@@ -24,17 +24,7 @@
 
 
     <style>
-        .btn:hover {
-            background-color: var(--yellow) !important;
-            color: black !important;
-        }
-
-        .footer-links {
-            color: black;
-            text-decoration: none;
-        }
-
-
+        /* slider code  */
         .owl-nav .owl-prev,
         .owl-nav .owl-next {
             pointer-events: auto;
@@ -56,9 +46,7 @@
         .owl-nav .owl-prev:hover,
         .owl-nav .owl-next:hover {
             background-color: yellow;
-            /* Ensures yellow remains on hover */
-            color: yellew;
-            /* Optional: Maintain the text color on hover */
+            color: var(--yellow) !important;
         }
 
         .owl-nav .owl-prev {
@@ -92,33 +80,9 @@
     <!-- Navbar -->
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
 
+    <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
-    <!-- BUTTONS -->
-    <div class="container-fluid my-4" style="max-height: 800px; width: 100%; overflow-x: auto; white-space: nowrap; scrollbar-width: none; -ms-overflow-style: none; padding-left: 10px;">
-        <div class="row justify-content-center gap-3 px-3" style="display: flex; flex-wrap: nowrap;">
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Book Pooja
-            </a>
-            <a href="<?php echo base_url('freekundli'); ?>" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Free Kundli
-            </a>
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Kundli Matching
-            </a>
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Jyotisika Mall
-            </a>
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Panchang
-            </a>
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                KP
-            </a>
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Festival
-            </a>
-        </div>
-    </div>
+
 
     <section>
         <div class="container mt-3">
@@ -237,7 +201,7 @@
         </div>
 
         <div class="container mt-4">
-            <div class="row d-flex justify-content-center">
+            <div class="row d-flex justify-content-center g-3">
                 <div class="col-12 col-md-6 " style="width: fit-content;">
                     <a href="#" style="text-decoration: none;">
                         <div class="card d-flex  flex-row justify-content-center align-items-center p-2 shadow text-center rounded-4 ">
@@ -264,14 +228,14 @@
     <section>
         <div class="container my-4">
             <div class="row p-3  rounded-3 d-flex justify-content-center align-items-center shadow" style="background-color: var(--yellow);">
-                <div class="col-md-4">
+                <div class="col-12 col-lg-4 text-center">
                     <img src="<?php echo base_url('assets/images/aboutImage.png'); ?>" alt="Image"
                         style="width: 300px; height: 300px; object-fit: cover;">
                 </div>
-                <div class="col-md-8">
-                    <h1 class="mb-3 fw-bold" style="color: var(--red);">About Astrology</h1>
-                    <p>Astrology can offer insights into one’s personality, life path, and future possibilities, but it’s important to approach it as a tool for reflection rather than a rigid predictor of fate. Different branches of astrology (e.g., psychological, traditional, horoscopic, and electional astrology) may interpret these elements in unique ways. Would you like to know about a specific area or need a birth chart interpretation</p>
-                    <p>
+                <div class="col-12 col-lg-8 ">
+                    <h3 class="mb-3 fw-bold text-center text-lg-start " style="color: var(--red);">About Astrology</h3>
+                    <p style="text-align: justify;">Astrology can offer insights into one’s personality, life path, and future possibilities, but it’s important to approach it as a tool for reflection rather than a rigid predictor of fate. Different branches of astrology (e.g., psychological, traditional, horoscopic, and electional astrology) may interpret these elements in unique ways. Would you like to know about a specific area or need a birth chart interpretation</p>
+                    <p style="text-align: justify;">
                         Astrology is a belief system that suggests the positions and movements of celestial bodies (such as planets, the Sun, and the Moon) influence or correlate with human affairs and natural events. While not scientifically validated, astrology has been practiced in various cultures for thousands of years and is still popular today.
                     </p>
                 </div>
@@ -327,7 +291,7 @@
                                 style="background-color: var(--yellow); ">
                                 Chat
                             </button>
-                            <button class="btn btn-outline-dark mt-4 w-50 rounded-4 p-2 border-1 ">
+                            <button class="btn btnHover btn-outline-dark mt-4 w-50 rounded-4 p-2 border-1 ">
                                 Call
                             </button>
                         </div>

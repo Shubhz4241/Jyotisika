@@ -26,24 +26,6 @@
 
 
     <style>
-        .btn:hover {
-            background-color: var(--yellow) !important;
-            color: black !important;
-        }
-
-        
-        /* Free Horoscope and Astrology Services */
-        /* Card Hover Effect */
-        .card-hover {
-            transition: transform 0.3s ease;
-        }
-
-        .card-hover:hover {
-            transform: scale(1.05);
-            /* Slightly scales up on hover */
-        }
-
-
         /* Gender Selection css */
         .form-check-input+.gender-label {
             background-color: white;
@@ -68,46 +50,24 @@
 
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
 
-    <!-- BUTTONS -->
-    <div class="container-fluid my-4" style="max-height: 800px; width: 100%; overflow-x: auto; white-space: nowrap; scrollbar-width: none; -ms-overflow-style: none; padding-left: 10px;">
-        <div class="row justify-content-center gap-3 px-3" style="display: flex; flex-wrap: nowrap;">
-            <a href="<?php echo base_url('bookpooja'); ?>" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Book Pooja
-            </a>
-            <a href="<?php echo base_url('freekundli'); ?>" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Free Kundli
-            </a>
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Kundli Matching
-            </a>
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Jyotisika Mall
-            </a>
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Panchang
-            </a>
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                KP
-            </a>
-            <a href="#" class="btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Festival
-            </a>
-        </div>
-    </div>
+    <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
 
     <div class="container p-3 my-4 rounded-3" style="background-color: #fff7b8;  ">
         <h3 class="text-center mb-3">Kundli/Birth Chart</h3>
-        <form action="">
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <h5>Get Your Kundli by Birth Date</h5>
 
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h5>Get Your Kundli by Birth Date</h5>
 
-                    <input type="text" name="name" id="name" placeholder="Name" autocomplete="off" class="form-control my-2 p-2 rounded-1">
+                <form action="">
+                    <input type="text" name="name" id="name" placeholder="Name" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required
+                        oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
+                        pattern="^[^\s][A-Za-zÀ-ž\s]+$"
+                        title="Enter Alphabets Only">
 
                     <div class="row flex-row justify-content-center  ">
-                        <div class="col-12 col-md-6 d-flex align-items-center text-start ">
+                        <div class="col-12 col-md-6 d-flex align-items-center text-start mb-2 mb-md-0 ">
                             <input type="radio" class="form-check-input d-none" name="gender" id="male" value="male">
                             <label for="male" class="btn border gender-label py-2 w-100 text-gray " style="color:gray !important;">Male</label>
                         </div>
@@ -119,43 +79,56 @@
 
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <input type="number" name="day" id="day" placeholder="Day" autocomplete="off" class="form-control my-2 p-2 rounded-1">
+                            <input type="number" name="day" id="day" placeholder="Day" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="31"
+                                oninput="(function(element) { 
+                            element.value = element.value.replace(/[^0-9]/g, '');
+                            if (parseInt(element.value) > 31) {
+                                element.value = '31';
+                            }
+                        })(this)"
+                                title="Enter amount paid (0-10000)">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="month" id="month" placeholder="Month" autocomplete="off" class="form-control my-2 p-2 rounded-1">
+                            <input type="number" name="month" id="month" placeholder="Month" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="12"
+                                oninput="(function(element) { 
+                            element.value = element.value.replace(/[^0-9]/g, '');
+                            if (parseInt(element.value) > 12) {
+                                element.value = '12';
+                            }
+                        })(this)"
+                                title="Enter amount paid (0-10000)">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="year" id="year" placeholder="Year" autocomplete="off" class="form-control my-2 p-2 rounded-1">
+                            <input type="number" name="year" id="year" placeholder="Year" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="hour" id="hour" placeholder="Hour" autocomplete="off" class="form-control my-2 p-2 rounded-1">
+                            <input type="number" name="hour" id="hour" placeholder="Hour" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off" class="form-control my-2 p-2 rounded-1">
+                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" >
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="second" id="second" placeholder="Second" autocomplete="off" class="form-control my-2 p-2 rounded-1">
+                            <input type="number" name="second" id="second" placeholder="Second" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
                         </div>
                     </div>
 
-                    <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off" class="form-control my-2 p-2 rounded-1">
+                    <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
 
                     <center>
                         <button type="submit" style="background-color: var(--yellow);" class="btn my-2 p-2 rounded-1">
                             Show Kundli
                         </button>
                     </center>
-
-                </div>
-                <div class="col-12 col-md-6 text-center">
-                    <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png'); ?>" alt="kundli" class="img-fluid"
-                        style="width: 150px; height: 150px;">
-                    <p class="text-start mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis incidunt autem temporibus similique soluta. Magnam ipsa totam a minus reiciendis amet repudiandae obcaecati consequatur illo. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam provident tenetur porro odio delectus accusamus sapiente aspernatur sit recusandae in!</p>
-
-                </div>
-
+                </form>
             </div>
-        </form>
+            <div class="col-12 col-md-6 text-center">
+                <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png'); ?>" alt="kundli" class="img-fluid"
+                    style="width: 150px; height: 150px;">
+                <p class="text-start mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis incidunt autem temporibus similique soluta. Magnam ipsa totam a minus reiciendis amet repudiandae obcaecati consequatur illo. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam provident tenetur porro odio delectus accusamus sapiente aspernatur sit recusandae in!</p>
+            </div>
+
+        </div>
+
     </div>
 
 

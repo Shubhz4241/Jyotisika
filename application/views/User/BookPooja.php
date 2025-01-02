@@ -21,46 +21,14 @@
     <!-- icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <style>
-        .btnHover:hover {
-            background-color: var(--yellow) !important;
-            color: black !important;
-        }
-    </style>
+  
 
 </head>
 
 <body>
     <!-- Navbar -->
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
-
-    <!-- BUTTONS -->
-    <div class="container-fluid my-4" style="max-height: 800px; width: 100%; overflow-x: auto; white-space: nowrap; scrollbar-width: none; -ms-overflow-style: none; padding-left: 10px;">
-        <div class="row justify-content-center gap-3 px-3" style="display: flex; flex-wrap: nowrap;">
-            <a href="<?php echo base_url('bookpooja'); ?>" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Book Pooja
-            </a>
-            <a href="<?php echo base_url('freekundli'); ?>" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Free Kundli
-            </a>
-            <a href="#" class=" btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Kundli Matching
-            </a>
-            <a href="#" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Jyotisika Mall
-            </a>
-            <a href="#" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Panchang
-            </a>
-            <a href="#" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                KP
-            </a>
-            <a href="#" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
-                Festival
-            </a>
-        </div>
-    </div>
-
+    <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
     <div class="container">
         <div class="row">

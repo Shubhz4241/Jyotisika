@@ -59,3 +59,5 @@ $route['home'] = 'User/Home';
 $route['demo'] = 'User/Demo';
 $route['freekundli'] = 'User/FreeKundli';
 $route['bookpooja'] = 'User/BookPooja';
+$route['kundlimatching'] = 'User/KundliMatching';
+$route['festival'] = 'User/Festival';

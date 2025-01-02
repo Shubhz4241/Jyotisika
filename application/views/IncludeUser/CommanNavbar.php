@@ -37,12 +37,15 @@
              </ul>
 
              <div class="d-flex gap-2">
-                 <select class="form-select " aria-label="Default select example" style="width: 150px;">
-                     <option selected>English</option>
-                     <option value="1">Marathi</option>
-                     <option value="2">Hindi</option>
-                     <option value="3">Tamil</option>
-                 </select>
+                 <div class="position-relative">
+                     <i class="bi bi-translate position-absolute" style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
+                     <select class="form-select shadow-none" aria-label="Default select example" style="width: 150px; padding-left: 30px;">
+                         <option selected>English</option>
+                         <option value="1">Marathi</option>
+                         <option value="2">Hindi</option>
+                         <option value="3">Tamil</option>
+                     </select>
+                 </div>
 
                  <button type="button" class="btn btn-primary border-0" style="background-color: var(--red);">
                      Login

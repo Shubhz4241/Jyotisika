@@ -21,12 +21,12 @@
                     </div>
                 </div>
                 <!-- Column 2: Astrological Services -->
-                <div class="col-12 col-md-2">
+                <div class="col-12 col-sm-4 col-md-2 mt-2 mt-md-0">
                     <h5 class="fw-bold">Astrological Services</h5>
                     <p class="text-dark">Explore our range of astrological services tailored to your needs.</p>
                 </div>
                 <!-- Column 3: Categories -->
-                <div class="col-12 col-md-2">
+                <div class="col-12 col-sm-4 col-md-2">
                     <h5 class="fw-bold">Categories</h5>
                     <ul class="list-unstyled">
                         <li><a href="#" class="footer-links">Kundli/Birth Chart</a></li>
@@ -38,7 +38,7 @@
                     </ul>
                 </div>
                 <!-- Column 4: General Links -->
-                <div class="col-12 col-md-2">
+                <div class="col-12 col-sm-4 col-md-2">
                     <h5 class="fw-bold">General Links</h5>
                     <ul class="list-unstyled ">
                         <li><a href="#" class="footer-links">Home</a></li>
@@ -52,7 +52,7 @@
                     </ul>
                 </div>
                 <!-- Column 5: Online Consultations -->
-                <div class="col-12 col-md-2">
+                <div class="col-12 col-sm-4 col-md-2">
                     <h5 class="fw-bold">Online Consultations</h5>
                     <ul class="list-unstyled">
                         <li><a href="#" class="footer-links"> Talk With Astrologer</a></li>

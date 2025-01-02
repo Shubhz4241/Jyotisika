@@ -18,4 +18,12 @@ class User extends CI_Controller {
 	public function BookPooja(){
 		$this->load->view('User/BookPooja');
 	}
+
+	public function KundliMatching(){
+		$this->load->view('User/KundliMatching');
+	}
+
+	public function Festival(){
+		$this->load->view('User/Festival');
+	}
 }
