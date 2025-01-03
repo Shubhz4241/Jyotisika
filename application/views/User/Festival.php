@@ -43,22 +43,51 @@
                 <p class="card-text fs-5"> <span style="color: var(--red);">Today's Festival :</span> There is no festival Today.</p>
             </div>
         </div>
-        <div class="row my-4">
-            <div class="col-12 col-md-6">
-                <div class="card p-2" style="width: 18rem;">
-                    <img src="<?php echo base_url('assets/images/Festival/merryChristmas.png'); ?>" class="card-img-top" alt="image">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Merry Chirstmas</h5>
-                        <center>
-                            <a href="#" class="btn mx-auto btn-sm mt-2 " style="background-color: var(--yellow);">
-                                Read More
-                            </a>
-                        </center>
+        <div class="row my-4 d-flex justify-content-center">
+            <?php
+            $cards = [
+                [
+                    'title' => 'Merry Christmas',
+                    'image' => 'assets/images/Festival/merryChristmas.png',
+                    'link' => '#',
+                ],
+                [
+                    'title' => 'Chhath Pooja',
+                    'image' => 'assets/images/Festival/chhathPooja.png',
+                    'link' => '#',
+                ],
+                [
+                    'title' => 'Merry Christmas',
+                    'image' => 'assets/images/Festival/merryChristmas.png',
+                    'link' => '#',
+                ],
+                [
+                    'title' => 'Govardhan Pooja',
+                    'image' => 'assets/images/Festival/govardhanPooja.png',
+                    'link' => '#',
+                ],
+            ];
+
+            foreach ($cards as $card) {
+            ?>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center">
+                    <div class="card p-2" style="width: 16rem;">
+                        <img src="<?php echo $card['image']; ?>" class="card-img-top" alt="image">
+                        <div class="card-body">
+                            <h5 class="card-title text-center"><?php echo $card['title']; ?></h5>
+                            <center>
+                                <a href="<?php echo $card['link']; ?>" class="btn mx-auto btn-sm mt-2" style="background-color: var(--yellow);">
+                                    Read More
+                                </a>
+                            </center>
+                        </div>
                     </div>
                 </div>
-                
-            </div>
+            <?php
+            }
+            ?>
         </div>
+
     </div>
 
 

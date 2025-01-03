@@ -33,8 +33,6 @@
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
 
-    
-
     <!-- kundli matching -->
     <div class="container rounded p-4 my-4 shadow" style="background-color: #fff7b8; ">
         <h3 class="text-center mb-4">Kundli/Birth Chart</h3>
@@ -165,8 +163,6 @@
 
     <!-- footer -->
     <?php $this->load->view('IncludeUser/CommanFooter'); ?>
-
-
 
 
 </body>

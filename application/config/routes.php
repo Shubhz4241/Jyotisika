@@ -61,3 +61,4 @@ $route['freekundli'] = 'User/FreeKundli';
 $route['bookpooja'] = 'User/BookPooja';
 $route['kundlimatching'] = 'User/KundliMatching';
 $route['festival'] = 'User/Festival';
+$route['panchang'] = 'User/Panchang';

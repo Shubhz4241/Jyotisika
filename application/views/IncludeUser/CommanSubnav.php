@@ -20,7 +20,7 @@
          <a href="" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
              Jyotisika Mall
          </a>
-         <a href="#" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
+         <a href="<?php echo base_url('panchang'); ?>" id="panchang-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
              Panchang
          </a>
          <a href="#" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
@@ -43,6 +43,7 @@
             'freekundli': document.getElementById('freekundli-link'),
             'kundlimatching': document.getElementById('kundlimatching-link'),
             'festival': document.getElementById('festival-link'),
+            'panchang': document.getElementById('panchang-link'),
 
         };
 

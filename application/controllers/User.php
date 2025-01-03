@@ -26,4 +26,8 @@ class User extends CI_Controller {
 	public function Festival(){
 		$this->load->view('User/Festival');
 	}
+
+	public function Panchang(){
+		$this->load->view('User/Panchang');
+	}
 }
