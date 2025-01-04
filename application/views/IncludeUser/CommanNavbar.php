@@ -48,7 +48,7 @@
                  </div>
 
                  <button type="button" class="btn btn-primary border-0" style="background-color: var(--red);">
-                     Login
+                    <a href="<?php echo base_url('LoginSignup'); ?>" style="text-decoration: none; color: white;">Login</a>
                  </button>
              </div>
          </div>

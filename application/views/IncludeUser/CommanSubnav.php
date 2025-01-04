@@ -17,7 +17,7 @@
          <a href="<?php echo base_url('kundlimatching'); ?>" id="kundlimatching-link" class=" btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
              Kundli Matching
          </a>
-         <a href="" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
+         <a href="<?php echo base_url('jyotisikamall'); ?>" id="jyotisikamall-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
              Jyotisika Mall
          </a>
          <a href="<?php echo base_url('panchang'); ?>" id="panchang-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
@@ -44,6 +44,7 @@
             'kundlimatching': document.getElementById('kundlimatching-link'),
             'festival': document.getElementById('festival-link'),
             'panchang': document.getElementById('panchang-link'),
+            'jyotisikamall': document.getElementById('jyotisikamall-link'),
 
         };
 

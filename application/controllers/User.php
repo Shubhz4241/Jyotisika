@@ -30,4 +30,8 @@ class User extends CI_Controller {
 	public function Panchang(){
 		$this->load->view('User/Panchang');
 	}
+
+	public function JyotisikaMall(){
+		$this->load->view('User/JyotisikaMall');
+	}
 }

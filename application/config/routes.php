@@ -62,3 +62,7 @@ $route['bookpooja'] = 'User/BookPooja';
 $route['kundlimatching'] = 'User/KundliMatching';
 $route['festival'] = 'User/Festival';
 $route['panchang'] = 'User/Panchang';
+$route['jyotisikamall'] = 'User/JyotisikaMall';
+
+// login poge
+$route['LoginSignup'] = 'LoginSignup/LoginSignup';
