@@ -1,37 +1,61 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class User extends CI_Controller
+{
 
 	public function Home()
 	{
 		$this->load->view('User/Home');
 	}
 
-	public function Demo(){
+	public function Demo()
+	{
 		$this->load->view('User/Demo');
 	}
-	public function FreeKundli(){
+	public function FreeKundli()
+	{
 		$this->load->view('User/FreeKundli');
 	}
 
-	public function BookPooja(){
+	public function BookPooja()
+	{
 		$this->load->view('User/BookPooja');
 	}
 
-	public function KundliMatching(){
+	public function KundliMatching()
+	{
 		$this->load->view('User/KundliMatching');
 	}
 
-	public function Festival(){
+	public function Festival()
+	{
 		$this->load->view('User/Festival');
 	}
 
-	public function Panchang(){
+	public function Panchang()
+	{
 		$this->load->view('User/Panchang');
 	}
 
-	public function JyotisikaMall(){
+	public function JyotisikaMall()
+	{
 		$this->load->view('User/JyotisikaMall');
+	}
+
+	public function TodayHoroscope()
+	{
+		$this->load->view('User/TodayHoroscope');
+	}
+
+	public function HoroscopeReadmore()
+	{
+		$this->load->view('User/HoroscopeReadmore');
+
+	}
+
+	public function KP()
+	{
+		$this->load->view('User/KP');
 	}
 }

@@ -17,7 +17,7 @@
                          Horoscope
                      </a>
                      <ul class="dropdown-menu dropdown-menu-end rounded-3" aria-labelledby="navbarDropdown">
-                         <li><a class="dropdown-item" href="#">Today Horoscope</a></li>
+                         <li><a class="dropdown-item" href="<?php echo base_url('todayhoroscope'); ?>"">Today Horoscope</a></li>
                          <li><a class="dropdown-item" href="#">Daily Horoscope</a></li>
                          <li><a class="dropdown-item" href="#">Weekly Horoscope</a></li>
                          <li><a class="dropdown-item" href="#">Monthly Horoscope</a></li>

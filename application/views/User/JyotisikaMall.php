@@ -7,10 +7,15 @@
     <title>Jyotisika:Festival</title>
 
     <!-- bootstrap link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,9 +25,14 @@
     <!-- icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+        integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <!-- EXTERNAL CSS -->
@@ -73,20 +83,28 @@
 
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="<?php echo base_url('assets/images/JyotisikaMall/sliderImage1.jpeg'); ?>" alt="First slide">
+                            <img class="d-block w-100"
+                                src="<?php echo base_url('assets/images/JyotisikaMall/sliderImage1.jpeg'); ?>"
+                                alt="First slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="<?php echo base_url('assets/images/JyotisikaMall/sliderImage1.jpeg'); ?>" alt="Second slide">
+                            <img class="d-block w-100"
+                                src="<?php echo base_url('assets/images/JyotisikaMall/sliderImage1.jpeg'); ?>"
+                                alt="Second slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="<?php echo base_url('assets/images/JyotisikaMall/sliderImage1.jpeg'); ?>" alt="Third slide">
+                            <img class="d-block w-100"
+                                src="<?php echo base_url('assets/images/JyotisikaMall/sliderImage1.jpeg'); ?>"
+                                alt="Third slide">
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -125,7 +143,7 @@
                     ];
 
                     foreach ($cards as $card) {
-                    ?>
+                        ?>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center mb-3 mb-lg-0 ">
                             <div class="card" style="width: 17rem;">
                                 <img src="<?php echo $card['image']; ?>" class="card-img-top" alt="image">
@@ -134,13 +152,14 @@
                                     <p><span class="text-decoration-line-through text-muted">Rs.1299</span> Rs.999</p>
                                 </div>
                                 <center>
-                                    <a href="<?php echo $card['link']; ?>" class="mb-2 btn mx-auto  mt-0 pt-0" style="background-color: var(--yellow);">
+                                    <a href="<?php echo $card['link']; ?>" class="mb-2 btn mx-auto  mt-0 pt-0"
+                                        style="background-color: var(--yellow);">
                                         Read More
                                     </a>
                                 </center>
                             </div>
                         </div>
-                    <?php
+                        <?php
                     }
                     ?>
                 </div>
@@ -179,8 +198,9 @@
                         ];
 
                         foreach ($cards as $card) {
-                        ?>
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center mb-3 mb-lg-0 ">
+                            ?>
+                            <div
+                                class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center mb-3 mb-lg-0 ">
                                 <div class="card" style="width: 17rem;">
                                     <img src="<?php echo $card['image']; ?>" class="card-img-top" alt="image">
                                     <div class="card-body mb-0 pb-0">
@@ -188,13 +208,14 @@
                                         <p><span class="text-decoration-line-through text-muted">Rs.1299</span> Rs.999</p>
                                     </div>
                                     <center>
-                                        <a href="<?php echo $card['link']; ?>" class="mb-2 btn mx-auto  mt-0 pt-0" style="background-color: var(--yellow);">
+                                        <a href="<?php echo $card['link']; ?>" class="mb-2 btn mx-auto  mt-0 pt-0"
+                                            style="background-color: var(--yellow);">
                                             Read More
                                         </a>
                                     </center>
                                 </div>
                             </div>
-                        <?php
+                            <?php
                         }
                         ?>
                     </div>
@@ -207,48 +228,69 @@
             <div class="container my-4">
                 <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Gallery</h2>
 
-                <div class="owl-carousel owl1 owl-theme" style="gap: 15px;"> <!-- Adjusted gap -->
+                <div class="owl-carousel owl1 owl-theme" style="gap: 15px;">
                     <div class="item">
-                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top img-fluid"
+                            alt="Finance Image">
                     </div>
                     <div class="item">
-                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top img-fluid"
+                            alt="Finance Image">
                     </div>
                     <div class="item">
-                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top img-fluid"
+                            alt="Finance Image">
                     </div>
                     <div class="item">
-                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top img-fluid"
+                            alt="Finance Image">
                     </div>
                     <div class="item">
-                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top img-fluid"
+                            alt="Finance Image">
                     </div>
                 </div>
             </div>
 
             <script>
-                $(document).ready(function() {
+                $(document).ready(function () {
                     var owl = $('.owl-carousel');
                     owl.owlCarousel({
-                        items: 4,
                         loop: true,
-                       
                         dots: false,
-                        margin: 15, // Gap between images
+                        margin: 15,
                         autoplay: true,
-                        autoplayTimeout: 10, // Seamless movement
-                        autoplaySpeed: 3000, // Smooth transition speed
-                        smartSpeed: 3000, // Additional smoothness
-                        slideTransition: 'linear', // Continuous linear scroll
-                        autoplayHoverPause: false // Disable pause on hover
+                        autoplayTimeout: 10,
+                        autoplaySpeed: 3000,
+                        smartSpeed: 3000,
+                        slideTransition: 'linear',
+                        autoplayHoverPause: false,
+                        responsive: {
+                            0: {
+                                items: 1
+                            },
+                            576: {
+                                items: 2
+                            },
+                            768: {
+                                items: 3
+                            },
+                            992: {
+                                items: 4
+                            }
+                        }
                     });
                 });
             </script>
 
         </section>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+            integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     </main>

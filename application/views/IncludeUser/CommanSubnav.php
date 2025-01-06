@@ -23,7 +23,7 @@
          <a href="<?php echo base_url('panchang'); ?>" id="panchang-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
              Panchang
          </a>
-         <a href="#" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
+         <a href="<?php echo base_url('kp'); ?>" id="kp-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
              KP
          </a>
          <a href="<?php echo base_url('festival'); ?>" id="festival-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
@@ -45,6 +45,7 @@
             'festival': document.getElementById('festival-link'),
             'panchang': document.getElementById('panchang-link'),
             'jyotisikamall': document.getElementById('jyotisikamall-link'),
+            'kp':document.getElementById('kp-link')
 
         };
 
