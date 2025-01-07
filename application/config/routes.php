@@ -66,6 +66,14 @@ $route['jyotisikamall'] = 'User/JyotisikaMall';
 $route['todayhoroscope'] = 'User/TodayHoroscope';
 $route['horoscopereadmore'] = 'User/HoroscopeReadmore';
 $route['kp'] = 'User/KP';
+$route['astrologers'] = 'User/Astrologers';
+$route['ViewAstrologer'] = 'User/ViewAstrologer';
+
+
+
+
+
+
 
 // login poge
 $route['LoginSignup'] = 'LoginSignup/LoginSignup';

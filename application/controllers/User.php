@@ -58,4 +58,12 @@ class User extends CI_Controller
 	{
 		$this->load->view('User/KP');
 	}
+
+	public function Astrologers(){
+		$this->load->view('User/Astrologers');
+	}
+
+	public function ViewAstrologer(){
+		$this->load->view('User/ViewAstrologer');
+	}
 }
