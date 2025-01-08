@@ -68,6 +68,8 @@ $route['horoscopereadmore'] = 'User/HoroscopeReadmore';
 $route['kp'] = 'User/KP';
 $route['astrologers'] = 'User/Astrologers';
 $route['ViewAstrologer'] = 'User/ViewAstrologer';
+$route['BookPoojaViewMore'] ='User/BookPoojaViewMore';
+$route['Poojaris'] ='User/Poojaris';
 
 
 
