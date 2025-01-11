@@ -70,6 +70,10 @@ $route['astrologers'] = 'User/Astrologers';
 $route['ViewAstrologer'] = 'User/ViewAstrologer';
 $route['BookPoojaViewMore'] ='User/BookPoojaViewMore';
 $route['Poojaris'] ='User/Poojaris';
+$route['FestivalReadmore'] ='User/FestivalReadmore';
+$route['WhyUs'] ='User/WhyUs';
+$route['OnlinePoojaris'] ='User/OnlinePoojaris';
+$route['Recharge'] ='User/Recharge';
 
 
 

@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jyotisika:Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 
     <!-- GOOGLE FONTS -->
@@ -16,9 +17,14 @@
     <!-- EXTERNAL CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+        integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -71,6 +77,18 @@
             transform: scale(1.05);
             /* Slightly scales up on hover */
         }
+
+        .astro-card img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .astro-card:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
     </style>
 
 </head>
@@ -82,129 +100,107 @@
 
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
-
-
     <section>
         <div class="container mt-3">
-            <div class="row gap-4 d-flex justify-content-center align-items-center">
+            <div class="row gx-6 gy-3 justify-content-center">
+                <!-- Astrology Sign -->
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="Aris"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Aris</p>
+                    </a>
+                </div>
 
-                <a href="#" class="border text-decoration-none shadow d-flex flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0;" class="text-dark text-decoration-none">Aris</p>
-                </a>
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/taurus.png'); ?>" alt="Taurus"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Taurus</p>
+                    </a>
+                </div>
 
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/gemini.png'); ?>" alt="Gemini"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Gemini</p>
+                    </a>
+                </div>
 
-                <a href="#" class="border text-decoration-none shadow d-flex flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/taurus.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0;" class="text-dark text-decoration-none">Taurus</p>
-                </a>
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/cancer.png'); ?>" alt="Cancer"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Cancer</p>
+                    </a>
+                </div>
 
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/leo.png'); ?>" alt="Leo"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Leo</p>
+                    </a>
+                </div>
 
-                <a href="#" class="border text-decoration-none  shadow d-flex flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/gemini.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0;" class="text-dark text-decoration-none">Gemini</p>
-                </a>
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/virgo.png'); ?>" alt="Virgo"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Virgo</p>
+                    </a>
+                </div>
 
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/scorpio.png'); ?>" alt="Scorpio"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Scorpio</p>
+                    </a>
+                </div>
 
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/sagittarius.png'); ?>" alt="Sagittarius"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Sagittarius</p>
+                    </a>
+                </div>
 
-                <a href="#" class="border text-decoration-none shadow d-flex flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/cancer.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0;" class="text-dark text-decoration-none">Cancer</p>
-                </a>
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/capricon.png'); ?>" alt="Capricorn"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Capricorn</p>
+                    </a>
+                </div>
 
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/aquarius.png'); ?>" alt="Aquarius"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Aquarius</p>
+                    </a>
+                </div>
 
-
-
-                <a href="#" class="border text-decoration-none shadow d-flex flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/leo.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0;" class="text-dark text-decoration-none">Leo</p>
-                </a>
-
-
-
-                <a href="#" class="border text-decoration-none shadow d-flex flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/virgo.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0;" class="text-dark text-decoration-none">Virgo</p>
-                </a>
-
-
-
-                <a href="#" class="border text-decoration-none shadow d-flex flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/scorpio.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0;" class="text-dark text-decoration-none overflow-hidden text-nowrap">Scorpio</p>
-                </a>
-
-
-
-                <a href="#" class="border text-decoration-none shadow text-decoration-none d-flex iconName flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/sagittarius.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0; font-size: 2px;" class="fs-6 text-dark overflow-hidden text-nowrap ">
-                        Sagittarius
-                    </p>
-                </a>
-
-
-
-                <a href="#" class="border text-decoration-none shadow text-decoration-none d-flex iconName flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/capricon.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0; font-size: 2px;" class="fs-6 text-dark overflow-hidden text-nowrap ">
-                        Capricorn
-                    </p>
-                </a>
-
-
-
-                <a href="#" class="border text-decoration-none shadow d-flex flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/aquarius.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0;" class="text-dark text-decoration-none">Aquarius</p>
-                </a>
-
-
-
-                <a href="#" class="border text-decoration-none shadow d-flex flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/pisces.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0;" class="text-dark text-decoration-none">Pisces</p>
-                </a>
-
-
-
-                <a href="#" class="border text-decoration-none shadow d-flex flex-column justify-content-center align-items-center card-hover"
-                    style="width: 100px; height: 100px; border-radius: 50%; text-align: center; flex-shrink: 0;">
-                    <img src="<?php echo base_url('assets/images/aries.png'); ?>" alt="image"
-                        style="width: 40px; height: 40px; object-fit: cover;">
-                    <p style="margin: 0;" class="text-dark text-decoration-none">Aries</p>
-                </a>
-
+                <div class="col-auto">
+                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/pisces.png'); ?>" alt="Pisces"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold">Pisces</p>
+                    </a>
+                </div>
             </div>
         </div>
+
 
         <div class="container mt-4">
             <div class="row d-flex justify-content-center g-3">
                 <div class="col-12 col-md-6 " style="width: fit-content;">
                     <a href="#" style="text-decoration: none;">
-                        <div class="card d-flex  flex-row justify-content-center align-items-center p-2 shadow text-center rounded-4 ">
+                        <div
+                            class="card d-flex  flex-row justify-content-center align-items-center p-2 shadow text-center rounded-4 ">
                             <img src="<?php echo base_url('assets/images/whatsapp.png'); ?>" alt=""
                                 style="width: 40px; height: 40px; object-fit: cover;">
                             <p class="mb-0 ms-2">Chat with Astrologer</p>
@@ -213,7 +209,8 @@
                 </div>
                 <div class="col-12 col-md-6 " style="width: fit-content;">
                     <a href="#" style="text-decoration: none;">
-                        <div class="card d-flex flex-row justify-content-center align-items-center p-2 shadow text-center rounded-4 ">
+                        <div
+                            class="card d-flex flex-row justify-content-center align-items-center p-2 shadow text-center rounded-4 ">
                             <img src="<?php echo base_url('assets/images/call.png'); ?>" alt=""
                                 style="width: 40px; height: 40px; object-fit: cover;">
                             <p class="mb-0 ms-2">Call with Astrologer</p>
@@ -227,16 +224,24 @@
     <!-- about astrology section -->
     <section>
         <div class="container my-4">
-            <div class="row p-3  rounded-3 d-flex justify-content-center align-items-center shadow" style="background-color: var(--yellow);">
+            <div class="row p-3  rounded-3 d-flex justify-content-center align-items-center shadow"
+                style="background-color: var(--yellow);">
                 <div class="col-12 col-lg-4 text-center">
                     <img src="<?php echo base_url('assets/images/aboutImage.png'); ?>" alt="Image"
                         style="width: 300px; height: 300px; object-fit: cover;">
                 </div>
                 <div class="col-12 col-lg-8 ">
                     <h3 class="mb-3 fw-bold text-center text-lg-start " style="color: var(--red);">About Astrology</h3>
-                    <p style="text-align: justify;">Astrology can offer insights into one’s personality, life path, and future possibilities, but it’s important to approach it as a tool for reflection rather than a rigid predictor of fate. Different branches of astrology (e.g., psychological, traditional, horoscopic, and electional astrology) may interpret these elements in unique ways. Would you like to know about a specific area or need a birth chart interpretation</p>
+                    <p style="text-align: justify;">Astrology can offer insights into one’s personality, life path, and
+                        future possibilities, but it’s important to approach it as a tool for reflection rather than a
+                        rigid predictor of fate. Different branches of astrology (e.g., psychological, traditional,
+                        horoscopic, and electional astrology) may interpret these elements in unique ways. Would you
+                        like to know about a specific area or need a birth chart interpretation</p>
                     <p style="text-align: justify;">
-                        Astrology is a belief system that suggests the positions and movements of celestial bodies (such as planets, the Sun, and the Moon) influence or correlate with human affairs and natural events. While not scientifically validated, astrology has been practiced in various cultures for thousands of years and is still popular today.
+                        Astrology is a belief system that suggests the positions and movements of celestial bodies (such
+                        as planets, the Sun, and the Moon) influence or correlate with human affairs and natural events.
+                        While not scientifically validated, astrology has been practiced in various cultures for
+                        thousands of years and is still popular today.
                     </p>
                 </div>
             </div>
@@ -247,17 +252,24 @@
     <!-- consult  astrologer on call or chat -->
     <section>
         <div class="container my-4">
-            <div class="row">
-                <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Consult Astrologer on Call or Chat</h2>
-               <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
-                    <div class="card shadow rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;" >
+            <div class="row my-4" id="cardContainer">
+                <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
+                    <div class="card shadow rounded-3 h-100"
+                        style="border: 1px solid var(--red); background-color: #fff;">
                         <div class="card-body p-3">
                             <!-- Profile Section -->
                             <div class="d-flex align-items-center mb-2">
-                                <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
-                                    class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+                                <a href="<?php echo base_url('ViewAstrologer'); ?>">
+                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
+                                        class="rounded-circle"
+                                        style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+                                </a>
                                 <div class="ms-2">
-                                    <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Acharya Mishra Ji</h6>
+                                    <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
+                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Acharya Mishra Ji
+                                        </h6>
+                                    </a>
+
                                     <div class="d-flex align-items-center gap-1">
                                         <?php for ($i = 0; $i < 3; $i++): ?>
                                             <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
@@ -293,10 +305,11 @@
 
                             <!-- Action Buttons -->
                             <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm border-1 w-50 rounded-3" style="background-color: var(--yellow);">Chat</button>
+                                <button class="btn btn-sm w-50 rounded-3 border-1"
+                                    style="background-color: var(--yellow);">Chat</button>
                                 <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
                             </div>
-                            <!-- <a href="<?php echo base_url('ViewAstrologer'); ?>" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
+                            <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
                         </div>
                     </div>
                 </div>
@@ -308,74 +321,85 @@
     <!-- Astrological Services For Accurate Answers And Better Future -->
     <section>
         <div class="container">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"> Astrological Services For Accurate Answers And Better Future</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"> Astrological Services For Accurate Answers
+                And Better Future</h2>
             <div class="owl-carousel owl1 owl-theme">
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top"
+                            alt="Finance Image">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Finance</h5>
                             <p class="card-text">
-                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts.
+                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your
+                                efforts.
                             </p>
                             <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Out</a>
+                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
                             </center>
                         </div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/question.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/question.png'); ?>" class="card-img-top"
+                            alt="Finance Image">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Ask a Question?</h5>
                             <p class="card-text">
-                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts.
+                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your
+                                efforts.
                             </p>
                             <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Out</a>
+                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
                             </center>
                         </div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/carrerjob.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/carrerjob.png'); ?>" class="card-img-top"
+                            alt="Finance Image">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Career & Job</h5>
                             <p class="card-text">
-                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts.
+                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your
+                                efforts.
                             </p>
                             <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Out</a>
+                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
                             </center>
                         </div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/counselling.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/counselling.png'); ?>" class="card-img-top"
+                            alt="Finance Image">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Counselling</h5>
                             <p class="card-text">
-                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts.
+                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your
+                                efforts.
                             </p>
                             <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Out</a>
+                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
                             </center>
                         </div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/yearbook.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/yearbook.png'); ?>" class="card-img-top"
+                            alt="Finance Image">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Year Book</h5>
                             <p class="card-text">
-                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts.
+                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your
+                                efforts.
                             </p>
                             <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Out</a>
+                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
                             </center>
                         </div>
                     </div>
@@ -388,11 +412,13 @@
     <!-- Astrological  Remedies  To  Get  Rid  Of  Your  Problems -->
     <section>
         <div class="container my-4">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrological Remedies To Get Rid Of Your Problems</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrological Remedies To Get Rid Of Your
+                Problems</h2>
             <div class="owl-carousel owl1 owl-theme">
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/rudraksh.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/rudraksh.png'); ?>" class="card-img-top"
+                            alt="Finance Image">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Rudraksh</h5>
                             <p class="card-text">
@@ -406,7 +432,8 @@
                 </div>
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/gamestones.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/gamestones.png'); ?>" class="card-img-top"
+                            alt="Finance Image">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Gamestones</h5>
                             <p class="card-text">
@@ -420,7 +447,8 @@
                 </div>
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/yantras.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/yantras.png'); ?>" class="card-img-top"
+                            alt="Finance Image">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Yantras</h5>
                             <p class="card-text">
@@ -434,7 +462,8 @@
                 </div>
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/mala.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/mala.png'); ?>" class="card-img-top"
+                            alt="Finance Image">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Mala</h5>
                             <p class="card-text">
@@ -448,7 +477,8 @@
                 </div>
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/jadi.png'); ?>" class="card-img-top" alt="Finance Image">
+                        <img src="<?php echo base_url('assets/images/jadi.png'); ?>" class="card-img-top"
+                            alt="Finance Image">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Jadi</h5>
                             <p class="card-text">
@@ -470,121 +500,132 @@
             <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">Free Horoscope and Astrology Services</h3>
             <div class="row g-4 justify-content-center">
                 <!-- Card 1 -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/kundli.png'); ?>" alt="Kundli" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/kundli.png'); ?>" alt="Kundli"
+                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Kundli <br> <small>(Birth Chart)</small></p>
                         </div>
                     </a>
-                </div>
+                </div> -->
                 <!-- Card 2 -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/HoroscopeMatching.png'); ?>" alt="Horoscope Matching" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/HoroscopeMatching.png'); ?>"
+                                alt="Horoscope Matching" class="mx-auto mb-3"
+                                style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Horoscope Matching <br> <small>(Birth Chart)</small></p>
                         </div>
                     </a>
                 </div>
                 <!-- Card 3 -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/examResult.png'); ?>" alt="Exam Result" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/examResult.png'); ?>" alt="Exam Result"
+                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Exam Result <br> <small>(Birth Chart)</small></p>
                         </div>
                     </a>
-                </div>
+                </div> -->
                 <!-- Card 4 -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow rounded  border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/talkToAstrologer.png'); ?>" alt="Talk To Astrologer" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/talkToAstrologer.png'); ?>"
+                                alt="Talk To Astrologer" class="mx-auto mb-3"
+                                style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Talk To Astrologer <br> <small>(Birth Chart)</small></p>
                         </div>
                     </a>
                 </div>
                 <!-- Card 5 -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/askQuestion.png'); ?>" alt="Ask Questions" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/askQuestion.png'); ?>" alt="Ask Questions"
+                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Ask Questions <br> <small>(Birth Chart)</small></p>
                         </div>
                     </a>
                 </div>
-                <!-- Card 6 -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/todayRahukal.png'); ?>" alt="Today's Rahukal" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Today's Rahukal <br> <small>(Birth Chart)</small></p>
-                        </div>
-                    </a>
-                </div>
+                -->
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/numerologyCalculator.png'); ?>" alt="Numerology Calculator" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/numerologyCalculator.png'); ?>"
+                                alt="Numerology Calculator" class="mx-auto mb-3"
+                                style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Numerology Calculator </p>
                         </div>
                     </a>
                 </div>
 
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/sadeSatiLifeReport.png'); ?>" alt="Sade Sati Life Report" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/sadeSatiLifeReport.png'); ?>"
+                                alt="Sade Sati Life Report" class="mx-auto mb-3"
+                                style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Sade Sati Life Report </p>
                         </div>
                     </a>
-                </div>
-
+                </div> -->
+                <!-- 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow  rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/hindiKundli.png'); ?>" alt="Hindi Kundli" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/hindiKundli.png'); ?>" alt="Hindi Kundli"
+                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Hindi Kundli</p>
                         </div>
                     </a>
-                </div>
+                </div> -->
 
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/yearAnalysis.png'); ?>" alt="Year Analysis" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/yearAnalysis.png'); ?>" alt="Year Analysis"
+                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Year Analysis</p>
                         </div>
                     </a>
-                </div>
+                </div> -->
 
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow  rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/kaalsarpDosha.png'); ?>" alt="Kaalsarp Dosha" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/kaalsarpDosha.png'); ?>" alt="Kaalsarp Dosha"
+                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Kaalsarp Dosha</p>
                         </div>
                     </a>
-                </div>
+                </div> -->
 
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/paidService.png'); ?>" alt="Paid Service" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/paidService.png'); ?>" alt="Paid Service"
+                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Paid Service</p>
                         </div>
                     </a>
-                </div>
+                </div> -->
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 ">
                     <a href="#" class="text-decoration-none">
                         <div class="card text-center shadow border-0 p-3 h-100 rounded card-hover">
-                            <img src="<?php echo base_url('assets/images/babyName.png'); ?>" alt="Today's Rahukal" class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <img src="<?php echo base_url('assets/images/babyName.png'); ?>" alt="Today's Rahukal"
+                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
                             <p class="fw-bold text-dark">Baby Name </p>
                         </div>
                     </a>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="#" class="btn fw-bold" style="background-color: var(--yellow);">See More</a>
                 </div>
             </div>
         </div>
@@ -594,31 +635,40 @@
     <!-- Footer -->
     <?php $this->load->view('IncludeUser/CommanFooter'); ?>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.owl1').owlCarousel({
                 loop: true,
                 margin: 10,
                 responsiveClass: true,
                 dots: false,
+                navText: [
+                    "<i class='bi bi-chevron-left' style='font-size: 2rem; color: var(--red);'></i>",
+                    "<i class='bi bi-chevron-right' style='font-size: 2rem; color: var(--red);'></i>"
+                ],
                 responsive: {
                     0: {
                         items: 1,
                         nav: true
                     },
                     600: {
-                        items: 1,
+                        items: 2,
                         nav: false
                     },
                     800: {
-                        items: 2,
+                        items: 3,
                         nav: false
                     },
                     1000: {
@@ -628,12 +678,69 @@
                     }
                 }
             });
+
+            function positionNavButtons() {
+                if ($(window).width() < 768) {
+                    // For mobile screens, position buttons below
+                    $('.owl-nav').css({
+                        'position': 'relative',
+                        'width': '100%',
+                        'margin-top': '20px',
+                        'display': 'flex',
+                        'justify-content': 'center',
+                        'gap': '20px'
+                    });
+
+                    $('.owl-prev, .owl-next').css({
+                        'position': 'relative',
+                        'left': 'auto',
+                        'right': 'auto'
+                    });
+                } else {
+                    // For larger screens, position buttons on sides
+                    $('.owl-nav').css({
+                        'position': 'absolute',
+                        'top': '50%',
+                        'width': '100%',
+                        'transform': 'translateY(-50%)',
+                        'margin-top': '0'
+                    });
+
+                    $('.owl-prev').css({
+                        'position': 'absolute',
+                        'left': '-40px'
+                    });
+
+                    $('.owl-next').css({
+                        'position': 'absolute',
+                        'right': '-40px'
+                    });
+                }
+            }
+
+            // Initial positioning
+            positionNavButtons();
+
+            // Reposition on window resize
+            $(window).resize(function () {
+                positionNavButtons();
+            });
+
+            // Prevent hover color change
+            $('.owl-nav button').hover(function () {
+                $(this).css('background', 'transparent');
+            });
+
+
         });
     </script>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzDO9Jq/Uy1p1Lw2jG/q04FH04EZoQUlBgDkfiC9UvN0" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyl2nq2K9KVDL9VkUsRxKSh3zO7lHcKrCdP4I3ZeGIDc9HrT2yztVR" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz4fnFO9gybBogGzDO9Jq/Uy1p1Lw2jG/q04FH04EZoQUlBgDkfiC9UvN0"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyl2nq2K9KVDL9VkUsRxKSh3zO7lHcKrCdP4I3ZeGIDc9HrT2yztVR"
+        crossorigin="anonymous"></script>
 
 </body>
 

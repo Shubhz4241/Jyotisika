@@ -61,7 +61,7 @@
                             <a href="<?php echo base_url('Poojaris') ?>" class="btn btnx`-dark text-dark flex-grow-1" style="background-color:var(--yellow)">
                                 Offline
                             </a>
-                            <a href="<?php echo base_url('Poojaris') ?>" class="btn btn-outline-dark btnHover flex-grow-1">
+                            <a href="<?php echo base_url('OnlinePoojaris') ?>" class="btn btn-outline-dark btnHover flex-grow-1">
                                 Online
                             </a>
                         </div>
@@ -69,70 +69,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 card-item">
-                <div class="card h-100">
-                    <img src="assets/images/BookPooja/LoveHoneySpell.png" class="card-img-top" alt="image">
-                    <div class="card-body">
-                        <h5 class="card-title">Love Honey Spell</h5>
-                        <p class="card-text">Ignite love, deepen bonds, and attract sweetness.</p>
-                    </div>
-                    <center>
-                        <a href="#" class="btn border my-3" style="background-color: var(--yellow);">Book Pooja</a>
-                    </center>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 card-item">
-                <div class="card h-100">
-                    <img src="assets/images/BookPooja/GauriShankarPooja.png" class="card-img-top" alt="image">
-                    <div class="card-body">
-                        <h5 class="card-title">Gauri Shankar Pooja</h5>
-                        <p class="card-text">Begin your married life with joy, harmony, and prosperity.</p>
-                    </div>
-                    <center>
-                        <a href="#" class="btn border my-3" style="background-color: var(--yellow);">Book Pooja</a>
-                    </center>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 card-item">
-                <div class="card h-100">
-                    <img src="assets/images/BookPooja/Rahuketu&ShaniPooja.png" class="card-img-top" alt="image">
-                    <div class="card-body">
-                        <h5 class="card-title">Rahu, Ketu & Shani Pooja</h5>
-                        <p class="card-text">Remove obstacles and welcome positivity with pooja.</p>
-                    </div>
-                    <center>
-                        <a href="#" class="btn border my-3" style="background-color: var(--yellow);">Book Pooja</a>
-                    </center>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 card-item">
-                <div class="card h-100">
-                    <img src="assets/images/BookPooja/SuryaAarti.png" class="card-img-top" alt="image">
-                    <div class="card-body">
-                        <h5 class="card-title">Surya Aarti</h5>
-                        <p class="card-text">Boost health and happiness with Surya Puja.</p>
-                    </div>
-                    <center>
-                        <a href="#" class="btn border my-3" style="background-color: var(--yellow);">Book Pooja</a>
-                    </center>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 card-item">
-                <div class="card h-100">
-                    <img src="assets/images/BookPooja/MahaRudrabhishekpooja.png" class="card-img-top" alt="image">
-                    <div class="card-body">
-                        <h5 class="card-title">Maha Rudrabhishek Pooja</h5>
-                        <p class="card-text">Cleanse your soul and receive divine blessings.</p>
-                    </div>
-                    <center>
-                        <a href="#" class="btn border my-3" style="background-color: var(--yellow);">Book Pooja</a>
-                    </center>
-                </div>
-            </div>
+            
 
         </div>
     </div>

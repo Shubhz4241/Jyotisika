@@ -48,16 +48,14 @@
                 <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
                     <h4 class="fw-bold">Available Balance : Rs.000</h4>
                     <button class="btn btn-outline-success">
-                        Recharge
+                        <a class="text-decoration-none text-dark" href="<?php echo base_url('Recharge') ?>">Recharger</a>
                     </button>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="input-group w-75 text-center mx-auto">
                         <input id="searchInput" type="search" class="form-control shadow-none"
                             placeholder="Search astrologer by name, expertise or language" onkeyup="filterCards()">
-                        <button class="btn border" type="button" style="background-color: var(--yellow); color: black;">
-                            <i class="bi bi-search"></i>
-                        </button>
+                        
                     </div>
                 </div>
             </div>

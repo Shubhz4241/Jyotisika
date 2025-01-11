@@ -28,6 +28,7 @@
     <!-- EXTERNAL CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
 
+    
 
 </head>
 
@@ -54,14 +55,11 @@
                         <option value="3">6-8 Years</option>
                         <option value="4">9+ Years</option>
                     </select>
-                    <div class="input-group w-75 text-center mx-auto">
-                        <input id="searchLocation" type="search" class="form-control shadow-none"
-                            placeholder="Search Location.">
 
-                    </div>
                 </div>
+
                 <div class="col-12 col-md-6">
-                    <div class="input-group w-75 text-center mx-auto">
+                    <div class="input-group w-100 text-center mx-auto">
                         <input id="searchInput" type="search" class="form-control shadow-none"
                             placeholder="Search astrologer by name, expertise or language" onkeyup="filterCards()">
 
@@ -71,7 +69,7 @@
 
             <!-- cards -->
             <div class="row my-4" id="cardContainer">
-                <?php for ($i = 0; $i < 7; $i++) { ?>
+                <?php for ($i = 0; $i < 16; $i++) { ?>
                     <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
                         <div class="card shadow rounded-3 h-100 position-relative" style="border: 2px solid var(--red); ">
                             <!-- Featured Badge -->
@@ -109,18 +107,13 @@
                                         <span class="card-expertise">Vastu Expert, Vedic Scholar</span>
                                     </div>
                                     <div class="row g-1">
-                                        <div class="col-6">
+                                        <div class="col-12">
                                             <div class="d-flex align-items-center small">
                                                 <i class="bi bi-calendar2-check me-1 text-success"></i>
                                                 <span class="card-experience">4 Years</span>
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="d-flex align-items-center small">
-                                                <i class="bi bi-geo-alt-fill me-1 text-primary"></i>
-                                                <span>2.5 km</span>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <div class="d-flex align-items-center small">
                                         <i class="bi bi-translate me-2 text-dark"></i>
@@ -162,10 +155,10 @@
                     const experience = parseInt(experienceText.split(' ')[0]); // Extract the number of years
 
                     const matchesSearch = title.includes(input) || expertise.includes(input) || language.includes(input);
-                    const matchesExperience = experienceFilter === "" || 
-                        (experienceFilter === "1" && experience <= 2) || 
-                        (experienceFilter === "2" && experience > 2 && experience <= 5) || 
-                        (experienceFilter === "3" && experience > 5 && experience <= 8) || 
+                    const matchesExperience = experienceFilter === "" ||
+                        (experienceFilter === "1" && experience <= 2) ||
+                        (experienceFilter === "2" && experience > 2 && experience <= 5) ||
+                        (experienceFilter === "3" && experience > 5 && experience <= 8) ||
                         (experienceFilter === "4" && experience > 8);
 
                     if (matchesSearch && matchesExperience) {
@@ -179,6 +172,8 @@
             // Add event listener for search input
             document.getElementById("searchInput").addEventListener("input", filterCards);
             document.getElementById("experienceFilter").addEventListener("change", filterCards);
+
+           
         </script>
 
     </main>
@@ -187,8 +182,6 @@
         <!-- footer -->
         <?php $this->load->view('IncludeUser/CommanFooter'); ?>
     </footer>
-
-
 
 </body>
 

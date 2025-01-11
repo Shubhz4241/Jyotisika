@@ -74,4 +74,21 @@ class User extends CI_Controller
 	public function Poojaris(){
 		$this->load->view('User/Poojaris');
 	}
+
+	public function FestivalReadmore(){
+		$this->load->view('User/FestivalReadmore');
+	}
+
+	public function WhyUs(){
+		$this->load->view('User/WhyUs');
+	}
+
+	public function OnlinePoojaris(){
+		$this->load->view("user/OnlinePoojaris");
+	}
+
+	public function Recharge(){
+		$this->load->view('User/Recharge');
+	}
 }
+
