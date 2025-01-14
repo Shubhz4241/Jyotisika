@@ -63,7 +63,7 @@
 </nav>
 
 
-<!-- Modal -->
+<!-- Modal login model-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content"
@@ -130,13 +130,10 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-
-
-
-
 
 
 <!-- Modal cretae account -->
@@ -180,14 +177,15 @@
                         style="background: #FFF;">
                         <h4 class="text-center fw-bold mb-4" style="color: #444; font-size: 1.6rem;">Create Account
                         </h4>
-                        <form id="signupForm" style="width: 100%; max-width: 400px;">
+                        <form id="signupForm" style="width: 100%; max-width: 420px;">
+
                             <div id="step1" class="mb-4">
-                                <input type="tel" class="form-control form-control-lg rounded-4" id="mobile"
-                                    placeholder="Mobile Number" style="padding: 0.8rem; border: 1px solid #ddd;" required>
+                                <input type="tel" class="form-control form-control-lg rounded-2" id="mobile"
+                                    placeholder="Mobile Number" style="padding: 0.5rem; border: 1px solid #ddd;" required>
                                 <button type="button" class="btn btn-warning mt-2" id="getOTP">Get OTP</button>
                             </div>
                             <div id="step2" style="display: none;">
-                                <input type="text" class="form-control form-control-lg rounded-4 mb-2" id="otp"
+                                <input type="text" class="form-control form-control-lg rounded-2 mb-2" id="otp"
                                     placeholder="Enter OTP" style="padding: 0.8rem; border: 1px solid #ddd;" maxlength="4" required>
                             </div>
                             <div id="step3" style="display: none;">
@@ -206,6 +204,15 @@
         </div>
     </div>
 </div>
+
+
+<div class="container">
+    
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     document.getElementById('getOTP').addEventListener('click', () => {
         // Add your OTP generation and verification logic here.  This is a placeholder.
@@ -214,7 +221,7 @@
             document.getElementById('step1').style.display = 'none';
             document.getElementById('step2').style.display = 'block';
         } else {
-            alert('Please enter a valid 10-digit mobile number.');
+            Swal.fire("Enter Valid Mobile Number");
         }
     });
 

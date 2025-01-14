@@ -144,8 +144,8 @@
                                     your efforts.
                                 </p>
                                 <center>
-                                    <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check
-                                        Out</a>
+                                    <a href="<?php echo base_url("ServiceDetails") ?>" class="btn fw-bold " style="background-color: var(--yellow);">Check
+                                        Now</a>
                                 </center>
                             </div>
                         </div>

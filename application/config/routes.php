@@ -74,6 +74,7 @@ $route['FestivalReadmore'] ='User/FestivalReadmore';
 $route['WhyUs'] ='User/WhyUs';
 $route['OnlinePoojaris'] ='User/OnlinePoojaris';
 $route['Recharge'] ='User/Recharge';
+$route['ServiceDetails'] ='User/ServiceDetails';
 
 
 
