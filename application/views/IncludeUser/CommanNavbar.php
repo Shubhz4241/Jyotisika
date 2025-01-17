@@ -1,5 +1,5 @@
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary px-md-2" style="background-color: var(--yellow) !important;">
+<nav class="navbar navbar-expand-lg bg-body-tertiary px-md-2 sticky-top" style="background-color: var(--yellow) !important;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="<?php echo base_url('assets/images/web-logo.jpg'); ?>" alt="logo image"
@@ -15,17 +15,7 @@
                     <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-black" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="true">
-                        Horoscope
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end rounded-3" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="<?php echo base_url('todayhoroscope'); ?>">Today
-                                Horoscope</a></li>
-                        <li><a class="dropdown-item" href="#">Daily Horoscope</a></li>
-                        <li><a class="dropdown-item" href="#">Weekly Horoscope</a></li>
-                        <li><a class="dropdown-item" href="#">Monthly Horoscope</a></li>
-                    </ul>
+                    <a class="nav-link text-black" href="<?php echo base_url('todayhoroscope'); ?>">Horoscope</a>
                 </li>
 
 
@@ -33,7 +23,7 @@
                     <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>">Astrologers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-black" href="#">Pujari</a>
+                    <a class="nav-link text-black" href="<?php echo base_url('Poojaris') ?>">Pujari</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">Why Us</a>
@@ -57,10 +47,47 @@
                     data-bs-target="#exampleModal" style="background-color: var(--red);">
                     login
                 </button>
+
+                <div class="dropdown">
+                    <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="User Profile" style="width: 40px; height: 40px; border-radius: 50%;">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown" style="border: none; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <li class="text-center p-3">'
+                            <a href="<?php echo base_url('UserProfile') ?>">
+                                <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="Profile Image" style="width: 60px; height: 60px; border-radius: 50%;">
+                            </a>
+                            <p class="mt-2 mb-0" style="font-weight: 600;">User Name</p>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-dark" href="<?php echo base_url('Orders'); ?>" style="background-color: transparent;">My Orders</a></li>
+                        <li><a class="dropdown-item text-dark" href="<?php echo base_url('myservices'); ?>" style="background-color: transparent;">My Services</a></li>
+                        <li><a class="dropdown-item text-dark" href="<?php echo base_url('logout'); ?>" style="background-color: transparent;">Logout</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </nav>
+
+<style>
+    /* Custom scrollbar styles */
+    ::-webkit-scrollbar {
+        width: 15px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--yellow);
+        border-radius: 2px;
+        border: 3px solid #f1f1f1;
+    }
+</style>
 
 
 <!-- Modal login model-->
@@ -205,10 +232,6 @@
     </div>
 </div>
 
-
-<div class="container">
-    
-</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

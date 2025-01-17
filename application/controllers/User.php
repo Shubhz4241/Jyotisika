@@ -73,9 +73,9 @@ class User extends CI_Controller
 		$this->load->view('User/BookPoojaViewMore');
 	}
 
-	public function Poojaris()
+	public function OfflinePoojaris()
 	{
-		$this->load->view('User/Poojaris');
+		$this->load->view('User/OfflinePoojaris');
 	}
 
 	public function FestivalReadmore()
@@ -101,5 +101,17 @@ class User extends CI_Controller
 	public function ServiceDetails()
 	{
 		$this->load->view('User/ServiceDetails');
+	}
+
+	public function Poojaris()
+	{
+		$this->load->view('User/Poojaris');
+	}
+
+	public function UserProfile(){
+		$this->load->view('User/UserProfile');
+	}
+	public function Orders(){
+		$this->load->view('User/Orders');
 	}
 }

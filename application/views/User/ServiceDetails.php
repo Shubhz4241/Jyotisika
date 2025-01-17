@@ -50,31 +50,50 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-4">
-                                <img src="<?php echo base_url('assets/images/Services/carrerJobService.png') ?>" alt="service image">
+                <div class="col-12 mb-4">
+                    <div class="card shadow-lg border-0" style="overflow: hidden; border-radius: 15px; ">
+                        <div class="row g-0">
+                            <!-- Image Section -->
+                            <div class="col-md-4 p-3">
+                                <img src="<?php echo base_url('assets/images/Services/carrerJobService.png') ?>"
+                                    class="img-fluid" alt="service image"
+                                    style="height:240px; width:240px; object-fit: contain;  " >
+                                
                             </div>
-                            <div class="col-4">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste illo nulla tempora dolorum vero quisquam minus cum, nobis rem velit dicta harum consequuntur recusandae fuga reiciendis ut magnam perferendis explicabo?</p>
+                            <!-- Content Section -->
+                            <div class="col-md-5 d-flex flex-column justify-content-center p-4">
+                                <h5 class="card-title fw-bold text-dark mb-3" style="font-size: 1.5rem; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);" >
+                                    Career/Job
+                                </h5>
+                                <p class="card-text text-secondary mb-4 " style="text-align:justify; font-size: 0.95rem; line-height: 1.6;">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste illo nulla tempora dolorum vero quisquam minus cum, nobis rem velit dicta harum consequuntur recusandae fuga reiciendis ut magnam perferendis explicabo?
+                                </p>
+                            </div>
+                            <!-- Price and Button Section -->
+                            <div class="col-md-3 d-flex flex-column justify-content-center align-items-center text-center p-4"
+                                style="border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                                <p class="mb-1 text-muted" style="font-size: 1rem;">Price</p>
+                                <p class="fw-bold fs-4 text-success mb-0 pb-0" style="font-size: 1.8rem; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);">
+                                    344 Rs
+                                </p>
+                                <p class="text-decoration-line-through">500 Rs</p>
+                                <button class="btn btn-primary btn w-fit text-dark p-2" style="background-color:var(--yellow); border: none; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); transition: transform 0.2s;">
+                                    Order Now
+                                </button>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
+
+
         </div>
-
-
 
     </main>
 
     <footer>
         <?php $this->load->view('IncludeUser/CommanFooter'); ?>
     </footer>
-
-
 
 </body>
 

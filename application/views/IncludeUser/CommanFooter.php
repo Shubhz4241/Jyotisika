@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col-12 text-center bg-white p-2">
                     <p class="text-dark">
-                        Powered By : <span><img src="<?php echo base_url('assets/images/manasviTechSolutionLogo.png'); ?>" alt="Manasvi Tech Solution" style="width: 120px;"></span>
+                        Design By : <span><img src="<?php echo base_url('assets/images/manasviTechSolutionLogo.png'); ?>" alt="Manasvi Tech Solution" style="width: 120px;"></span>
                         This site is designed, hosted and maintained by <a class="text-dark text-decoration-none" href="https://manasvi.tech/">Manasvi Tech Solutions Pvt. Ltd.</a>
                     </p>
                 </div>

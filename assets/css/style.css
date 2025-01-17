@@ -3,6 +3,7 @@
     padding: 0;
     font-family: "Kaisei Decol", serif;
     box-sizing: border-box
+    
 }
 
 :root{
@@ -11,3 +12,17 @@
     
 }
 
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--yellow);
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}

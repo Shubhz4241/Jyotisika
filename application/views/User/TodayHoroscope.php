@@ -57,7 +57,7 @@
 <body>
 
     <!-- Navbar -->
-    <header>
+    <header class="sticky-top">
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 

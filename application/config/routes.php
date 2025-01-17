@@ -69,17 +69,15 @@ $route['kp'] = 'User/KP';
 $route['astrologers'] = 'User/Astrologers';
 $route['ViewAstrologer'] = 'User/ViewAstrologer';
 $route['BookPoojaViewMore'] ='User/BookPoojaViewMore';
-$route['Poojaris'] ='User/Poojaris';
+$route['OfflinePoojaris'] ='User/OfflinePoojaris';
 $route['FestivalReadmore'] ='User/FestivalReadmore';
 $route['WhyUs'] ='User/WhyUs';
 $route['OnlinePoojaris'] ='User/OnlinePoojaris';
 $route['Recharge'] ='User/Recharge';
 $route['ServiceDetails'] ='User/ServiceDetails';
-
-
-
-
-
+$route['Poojaris'] ='User/Poojaris';
+$route['UserProfile'] ='User/UserProfile';
+$route['Orders'] ='User/Orders';
 
 
 // login poge
