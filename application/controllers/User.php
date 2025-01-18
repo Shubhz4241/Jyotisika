@@ -51,7 +51,6 @@ class User extends CI_Controller
 	public function HoroscopeReadmore()
 	{
 		$this->load->view('User/HoroscopeReadmore');
-
 	}
 
 	public function KP()
@@ -59,19 +58,60 @@ class User extends CI_Controller
 		$this->load->view('User/KP');
 	}
 
-	public function Astrologers(){
+	public function Astrologers()
+	{
 		$this->load->view('User/Astrologers');
 	}
 
-	public function ViewAstrologer(){
+	public function ViewAstrologer()
+	{
 		$this->load->view('User/ViewAstrologer');
 	}
 
-	public function BookPoojaViewMore(){
+	public function BookPoojaViewMore()
+	{
 		$this->load->view('User/BookPoojaViewMore');
 	}
 
-	public function Poojaris(){
+	public function OfflinePoojaris()
+	{
+		$this->load->view('User/OfflinePoojaris');
+	}
+
+	public function FestivalReadmore()
+	{
+		$this->load->view('User/FestivalReadmore');
+	}
+
+	public function WhyUs()
+	{
+		$this->load->view('User/WhyUs');
+	}
+
+	public function OnlinePoojaris()
+	{
+		$this->load->view("user/OnlinePoojaris");
+	}
+
+	public function Recharge()
+	{
+		$this->load->view('User/Recharge');
+	}
+
+	public function ServiceDetails()
+	{
+		$this->load->view('User/ServiceDetails');
+	}
+
+	public function Poojaris()
+	{
 		$this->load->view('User/Poojaris');
+	}
+
+	public function UserProfile(){
+		$this->load->view('User/UserProfile');
+	}
+	public function Orders(){
+		$this->load->view('User/Orders');
 	}
 }

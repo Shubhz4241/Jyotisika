@@ -8,25 +8,25 @@
  <!-- BUTTONS -->
  <div class="container-fluid my-4" style="max-height: 800px; width: 100%; overflow-x: auto; white-space: nowrap; scrollbar-width: none; -ms-overflow-style: none; padding-left: 10px;">
      <div class="row  justify-content-md-center gap-3 px-1" style="display: flex; flex-wrap: nowrap;">
-         <a href="<?php echo base_url('bookpooja'); ?>" id="bookpooja-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
+         <a href="<?php echo base_url('bookpooja'); ?>" id="bookpooja-link" class="btnHover btn btn-outline-dark rounded-4 shadow-sm" style="width: fit-content;">
              Book Pooja
          </a>
-         <a href="<?php echo base_url('freekundli'); ?>" id="freekundli-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
+         <a href="<?php echo base_url('freekundli'); ?>" id="freekundli-link" class="btnHover btn btn-outline-dark rounded-4 shadow-sm" style="width: fit-content;">
              Free Kundli
          </a>
-         <a href="<?php echo base_url('kundlimatching'); ?>" id="kundlimatching-link" class=" btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
+         <a href="<?php echo base_url('kundlimatching'); ?>" id="kundlimatching-link" class=" btnHover btn btn-outline-dark rounded-4 shadow-sm" style="width: fit-content;">
              Kundli Matching
          </a>
-         <a href="<?php echo base_url('jyotisikamall'); ?>" id="jyotisikamall-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
+         <a href="<?php echo base_url('jyotisikamall'); ?>" id="jyotisikamall-link" class="btnHover btn btn-outline-dark rounded-4 shadow-sm" style="width: fit-content;">
              Jyotisika Mall
          </a>
-         <a href="<?php echo base_url('panchang'); ?>" id="panchang-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
+         <a href="<?php echo base_url('panchang'); ?>" id="panchang-link" class="btnHover btn btn-outline-dark rounded-4 shadow-sm" style="width: fit-content;">
              Panchang
          </a>
-         <a href="<?php echo base_url('kp'); ?>" id="kp-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
+         <a href="<?php echo base_url('kp'); ?>" id="kp-link" class="btnHover btn btn-outline-dark rounded-4 shadow-sm" style="width: fit-content;">
              KP
          </a>
-         <a href="<?php echo base_url('festival'); ?>" id="festival-link" class="btnHover btn btn-outline-dark rounded-4 shadow" style="width: fit-content;">
+         <a href="<?php echo base_url('festival'); ?>" id="festival-link" class="btnHover btn btn-outline-dark rounded-4 shadow-sm" style="width: fit-content;">
              Festival
          </a>
      </div>

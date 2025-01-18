@@ -38,45 +38,82 @@
             <h3 class="text-center fw-bold " style="color: var(--red);">Hindu Festivals 2025 & Muhurat</h3>
             <p> <span style="color: var(--red);">Hinduism</span> is celebrated for its rich tapestry of festivals, each brimming with cultural and spiritual significance. Over time, these festivals have evolved, embracing new traditions and meanings while preserving their ancient roots.</p>
         </div>
+        
+        <div class="row my-4">
+            <div class="col-12 d-flex justify-content-center">
+                <select id="stateFilter" class="form-select mx-2 shadow-none" onchange="filterFestivals()">
+                    <option value="">Select State</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Gujarat">Gujarat</option>
+                </select>
+                <select id="monthFilter" class="form-select mx-2 shadow-none" onchange="filterFestivals()">
+                    <option value="">Select Month</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                <select id="yearFilter" class="form-select shadow-none mx-2" onchange="filterFestivals()">
+                    <option value="">Select Year</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                </select>
+            </div>
+        </div>
+
         <div class="row d-flex justify-content-center">
             <div class="card p-2 " style="width:fit-content">
                 <p class="card-text fs-5"> <span style="color: var(--red);">Today's Festival :</span> There is no festival Today.</p>
             </div>
         </div>
-        <div class="row my-4 d-flex justify-content-center">
+        <div class="row my-4 d-flex justify-content-center" id="festivalCards">
             <?php
             $cards = [
                 [
                     'title' => 'Merry Christmas',
                     'image' => 'assets/images/Festival/merryChristmas.png',
-                    'link' => '#',
+                    'link' => 'FestivalReadmore',
+                    'state' => 'Maharashtra',
+                    'month' => 'December',
+                    'year' => '2025'
                 ],
                 [
                     'title' => 'Chhath Pooja',
                     'image' => 'assets/images/Festival/chhathPooja.png',
                     'link' => '#',
-                ],
-                [
-                    'title' => 'Merry Christmas',
-                    'image' => 'assets/images/Festival/merryChristmas.png',
-                    'link' => '#',
+                    'state' => 'Bihar',
+                    'month' => 'October',
+                    'year' => '2025'
                 ],
                 [
                     'title' => 'Govardhan Pooja',
                     'image' => 'assets/images/Festival/govardhanPooja.png',
                     'link' => '#',
+                    'state' => 'Uttar Pradesh',
+                    'month' => 'November',
+                    'year' => '2025'
                 ],
             ];
 
             foreach ($cards as $card) {
             ?>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center festival-card" data-state="<?php echo $card['state']; ?>" data-month="<?php echo $card['month']; ?>" data-year="<?php echo $card['year']; ?>">
                     <div class="card p-2" style="width: 16rem;">
-                        <img src="<?php echo $card['image']; ?>" class="card-img-top" alt="image">
+                        <img src="<?php echo base_url() . $card['image']; ?>" class="card-img-top" alt="image">
                         <div class="card-body">
                             <h5 class="card-title text-center"><?php echo $card['title']; ?></h5>
                             <center>
-                                <a href="<?php echo $card['link']; ?>" class="btn mx-auto btn-sm mt-2" style="background-color: var(--yellow);">
+                                <a href="<?php echo base_url() . $card['link']; ?>" class="btn mx-auto btn-sm mt-2" style="background-color: var(--yellow);">
                                     Read More
                                 </a>
                             </center>
@@ -87,8 +124,30 @@
             }
             ?>
         </div>
-
     </div>
+
+    <script>
+        function filterFestivals() {
+            const state = document.getElementById("stateFilter").value;
+            const month = document.getElementById("monthFilter").value;
+            const year = document.getElementById("yearFilter").value;
+            const cards = document.querySelectorAll(".festival-card");
+
+            cards.forEach(card => {
+                const cardState = card.getAttribute("data-state");
+                const cardMonth = card.getAttribute("data-month");
+                const cardYear = card.getAttribute("data-year");
+
+                if ((state === "" || cardState === state) &&
+                    (month === "" || cardMonth === month) &&
+                    (year === "" || cardYear === year)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
 
 
 

@@ -45,25 +45,55 @@
 
             <!-- recharge and seach section  -->
             <div class="row my-4">
-                <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
+                <!-- <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
                     <h4 class="fw-bold">Available Balance : Rs.000</h4>
                     <button class="btn btn-outline-success">
-                        Recharge
+                        <a class="text-decoration-none text-dark" href="<?php echo base_url('Recharge') ?>">Recharger</a>
                     </button>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="input-group w-75 text-center mx-auto">
+                </div> -->
+                <div class="col-12 d-flex justify-content-center ">
+                    <div class="input-group w-50">
                         <input id="searchInput" type="search" class="form-control shadow-none"
                             placeholder="Search astrologer by name, expertise or language" onkeyup="filterCards()">
-                        <button class="btn border" type="button" style="background-color: var(--yellow); color: black;">
-                            <i class="bi bi-search"></i>
-                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- cards -->
             <div class="row my-4" id="cardContainer">
+                <?php 
+                $astrologers = [
+                    [
+                        'name' => 'Acharya Mishra Ji',
+                        'image' => 'astrologer.png',
+                        'expertise' => 'Vastu, Vedic',
+                        'experience' => '4+ Years',
+                        'price' => 'Rs.25/min',
+                        'languages' => 'English, Hindi, Marathi',
+                        'rating' => 3
+                    ],
+                    [
+                        'name' => 'Pandit Ji',
+                        'image' => 'astrologer.png',
+                        'expertise' => 'Vastu, Vedic',
+                        'experience' => '10+ Years',
+                        'price' => 'Rs.50/min',
+                        'languages' => 'English, Hindi, Marathi',
+                        'rating' => 5
+                    ],
+                    [
+                        'name' => 'Karan Ji',
+                        'image' => 'astrologer.png',
+                        'expertise' => 'Vastu, Vedic',
+                        'experience' => '7+ Years',
+                        'price' => 'Rs.40/min',
+                        'languages' => 'English, Hindi, Marathi',
+                        'rating' => 4
+                    ],
+                    
+                ];
+
+                foreach ($astrologers as $astrologer): ?>
                 <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
                     <div class="card shadow rounded-3 h-100"
                         style="border: 1px solid var(--red); background-color: #fff;">
@@ -71,18 +101,18 @@
                             <!-- Profile Section -->
                             <div class="d-flex align-items-center mb-2">
                                 <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
+                                    <img src="<?php echo base_url('assets/images/' . $astrologer['image']); ?>" alt="image"
                                         class="rounded-circle"
                                         style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                 </a>
                                 <div class="ms-2">
                                     <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Acharya Mishra Ji
+                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);"><?php echo $astrologer['name']; ?>
                                         </h6>
                                     </a>
 
                                     <div class="d-flex align-items-center gap-1">
-                                        <?php for ($i = 0; $i < 3; $i++): ?>
+                                        <?php for ($i = 0; $i < $astrologer['rating']; $i++): ?>
                                             <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
                                                 style="width: 15px; height: 15px;">
                                         <?php endfor; ?>
@@ -95,22 +125,22 @@
                                 <div class="d-flex align-items-center">
                                     <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
                                         style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Vastu, Vedic</small>
+                                    <small class="card-expertise"><?php echo $astrologer['expertise']; ?></small>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
                                         style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>4+ Years</small>
+                                    <small><?php echo $astrologer['experience']; ?></small>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
                                         style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.25/min</small>
+                                    <small><?php echo $astrologer['price']; ?></small>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
                                         style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-language">English, Hindi, Marathi</small>
+                                    <small class="card-language"><?php echo $astrologer['languages']; ?></small>
                                 </div>
                             </div>
 
@@ -124,6 +154,7 @@
                         </div>
                     </div>
                 </div>
+                <?php endforeach; ?>
             </div>
         </div>
 

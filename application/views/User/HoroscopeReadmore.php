@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row my-4">
                 <div class="col-12 col-md-4 order-2 order-md-1 ">
                     <div class="card p-3 shadow border-1 rounded-2 ">
                         <label for="zodiacSign" class="form-label fw-bold mb-2">Select Other Sign</label>
@@ -109,21 +109,15 @@
                     </div>
 
                     <div class="card shadow border-1 rounded-2 mt-1 p-3">
-                        <p class="fs-5 fw-bold mb-3">Horoscope</p>
-                        <div class="row row-cols-2 g-2">
-                            <div class="col">
-                                <button class="btn btn-outline-dark w-100 btn-hover">Today's Horoscope</button>
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-outline-dark w-100 btn-hover">Tomorrow's Horoscope</button>
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-outline-dark w-100 btn-hover">Weekly Horoscope</button>
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-outline-dark w-100 btn-hover">Monthly Horoscope</button>
-                            </div>
-                        </div>
+                        <label for="horoscopeSelect" class="form-label fw-bold mb-2">Select Horoscope Type</label>
+                        <select name="horoscopeSelect" id="horoscopeSelect" class="form-select shadow-none">
+                            <option value="today" selected>Today's Horoscope</option>
+                            <option value="tomorrow" >Tomorrow Horoscope</option>
+                            <option value="yestarday" >Yestarday Horoscope</option>
+                            <option value="weekly">Weekly Horoscope</option>
+                            <option value="monthly">Monthly Horoscope</option>
+                            <option value="yearly">Yearly Horoscope</option>
+                        </select>
                     </div>
 
                     <div class="card shadow border-1 rounded-2 mt-1 p-2">

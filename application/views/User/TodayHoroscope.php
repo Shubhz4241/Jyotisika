@@ -57,7 +57,7 @@
 <body>
 
     <!-- Navbar -->
-    <header>
+    <header class="sticky-top">
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
@@ -142,7 +142,7 @@
 
                 foreach ($horoscopes as $horoscope): ?>
                     <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                        <div class="card shadow-lg border-0 rounded-4 hover-zoom h-100" style="width: 18rem;">
+                        <div class="card  border-0 rounded-4 hover-zoom h-100" style="width: 18rem;  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;" >
                             <div class="text-center mt-3">
                                 <img class="border-0 img-fluid mx-auto "
                                     src="<?php echo base_url('assets/images/' . $horoscope['image']); ?>"
@@ -152,7 +152,7 @@
                                 <h5 class="card-title text-center fw-bold" style="color: var(--red)">
                                     <?php echo $horoscope['name']; ?> Horoscope 2025
                                 </h5>
-                                <div class="card-text" style="height: 150px; overflow: hidden; position: relative;">
+                                <div class="card-text" style="height: 60px; overflow: hidden; position: relative;">
                                     <p class="text-muted" style="text-align:justify;">Lorem ipsum dolor, sit amet
                                         consectetur
                                         adipisicing elit. Natus eveniet, asperiores minus officia iste, totam corrupti
