@@ -89,9 +89,6 @@
             transform: scale(1.1);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
-
-       
     </style>
 
 </head>
@@ -103,12 +100,13 @@
 
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
+    <!-- astro signs -->
     <section>
         <div class="container mt-3">
             <div class="row gx-6 gy-3 justify-content-center">
                 <!-- Astrology Sign -->
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                    <a href="<?php echo base_url('horoscopereadmore')?>" class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="Aris"
                             class="rounded-circle p-2 shadow-sm">
                         <p class="mt-2 mb-0 text-dark fw-bold">Aris</p>
@@ -198,7 +196,7 @@
         </div>
 
 
-        <div class="container mt-4">
+        <!-- <div class="container mt-4">
             <div class="row d-flex justify-content-center g-3">
                 <div class="col-12 col-md-6 " style="width: fit-content;">
                     <a href="#" style="text-decoration: none;">
@@ -221,11 +219,11 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
     </section>
 
     <!-- about astrology section -->
-    <section>
+    <!-- <section>
         <div class="container my-4">
             <div class="row p-3  rounded-3 d-flex justify-content-center align-items-center shadow-sm"
                 style="background-color: var(--yellow);">
@@ -250,80 +248,105 @@
             </div>
         </div>
 
-    </section>
+    </section> -->
 
-    <!-- consult  astrologer on call or chat -->
+    <!--CAROUSEL CODE  -->
     <section>
         <div class="container my-4">
+            <div id="carouselExampleIndicators" class="carousel slide rounded-4" data-bs-ride="carousel" style="overflow: hidden;">
+                
+                <div class="carousel-inner rounded-4">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png')?>" alt="slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png')?>" alt="slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png')?>" alt="slide">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Astrologer on call or chat -->
+    <section>
+        <div class="container my-4">
+        <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrologers</h2>
             <div class="row my-4" id="cardContainer">
-            <?php for ($i = 0; $i < 4; $i++): ?>
-                <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
-                <div class="card shadow-sm rounded-3 h-100"
-                    style="border: 1px solid var(--red); background-color: #fff;">
-                    <div class="card-body p-3">
-                    <!-- Profile Section -->
-                    <div class="d-flex align-items-center mb-2">
-                        <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                        <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
-                            class="rounded-circle"
-                            style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                        </a>
-                        <div class="ms-2">
-                        <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
-                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Acharya Mishra Ji
-                            </h6>
-                        </a>
+                <?php for ($i = 0; $i < 4; $i++): ?>
+                    <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
+                        <div class="card shadow-sm rounded-3 h-100"
+                            style="border: 1px solid var(--red); background-color: #fff;">
+                            <div class="card-body p-3">
+                                <!-- Profile Section -->
+                                <div class="d-flex align-items-center mb-2">
+                                    <a href="<?php echo base_url('ViewAstrologer'); ?>">
+                                        <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
+                                            class="rounded-circle"
+                                            style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+                                    </a>
+                                    <div class="ms-2">
+                                        <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
+                                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Acharya Mishra Ji
+                                            </h6>
+                                        </a>
 
-                        <div class="d-flex align-items-center gap-1">
-                            <?php for ($j = 0; $j < 3; $j++): ?>
-                            <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                style="width: 15px; height: 15px;">
-                            <?php endfor; ?>
-                        </div>
-                        </div>
-                    </div>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <?php for ($j = 0; $j < 3; $j++): ?>
+                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
+                                                    style="width: 15px; height: 15px;">
+                                            <?php endfor; ?>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <!-- Details Section -->
-                    <div class="d-flex flex-column gap-1 mb-2">
-                        <div class="d-flex align-items-center">
-                        <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
-                            style="width: 15px; height: 15px; margin-right: 5px;">
-                        <small class="card-expertise">Vastu, Vedic</small>
-                        </div>
-                        <div class="d-flex align-items-center">
-                        <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
-                            style="width: 15px; height: 15px; margin-right: 5px;">
-                        <small>4+ Years</small>
-                        </div>
-                        <div class="d-flex align-items-center">
-                        <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
-                            style="width: 15px; height: 15px; margin-right: 5px;">
-                        <small>Rs.25/min</small>
-                        </div>
-                        <div class="d-flex align-items-center">
-                        <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
-                            style="width: 15px; height: 15px; margin-right: 5px;">
-                        <small class="card-language">English, Hindi, Marathi</small>
-                        </div>
-                    </div>
+                                <!-- Details Section -->
+                                <div class="d-flex flex-column gap-1 mb-2">
+                                    <div class="d-flex align-items-center">
+                                        <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
+                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                        <small class="card-expertise">Vastu, Vedic</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
+                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                        <small>4+ Years</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
+                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                        <small>Rs.25/min</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
+                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                        <small class="card-language">English, Hindi, Marathi</small>
+                                    </div>
+                                </div>
 
-                    <!-- Action Buttons -->
-                    <div class="d-flex gap-2 mb-2">
-                        <button class="btn btn-sm w-50 rounded-3 border-1"
-                        style="background-color: var(--yellow);">Chat</button>
-                        <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
+                                <!-- Action Buttons -->
+                                <div class="d-flex gap-2 mb-2">
+                                    <button class="btn btn-sm w-50 rounded-3 border-1"
+                                        style="background-color: var(--yellow);">Chat</button>
+                                    <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
+                                </div>
+                                <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
+                            </div>
+                        </div>
                     </div>
-                    <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
-                    </div>
+                <?php endfor; ?>
+
+                <div class="text-center mt-4">
+                    <a href="<?php echo base_url('astrologers')?>" class="btn fw-bold" style="background-color: var(--yellow);">View More</a>
                 </div>
-                </div>
-            <?php endfor; ?>
             </div>
         </div>
     </section>
 
     <!-- Astrological Services For Accurate Answers And Better Future -->
-    <section>
+    <!-- <section>
         <div class="container">
             <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"> Astrological Services For Accurate Answers
                 And Better Future</h2>
@@ -410,7 +433,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
 
     <!-- Astrological  Remedies  To  Get  Rid  Of  Your  Problems -->
@@ -629,7 +652,7 @@
                     </a>
                 </div>
                 <div class="text-center mt-4">
-                    <a href="#" class="btn fw-bold" style="background-color: var(--yellow);">See More</a>
+                    <a href="<?php echo base_url('AstrologyServices')?>" class="btn fw-bold" style="background-color: var(--yellow);">See More</a>
                 </div>
             </div>
         </div>
@@ -652,7 +675,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.owl1').owlCarousel({
                 loop: true,
                 margin: 10,
@@ -726,12 +749,12 @@
             positionNavButtons();
 
             // Reposition on window resize
-            $(window).resize(function() {
+            $(window).resize(function () {
                 positionNavButtons();
             });
 
             // Prevent hover color change
-            $('.owl-nav button').hover(function() {
+            $('.owl-nav button').hover(function () {
                 $(this).css('background', 'transparent');
             });
 

@@ -79,7 +79,7 @@
                             <div class="card-body p-3">
                                 <!-- Profile Section -->
                                 <div class="d-flex align-items-center mb-2">
-                                    <a href="<?php echo base_url('ViewAstrologer'); ?>">
+                                    <a href="<?php echo base_url('PoojarViewMore'); ?>">
                                         <div class="position-relative">
                                             <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
                                                 class="rounded-circle"
@@ -134,17 +134,57 @@
 
                                 <!-- Action Buttons -->
                                 <div class="d-flex gap-2">
-                                    <a href="<?php echo base_url('BookPoojaViewMore') ?>"
-                                        class="w-100 text-decoration-none text-dark">
-                                        <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);">
-                                            View
+                                  
+                                        <button  data-bs-toggle="modal" data-bs-target="#bookpooja" class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);">
+                                            Book Pooja
                                         </button>
-                                    </a>
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
+            </div>
+        </div>
+
+        <div class="modal fade" id="bookpooja" tabindex="-1" aria-labelledby="bookpoojaLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="d-flex justify-content-between align-items-center p-3">
+                        <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Address</label>
+                                    <textarea class="form-control shadow-none" rows="3"
+                                        placeholder="Enter your complete address"></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Preferred Date</label>
+                                    <input type="date" class="form-control shadow-none">
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Preferred Time</label>
+                                    <input type="time" class="form-control shadow-none">
+                                </div>
+
+
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="p-3 d-flex justify-content-center align-items-center gap-3">
+
+                        <button type="submit" class="btn text-dark" style="background-color: var(--yellow);" >
+                            Confirm Booking
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
