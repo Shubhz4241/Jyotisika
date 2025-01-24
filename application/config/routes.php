@@ -86,3 +86,12 @@ $route['LoginSignup'] = 'LoginSignup/LoginSignup';
 // Admin Routes
 $route['admindash'] = 'Admin/AdminDash';
 $route['astrologerrequests'] = 'Admin/AstrologerReqList';
+$route['pujarirequests'] = 'Admin/PujariReqList';
+$route['usermanagement'] = 'Admin/UserManagement';
+$route['festivals'] = 'Admin/Festivals';
+$route['poojalist'] = 'Admin/BookPooja';
+$route['jyotisikastore'] = 'Admin/JyotisikaStore';
+$route['profile'] = 'Admin/Profile';
+
+// Login Admin Routes
+$route['login'] = 'LoginForgotAdmin/LoginAdmin';
