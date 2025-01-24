@@ -85,3 +85,7 @@ $route['ProductDetails'] ='User/ProductDetails';
 
 // login poge
 $route['LoginSignup'] = 'LoginSignup/LoginSignup';
+
+// Admin Routes
+$route['admindash'] = 'Admin/AdminDash';
+$route['astrologerrequests'] = 'Admin/AstrologerReqList';
