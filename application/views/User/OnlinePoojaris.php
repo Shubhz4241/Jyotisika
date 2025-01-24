@@ -12,7 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+   
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -27,8 +28,6 @@
 
     <!-- EXTERNAL CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
-
-    
 
 </head>
 
@@ -77,7 +76,7 @@
                             <div class="card-body p-3">
                                 <!-- Profile Section -->
                                 <div class="d-flex align-items-center mb-2">
-                                    <a href="<?php echo base_url('ViewAstrologer'); ?>">
+                                    <a href="<?php echo base_url('PoojarViewMore'); ?>">
                                         <div class="position-relative">
                                             <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
                                                 class="rounded-circle"
@@ -113,7 +112,7 @@
                                                 <span class="card-experience">4 Years</span>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="d-flex align-items-center small">
                                         <i class="bi bi-translate me-2 text-dark"></i>
@@ -127,17 +126,52 @@
 
                                 <!-- Action Buttons -->
                                 <div class="d-flex gap-2">
-                                    <a href="<?php echo base_url('BookPoojaViewMore') ?>"
-                                        class="w-100 text-decoration-none text-dark">
-                                        <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);">
-                                            View
-                                        </button>
-                                    </a>
+                                    <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
+                                        data-bs-toggle="modal" data-bs-target="#bookpooja">
+                                        Book Pooja
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="bookpooja" tabindex="-1" aria-labelledby="bookpoojaLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="d-flex justify-content-between align-items-center p-3">
+                        <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row g-3">
+                                
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Preferred Date</label>
+                                    <input type="date" class="form-control shadow-none">
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Preferred Time</label>
+                                    <input type="time" class="form-control shadow-none">
+                                </div>
+
+
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="p-3 d-flex justify-content-center align-items-center gap-3">
+
+                        <button type="submit" class="btn text-dark" style="background-color: var(--yellow);">
+                            Confirm Booking
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -173,7 +207,7 @@
             document.getElementById("searchInput").addEventListener("input", filterCards);
             document.getElementById("experienceFilter").addEventListener("change", filterCards);
 
-           
+
         </script>
 
     </main>

@@ -68,9 +68,9 @@ class User extends CI_Controller
 		$this->load->view('User/ViewAstrologer');
 	}
 
-	public function BookPoojaViewMore()
+	public function PoojarViewMore()
 	{
-		$this->load->view('User/BookPoojaViewMore');
+		$this->load->view('User/PoojarViewMore');
 	}
 
 	public function OfflinePoojaris()
@@ -113,5 +113,13 @@ class User extends CI_Controller
 	}
 	public function Orders(){
 		$this->load->view('User/Orders');
+	}
+
+	public function AstrologyServices(){
+		$this->load->view('User/AstrologyServices');
+	}
+
+	public function ProductDetails (){
+		$this->load->view('User/ProductDetails');
 	}
 }

@@ -22,9 +22,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>">Astrologers</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link text-black" href="<?php echo base_url('Poojaris') ?>">Pujari</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">Why Us</a>
                 </li>
