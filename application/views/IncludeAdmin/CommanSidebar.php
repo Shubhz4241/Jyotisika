@@ -26,7 +26,7 @@
         height: 100vh;
         min-height: 100vh;
         transition: all 0.35s ease-in-out;
-        background-color: #ffffff;
+        background-color: #D4ECFF;
         display: flex;
         flex-direction: column;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -143,7 +143,7 @@
 
     @media (max-width:768px) {
         #sidebar {
-            background-color: #ffffff;
+            background-color: #D4ECFF;
             /* Solid color for mobile devices */
             position: fixed;
             z-index: 1100;
@@ -317,7 +317,7 @@
                     <li class="nav-item">
                         <a href="<?php echo base_url() . 'poojalist'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 16px;">
                             <!-- <i class="bi bi-mortarboard-fill"></i> -->
-                            <span class="ms-1"> Book Puja</span>
+                            <span class="ms-1"> Puja</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -332,7 +332,7 @@
 
         <!-- MANAGE EVENT -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'ManasviManageEvent'; ?>" class="sidebar-link" id="Manageevent-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'anyliticsandreports'; ?>" class="sidebar-link" id="Manageevent-link" style="font-size: 16px;">
                 <i class="bi bi-file-bar-graph"></i>
                 <span class="ms-1">Analytics & Reports</span>
             </a>

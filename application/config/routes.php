@@ -95,6 +95,7 @@ $route['festivals'] = 'Admin/Festivals';
 $route['poojalist'] = 'Admin/BookPooja';
 $route['jyotisikastore'] = 'Admin/JyotisikaStore';
 $route['profile'] = 'Admin/Profile';
+$route['anyliticsandreports'] = 'Admin/AnyliticsandReports';
 
 // Login Admin Routes
 $route['login'] = 'LoginForgotAdmin/LoginAdmin';

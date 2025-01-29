@@ -35,5 +35,9 @@ class Admin extends CI_Controller {
 		
 		$this->load->view('Admin/Profile');
 	}
+	public function AnyliticsandReports(){
+		
+		$this->load->view('Admin/AnyliticsandReports');
+	}
     
 }
