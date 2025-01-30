@@ -26,7 +26,7 @@
         height: 100vh;
         min-height: 100vh;
         transition: all 0.35s ease-in-out;
-        background-color: #ffffff;
+        background-color: #D4ECFF;
         display: flex;
         flex-direction: column;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -143,7 +143,7 @@
 
     @media (max-width:768px) {
         #sidebar {
-            background-color: #ffffff;
+            background-color: #D4ECFF;
             /* Solid color for mobile devices */
             position: fixed;
             z-index: 1100;
@@ -192,7 +192,7 @@
 
         <!-- HOME -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'ManasviHome'; ?>" class="sidebar-link " id="ManasviHome-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'admindash'; ?>" class="sidebar-link " id="ManasviHome-link" style="font-size: 16px;">
                 <i class="bi bi-house-fill"></i>
                 <span class="ms-1">Dashboard</span>
             </a>
@@ -291,25 +291,48 @@
             </div>
         </li> -->
 
-        <!-- SALARY MANAGEMENT -->
+        <!-- User Management -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'ManasviSalaryManagement'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'usermanagement'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 16px;">
                 <i class="bi bi-person-vcard"></i>
                 <span class="ms-1">User Management</span>
             </a>
         </li>
 
-        <!-- DOCUMENTATION LETTER -->
+        <!-- Service Management -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'ManasviDocumentation'; ?>" class="sidebar-link" id="ManasviDocumentation-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'ManasviDocumentation'; ?>" class="sidebar-link dropdown-toggle collapsed" id="people-dropdown" data-bs-toggle="collapse"
+                data-bs-target="#peopleSubmenu" aria-expanded="false" style="font-size: 16px;">
                 <i class="bi bi-clipboard-check"></i>
                 <span class="ms-1">Service Management</span>
             </a>
+            <div class="collapse" id="peopleSubmenu">
+                <ul class="nav flex-column ms-3">
+                    <li class="nav-item">
+                        <a href="<?php echo base_url() . 'festivals'; ?>" class="sidebar-link" id="TotalEmployee-link" style="font-size: 16px;">
+                            <!-- <i class="bi bi-person-workspace"></i> -->
+                            <span class="ms-1">Festivals</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo base_url() . 'poojalist'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 16px;">
+                            <!-- <i class="bi bi-mortarboard-fill"></i> -->
+                            <span class="ms-1"> Puja</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo base_url() . 'jyotisikastore'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 16px;">
+                            <!-- <i class="bi bi-mortarboard-fill"></i> -->
+                            <span class="ms-1"> Jyotisika Store</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li>
 
         <!-- MANAGE EVENT -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'ManasviManageEvent'; ?>" class="sidebar-link" id="Manageevent-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'anyliticsandreports'; ?>" class="sidebar-link" id="Manageevent-link" style="font-size: 16px;">
                 <i class="bi bi-file-bar-graph"></i>
                 <span class="ms-1">Analytics & Reports</span>
             </a>
@@ -317,7 +340,7 @@
 
         <!-- INTERVIEW ANALYSIS -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'ManasviInterviewAnalysis'; ?>" class="sidebar-link" id="InterviewAnalysis-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'profile'; ?>" class="sidebar-link" id="InterviewAnalysis-link" style="font-size: 16px;">
                 <i class="bi bi-person-circle"></i>
                 <span class="ms-1">Profile</span>
             </a>
@@ -328,7 +351,7 @@
 
     <!-- LOGOUT -->
     <div class="sidebar-footer mb-3">
-        <a href="<?php echo base_url() . 'Logout'; ?>" class="sidebar-link" style="font-size: 16px;">
+        <a href="<?php echo base_url() . 'login'; ?>" class="sidebar-link" style="font-size: 16px;">
             <i class="bi bi-box-arrow-left"></i>
             <span class="ms-1">Logout</span>
         </a>

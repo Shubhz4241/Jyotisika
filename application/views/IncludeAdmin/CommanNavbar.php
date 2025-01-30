@@ -92,7 +92,7 @@
             </div>
         </div>
     </div>
-        
+    
 </div>
 
 
@@ -110,7 +110,7 @@
 <style>
     /* Header styles */
     .navbar {
-        background-color: #ffffff;
+        background-color: #D4ECFF;
         border-bottom: 1px solid #e1e1e1;
     }
 

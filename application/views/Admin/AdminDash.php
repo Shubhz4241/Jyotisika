@@ -149,18 +149,18 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
+                            <a href="<?php echo base_url() . 'astrologerrequests'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
                                 <img src="<?php echo base_url() . 'assets/images/astrologers.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
                                 <h1 class="mt-3">50</h1>
                                 <p>Total Astrologer</p>
-                            </div>
+                            </a>
                         </div>
                         <div class="col-md-4">
-                            <div class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
+                            <a href="<?php echo base_url() . 'pujarirequests'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
                                 <img src="<?php echo base_url() . 'assets/images/pujari.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
                                 <h1 class="mt-3">50</h1>
                                 <p>Total Pujari</p>
-                            </div>
+                            </a>
                         </div>
                     </div>
 
@@ -344,7 +344,7 @@
 
                                         </table>
                                         <div class="card-footer text-center">
-                                            <a href="<?php echo base_url('admin/all_registrations'); ?>"
+                                            <a href="<?php echo base_url() . 'pujarirequests'; ?>"
                                                 class="btn btn-outline-primary btn-block">
                                                 See All Registrations
                                             </a>

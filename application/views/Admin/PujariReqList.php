@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin:Astrologer Requests</title>
+    <title>Admin:Pujari Requests</title>
     <!-- Bootstrap CSS for styling and layout -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS file -->
@@ -141,7 +141,7 @@
             <main class="p-3">
                 <div class="container">
 
-                    <h2 class="float-start">Astrologer Request List</h2>
+                    <h2 class="float-start">Pujari Request List</h2>
 
                     <!-- NAV TAB -->
                     <div class="float-end">
