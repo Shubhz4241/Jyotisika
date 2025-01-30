@@ -52,19 +52,48 @@
                     <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="User Profile" style="width: 40px; height: 40px; border-radius: 50%;">
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown" style="border: none; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                        <li class="text-center p-3">'
-                            <a href="<?php echo base_url('UserProfile') ?>">
-                                <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="Profile Image" style="width: 60px; height: 60px; border-radius: 50%;">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown" 
+                        style="border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); border: none; min-width: 250px;">
+                        <li class="text-center p-4">
+                            <a href="<?php echo base_url('UserProfile') ?>" class="text-decoration-none">
+                                <div class="position-relative d-inline-block">
+                                    <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="Profile Image" 
+                                        style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--yellow); padding: 3px; transition: transform 0.3s;">
+                                    <div class="position-absolute bottom-0 right-0 bg-success rounded-circle" 
+                                        style="width: 15px; height: 15px; right: 5px; border: 2px solid white;"></div>
+                                </div>
+                                <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;">User Name</p>
+                               
                             </a>
-                            <p class="mt-2 mb-0" style="font-weight: 600;">User Name</p>
+                        </li>
+                        <li><hr class="dropdown-divider mx-3"></li>
+                        <li>
+                            <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Notification'); ?>">
+                                <i class="bi bi-bell me-2"></i> Notifications
+                                <span class="badge bg-danger rounded-pill float-end me-2">3</span>
+                            </a>
                         </li>
                         <li>
-                            <hr class="dropdown-divider">
+                            <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Orders'); ?>">
+                                <i class="bi bi-bag me-2"></i> My Orders
+                            </a>
                         </li>
-                        <li><a class="dropdown-item text-dark" href="<?php echo base_url('Orders'); ?>" style="background-color: transparent;">My Orders</a></li>
-                        <li><a class="dropdown-item text-dark" href="<?php echo base_url('myservices'); ?>" style="background-color: transparent;">My Services</a></li>
-                        <li><a class="dropdown-item text-dark" href="<?php echo base_url('logout'); ?>" style="background-color: transparent;">Logout</a></li>
+                        <li>
+                            <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('myservices'); ?>">
+                                <i class="bi bi-gear me-2"></i> My Services
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('CustomerSupport'); ?>">
+                                <i class="bi bi-gear me-2"></i> Customer Support
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider mx-3"></li>
+                        <li>
+                            <a class="dropdown-item py-2 ps-4 text-danger" href="<?php echo base_url('logout'); ?>">
+                                <i class="bi bi-box-arrow-right me-2"></i> Logout
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

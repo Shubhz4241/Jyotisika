@@ -104,71 +104,124 @@
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
 
-        <section>
-            <div class="container my-5">
-                <div class="row">
+        <section class="py-5">
+            <div class="container">
+                <div class="row g-4">
                     <!-- Product Image Section -->
                     <div class="col-md-6">
                         <div class="product-image-container">
-                            <img src="<?php echo base_url('assets/images/JyotisikaMall/Rudraksh.png'); ?>" class="img-fluid rounded w-100" alt="Product Image">
+                            <img src="<?php echo base_url('assets/images/JyotisikaMall/Rudraksh.png'); ?>" 
+                                 class="img-fluid rounded shadow-sm w-100" alt="Rudraksh">
                         </div>
                     </div>
 
                     <!-- Product Details Section -->
                     <div class="col-md-6">
-                        <h2 class="mb-3">Rudraksh</h2>
-                        <div class="price-section mb-4">
-                            <h3>₹ 999.00</h3>
-                            <span class="text-decoration-line-through text-muted">₹ 1299.00</span>
-                        </div>
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h2 class="mb-3">Rudraksh</h2>
+                                <div class="price-section mb-4">
+                                    <h3 class="text-success">₹ 999.00</h3>
+                                    <span class="text-decoration-line-through text-muted">₹ 1299.00</span>
+                                    <span class="badge bg-danger ms-2">23% OFF</span>
+                                </div>
+                            </div>
 
-                        <!-- Quantity Selector -->
-                        <div class="quantity-section mb-4">
-                            <label for="quantity" class="form-label">Quantity:</label>
-                            <div class="input-group" style="width: 150px;">
-                                <button class="btn" type="button" onclick="decrementQuantity()">-</button>
-                                <input type="number" class="form-control text-center rounded-2" id="quantity" value="1" min="1">
-                                <button class="btn " type="button" onclick="incrementQuantity()">+</button>
+                            <div class="card-body">
+                                <h4 class="mb-3"> Address</h4>
+                                <div class="alert alert-info">
+                                    <p class="mb-1"><strong>John Doe</strong></p>
+                                    <p class="mb-1">123 Main Street, Apartment 4B</p>
+                                    <p class="mb-1">Mumbai, Maharashtra 400001</p>
+                                    <p class="mb-0">Phone: +91 98765 43210</p>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- Add to Cart Button -->
-                        <a class="btn w-50 mb-4" href="<?php echo base_url('ProductPayment')?>" style="background-color: var(--yellow);">Buy Now</a>
-
-
-                        <!-- Product Information -->
-                        <div class="product-info mb-4">
-                            <h4>Product Information</h4>
-                            <p class="text-muted">Detailed description of the product goes here. Include important features and specifications.</p>
-
-                            <h5 class="mt-3">Requirements:</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Requirement 1</li>
-                                <li class="list-group-item">Requirement 2</li>
-                                <li class="list-group-item">Requirement 3</li>
-                            </ul>
+                
+                <!-- Example Address -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            
                         </div>
+                    </div>
+                </div>
 
+                <!-- Payment Section -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h4 class="mb-4">Payment Method</h4>
+                                
+                                <div class="payment-options">
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="upi" checked>
+                                        <label class="form-check-label" for="upi">UPI Payment</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="card">
+                                        <label class="form-check-label" for="card">Credit/Debit Card</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="cod">
+                                        <label class="form-check-label" for="cod">Cash on Delivery</label>
+                                    </div>
+                                </div>
 
+                                <!-- Order Summary -->
+                                <div class="mt-4">
+                                    <h5>Order Summary</h5>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Subtotal:</span>
+                                        <span>₹ 999.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Delivery:</span>
+                                        <span>₹ 40.00</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between fw-bold">
+                                        <span>Total:</span>
+                                        <span>₹ 1039.00</span>
+                                    </div>
+                                </div>
+
+                                <!-- Place Order Button -->
+                                <button class="btn btn-success w-100 mt-4" onclick="processPayment()">Place Order</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <script>
-                // code for quantity 
                 function incrementQuantity() {
                     var input = document.getElementById('quantity');
                     input.value = parseInt(input.value) + 1;
+                    updateTotal();
                 }
 
                 function decrementQuantity() {
                     var input = document.getElementById('quantity');
                     if (parseInt(input.value) > 1) {
                         input.value = parseInt(input.value) - 1;
+                        updateTotal();
                     }
                 }
-            </script>
 
+                function updateTotal() {
+                    // Add logic to update total based on quantity
+                }
+
+                function processPayment() {
+                    // Add payment processing logic here
+                    alert('Payment processing will be integrated here');
+                }
+            </script>
         </section>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
