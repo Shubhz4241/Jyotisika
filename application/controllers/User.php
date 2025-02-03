@@ -122,4 +122,17 @@ class User extends CI_Controller
 	public function ProductDetails (){
 		$this->load->view('User/ProductDetails');
 	}
+
+	public function ProductPayment(){
+		$this->load->view('User/ProductPayment');
+	}	
+
+	public function Notification()
+	{
+		$this->load->view('User/Notification');
+	}
+
+	public function CustomerSupport(){
+		$this->load->view('User/CustomerSupport');
+	}
 }

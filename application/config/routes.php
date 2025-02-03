@@ -80,6 +80,9 @@ $route['UserProfile'] ='User/UserProfile';
 $route['Orders'] ='User/Orders';
 $route['AstrologyServices'] ='User/AstrologyServices';
 $route['ProductDetails'] ='User/ProductDetails';
+$route['ProductPayment'] ='User/ProductPayment';
+$route['Notification'] ='User/Notification';
+$route['CustomerSupport'] ='User/CustomerSupport';
 
 
 

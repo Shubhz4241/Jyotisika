@@ -64,39 +64,104 @@
 
     <main>
         <div class="container my-5">
-            <div class="row ">
-                <ul class="nav nav-pills mb-3  d-flex justify-content-center" id="pills-tab" role="tablist">
-                    <li class="nav-item w-25 text-center">
-                        <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home" role="tab"
-                            aria-controls="pills-home" aria-selected="true">Call</a>
+            <div class="row">
+                <!-- Nav pills - switches to vertical on small screens -->
+                <ul class="nav nav-pills mb-3 d-flex justify-content-between w-100" id="pills-tab" role="tablist">
+                    <li class="nav-item flex-grow-1 mx-1">
+                        <a class="nav-link active text-center w-100" id="pills-home-tab" data-bs-toggle="pill"
+                            href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Call</a>
                     </li>
-                    <li class="nav-item w-25 text-center">
-                        <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" href="#pills-profile" role="tab"
-                            aria-controls="pills-profile" aria-selected="false">Chat</a>
+                    <li class="nav-item flex-grow-1 mx-1">
+                        <a class="nav-link text-center w-100" id="pills-profile-tab" data-bs-toggle="pill"
+                            href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Chat</a>
                     </li>
-                    <li class="nav-item w-25 text-center">
-                        <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-contact" role="tab"
-                            aria-controls="pills-contact" aria-selected="false">Report</a>
-                    </li>
-                    <li class="nav-item w-25 text-center">
-                        <a class="nav-link" id="pills-mall-tab" data-bs-toggle="pill" href="#pills-mall" role="tab"
-                            aria-controls="pills-mall" aria-selected="false">Jyotisika Mall</a>
+
+                    <li class="nav-item flex-grow-1 mx-1">
+                        <a class="nav-link text-center w-100" id="pills-mall-tab" data-bs-toggle="pill"
+                            href="#pills-mall" role="tab" aria-controls="pills-mall" aria-selected="false">Jyotisika Mall</a>
                     </li>
                 </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                        aria-labelledby="pills-home-tab">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos quis quas quae beatae qui
-                        quaerat necessitatibus modi nulla sed rem.
+                <!-- Tab content -->
+                <div class="tab-content p-3" id="pills-tabContent">
+
+                    <!-- call -->
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="card">
+                            <div class="card-body">
+                                <?php if(empty($calls)): ?>
+                                    <div class="text-center py-4">
+                                        <i class="bi bi-calendar-x fs-1 text-muted"></i>
+                                        <p class="mt-2">No pooja calls found</p>
+                                    </div>
+                                <?php else: ?>
+                                    <?php foreach($calls as $call): ?>
+                                        <div class="card mb-3 border-warning">
+                                            <div class="card-body">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-2 text-center">
+                                                        <i class="bi bi-person-circle fs-1"></i>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <h5 class="card-title"><?php echo $call->pooja_name; ?></h5>
+                                                        <p class="card-text mb-1">
+                                                            <i class="bi bi-calendar-event"></i> 
+                                                            <?php echo date('d M Y', strtotime($call->scheduled_date)); ?>
+                                                        </p>
+                                                        <p class="card-text mb-1">
+                                                            <i class="bi bi-clock"></i>
+                                                            <?php echo date('h:i A', strtotime($call->scheduled_time)); ?>
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <i class="bi bi-person"></i>
+                                                            <?php echo $call->pandit_name; ?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-3 text-end">
+                                                        <span class="badge bg-<?php echo ($call->status == 'completed') ? 'success' : 'warning'; ?>">
+                                                            <?php echo ucfirst($call->status); ?>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
+
+
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        second
+                        <div class="card p-3">second</div>
                     </div>
-                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        third
-                    </div>
+
+
+                    <!-- mall -->
                     <div class="tab-pane fade" id="pills-mall" role="tabpanel" aria-labelledby="pills-mall-tab">
-                        Fourth
+
+                        <!-- Submenu Nav pills -->
+                        <ul class="nav nav-pills mb-3 mt-3 d-flex justify-content-between w-100" id="mall-subtab" role="tablist">
+                            <li class="nav-item flex-grow-1 mx-1">
+                                <a class="nav-link active text-center w-100" id="orders-tab" data-bs-toggle="pill" href="#orders" role="tab">Orders</a>
+                            </li>
+                            <li class="nav-item flex-grow-1 mx-1">
+                                <a class="nav-link text-center w-100" id="purchased-tab" data-bs-toggle="pill" href="#purchased" role="tab">Purchased</a>
+                            </li>
+                        </ul>
+
+                        <!-- Submenu Tab content -->
+                        <div class="tab-content" id="mall-subTabContent">
+                            <div class="tab-pane fade show active" id="orders" role="tabpanel">
+                                <div class="card p-3">
+                                    Orders content here
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="purchased" role="tabpanel">
+                                <div class="card p-3">
+                                    Purchased items content here
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
