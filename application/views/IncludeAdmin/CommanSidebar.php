@@ -179,7 +179,7 @@
     <ul class="sidebar-nav p-0">
         <!-- Profile Image & Name -->
         <li class="sidebar-item text-center mb-4 ">
-            <a href="<?php echo base_url() . 'ManasviProfile'; ?>">
+            <a href="<?php echo base_url() . 'admindash'; ?>">
                 <img src="<?php echo base_url() . 'assets\images\Admin logo.png'; ?>" alt="HR Profile"
                     class="rounded-circle mb-2" style="width: 160px; height: 140px;">
             </a>
