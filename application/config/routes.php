@@ -113,3 +113,4 @@ $route['PujariFooter']='PujariUser/PujariFooter';
 $route['RecentRequest']='PujariUser/RecentRequest';
 $route['SetRate']='PujariUser/SetRate';
 $route['RateChart']='PujariUser/RateChart';
+$route['List']='PujariUser/List';

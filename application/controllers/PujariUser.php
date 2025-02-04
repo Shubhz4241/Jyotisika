@@ -21,4 +21,7 @@ class PujariUser extends CI_Controller {
 	public function RateChart(){
 		$this->load->view('Pujari/RateChart');
 	}
+	public function List(){
+		$this->load->view('Pujari/List');
+	}
 }
