@@ -102,3 +102,14 @@ $route['anyliticsandreports'] = 'Admin/AnyliticsandReports';
 
 // Login Admin Routes
 $route['login'] = 'LoginForgotAdmin/LoginAdmin';
+
+
+//Pujari Module
+$route['PujariReg'] = 'PujariUser/PujariReg';
+$route['RegisterForm']='PujariUser/RegisterForm';
+$route['PujariDashboard']='PujariUser/PujariDashboard';
+$route['PujariNav']='PujariUser/PujariNav';
+$route['PujariFooter']='PujariUser/PujariFooter';
+$route['RecentRequest']='PujariUser/RecentRequest';
+$route['SetRate']='PujariUser/SetRate';
+$route['RateChart']='PujariUser/RateChart';
