@@ -24,4 +24,7 @@ class PujariUser extends CI_Controller {
 	public function List(){
 		$this->load->view('Pujari/List');
 	}
+	public function PujaForm(){
+		$this->load->view('Pujari/PujaForm');
+	}
 }
