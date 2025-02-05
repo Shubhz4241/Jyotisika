@@ -30,5 +30,7 @@ class PujariUser extends CI_Controller {
 	public function AnalyticsandEarning(){
 		$this->load->view('Pujari/AnalyticsandEarning');
 	}
-
+	public function OnlinePuja(){
+		$this->load->view('Pujari/OnlinePuja');
+	}
 }
