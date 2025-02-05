@@ -27,4 +27,8 @@ class PujariUser extends CI_Controller {
 	public function PujaForm(){
 		$this->load->view('Pujari/PujaForm');
 	}
+	public function AnalyticsandEarning(){
+		$this->load->view('Pujari/AnalyticsandEarning');
+	}
+
 }

@@ -115,3 +115,4 @@ $route['SetRate']='PujariUser/SetRate';
 $route['RateChart']='PujariUser/RateChart';
 $route['List']='PujariUser/List';
 $route['PujaForm']='PujariUser/PujaForm';
+$route['AnalyticsandEarning']='PujariUser/AnalyticsandEarning';
