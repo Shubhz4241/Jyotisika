@@ -33,4 +33,7 @@ class PujariUser extends CI_Controller {
 	public function OnlinePuja(){
 		$this->load->view('Pujari/OnlinePuja');
 	}
+	public function OfflinePuja(){
+		$this->load->view('Pujari/OfflinePuja');
+	}
 }

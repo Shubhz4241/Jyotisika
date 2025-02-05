@@ -117,3 +117,4 @@ $route['List']='PujariUser/List';
 $route['PujaForm']='PujariUser/PujaForm';
 $route['AnalyticsandEarning']='PujariUser/AnalyticsandEarning';
 $route['OnlinePuja']='PujariUser/OnlinePuja';
+$route['OfflinePuja']='PujariUser/OfflinePuja';
