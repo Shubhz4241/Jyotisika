@@ -2,6 +2,7 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
+           margin-top: 5rem;
         }
 
         /* Navbar Styling */
@@ -9,6 +10,10 @@
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top:0;
+            z-index:1000;
         }
 
         .logo-container img {

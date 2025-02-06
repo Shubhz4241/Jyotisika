@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
             background-color: #f8f8f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            width: 100%;
         }
         .profile-container {
             background: white;
@@ -29,12 +27,13 @@
             flex-direction: column;
             overflow-y: auto;
         }
-        .profile-img {
+        .profilei {
             width: 120px;
             height: 120px;
             border-radius: 50%;
             border: 3px solid gold;
             margin-bottom: 15px;
+           margin: auto;
         }
         .tabs {
             display: flex;
@@ -90,8 +89,12 @@
     </style>
 </head>
 <body>
+<header>
+        <?php $this->load->view('Pujari/Include/PujariNav') ?>
+    </header>
+    <div style="width: 100%; display: flex; justify-content: center;">
     <div class="profile-container">
-        <img src="https://via.placeholder.com/120" class="profile-img" alt="Profile">
+        <img src="<?php echo base_url() .'assets/images/Pujari/logo.png'?>" class="profilei" alt="Profile" alt="<?php echo base_url() .'assets/images/Pujari/logo.png'?>">
         <div class="tabs">
             <div class="tab active" data-target="#personal">Personal</div>
             <div class="tab" data-target="#professional">Professional</div>
@@ -102,7 +105,7 @@
             <label class="form-label">Name</label>
             <input type="text" class="form-control" required>
             <label class="form-label">Contact</label>
-            <input type="tel" class="form-control" required>
+            <input type="number" class="form-control" required>
             <label class="form-label">Email</label>
             <input type="email" class="form-control" required>
             <label class="form-label">Gender</label>
@@ -141,7 +144,10 @@
             <button type="submit" class="save-btn">Save Changes</button>
         </form>
     </div>
-
+    </div>
+    <footer>
+        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+    </footer>
     <script>
         $(document).ready(function() {
             $('.tab').click(function() {
