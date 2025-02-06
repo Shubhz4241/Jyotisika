@@ -9,9 +9,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS CDN (optional, for any JavaScript features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
+            overflow-x: auto;
         }
         .table-header {
             background-color: orange;
@@ -31,12 +38,34 @@
             height: 50px;
             border-radius: 5px;
         }
+
+        /* Ensure the filter buttons wrap on smaller screens */
+        .filter-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        /* Add some margin to the container on small screens */
+        @media (max-width: 576px) {
+            .container {
+                margin: 10px;
+            }
+
+            .filter-btns .btn {
+                padding: 5px 10px;
+            }
+        }
+
+        .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch !important;
+}
     </style>
 </head>
 <body>
-<header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
-    </header>
+
     <div class="container mt-4">
         <a href="#" class="text-dark">&#x2190; Completed Offline Puja</a>
         <div class="d-flex justify-content-end filter-btns mt-3">
@@ -45,7 +74,8 @@
             <button class="btn btn-outline-dark" data-filter="rahu-ketu">Rahu-Ketu</button>
             <button class="btn btn-outline-dark" data-filter="wealth">Wealth</button>
         </div>
-        <table class="table mt-3 text-center">
+    </div>
+        <table class="table mt-3 text-center table-responsive">
             <thead>
                 <tr class="table-header">
                     <th>Name</th>
@@ -100,7 +130,8 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+
+
     <script>
         $(document).ready(function() {
             $('.filter-btns .btn').click(function() {
@@ -116,8 +147,10 @@
             });
         });
     </script>
-     <footer>
+
+    <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
+
 </body>
 </html>

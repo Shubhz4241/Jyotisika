@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
     <style>
         body {
             background-color: #f8f8f8;
-            padding: 0;
         }
         .table-container {
             background: white;
@@ -26,18 +26,38 @@
         .highlight-row {
             background-color: #a8e6a2 !important;
         }
+        .table-fixed thead, .table-fixed tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+        .table-fixed tbody {
+            display: block;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .filter-dropdown {
+            display: none;
+        }
     </style>
 </head>
 <body>
-<header>
+    <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
     <div class="container">
         <h5 class="mb-3"><a href="#">&#8592; Earnings Breakdown</a></h5>
         
         <div class="table-container">
-            <h5>Offline puja Breakdown <span class="filter-btn btn btn-light">&#xf0b0; Filter</span></h5>
-            <table class="table table-bordered">
+            <h5>Offline puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('offline')">Filter</button></h5>
+            <div class="filter-dropdown" id="offlineFilterDropdown">
+                <select id="offlineFilter" onchange="filterData('offline')">
+                    <option value="">All</option>
+                    <option value="Rahu-ketu">Rahu-ketu</option>
+                    <option value="Ghar shanti">Ghar shanti</option>
+                </select>
+            </div>
+            <table class="table table-bordered table-fixed">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -45,10 +65,31 @@
                         <th>Fees</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
+                <tbody id="offlineBody">
                     <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
+                    <tr><td>John Doe</td><td>Ghar shanti</td><td>1200</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-container">
+            <h5>Online puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('online')">Filter</button></h5>
+            <div class="filter-dropdown" id="onlineFilterDropdown">
+                <select id="onlineFilter" onchange="filterData('online')">
+                    <option value="">All</option>
+                    <option value="Rahu-ketu">Rahu-ketu</option>
+                    <option value="Ghar shanti">Ghar shanti</option>
+                </select>
+            </div>
+            <table class="table table-bordered table-fixed">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Pooja</th>
+                        <th>Fees</th>
+                    </tr>
+                </thead>
+                <tbody id="onlineBody">
                     <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
                     <tr><td>John Doe</td><td>Ghar shanti</td><td>1200</td></tr>
                 </tbody>
@@ -56,8 +97,15 @@
         </div>
         
         <div class="table-container">
-            <h5>Online puja Breakdown <span class="filter-btn btn btn-light">&#xf0b0; Filter</span></h5>
-            <table class="table table-bordered">
+            <h5>Mob puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('mob')">Filter</button></h5>
+            <div class="filter-dropdown" id="mobFilterDropdown">
+                <select id="mobFilter" onchange="filterData('mob')">
+                    <option value="">All</option>
+                    <option value="Rahu-ketu">Rahu-ketu</option>
+                    <option value="Ghar shanti">Ghar shanti</option>
+                </select>
+            </div>
+            <table class="table table-bordered table-fixed">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -65,30 +113,7 @@
                         <th>Fees</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr><td>John Doe</td><td>Ghar shanti</td><td>1200</td></tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="table-container">
-            <h5>Mob puja Breakdown <span class="filter-btn btn btn-light">&#xf0b0; Filter</span></h5>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Pooja</th>
-                        <th>Fees</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
+                <tbody id="mobBody">
                     <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
                     <tr><td>John Doe</td><td>Ghar shanti</td><td>1200</td></tr>
                 </tbody>
@@ -98,5 +123,26 @@
     <footer>
     <?php $this->load->view('Pujari/Include/PujariFooter') ?>  
     </footer>
+    <script>
+        function toggleFilter(category) {
+            let filterDropdown = document.getElementById(category + 'FilterDropdown');
+            filterDropdown.style.display = (filterDropdown.style.display === "none" || filterDropdown.style.display === "") ? "block" : "none";
+        }
+
+        function filterData(category) {
+            let filterValue = document.getElementById(category + 'Filter').value;
+            let tableBody = document.getElementById(category + 'Body');
+            let rows = tableBody.getElementsByTagName('tr');
+            
+            for (let row of rows) {
+                let poojaType = row.getElementsByTagName('td')[1].innerText;
+                if (filterValue === "" || poojaType === filterValue) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>

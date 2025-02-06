@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
     <style>
         body {
             background-color: #f8f8f8;
-            padding: 20px;
+            padding: 0;
         }
         .table-container {
             background: white;
@@ -30,19 +32,31 @@
             width: auto;
             float: right;
         }
+        table {
+            table-layout: fixed;
+            width: 100%;
+        }
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
+<header>
+        <?php $this->load->view('Pujari/Include/PujariNav') ?>
+    </header>
     <div class="container">
         <h4>← Monthly Earnings Breakdown
             <select class="form-select" id="monthFilter">
-                <option selected>December</option>
-                <option>November</option>
-                <option>October</option>
+                <option value="December" selected>December</option>
+                <option value="November">November</option>
+                <option value="October">October</option>
             </select>
         </h4>
         
-        <div class="table-container">
+        <div class="table-container" id="offlinePuja">
             <h5>Offline puja Breakdown <button class="btn btn-light filter-btn">&#x1F50D; Filter</button></h5>
             <table class="table table-bordered">
                 <thead>
@@ -52,17 +66,11 @@
                         <th>Fees</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr><td>John Doe</td><td>Ghar shanti</td><td>1200</td></tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
         
-        <div class="table-container">
+        <div class="table-container" id="onlinePuja">
             <h5>Online puja Breakdown <button class="btn btn-light filter-btn">&#x1F50D; Filter</button></h5>
             <table class="table table-bordered">
                 <thead>
@@ -72,17 +80,11 @@
                         <th>Fees</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr><td>John Doe</td><td>Ghar shanti</td><td>1200</td></tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
 
-        <div class="table-container">
+        <div class="table-container" id="mobPuja">
             <h5>Mob puja Breakdown <button class="btn btn-light filter-btn">&#x1F50D; Filter</button></h5>
             <table class="table table-bordered">
                 <thead>
@@ -92,22 +94,54 @@
                         <th>Fees</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr class="highlight-row"><td>Jane Doe</td><td>Rahu-ketu</td><td>500</td></tr>
-                    <tr><td>John Doe</td><td>Ghar shanti</td><td>1200</td></tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
-    
+    <footer>
+        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+    </footer>
     <script>
+        const data = {
+            "December": [
+                ["Jane Doe", "Rahu-ketu", "500"],
+                ["Jane Doe", "Rahu-ketu", "500"],
+                ["Jane Doe", "Rahu-ketu", "500"],
+                ["Jane Doe", "Rahu-ketu", "500"],
+                ["John Doe", "Ghar shanti", "1200"]
+            ],
+            "November": [
+                ["Alice", "Satyanarayan", "700"],
+                ["Alice", "Navgrah Puja", "900"],
+                ["Bob", "Mahadev Abhishek", "1100"],
+                ["Charlie", "Durga Saptashati", "1500"],
+                ["John Doe", "Ghar shanti", "1200"]
+            ],
+            "October": [
+                ["Eve", "Ganesh Puja", "800"],
+                ["Eve", "Kali Puja", "1000"],
+                ["Mallory", "Navratri Puja", "1200"],
+                ["Trudy", "Shani Shanti", "1300"],
+                ["John Doe", "Ghar shanti", "1200"]
+            ]
+        };
+
+        function updateTableContent() {
+            let selectedMonth = $("#monthFilter").val();
+            let tableRows = data[selectedMonth].map((row, index) => `
+                <tr class="${index % 2 === 1 ? 'highlight-row' : ''}">
+                    <td>${row[0]}</td>
+                    <td>${row[1]}</td>
+                    <td>${row[2]}</td>
+                </tr>
+            `).join('');
+
+            $("#offlinePuja tbody, #onlinePuja tbody, #mobPuja tbody").html(tableRows);
+        }
+
         $(document).ready(function(){
-            $(".filter-btn").click(function(){
-                alert("Filter functionality will be added!");
-            });
+            updateTableContent();
+            $("#monthFilter").change(updateTableContent);
         });
     </script>
 </body>
