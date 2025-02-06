@@ -39,4 +39,10 @@ class PujariUser extends CI_Controller {
 	public function ProfileForm(){
 		$this->load->view('Pujari/ProfileForm');
 	}
+	public function AnalyticsAndEarning2(){
+		$this->load->view('Pujari/AnalyticsAndEarning2');
+	}
+	public function EarningsBreakdown(){
+		$this->load->view('Pujari/EarningsBreakdown');
+	}
 }

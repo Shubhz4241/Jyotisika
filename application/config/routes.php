@@ -119,3 +119,5 @@ $route['AnalyticsandEarning']='PujariUser/AnalyticsandEarning';
 $route['OnlinePuja']='PujariUser/OnlinePuja';
 $route['OfflinePuja']='PujariUser/OfflinePuja';
 $route['ProfileForm']='PujariUser/ProfileForm';
+$route['AnalyticsAndEarning2']='PujariUser/AnalyticsAndEarning2';
+$route['EarningsBreakdown']='PujariUser/EarningsBreakdown';
