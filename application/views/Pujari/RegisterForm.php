@@ -132,7 +132,7 @@
 
             document.querySelector(".form-container").innerHTML = `
                 <div class="text-center">
-                    <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Success" width="100">
+                <img src="<?php echo base_url() .'assets/images/Pujari/Tick Circle.png'?>" alt="<?php echo base_url() .'assets/images/Pujari/Tick Circle.png'?>"  alt="Success" width="100">
                     <h2 class="mt-3">Registration Successful!</h2>
                     <p>After reviewing your profile, we will schedule an interview.</p>
                 </div>
