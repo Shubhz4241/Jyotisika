@@ -122,8 +122,6 @@
                 </div>
                 <div class="col-md-6">
                     <h5>Puja Reminder</h5>
-                    <img src="<?php echo base_url() .'assets/images/Pujari/Rectangle 5160 (1).png'?>" alt="<?php echo base_url() .'assets/images/Pujari/Rectangle 5160 (1).png'?>"  alt="User" class="Rectangle" width="200px">
-
                     <div class="card p-3">
                         <h6>Puja - Ghar Shanti Puja</h6>
                         <p>Date: 12/1/2025<br>Time: 10:30 AM<br>Attendees: 104<br><strong>Starts in:</strong> 1d 2h 30m</p>
