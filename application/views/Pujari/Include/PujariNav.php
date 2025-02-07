@@ -9,7 +9,7 @@
         .navbar {
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 10px 20px;
+            padding: 10px 70px;
             position: fixed;
             width: 100%;
             top:0;
@@ -24,7 +24,7 @@
         .menu-items a {
             text-decoration: none;
             color: #000;
-            margin: 0 15px;
+            margin: 0 23px;
             font-weight: 500;
         }
 
@@ -192,7 +192,9 @@
                 </div>
             </div>
         </div>
-        <img src="profile-placeholder.png" alt="Profile" class="profile-img">
+      
+        <img src="<?php echo base_url() .'assets/images/Pujari/Rectangle 5160 (1).png'?>" alt="Logo"  class="profile-img rounded-circle " width="30px" height="30px">
+
     </div>
 </nav>
 

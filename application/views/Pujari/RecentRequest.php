@@ -26,7 +26,6 @@
         footer {
             background-color: white;
             color: black;
-            padding: 20px;
             text-align: center;
             font-size: 0.9rem;
         }
