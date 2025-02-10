@@ -122,3 +122,4 @@ $route['ProfileForm']='PujariUser/ProfileForm';
 $route['AnalyticsAndEarning2']='PujariUser/AnalyticsAndEarning2';
 $route['EarningsBreakdown']='PujariUser/EarningsBreakdown';
 $route['MonthlyEarningsBreakdown']='PujariUser/MonthlyEarningsBreakdown';
+$route['MobileNumberAndOTPForm']='PujariUser/MobileNumberAndOTPForm';

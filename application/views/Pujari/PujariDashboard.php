@@ -168,8 +168,10 @@
                                 <h5>Puja - Rudraabhishek Puja</h5>
                                 <p><strong>Date:</strong> 12/1/2025</p>
                                 <p><strong>Time:</strong> 10:30 AM</p>
-                                <p><strong>Languages:</strong> English, Hindi, Marathi</p>
-                                <p><strong>Exp:</strong> 23 years</p>
+                                <p><strong> <img src="<?php echo base_url() . 'assets/images/Pujari/icon.png' ?>"
+                                alt="User" class="Rectangle img-fluid" width="15px"></strong> English, Hindi, Marathi</p>
+                                <p><strong><img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png' ?>"
+                                alt="User" class="Rectangle img-fluid" width="17px">Exp:</strong> 23 years</p>
                                 <p><strong>Price:</strong> <span class="discount">₹710</span> ₹500</p>
                                 <p><strong>Attendees:</strong> 104</p>
                                 <p class="text-danger">Starts in: 1d 4h 23m</p>

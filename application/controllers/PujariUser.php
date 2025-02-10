@@ -48,4 +48,7 @@ class PujariUser extends CI_Controller {
 	public function MonthlyEarningsBreakdown(){
 		$this->load->view('Pujari/MonthlyEarningsBreakdown');
 	}
+	public function MobileNumberAndOTPForm(){
+		$this->load->view('Pujari/MobileNumberAndOTPForm');
+	}
 }
