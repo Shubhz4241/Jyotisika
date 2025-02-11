@@ -78,7 +78,7 @@
     <div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
             <div class="puja-card">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>" alt="Rudraabhishek Puja">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>"alt="Rudraabhishek Puja">
                 <div class="content">
                     <h5>Rudraabhishek Puja</h5>
                     <p><strong>Date:</strong> 12/1/2025</p>
@@ -89,7 +89,7 @@
         </div>
         <div class="col">
             <div class="puja-card">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"  alt="Maha Laxmi Puja">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>"alt="Maha Laxmi Puja">
                 <div class="content">
                     <h5>Maha Laxmi Puja</h5>
                     <p><strong>Date:</strong> 13/1/2025</p>
@@ -111,7 +111,7 @@
     <div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
             <div class="puja-card">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>" alt="Ganesh Pooja">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>" alt="Ganesh Pooja">
                 <div class="content">
                     <h5>Ganesh Pooja</h5>
                     <p><strong>Date:</strong> 14/1/2025</p>
@@ -122,7 +122,7 @@
         </div>
         <div class="col">
             <div class="puja-card">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"alt="Hanuman Jayanti">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>"alt="Hanuman Jayanti">
                 <div class="content">
                     <h5>Hanuman Jayanti</h5>
                     <p><strong>Date:</strong> 15/1/2025</p>
