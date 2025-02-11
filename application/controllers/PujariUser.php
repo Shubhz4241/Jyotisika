@@ -51,4 +51,7 @@ class PujariUser extends CI_Controller {
 	public function MobileNumberAndOTPForm(){
 		$this->load->view('Pujari/MobileNumberAndOTPForm');
 	}
+	public function PujaReminder(){
+		$this->load->view('Pujari/PujaReminder');
+	}
 }
