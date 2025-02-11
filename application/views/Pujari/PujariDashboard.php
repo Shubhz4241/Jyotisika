@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         .dashboard-sections {
             padding: 20px;
@@ -66,8 +66,6 @@
             margin-top: 15px;
         }
 
-        
-
         .card {
             border: none;
             border-radius: 12px;
@@ -102,7 +100,7 @@
     </style>
 </head>
 
-<body style="font-family: 'Montserrat', serif;" >
+<body style="font-family: 'Montserrat', serif;">
     <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
@@ -139,17 +137,19 @@
             <div class="row g-4"> <!-- Added Bootstrap gap class g-4 for spacing -->
                 <!-- Recent Request -->
                 <div class="col-md-6">
-                    <h5>Recent Request</h5>
-                    <div class="card p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Recent Request</h5>
+                        <a href="recent-requests.php" class="btn btn-link p-0 text-decoration-none">View All</a>
+                    </div>
+                    <div class="card p-3 mt-3">
                         <div class="d-flex align-items-center">
-                            <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>"
-                                alt="User" class="Rectangle img-fluid" width="200px">
+                            <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>" alt="User" class="Rectangle img-fluid" width="200px">
                             <div class="ms-3">
                                 <h6>John Doe</h6>
                                 <p>Puja: Ghar Shanti Puja<br>
                                     Date: 12/1/2025 | Time: 10:30 AM<br>
                                     Location: Nashik</p>
-                                <P>padit colony Nashik</P>
+                                <p>Padit Colony Nashik</p>
                                 <button class="btn btn-success btn-sm">Accept</button>
                                 <button class="btn btn-danger btn-sm">Reject</button>
                             </div>
@@ -157,30 +157,29 @@
                     </div>
                 </div>
 
-                <!-- Another Card (Same Structure) -->
+                <!-- Puja Reminder -->
                 <div class="col-md-6">
-                    <h5>Puja Reminder</h5>
-                    <div class="card p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Puja Reminder</h5>
+                        <a href="recent-requests.php" class="btn btn-link p-0 text-decoration-none">View All</a>
+                    </div>
+                    <div class="card p-3 mt-3">
                         <div class="d-flex align-items-center">
-                            <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>"
-                                alt="User" class="Rectangle img-fluid" width="200px">
+                            <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>" alt="User" class="Rectangle img-fluid" width="200px">
                             <div class="ms-3">
                                 <h5>Puja - Rudraabhishek Puja</h5>
                                 <p><strong>Date:</strong> 12/1/2025</p>
                                 <p><strong>Time:</strong> 10:30 AM</p>
-                                <p><strong> <img src="<?php echo base_url() . 'assets/images/Pujari/icon.png' ?>"
-                                alt="User" class="Rectangle img-fluid" width="15px"></strong> English, Hindi, Marathi</p>
-                                <p><strong><img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png' ?>"
-                                alt="User" class="Rectangle img-fluid" width="17px">Exp:</strong> 23 years</p>
+                                <p><strong> <img src="<?php echo base_url() . 'assets/images/Pujari/icon.png' ?>" alt="User" class="Rectangle img-fluid" width="15px"></strong> English, Hindi, Marathi</p>
+                                <p><strong><img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png' ?>" alt="User" class="Rectangle img-fluid" width="19px">Exp:</strong> 23 years</p>
                                 <p><strong>Price:</strong> <span class="discount">₹710</span> ₹500</p>
                                 <p><strong>Attendees:</strong> 104</p>
-                                <p class="text-danger">Starts in: 1d 4h 23m</p>
+                                <p class="text-danger"><img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png' ?>" alt="User" class="Rectangle img-fluid" width="19px"> Starts in: 1d 4h 23m</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <div class="container mt-5">
                 <div class="d-flex justify-content-center align-items-center position-relative">
@@ -221,11 +220,8 @@
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Bootstrap Icons -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
 </body>
-
 </html>
