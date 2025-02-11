@@ -54,4 +54,7 @@ class PujariUser extends CI_Controller {
 	public function PujaReminder(){
 		$this->load->view('Pujari/PujaReminder');
 	}
+	public function PujaReminder2(){
+		$this->load->view('Pujari/PujaReminder2');
+	}
 }

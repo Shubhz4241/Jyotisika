@@ -124,3 +124,4 @@ $route['EarningsBreakdown']='PujariUser/EarningsBreakdown';
 $route['MonthlyEarningsBreakdown']='PujariUser/MonthlyEarningsBreakdown';
 $route['MobileNumberAndOTPForm']='PujariUser/MobileNumberAndOTPForm';
 $route['PujaReminder']='PujariUser/PujaReminder';
+$route['PujaReminder2']='PujariUser/PujaReminder2';

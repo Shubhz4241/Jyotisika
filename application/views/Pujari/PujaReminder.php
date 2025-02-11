@@ -7,10 +7,10 @@
     <title>Pooja Reminder</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -114,7 +114,7 @@
     </style>
 </head>
 
-<body>
+<body >
 <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
@@ -166,7 +166,7 @@
         <div class="d-flex justify-content-between align-items-center mt-5 mb-4">
             <h4>Upcoming Schedule</h4>
             <button class="btn btn-set-reminder"> <img src="<?php echo base_url() . 'assets/images/Pujari/Alarm Plus.png' ?>" alt="Puja Image">
-            Set Reminder</button>
+            SetReminder</button>
         </div>
         <div class="row g-4">
             <div class="col-md-6">
