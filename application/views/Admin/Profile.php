@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
         /* Apply Inter font to the entire page */
@@ -170,6 +169,93 @@
                 font-size: 1.5rem;
             }
         }
+
+
+        /* General Form Styling */
+        form {
+            max-width: 500px;
+            /* Adjusted for a more compact form */
+            margin: 0 auto;
+            /* Centered form */
+            padding: 20px 15px;
+            background-color: #fff;
+            /* Clean white background */
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            /* Light shadow for subtle depth */
+        }
+
+        /* Profile Image Section */
+        #profileImage {
+            border: 3px solid #ddd;
+            /* Lighter border for simplicity */
+            transition: all 0.3s ease;
+        }
+
+        #profileImage:hover {
+            opacity: 0.8;
+        }
+
+        /* Input Field Styling */
+        .form-label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            /* Light border color */
+            transition: border 0.2s ease;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            /* Highlight on focus */
+            box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+            /* Soft shadow on focus */
+        }
+
+        /* Button Styling */
+        button.w-100 {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button.w-100:hover {
+            background-color: #0056b3;
+            /* Darker shade on hover */
+            cursor: pointer;
+        }
+
+        /* Error Styling */
+        .text-danger {
+            font-size: 0.9rem;
+            color: red;
+            padding-top: 5px;
+        }
+
+        /* Spacing Between Input Fields */
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 
@@ -197,47 +283,83 @@
                         <!-- Admin Profile Settings Form -->
                         <div id="settingsForm" class="form-container active">
                             <form class="w-100" onsubmit="return validateFormProfile(event)">
-                                <div class="mb-3">
+                                <!-- Profile Image Section -->
+                                <div class="text-center position-relative mb-4">
+                                    <label for="profileUpload" class="position-relative d-inline-block">
+                                        <img id="profileImage" src="<?php echo base_url() . 'assets/images/astrologer.png'; ?>" class="rounded-circle" width="120" height="120" alt="Profile Image">
+                                        <span class="position-absolute bottom-0 end-0 p-2 bg-white border rounded-circle shadow-sm" style="cursor: pointer; transition: transform 0.3s ease-in-out;">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </span>
+                                    </label>
+                                    <input type="file" id="profileUpload" accept="image/*" class="d-none" onchange="previewProfileImage(event)">
+                                </div>
+
+                                <!-- Email Section -->
+                                <div class="mb-4">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required oninput="(function(element) { element.value = element.value.toLowerCase().replace(/[^a-z0-9@.]/g, ''); })(this)"
+                                        pattern="^[a-z0-9]+@[a-z0-9]+\.[a-z]{2,}$">
                                     <div id="emailError" class="text-danger" style="display: none;"></div>
                                 </div>
-                                <div class="mb-3">
+
+                                <!-- Contact Section -->
+                                <div class="mb-4">
                                     <label for="contact" class="form-label">Contact</label>
-                                    <input
-                                        type="text"
-                                        id="contact"
-                                        name="contactno"
-                                        class="form-control"
-                                        placeholder="Enter your contact"
-                                        maxlength="10"
-                                        autocomplete="off"
-                                        required
-                                        oninput="validateContactInput(this)">
+                                    <input type="text" id="contact" name="contactno" class="form-control" placeholder="Enter your contact" maxlength="10" autocomplete="off" required oninput="validateContactInput(this)">
                                     <div id="contactError" class="text-danger" style="display: none;">Only numbers are allowed.</div>
                                 </div>
 
-                                <script>
-                                    // Function to validate contact input
-                                    function validateContactInput(input) {
-                                        const contactError = document.getElementById('contactError');
-
-                                        // Remove any non-numeric characters
-                                        input.value = input.value.replace(/[^0-9]/g, '');
-
-                                        // Show error if the value is not numeric
-                                        if (!/^\d*$/.test(input.value)) {
-                                            contactError.style.display = 'block';
-                                        } else {
-                                            contactError.style.display = 'none';
-                                        }
-                                    }
-                                </script>
-
+                                <!-- Submit Button -->
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                                    <button type="submit" class="btn btn-primary w-100">Update Profile</button>
                                 </div>
                             </form>
+
+                            <script>
+                                // Function to preview the uploaded profile image
+                                function previewProfileImage(event) {
+                                    const file = event.target.files[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            document.getElementById('profileImage').src = e.target.result;
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                }
+
+                                // Function to validate contact input
+                                function validateContactInput(input) {
+                                    const contactError = document.getElementById('contactError');
+                                    input.value = input.value.replace(/[^0-9]/g, '');
+                                    contactError.style.display = /^\d*$/.test(input.value) ? 'none' : 'block';
+                                }
+                            </script>
+
+                            <script>
+                                // Function to preview the uploaded profile image
+                                function previewProfileImage(event) {
+                                    const file = event.target.files[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            document.getElementById('profileImage').src = e.target.result;
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                }
+
+                                // Function to validate contact input
+                                function validateContactInput(input) {
+                                    const contactError = document.getElementById('contactError');
+                                    input.value = input.value.replace(/[^0-9]/g, '');
+                                    contactError.style.display = /^\d*$/.test(input.value) ? 'none' : 'block';
+                                }
+                            </script>
+
+                            <!-- FontAwesome for Pen Icon -->
+                            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
                         </div>
 
                         <!-- Include SweetAlert2 library -->
@@ -283,36 +405,45 @@
                         <!-- Password & Privacy Form -->
                         <div id="passwordSettingsForm" class="form-container" style="display: none;">
                             <form class="w-100" id="passwordForm" onsubmit="return validatePasswordForm(event)">
-                                <div class="mb-3">
+                                <!-- Old Password Section -->
+                                <div class="mb-4">
                                     <label for="oldPassword" class="form-label">Old Password</label>
                                     <div class="input-group">
-                                        <input type="password" id="oldPassword" name="oldpassword" class="form-control" placeholder="Enter your old password" autocomplete="off" required>
+                                        <input type="password" id="oldPassword" name="oldpassword" class="form-control" placeholder="Enter your old password" autocomplete="off" required oninput="this.value = this.value.replace(/^\s+/g, '')">
                                         <span class="input-group-text" onclick="togglePassword('oldPassword', this)" style="cursor: pointer;">
                                             <i class="bi bi-eye-slash"></i>
                                         </span>
                                     </div>
+
                                 </div>
-                                <div class="mb-3">
+
+                                <!-- New Password Section -->
+                                <div class="mb-4">
                                     <label for="newPassword" class="form-label">New Password</label>
                                     <div class="input-group">
-                                        <input type="password" id="newPassword" name="password" class="form-control" placeholder="Enter your new password" autocomplete="off" required>
+                                        <input type="password" id="newPassword" name="password" class="form-control" placeholder="Enter your new password" autocomplete="off" required oninput="this.value = this.value.replace(/^\s+/g, '')">
                                         <span class="input-group-text" onclick="togglePassword('newPassword', this)" style="cursor: pointer;">
                                             <i class="bi bi-eye-slash"></i>
                                         </span>
                                     </div>
                                 </div>
-                                <div class="mb-3">
+
+                                <!-- Confirm Password Section -->
+                                <div class="mb-4">
                                     <label for="confirmPassword" class="form-label">Confirm Password</label>
                                     <div class="input-group">
-                                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your new password" autocomplete="off" required>
+                                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your new password" autocomplete="off" required oninput="this.value = this.value.replace(/^\s+/g, '')">
                                         <span class="input-group-text" onclick="togglePassword('confirmPassword', this)" style="cursor: pointer;">
                                             <i class="bi bi-eye-slash"></i>
                                         </span>
                                     </div>
                                 </div>
+
                                 <div id="passwordError" class="text-danger" style="display: none;"></div>
+
+                                <!-- Submit Button -->
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary w-100">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -455,9 +586,6 @@
             this.submit();
         };
     </script>
-    <!-- Script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Script End -->
 
     <!-- Script Toggle Sidebar -->
     <script>

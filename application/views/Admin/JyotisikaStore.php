@@ -289,15 +289,20 @@
                     visibleFestivals.forEach((festival, index) => {
                         tableBody.innerHTML += `
                     <tr>
-                        <th scope="row">${startIndex + index + 1}</th>
-                        <td>${festival.title}</td>
-                        <td>${truncateText(festival.description, 50)}</td>
-                        <td><img src="${festival.image}" class="img-fluid rounded" alt="${festival.title}"></td>
-                        <td class="text-center d-flex justify-content-center">
-                            <button class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                            <button class="btn btn-danger btn-sm ms-1">Delete</button>
-                        </td>
-                    </tr>
+    <th scope="row">${startIndex + index + 1}</th>
+    <td>${festival.title}</td>
+    <td>${truncateText(festival.description, 50)}</td>
+    <td><img src="${festival.image}" class="img-fluid rounded" alt="${festival.title}"></td>
+    <td class="text-center d-flex justify-content-center">
+        <a href="#" class="text-primary me-2" data-bs-toggle="modal" data-bs-target="#editModal">
+            <i class="bi bi-pencil-square fs-5"></i>
+        </a>
+        <a href="#" class="text-danger ms-2">
+            <i class="bi bi-trash fs-5"></i>
+        </a>
+    </td>
+</tr>
+
                 `;
                     });
                 }
@@ -401,9 +406,7 @@
     </div>
     </div>
 
-    <!-- Script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Script End -->
+
 
     <!-- Script Toggle Sidebar -->
     <script>
