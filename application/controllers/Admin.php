@@ -39,5 +39,9 @@ class Admin extends CI_Controller {
 		
 		$this->load->view('Admin/AnyliticsandReports');
 	}
+	public function RescheduleInterview(){
+		
+		$this->load->view('Admin/RescheduleInterview');
+	}
     
 }

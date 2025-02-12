@@ -170,6 +170,7 @@
                 font-size: 1.5rem;
             }
         }
+
     </style>
 </head>
 
@@ -191,18 +192,19 @@
                     <div class="col-md-12">
                         <h3 class="text-center">Pooja List</h3>
                         <div class="d-flex justify-content-end mb-5">
-                            <button class="btn btn-primary fixed-right-btn" data-bs-toggle="modal" data-bs-target="#addModal">Add Pooja</button>
+                            <button class="btn btn-primary fixed-right-btn" style="background-color: #0c768a; color: white;" data-bs-toggle="modal" data-bs-target="#addModal">Add Pooja</button>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
-                                    <tr>
+                                <tr>
                                         <th scope="col">Sr. No.</th>
                                         <th scope="col">Title</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Image</th>
+                                        <th scope="col">Pooja Mode</th>
                                         <th scope="col" class="text-center">Action</th>
-                                    </tr>
+                                </tr>
                                 </thead>
                                 <tbody id="festival-table-body">
                                     <!-- Dynamic Rows Here -->
@@ -220,53 +222,62 @@
 
             <script>
                 // Sample data
-                const festivals = [{
+     // Sample data
+     const festivals = [{
                         id: 1,
                         title: "Ganesh Pooja",
                         description: "The pooja of the remover of obstacles",
-                        image: "https://picsum.photos/40"
+                        mode: "Online",
+                        image: "https://picsum.photos/40",
                     },
                     {
                         id: 2,
                         title: "Satyanarayan Pooja",
                         description: "The pooja of the one with true knowledge",
-                        image: "https://picsum.photos/41"
+                        mode: "Offline",
+                        image: "https://picsum.photos/41",
                     },
                     {
                         id: 3,
                         title: "Lakshmi Pooja",
                         description: "The pooja of the goddess of wealth",
-                        image: "https://picsum.photos/42"
+                        mode: "Mobile",
+                        image: "https://picsum.photos/42",
                     },
                     {
                         id: 4,
                         title: "Durga Pooja",
                         description: "The pooja of the goddess of strength",
-                        image: "https://picsum.photos/43"
+                        mode: "Online",
+                        image: "https://picsum.photos/43",
                     },
                     {
                         id: 5,
                         title: "Hanuman Pooja",
                         description: "The pooja of the monkey god",
-                        image: "https://picsum.photos/44"
+                        mode: "Offline",
+                        image: "https://picsum.photos/44",
                     },
                     {
                         id: 6,
                         title: "Krishna Pooja",
                         description: "The pooja of the divine prince",
-                        image: "https://picsum.photos/45"
+                        mode: "Mobile",
+                        image: "https://picsum.photos/45",
                     },
                     {
                         id: 7,
                         title: "Shiva Pooja",
                         description: "The pooja of the destroyer",
-                        image: "https://picsum.photos/46"
+                        mode: "Online",
+                        image: "https://picsum.photos/46",
                     },
                     {
                         id: 8,
                         title: "Saraswati Pooja",
                         description: "The pooja of the goddess of knowledge",
-                        image: "https://picsum.photos/47"
+                        mode: "Offline",
+                        image: "https://picsum.photos/47",
                     }
                 ];
 
@@ -289,19 +300,20 @@
                     visibleFestivals.forEach((festival, index) => {
                         tableBody.innerHTML += `
                     <tr>
-    <th scope="row">${startIndex + index + 1}</th>
-    <td>${festival.title}</td>
-    <td>${truncateText(festival.description, 50)}</td>
-    <td><img src="${festival.image}" class="img-fluid rounded" alt="${festival.title}"></td>
-    <td class="text-center d-flex justify-content-center">
-        <a href="#" class="text-primary me-2" data-bs-toggle="modal" data-bs-target="#editModal">
-            <i class="bi bi-pencil-square fs-5"></i>
-        </a>
-        <a href="#" class="text-danger ms-2">
-            <i class="bi bi-trash fs-5"></i>
-        </a>
-    </td>
-</tr>
+                        <th scope="row">${startIndex + index + 1}</th>
+                        <td>${festival.title}</td>
+                        <td>${truncateText(festival.description, 50)}</td>
+                        <td><img src="${festival.image}" class="img-fluid rounded" alt="${festival.title}"></td>
+                        <td>${festival.mode}</td>
+                        <td class="text-center d-flex justify-content-center">
+                            <a href="#" class="text-primary me-2" data-bs-toggle="modal" data-bs-target="#editModal">
+                                <i class="bi bi-pencil-square fs-5"></i>
+                            </a>
+                            <a href="#" class="text-danger ms-2">
+                                <i class="bi bi-trash fs-5"></i>
+                            </a>
+                        </td>
+                    </tr>
 
                 `;
                     });
@@ -356,11 +368,21 @@
                                     <textarea class="form-control" id="description" aria-describedby="description" rows="3" required></textarea>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="puja-mode" class="form-label">Puja Mode</label>
+                                    <select class="form-select" id="puja-mode" aria-describedby="puja-mode" required>
+                                        <option value="" disabled selected>Select Puja Mode</option>
+                                        <option value="Online">Online</option>
+                                        <option value="Offline">Offline</option>
+                                        <option value="Mob">Mob</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a valid puja mode.</div>
+                                </div>
+                                <div class="mb-3">
                                     <label for="image" class="form-label">Upload Image</label>
                                     <input type="file" class="form-control" id="image" aria-describedby="image" accept="image/*" required>
                                     <div class="invalid-feedback">Please select a valid image file.</div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #0c768a; color: white;">Save</button>
                             </form>
                         </div>
                     </div>
@@ -384,16 +406,27 @@
                                         pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only">
                                     <div class="invalid-feedback">Please enter a valid title without spaces and special characters.</div>
                                 </div>
+                                
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
                                     <textarea class="form-control" id="description" aria-describedby="description" rows="3" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="puja-mode" class="form-label">Puja Mode</label>
+                                    <select class="form-select" id="puja-mode" aria-describedby="puja-mode" required>
+                                        <option value="" disabled selected>Select Puja Mode</option>
+                                        <option value="Online">Online</option>
+                                        <option value="Offline">Offline</option>
+                                        <option value="Mob">Mob</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a valid puja mode.</div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Upload Image</label>
                                     <input type="file" class="form-control" id="image" aria-describedby="image" accept="image/*" required>
                                     <div class="invalid-feedback">Please select a valid image file.</div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #0c768a; color: white;">Add</button>
                             </form>
                         </div>
                     </div>

@@ -126,9 +126,8 @@
             }
         }
 
-        #bar-graph {
-            width: 100%;
-            height: 400px;
+        .nav-pills .nav-link.active {
+            background-color: #0c768a;
         }
     </style>
 </head>
@@ -153,7 +152,7 @@
 
                 <div class="text-center ">
                     <div class="dropdown ms-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #0c768a; color: white;">
                             Select Report
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -232,11 +231,11 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="m-0">Top Puja Sales</h5>
-                        <select id="salesType2" class="form-select" style="width: 150px;" onchange="updateDoughnutChart('top-5-selling-puja2')">
+                        <!-- <select id="salesType2" class="form-select" style="width: 150px;" onchange="updateDoughnutChart('top-5-selling-puja2')">
                             <option value="online">Online</option>
                             <option value="offline">Offline</option>
                             <option value="mob">Mob</option>
-                        </select>
+                        </select> -->
                     </div>
                     <div class="card-body d-flex justify-content-center">
                         <canvas id="top-5-selling-puja2" style="max-width: 600px; height: 400px;"></canvas>
@@ -262,11 +261,11 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="m-0">Top Puja Sales</h5>
-                        <select id="salesType3" class="form-select" style="width: 150px;" onchange="updateDoughnutChart('top-5-selling-puja3')">
+                        <!-- <select id="salesType3" class="form-select" style="width: 150px;" onchange="updateDoughnutChart('top-5-selling-puja3')">
                             <option value="online">Online</option>
                             <option value="offline">Offline</option>
                             <option value="mob">Mob</option>
-                        </select>
+                        </select> -->
                     </div>
                     <div class="card-body d-flex justify-content-center">
                         <canvas id="top-5-selling-puja3" style="max-width: 600px; height: 400px;"></canvas>
@@ -445,6 +444,7 @@
                 });
 
                 // Function to Update Chart on Dropdown Change
+                // Function to Update Chart on Dropdown Change
                 function updateDoughnutChart() {
                     const selectedType = document.getElementById('salesType').value;
 
@@ -454,15 +454,32 @@
                         return;
                     }
 
-                    console.log("Updating chart for:", selectedType);
+                    // Destroy existing chart
+                    if (top5SellingPujaChart) {
+                        top5SellingPujaChart.destroy();
+                    }
 
-                    // Update chart labels and dataset
-                    top5SellingPujaChart.data.labels = salesData[selectedType].labels;
-                    top5SellingPujaChart.data.datasets[0].data = salesData[selectedType].datasets[0].data;
-                    top5SellingPujaChart.data.datasets[0].backgroundColor = salesData[selectedType].datasets[0].backgroundColor;
-
-                    // Apply the updates
-                    top5SellingPujaChart.update();
+                    // Recreate the chart with new data
+                    const ctx2 = document.getElementById('top-5-selling-puja').getContext('2d');
+                    top5SellingPujaChart = new Chart(ctx2, {
+                        type: 'doughnut',
+                        data: {
+                            labels: salesData[selectedType].labels,
+                            datasets: [{
+                                data: salesData[selectedType].datasets[0].data,
+                                backgroundColor: salesData[selectedType].datasets[0].backgroundColor
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        }
+                    });
 
                     // Update the legend
                     createLegend(top5SellingPujaChart);
@@ -472,15 +489,17 @@
                 function createLegend(chart) {
                     const legendContainer = document.getElementById('chart-legend');
                     legendContainer.innerHTML = chart.data.labels.map((label, i) => `
-        <div style="display: flex; align-items: center; margin-bottom: 5px;">
-            <span style="width: 14px; height: 14px; background-color: ${chart.data.datasets[0].backgroundColor[i]}; display: inline-block; margin-right: 8px; border-radius: 3px;"></span>
-            <span>${label}</span>
-        </div>
-    `).join('');
+                        <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                            <span style="width: 14px; height: 14px; background-color: ${chart.data.datasets[0].backgroundColor[i]}; display: inline-block; margin-right: 8px; border-radius: 3px;"></span>
+                            <span>${label}</span>
+                        </div>
+                    `).join('');
                 }
 
                 // Initialize the Legend on Page Load
                 createLegend(top5SellingPujaChart);
+
+                document.getElementById("salesType").addEventListener("change", updateDoughnutChart);
             </script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
