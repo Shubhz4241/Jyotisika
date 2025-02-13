@@ -141,25 +141,32 @@
             <main class="p-3">
                 <div class="container">
                     <div class="row g-4">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
                                 <img src="<?php echo base_url() . 'assets/images/users.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
                                 <h1 class="mt-3 counter" data-target="450">0</h1>
                                 <p>Total Users</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <a href="<?php echo base_url() . 'astrologerrequests'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
                                 <img src="<?php echo base_url() . 'assets/images/astrologers.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
                                 <h1 class="mt-3 counter" data-target="150">0</h1>
                                 <p>Total Astrologer</p>
                             </a>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <a href="<?php echo base_url() . 'pujarirequests'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
                                 <img src="<?php echo base_url() . 'assets/images/pujari.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
                                 <h1 class="mt-3 counter" data-target="100">0</h1>
                                 <p>Total Pujari</p>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="<?php echo base_url() . 'rescheduleinterview'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
+                                <img src="<?php echo base_url() . 'assets/images/rescheduleinterview.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
+                                <h1 class="mt-3 counter" data-target="870">0</h1>
+                                <p>Reschedule Interview</p>
                             </a>
                         </div>
                     </div>
@@ -278,7 +285,7 @@
                                         </table>
                                         <div class="card-footer text-center">
                                             <a href="<?php echo base_url('astrologerrequests'); ?>"
-                                                class="btn btn-outline-primary btn-block">
+                                                class="btn btn-block" style="background-color: #0c768a; color: white;">
                                                 See All Registrations
                                             </a>
                                         </div>
@@ -370,7 +377,7 @@
                                         </table>
                                         <div class="card-footer text-center">
                                             <a href="<?php echo base_url() . 'pujarirequests'; ?>"
-                                                class="btn btn-outline-primary btn-block">
+                                                class="btn btn-block" style="background-color: #0c768a; color: white;">
                                                 See All Registrations
                                             </a>
                                         </div>

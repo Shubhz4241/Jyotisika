@@ -361,10 +361,10 @@
         <td class="text-center">
             <div class="d-flex justify-content-center">
                 <button class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#scheduleModal" onclick="openScheduleModal(${item.srNo})">
-                    Accept
+                    <i class="bi bi-check-circle-fill"></i>
                 </button>
                 <button class="btn btn-danger btn-sm" onclick="handleReject(${item.srNo})">
-                    Reject
+                    <i class="bi bi-x-circle-fill"></i>
                 </button>
             </div>
 
@@ -378,23 +378,23 @@
                         </div>
                         <div class="modal-body">
                             <form id="scheduleForm" onsubmit="handleSchedule(${item.srNo}); return false;">
-    <div class="mb-3">
-        <label for="date" class="form-label">Date</label>
-        <input type="date" class="form-control" id="date" name="date" required />
-    </div>
-    <div class="mb-3">
-        <label for="time" class="form-label">Time</label>
-        <input type="time" class="form-control" id="time" name="time" required />
-    </div>
-    <div class="mb-3">
-        <label for="venue" class="form-label">Venue</label>
-        <input type="text" class="form-control" id="venue" name="venue" required />
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Schedule</button>
-    </div>
-</form>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="date" name="date" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="time" class="form-label">Time</label>
+                            <input type="time" class="form-control" id="time" name="time" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="venue" class="form-label">Venue</label>
+                            <input type="text" class="form-control" id="venue" name="venue" required />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Schedule</button>
+                        </div>
+                            </form>
 
 
                         </div>

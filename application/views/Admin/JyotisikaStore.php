@@ -170,6 +170,21 @@
                 font-size: 1.5rem;
             }
         }
+
+        .page-item.active .page-link {
+            background-color: #0c768a !important;
+            border-color: #0c768a !important;
+            color: white !important;
+        }
+
+        .page-link {
+            color: #0c768a !important;
+        }
+
+        .page-link:hover {
+            background-color: #0c768a !important;
+            color: white !important;
+        }
     </style>
 </head>
 
@@ -191,7 +206,7 @@
                     <div class="col-md-12">
                         <h3 class="text-center">Jyotisika Store Product List</h3>
                         <div class="d-flex justify-content-end mb-5">
-                            <button class="btn btn-primary fixed-right-btn" data-bs-toggle="modal" data-bs-target="#addModal">Add Product</button>
+                            <button class="btn btn-primary fixed-right-btn" data-bs-toggle="modal" data-bs-target="#addModal" style="background-color: #0c768a; color: white;">Add Product</button>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -289,19 +304,19 @@
                     visibleFestivals.forEach((festival, index) => {
                         tableBody.innerHTML += `
                     <tr>
-    <th scope="row">${startIndex + index + 1}</th>
-    <td>${festival.title}</td>
-    <td>${truncateText(festival.description, 50)}</td>
-    <td><img src="${festival.image}" class="img-fluid rounded" alt="${festival.title}"></td>
-    <td class="text-center d-flex justify-content-center">
-        <a href="#" class="text-primary me-2" data-bs-toggle="modal" data-bs-target="#editModal">
-            <i class="bi bi-pencil-square fs-5"></i>
-        </a>
-        <a href="#" class="text-danger ms-2">
-            <i class="bi bi-trash fs-5"></i>
-        </a>
-    </td>
-</tr>
+                        <th scope="row">${startIndex + index + 1}</th>
+                        <td>${festival.title}</td>
+                        <td>${truncateText(festival.description, 50)}</td>
+                        <td><img src="${festival.image}" class="img-fluid rounded" alt="${festival.title}"></td>
+                        <td class="text-center d-flex justify-content-center">
+                            <a href="#" class="text-primary me-2" data-bs-toggle="modal" data-bs-target="#editModal">
+                                <i class="bi bi-pencil-square fs-5"></i>
+                            </a>
+                            <a href="#" class="text-danger ms-2">
+                                <i class="bi bi-trash fs-5"></i>
+                            </a>
+                        </td>
+                    </tr>
 
                 `;
                     });
@@ -344,17 +359,24 @@
                         </div>
                         <div class="modal-body">
                             <form>
-                            <div class="mb-3">
+                                <div class="mb-3">
                                     <label for="title" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="title" aria-describedby="title" required  maxlength="50"
+                                    <input type="text" class="form-control" id="title" aria-describedby="title" required maxlength="50"
                                         oninput="(function(element) { element.value = element.value.replace(/^[ ]/g, '').replace(/[^a-zA-Z0-9\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
-                                        pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only"
->
+                                        pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only">
                                     <div class="invalid-feedback">Please enter a valid title without spaces and special characters.</div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
                                     <textarea class="form-control" id="description" aria-describedby="description" rows="3" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="prise" class="form-label">Price</label>
+                                    <input type="text" class="form-control" id="prise" aria-describedby="prise"
+                                        required pattern="^\d+(\.\d{1,2})?$"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        title="Please enter a valid price (e.g., 100 or 99.99)">
+                                    <div class="invalid-feedback">Please enter a valid price (numbers only, max 2 decimal places).</div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Upload Image</label>
@@ -373,23 +395,31 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addModalLabel">Add Product</h5>
+                            <h5 class="modal-title" id="addModalLabel" style="background-color: #0c768a; color: white;">Add Product</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form onsubmit="document.getElementById('addModal').dispatchEvent(new Event('close.bs.modal'));">
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="title" aria-describedby="title" required  maxlength="50"
+                                    <input type="text" class="form-control" id="title" aria-describedby="title" required maxlength="50"
                                         oninput="(function(element) { element.value = element.value.replace(/^[ ]/g, '').replace(/[^a-zA-Z0-9\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
-                                        pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only"
->
+                                        pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only">
                                     <div class="invalid-feedback">Please enter a valid title without spaces and special characters.</div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
                                     <textarea class="form-control" id="description" aria-describedby="description" rows="3" required></textarea>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="prise" class="form-label">Price</label>
+                                    <input type="text" class="form-control" id="prise" aria-describedby="prise"
+                                        required pattern="^\d+(\.\d{1,2})?$"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        title="Please enter a valid price (e.g., 100 or 99.99)">
+                                    <div class="invalid-feedback">Please enter a valid price (numbers only, max 2 decimal places).</div>
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Upload Image</label>
                                     <input type="file" class="form-control" id="image" aria-describedby="image" accept="image/*" required>

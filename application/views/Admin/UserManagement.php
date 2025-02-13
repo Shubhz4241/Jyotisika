@@ -166,9 +166,9 @@
 
                     <!-- Pagination Buttons -->
                     <div class="d-flex justify-content-end gap-2">
-                        <button id="prevBtn" class="btn btn-sm btn-primary" onclick="previousPage()">Previous</button>
+                        <button id="prevBtn" class="btn btn-sm" style="background-color: #0c768a; color: white;" onclick="previousPage()">Previous</button>
                         <div id="pageNumbers" class="btn-group"></div>
-                        <button id="nextBtn" class="btn btn-sm btn-primary" onclick="nextPage()">Next</button>
+                        <button id="nextBtn" class="btn btn-sm" style="background-color: #0c768a; color: white;" onclick="nextPage()">Next</button>
                     </div>
 
                 </div>
@@ -266,7 +266,7 @@
 
                     // Function to display data based on page
                     function displayData(page) {
-                        const start = (page - 1) * rowsPerPage;
+                        const start = (page - 1) * rowsPerPage; // Calculate starting index
                         const end = start + rowsPerPage;
                         const paginatedData = filteredData.slice(start, end);
 
@@ -275,19 +275,20 @@
 
                         paginatedData.forEach((item, index) => {
                             const row = `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${item.name}</td>
-                    <td>${item.address}</td>
-                    <td>${item.contactNo}</td>
-                    <td>${item.serviceTaken}</td>
-                    <td class="text-center">${item.action}</td>
-                </tr>`;
+                            <tr>
+                                <td>${start + index + 1}</td>  <!-- Serial number continues -->
+                                <td>${item.name}</td>
+                                <td>${item.address}</td>
+                                <td>${item.contactNo}</td>
+                                <td>${item.serviceTaken}</td>
+                                <td class="text-center">${item.action}</td>
+                            </tr>`;
                             tableBody.innerHTML += row;
                         });
 
                         attachDeleteEvent(); // Attach SweetAlert to delete buttons
                     }
+
                     // Function to attach SweetAlert confirmation to delete buttons
                     function attachDeleteEvent() {
                         const deleteButtons = document.querySelectorAll('.delete-btn');

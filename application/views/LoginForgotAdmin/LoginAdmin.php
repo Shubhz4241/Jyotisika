@@ -12,7 +12,7 @@
 
     <style>
         body {
-            background-color: #f7faff;
+            background-color: #e6f0ff;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -20,7 +20,7 @@
         }
 
         .login-container {
-            background-color: #e6f0ff;
+            background-color: white;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -36,6 +36,7 @@
 
         .form-control {
             border-radius: 5px;
+            border-color: #0c768a;
         }
 
         .login-container .btn-primary {
@@ -49,12 +50,27 @@
 
         .forgot-password {
             font-size: 12px;
-            color: #007bff;
+            color: #0c768a;
             text-decoration: none;
         }
 
         .forgot-password:hover {
             text-decoration: underline;
+        }
+
+        .input-group-text {
+            background-color: #f8f9fa;
+            border-color: #0c768a;
+            color: #0c768a;
+        }
+
+        #togglePassword {
+            border-color: #0c768a;
+            color: #0c768a;
+        }
+
+        h4 {
+            color: #0c768a;
         }
     </style>
 </head>
@@ -122,7 +138,7 @@
             </script>
 
             <a href="#" class="forgot-password d-block mb-3">Forgot Password?</a>
-            <button type="button" class="btn btn-primary w-100" onclick="window.location.href='<?php echo base_url('admindash'); ?>'">Login</button>
+            <button type="button" class="btn btn w-100 text-white" style="background-color: #0c768a;" onclick="window.location.href='<?php echo base_url('admindash'); ?>'">Login</button>
         </form>
     </div>
 

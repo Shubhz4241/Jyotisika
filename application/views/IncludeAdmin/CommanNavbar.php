@@ -1,10 +1,11 @@
-<nav class="navbar navbar-expand d-flex justify-content-between align-items-center">
+<!-- <nav class="navbar navbar-expand d-flex justify-content-between align-items-center"> -->
+<nav class="navbar navbar-expand  align-items-center">
     <button class="toggler-btn" type="button">
         <i class="bi bi-list"></i>
     </button>
 
     <!-- Notification Icon with Badge -->
-    <div class="notificationIcon position-relative"  onclick="openNotificationModal()">
+    <div class="notificationIcon position-relative" onclick="openNotificationModal()">
         <i class="bi bi-bell-fill fs-5"></i>
         <!-- Badge for Unread Notifications -->
         <span id="notificationBadge"
@@ -92,7 +93,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 
@@ -110,8 +111,19 @@
 <style>
     /* Header styles */
     .navbar {
-        background-color: #D4ECFF;
+        background-color: white;
         border-bottom: 1px solid #e1e1e1;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    @media (max-width: 768px) {
+        #interviewHeading {
+            margin-top: 60px;
+        }
     }
 
     .navbar-nav .nav-link {
@@ -279,8 +291,9 @@
         text-decoration: none;
         font-weight: 500;
     }
+
     @media (max-width:768px) {
-        .navbar{
+        .navbar {
             background-color: #ffffff;
         }
     }

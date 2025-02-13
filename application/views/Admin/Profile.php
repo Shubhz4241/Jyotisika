@@ -276,8 +276,8 @@
                 <div class="col-md-6">
                     <div class="profile-form shadow p-3 mb-5 bg-body rounded">
                         <div class="nav-buttons text-center mb-3">
-                            <button type="button" class="btn btn-outline-primary mx-2" onclick="showForm('settingsForm')">Admin Profile Settings</button>
-                            <button type="button" class="btn btn-outline-primary mx-2" onclick="showForm('passwordSettingsForm')">Password & Privacy</button>
+                            <button type="button" class="btn btn text-white mx-2" onclick="showForm('settingsForm')" style="background-color: #0c768a;">Admin Profile Settings</button>
+                            <button type="button" class="btn btn text-white mx-2" onclick="showForm('passwordSettingsForm')" style="background-color: #0c768a;">Password & Privacy</button>
                         </div>
 
                         <!-- Admin Profile Settings Form -->
@@ -311,7 +311,7 @@
 
                                 <!-- Submit Button -->
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+                                    <button type="submit" class="btn btn w-100" style="background-color: #0c768a;">Update Profile</button>
                                 </div>
                             </form>
 

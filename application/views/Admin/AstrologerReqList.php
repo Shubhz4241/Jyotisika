@@ -361,10 +361,10 @@
         <td class="text-center">
             <div class="d-flex justify-content-center">
                 <button class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#scheduleModal" onclick="openScheduleModal(${item.srNo})">
-                    Accept
+                    <i class="bi bi-check-circle-fill"></i>
                 </button>
                 <button class="btn btn-danger btn-sm" onclick="handleReject(${item.srNo})">
-                    Reject
+                    <i class="bi bi-x-circle-fill"></i>
                 </button>
             </div>
 

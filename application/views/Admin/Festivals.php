@@ -170,6 +170,21 @@
                 font-size: 1.5rem;
             }
         }
+
+        .page-item.active .page-link {
+            background-color: #0c768a !important;
+            border-color: #0c768a !important;
+            color: white !important;
+        }
+
+        .page-link {
+            color: #0c768a !important;
+        }
+
+        .page-link:hover {
+            background-color: #0c768a !important;
+            color: white !important;
+        }
     </style>
 </head>
 
@@ -191,7 +206,7 @@
                     <div class="col-md-12">
                         <h3 class="text-center">Festival List</h3>
                         <div class="d-flex justify-content-end mb-5">
-                            <button class="btn btn-primary fixed-right-btn" data-bs-toggle="modal" data-bs-target="#addModal">Add Service</button>
+                            <button class="btn fixed-right-btn" style="background-color: #0c768a; color: white;" data-bs-toggle="modal" data-bs-target="#addModal">Add Festival</button>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -360,7 +375,7 @@
                                     <input type="file" class="form-control" id="image" aria-describedby="image" accept="image/*" required>
                                     <div class="invalid-feedback">Please select a valid image file.</div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #0c768a; color: white;">Save</button>
                             </form>
                         </div>
                     </div>
@@ -393,7 +408,7 @@
                                     <input type="file" class="form-control" id="image" aria-describedby="image" accept="image/*" required>
                                     <div class="invalid-feedback">Please select a valid image file.</div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #0c768a; color: white;">Add</button>
                             </form>
                         </div>
                     </div>

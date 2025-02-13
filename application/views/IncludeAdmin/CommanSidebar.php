@@ -26,7 +26,7 @@
         height: 100vh;
         min-height: 100vh;
         transition: all 0.35s ease-in-out;
-        background-color: #D4ECFF;
+        background-color: #0c768a;
         display: flex;
         flex-direction: column;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -143,7 +143,7 @@
 
     @media (max-width:768px) {
         #sidebar {
-            background-color: #D4ECFF;
+            background-color: #0c768a;
             /* Solid color for mobile devices */
             position: fixed;
             z-index: 1100;
@@ -181,7 +181,7 @@
         <li class="sidebar-item text-center mb-4 ">
             <a href="<?php echo base_url() . 'admindash'; ?>">
                 <img src="<?php echo base_url() . 'assets\images\Admin logo.png'; ?>" alt="HR Profile"
-                    class="rounded-circle mb-2" style="width: 160px; height: 140px;">
+                    class="rounded-circle mb-2" style="width: 160px; height: 140px;    filter: drop-shadow(0 0 8px rgba(234, 239, 44, 1));">
             </a>
             <!-- <h6 class="text-dark mb-3">HR Manager</h6> -->
             <div class="d-flex justify-content-center gap-2">
@@ -193,137 +193,44 @@
         <!-- HOME -->
         <li class="sidebar-item">
             <a href="<?php echo base_url() . 'admindash'; ?>" class="sidebar-link " id="ManasviHome-link" style="font-size: 16px;">
-                <i class="bi bi-house-fill"></i>
-                <span class="ms-1">Dashboard</span>
+                <i class="bi bi-house-fill" style="color: white;"></i>
+                <span class="ms-1" style="color: white;">Dashboard</span>
             </a>
         </li>
-
-        <!-- PEOPLE -->
-        <!-- <li class="sidebar-item">
-            <a href="#" class="sidebar-link dropdown-toggle collapsed" id="people-dropdown" data-bs-toggle="collapse"
-                data-bs-target="#peopleSubmenu" aria-expanded="false" style="font-size: 16px;">
-                <i class="bi bi-people-fill"></i>
-                <span class="ms-1">People</span>
-            </a>
-            <div class="collapse" id="peopleSubmenu">
-                <ul class="nav flex-column ms-3">
-                    <li class="nav-item">
-                        <a href="<?php echo base_url() . 'ManasviTotalEmployee'; ?>" class="sidebar-link" id="TotalEmployee-link" style="font-size: 16px;">
-                            <i class="bi bi-person-workspace"></i>
-                            <span class="ms-1">Total Employees</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url() . 'ManasviTotalIntern'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 16px;">
-                            <i class="bi bi-mortarboard-fill"></i>
-                            <span class="ms-1"> Total Interns</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li> -->
-
-        <!-- ATTENDANCE MANAGEMENT -->
-        <!-- <li class="sidebar-item">
-            <a href="#" class="sidebar-link dropdown-toggle collapsed" id="attendance-dropdown"
-                data-bs-toggle="collapse" data-bs-target="#attendanceSubmenu" aria-expanded="false" style="font-size: 16px;">
-                <i class="bi bi-clipboard-check-fill"></i>
-                <span class="ms-1">Attendance Management</span>
-            </a>
-            <div class="collapse" id="attendanceSubmenu">
-                <ul class="nav flex-column ms-3">
-                    <li class="nav-item">
-                        <a href="<?php echo base_url() . 'ManasviEmployeeAttendance'; ?>" class="sidebar-link"
-                            id="EmployeeAttendance-link" style="font-size: 16px;">
-                            <i class="bi bi-person-check-fill"></i>
-                            <span class="ms-1">Daily Employee Attendance</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="<?php echo base_url() . 'ManasviInternAttendance'; ?>" class="sidebar-link"
-                            id="InternAttendance-link" style="font-size: 16px;">
-                            <i class="bi bi-person-check-fill"></i>
-                            <span class="ms-1">Daily Interns Attendance</span>
-                        </a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="<?php echo base_url() . 'ManasviGenerateAttendance'; ?>" class="sidebar-link"
-                            id="GenerateAttendance-link" style="font-size: 16px;">
-                            <i class="bi bi-file-text-fill"></i>
-                            <span class="ms-1">Generate Attendance Report</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li> -->
-
-        <!-- LEAVE MANAGEMENT -->
-        <!-- <li class="sidebar-item">
-            <a href="#" class="sidebar-link dropdown-toggle collapsed" id="leave-dropdown" data-bs-toggle="collapse"
-                data-bs-target="#leaveSubmenu" aria-expanded="false" style="font-size: 16px;">
-                <i class="bi bi-calendar-minus-fill"></i>
-                <span class="ms-1">Leave Management</span>
-            </a>
-            <div class="collapse" id="leaveSubmenu">
-                <ul class="nav flex-column ms-3">
-                    <li class="nav-item">
-                        <a href="<?php echo base_url() . 'ManasviEmployeeLeaveRequest'; ?>" class="sidebar-link"
-                            id="EmployeeLeaveRequest-link" style="font-size: 16px;">
-                            <i class="bi bi-send-fill"></i>
-                            <span class="ms-1">Employee Leave Request</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url() . 'ManasviInternLeaveRequest'; ?>" class="sidebar-link" id="InternLeaveRequest-link" style="font-size: 16px;">
-                            <i class="bi bi-send-fill"></i>
-                            <span class="ms-1">Intern Leave Request</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url() . 'ManasviLeaveRecords'; ?>" class="sidebar-link" id="leaveRecords-link" style="font-size: 16px;">
-                            <i class="bi bi-key-fill"></i>
-                            <span class="ms-1">Leave Access</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li> -->
 
         <!-- User Management -->
         <li class="sidebar-item">
             <a href="<?php echo base_url() . 'usermanagement'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 16px;">
-                <i class="bi bi-person-vcard"></i>
-                <span class="ms-1">User Management</span>
+                <i class="bi bi-person-vcard" style="color: white;"></i>
+                <span class="ms-1" style="color: white;">User Management</span>
             </a>
         </li>
 
         <!-- Service Management -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'ManasviDocumentation'; ?>" class="sidebar-link dropdown-toggle collapsed" id="people-dropdown" data-bs-toggle="collapse"
+            <a href="<?php echo base_url() . 'ManasviDocumentation'; ?>" class="sidebar-link dropdown-toggle collapsed text-white " id="people-dropdown" data-bs-toggle="collapse"
                 data-bs-target="#peopleSubmenu" aria-expanded="false" style="font-size: 16px;">
-                <i class="bi bi-clipboard-check"></i>
-                <span class="ms-1">Service Management</span>
+                <i class="bi bi-clipboard-check " style="color: white;"></i>
+                <span class="ms-1" style="color: white;">Service Management</span>
             </a>
             <div class="collapse" id="peopleSubmenu">
                 <ul class="nav flex-column ms-3">
                     <li class="nav-item">
                         <a href="<?php echo base_url() . 'festivals'; ?>" class="sidebar-link" id="TotalEmployee-link" style="font-size: 16px;">
                             <!-- <i class="bi bi-person-workspace"></i> -->
-                            <span class="ms-1">Festivals</span>
+                            <span class="ms-1" style="color: white;">Festivals</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?php echo base_url() . 'poojalist'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 16px;">
                             <!-- <i class="bi bi-mortarboard-fill"></i> -->
-                            <span class="ms-1"> Puja</span>
+                            <span class="ms-1" style="color: white;"> Puja</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?php echo base_url() . 'jyotisikastore'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 16px;">
                             <!-- <i class="bi bi-mortarboard-fill"></i> -->
-                            <span class="ms-1"> Jyotisika Store</span>
+                            <span class="ms-1" style="color: white;"> Jyotisika Store</span>
                         </a>
                     </li>
                 </ul>
@@ -333,16 +240,16 @@
         <!-- MANAGE EVENT -->
         <li class="sidebar-item">
             <a href="<?php echo base_url() . 'anyliticsandreports'; ?>" class="sidebar-link" id="Manageevent-link" style="font-size: 16px;">
-                <i class="bi bi-file-bar-graph"></i>
-                <span class="ms-1">Analytics & Reports</span>
+                <i class="bi bi-file-bar-graph" style="color: white;"></i>
+                <span class="ms-1" style="color: white;">Analytics & Reports</span>
             </a>
         </li>
 
         <!-- INTERVIEW ANALYSIS -->
         <li class="sidebar-item">
             <a href="<?php echo base_url() . 'profile'; ?>" class="sidebar-link" id="InterviewAnalysis-link" style="font-size: 16px;">
-                <i class="bi bi-person-circle"></i>
-                <span class="ms-1">Profile</span>
+                <i class="bi bi-person-circle" style="color: white;"></i>
+                <span class="ms-1" style="color: white;">Profile</span>
             </a>
         </li>
 
@@ -352,8 +259,8 @@
     <!-- LOGOUT -->
     <div class="sidebar-footer mb-3">
         <a href="<?php echo base_url() . 'login'; ?>" class="sidebar-link" style="font-size: 16px;">
-            <i class="bi bi-box-arrow-left"></i>
-            <span class="ms-1">Logout</span>
+            <i class="bi bi-box-arrow-left" style="color: white;"></i>
+            <span class="ms-1" style="color: white;">Logout</span>
         </a>
     </div>
 
