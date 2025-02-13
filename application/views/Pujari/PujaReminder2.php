@@ -6,10 +6,6 @@
     <title>Pooja Reminder</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: "Montserrat", sans-serif;
@@ -69,72 +65,17 @@
 <div class="container mt-4">
     <h2 class="text-center mb-4">Pooja Reminder</h2>
 
-    <!-- Puja Category Filter Buttons -->
     <div class="d-flex flex-wrap justify-content-end gap-2 mb-4">
         <button class="btn btn-outline-secondary btn-filter active" data-type="offline">Offline Puja</button>
         <button class="btn btn-outline-secondary btn-filter" data-type="online">Online Puja</button>
         <button class="btn btn-outline-secondary btn-filter" data-type="mob">Mob Puja</button>
     </div>
 
-    <!-- Today's Schedule -->
-    <h4 class="mb-3">Today's Schedule</h4>
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-        <div class="col">
-            <div class="puja-card">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>"alt="Rudraabhishek Puja">
-                <div class="content">
-                    <h5>Rudraabhishek Puja</h5>
-                    <p><strong>Date:</strong> 12/1/2025</p>
-                    <p><strong>Time:</strong> 10:30 AM</p>
-                    <p><strong>Location:</strong> XYZ Road, Nashik</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="puja-card">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>"alt="Maha Laxmi Puja">
-                <div class="content">
-                    <h5>Maha Laxmi Puja</h5>
-                    <p><strong>Date:</strong> 13/1/2025</p>
-                    <p><strong>Time:</strong> 9:00 AM</p>
-                    <p><strong>Location:</strong> Temple, Pune</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Upcoming Schedule -->
-    <div class="d-flex justify-content-between align-items-center mt-4">
-        <h4>Upcoming Schedule</h4>
-        <button class="btn btn-set-reminder">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/Alarm Plus.png' ?>" alt="Reminder Icon" width="25">
-            Set Reminder
-        </button>
-    </div>
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-        <div class="col">
-            <div class="puja-card">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>" alt="Ganesh Pooja">
-                <div class="content">
-                    <h5>Ganesh Pooja</h5>
-                    <p><strong>Date:</strong> 14/1/2025</p>
-                    <p><strong>Time:</strong> 6:00 PM</p>
-                    <p><strong>Location:</strong> Shrine, Mumbai</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="puja-card">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>"alt="Hanuman Jayanti">
-                <div class="content">
-                    <h5>Hanuman Jayanti</h5>
-                    <p><strong>Date:</strong> 15/1/2025</p>
-                    <p><strong>Time:</strong> 7:30 AM</p>
-                    <p><strong>Location:</strong> Ram Mandir, Nagpur</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h4 class="mb-3">Today’s Schedule</h4>
+    <div class="row row-cols-1 row-cols-md-2 g-4" id="pujaContainer"></div>
+    
+    <h4 class="mt-5 mb-3">Upcoming Schedule</h4>
+    <div class="row row-cols-1 row-cols-md-2 g-4" id="upcomingPujaContainer"></div>
 </div>
 
 <footer>
@@ -142,58 +83,77 @@
 </footer>
 
 <script>
-   document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const pujaData = {
         offline: [
-            { name: "Rudraabhishek Puja", date: "12/1/2025", time: "10:30 AM", location: "XYZ Road, Nashik", img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>" },
-            { name: "Maha Laxmi Puja", date: "13/1/2025", time: "9:00 AM", location: "Temple, Pune", img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>" }
+            { name: "Rudraabhishek Puja", date: "12/1/2025", time: "10:30 AM", location: "XYZ Road, Nashik", img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>" },
+            { name: "Maha Laxmi Puja", date: "13/1/2025", time: "9:00 AM", location: "Temple, Pune", img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>" }
         ],
         online: [
-            { name: "Online Puja 1", date: "20/2/2025", time: "2:00 PM", location: "Online via Zoom", img: "<?php echo base_url() . 'assets/images/Pujari/OnlinePuja1.png' ?>" },
-            { name: "Online Puja 2", date: "21/2/2025", time: "4:00 PM", location: "YouTube Live", img: "<?php echo base_url() . 'assets/images/Pujari/OnlinePuja2.png' ?>" }
+            { name: "Online Rudraabhishek", date: "20/2/2025", time: "2:00 PM", location: "Online via Zoom", img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>" }
         ],
         mob: [
-            { name: "Mobile Puja 1", date: "25/2/2025", time: "8:00 AM", location: "Video Call", img: "<?php echo base_url() . 'assets/images/Pujari/MobPuja1.png' ?>" },
-            { name: "Mobile Puja 2", date: "26/2/2025", time: "6:45 PM", location: "WhatsApp Call", img: "<?php echo base_url() . 'assets/images/Pujari/MobPuja2.png' ?>" }
-        ]
+            { name: "Maha Mrityunjaya Jaap", date: "14/1/2025", time: "7:00 AM", languages: "Sanskrit, Hindi", experience: "18 years", fee: "700", discount: "850", attendees: "88", countdown: "Starts in: 2 d 6h", img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>" }
+        ],
+        upcoming: {
+            offline: [
+                { name: "Chandi Homam", date: "25/2/2025", time: "6:30 AM", location: "Kashi Temple", img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>" }
+            ],
+            online: [
+                { name: "Online Navratri Puja", date: "28/2/2025", time: "5:30 PM", location: "Zoom", img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>" }
+            ],
+            mob: [
+                { name: "Graha Shanti", date: "29/2/2025", time: "7:00 AM", languages: "Hindi, Marathi", experience: "15 years", fee: "800", discount: "950", attendees: "78", countdown: "Starts in: 10d 5h", img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>" }
+            ]
+        }
     };
 
-    function updatePujaCards(type) {
-        const pujaContainer = document.querySelector(".row.row-cols-1.row-cols-md-2.g-4");
-        pujaContainer.innerHTML = ""; // Clear existing puja cards
-        pujaData[type].forEach(puja => {
-            const pujaCard = `
-                <div class="col">
-                    <div class="puja-card">
-                        <img src="${puja.img}" alt="${puja.name}">
-                        <div class="content">
-                            <h5>${puja.name}</h5>
-                            <p><strong>Date:</strong> ${puja.date}</p>
-                            <p><strong>Time:</strong> ${puja.time}</p>
-                            <p><strong>Location:</strong> ${puja.location}</p>
+    function updatePujaCards(type, containerId, scheduleType = 'pujaData') {
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+
+        const data = scheduleType === 'upcoming' ? pujaData.upcoming[type] : pujaData[type];
+
+        if (data) {
+            data.forEach(puja => {
+                const pujaCard = `
+                    <div class="col">
+                        <div class="puja-card">
+                            <img src="${puja.img}" alt="${puja.name}">
+                            <div class="content">
+                                <h5>${puja.name}</h5>
+                                <p><strong>Date:</strong> ${puja.date}</p>
+                                <p><strong>Time:</strong> ${puja.time}</p>
+                                ${type === "mob" ? `
+                                <p><strong>Languages:</strong> ${puja.languages}</p>
+                                <p><strong>Experience:</strong> ${puja.experience}</p>
+                                <p><strong>Fee:</strong> ₹${puja.fee}</p>
+                                <p><strong>Discounted:</strong> ₹${puja.discount}</p>
+                                <p><strong>Attendees:</strong> ${puja.attendees}</p>
+                                <p><strong>${puja.countdown}</strong></p>
+                                ` : `<p><strong>Location:</strong> ${puja.location}</p>`}
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            pujaContainer.innerHTML += pujaCard;
-        });
+                `;
+                container.innerHTML += pujaCard;
+            });
+        }
     }
 
-    // Add event listeners to filter buttons
     document.querySelectorAll(".btn-filter").forEach(button => {
         button.addEventListener("click", function () {
             document.querySelectorAll(".btn-filter").forEach(btn => btn.classList.remove("active"));
             this.classList.add("active");
-            updatePujaCards(this.getAttribute("data-type"));
+            const type = this.getAttribute("data-type");
+            updatePujaCards(type, "pujaContainer");
+            updatePujaCards(type, "upcomingPujaContainer", 'upcoming');
         });
     });
 
-    // Load default category (Offline Puja)
-    updatePujaCards("offline");
+    updatePujaCards("offline", "pujaContainer");
+    updatePujaCards("offline", "upcomingPujaContainer", 'upcoming');
 });
-
 </script>
-
-
 </body>
 </html>

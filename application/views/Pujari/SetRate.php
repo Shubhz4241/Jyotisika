@@ -41,12 +41,16 @@
         .btn-custom {
             background-color: orange;
             color: white;
-            width: 100%;
-            padding: 10px;
+            /* width: 15%; */
+            padding: 10px 20px ;
             font-size: 16px;
             font-weight: bold;
             border: none;
             border-radius: 5px;
+            display: block;
+            margin: auto;
+            margin-top: 50px;
+        
         }
 
         .btn-custom:hover {

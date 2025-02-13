@@ -180,8 +180,9 @@
                     </div>
                 </div>
             </div>
-
+           
             <div class="container mt-5">
+            <h5 class="mb-0">User Reviews</h5>
                 <div class="d-flex justify-content-center align-items-center position-relative">
                     <!-- Left Arrow Button -->
                     <button class="arrow-btn arrow-left">
