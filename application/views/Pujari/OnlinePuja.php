@@ -25,7 +25,7 @@
         }
 
         .filter-buttons button {
-            border: 1px solid black;
+            border: none;
             border-radius: 20px;
             padding: 8px 20px;
             margin-left: 10px;
@@ -96,7 +96,6 @@
             <button onclick="filterData('wealth')">Wealth</button>
         </div>
 
-
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -112,7 +111,8 @@
     </div>
 
     <script>
-        const pujaData = [{
+        const pujaData = [
+            {
                 name: "Ghar Shanti",
                 type: "ghar-shanti",
                 image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
