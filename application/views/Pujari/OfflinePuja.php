@@ -65,7 +65,10 @@
     </style>
 </head>
 <body>
-
+<header>
+        <?php $this->load->view('Pujari/Include/PujariNav') ?>
+    </header>
+    <div style="min-height: 100vh;">
     <div class="container mt-4">
         <a href="#" class="text-dark">&#x2190; Completed Offline Puja</a>
         <div class="d-flex justify-content-end filter-btns mt-3">
@@ -147,7 +150,7 @@
             });
         });
     </script>
-
+    </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>

@@ -36,7 +36,7 @@
 <header>
     <?php $this->load->view('Pujari/Include/PujariNav') ?>
 </header>
-
+<div style="min-height: 100vh;">
 <div class="container mt-5">
     <h5 class="mb-4">Recent Request</h5>
     <div class="filter-btn">
@@ -122,7 +122,7 @@
             </ul>
         </nav>
     </div>
-
+    </div>
     <footer>
     <?php $this->load->view('Pujari/Include/PujariFooter') ?>  
 </footer>

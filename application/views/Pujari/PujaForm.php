@@ -62,6 +62,7 @@
     <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
+    <div style="min-height: 100vh;">
     <div class="WrapperDiv">
         <!-- Form Container -->
         <div class="form-container">
@@ -111,6 +112,7 @@
         </div>
     </div>
     <!-- Footer -->
+    </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>

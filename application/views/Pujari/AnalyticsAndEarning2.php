@@ -46,6 +46,7 @@
 <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
+    <div style="min-height: 100vh;">
     <div class="container">
         <div class="row text-center mb-4">
             <div class="col-md-4">
@@ -82,6 +83,7 @@
             <h5>Pending Payments <button class="btn btn-light filter-btn">Filter</button></h5>
             <canvas id="pendingPaymentsChart"></canvas>
         </div>
+    </div>
     </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>

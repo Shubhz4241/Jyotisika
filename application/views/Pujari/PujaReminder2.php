@@ -64,7 +64,7 @@
 <header>
     <?php $this->load->view('Pujari/Include/PujariNav') ?>
 </header>
-
+<div style="min-height: 100vh;">
 <div class="container mt-4">
     <h2 class="text-center mb-4">Pooja Reminder</h2>
 
@@ -80,7 +80,7 @@
     <h4 class="mt-5 mb-3">Upcoming Schedule</h4>
     <div class="row row-cols-1 row-cols-md-2 g-4" id="upcomingPujaContainer"></div>
 </div>
-
+</div>
 <footer>
     <?php $this->load->view('Pujari/Include/PujariFooter') ?>
 </footer>

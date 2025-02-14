@@ -96,6 +96,7 @@
 <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
+    <div style="min-height: 100vh;">
     <div style="width: 100%; display: flex; justify-content: center;">
     <div class="profile-container">
         <img src="<?php echo base_url() .'assets/images/Pujari/logo.png'?>" class="profilei" alt="Profile" alt="<?php echo base_url() .'assets/images/Pujari/logo.png'?>">
@@ -147,6 +148,7 @@
             </div>
             <button type="submit" class="save-btn">Save Changes</button>
         </form>
+    </div>
     </div>
     </div>
     <footer>

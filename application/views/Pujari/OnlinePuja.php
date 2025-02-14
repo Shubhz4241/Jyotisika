@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-   <style>
+    <style>
         body {
             background-color: #f9f9f9;
             font-family: Arial, sans-serif;
@@ -84,91 +84,90 @@
     <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
+    <div style="min-height: 100vh;">
+        <div class="container">
+            <div class="mb-3">
+                <a href="#" style="text-decoration: none; color: #555;">
+                    <i class="bi bi-arrow-left"></i> Completed Online Puja
+                </a>
+            </div>
 
-    <div class="container">
-        <div class="mb-3">
-            <a href="#" style="text-decoration: none; color: #555;">
-                <i class="bi bi-arrow-left"></i> Completed Online Puja
-            </a>
+            <div class="filter-buttons">
+                <button class="active" onclick="filterData('all')">All</button>
+                <button onclick="filterData('ghar-shanti')">Ghar Shanti</button>
+                <button onclick="filterData('rahu-ketu')">Rahu-Ketu</button>
+                <button onclick="filterData('wealth')">Wealth</button>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Puja Type</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="pujaTableBody"></tbody>
+            </table>
         </div>
 
-        <div class="filter-buttons">
-            <button class="active" onclick="filterData('all')">All</button>
-            <button onclick="filterData('ghar-shanti')">Ghar Shanti</button>
-            <button onclick="filterData('rahu-ketu')">Rahu-Ketu</button>
-            <button onclick="filterData('wealth')">Wealth</button>
-        </div>
+        <script>
+            const pujaData = [{
+                    name: "Ghar Shanti",
+                    type: "ghar-shanti",
+                    image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
+                    pujaType: "Online",
+                    date: "10/02/2025",
+                    time: "10:30 AM"
+                },
+                {
+                    name: "Rahu-Ketu",
+                    type: "rahu-ketu",
+                    image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
+                    pujaType: "Online",
+                    date: "11/02/2025",
+                    time: "11:30 AM"
+                },
+                {
+                    name: "Wealth",
+                    type: "wealth",
+                    image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
+                    pujaType: "Online",
+                    date: "12/02/2025",
+                    time: "12:30 PM"
+                }
+            ];
 
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Puja Type</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody id="pujaTableBody"></tbody>
-        </table>
-    </div>
+            function loadTableData(filteredType = 'all') {
+                const tableBody = document.getElementById("pujaTableBody");
+                tableBody.innerHTML = "";
 
-    <script>
-        const pujaData = [
-            {
-                name: "Ghar Shanti",
-                type: "ghar-shanti",
-                image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
-                pujaType: "Online",
-                date: "10/02/2025",
-                time: "10:30 AM"
-            },
-            {
-                name: "Rahu-Ketu",
-                type: "rahu-ketu",
-                image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
-                pujaType: "Online",
-                date: "11/02/2025",
-                time: "11:30 AM"
-            },
-            {
-                name: "Wealth",
-                type: "wealth",
-                image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
-                pujaType: "Online",
-                date: "12/02/2025",
-                time: "12:30 PM"
-            }
-        ];
-
-        function loadTableData(filteredType = 'all') {
-            const tableBody = document.getElementById("pujaTableBody");
-            tableBody.innerHTML = "";
-
-            pujaData.forEach(puja => {
-                if (filteredType === 'all' || puja.type === filteredType) {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
+                pujaData.forEach(puja => {
+                    if (filteredType === 'all' || puja.type === filteredType) {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
                         <td>${puja.name}</td>
                         <td><img src="<?php echo base_url(); ?>${puja.image}" alt="${puja.name}" width="250px"></td>
                         <td>${puja.pujaType}</td>
                         <td>${puja.date}</td>
                         <td>${puja.time}</td>
                     `;
-                    tableBody.appendChild(row);
-                }
-            });
-        }
+                        tableBody.appendChild(row);
+                    }
+                });
+            }
 
-        function filterData(type) {
-            document.querySelectorAll('.filter-buttons button').forEach(button => button.classList.remove('active'));
-            document.querySelector(`button[onclick="filterData('${type}')"]`).classList.add('active');
-            loadTableData(type);
-        }
+            function filterData(type) {
+                document.querySelectorAll('.filter-buttons button').forEach(button => button.classList.remove('active'));
+                document.querySelector(`button[onclick="filterData('${type}')"]`).classList.add('active');
+                loadTableData(type);
+            }
 
-        window.onload = () => loadTableData();
-    </script>
-
+            window.onload = () => loadTableData();
+        </script>
+    </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>

@@ -51,6 +51,7 @@
 <header>
     <?php $this->load->view('Pujari/Include/PujariNav') ?>
 </header>
+<div style="min-height: 100vh;">
 <div class="container mt-4">
     <div class="row text-center">
         <div class="col-md-4 mb-3">
@@ -163,6 +164,7 @@
     renderChart('onlineChart', labels, datasets);
     renderChart('mobChart', labels, datasets);
 </script>
+</div>
 <footer>
     <?php $this->load->view('Pujari/Include/PujariFooter') ?>  
 </footer>

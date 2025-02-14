@@ -47,6 +47,7 @@
 <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
+    <div style="min-height: 100vh;">
     <div class="container">
         <h4>← Monthly Earnings Breakdown
             <select class="form-select" id="monthFilter">
@@ -97,6 +98,7 @@
                 <tbody></tbody>
             </table>
         </div>
+    </div>
     </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>

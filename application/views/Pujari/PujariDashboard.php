@@ -104,7 +104,7 @@
     <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
-
+    <div style="min-height: 100vh;">
     <main>
         <section class="dashboard-sections container">
             <div class="row text-center mb-4">
@@ -216,7 +216,7 @@
             </div>
         </section>
     </main>
-
+    </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>

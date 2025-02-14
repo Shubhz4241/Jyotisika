@@ -1,4 +1,4 @@
-<footer class="text-black py-3" style="background:rgba(217, 217, 217, 0.2); font-family:rokkit;">
+<footer class="text-black py-3 " style="background:rgba(217, 217, 217, 0.2); font-family:rokkit;">
     <div class="container footer-height">
         <div class="row align-items-center justify-content-center">
             <div class="col-12 col-md-auto text-center">

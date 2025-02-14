@@ -50,6 +50,7 @@
 <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
+    <div style="min-height: 100vh;">
     <div class="container mt-5">
         <h2 class="text-center">Rate Chart</h2>
         <div class="search-bar">
@@ -105,6 +106,7 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
     <footer>
     <?php $this->load->view('Pujari/Include/PujariFooter') ?>  
     </footer>
