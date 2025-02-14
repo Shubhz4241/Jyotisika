@@ -158,10 +158,10 @@
     </div>
 
     <div class="menu-items" id="menuItems">
-        <a href="#">Home</a>
-        <a href="#">Pujas</a>
-        <a href="#">Analytics</a>
-        <a href="#">Earnings</a>
+        <a href="<?php echo base_url() . 'PujariUser/PujariDashboard'; ?>">Home</a>
+        <a href="<?php echo base_url() . 'PujariUser/List'; ?>">Pujas</a>
+        <a href="<?php echo base_url() . 'PujariUser/AnalyticsandEarning'; ?>">Analytics</a>
+        <a href="<?php echo base_url() . 'PujariUser/AnalyticsandEarning2   '; ?>">Earnings</a>
     </div>
 
     <div class="navbar-right">
@@ -192,7 +192,14 @@
             </div>
         </div>
       
-        <img src="<?php echo base_url() .'assets/images/Pujari/Rectangle 5160 (1).png'?>" alt="Logo"  class="profile-img rounded-circle " width="30px" height="30px">
+        <a href="<?php echo base_url() . 'PujariUser/ProfileForm'; ?>">
+    <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>" 
+         alt="Profile Image" 
+         class="profile-img rounded-circle" 
+         width="30px" 
+         height="30px">
+</a>
+
 
     </div>
 </nav>
