@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -17,22 +20,26 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
             overflow-x: auto;
+            font-family: 'Montserrat', serif;
         }
+
         .table-header {
             background-color: orange;
             color: white;
         }
+
         .filter-btns .btn {
             border-radius: 20px;
             margin-right: 10px;
             padding: 5px 15px;
         }
+
         .filter-btns .active {
             background-color: #f5c0d2;
             color: black;
         }
+
         .puja-image {
             width: 50px;
             height: 50px;
@@ -59,25 +66,26 @@
         }
 
         .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch !important;
-}
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch !important;
+        }
     </style>
 </head>
+
 <body>
-<header>
+    <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
     <div style="min-height: 100vh;">
-    <div class="container mt-4">
-        <a href="#" class="text-dark">&#x2190; Completed Offline Puja</a>
-        <div class="d-flex justify-content-end filter-btns mt-3">
-            <button class="btn btn-outline-dark active" data-filter="all">All</button>
-            <button class="btn btn-outline-dark" data-filter="ghar-shanti">Ghar Shanti</button>
-            <button class="btn btn-outline-dark" data-filter="rahu-ketu">Rahu-Ketu</button>
-            <button class="btn btn-outline-dark" data-filter="wealth">Wealth</button>
+        <div class="container mt-4">
+            <a href="#" class="text-dark">&#x2190; Completed Offline Puja</a>
+            <div class="d-flex justify-content-end filter-btns mt-3">
+                <button class="btn btn-outline-dark active" data-filter="all">All</button>
+                <button class="btn btn-outline-dark" data-filter="ghar-shanti">Ghar Shanti</button>
+                <button class="btn btn-outline-dark" data-filter="rahu-ketu">Rahu-Ketu</button>
+                <button class="btn btn-outline-dark" data-filter="wealth">Wealth</button>
+            </div>
         </div>
-    </div>
         <table class="table mt-3 text-center table-responsive">
             <thead>
                 <tr class="table-header">
@@ -135,25 +143,26 @@
         </table>
 
 
-    <script>
-        $(document).ready(function() {
-            $('.filter-btns .btn').click(function() {
-                $('.filter-btns .btn').removeClass('active');
-                $(this).addClass('active');
-                let filter = $(this).data('filter');
-                if (filter === 'all') {
-                    $('.puja-item').show();
-                } else {
-                    $('.puja-item').hide();
-                    $('.puja-item[data-category="' + filter + '"]').show();
-                }
+        <script>
+            $(document).ready(function() {
+                $('.filter-btns .btn').click(function() {
+                    $('.filter-btns .btn').removeClass('active');
+                    $(this).addClass('active');
+                    let filter = $(this).data('filter');
+                    if (filter === 'all') {
+                        $('.puja-item').show();
+                    } else {
+                        $('.puja-item').hide();
+                        $('.puja-item[data-category="' + filter + '"]').show();
+                    }
+                });
             });
-        });
-    </script>
+        </script>
     </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
 
 </body>
+
 </html>

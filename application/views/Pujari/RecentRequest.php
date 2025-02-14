@@ -13,7 +13,7 @@
     <style>
         body {
             background-color: #f8f9fa;
-            font-family: "Montserrat", sans-serif;
+            font-family: "Montserrat", serif;
             overflow: visible !important;
         }
         .table th {
