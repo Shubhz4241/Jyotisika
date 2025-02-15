@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -19,63 +20,35 @@
             background-color: #ff9800;
             color: white;
         }
-        .table tbody tr {
-            background-color: white;
-        }
         .table img {
             width: 50px;
             height: 50px;
             border-radius: 5px;
         }
-        .pagination .page-item.active .page-link {
-            background-color: #ff9800;
-            border-color: #ff9800;
-        }
         .btn-add {
-            background-color: #6c757d;
+            background-color: #ff9800;
             color: white;
-            border: none;
-            padding: 5px 10px;
+            padding: 10px 16px;
             border-radius: 5px;
         }
-        @media (max-width: 768px) {
-            .table thead {
-                display: none;
-            }
-            .table tbody, .table tr, .table td {
-                display: block;
-                width: 100%;
-            }
-            .table tr {
-                margin-bottom: 15px;
-                border: 1px solid #ddd;
-                padding: 10px;
-            }
-            .table td {
-                text-align: right;
-                position: relative;
-                padding-left: 50%;
-            }
-            .table td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: 10px;
-                width: 45%;
-                text-align: left;
-                font-weight: bold;
-            }
+        .btn-add:hover {
+            background-color: #e68900;
         }
     </style>
 </head>
 <body>
 <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
-    </header>
-    <div style="min-height: 100vh;">
-    <div class="container mt-4">
+    <?php $this->load->view('Pujari/Include/PujariNav') ?>
+</header>
+<div style="min-height: 100vh;">
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Puja List</h3>
-        <button class="btn btn-add float-end mb-2">Add Puja <i class="fas fa-plus-circle"></i></button>
-        <table class="table table-bordered">
+        <button class="btn btn-add"><i class="fas fa-plus-circle"></i> Add Puja</button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered text-center">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -87,57 +60,140 @@
                 </tr>
             </thead>
             <tbody id="pujaTable">
-                <!-- Data will be inserted here dynamically -->
+                <!-- Data will be inserted dynamically -->
             </tbody>
         </table>
-        <nav>
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled"><a class="page-link" href="#">&laquo; Previous</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                <li class="page-item"><a class="page-link" href="#">10</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next &raquo;</a></li>
-            </ul>
-        </nav>
     </div>
+</div>
 
-    <script>
-        const pujaData = Array(20).fill({
-            name: "Gruh Shanti",
-            image: "https://via.placeholder.com/50",
-            type: "Online",
-            date: "10/02/2025",
-            time: "10:30am"
+<!-- Edit Puja Modal -->
+<div class="modal fade" id="editPujaModal" tabindex="-1" aria-labelledby="editPujaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPujaModalLabel">Edit Puja</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editPujaForm">
+                    <input type="hidden" id="editPujaIndex">
+                    <div class="mb-3">
+                        <label class="form-label">Puja Name</label>
+                        <input type="text" id="editPujaName" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Puja Type</label>
+                        <select id="editPujaType" class="form-control">
+                            <option>Online</option>
+                            <option>Offline</option>
+                            <option>Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Availability Date</label>
+                        <input type="date" id="editPujaDate" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Availability Time</label>
+                        <input type="time" id="editPujaTime" class="form-control">
+                    </div>
+                    <button type="button" class="btn btn-success" onclick="saveEditPuja()">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let pujaData = [
+        { name: "Gruh Shanti", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-02-10", time: "10:30" },
+        { name: "Rudra Abhishek", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-02-15", time: "08:00" },
+        { name: "Satyanarayan Puja", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-02-20", time: "11:00" },
+        { name: "Maha Mrityunjaya Jaap", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-02-25", time: "06:30" },
+        { name: "Lakshmi Pooja", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-03-01", time: "18:00" },
+        { name: "Ganesh Chaturthi Puja",image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-03-05", time: "07:45" },
+        { name: "Navratri Puja", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-03-10", time: "10:00" },
+        { name: "Kaal Sarp Dosh Puja",image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-03-15", time: "12:30" },
+        { name: "Shradh Puja", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-03-20", time: "09:30" },
+        { name: "Diwali Lakshmi Puja",image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-03-25", time: "19:00" }
+    ];
+
+    function loadPujaData() {
+        const tableBody = document.getElementById("pujaTable");
+        tableBody.innerHTML = "";
+        pujaData.forEach((puja, index) => {
+            const row = `<tr>
+                <td>${puja.name}</td>
+                <td><img src="${puja.image}" alt="Puja Image"></td>
+                <td>${puja.type}</td>
+                <td>${puja.date}</td>
+                <td>${puja.time}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" onclick="editPuja(${index})"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="btn btn-sm btn-danger" onclick="deletePuja(${index})"><i class="fas fa-trash"></i> Delete</button>
+                </td>
+            </tr>`;
+            tableBody.innerHTML += row;
         });
+    }
 
-        function loadPujaData() {
-            const tableBody = document.getElementById("pujaTable");
-            tableBody.innerHTML = "";
-            pujaData.forEach((puja, index) => {
-                const row = `<tr>
-                    <td data-label="Name">${puja.name}</td>
-                    <td data-label="Image"><img src="${puja.image}" alt="Puja Image"></td>
-                    <td data-label="Puja Type">${puja.type}</td>
-                    <td data-label="Availability Date">${puja.date}</td>
-                    <td data-label="Availability Time">${puja.time}</td>
-                    <td data-label="Action">
-                        <i class="fas fa-edit text-primary" style="cursor: pointer; margin-right: 10px;"></i>
-                        <i class="fas fa-trash text-danger" style="cursor: pointer;"></i>
-                    </td>
-                </tr>`;
-                tableBody.innerHTML += row;
-            });
+    function editPuja(index) {
+        document.getElementById("editPujaIndex").value = index;
+        document.getElementById("editPujaName").value = pujaData[index].name;
+        document.getElementById("editPujaType").value = pujaData[index].type;
+        document.getElementById("editPujaDate").value = pujaData[index].date;
+        document.getElementById("editPujaTime").value = pujaData[index].time;
+        new bootstrap.Modal(document.getElementById('editPujaModal')).show();
+    }
+
+    function saveEditPuja() {
+        const index = document.getElementById("editPujaIndex").value;
+        pujaData[index].name = document.getElementById("editPujaName").value;
+        pujaData[index].type = document.getElementById("editPujaType").value;
+        pujaData[index].date = document.getElementById("editPujaDate").value;
+        pujaData[index].time = document.getElementById("editPujaTime").value;
+        loadPujaData();
+        bootstrap.Modal.getInstance(document.getElementById('editPujaModal')).hide();
+    }
+
+    function deletePuja(index) {
+        if (confirm(`Are you sure you want to delete ${pujaData[index].name}?`)) {
+            pujaData.splice(index, 1);
+            loadPujaData();
         }
+    }
 
-        document.addEventListener("DOMContentLoaded", loadPujaData);
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </div>
-    <footer>
-    <?php $this->load->view('Pujari/Include/PujariFooter') ?>  
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+    document.addEventListener("DOMContentLoaded", loadPujaData);
+</script>
+<!-- Include SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script>
+    function deletePuja(index) {
+        Swal.fire({
+            title: `Are you sure you want to delete "${pujaData[index].name}"?`,
+            text: "This action cannot be undone!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                pujaData.splice(index, 1);
+                loadPujaData();
+                Swal.fire("Deleted!", "The Puja has been deleted.", "success");
+            }
+        });
+    }
+</script>
+
+</div>
+<footer class="mt-5 text-center">
+    <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
