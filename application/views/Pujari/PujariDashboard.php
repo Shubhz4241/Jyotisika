@@ -8,10 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Montserrat', serif;
         }
 
         .dashboard-sections {
@@ -51,6 +53,8 @@
             padding: 20px;
             margin-top: 15px;
             text-align: center;
+            width: 90%;
+            margin: auto;
         }
 
         .puja-image {
@@ -70,7 +74,7 @@
             text-align: center;
         }
 
-        .card1 { min-height: 300px; 
+        .card1 { min-height: 345px !important; 
         
         }
 
@@ -160,9 +164,23 @@
                                     <h5>Puja - Rudraabhishek Puja</h5>
                                     <p><strong>Date:</strong> 12/1/2025</p>
                                     <p><strong>Time:</strong> 10:30 AM</p>
+                                    <p>
+                                        <strong><img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" 
+                                             alt="Languages" class="img-fluid" width="15px"></strong> 
+                                        English, Hindi, Marathi
+                                    </p>
+                                    <p>
+                                        <strong><img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" 
+                                             alt="Experience" class="img-fluid" width="19px"> Exp:</strong> 23 years
+                                    </p>
                                     <p><strong>Price:</strong> <span class="discount">₹710</span> ₹500</p>
                                     <p><strong>Attendees:</strong> 104</p>
-                                    <p class="text-danger">Starts in: 1d 4h 23m</p>
+                                    <p class="text-danger">
+                                        <img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" 
+                                             alt="Countdown" class="img-fluid" width="19px"> 
+                                        Starts in: 1d 4h 23m
+                                    </p>
+                                  
                                 </div>
                             </div>
                         </div>

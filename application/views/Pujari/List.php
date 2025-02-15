@@ -106,16 +106,16 @@
 
 <script>
     let pujaData = [
-        { name: "Gruh Shanti", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-02-10", time: "10:30" },
-        { name: "Rudra Abhishek", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-02-15", time: "08:00" },
-        { name: "Satyanarayan Puja", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-02-20", time: "11:00" },
-        { name: "Maha Mrityunjaya Jaap", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-02-25", time: "06:30" },
-        { name: "Lakshmi Pooja", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-03-01", time: "18:00" },
-        { name: "Ganesh Chaturthi Puja",image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-03-05", time: "07:45" },
-        { name: "Navratri Puja", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-03-10", time: "10:00" },
-        { name: "Kaal Sarp Dosh Puja",image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-03-15", time: "12:30" },
-        { name: "Shradh Puja", image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-03-20", time: "09:30" },
-        { name: "Diwali Lakshmi Puja",image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-03-25", time: "19:00" }
+        { name: "Gruh Shanti", image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-02-10", time: "10:30" },
+        { name: "Rudra Abhishek", image: "navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-02-15", time: "08:00" },
+        { name: "Satyanarayan Puja", image: "navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-02-20", time: "11:00" },
+        { name: "Maha Mrityunjaya Jaap", image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-02-25", time: "06:30" },
+        { name: "Lakshmi Pooja", image: "navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-03-01", time: "18:00" },
+        { name: "Ganesh Chaturthi Puja",image: "navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-03-05", time: "07:45" },
+        { name: "Navratri Puja", image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-03-10", time: "10:00" },
+        { name: "Kaal Sarp Dosh Puja",image: "navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-03-15", time: "12:30" },
+        { name: "Shradh Puja", image: "navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-03-20", time: "09:30" },
+        { name: "Diwali Lakshmi Puja",image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-03-25", time: "19:00" }
     ];
 
     function loadPujaData() {
@@ -124,7 +124,7 @@
         pujaData.forEach((puja, index) => {
             const row = `<tr>
                 <td>${puja.name}</td>
-                <td><img src="${puja.image}" alt="Puja Image"></td>
+                <td><img src="<?php echo base_url() . '/assets/images/Pujari/'?>${puja.image}" alt="Puja Image"></td>
                 <td>${puja.type}</td>
                 <td>${puja.date}</td>
                 <td>${puja.time}</td>

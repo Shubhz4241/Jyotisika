@@ -37,15 +37,15 @@
     <?php $this->load->view('Pujari/Include/PujariNav') ?>
 </header>
 <div style="min-height: 100vh;">
-<div class="container mt-5">
+<div class="container mt-5" >
     <h5 class="mb-4">Recent Request</h5>
     <div class="filter-btn">
         <button class="btn btn-outline-secondary">
             <i class="bi bi-funnel"></i> Filter By
         </button>
     </div>
-
-    <table class="table table-bordered">
+<div style="overflow-x: auto;">
+    <table class="table table-bordered" style="overflow: auto;">
         <thead>
             <tr>
                 <th>Name</th>

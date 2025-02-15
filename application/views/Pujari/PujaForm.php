@@ -29,12 +29,13 @@
 
         .form-container {
             background-color: #f5f5f5;
-            padding: 20px;
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
-            margin: 20px auto;
+            margin: 140px auto;
+
         }
 
         .form-title {
@@ -57,6 +58,12 @@
         .WrapperDiv {
             min-height: 90vh;
         }
+
+        .form-container .form-label,
+        .form-container .form-control,
+        .form-container .form-select {
+            padding: 10px;
+        }
     </style>
 </head>
 
@@ -65,56 +72,56 @@
     <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
-    <div style="min-height: 100vh;">
-    <div class="WrapperDiv">
-        <!-- Form Container -->
-        <div class="form-container">
-            <h2 class="form-title">Add Puja Form</h2>
-            <form id="pujaForm">
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="pujaName" class="form-label">Name</label>
-                        <select class="form-select" id="pujaName" required>
-                            <option value="" disabled selected>Select Puja Name</option>
-                            <option value="Puja1">Puja 1</option>
-                            <option value="Puja2">Puja 2</option>
-                        </select>
+    <div style="min-height: 100vh; ">
+        <div class="WrapperDiv">
+            <!-- Form Container -->
+            <div class="form-container">
+                <h2 class="form-title">Add Puja Form</h2>
+                <form id="pujaForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="pujaName" class="form-label">Name</label>
+                            <select class="form-select" id="pujaName" required>
+                                <option value="" disabled selected>Select Puja Name</option>
+                                <option value="Puja1">Puja 1</option>
+                                <option value="Puja2">Puja 2</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="pujaType" class="form-label">Puja Type</label>
+                            <select class="form-select" id="pujaType" required>
+                                <option value="" disabled selected>Select Puja Type</option>
+                                <option value="Online">Online</option>
+                                <option value="Offline">Offline</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="pujaType" class="form-label">Puja Type</label>
-                        <select class="form-select" id="pujaType" required>
-                            <option value="" disabled selected>Select Puja Type</option>
-                            <option value="Online">Online</option>
-                            <option value="Offline">Offline</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="pujaImage" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="pujaImage" accept="image/*" required>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="pujaImage" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="pujaImage" accept="image/*" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="availabilityDate" class="form-label">Availability Date</label>
+                            <input type="date" class="form-control" id="availabilityDate" required>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="availabilityDate" class="form-label">Availability Date</label>
-                        <input type="date" class="form-control" id="availabilityDate" required>
-                    </div>
-                </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <label for="availabilityTime" class="form-label">Availability Time</label>
-                        <input type="time" class="form-control" id="availabilityTime" required>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="availabilityTime" class="form-label">Availability Time</label>
+                            <input type="time" class="form-control" id="availabilityTime" required>
+                        </div>
                     </div>
-                </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-submit">Submit</button>
-                </div>
-            </form>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-    <!-- Footer -->
+        <!-- Footer -->
     </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
