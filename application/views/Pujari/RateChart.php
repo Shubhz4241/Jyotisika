@@ -51,9 +51,10 @@
 </head>
 <body>
 <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
-    </header>
-    <div style="min-height: 100vh;">
+    <?php $this->load->view('Pujari/Include/PujariNav') ?>
+</header>
+
+<div style="min-height: 100vh;">
     <div class="container mt-5">
         <h2 class="text-center">Rate Chart</h2>
         <div class="search-bar">
@@ -64,13 +65,15 @@
                 <option value="Rahu-Ketu">Rahu-Ketu</option>
             </select>
         </div>
-        <div class="row" id="rateCardsContainer">
-            <!-- Cards will be populated dynamically -->
+        <div id="rateCardsContainer">
+            <!-- Cards will be dynamically inserted -->
         </div>
     </div>
 
     <script>
         const pujas = [
+            { name: "Ghar Shanti", originalPrice: 610, discountPrice: 500 },
+            { name: "Rahu-Ketu", originalPrice: 610, discountPrice: 500 },
             { name: "Ghar Shanti", originalPrice: 610, discountPrice: 500 },
             { name: "Rahu-Ketu", originalPrice: 610, discountPrice: 500 },
             { name: "Ghar Shanti", originalPrice: 610, discountPrice: 500 },
@@ -82,9 +85,16 @@
         function renderPujas(filter = "") {
             const container = document.getElementById("rateCardsContainer");
             container.innerHTML = "";
-            pujas.filter(puja => !filter || puja.name === filter).forEach(puja => {
+
+            let row;
+            pujas.filter(puja => !filter || puja.name === filter).forEach((puja, index) => {
+                if (index % 4 === 0) {
+                    row = document.createElement("div");
+                    row.classList.add("row", "mb-4");
+                    container.appendChild(row);
+                }
                 const card = document.createElement("div");
-                card.classList.add("col-md-4", "mb-4");
+                card.classList.add("col-md-3", "mb-4");
                 card.innerHTML = `
                     <div class="rate-card">
                         <h5>${puja.name}</h5>
@@ -93,7 +103,7 @@
                         <button class="btn btn-change">Change</button>
                     </div>
                 `;
-                container.appendChild(card);
+                row.appendChild(card);
             });
         }
 
@@ -109,9 +119,10 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </div>
-    <footer>
+</div>
+
+<footer>
     <?php $this->load->view('Pujari/Include/PujariFooter') ?>  
-    </footer>
+</footer>
 </body>
 </html>
