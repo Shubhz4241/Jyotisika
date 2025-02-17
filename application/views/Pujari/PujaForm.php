@@ -146,68 +146,6 @@
         });
         
         </script>
-
-        <script> 
-            // Save Puja Data to Local Storage from Form Submission
-document.getElementById('pujaForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const pujaName = document.getElementById('pujaName').value;
-    const pujaType = document.getElementById('pujaType').value;
-    const pujaImage = document.getElementById('pujaImage').files[0]?.name || "default.png";
-    const availabilityDate = document.getElementById('availabilityDate').value;
-    const availabilityTime = document.getElementById('availabilityTime').value;
-
-    const newPuja = {
-        name: pujaName,
-        type: pujaType,
-        image: pujaImage,
-        date: availabilityDate,
-        time: availabilityTime
-    };
-
-    let pujaData = JSON.parse(localStorage.getItem('pujaData')) || [];
-    pujaData.push(newPuja);
-    localStorage.setItem('pujaData', JSON.stringify(pujaData));
-
-    alert('Puja added successfully!');
-    window.location.href = "<?php echo base_url() . 'PujariUser/List.php'; ?>";
-});
-
-// Load Puja Data from Local Storage on Puja List Page
-function loadPujaData() {
-    const tableBody = document.getElementById("pujaTable");
-    tableBody.innerHTML = "";
-
-    let pujaData = JSON.parse(localStorage.getItem('pujaData')) || [];
-
-    pujaData.forEach((puja, index) => {
-        const row = `<tr>
-            <td>${puja.name}</td>
-            <td><img src="<?php echo base_url() . '/assets/images/Pujari/'?>${puja.image}" alt="Puja Image"></td>
-            <td>${puja.type}</td>
-            <td>${puja.date}</td>
-            <td>${puja.time}</td>
-            <td>
-                <button class="btn btn-sm btn-danger" onclick="deletePuja(${index})"><i class="fas fa-trash"></i> Delete</button>
-            </td>
-        </tr>`;
-        tableBody.innerHTML += row;
-    });
-}
-
-// Delete Puja from Local Storage
-function deletePuja(index) {
-    let pujaData = JSON.parse(localStorage.getItem('pujaData')) || [];
-    pujaData.splice(index, 1);
-    localStorage.setItem('pujaData', JSON.stringify(pujaData));
-    loadPujaData();
-}
-
-// Load Puja Data when Puja List Page is loaded
-document.addEventListener("DOMContentLoaded", loadPujaData);
-
-        </script>
 </body>
 
 </html>
