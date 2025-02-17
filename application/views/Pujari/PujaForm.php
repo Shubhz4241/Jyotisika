@@ -144,7 +144,11 @@
             console.log('Form Submitted:', data);
             alert('Form submitted successfully!');
         });
-        // Save Puja Data to Local Storage from Form Submission
+        
+        </script>
+
+        <script> 
+            // Save Puja Data to Local Storage from Form Submission
 document.getElementById('pujaForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -167,7 +171,7 @@ document.getElementById('pujaForm').addEventListener('submit', function(event) {
     localStorage.setItem('pujaData', JSON.stringify(pujaData));
 
     alert('Puja added successfully!');
-    window.location.href = 'List.php'; // Redirect to Puja List page
+    window.location.href = "<?php echo base_url() . 'PujariUser/List'; ?>";
 });
 
 // Load Puja Data from Local Storage on Puja List Page
