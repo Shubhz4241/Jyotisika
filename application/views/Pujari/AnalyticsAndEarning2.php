@@ -9,155 +9,211 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f8f8f8;
             padding: 0;
+            font-family: 'Montserrat', serif;
         }
+        
+        /* Center the stat boxes */
+        .stat-box-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 100px;
+        }
+
         .stat-box {
             border-radius: 10px;
-            padding: 20px;
+            padding: 20px ;
             text-align: center;
             font-weight: bold;
+            height: 150px; /* Square height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 150px; /* Square width */
+            margin: 50px;
         }
+
+        .stat-box h3 {
+            font-size: 2rem;
+        }
+
+        .stat-box p {
+            font-size: 1.2rem;
+        }
+
+        .stat-box.bg-success {
+            background-color: #B1DDBF;
+            color: white;
+        }
+
+        .stat-box.bg-primary {
+            background-color: #E3E0FF;
+            color: white;
+        }
+
+        .stat-box.bg-warning {
+            background-color: #F8EB9A;
+            color: black;
+        }
+
         .chart-container {
-            background: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
             margin-top: 20px;
-            max-width: 650px;
-            height: auto;
+            max-width: 1000px; /* Increased width */
+            height: 400px; /* Increased height */
             margin-left: auto;
             margin-right: auto;
         }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
         .filter-btn {
             float: right;
         }
-        canvas {
-            width: 100% !important;
-            height: 300px !important;
+
+        /* Make the boxes responsive */
+        @media (max-width: 768px) {
+            .stat-box {
+                height: 150px; /* Adjust for smaller screens */
+            }
+            .stat-box-container {
+                flex-direction: column;
+                align-items: center;
+            }
         }
+
+        @media (max-width: 576px) {
+            .stat-box {
+                height: 120px; /* Adjust for very small screens */
+                width: 180px;
+            }
+        }
+
     </style>
 </head>
-<body style=" font-family: 'Montserrat', serif;">
+<body style="font-family: 'Montserrat', serif;">
 <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
-    </header>
-    <div style="min-height: 100vh;">
-    <div class="container">
-        <div class="row text-center mb-4">
-            <div class="col-md-4">
-                <div class="stat-box bg-success text-white">
-                    <h3>2.5L</h3>
-                    <p>Total Earnings</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-box bg-primary text-white">
-                    <h3>5K</h3>
-                    <p>Monthly Earnings</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-box bg-warning text-dark">
-                    <h3>1K</h3>
-                    <p>Pending Payments</p>
-                </div>
-            </div>
+    <?php $this->load->view('Pujari/Include/PujariNav') ?>
+</header>
+<div style="min-height: 100vh;">
+<div class="container">
+    <div class="stat-box-container">
+        <div class="stat-box bg-success text-white">
+            <h3>2.5L</h3>
+            <p>Total Earnings</p>
         </div>
-        
-        <div class="chart-container">
-            <h5>Overall Earnings <button class="btn btn-light filter-btn">Filter</button></h5>
-            <canvas id="overallEarningsChart"></canvas>
+        <div class="stat-box bg-primary text-white">
+            <h3>5K</h3>
+            <p>Monthly Earnings</p>
         </div>
-        
-        <div class="chart-container">
-            <h5>Monthly Earnings <button class="btn btn-light filter-btn">Filter</button></h5>
-            <canvas id="monthlyEarningsChart"></canvas>
-        </div>
-        
-        <div class="chart-container">
-            <h5>Pending Payments <button class="btn btn-light filter-btn">Filter</button></h5>
-            <canvas id="pendingPaymentsChart"></canvas>
+        <div class="stat-box bg-warning text-dark">
+            <h3>1K</h3>
+            <p>Pending Payments</p>
         </div>
     </div>
+
+    <div class="chart-container">
+        <h5>Overall Earnings <button class="btn btn-light filter-btn">Filter</button></h5>
+        <canvas id="overallEarningsChart"></canvas>
     </div>
-    <footer>
-        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
-    </footer>
-    <script>
-        const ctx1 = document.getElementById('overallEarningsChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['2022', '2023', '2024'],
-                datasets: [
-                    { label: '2022', data: [50, 80, 100], backgroundColor: '#6C63FF' },
-                    { label: '2023', data: [35, 97, 150], backgroundColor: '#FF6384' },
-                    { label: '2024', data: [58, 93, 163], backgroundColor: '#36A2EB' }
-                ]
-            },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        suggestedMin: 0,
-                        suggestedMax: 200,
-                        ticks: {
-                            stepSize: 50
-                        }
+
+    <div class="chart-container">
+        <h5>Monthly Earnings <button class="btn btn-light filter-btn">Filter</button></h5>
+        <canvas id="monthlyEarningsChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h5>Pending Payments <button class="btn btn-light filter-btn">Filter</button></h5>
+        <canvas id="pendingPaymentsChart"></canvas>
+    </div>
+</div>
+</div>
+<footer>
+    <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+</footer>
+
+<script>
+    const ctx1 = document.getElementById('overallEarningsChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['2022', '2023', '2024'],
+            datasets: [
+                { label: '2022', data: [50, 80, 100], backgroundColor: '#6C63FF' },
+                { label: '2023', data: [35, 97, 150], backgroundColor: '#FF6384' },
+                { label: '2024', data: [58, 93, 163], backgroundColor: '#36A2EB' }
+            ]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    suggestedMin: 0,
+                    suggestedMax: 200,
+                    ticks: {
+                        stepSize: 50
                     }
                 }
             }
-        });
+        }
+    });
 
-        const ctx2 = document.getElementById('monthlyEarningsChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Offline', 'Online', 'Mob'],
-                datasets: [
-                    { label: 'Offline', data: [8, 9, 12], backgroundColor: '#6C63FF' },
-                    { label: 'Online', data: [6, 12, 13], backgroundColor: '#FF6384' },
-                    { label: 'Mob', data: [3, 13, 14], backgroundColor: '#36A2EB' }
-                ]
-            },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        suggestedMin: 0,
-                        suggestedMax: 20,
-                        ticks: {
-                            stepSize: 5
-                        }
+    const ctx2 = document.getElementById('monthlyEarningsChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Offline', 'Online', 'Mob'],
+            datasets: [
+                { label: 'Offline', data: [8, 9, 12], backgroundColor: '#6C63FF' },
+                { label: 'Online', data: [6, 12, 13], backgroundColor: '#FF6384' },
+                { label: 'Mob', data: [3, 13, 14], backgroundColor: '#36A2EB' }
+            ]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    suggestedMin: 0,
+                    suggestedMax: 20,
+                    ticks: {
+                        stepSize: 5
                     }
                 }
             }
-        });
+        }
+    });
 
-        const ctx3 = document.getElementById('pendingPaymentsChart').getContext('2d');
-        new Chart(ctx3, {
-            type: 'doughnut',
-            data: {
-                labels: ['Home Shanti', 'Wealth', 'Rahu-Ketu'],
-                datasets: [{
-                    data: [39, 23, 38],
-                    backgroundColor: ['#6C63FF', '#36A2EB', '#FF6384']
-                }]
-            },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false
-            }
-        });
-    </script>
+    const ctx3 = document.getElementById('pendingPaymentsChart').getContext('2d');
+    new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            labels: ['Home Shanti', 'Wealth', 'Rahu-Ketu'],
+            datasets: [{
+                data: [39, 23, 38],
+                backgroundColor: ['#6C63FF', '#36A2EB', '#FF6384']
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false
+        }
+    });
+</script>
+
 </body>
 </html>

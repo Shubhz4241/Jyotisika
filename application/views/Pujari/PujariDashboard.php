@@ -189,7 +189,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
                         <div class="card py-3">
                             <div class="icon-box red">📜</div>
-                            <a href="<?php echo base_url() . 'PujariUser/RateChart'; ?>">
+                            <a href="<?php echo base_url() . 'PujariUser/SetRate'; ?>">
                                 <h6>Rate Chart</h6>
                             </a>
 

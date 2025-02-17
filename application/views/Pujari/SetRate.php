@@ -42,7 +42,7 @@
             background-color: orange;
             color: white;
             /* width: 15%; */
-            padding: 10px 20px ;
+            padding: 10px 20px;
             font-size: 16px;
             font-weight: bold;
             border: none;
@@ -50,7 +50,7 @@
             display: block;
             margin: auto;
             margin-top: 50px;
-        
+
         }
 
         .btn-custom:hover {
@@ -73,36 +73,73 @@
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
     <div style="min-height: 100vh;">
-    <!-- Main Content -->
-    <div class="content-container">
-        <div class="form-container">
-            <h4 class="text-center mb-3">Set Rate</h4>
-            <form id="rateForm">
-                <div class="mb-3">
-                    <label for="pujaName" class="form-label">Puja Name</label>
-                    <select class="form-select" id="pujaName" name="pujaName" required>
-                        <option value="">Enter puja name</option>
-                        <option value="Ganesh Puja">Ganesh Puja</option>
-                        <option value="Lakshmi Puja">Lakshmi Puja</option>
-                        <option value="Durga Puja">Durga Puja</option>
-                    </select>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="originalPrice" class="form-label">Original Price</label>
-                        <input type="number" class="form-control" id="originalPrice" name="originalPrice" placeholder="Enter amount in rupees" required>
+        <!-- Main Content -->
+        <div class="content-container">
+            <div class="form-container">
+                <h4 class="text-center mb-3">Set Rate</h4>
+                <form id="rateForm">
+                    <div class="mb-3">
+                        <label for="pujaName" class="form-label">Puja Name</label>
+                        <select class="form-select" id="pujaName" name="pujaName" required>
+                            <option value="">Enter puja name</option>
+                            <option value="Ganesh Puja">Ganesh Puja</option>
+                            <option value="Lakshmi Puja">Lakshmi Puja</option>
+                            <option value="Durga Puja">Durga Puja</option>
+                        </select>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="discountPrice" class="form-label">Discount Price</label>
-                        <input type="number" class="form-control" id="discountPrice" name="discountPrice" placeholder="Enter Discount amount in rupees" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="originalPrice" class="form-label">Original Price</label>
+                            <input type="number" class="form-control" id="originalPrice" name="originalPrice" placeholder="Enter amount in rupees" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="discountPrice" class="form-label">Discount Price</label>
+                            <input type="number" class="form-control" id="discountPrice" name="discountPrice" placeholder="Enter Discount amount in rupees" required>
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-custom">Submit</button>
-            </form>
+                    <button type="submit" class="btn btn-custom">Submit</button>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <!-- JavaScript & Form Submission -->
+        <!-- JavaScript & Form Submission -->
+        <script>
+            $(document).ready(function() {
+                $("#rateForm").submit(function(event) {
+                    event.preventDefault();
+
+                    var pujaName = $("#pujaName").val();
+                    var originalPrice = $("#originalPrice").val();
+                    var discountPrice = $("#discountPrice").val();
+
+                    if (pujaName === "" || originalPrice === "" || discountPrice === "") {
+                        alert("Please fill in all fields!");
+                        return;
+                    }
+
+                    $.ajax({
+                        url: "process_form.php",
+                        type: "POST",
+                        data: {
+                            pujaName: pujaName,
+                            originalPrice: originalPrice,
+                            discountPrice: discountPrice
+                        },
+                        success: function(response) {
+                            alert(response);
+                        }
+                    });
+                });
+            });
+        </script>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+    </footer>
+
+    <!-- Bootstrap Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
     <script>
         $(document).ready(function() {
             $("#rateForm").submit(function(event) {
@@ -117,29 +154,24 @@
                     return;
                 }
 
-                $.ajax({
-                    url: "process_form.php",
-                    type: "POST",
-                    data: {
-                        pujaName: pujaName,
-                        originalPrice: originalPrice,
-                        discountPrice: discountPrice
-                    },
-                    success: function(response) {
-                        alert(response);
-                    }
-                });
+                // Store data in localStorage to access on the Rate Chart page
+                var pujaData = {
+                    name: pujaName,
+                    originalPrice: originalPrice,
+                    discountPrice: discountPrice
+                };
+
+                var storedPujas = JSON.parse(localStorage.getItem("pujas")) || [];
+                storedPujas.push(pujaData);
+                localStorage.setItem("pujas", JSON.stringify(storedPujas));
+
+                // Redirect to Rate Chart Page
+                window.location.href = "RateChart"; // Change URL based on actual file name
             });
         });
     </script>
-    </div>
-    <!-- Footer -->
-    <footer>
-        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
-    </footer>
 
-    <!-- Bootstrap Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+
 
 </body>
 

@@ -27,7 +27,7 @@
 
         .puja-card img {
             width: 100%;
-            height: 180px;
+            height: 200px;
             object-fit: cover;
         }
 
@@ -69,7 +69,16 @@
             }
         }
 
-        
+        .icon-small {
+            width: 21px !important;
+            /* Adjust size as needed */
+            height: 10px !important;
+            vertical-align: middle;
+            /* Aligns the icon with the text */
+            margin-right: 5px;
+            /* Adds spacing between the icon and the text */
+         
+        }
     </style>
 </head>
 
@@ -117,51 +126,107 @@
                     }
                 ],
                 online: [{
-                    name: "Online Rudraabhishek",
-                    date: "20/2/2025",
-                    time: "2:00 PM",
-                    location: "Online via Zoom",
-                    img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
-                }],
+                        name: "Online Rudraabhishek",
+                        date: "20/2/2025",
+                        time: "2:00 PM",
+                        location: "Online via Zoom",
+                        img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
+                    },
+                    {
+                        name: "Online Rudraabhishek",
+                        date: "20/2/2025",
+                        time: "2:00 PM",
+                        location: "Online via Zoom",
+                        img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
+                    }
+
+                ],
                 mob: [{
-                    name: "Maha Mrityunjaya Jaap",
-                    date: "14/1/2025",
-                    time: "7:00 AM",
-                    languages: `<img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" alt="Language" width="10px"> Sanskrit, Hindi`,
-                    experience: `<img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" alt="Experience" width="10px"> 18 years`,
-                    fee: "700",
-                    discount: "850",
-                    attendees: "88",
-                    countdown: `<img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" alt="Experience" width="10px" > Starts in: 2 d 6h`,
-                    img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
-                }],
+                        name: "Maha Mrityunjaya Jaap",
+                        date: "14/1/2025",
+                        time: "7:00 AM",
+                        languages: `<img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" class="icon-small" alt="Language"> Sanskrit, Hindi`,
+                        experience: `<img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" class="icon-small" alt="Experience"> 18 years`,
+                        fee: "700",
+                        discount: "850",
+                        attendees: "88",
+                        countdown: `<img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="icon-small" alt="Experience" width="10px" > Starts in: 2 d 6h`,
+                        img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
+                    },
+
+                    {
+                        name: "Maha Mrityunjaya Jaap",
+                        date: "14/1/2025",
+                        time: "7:00 AM",
+                        languages: `<img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" class="icon-small" alt="Language"> Sanskrit, Hindi`,
+                        experience: `<img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" class="icon-small" alt="Experience"> 18 years`,
+                        fee: "700",
+                        discount: "850",
+                        attendees: "88",
+                        countdown: `<img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="icon-small" alt="Experience" width="10px" > Starts in: 2 d 6h`,
+                        img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
+                    }
+
+
+
+                ],
                 upcoming: {
                     offline: [{
-                        name: "Chandi Homam",
-                        date: "25/2/2025",
-                        time: "6:30 AM",
-                        location: "Kashi Temple",
-                        img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
-                    }],
+                            name: "Chandi Homam",
+                            date: "25/2/2025",
+                            time: "6:30 AM",
+                            location: "Kashi Temple",
+                            img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
+                        },
+                        {
+                            name: "Chandi Homam",
+                            date: "25/2/2025",
+                            time: "6:30 AM",
+                            location: "Kashi Temple",
+                            img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
+                        }
+                    ],
                     online: [{
-                        name: "Online Navratri Puja",
-                        date: "28/2/2025",
-                        time: "5:30 PM",
-                        location: "Zoom",
-                        img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
-                    }],
+                            name: "Online Navratri Puja",
+                            date: "28/2/2025",
+                            time: "5:30 PM",
+                            location: "Zoom",
+                            img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
+                        },
+                        {
+                            name: "Online Navratri Puja",
+                            date: "28/2/2025",
+                            time: "5:30 PM",
+                            location: "Zoom",
+                            img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
+                        }
+
+                    ],
                     mob: [{
-                        name: "Graha Shanti",
-                        date: "29/2/2025",
-                        time: "7:00 AM",
-                        languages: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" class="language-icon" alt="Language"> Hindi, Marathi</span>`,
-                        experience: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" class="experience-icon" alt="Experience"> 15 years</span>`,
-                        fee: "800",
-                        discount: "950",
-                        attendees: "78",
-                        countdown: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="countdown-icon" alt="Countdown"> Starts in: 10d 5h</span>`,
-                        img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
-                    }]
+                            name: "Graha Shanti",
+                            date: "29/2/2025",
+                            time: "7:00 AM",
+                            languages: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" class="icon-small" alt="Language"> Hindi, Marathi</span>`,
+                            experience: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" class="icon-small" alt="Experience"> 15 years</span>`,
+                            fee: "800",
+                            discount: "950",
+                            attendees: "78",
+                            countdown: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="icon-small" alt="Countdown"> Starts in: 10d 5h</span>`,
+                            img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
+                        },
+                        {
+                            name: "Graha Shanti",
+                            date: "29/2/2025",
+                            time: "7:00 AM",
+                            languages: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" class="icon-small" alt="Language"> Hindi, Marathi</span>`,
+                            experience: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" class="icon-small" alt="Experience"> 15 years</span>`,
+                            fee: "800",
+                            discount: "950",
+                            attendees: "78",
+                            countdown: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="icon-small" alt="Countdown"> Starts in: 10d 5h</span>`,
+                            img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
+                        }
+                    ]
                 }
             };
 

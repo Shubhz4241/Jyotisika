@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@
             width: 100%;
             font-family: 'Montserrat', serif;
         }
+
         .profile-container {
             background: white;
             border-radius: 10px;
@@ -31,14 +33,17 @@
             flex-direction: column;
             overflow-y: auto;
         }
+
         .profilei {
             width: 120px;
             height: 120px;
             border-radius: 50%;
             border: 3px solid gold;
             margin-bottom: 15px;
-           margin: auto;
+            margin: auto;
+
         }
+
         .tabs {
             display: flex;
             justify-content: center;
@@ -46,110 +51,148 @@
             padding: 10px;
             border-radius: 10px;
         }
+
         .tab {
             padding: 10px 20px;
             cursor: pointer;
             font-weight: bold;
         }
+
         .tab.active {
             border-bottom: 3px solid purple;
         }
+
         .form-container {
             display: none;
             text-align: left;
             flex-grow: 1;
         }
+
         .form-container.active {
             display: block;
         }
+
         .form-label {
             font-weight: bold;
         }
+
         .form-control {
             margin-bottom: 15px;
         }
+
         .save-btn {
             background: gold;
             border: none;
             padding: 10px;
-            width: 100%;
+            width: 60%;
             font-weight: bold;
             border-radius: 5px;
+            display: block;
+            margin: auto;
+            border-radius: 10px;
         }
+
         @media (max-width: 576px) {
             .profile-container {
                 padding: 20px;
                 min-height: 90vh;
             }
+
             .tabs {
                 flex-direction: column;
                 align-items: center;
             }
+
             .tab {
                 width: 100%;
                 text-align: center;
             }
         }
+
+        .profilei {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid gold;
+            margin-bottom: 25px;
+            margin: auto;
+            margin-bottom: 25px;
+        }
+        .form-label {
+    font-weight: bold;
+    margin-bottom: 5px; /* Adds spacing between labels and inputs */
+}
+
+.form-control {
+    margin-bottom: 20px; /* Increases space between input fields */
+    padding: 10px; /* Optional: Makes input fields more spacious */
+}
+
+.save-btn {
+    margin-top: 15px; /* Adds spacing above the save button */
+}
+
     </style>
 </head>
+
 <body>
-<header>
+    <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
     <div style="min-height: 100vh;">
-    <div style="width: 100%; display: flex; justify-content: center;">
-    <div class="profile-container">
-        <img src="<?php echo base_url() .'assets/images/Pujari/logo.png'?>" class="profilei" alt="Profile" alt="<?php echo base_url() .'assets/images/Pujari/logo.png'?>">
-        <div class="tabs">
-            <div class="tab active" data-target="#personal">Personal</div>
-            <div class="tab" data-target="#professional">Professional</div>
-            <div class="tab" data-target="#advanced">Advanced</div>
-        </div>
-        
-        <form id="personal" class="form-container active">
-            <label class="form-label">Name</label>
-            <input type="text" class="form-control" required>
-            <label class="form-label">Contact</label>
-            <input type="number" class="form-control" required>
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" required>
-            <label class="form-label">Gender</label>
-            <select class="form-control" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-            <label class="form-label">Date of Birth</label>
-            <input type="date" class="form-control" required>
-            <button type="submit" class="save-btn">Save Changes</button>
-        </form>
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <div class="profile-container">
+                <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>" class="profilei" alt="Profile" alt="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>">
+                <div class="tabs">
+                    <div class="tab active" data-target="#personal">Personal</div>
+                    <div class="tab" data-target="#professional">Professional</div>
+                    <div class="tab" data-target="#advanced">Advanced</div>
+                </div>
 
-        <form id="professional" class="form-container">
-            <label class="form-label">Poojas</label>
-            <input type="text" class="form-control" value="Ghar shanti, Rahu-ketu, Sukhi vivah" required>
-            <label class="form-label">Duration for Ghar Shanti</label>
-            <input type="text" class="form-control" value="3 Hrs" required>
-            <label class="form-label">Duration for Rahu-ketu</label>
-            <input type="text" class="form-control" value="3 Hrs" required>
-            <label class="form-label">Duration for Sukhi Vivah</label>
-            <input type="text" class="form-control" value="3 Hrs" required>
-            <button type="submit" class="save-btn">Save Changes</button>
-        </form>
+                <form id="personal" class="form-container active">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" required>
+                    <label class="form-label">Contact</label>
+                    <input type="number" class="form-control" required>
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" required>
+                    <label class="form-label">Gender</label>
+                    <select class="form-control" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <label class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" required>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </form>
 
-        <form id="advanced" class="form-container">
-            <label class="form-label">Add Pooja</label>
-            <input type="text" class="form-control" required>
-            <label class="form-label">Availability Day</label>
-            <input type="text" class="form-control" value="Monday - Friday" required>
-            <label class="form-label">Availability Time</label>
-            <div class="d-flex">
-                <input type="text" class="form-control me-2" value="9:30 AM" required>
-                <input type="text" class="form-control" value="6:00 PM" required>
+                <form id="professional" class="form-container">
+                    <label class="form-label">Poojas</label>
+                    <input type="text" class="form-control" value="Ghar shanti, Rahu-ketu, Sukhi vivah" required>
+                    <label class="form-label">Duration for Ghar Shanti</label>
+                    <input type="text" class="form-control" value="3 Hrs" required>
+                    <label class="form-label">Duration for Rahu-ketu</label>
+                    <input type="text" class="form-control" value="3 Hrs" required>
+                    <label class="form-label">Duration for Sukhi Vivah</label>
+                    <input type="text" class="form-control" value="3 Hrs" required>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </form>
+
+                <form id="advanced" class="form-container">
+                    <label class="form-label">Add Pooja</label>
+                    <input type="text" class="form-control" required>
+                    <label class="form-label">Availability Day</label>
+                    <input type="text" class="form-control" value="Monday - Friday" required>
+                    <label class="form-label">Availability Time</label>
+                    <div class="d-flex">
+                        <input type="text" class="form-control me-2" value="9:30 AM" required>
+                        <input type="text" class="form-control" value="6:00 PM" required>
+                    </div>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </form>
             </div>
-            <button type="submit" class="save-btn">Save Changes</button>
-        </form>
-    </div>
-    </div>
+        </div>
     </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
@@ -169,4 +212,5 @@
         });
     </script>
 </body>
+
 </html>
