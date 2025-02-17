@@ -171,7 +171,7 @@ document.getElementById('pujaForm').addEventListener('submit', function(event) {
     localStorage.setItem('pujaData', JSON.stringify(pujaData));
 
     alert('Puja added successfully!');
-    window.location.href = "<?php echo base_url() . 'PujariUser/List'; ?>";
+    window.location.href = "<?php echo base_url() . 'PujariUser/List.php'; ?>";
 });
 
 // Load Puja Data from Local Storage on Puja List Page
