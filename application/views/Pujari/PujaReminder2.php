@@ -87,21 +87,28 @@
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
     <div style="min-height: 100vh;">
-        <div class="container mt-4">
-            <h2 class="text-center mb-4">Pooja Reminder</h2>
+    <div class="container mt-4">
+    <h2 class="text-center mb-4">Pooja Reminder</h2>
 
-            <div class="d-flex flex-wrap justify-content-end gap-2 mb-4">
-                <button class="btn btn-outline-secondary btn-filter active" data-type="offline">Offline Puja</button>
-                <button class="btn btn-outline-secondary btn-filter" data-type="online">Online Puja</button>
-                <button class="btn btn-outline-secondary btn-filter" data-type="mob">Mob Puja</button>
-            </div>
+    <div class="d-flex flex-wrap justify-content-end gap-2 mb-4">
+        <button class="btn btn-outline-secondary btn-filter active" data-type="offline">Offline Puja</button>
+        <button class="btn btn-outline-secondary btn-filter" data-type="online">Online Puja</button>
+        <button class="btn btn-outline-secondary btn-filter" data-type="mob">Mob Puja</button>
+    </div>
 
-            <h4 class="mb-3">Today’s Schedule</h4>
-            <div class="row row-cols-1 row-cols-md-2 g-4" id="pujaContainer"></div>
+    <h4 class="mb-3">Today’s Schedule</h4>
+    <div class="row row-cols-1 row-cols-md-2 g-4" id="pujaContainer"></div>
 
-            <h4 class="mt-5 mb-3">Upcoming Schedule</h4>
-            <div class="row row-cols-1 row-cols-md-2 g-4" id="upcomingPujaContainer"></div>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mt-5">
+        <h4 class="mb-3">Upcoming Schedule</h4>
+        <button class="btn btn-primary">
+    <img src="<?php echo base_url() . 'assets/images/Pujari/Alarm Plus.png'; ?>" alt="Caret Icon" style="width: 20px; margin-right: 8px;">
+    Set Reminder
+</button>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 g-4" id="upcomingPujaContainer"></div>
+</div>
+
     </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
