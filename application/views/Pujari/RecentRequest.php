@@ -132,32 +132,24 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.querySelector("#puja-table-body");
-    let selectedRowIndex = null;
 
     function loadDummyData() {
-   
         const dummyData = [
-            { "name": "John Doe", "puja": "Shani Puja", "date": "2025-02-10", "time": "10:30", "address": "Sector 15, Nashik" },
-            { "name": "Jane Smith", "puja": "Ganesh Puja", "date": "2025-02-15", "time": "09:00", "address": "Kothrud, Pune" },
-            { "name": "Rahul Sharma", "puja": "Lakshmi Puja", "date": "2025-03-01", "time": "08:45", "address": "Bandra, Mumbai" },
-            { "name": "Amit Verma", "puja": "Navgrah Puja", "date": "2025-03-05", "time": "11:15", "address": "Connaught Place, Delhi" },
-            { "name": "Priya Kapoor", "puja": "Shani Puja", "date": "2025-03-10", "time": "14:00", "address": "Indiranagar, Bangalore" },
-            { "name": "Suresh Patil", "puja": "Ganesh Puja", "date": "2025-03-15", "time": "07:30", "address": "Banjara Hills, Hyderabad" },
-            { "name": "Meera Iyer", "puja": "Lakshmi Puja", "date": "2025-04-05", "time": "12:00", "address": "T Nagar, Chennai" },
-            { "name": "Arjun Mehta", "puja": "Navgrah Puja", "date": "2025-04-10", "time": "15:45", "address": "Satellite, Ahmedabad" },
-            { "name": "Neha Reddy", "puja": "Shani Puja", "date": "2025-04-15", "time": "18:30", "address": "Salt Lake, Kolkata" },
-            { "name": "Kunal Desai", "puja": "Ganesh Puja", "date": "2025-05-01", "time": "10:00", "address": "Adajan, Surat" },
-            { "name": "Anjali Shah", "puja": "Lakshmi Puja", "date": "2025-05-05", "time": "11:45", "address": "Sector 17, Chandigarh" },
-            { "name": "Rohit Bansal", "puja": "Navgrah Puja", "date": "2025-05-10", "time": "09:15", "address": "Vaishali Nagar, Jaipur" },
-            { "name": "Pooja Nair", "puja": "Shani Puja", "date": "2025-05-15", "time": "13:30", "address": "Hazratganj, Lucknow" },
-            { "name": "Vikas Kumar", "puja": "Ganesh Puja", "date": "2025-06-01", "time": "16:00", "address": "MG Road, Indore" },
-            { "name": "Komal Singh", "puja": "Lakshmi Puja", "date": "2025-06-05", "time": "17:45", "address": "MP Nagar, Bhopal" },
-            { "name": "Sameer Joshi", "puja": "Navgrah Puja", "date": "2025-06-10", "time": "19:30", "address": "Fraser Road, Patna" }
+            { "name": "John Doe", "puja": "Shani Puja", "date": "2025-02-10", "time": "10:30 AM", "address": "Sector 15, Nashik", "status": "" },
+            { "name": "Jane Smith", "puja": "Ganesh Puja", "date": "2025-02-15", "time": "09:00 AM", "address": "Kothrud, Pune", "status": "" },
+            { "name": "Amit Sharma", "puja": "Maha Mrityunjaya", "date": "2025-02-18", "time": "06:00 AM", "address": "Dadar, Mumbai", "status": "" },
+            { "name": "Priya Patel", "puja": "Satyanarayan", "date": "2025-02-20", "time": "05:30 PM", "address": "Thane, Mumbai", "status": "" },
+            { "name": "Rajesh Kumar", "puja": "Rudrabhishek", "date": "2025-02-25", "time": "04:00 PM", "address": "Hadapsar, Pune", "status": "" },
+            { "name": "Sneha Joshi", "puja": "Navgraha Puja", "date": "2025-02-28", "time": "07:45 AM", "address": "Vashi, Navi Mumbai", "status": "" },
+            { "name": "Vikram Singh", "puja": "Kaal Sarp Dosh", "date": "2025-03-02", "time": "03:00 PM", "address": "Nigdi, Pune", "status": "" },
+            { "name": "Sunita Sharma", "puja": "Durga Saptashati", "date": "2025-03-05", "time": "10:00 AM", "address": "Panvel, Navi Mumbai", "status": "" },
+            { "name": "Rahul Mehta", "puja": "Lakshmi Puja", "date": "2025-03-10", "time": "08:15 AM", "address": "Shivaji Nagar, Pune", "status": "" },
+            { "name": "Ananya Verma", "puja": "Ganesh Chaturthi", "date": "2025-03-15", "time": "06:30 AM", "address": "Borivali, Mumbai", "status": "" },
+            { "name": "Karan Kapoor", "puja": "Vastu Shanti", "date": "2025-03-20", "time": "11:00 AM", "address": "Chembur, Mumbai", "status": "" },
+            { "name": "Meera Iyer", "puja": "Griha Pravesh", "date": "2025-03-25", "time": "12:00 PM", "address": "Kharghar, Navi Mumbai", "status": "" }
         ];
         localStorage.setItem("pujaRequests", JSON.stringify(dummyData));
-    
-}
-
+    }
 
     function loadTable() {
         const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
@@ -169,12 +161,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${data.time}</td>
                 <td>${data.address}</td>
                 <td>
-                    <button class="btn btn-outline-secondary btn-sm edit-btn" data-index="${index}" data-bs-toggle="modal" data-bs-target="#editModal">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button class="btn btn-outline-danger btn-sm delete-btn" data-index="${index}">
-                        <i class="bi bi-trash"></i>
-                    </button>
+                    ${data.status === "Approved" ? 
+                        '<span class="text-success fw-bold">Approved</span>' : 
+                        `<button class="btn btn-outline-success btn-sm approve-btn me-2" data-index="${index}">
+                            <i class="bi bi-check-lg"></i>
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm delete-btn" data-index="${index}">
+                            <i class="bi bi-x-lg"></i>
+                        </button>`
+                    }
                 </td>
             </tr>
         `).join("");
@@ -184,67 +179,125 @@ document.addEventListener("DOMContentLoaded", function () {
     loadTable();
 
     tableBody.addEventListener("click", function (event) {
-        if (event.target.closest(".edit-btn")) {
-            selectedRowIndex = event.target.closest(".edit-btn").dataset.index;
-            const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-            const rowData = storedData[selectedRowIndex];
+        if (event.target.closest(".approve-btn")) {
+            const indexToApprove = event.target.closest(".approve-btn").dataset.index;
+            let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
+            
+            storedData[indexToApprove].status = "Approved";
+            localStorage.setItem("pujaRequests", JSON.stringify(storedData));
 
-            document.getElementById("edit-name").value = rowData.name;
-            document.getElementById("edit-puja").value = rowData.puja;
-            document.getElementById("edit-date").value = rowData.date;
-            document.getElementById("edit-time").value = rowData.time;
-            document.getElementById("edit-address").value = rowData.address;
+            Swal.fire({
+                title: "Approved!",
+                text: "The request has been approved successfully.",
+                icon: "success",
+                confirmButtonColor: "#28a745"
+            });
+
+            loadTable();
         }
 
         if (event.target.closest(".delete-btn")) {
             const indexToDelete = event.target.closest(".delete-btn").dataset.index;
+            let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
+
             Swal.fire({
                 title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                text: "Do you want to reject this request?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Yes, delete it!"
+                cancelButtonColor: "#6c757d",
+                confirmButtonText: "Yes, Reject"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
                     storedData.splice(indexToDelete, 1);
                     localStorage.setItem("pujaRequests", JSON.stringify(storedData));
-                    loadTable();
+                    
+                    Swal.fire({
+                        title: "Rejected!",
+                        text: "The request has been rejected successfully.",
+                        icon: "error",
+                        confirmButtonColor: "#d33"
+                    });
 
-                    Swal.fire("Deleted!", "Your record has been deleted.", "success");
+                    loadTable();
                 }
             });
         }
     });
-
-    document.getElementById("save-changes").addEventListener("click", function () {
-        const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-        storedData[selectedRowIndex] = {
-            name: document.getElementById("edit-name").value,
-            puja: document.getElementById("edit-puja").value,
-            date: document.getElementById("edit-date").value,
-            time: document.getElementById("edit-time").value,
-            address: document.getElementById("edit-address").value
-        };
-
-        localStorage.setItem("pujaRequests", JSON.stringify(storedData));
-        loadTable();
-        
-        // Close the modal properly
-        let editModal = bootstrap.Modal.getInstance(document.getElementById("editModal"));
-        editModal.hide();
-    });
-
-    // Ensure modal hides properly when clicking outside or on close button
-    document.getElementById("editModal").addEventListener("hidden.bs.modal", function () {
-        document.body.classList.remove("modal-open");
-        document.querySelector(".modal-backdrop")?.remove();
-    });
 });
 </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const tableBody = document.querySelector("#puja-table-body");
+    const filterButton = document.querySelector(".filter-btn button");
+    let filterDropdown;
+
+    // Function to create filter dropdown
+    function createFilterDropdown() {
+        filterDropdown = document.createElement("div");
+        filterDropdown.classList.add("dropdown-menu", "show");
+        filterDropdown.innerHTML = `
+            <button class="dropdown-item" id="filter-accept">Accept</button>
+            <button class="dropdown-item" id="filter-reject">Reject</button>
+        `;
+        document.body.appendChild(filterDropdown);
+
+        // Position dropdown correctly
+        const rect = filterButton.getBoundingClientRect();
+        filterDropdown.style.position = "absolute";
+        filterDropdown.style.top = `${rect.bottom}px`;
+        filterDropdown.style.left = `${rect.left}px`;
+    }
+
+    // Show filter dropdown on button click
+    filterButton.addEventListener("click", function () {
+        if (filterDropdown) {
+            filterDropdown.remove();
+            filterDropdown = null;
+        } else {
+            createFilterDropdown();
+        }
+    });
+
+    // Handle filter selection
+    document.body.addEventListener("click", function (event) {
+        if (event.target.id === "filter-accept" || event.target.id === "filter-reject") {
+            const isAccepted = event.target.id === "filter-accept";
+            updateTableForFilter(isAccepted);
+            filterDropdown.remove();
+            filterDropdown = null;
+        }
+    });
+
+    function updateTableForFilter(isAccepted) {
+        const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
+        tableBody.innerHTML = storedData.map((data) => `
+            <tr>
+                <td>${data.name}</td>
+                <td>${data.puja}</td>
+                <td>${data.date}</td>
+                <td>${data.time}</td>
+                <td>${data.address}</td>
+                <td class="status-col">${isAccepted ? "Approved" : "Rejected"}</td>
+            </tr>
+        `).join("");
+
+        // Change column name from "Action" to "Status"
+        document.querySelector(".table thead tr th:last-child").textContent = "Status";
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function (event) {
+        if (filterDropdown && !filterButton.contains(event.target) && !filterDropdown.contains(event.target)) {
+            filterDropdown.remove();
+            filterDropdown = null;
+        }
+    });
+});
+
+</script>
 
 
 </body>
