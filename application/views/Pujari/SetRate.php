@@ -26,12 +26,12 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 27px;
         }
 
         .form-container {
             background-color: #E0E0E0;
-            padding: 25px;
+            padding: 35px;
             border-radius: 10px;
             width: 100%;
             max-width: 600px;

@@ -87,9 +87,11 @@
     <div style="min-height: 100vh;">
         <div class="container">
             <div class="mb-3">
-                <a href="#" style="text-decoration: none; color: #555;">
-                    <i class="bi bi-arrow-left"></i> Completed Offline Puja
-                </a>
+            <a class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/AnalyticsAndEarning'); ?>">
+        <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
+        Completed Offline Puja
+    </a>
+                
             </div>
 
             <div class="filter-buttons">
@@ -123,12 +125,36 @@
                     time: "10:30 AM"
                 },
                 {
+                    name: "Ghar Shanti",
+                    type: "ghar-shanti",
+                    image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
+                    pujaType: "Offline",
+                    date: "10/02/2025",
+                    time: "10:30 AM"
+                },
+                {
                     name: "Rahu-Ketu",
                     type: "rahu-ketu",
                     image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
                     pujaType: "Offline",
                     date: "11/02/2025",
                     time: "11:30 AM"
+                },
+                {
+                    name: "Rahu-Ketu",
+                    type: "rahu-ketu",
+                    image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
+                    pujaType: "Offline",
+                    date: "11/02/2025",
+                    time: "11:30 AM"
+                },
+                {
+                    name: "Wealth",
+                    type: "wealth",
+                    image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
+                    pujaType: "Offline",
+                    date: "12/02/2025",
+                    time: "12:30 PM"
                 },
                 {
                     name: "Wealth",

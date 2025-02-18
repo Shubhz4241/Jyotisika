@@ -106,7 +106,24 @@
         </div>
     </div>
 </div>
-
+<div>
+     <!-- Pagination -->
+     <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="#">10</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+</div>
 <script>
     let pujaData = [
         { name: "Gruh Shanti", image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-02-10", time: "10:30" },
@@ -193,7 +210,7 @@
 </script>
 
 </div>
-<footer class="mt-5 text-center">
+<footer>
     <?php $this->load->view('Pujari/Include/PujariFooter') ?>
 </footer>
 

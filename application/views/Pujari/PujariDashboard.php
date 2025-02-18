@@ -294,7 +294,7 @@
 </div>
 
                 <div class="container mt-5">
-                    <h5 class="mb-3 text-Start">User Reviews</h5>
+                    <h5 class="mb-3 text-Start" >User Reviews</h5>
 
                     <div class="review-container">
                         <!-- Left Arrow -->

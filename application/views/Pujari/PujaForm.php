@@ -64,6 +64,21 @@
         .form-container .form-select {
             padding: 10px;
         }
+        @media (max-width: 576px) {
+        .form-container {
+            padding: 20px;
+        }
+
+        .form-container .form-control, 
+        .form-container .form-select {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .btn-submit {
+            width: 100%;
+        }
+    }
     </style>
 </head>
 
@@ -129,23 +144,34 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.getElementById('pujaForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            const data = {
-                pujaName: formData.get('pujaName'),
-                pujaType: formData.get('pujaType'),
-                pujaImage: formData.get('pujaImage')?.name,
-                availabilityDate: formData.get('availabilityDate'),
-                availabilityTime: formData.get('availabilityTime'),
-            };
-
-            console.log('Form Submitted:', data);
-            alert('Form submitted successfully!');
-        });
+    document.getElementById('pujaForm').addEventListener('submit', function(event) {
+        event.preventDefault();
         
-        </script>
+        const formData = new FormData(this);
+        const data = {
+            pujaName: formData.get('pujaName'),
+            pujaType: formData.get('pujaType'),
+            pujaImage: formData.get('pujaImage')?.name,
+            availabilityDate: formData.get('availabilityDate'),
+            availabilityTime: formData.get('availabilityTime'),
+        };
+
+        console.log('Form Submitted:', data);
+
+        // SweetAlert2 for confirmation message
+        Swal.fire({
+            title: 'Success!',
+            text: 'Puja form submitted successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            document.getElementById('pujaForm').reset(); // Reset form after submission
+        });
+    });
+</script>
 </body>
 
 </html>

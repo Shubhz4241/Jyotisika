@@ -103,7 +103,16 @@
         .text-center {
             text-align: start !important;
         }
-
+        .bg-warning-subtle {
+    background-color: #F2DC5194 !important;
+}
+.bg-warning {
+    --bs-bg-opacity: 1;
+    background-color: #F1810063 !important;
+}
+.bg-success-subtle {
+    background-color:#14993E54 !important;
+}
     </style>
 </head>
 
@@ -117,16 +126,20 @@
                 <div class="col-md-4 col-6 mb-3">
                     <div class="square-box bg-warning text-white">
                         <div>
+                        <a href="<?php echo base_url('PujariUser/OfflinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
                             <h5 class="card-title">Offline Puja</h5>
                             <h2 class="card-text">40</h2>
+                        </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-6 mb-3">
                     <div class="square-box bg-warning-subtle text-dark">
                         <div>
+                        <a href="<?php echo base_url('PujariUser/OnlinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
                             <h5 class="card-title">Online Puja</h5>
                             <h2 class="card-text">40</h2>
+                        </a>
                         </div>
                     </div>
                 </div>

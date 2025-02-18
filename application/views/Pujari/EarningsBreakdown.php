@@ -145,7 +145,7 @@
             <div class="table-container">
                 <h5>Mob puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('mob')">Filter</button></h5>
                 <div class="filter-dropdown" id="mobFilterDropdown">
-                    <select id="mobFilter" onchange="filterData('mob')">
+                    <select id="mobFilter" onchange="filterData('mob')" >
                         <option value="">All</option>
                         <option value="Rahu-ketu">Rahu-ketu</option>
                         <option value="Ghar shanti">Ghar shanti</option>
