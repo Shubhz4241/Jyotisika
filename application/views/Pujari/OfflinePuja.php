@@ -4,70 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Completed Offline Puja</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Online Puja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap JS CDN (optional, for any JavaScript features) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
     <style>
         body {
-            overflow-x: auto;
+            background-color: #f9f9f9;
             font-family: 'Montserrat', serif;
         }
 
-        .table-header {
-            background-color: orange;
-            color: white;
+        .container {
+            padding-top: 20px;
         }
 
-        .filter-btns .btn {
-            border-radius: 20px;
-            margin-right: 10px;
-            padding: 5px 15px;
-        }
-
-        .filter-btns .active {
-            background-color: #f5c0d2;
-            color: black;
-        }
-
-        .puja-image {
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
-        }
-
-        /* Ensure the filter buttons wrap on smaller screens */
-        .filter-btns {
+        .filter-buttons {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
             justify-content: flex-end;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
-        /* Add some margin to the container on small screens */
-        @media (max-width: 576px) {
-            .container {
-                margin: 10px;
-            }
-
-            .filter-btns .btn {
-                padding: 5px 10px;
-            }
+        .filter-buttons button {
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            margin-left: 10px;
+            background-color: #fff;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .table-responsive {
+        .filter-buttons button.active,
+        .filter-buttons button:hover {
+            background-color: #f5c71a;
+            color: #fff;
+        }
+
+        .table-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch !important;
+            min-height: 250px;
+            /* Ensures stable height */
+        }
+
+        .table {
+            width: 100%;
+            table-layout: fixed;
+            /* Prevents table shifting */
+        }
+
+        .table th {
+            background-color: orange;
+            color: #fff;
+            text-align: center;
+            padding: 12px;
+        }
+
+        .table td {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .table img {
+            width: 60px;
+            height: auto;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -77,92 +85,92 @@
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
     <div style="min-height: 100vh;">
-        <div class="container mt-4">
-            <a href="#" class="text-dark">&#x2190; Completed Offline Puja</a>
-            <div class="d-flex justify-content-end filter-btns mt-3">
-                <button class="btn btn-outline-dark active" data-filter="all">All</button>
-                <button class="btn btn-outline-dark" data-filter="ghar-shanti">Ghar Shanti</button>
-                <button class="btn btn-outline-dark" data-filter="rahu-ketu">Rahu-Ketu</button>
-                <button class="btn btn-outline-dark" data-filter="wealth">Wealth</button>
+        <div class="container">
+            <div class="mb-3">
+                <a href="#" style="text-decoration: none; color: #555;">
+                    <i class="bi bi-arrow-left"></i> Completed Offline Puja
+                </a>
             </div>
-        </div>
-        <table class="table mt-3 text-center table-responsive">
-            <thead>
-                <tr class="table-header">
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Puja Type</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody id="pujaTableBody">
-                <tr class="puja-item" data-category="ghar-shanti">
-                    <td>Ghar Shanti</td>
-                    <td><img src="https://via.placeholder.com/50" class="puja-image" alt="puja"></td>
-                    <td>Online</td>
-                    <td>10/02/2025</td>
-                    <td>10:30am</td>
-                </tr>
-                <tr class="puja-item" data-category="rahu-ketu">
-                    <td>Rahu-Ketu</td>
-                    <td><img src="https://via.placeholder.com/50" class="puja-image" alt="puja"></td>
-                    <td>Online</td>
-                    <td>12/02/2025</td>
-                    <td>11:00am</td>
-                </tr>
-                <tr class="puja-item" data-category="wealth">
-                    <td>Wealth</td>
-                    <td><img src="https://via.placeholder.com/50" class="puja-image" alt="puja"></td>
-                    <td>Online</td>
-                    <td>15/02/2025</td>
-                    <td>9:00am</td>
-                </tr>
-                <tr class="puja-item" data-category="ghar-shanti">
-                    <td>Ghar Shanti</td>
-                    <td><img src="https://via.placeholder.com/50" class="puja-image" alt="puja"></td>
-                    <td>Online</td>
-                    <td>10/02/2025</td>
-                    <td>10:30am</td>
-                </tr>
-                <tr class="puja-item" data-category="rahu-ketu">
-                    <td>Rahu-Ketu</td>
-                    <td><img src="https://via.placeholder.com/50" class="puja-image" alt="puja"></td>
-                    <td>Online</td>
-                    <td>14/02/2025</td>
-                    <td>1:30pm</td>
-                </tr>
-                <tr class="puja-item" data-category="wealth">
-                    <td>Wealth</td>
-                    <td><img src="https://via.placeholder.com/50" class="puja-image" alt="puja"></td>
-                    <td>Online</td>
-                    <td>16/02/2025</td>
-                    <td>2:00pm</td>
-                </tr>
-            </tbody>
-        </table>
 
+            <div class="filter-buttons">
+                <button class="active" onclick="filterData('all')">All</button>
+                <button onclick="filterData('ghar-shanti')">Ghar Shanti</button>
+                <button onclick="filterData('rahu-ketu')">Rahu-Ketu</button>
+                <button onclick="filterData('wealth')">Wealth</button>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Puja Type</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="pujaTableBody"></tbody>
+            </table>
+        </div>
 
         <script>
-            $(document).ready(function() {
-                $('.filter-btns .btn').click(function() {
-                    $('.filter-btns .btn').removeClass('active');
-                    $(this).addClass('active');
-                    let filter = $(this).data('filter');
-                    if (filter === 'all') {
-                        $('.puja-item').show();
-                    } else {
-                        $('.puja-item').hide();
-                        $('.puja-item[data-category="' + filter + '"]').show();
+            const pujaData = [{
+                    name: "Ghar Shanti",
+                    type: "ghar-shanti",
+                    image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
+                    pujaType: "Offline",
+                    date: "10/02/2025",
+                    time: "10:30 AM"
+                },
+                {
+                    name: "Rahu-Ketu",
+                    type: "rahu-ketu",
+                    image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
+                    pujaType: "Offline",
+                    date: "11/02/2025",
+                    time: "11:30 AM"
+                },
+                {
+                    name: "Wealth",
+                    type: "wealth",
+                    image: "assets/images/Pujari/navratri-highly-detailed-floral-decoration.png",
+                    pujaType: "Offline",
+                    date: "12/02/2025",
+                    time: "12:30 PM"
+                }
+            ];
+
+            function loadTableData(filteredType = 'all') {
+                const tableBody = document.getElementById("pujaTableBody");
+                tableBody.innerHTML = "";
+
+                pujaData.forEach(puja => {
+                    if (filteredType === 'all' || puja.type === filteredType) {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                        <td>${puja.name}</td>
+                        <td><img src="<?php echo base_url(); ?>${puja.image}" alt="${puja.name}" width="250px"></td>
+                        <td>${puja.pujaType}</td>
+                        <td>${puja.date}</td>
+                        <td>${puja.time}</td>
+                    `;
+                        tableBody.appendChild(row);
                     }
                 });
-            });
+            }
+
+            function filterData(type) {
+                document.querySelectorAll('.filter-buttons button').forEach(button => button.classList.remove('active'));
+                document.querySelector(`button[onclick="filterData('${type}')"]`).classList.add('active');
+                loadTableData(type);
+            }
+
+            window.onload = () => loadTableData();
         </script>
     </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
-
 </body>
 
 </html>

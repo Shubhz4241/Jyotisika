@@ -150,7 +150,7 @@
                         fee: "700",
                         discount: "850",
                         attendees: "88",
-                        countdown: `<img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="icon-small" alt="Experience" width="10px" > Starts in: 2 d 6h`,
+                        countdown: `<img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="icon-small" alt="Experience" width="15px" > Starts in: 2 d 6h`,
                         img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
                     },
 

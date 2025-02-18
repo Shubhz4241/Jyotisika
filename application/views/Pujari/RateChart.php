@@ -101,6 +101,7 @@
             outline: none;
             flex-shrink: 0;
             /* Prevents shrinking */
+            margin: 30px;
         }
 
         @media (max-width: 768px) {
@@ -114,6 +115,11 @@
                 width: 100%;
                 max-width: 300px;
             }
+        }
+        p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    SIZE: 14PX;
         }
     </style>
 </head>

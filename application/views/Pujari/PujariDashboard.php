@@ -90,8 +90,7 @@
         }
 
         .card1 {
-            min-height: 345px !important;
-
+            min-height: 350px !important;
         }
 
         /* Responsive Fixes */
@@ -161,6 +160,30 @@
             font-size: 1rem;
             color: #000000
         }
+        .card1 {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .image-container {
+        width: 100%;
+        max-width: 240px; /* Adjust this as per design */
+        height: 100%;
+    }
+
+    .image-container img {
+        object-fit: cover; /* Ensures the image covers the full height */
+    }
+
+    @media (max-width: 768px) {
+        .d-flex.flex-md-row {
+            flex-direction: column !important;
+        }
+        .image-container {
+            max-width: 100%; /* Full width on small screens */
+            height: auto;
+        }
+    }
     </style>
 </head>
 
@@ -207,61 +230,68 @@
                 </div>
 
                 <div class="row g-4">
-                    <div class="col-lg-6 mt-5">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Recent Request</h5>
-                            <a href="<?php echo base_url() . 'PujariUser/RecentRequest'; ?>">View All</a>
-                        </div>
-                        <div class="card p-3 mt-3 card1">
-                            <div class="d-flex flex-column flex-md-row align-items-center">
-                                <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>" alt="User" class="Rectangle img-fluid">
-                                <div class="ms-md-3 mt-3 mt-md-0 pujari-content">
-                                    <h6>John Doe</h6>
-                                    <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 | Time: 10:30 AM<br> Location: Nashik</p>
-                                    <p>Padit Colony Nashik</p>
-                                    <button class="btn btn-success btn-sm">Accept</button>
-                                    <button class="btn btn-danger btn-sm">Reject</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="col-lg-6 mt-5">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Puja Reminder</h5>
-                            <a href="<?php echo base_url() . 'PujariUser/PujaReminder2'; ?>">View All</a>
-                        </div>
-                        <div class="card p-3 mt-3 card1">
-                            <div class="d-flex flex-column flex-md-row align-items-center">
-                                <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>" alt="User" class="Rectangle img-fluid">
-                                <div class="ms-md-3 mt-3 mt-md-0 pujari-content">
-                                    <h5>Puja - Rudraabhishek Puja</h5>
-                                    <p><strong>Date:</strong> 12/1/2025</p>
-                                    <p><strong>Time:</strong> 10:30 AM</p>
-                                    <p>
-                                        <strong><img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>"
-                                                alt="Languages" class="img-fluid" width="15px"></strong>
-                                        English, Hindi, Marathi
-                                    </p>
-                                    <p>
-                                        <strong><img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>"
-                                                alt="Experience" class="img-fluid" width="19px"> Exp:</strong> 23 years
-                                    </p>
-                                    <p><strong>Price:</strong> <span class="discount">₹710</span> ₹500</p>
-                                    <p><strong>Attendees:</strong> 104</p>
-                                    <p class="text-danger">
-                                        <img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>"
-                                            alt="Countdown" class="img-fluid" width="19px">
-                                        Starts in: 1d 4h 23m
-                                    </p>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Recent Request Section -->
+    <div class="col-lg-6 mt-5">
+        <div class="d-flex justify-content-between ">
+            <h5 class="mb-0">Recent Request</h5>
+            <a href="<?php echo base_url('PujariUser/RecentRequest'); ?>">View All</a>
+        </div>
+        
+        <div class="card mt-3 card1 h-100">
+            <div class="d-flex flex-column flex-md-row h-100">
+                <div class="image-container" style="height:100%;">
+                    <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" 
+                         alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
                 </div>
+                <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
+                    <h6>John Doe</h6>
+                    <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 | Time: 10:30 AM<br> Location: Nashik</p>
+                    <p>Padit Colony Nashik</p>
+                    <button class="btn btn-success btn-sm">Accept</button>
+                    <button class="btn btn-danger btn-sm">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Puja Reminder Section -->
+    <div class="col-lg-6 mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Puja Reminder</h5>
+            <a href="<?php echo base_url('PujariUser/PujaReminder2'); ?>">View All</a>
+        </div>
+   
+        <div class="card mt-3 card1 h-100">
+            <div class="d-flex flex-column flex-md-row" style="height:100%;">
+            <div class="image-container" style="height:100%;">
+                    <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" 
+                         alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
+                </div>
+                <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
+                    <h5>Puja - Rudraabhishek Puja</h5>
+                    <p><strong>Date:</strong> 12/1/2025</p>
+                    <p><strong>Time:</strong> 10:30 AM</p>
+                    <p>
+                        <strong><img src="<?php echo base_url('assets/images/Pujari/icon.png'); ?>" 
+                                     alt="Languages" class="img-fluid" width="15px"></strong>
+                        English, Hindi, Marathi
+                    </p>
+                    <p>
+                        <strong><img src="<?php echo base_url('assets/images/Pujari/graduate-cap_svgrepo.com.png'); ?>" 
+                                     alt="Experience" class="img-fluid" width="19px"> Exp:</strong> 23 years
+                    </p>
+                    <p><strong>Price:</strong> <span class="discount">₹710</span> ₹500</p>
+                    <p><strong>Attendees:</strong> 104</p>
+                    <p class="text-danger">
+                        <img src="<?php echo base_url('assets/images/Pujari/time-filled_svgrepo.com.png'); ?>" 
+                             alt="Countdown" class="img-fluid" width="19px">
+                        Starts in: 1d 4h 23m
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <div class="container mt-5">
                     <h5 class="mb-3 text-Start">User Reviews</h5>

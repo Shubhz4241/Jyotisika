@@ -17,10 +17,9 @@
         }
 
         .table-container {
-            background: white;
+      
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
 
@@ -58,8 +57,12 @@
     </header>
     <div style="min-height: 100vh;">
         <div class="container">
-            <h5 class="mb-3"><a href="#">&#8592; Earnings Breakdown</a></h5>
-
+        <h5 class="mb-3">
+    <a  class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/AnalyticsAndEarning2'); ?>">
+        <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
+        Earnings Breakdown
+    </a>
+</h5>
             <div class="table-container">
                 <h5>Offline puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('offline')">Filter</button></h5>
                 <div class="filter-dropdown" id="offlineFilterDropdown">
@@ -69,7 +72,7 @@
                         <option value="Ghar shanti">Ghar shanti</option>
                     </select>
                 </div>
-                <table class="table table-bordered table-fixed">
+                <table class="table table-bordered table-fixed  text-center">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -78,6 +81,11 @@
                         </tr>
                     </thead>
                     <tbody id="offlineBody">
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>Rahu-ketu</td>
+                            <td>500</td>
+                        </tr>
                         <tr>
                             <td>Jane Doe</td>
                             <td>Rahu-ketu</td>
@@ -101,7 +109,7 @@
                         <option value="Ghar shanti">Ghar shanti</option>
                     </select>
                 </div>
-                <table class="table table-bordered table-fixed">
+                <table class="table table-bordered table-fixed  text-center">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -114,6 +122,16 @@
                             <td>Jane Doe</td>
                             <td>Rahu-ketu</td>
                             <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Ghar shanti</td>
+                            <td>1200</td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Ghar shanti</td>
+                            <td>1200</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
@@ -133,7 +151,7 @@
                         <option value="Ghar shanti">Ghar shanti</option>
                     </select>
                 </div>
-                <table class="table table-bordered table-fixed">
+                <table class="table table-bordered table-fixed  text-center">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -151,6 +169,11 @@
                             <td>John Doe</td>
                             <td>Ghar shanti</td>
                             <td>1200</td>
+                        </tr>
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>Rahu-ketu</td>
+                            <td>500</td>
                         </tr>
                     </tbody>
                 </table>

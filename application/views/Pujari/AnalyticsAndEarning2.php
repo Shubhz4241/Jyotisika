@@ -33,8 +33,7 @@
             padding: 20px ;
             text-align: center;
             font-weight: bold;
-            height: 150px; /* Square height */
-            display: flex;
+            height: 150px; /* Square height */  
             justify-content: center;
             align-items: center;
             width: 150px; /* Square width */
@@ -108,20 +107,21 @@
 </header>
 <div style="min-height: 100vh;">
 <div class="container">
-    <div class="stat-box-container">
-        <div class="stat-box bg-success text-white">
-            <h3>2.5L</h3>
-            <p>Total Earnings</p>
-        </div>
-        <div class="stat-box bg-primary text-white">
-            <h3>5K</h3>
-            <p>Monthly Earnings</p>
-        </div>
-        <div class="stat-box bg-warning text-dark">
-            <h3>1K</h3>
-            <p>Pending Payments</p>
-        </div>
+<div class="stat-box-container">
+    <a href="<?php echo base_url('PujariUser/EarningsBreakdown'); ?>" class="stat-box bg-success text-white text-decoration-none">
+        <h3>2.5L</h3>
+        <p>Total Earnings</p>
+    </a>
+    <a href="<?php echo base_url('PujariUser/MonthlyEarningsBreakdown'); ?>" class="stat-box bg-primary text-white text-decoration-none">
+        <h3>5K</h3>
+        <p>Monthly Earnings</p>
+    </a>
+    <div class="stat-box bg-warning text-dark">
+        <h3>1K</h3>
+        <p>Pending Payments</p>
     </div>
+</div>
+
 
     <div class="chart-container">
         <h5>Overall Earnings <button class="btn btn-light filter-btn">Filter</button></h5>

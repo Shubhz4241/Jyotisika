@@ -18,10 +18,8 @@
             font-family: 'Montserrat', serif;
         }
         .table-container {
-            background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
             margin-top: 20px;
         }
         .filter-btn {
@@ -52,13 +50,20 @@
     </header>
     <div style="min-height: 100vh;">
     <div class="container">
-        <h4>← Monthly Earnings Breakdown
-            <select class="form-select" id="monthFilter">
+
+    <h5 class="mb-3">
+    <a class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/AnalyticsAndEarning2'); ?>">
+        <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
+        Monthly Earnings Breakdown
+    </a>
+    <select class="form-select" id="monthFilter">
                 <option value="December" selected>December</option>
                 <option value="November">November</option>
                 <option value="October">October</option>
             </select>
-        </h4>
+</h5>
+
+       
         
         <div class="table-container" id="offlinePuja">
             <h5>Offline puja Breakdown <button class="btn btn-light filter-btn">&#x1F50D; Filter</button></h5>
