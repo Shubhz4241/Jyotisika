@@ -135,6 +135,16 @@
         { name: "Navratri Puja", image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-03-10", time: "10:00" },
         { name: "Kaal Sarp Dosh Puja",image: "navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-03-15", time: "12:30" },
         { name: "Shradh Puja", image: "navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-03-20", time: "09:30" },
+        { name: "Diwali Lakshmi Puja",image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-03-25", time: "19:00" },
+        { name: "Gruh Shanti", image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-02-10", time: "10:30" },
+        { name: "Rudra Abhishek", image: "navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-02-15", time: "08:00" },
+        { name: "Satyanarayan Puja", image: "navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-02-20", time: "11:00" },
+        { name: "Maha Mrityunjaya Jaap", image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-02-25", time: "06:30" },
+        { name: "Lakshmi Pooja", image: "navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-03-01", time: "18:00" },
+        { name: "Ganesh Chaturthi Puja",image: "navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-03-05", time: "07:45" },
+        { name: "Navratri Puja", image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-03-10", time: "10:00" },
+        { name: "Kaal Sarp Dosh Puja",image: "navratri-highly-detailed-floral-decoration.png", type: "Offline", date: "2025-03-15", time: "12:30" },
+        { name: "Shradh Puja", image: "navratri-highly-detailed-floral-decoration.png", type: "Hybrid", date: "2025-03-20", time: "09:30" },
         { name: "Diwali Lakshmi Puja",image: "navratri-highly-detailed-floral-decoration.png", type: "Online", date: "2025-03-25", time: "19:00" }
     ];
 
@@ -208,12 +218,64 @@
         });
     }
 </script>
-
 </div>
 <footer>
     <?php $this->load->view('Pujari/Include/PujariFooter') ?>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let currentPage = 1;
+    const itemsPerPage = 8;
+    let totalPages = Math.ceil(pujaData.length / itemsPerPage);
+
+    function loadPujaData(page = 1) {
+        const tableBody = document.getElementById("pujaTable");
+        tableBody.innerHTML = "";
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        
+        pujaData.slice(start, end).forEach((puja, index) => {
+            const row = `<tr>
+                <td>${puja.name}</td>
+                <td><img src="<?php echo base_url() . '/assets/images/Pujari/'?>${puja.image}" alt="Puja Image"></td>
+                <td>${puja.type}</td>
+                <td>${puja.date}</td>
+                <td>${puja.time}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" onclick="editPuja(${index})"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="btn btn-sm btn-danger" onclick="deletePuja(${index})"><i class="fas fa-trash"></i> Delete</button>
+                </td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+        updatePagination();
+    }
+
+    function updatePagination() {
+        const pagination = document.querySelector(".pagination");
+        pagination.innerHTML = "";
+        
+        const prevClass = currentPage === 1 ? "disabled" : "";
+        pagination.innerHTML += `<li class="page-item ${prevClass}"><a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a></li>`;
+        
+        for (let i = 1; i <= totalPages; i++) {
+            const activeClass = currentPage === i ? "active" : "";
+            pagination.innerHTML += `<li class="page-item ${activeClass}"><a class="page-link" href="#" onclick="changePage(${i})">${i}</a></li>`;
+        }
+        
+        const nextClass = currentPage === totalPages ? "disabled" : "";
+        pagination.innerHTML += `<li class="page-item ${nextClass}"><a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a></li>`;
+    }
+
+    function changePage(page) {
+        if (page < 1 || page > totalPages) return;
+        currentPage = page;
+        loadPujaData(page);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => loadPujaData());
+</script>
+
 </body>
 </html>
