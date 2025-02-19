@@ -79,6 +79,44 @@
             /* Adds spacing between the icon and the text */
          
         }
+        .reminder-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0EDF50;
+            color: black;
+            border: none;
+            padding: 12px 16px;
+            font-size: 16px;
+            /* font-weight: bold; */
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .reminder-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        .reminder-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .reminder-btn {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .reminder-btn img {
+                width: 18px;
+                height: 18px;
+                margin-right: 6px;
+            }
+        }
     </style>
 </head>
 
@@ -101,10 +139,10 @@
 
     <div class="d-flex justify-content-between align-items-center mt-5">
         <h4 class="mb-3">Upcoming Schedule</h4>
-        <button class="btn btn-primary">
-    <img src="<?php echo base_url() . 'assets/images/Pujari/Alarm Plus.png'; ?>" alt="Caret Icon" style="width: 20px; margin-right: 8px;">
-    Set Reminder
-</button>
+        <button class="reminder-btn">
+        <img src="<?php echo base_url() . 'assets/images/Pujari/Alarm Plus.png'; ?>" alt="Caret Icon" >
+        Set Reminder
+    </button>
     </div>
     <div class="row row-cols-1 row-cols-md-2 g-4" id="upcomingPujaContainer"></div>
 </div>
