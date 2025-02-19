@@ -296,6 +296,113 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const tableBody = document.querySelector("#puja-table-body");
+    const prevButton = document.querySelector(".pagination .page-item:first-child a");
+    const nextButton = document.querySelector(".pagination .page-item:last-child a");
+    const paginationContainer = document.querySelector(".pagination");
+
+    let currentPage = 1;
+    const itemsPerPage = 5;
+
+    // Generate and store dummy data if not already stored
+    if (!localStorage.getItem("pujaRequests")) {
+        let dummyData = [];
+        for (let i = 1; i <= 20; i++) {
+            dummyData.push({
+                name: `Person ${i}`,
+                puja: `Puja Type ${i}`,
+                date: `2025-02-${(i % 28) + 1}`,
+                time: `${(i % 12) + 1}:00 ${i % 2 === 0 ? "AM" : "PM"}`,
+                address: `Address ${i}`
+            });
+        }
+        localStorage.setItem("pujaRequests", JSON.stringify(dummyData));
+    }
+
+    let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
+
+    function loadTable(page) {
+        tableBody.innerHTML = "";
+        let start = (page - 1) * itemsPerPage;
+        let end = start + itemsPerPage;
+        let paginatedItems = storedData.slice(start, end);
+
+        paginatedItems.forEach((data, index) => {
+            let row = `<tr>
+                <td>${data.name}</td>
+                <td>${data.puja}</td>
+                <td>${data.date}</td>
+                <td>${data.time}</td>
+                <td>${data.address}</td>
+                <td>
+                    <button class="btn btn-outline-success btn-sm approve-btn me-2" data-index="${index}">
+                        <i class="bi bi-check-lg"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm delete-btn" data-index="${index}">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+
+        updatePagination(page);
+    }
+
+    function updatePagination(activePage) {
+        paginationContainer.innerHTML = `
+            <li class="page-item ${activePage === 1 ? "disabled" : ""}">
+                <a class="page-link" href="#" id="prevPage">Previous</a>
+            </li>`;
+
+        let totalPages = Math.ceil(storedData.length / itemsPerPage);
+        for (let i = 1; i <= totalPages; i++) {
+            paginationContainer.innerHTML += `
+                <li class="page-item ${i === activePage ? "active" : ""}">
+                    <a class="page-link page-number" href="#" data-page="${i}">${i}</a>
+                </li>`;
+        }
+
+        paginationContainer.innerHTML += `
+            <li class="page-item ${activePage === totalPages ? "disabled" : ""}">
+                <a class="page-link" href="#" id="nextPage">Next</a>
+            </li>`;
+
+        attachEventListeners();
+    }
+
+    function attachEventListeners() {
+        document.querySelectorAll(".page-number").forEach(pageBtn => {
+            pageBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                currentPage = parseInt(this.dataset.page);
+                loadTable(currentPage);
+            });
+        });
+
+        document.getElementById("prevPage")?.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (currentPage > 1) {
+                currentPage--;
+                loadTable(currentPage);
+            }
+        });
+
+        document.getElementById("nextPage")?.addEventListener("click", function (event) {
+            event.preventDefault();
+            if ((currentPage * itemsPerPage) < storedData.length) {
+                currentPage++;
+                loadTable(currentPage);
+            }
+        });
+    }
+
+    loadTable(currentPage);
+});
+</script>
+
 
 
 </body>
