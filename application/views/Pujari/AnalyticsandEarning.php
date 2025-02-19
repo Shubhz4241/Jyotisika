@@ -26,7 +26,8 @@
         .chart-container {
             margin: 30px 0;
             width: 100%;
-            max-width: 800px; /* Reducing the maximum width of chart container */
+            max-width: 800px;
+            /* Reducing the maximum width of chart container */
             margin-left: auto;
             margin-right: auto;
         }
@@ -90,29 +91,34 @@
 
             .chart-container canvas {
                 width: 100% !important;
-                height: 250px !important; /* Reducing the height for small screens */
+                height: 250px !important;
+                /* Reducing the height for small screens */
             }
         }
 
         @media (max-width: 576px) {
             .chart-container canvas {
-                height: 200px !important; /* Further reducing height for smaller screens */
+                height: 200px !important;
+                /* Further reducing height for smaller screens */
             }
         }
 
         .text-center {
             text-align: start !important;
         }
+
         .bg-warning-subtle {
-    background-color: #F2DC5194 !important;
-}
-.bg-warning {
-    --bs-bg-opacity: 1;
-    background-color: #F1810063 !important;
-}
-.bg-success-subtle {
-    background-color:#14993E54 !important;
-}
+            background-color: #F2DC5194 !important;
+        }
+
+        .bg-warning {
+            --bs-bg-opacity: 1;
+            background-color: #F1810063 !important;
+        }
+
+        .bg-success-subtle {
+            background-color: #14993E54 !important;
+        }
     </style>
 </head>
 
@@ -126,20 +132,20 @@
                 <div class="col-md-4 col-6 mb-3">
                     <div class="square-box bg-warning text-white">
                         <div>
-                        <a href="<?php echo base_url('PujariUser/OfflinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
-                            <h5 class="card-title">Offline Puja</h5>
-                            <h2 class="card-text">40</h2>
-                        </a>
+                            <a href="<?php echo base_url('PujariUser/OfflinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
+                                <h5 class="card-title">Offline Puja</h5>
+                                <h2 class="card-text">40</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-6 mb-3">
                     <div class="square-box bg-warning-subtle text-dark">
                         <div>
-                        <a href="<?php echo base_url('PujariUser/OnlinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
-                            <h5 class="card-title">Online Puja</h5>
-                            <h2 class="card-text">40</h2>
-                        </a>
+                            <a href="<?php echo base_url('PujariUser/OnlinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
+                                <h5 class="card-title">Online Puja</h5>
+                                <h2 class="card-text">40</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
