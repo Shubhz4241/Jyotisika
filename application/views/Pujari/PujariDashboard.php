@@ -21,8 +21,8 @@
         }
 
         .card {
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* border-radius: 12px; */
+
             transition: all 0.3s ease;
         }
 
@@ -158,33 +158,46 @@
         .h6,
         h6 {
             font-size: 1rem;
-            color: #000000
+            color: #000000;
         }
+
         .card1 {
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .image-container {
-        width: 100%;
-        max-width: 240px; /* Adjust this as per design */
-        height: 100%;
-    }
-
-    .image-container img {
-        object-fit: cover; /* Ensures the image covers the full height */
-    }
-
-    @media (max-width: 768px) {
-        .d-flex.flex-md-row {
-            flex-direction: column !important;
+            border-radius: 10px;
+            overflow: hidden;
         }
+
         .image-container {
-            max-width: 100%; /* Full width on small screens */
-            height: auto;
+            width: 100%;
+            max-width: 240px;
+            /* Adjust this as per design */
+            height: 100%;
         }
-    }
-    
+
+        .image-container img {
+            object-fit: cover;
+            /* Ensures the image covers the full height */
+        }
+
+        @media (max-width: 768px) {
+            .d-flex.flex-md-row {
+                flex-direction: column !important;
+            }
+
+            .image-container {
+                max-width: 100%;
+                /* Full width on small screens */
+                height: auto;
+            }
+        }
+
+        .mb-3 {
+            margin-top: 3rem !important;
+        }
+
+        .p-3 {
+            padding: 1rem !important;
+            text-align: start;
+        }
     </style>
 </head>
 
@@ -199,166 +212,173 @@
             <section class="dashboard-sections container">
                 <div class="row text-center mb-4">
                     <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                        <div class="card py-3">
-                            <div class="icon-box green">📅</div>
-                            <h6>Today's Schedule</h6>
+                        <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <div class="card py-3" style="border-radius:0;">
+                                <div class="icon-box green">📅</div>
+                                <h6>Today's Schedule</h6>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                        <div class="card py-3">
-                            <div class="icon-box purple">🕒</div>
-                            <h6>Upcoming Puja's</h6>
+                        <div style="background-color:#BB97C1; padding:6px 2px; padding-bottom:20px; border:3px solid #BB97C1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <div class="card py-3" style="border-radius:0;">
+                                <div class="icon-box purple">🕒</div>
+                                <h6>Upcoming Puja's</h6>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                        <div class="card py-3">
-                            <div class="icon-box red">📜</div>
-                            <a href="<?php echo base_url() . 'PujariUser/SetRate'; ?>">
-                                <h6>Rate Chart</h6>
-                            </a>
+                        <div style="background-color:#FF2E11BF; padding:6px 2px; padding-bottom:20px; border:3px solid #FF2E11BF; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <div class="card py-3" style="border-radius:0;">
+                                <div class="icon-box red">📜</div>
+                                <a href="<?php echo base_url() . 'PujariUser/SetRate'; ?>">
+                                    <h6>Rate Chart</h6>
+                                </a>
 
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                        <div class="card py-3">
-                            <div class="icon-box yellow">➕</div>
-                            <a href="<?php echo base_url() . 'PujariUser/PujaForm'; ?>">
-                                <h6>Add Puja's</h6>
-                            </a>
+                        <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <div class="card py-3" style="border-radius:0;">
+                                <div class="icon-box yellow">➕</div>
+                                <a href="<?php echo base_url() . 'PujariUser/PujaForm'; ?>">
+                                    <h6>Add Puja's</h6>
+                                </a>
 
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row g-4">
-    <!-- Recent Request Section -->
-    <div class="col-lg-6 mt-5">
-        <div class="d-flex justify-content-between ">
-            <h5 class="mb-0">Recent Request</h5>
-            <a href="<?php echo base_url('PujariUser/RecentRequest'); ?>">View All</a>
-        </div>
-        
-        <div class="card mt-3 card1 h-100">
-            <div class="d-flex flex-column flex-md-row h-100">
-                <div class="image-container" style="height:100%;">
-                    <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" 
-                         alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
-                </div>
-                <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
-                    <h6>John Doe</h6>
-                    <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 | Time: 10:30 AM<br> Location: Nashik</p>
-                    <p>Padit Colony Nashik</p>
-                    <button class="btn btn-success btn-sm">Accept</button>
-                    <button class="btn btn-danger btn-sm">Reject</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <div class="row g-4">
+                        <!-- Recent Request Section -->
+                        <div class="col-lg-6 mt-5">
+                            <div class="d-flex justify-content-between ">
+                                <h5 class="mb-0">Recent Request</h5>
+                                <a href="<?php echo base_url('PujariUser/RecentRequest'); ?>">View All</a>
+                            </div>
 
-    <!-- Puja Reminder Section -->
-    <div class="col-lg-6 mt-5">
-        <div class="d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Puja Reminder</h5>
-            <a href="<?php echo base_url('PujariUser/PujaReminder2'); ?>">View All</a>
-        </div>
-   
-        <div class="card mt-3 card1 h-100">
-            <div class="d-flex flex-column flex-md-row" style="height:100%;">
-            <div class="image-container" style="height:100%;">
-                    <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" 
-                         alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
-                </div>
-                <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
-                    <h5>Puja - Rudraabhishek Puja</h5>
-                    <p><strong>Date:</strong> 12/1/2025</p>
-                    <p><strong>Time:</strong> 10:30 AM</p>
-                    <p>
-                        <strong><img src="<?php echo base_url('assets/images/Pujari/icon.png'); ?>" 
-                                     alt="Languages" class="img-fluid" width="15px"></strong>
-                        English, Hindi, Marathi
-                    </p>
-                    <p>
-                        <strong><img src="<?php echo base_url('assets/images/Pujari/graduate-cap_svgrepo.com.png'); ?>" 
-                                     alt="Experience" class="img-fluid" width="19px"> Exp:</strong> 23 years
-                    </p>
-                    <p><strong>Price:</strong> <span class="discount">₹710</span> ₹500</p>
-                    <p><strong>Attendees:</strong> 104</p>
-                    <p class="text-danger">
-                        <img src="<?php echo base_url('assets/images/Pujari/time-filled_svgrepo.com.png'); ?>" 
-                             alt="Countdown" class="img-fluid" width="19px">
-                        Starts in: 1d 4h 23m
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-                <div class="container mt-5">
-                    <h5 class="mb-3 text-Start" >User Reviews</h5>
-
-                    <div class="review-container">
-                        <!-- Left Arrow -->
-                        <button class="carousel-btn left" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
-                            <img src="<?php echo base_url() . 'assets\images\Pujari\Caret Left (3).png'; ?>" alt="Previous">
-                        </button>
-
-                        <!-- Review Carousel -->
-                        <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="review-card text-center">
-                                        <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
-                                        <blockquote>
-                                            “We had the privilege of having Pandit Ji perform a Satyanarayan Puja at our home, and the experience was truly divine.”
-                                        </blockquote>
-                                        <div class="stars">
-                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                        <p class="fw-bold">Jane Doe</p>
+                            <div class="card mt-3 card1 h-100">
+                                <div class="d-flex flex-column flex-md-row h-100">
+                                    <div class="image-container" style="height:100%;">
+                                        <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>"
+                                            alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
                                     </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="review-card text-center">
-                                        <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
-                                        <blockquote>
-                                            “Amazing experience! Pandit Ji explained every ritual in detail and made the Puja very special.”
-                                        </blockquote>
-                                        <div class="stars">
-                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-half"></i>
-                                        </div>
-                                        <p class="fw-bold">John Smith</p>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="review-card text-center">
-                                        <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
-                                        <blockquote>
-                                            “Highly recommend Pandit Ji lor for any religious ceremony. Very professional and knowledgeable.”
-                                        </blockquote>
-                                        <div class="stars">
-                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                        <p class="fw-bold">Priya Sharma</p>
+                                    <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
+                                        <h6>John Doe</h6>
+                                        <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 | Time: 10:30 AM<br> Location: Nashik</p>
+                                        <p>Padit Colony Nashik</p>
+                                        <button class="btn btn-success btn-sm">Accept</button>
+                                        <button class="btn btn-danger btn-sm">Reject</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Right Arrow -->
-                        <button class="carousel-btn right" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
-                            <img src="<?php echo base_url() . 'assets\images\Pujari\Caret Left.png'; ?>" alt="Next">
-                        </button>
+                        <!-- Puja Reminder Section -->
+                        <div class="col-lg-6 mt-5">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Puja Reminder</h5>
+                                <a href="<?php echo base_url('PujariUser/PujaReminder2'); ?>">View All</a>
+                            </div>
+
+                            <div class="card mt-3 card1 h-100">
+                                <div class="d-flex flex-column flex-md-row" style="height:100%;">
+                                    <div class="image-container" style="height:100%;">
+                                        <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>"
+                                            alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
+                                    </div>
+                                    <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
+                                        <h5>Puja - Rudraabhishek Puja</h5>
+                                        <p><strong>Date:</strong> 12/1/2025</p>
+                                        <p><strong>Time:</strong> 10:30 AM</p>
+                                        <p>
+                                            <strong><img src="<?php echo base_url('assets/images/Pujari/icon.png'); ?>"
+                                                    alt="Languages" class="img-fluid" width="15px"></strong>
+                                            English, Hindi, Marathi
+                                        </p>
+                                        <p>
+                                            <strong><img src="<?php echo base_url('assets/images/Pujari/graduate-cap_svgrepo.com.png'); ?>"
+                                                    alt="Experience" class="img-fluid" width="19px"> Exp:</strong> 23 years
+                                        </p>
+                                        <p><strong>Price:</strong> <span class="discount">₹710</span> ₹500</p>
+                                        <p><strong>Attendees:</strong> 104</p>
+                                        <p class="text-danger">
+                                            <img src="<?php echo base_url('assets/images/Pujari/time-filled_svgrepo.com.png'); ?>"
+                                                alt="Countdown" class="img-fluid" width="19px">
+                                            Starts in: 1d 4h 23m
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="container mt-5">
+                        <h5 class="mb-3 text-Start">User Reviews</h5>
+
+                        <div class="review-container">
+                            <!-- Left Arrow -->
+                            <button class="carousel-btn left" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+                                <img src="<?php echo base_url() . 'assets\images\Pujari\Caret Left (3).png'; ?>" alt="Previous">
+                            </button>
+
+                            <!-- Review Carousel -->
+                            <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="review-card text-center">
+                                            <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
+                                            <blockquote>
+                                                “We had the privilege of having Pandit Ji perform a Satyanarayan Puja at our home, and the experience was truly divine.”
+                                            </blockquote>
+                                            <div class="stars">
+                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                            </div>
+                                            <p class="fw-bold">Jane Doe</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-item">
+                                        <div class="review-card text-center">
+                                            <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
+                                            <blockquote>
+                                                “Amazing experience! Pandit Ji explained every ritual in detail and made the Puja very special.”
+                                            </blockquote>
+                                            <div class="stars">
+                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-half"></i>
+                                            </div>
+                                            <p class="fw-bold">John Smith</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-item">
+                                        <div class="review-card text-center">
+                                            <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
+                                            <blockquote>
+                                                “Highly recommend Pandit Ji lor for any religious ceremony. Very professional and knowledgeable.”
+                                            </blockquote>
+                                            <div class="stars">
+                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                            </div>
+                                            <p class="fw-bold">Priya Sharma</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Arrow -->
+                            <button class="carousel-btn right" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+                                <img src="<?php echo base_url() . 'assets\images\Pujari\Caret Left.png'; ?>" alt="Next">
+                            </button>
+                        </div>
+                    </div>
             </section>
         </main>
     </div>

@@ -38,11 +38,13 @@
 </header>
 <div style="min-height: 100vh;">
 <div class="container mt-5" >
+    <div class="d-flex justify-content-between pt-4">
     <h5 class="mb-4">Recent Request</h5>
     <div class="filter-btn">
         <button class="btn btn-outline-secondary">
             <i class="bi bi-funnel"></i> Filter By
         </button>
+    </div>
     </div>
 <div style="overflow-x: auto;">
     <table class="table table-bordered" style="overflow: auto;">
@@ -146,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { "name": "Rahul Mehta", "puja": "Lakshmi Puja", "date": "2025-03-10", "time": "08:15 AM", "address": "Shivaji Nagar, Pune", "status": "" },
             { "name": "Ananya Verma", "puja": "Ganesh Chaturthi", "date": "2025-03-15", "time": "06:30 AM", "address": "Borivali, Mumbai", "status": "" },
             { "name": "Karan Kapoor", "puja": "Vastu Shanti", "date": "2025-03-20", "time": "11:00 AM", "address": "Chembur, Mumbai", "status": "" },
-            { "name": "Meera Iyer", "puja": "Griha Pravesh", "date": "2025-03-25", "time": "12:00 PM", "address": "Kharghar, Navi Mumbai", "status": "" }
+            { "name": "Rushikesh Thomre", "puja": "Satyanarayan Puja", "date": "2000-09-29", "time": "06:00 PM", "address": "DGP Nager 2", "status": "" }
         ];
         localStorage.setItem("pujaRequests", JSON.stringify(dummyData));
     }
@@ -161,15 +163,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${data.time}</td>
                 <td>${data.address}</td>
                 <td>
-                    ${data.status === "Approved" ? 
-                        '<span class="text-success fw-bold">Approved</span>' : 
-                        `<button class="btn btn-outline-success btn-sm approve-btn me-2" data-index="${index}">
-                            <i class="bi bi-check-lg"></i>
-                        </button>
-                        <button class="btn btn-outline-danger btn-sm delete-btn" data-index="${index}">
-                            <i class="bi bi-x-lg"></i>
-                        </button>`
-                    }
+                    <button class="btn btn-outline-success btn-sm approve-btn me-2" data-index="${index}">
+                        <i class="bi bi-check-lg"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm delete-btn" data-index="${index}">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
                 </td>
             </tr>
         `).join("");
@@ -182,9 +181,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.target.closest(".approve-btn")) {
             const indexToApprove = event.target.closest(".approve-btn").dataset.index;
             let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-            
             storedData[indexToApprove].status = "Approved";
             localStorage.setItem("pujaRequests", JSON.stringify(storedData));
+
+            // Change tick button color to green
+            event.target.closest(".approve-btn").classList.remove("btn-outline-success");
+            event.target.closest(".approve-btn").classList.add("btn-success");
 
             Swal.fire({
                 title: "Approved!",
@@ -192,14 +194,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 icon: "success",
                 confirmButtonColor: "#28a745"
             });
-
-            loadTable();
         }
 
         if (event.target.closest(".delete-btn")) {
             const indexToDelete = event.target.closest(".delete-btn").dataset.index;
             let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-
             Swal.fire({
                 title: "Are you sure?",
                 text: "Do you want to reject this request?",
@@ -212,14 +211,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (result.isConfirmed) {
                     storedData.splice(indexToDelete, 1);
                     localStorage.setItem("pujaRequests", JSON.stringify(storedData));
-                    
                     Swal.fire({
                         title: "Rejected!",
                         text: "The request has been rejected successfully.",
                         icon: "error",
                         confirmButtonColor: "#d33"
                     });
-
                     loadTable();
                 }
             });
@@ -227,6 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
