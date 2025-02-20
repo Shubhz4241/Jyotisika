@@ -48,6 +48,10 @@
         .filter-dropdown {
             display: none;
         }
+        .mb-3 {
+    margin-bottom: 1rem !important;
+    margin-top: 100px;
+}
     </style>
 </head>
 

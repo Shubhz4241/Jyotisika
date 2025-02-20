@@ -45,10 +45,12 @@
 
         .stat-box h3 {
             font-size: 2rem;
+            color: black;
         }
 
         .stat-box p {
-            font-size: 1.2rem;
+            /* font-size: 1.2rem; */
+            color: black;
         }
 
         .stat-box.bg-success {
@@ -121,6 +123,72 @@
             --bs-bg-opacity: 1;
             background-color: #F8EB9A !important;
         }
+
+        /* Center the stat boxes and charts */
+        .stat-box-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .stat-box {
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            height: 140px;
+            /* Reduced height */
+            width: 150px;
+            /* Reducedwidth  */
+            justify-content: center;
+            align-items: center;
+            margin: 30px;
+        }
+
+        .chart-container {
+            width: 90%;
+            /* Increased width */
+            max-width: 1200px;
+            /* Maximum limit */
+            height: 450px;
+            /* Adjusted height */
+            margin: 20px auto;
+            padding: 20px;
+            background: transparent;
+            /* Removes the white background */
+            border-radius: 10px;
+            box-shadow: none;
+            /* Removes the shadow */
+        }
+
+
+        /* Make the charts and boxes align properly */
+        @media (max-width: 768px) {
+            .stat-box-container {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            .chart-container {
+                width: 100%;
+                /* Make full width for small screens */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stat-box {
+                width: 100px;
+                height: 100px;
+            }
+
+            .chart-container {
+                height: 300px;
+                /* Adjusted for small screens */
+            }
+        }
     </style>
 </head>
 
@@ -133,15 +201,15 @@
             <div class="stat-box-container">
                 <a href="<?php echo base_url('PujariUser/EarningsBreakdown'); ?>" class="stat-box bg-success text-white text-decoration-none">
                     <h3>2.5L</h3>
-                    <p>Total Earnings</p>
+                    <p class="fw-normal">Total Earnings</p>
                 </a>
                 <a href="<?php echo base_url('PujariUser/MonthlyEarningsBreakdown'); ?>" class="stat-box bg-primary text-white text-decoration-none">
                     <h3>5K</h3>
-                    <p>Monthly Earnings</p>
+                    <p class="fw-normal">Monthly Earnings</p>
                 </a>
                 <div class="stat-box bg-warning text-dark">
                     <h3>1K</h3>
-                    <p>Pending Payments</p>
+                    <p class="fw-normal">Pending Payments</p>
                 </div>
             </div>
 

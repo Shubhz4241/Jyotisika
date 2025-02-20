@@ -159,28 +159,39 @@
                 </div>
             </div>
         </div>
-        <!-- Charts Section -->
-        <div class="chart-container">
-            <h4 class="text-center">Offline Puja</h4>
-            <div>
-                <canvas id="offlineChart"></canvas>
-            </div>
+       <!-- Charts Section -->
+<div class="container">
+    <div class="chart-container p-3 mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="text-center mb-0">Offline Puja</h4>
+            <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
         </div>
-
-        <div class="chart-container">
-            <h4 class="text-center">Online Puja</h4>
-            <div>
-                <canvas id="onlineChart"></canvas>
-            </div>
-        </div>
-
-        <div class="chart-container">
-            <h4 class="text-center">Mob Puja</h4>
-            <div>
-                <canvas id="mobChart"></canvas>
-            </div>
+        <div class="mt-3">
+            <canvas id="offlineChart"></canvas>
         </div>
     </div>
+
+    <div class="chart-container p-3 mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="text-center mb-0">Online Puja</h4>
+            <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
+        </div>
+        <div class="mt-3">
+            <canvas id="onlineChart"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-container p-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="text-center mb-0">Mob Puja</h4>
+            <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
+        </div>
+        <div class="mt-3">
+            <canvas id="mobChart"></canvas>
+        </div>
+    </div>
+</div>
+
 
     <script>
         function renderChart(chartId, labels, datasets) {

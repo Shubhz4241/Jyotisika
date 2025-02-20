@@ -77,8 +77,9 @@
             /* Aligns the icon with the text */
             margin-right: 5px;
             /* Adds spacing between the icon and the text */
-         
+
         }
+
         .reminder-btn {
             display: flex;
             align-items: center;
@@ -86,7 +87,7 @@
             background-color: #0EDF50;
             color: black;
             border: none;
-            padding: 12px 16px;
+            padding: 10px 13px;        
             font-size: 16px;
             /* font-weight: bold; */
             border-radius: 10px;
@@ -125,27 +126,28 @@
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
     <div style="min-height: 100vh;">
-    <div class="container mt-4">
-    <h2 class="text-center mb-4">Pooja Reminder</h2>
+        <div class="container mt-4">
+            <h2 class="text-center mb-4">Pooja Reminder</h2>
 
-    <div class="d-flex flex-wrap justify-content-end gap-2 mb-4">
-        <button class="btn btn-outline-secondary btn-filter active" data-type="offline">Offline Puja</button>
-        <button class="btn btn-outline-secondary btn-filter" data-type="online">Online Puja</button>
-        <button class="btn btn-outline-secondary btn-filter" data-type="mob">Mob Puja</button>
-    </div>
+            <div class="d-flex flex-wrap justify-content-end gap-2 mb-4">
+                <button class="btn btn-outline-secondary btn-filter active" data-type="offline">Offline Puja</button>
+                <button class="btn btn-outline-secondary btn-filter" data-type="online">Online Puja</button>
+                <button class="btn btn-outline-secondary btn-filter" data-type="mob">Mob Puja</button>
+            </div>
 
-    <h4 class="mb-3">Today’s Schedule</h4>
-    <div class="row row-cols-1 row-cols-md-2 g-4" id="pujaContainer"></div>
+            <h4 class="mb-3">Today’s Schedule</h4>
+            <div class="row row-cols-1 row-cols-md-2 g-4" id="pujaContainer"></div>
 
-    <div class="d-flex justify-content-between align-items-center mt-5">
-        <h4 class="mb-3">Upcoming Schedule</h4>
-        <button class="reminder-btn">
-        <img src="<?php echo base_url() . 'assets/images/Pujari/Alarm Plus.png'; ?>" alt="Caret Icon" >
-        Set Reminder
-    </button>
-    </div>
-    <div class="row row-cols-1 row-cols-md-2 g-4" id="upcomingPujaContainer"></div>
-</div>
+            <div class="d-flex justify-content-between align-items-center mt-5">
+                <h4 class="mb-3">Upcoming Schedule</h4>
+                <a href="<?php echo base_url() . 'PujariUser/PujariDashboard'; ?>" class="reminder-btn text-decoration-none">
+                    <img src="<?php echo base_url() . 'assets/images/Pujari/Alarm Plus.png'; ?>" alt="Caret Icon">
+                    Set Reminder
+                </a>
+
+            </div>
+            <div class="row row-cols-1 row-cols-md-2 g-4" id="upcomingPujaContainer"></div>
+        </div>
 
     </div>
     <footer>
