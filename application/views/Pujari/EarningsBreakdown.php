@@ -65,7 +65,7 @@
 </h5>
             <div class="table-container">
                 <h5>Offline puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('offline')">Filter</button></h5>
-                <div class="filter-dropdown" id="offlineFilterDropdown">
+                <div class="filter-dropdown text-end" id="offlineFilterDropdown">
                     <select id="offlineFilter" onchange="filterData('offline')">
                         <option value="">All</option>
                         <option value="Rahu-ketu">Rahu-ketu</option>
@@ -102,7 +102,7 @@
 
             <div class="table-container">
                 <h5>Online puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('online')">Filter</button></h5>
-                <div class="filter-dropdown" id="onlineFilterDropdown">
+                <div class="filter-dropdown text-end" id="onlineFilterDropdown">
                     <select id="onlineFilter" onchange="filterData('online')">
                         <option value="">All</option>
                         <option value="Rahu-ketu">Rahu-ketu</option>
@@ -144,7 +144,7 @@
 
             <div class="table-container">
                 <h5>Mob puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('mob')">Filter</button></h5>
-                <div class="filter-dropdown" id="mobFilterDropdown">
+                <div class="filter-dropdown text-end " id="mobFilterDropdown">
                     <select id="mobFilter" onchange="filterData('mob')" >
                         <option value="">All</option>
                         <option value="Rahu-ketu">Rahu-ketu</option>

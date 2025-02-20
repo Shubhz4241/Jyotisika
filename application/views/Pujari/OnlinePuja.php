@@ -11,73 +11,113 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #f9f9f9;
-            font-family: 'Montserrat', serif;
-        }
+    body {
+        background-color: #f9f9f9;
+        font-family: 'Montserrat', serif;
+    }
 
-        .container {
-            padding-top: 20px;
-        }
+    .container {
+        padding-top: 20px;
+    }
 
-        .filter-buttons {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
+    .filter-buttons {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
 
-        .filter-buttons button {
-            border: none;
-            border-radius: 20px;
-            padding: 8px 20px;
-            margin-left: 10px;
-            background-color: #fff;
-            color: black;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    .filter-buttons button {
+        border: none;
+        border-radius: 20px;
+        padding: 8px 20px;
+        margin-left: 10px;
+        background-color: #fff;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-        .filter-buttons button.active,
-        .filter-buttons button:hover {
-            background-color: #f5c71a;
-            color: #fff;
-        }
+    .filter-buttons button.active,
+    .filter-buttons button:hover {
+        background-color: #f5c71a;
+        color: #fff;
+    }
 
+    /* Responsive Table */
+    .table-container {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        overflow-x: auto;
+        min-height: 250px;
+    }
+
+    .table {
+        width: 100%;
+        table-layout: auto;
+        white-space: nowrap;
+    }
+
+    .table th {
+        background-color: orange;
+        color: #fff;
+        text-align: center;
+        padding: 12px;
+    }
+
+    .table td {
+        text-align: center;
+        padding: 10px;
+        word-wrap: break-word;
+        font-size: 16px;
+    }
+
+    .table img {
+        width: 100%;
+        max-width: 80px;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
         .table-container {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
             overflow-x: auto;
-            min-height: 250px;
-            /* Ensures stable height */
         }
 
         .table {
+            display: block;
             width: 100%;
-            table-layout: fixed;
-            /* Prevents table shifting */
+            overflow-x: auto;
+            white-space: nowrap;
         }
 
-        .table th {
-            background-color: orange;
-            color: #fff;
-            text-align: center;
-            padding: 12px;
-        }
-
+        .table th, 
         .table td {
-            text-align: center;
-            padding: 10px;
+            font-size: 14px;
+            padding: 8px;
         }
 
         .table img {
-            width: 60px;
-            height: auto;
-            border-radius: 10px;
+            max-width: 60px;
         }
-    </style>
+    }
+
+    @media (max-width: 480px) {
+        .table th, 
+        .table td {
+            font-size: 12px;
+            padding: 6px;
+        }
+
+        .table img {
+            max-width: 50px;
+        }
+    }
+</style>
+
 </head>
 
 <body>
