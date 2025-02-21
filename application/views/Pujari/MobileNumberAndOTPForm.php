@@ -6,30 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Number and OTP Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: white;
+            background-image: url('<?php echo base_url("assets/images/Pujari/OTPVarificationForm.png"); ?>');
             min-height: 100vh;
             margin: 0;
-            padding: 0px;
-            width: 100%;
-            font-family: "Montserrat", serif;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-family: "Montserrat", sans-serif;
         }
 
         #form-container {
-            background-color: #D9D9D952;
-            padding: 30px;
+            background-color: white;
+            padding: 40px 25px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
         }
 
         .btn-custom {
@@ -42,7 +38,7 @@
         }
 
         .logo-container img {
-            width: 150px;
+            width: 170px;
             display: block;
             margin: 0 auto 20px;
         }
@@ -60,7 +56,7 @@
 
         #success-message img {
             width: 100px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         #success-message p {
@@ -78,19 +74,23 @@
 </head>
 
 <body>
-    <!-- Mobile Number Form -->
+
     <div id="form-container">
+        <!-- Mobile Number Form -->
         <div id="mobile-form">
             <div class="logo-container">
                 <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
             <form>
                 <div class="mb-3">
-                    <label for="mobile" class="form-label">Mobile Number</label>
+                    <label for="mobile" class="form-label">Mobile No</label>
                     <input type="tel" class="form-control" id="mobile" placeholder="Enter Mobile Number" maxlength="10" required oninput="validateMobileNumber(this)">
                     <button type="button" id="getOtpBtn" class="btn btn-custom mt-3 w-100" style="display: none;">Get OTP</button>
                 </div>
             </form>
+            <div class="text-center mt-3">
+                <p>Don’t have an account? <a href="#" class="text-primary">Register now</a></p>
+            </div>
         </div>
 
         <!-- OTP Form -->
@@ -98,7 +98,7 @@
             <div class="logo-container">
                 <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
-            <p class="text-center">We have sent an OTP to your mobile number</p>
+            <p class="text-center">We have Sent the code on +91************95</p>
             <form>
                 <div class="d-flex justify-content-between mb-3">
                     <input type="text" class="form-control text-center me-2" maxlength="1" required>
@@ -106,7 +106,15 @@
                     <input type="text" class="form-control text-center me-2" maxlength="1" required>
                     <input type="text" class="form-control text-center" maxlength="1" required>
                 </div>
+
+
+
                 <button type="button" id="verifyOtpBtn" class="btn btn-custom w-100">Verify OTP</button>
+                <!-- Resend OTP Timer Section -->
+                <div class="text-center mb-3">
+                    <span id="resendTimer">Resend OTP in <span id="countdown">00:30</span></span>
+                    <button type="button" id="resendOtpBtn" class="btn btn-link p-1" style="display: none;">Resend OTP</button>
+                </div>
             </form>
         </div>
 
@@ -128,6 +136,10 @@
         const mobileInput = document.getElementById('mobile');
         const getOtpBtn = document.getElementById('getOtpBtn');
         const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+        const otpMessage = document.querySelector('#otp-form p');
+        const countdownElement = document.getElementById('countdown');
+        const resendOtpBtn = document.getElementById('resendOtpBtn');
+        let countdown;
 
         // Validate and display 'Get OTP' button
         function validateMobileNumber(input) {
@@ -137,8 +149,40 @@
 
         // Show OTP form when 'Get OTP' is clicked
         getOtpBtn.addEventListener('click', () => {
-            mobileForm.style.display = 'none';
-            otpForm.style.display = 'block';
+            if (mobileInput.value.length === 10) {
+                let firstTwo = mobileInput.value.substring(0, 2);
+                let lastTwo = mobileInput.value.substring(8, 10);
+                otpMessage.innerHTML = `We have Sent the code on +91 ${firstTwo}******${lastTwo}`;
+                mobileForm.style.display = 'none';
+                otpForm.style.display = 'block';
+                startCountdown();
+            }
+        });
+
+        // Start OTP Countdown Timer
+        function startCountdown() {
+            let timeLeft = 30;
+            resendOtpBtn.style.display = 'none';
+            countdownElement.textContent = `00:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
+
+            countdown = setInterval(() => {
+                timeLeft--;
+                countdownElement.textContent = `00:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    document.getElementById('resendTimer').style.display = 'none';
+                    resendOtpBtn.style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        // Resend OTP Function
+        resendOtpBtn.addEventListener('click', () => {
+            resendOtpBtn.style.display = 'none';
+            document.getElementById('resendTimer').style.display = 'block';
+            startCountdown();
+            // Add OTP resend functionality here if needed
         });
 
         // Show success message when 'Verify OTP' is clicked

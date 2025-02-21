@@ -127,3 +127,4 @@ $route['MobileNumberAndOTPForm']='PujariUser/MobileNumberAndOTPForm';
 $route['PujaReminder']='PujariUser/PujaReminder';
 $route['PujaReminder2']='PujariUser/PujaReminder2';
 $route['PujaReminder3']='PujariUser/PujaReminder3';
+$route['UserSelection']='PujariUser/UserSelection';
