@@ -172,6 +172,38 @@
         });
     });
 </script>
+<script>
+document.getElementById("pujaForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Get form values
+    let pujaName = document.getElementById("pujaName").value;
+    let pujaType = document.getElementById("pujaType").value;
+    let availabilityDate = document.getElementById("availabilityDate").value;
+    let availabilityTime = document.getElementById("availabilityTime").value;
+
+    if (!pujaName || !pujaType || !availabilityDate || !availabilityTime) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    // Store data in localStorage
+    let pujaList = JSON.parse(localStorage.getItem("pujaList")) || [];
+    pujaList.push({ pujaName, pujaType, availabilityDate, availabilityTime });
+    localStorage.setItem("pujaList", JSON.stringify(pujaList));
+
+    // Show success message and redirect
+    Swal.fire({
+        title: "Success!",
+        text: "Puja form submitted successfully!",
+        icon: "success",
+        confirmButtonText: "OK"
+    }).then(() => {
+        window.location.href = "<?php echo base_url('PujariUser/List'); ?>";
+    });
+});
+</script>
+
 </body>
 
 </html>
