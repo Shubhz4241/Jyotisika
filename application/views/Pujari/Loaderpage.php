@@ -26,7 +26,7 @@
         .background-container {
             width: 100%;
             height: 50vh; /* Background image covers bottom half */
-            background-image: url('<?php echo base_url("assets/images/Pujari/OTPVarificationForm.png"); ?>');
+             /* background-image: url('<?php echo base_url("assets/images/Pujari/OTPVarificationForm.png"); ?>');  */
             background-size: cover;
             background-position: center;
             position: absolute;
@@ -35,7 +35,7 @@
         }
 
         .logo {
-            width: 260px; /* Adjust width */
+            width: 400px; /* Adjust width */
             position: absolute;
             bottom: 58vh; /* Half inside, half outside */
             left: 50%;
@@ -52,7 +52,7 @@
     echo "<script>
         setTimeout(() => {
             window.location.href = '" . base_url('UserSelection') . "';
-        }, " . ($delay * 1000) . ");
+        }, " . ($delay * 1100) . ");
     </script>";
     ?>
 </head>
@@ -63,7 +63,7 @@
     <div class="background-container"></div>
 
     <!-- Logo positioned half inside, half outside the background image -->
-    <img src="<?php echo base_url('assets/images/Pujari/logo.png'); ?>" alt="Logo" class="logo">
+    <img src="<?php echo base_url('assets/images/Pujari/Logo.gif'); ?>" alt="Logo" class="logo">
 
 </body>
 

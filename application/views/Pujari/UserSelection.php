@@ -63,11 +63,14 @@
         }
 
         .user-card img {
-            max-width: 100px;
+            max-width: 140px;
             border: 3px solid orange;
             border-radius: 50%;
             padding: 5px;
             background: #fff;
+        }
+        hr{
+            width: 129px;
         }
     </style>
 </head>
