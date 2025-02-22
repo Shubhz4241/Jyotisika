@@ -8,15 +8,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-image: url('<?php echo base_url("assets/images/Pujari/OTPVarificationForm.png"); ?>');
-            min-height: 100vh;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: "Montserrat", sans-serif;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Background image only covers bottom 50% */
+        .background-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50vh;
+            background-image: url('<?php echo base_url("assets/images/Pujari/OTPVarificationForm.png"); ?>');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
         }
 
         #form-container {
@@ -26,6 +43,8 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
+            position: relative;
+            z-index: 1;
         }
 
         .btn-custom {
@@ -75,6 +94,9 @@
 
 <body>
 
+    <!-- Background Image (Covers bottom half) -->
+    <div class="background-container"></div>
+
     <div id="form-container">
         <!-- Mobile Number Form -->
         <div id="mobile-form">
@@ -106,8 +128,6 @@
                     <input type="text" class="form-control text-center me-2" maxlength="1" required>
                     <input type="text" class="form-control text-center" maxlength="1" required>
                 </div>
-
-
 
                 <button type="button" id="verifyOtpBtn" class="btn btn-custom w-100">Verify OTP</button>
                 <!-- Resend OTP Timer Section -->
@@ -141,13 +161,11 @@
         const resendOtpBtn = document.getElementById('resendOtpBtn');
         let countdown;
 
-        // Validate and display 'Get OTP' button
         function validateMobileNumber(input) {
             input.value = input.value.replace(/[^0-9]/g, ''); // Allow only numbers
             getOtpBtn.style.display = input.value.length === 10 ? 'block' : 'none';
         }
 
-        // Show OTP form when 'Get OTP' is clicked
         getOtpBtn.addEventListener('click', () => {
             if (mobileInput.value.length === 10) {
                 let firstTwo = mobileInput.value.substring(0, 2);
@@ -159,7 +177,6 @@
             }
         });
 
-        // Start OTP Countdown Timer
         function startCountdown() {
             let timeLeft = 30;
             resendOtpBtn.style.display = 'none';
@@ -177,15 +194,12 @@
             }, 1000);
         }
 
-        // Resend OTP Function
         resendOtpBtn.addEventListener('click', () => {
             resendOtpBtn.style.display = 'none';
             document.getElementById('resendTimer').style.display = 'block';
             startCountdown();
-            // Add OTP resend functionality here if needed
         });
 
-        // Show success message when 'Verify OTP' is clicked
         verifyOtpBtn.addEventListener('click', () => {
             otpForm.style.display = 'none';
             successMessage.style.display = 'block';

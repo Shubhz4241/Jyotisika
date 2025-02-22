@@ -63,4 +63,10 @@ class PujariUser extends CI_Controller {
 	public function UserSelection(){
 		$this->load->view('Pujari/UserSelection');
 	}
+	public function Loaderpage(){
+		$this->load->view('Pujari/Loaderpage');
+	}
+	public function RegistrationForm(){
+		$this->load->view('Pujari/RegistrationForm');
+	}
 }
