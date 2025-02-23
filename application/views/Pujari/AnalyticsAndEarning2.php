@@ -44,7 +44,7 @@
         }
 
         .stat-box h3 {
-            font-size: 2rem;
+            font-size: 1.3rem;
             color: black;
         }
 
