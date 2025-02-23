@@ -167,23 +167,31 @@
             ];
 
             function loadTableData(filteredType = 'all') {
-                const tableBody = document.getElementById("pujaTableBody");
-                tableBody.innerHTML = "";
+    const tableBody = document.getElementById("pujaTableBody");
 
-                pujaData.forEach(puja => {
-                    if (filteredType === 'all' || puja.type === filteredType) {
-                        const row = document.createElement("tr");
-                        row.innerHTML = `
-                        <td>${puja.name}</td>
-                        <td><img src="<?php echo base_url(); ?>${puja.image}" alt="${puja.name}" width="250px"></td>
-                        <td>${puja.pujaType}</td>
-                        <td>${puja.date}</td>
-                        <td>${puja.time}</td>
-                    `;
-                        tableBody.appendChild(row);
-                    }
-                });
-            }
+    // Preserve table height to prevent movement
+    tableBody.style.minHeight = tableBody.offsetHeight + "px";
+    tableBody.innerHTML = "";
+
+    let filteredData = pujaData.filter(puja => filteredType === 'all' || puja.type === filteredType);
+
+    if (filteredData.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5">No data available</td></tr>`;
+    } else {
+        filteredData.forEach(puja => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${puja.name}</td>
+                <td><img src="<?php echo base_url(); ?>${puja.image}" alt="${puja.name}" width="250px"></td>
+                <td>${puja.pujaType}</td>
+                <td>${puja.date}</td>
+                <td>${puja.time}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+}
+
 
             function filterData(type) {
                 document.querySelectorAll('.filter-buttons button').forEach(button => button.classList.remove('active'));
