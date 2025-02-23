@@ -144,6 +144,15 @@
             this.value = this.value.replace(/\D/g, '');
         });
     </script>
+    <script>
+    document.getElementById("pujariForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent actual form submission
+        
+        // Redirect directly to success message section in MobileNumberAndOTPForm
+        window.location.href = "<?php echo base_url('MobileNumberAndOTPForm'); ?>?success=true";
+    });
+</script>
+
 </body>
 
 </html>

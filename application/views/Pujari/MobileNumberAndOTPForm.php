@@ -74,7 +74,7 @@
         }
 
         #success-message img {
-            width: 100px;
+            width: 200px;
             margin-bottom: 15px;
         }
 
@@ -111,8 +111,11 @@
                 </div>
             </form>
             <div class="text-center mt-3">
-                <p>Don’t have an account? <a href="#" class="text-primary">Register now</a></p>
+                <p>Don’t have an account?
+                    <a href="<?php echo base_url('RegistrationForm'); ?>" class="text-primary">Register now</a>
+                </p>
             </div>
+
         </div>
 
         <!-- OTP Form -->
@@ -140,12 +143,12 @@
 
         <!-- Success Message -->
         <div id="success-message">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             <div class="checkmark">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/Tick Circle.png' ?>" alt="Logo">
+                <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Logo">
             </div>
-            <p>Yay! Registration completed successfully</p>
-            <small>Note: After reviewing your profile we will schedule an interview to proceed further.</small>
+            <p>Application Submitted Successfully!</p>
+            <small>Thank you for your submission! Our team is reviewing your application. </small>
+            <small>Note:- You will receive an update within 48 hours. If you have any queries, feel free to contact our support team."</small>
         </div>
     </div>
 
@@ -207,6 +210,19 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get("success");
+
+        if (successParam === "true") {
+            document.getElementById('mobile-form').style.display = 'none';
+            document.getElementById('otp-form').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+        }
+    });
+</script>
+
 </body>
 
 </html>
