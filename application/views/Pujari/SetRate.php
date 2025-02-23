@@ -30,7 +30,7 @@
         }
 
         .form-container {
-            background-color: #E0E0E0;
+            background-color: #BDBDBD52;
             padding: 35px;
             border-radius: 10px;
             width: 100%;

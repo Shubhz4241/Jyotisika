@@ -119,6 +119,38 @@
         .bg-success-subtle {
             background-color: #14993E54 !important;
         }
+        .chart-container {
+    width: 90% !important; /* Increased width */
+    max-width: 1000px !important; /* Wider max width */
+}
+
+.pie-chart-container {
+        border: 2px solid gray;
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f9f9f9;
+    }
+
+    .chart-container {
+        width: 90%;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    @media (max-width: 768px) {
+        .chart-container {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .chart-container canvas {
+            height: 200px !important;
+        }
+    }
     </style>
 </head>
 
@@ -182,77 +214,103 @@
     </div>
 
     <div class="chart-container p-3">
-        <div class="d-flex justify-content-between align-items-center">
-            <h4 class="text-center mb-0">Mob Puja</h4>
-            <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
-        </div>
-        <div class="mt-3">
-            <canvas id="mobChart"></canvas>
-        </div>
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="text-center mb-0">Mob Puja</h4>
+        <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
+    </div>
+    <div class="mt-3 pie-chart-container"> 
+        <canvas id="mobChart"></canvas>
     </div>
 </div>
 
+</div>
 
-    <script>
-        function renderChart(chartId, labels, datasets) {
-            const ctx = document.getElementById(chartId).getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: datasets
+
+<script>
+    function renderBarChart(chartId, labels, datasets) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        new Chart(ctx, {
+            type: 'bar', // Converted to bar chart
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
                 },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 2, // Set step size for Y-axis
-                                font: {
-                                    size: 12
-                                }
-                            },
-                            max: 10
-                        }
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 2,
+                            font: {
+                                size: 12
+                            }
+                        },
+                        max: 10
                     }
                 }
-            });
-        }
-
-        const labels = ['Rahu-Ketu', 'Wealth', 'Ghar-shanti'];
-        const datasets = [{
-                label: 'December',
-                data: [4, 6, 8],
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
-            },
-            {
-                label: 'November',
-                data: [3, 7, 6],
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                fill: true,
-            },
-            {
-                label: 'October',
-                data: [5, 4, 9],
-                borderColor: 'rgba(54, 162, 235, 1)',
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                fill: true,
             }
-        ];
+        });
+    }
 
-        renderChart('offlineChart', labels, datasets);
-        renderChart('onlineChart', labels, datasets);
-        renderChart('mobChart', labels, datasets);
-    </script>
+    function renderPieChart(chartId, labels, data) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut', // Doughnut for a similar look
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: ['#ff7f7f', '#36a2eb', '#8a6be1'], // Matching colors
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                cutout: '50%' // To make it look like a ring
+            }
+        });
+    }
+
+   
+
+    const labels = ['Rahu-Ketu', 'Wealth', 'Ghar-shanti'];
+    const datasets = [{
+            label: 'December',
+            data: [4, 6, 8],
+            backgroundColor: 'rgba(75, 192, 192, 0.6)'
+        },
+        {
+            label: 'November',
+            data: [3, 7, 6],
+            backgroundColor: 'rgba(255, 99, 132, 0.6)'
+        },
+        {
+            label: 'October',
+            data: [5, 4, 9],
+            backgroundColor: 'rgba(54, 162, 235, 0.6)'
+        }
+    ];
+
+    renderBarChart('offlineChart', labels, datasets);
+    renderBarChart('onlineChart', labels, datasets);
+    renderPieChart('mobChart', ['Rahu-Ketu', 'Wealth', 'Ghar-Shanti'], [38, 23, 39]);</script>
+
     </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
