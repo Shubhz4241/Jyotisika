@@ -69,4 +69,7 @@ class PujariUser extends CI_Controller {
 	public function RegistrationForm(){
 		$this->load->view('Pujari/RegistrationForm');
 	}
+	public function TodaysSchedule(){
+		$this->load->view('Pujari/TodaysSchedule');
+	}
 }

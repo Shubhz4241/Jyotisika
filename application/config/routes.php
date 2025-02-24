@@ -130,3 +130,4 @@ $route['PujaReminder3']='PujariUser/PujaReminder3';
 $route['UserSelection']='PujariUser/UserSelection';
 $route['Loaderpage']='PujariUser/Loaderpage';
 $route['RegistrationForm']='PujariUser/RegistrationForm';
+$route['TodaysSchedule']='PujariUser/TodaysSchedule';
