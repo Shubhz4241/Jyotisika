@@ -11,14 +11,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         body {
+
             font-family: 'Montserrat', serif;
-            background-color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-image: url('<?php echo base_url("assets/images/Pujari/OTPVarificationForm.png"); ?>');
+            background-position: center bottom;
+            /* Position image at the bottom */
+            background-size: 100% auto;
+            /* Full width, auto height */
+            background-repeat: no-repeat;
+            /* Prevent repeating */
+            background-attachment: fixed;
+            /* Keeps the image fixed */
             min-height: 100vh;
             margin: 0;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
@@ -28,8 +37,9 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 800px;
-            margin-top: 50px;
+            /* margin-top: 50px; */
             margin-bottom: 50px;
+            
         }
 
         .form-group {
