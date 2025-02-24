@@ -73,6 +73,36 @@
             background-color: #ddd;
             margin-bottom: 20px;
         }
+
+        #fileList {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        /* File item styling */
+        .file-item {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 6px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        /* Remove (Cross) Button Styling */
+        .remove-file {
+            background: none;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -124,15 +154,13 @@
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Aadhaar Card</label>
-                    <select class="form-control" id="aadhaar" required>
-                        <option value="">Select</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
+                    <input type="file" class="form-control" id="aadhaarCard" accept=".pdf,.jpg,.png" required>
                 </div>
+
                 <div class="col-md-6 form-group">
                     <label>Certificates (optional)</label>
-                    <input type="file" class="form-control" id="certificates" accept=".pdf,.jpg,.png">
+                    <input type="file" class="form-control" id="certificates" accept=".pdf,.jpg,.png" multiple>
+                    <div id="fileList" class="mt-2"></div>
                 </div>
             </div>
             <button type="submit" class="btn btn-custom mt-3">Submit</button>
@@ -145,14 +173,64 @@
         });
     </script>
     <script>
-    document.getElementById("pujariForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent actual form submission
-        
-        // Redirect directly to success message section in MobileNumberAndOTPForm
-        window.location.href = "<?php echo base_url('MobileNumberAndOTPForm'); ?>?success=true";
-    });
-</script>
+        document.getElementById("pujariForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent actual form submission
 
+            // Redirect directly to success message section in MobileNumberAndOTPForm
+            window.location.href = "<?php echo base_url('MobileNumberAndOTPForm'); ?>?success=true";
+        });
+    </script>
+
+    <script>
+        let selectedFiles = []; // Store selected files
+
+        document.getElementById("certificates").addEventListener("change", function(event) {
+            let newFiles = Array.from(event.target.files);
+
+            // Merge new files with previously selected ones
+            selectedFiles = [...selectedFiles, ...newFiles];
+
+            displayFiles(); // Show updated list
+        });
+
+        function displayFiles() {
+            const fileList = document.getElementById("fileList");
+            fileList.innerHTML = ""; // Clear the list before re-rendering
+
+            const row = document.createElement("div");
+            row.classList.add("row", "gx-2"); // Bootstrap row with gap reduction
+
+            selectedFiles.forEach((file, index) => {
+                const fileItem = document.createElement("div");
+                fileItem.classList.add("col-4", "p-1"); // 3 files per row
+
+                fileItem.innerHTML = `
+            <div class="file-item d-flex justify-content-between align-items-center">
+                <span class="text-truncate">${file.name}</span>
+                <button type="button" class="text-danger remove-file" data-index="${index}" title="Remove">❌</button>
+            </div>
+        `;
+
+                row.appendChild(fileItem);
+            });
+
+            fileList.appendChild(row);
+            attachRemoveEvents(); // Attach event listeners after rendering
+        }
+
+        function attachRemoveEvents() {
+            document.querySelectorAll(".remove-file").forEach(button => {
+                button.addEventListener("click", function() {
+                    removeFile(button.getAttribute("data-index"));
+                });
+            });
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1); // Remove file from array
+            displayFiles(); // Refresh file list
+        }
+    </script>
 </body>
 
 </html>
