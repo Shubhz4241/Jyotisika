@@ -8,7 +8,7 @@
         .navbar {
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 10px 70px;
+            padding: 10px 40px;
             position: fixed;
             width: 100%;
             top:0;
