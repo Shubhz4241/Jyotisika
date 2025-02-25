@@ -202,12 +202,11 @@
 </head>
 
 <body>
-
     <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
 
-    <div style="min-height: 100vh;">
+    <div>
         <main>
             <section class="dashboard-sections container">
                 <div class="row text-center mb-4">
@@ -317,7 +316,7 @@
                     <div class="container mt-5">
                         <h5 class="mb-3 text-Start" style="text-align: start;">User Reviews</h5>
 
-                        <div class="review-container">
+                        <div class="review-container" style="width:100%;">
                             <!-- Left Arrow -->
                             <button class="carousel-btn left" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
                                 <img src="<?php echo base_url() . 'assets\images\Pujari\Caret Left (3).png'; ?>" alt="Previous">
