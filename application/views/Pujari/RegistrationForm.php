@@ -39,7 +39,7 @@
             max-width: 800px;
             /* margin-top: 50px; */
             margin-bottom: 50px;
-            
+
         }
 
         .form-group {
@@ -79,10 +79,14 @@
 
         hr {
             border: 0;
-            height: 1px;
+            height: 6px;
             background-color: #ddd;
             margin-bottom: 20px;
+            color:#99AFCD;
+            width: 90px;
+            border-radius: 14px;
         }
+
 
         #fileList {
             display: flex;
@@ -105,6 +109,7 @@
             width: 100%;
             border: 1px solid #ddd;
         }
+
 
         /* Remove (Cross) Button Styling */
         .remove-file {
@@ -165,6 +170,11 @@
                 <div class="col-md-6 form-group">
                     <label>Aadhaar Card</label>
                     <input type="file" class="form-control" id="aadhaarCard" accept=".pdf,.jpg,.png" required>
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label>Experience (in years)</label>
+                    <input type="number" class="form-control" id="experience" required min="0" max="50" placeholder="Enter experience in years">
                 </div>
 
                 <div class="col-md-6 form-group">
