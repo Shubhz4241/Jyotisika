@@ -12,4 +12,50 @@ class AstrologerUser extends CI_Controller {
 	public function AstrologerFooter(){
 		$this->load->view('Astrologer/AstrologerFooter');
 	}
+	public function RegisterForm(){
+		$this->load->view('Astrologer/RegisterForm');
+	}
+	public function AnalyticsandEarning1(){
+		$this->load->view('Astrologer/AnalyticsandEarning1');
+	}
+	public function AnalyticsAndEarning2(){
+		$this->load->view('Astrologer/AnalyticsAndEarning2');
+	}
+	public function EarningsBreakdown(){
+		$this->load->view('Astrologer/EarningsBreakdown');
+	}
+	public function List(){
+		$this->load->view('Astrologer/List');
+	}
+	public function Loaderpage(){
+		$this->load->view('Astrologer/Loaderpage');
+	}
+	public function MobileNumberAndOTPForm(){
+		$this->load->view('Astrologer/MobileNumberAndOTPForm');
+	}
+	public function MonthlyEarningsBreakdown(){
+		$this->load->view('Astrologer/MonthlyEarningsBreakdown');
+	}
+	public function ProfileForm(){
+		$this->load->view('Astrologer/ProfileForm');
+	}
+	public function AstrologerReg(){
+		$this->load->view('Astrologer/AstrologerReg');
+	}
+	public function RecentRequest(){
+		$this->load->view('Astrologer/RecentRequest');
+	}
+	public function RegistrationForm(){
+		$this->load->view('Astrologer/RegistrationForm');
+	}
+	public function AstrologyAndSpiritualServices1(){
+		$this->load->view('Astrologer/AstrologyAndSpiritualServices1');
+	}
+	public function AstrologyAndSpiritualServices2(){
+		$this->load->view('Astrologer/AstrologyAndSpiritualServices2');
+	}
+	
+
+
+
 }
