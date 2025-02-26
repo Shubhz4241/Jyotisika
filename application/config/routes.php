@@ -146,6 +146,6 @@ $route['MobileNumberAndOTPForm']='AstrologerUser/MobileNumberAndOTPForm';
 $route['MonthlyEarningsBreakdown']='AstrologerUser/MonthlyEarningsBreakdown';
 $route['ProfileForm']='AstrologerUser/ProfileForm';
 $route['AstrologerReg']='AstrologerUser/AstrologerReg';
-$route['RecentRequest']='AstrologerUser/RecentRequest';
+$route['AstrologerRecentRequest']='AstrologerUser/AstrologerRecentRequest';
 $route['RegistrationForm']='AstrologerUser/RegistrationForm';
 $route['AstrologyAndSpiritualServices1']='AstrologerUser/AstrologyAndSpiritualServices1';

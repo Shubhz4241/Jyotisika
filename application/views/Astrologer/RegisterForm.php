@@ -21,12 +21,12 @@
         }
 
         .form-container {
-            background-color: #D9D9D985;
+            background-color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
         }
 
         .logo-container {
@@ -35,8 +35,9 @@
         }
 
         .logo-container img {
-            width: 120px;
+            width: 140px;
             height: auto;
+            margin-bottom: 30px;
         }
 
         .success-icon {
@@ -59,13 +60,16 @@
                 width: 100px;
             }
         }
+        h4{
+            color: green !important;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="container">
-        <div class="form-container mx-auto">
+        <div class="form-container mx-auto" id="formContainer">
             <div class="logo-container">
                 <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
@@ -159,16 +163,39 @@
                 return;
             }
 
-            document.querySelector(".form-container").innerHTML = `
+            // Save success state to localStorage
+            localStorage.setItem("registrationSuccess", "true");
+
+            document.getElementById("formContainer").innerHTML = `
                 <div class="text-center">
+                    <div class="logo-container">
+                        <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+                    </div>
                     <img src="<?php echo base_url() . 'assets/images/Pujari/Tick Circle.png' ?>" alt="Success" width="100">
-                    <h2 class="mt-3">Registration Successful!</h2>
-                    <p>After reviewing your profile, we will schedule an interview.</p>
+                    <h4 class="mt-3 mb-5">Yay ! registration completed successfully</h4>
+                    <p>Note:Note: After reviewing your profile we will schedule an interview to proceed further.</p>
                 </div>
             `;
         });
+
+        // Check if registration was successful before page reload
+        window.onload = function() {
+            if (localStorage.getItem("registrationSuccess") === "true") {
+                document.getElementById("formContainer").innerHTML = `
+                    <div class="text-center">
+                        <div class="logo-container">
+                            <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+                        </div>
+                        <img src="<?php echo base_url() . 'assets/images/Pujari/Tick Circle.png' ?>" alt="Success" width="100">
+                        <h4 class="mt-3 mb-5">Yay ! registration completed successfully</h4>
+                        <p>Note: After reviewing your profile we will schedule an interview to proceed further.</p>
+                    </div>
+                `;
+            }
+        };
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

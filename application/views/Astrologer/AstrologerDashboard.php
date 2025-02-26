@@ -245,7 +245,7 @@
                         <!-- Heading and View All Button (Only Once) -->
                         <div class="col-12 mt-5 d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Recent Request</h5>
-                            <a href="<?php echo base_url('PujariUser/RecentRequest'); ?>">View All</a>
+                            <a href="<?php echo base_url('AstrologerUser/AstrologerRecentRequest'); ?>">View All</a>
                         </div>
 
                         <!-- First Card -->
