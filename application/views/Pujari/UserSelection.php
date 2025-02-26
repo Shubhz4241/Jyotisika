@@ -69,7 +69,8 @@
             padding: 5px;
             background: #fff;
         }
-        hr{
+
+        hr {
             width: 129px;
         }
     </style>
@@ -87,7 +88,7 @@
                 <img src="<?php echo base_url('assets/images/Pujari/User.png'); ?>" alt="User">
                 <h5>User</h5>
             </div>
-            <div class="user-card">
+            <div class="user-card" onclick="redirectToOTPForm()">
                 <img src="<?php echo base_url('assets/images/Pujari/Pujari.png'); ?>" alt="Pujari">
                 <h5>Pujari</h5>
             </div>
@@ -99,6 +100,11 @@
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function redirectToOTPForm() {
+            window.location.href = "<?php echo base_url('MobileNumberAndOTPForm'); ?>";
+        }
+    </script>
 </body>
 
 </html>
