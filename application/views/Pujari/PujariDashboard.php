@@ -217,7 +217,6 @@
                                 <a href="<?php echo base_url() . 'PujariUser/TodaysSchedule'; ?>">
                                 <h6>Today's Schedule</h6>
                                 </a>
-                                
                             </div>
                         </div>
                     </div>

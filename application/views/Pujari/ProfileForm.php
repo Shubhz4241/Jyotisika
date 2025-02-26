@@ -118,20 +118,24 @@
             margin: auto;
             margin-bottom: 25px;
         }
+
         .form-label {
-    font-weight: bold;
-    margin-bottom: 5px; /* Adds spacing between labels and inputs */
-}
+            font-weight: bold;
+            margin-bottom: 5px;
+            /* Adds spacing between labels and inputs */
+        }
 
-.form-control {
-    margin-bottom: 20px; /* Increases space between input fields */
-    padding: 10px; /* Optional: Makes input fields more spacious */
-}
+        .form-control {
+            margin-bottom: 20px;
+            /* Increases space between input fields */
+            padding: 10px;
+            /* Optional: Makes input fields more spacious */
+        }
 
-.save-btn {
-    margin-top: 15px; /* Adds spacing above the save button */
-}
-
+        .save-btn {
+            margin-top: 15px;
+            /* Adds spacing above the save button */
+        }
     </style>
 </head>
 
@@ -179,18 +183,35 @@
                     <button type="submit" class="save-btn">Save Changes</button>
                 </form>
 
-                <form id="advanced" class="form-container">
-                    <label class="form-label">Add Pooja</label>
-                    <input type="text" class="form-control" required>
-                    <label class="form-label">Availability Day</label>
-                    <input type="text" class="form-control" value="Monday - Friday" required>
-                    <label class="form-label">Availability Time</label>
-                    <div class="d-flex">
-                        <input type="text" class="form-control me-2" value="9:30 AM" required>
-                        <input type="text" class="form-control" value="6:00 PM" required>
+                <form id="advanced" class="form-container p-3">
+                    <div class="mb-3">
+                        <label for="pujaName" class="form-label fw-bold">Add Pooja</label>
+                        <select class="form-select" id="pujaName" required>
+                            <option value="" disabled selected>Select Puja</option>
+                            <option value="Ganesh Puja">Ganesh Puja</option>
+                            <option value="Lakshmi Puja">Lakshmi Puja</option>
+                            <option value="Saraswati Puja">Saraswati Puja</option>
+                            <option value="Shiv Puja">Shiv Puja</option>
+                        </select>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Availability Day</label>
+                        <input type="text" class="form-control" value="Monday - Friday" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Availability Time</label>
+                        <div class="d-flex flex-column flex-md-row gap-2">
+                            <input type="text" class="form-control" value="9:30 AM" required>
+                            <input type="text" class="form-control" value="6:00 PM" required>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
                     <button type="submit" class="save-btn">Save Changes</button>
+                    </div>
                 </form>
+
             </div>
         </div>
     </div>
