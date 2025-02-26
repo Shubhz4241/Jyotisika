@@ -76,11 +76,13 @@
         .square-box h5 {
             font-size: 16px;
             margin-bottom: 5px;
+            color:black;
         }
 
         .square-box h2 {
             font-size: 30px;
             font-weight: bold;
+            color:black;
         }
 
         @media (max-width: 768px) {
