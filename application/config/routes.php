@@ -131,3 +131,6 @@ $route['UserSelection']='PujariUser/UserSelection';
 $route['Loaderpage']='PujariUser/Loaderpage';
 $route['RegistrationForm']='PujariUser/RegistrationForm';
 $route['TodaysSchedule']='PujariUser/TodaysSchedule';
+
+// Astrologer Module
+$route['AstrologerDashboard']='AstrologerUser/AstrologerDashboard';
