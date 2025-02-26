@@ -203,63 +203,54 @@
 
 <body>
     <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
 
     <div>
         <main>
             <section class="dashboard-sections container">
                 <div class="row text-center mb-4">
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <div class="card py-3" style="border-radius:0;">
-                                <div class="icon-box green">📅</div>
-                                <a href="<?php echo base_url() . 'PujariUser/TodaysSchedule'; ?>">
-                                <h6>Today's Schedule</h6>
-                                </a>
+                    <div class="col-12 row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 ">
+                            <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
+                                <div class="card py-3" style="border-radius:0;">
+                                    <div class="icon-box green">📅</div>
+                                    <a href="<?php echo base_url() . 'PujariUser/TodaysSchedule'; ?>">
+                                        <h6>Today's Schedule</h6>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#BB97C1; padding:6px 2px; padding-bottom:20px; border:3px solid #BB97C1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <div class="card py-3" style="border-radius:0;">
-                                <div class="icon-box purple">🕒</div>
-                                <h6>Upcoming Puja's</h6>
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 ">
+                            <div style="background-color:#BB97C1; padding:6px 2px; padding-bottom:20px; border:3px solid #BB97C1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
+                                <div class="card py-3" style="border-radius:0;">
+                                    <div class="icon-box purple">🕒</div>
+                                    <h6>Total Users</h6>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#FF2E11BF; padding:6px 2px; padding-bottom:20px; border:3px solid #FF2E11BF; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <div class="card py-3" style="border-radius:0;">
-                                <div class="icon-box red">📜</div>
-                                <a href="<?php echo base_url() . 'PujariUser/SetRate'; ?>">
-                                    <h6>Rate Chart</h6>
-                                </a>
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 ">
+                            <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
+                                <div class="card py-3" style="border-radius:0;">
+                                    <div class="icon-box red">📜</div>
+                                    <a href="<?php echo base_url() . 'PujariUser/SetRate'; ?>">
+                                        <h6>Requests</h6>
+                                    </a>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <div class="card py-3" style="border-radius:0;">
-                                <div class="icon-box yellow">➕</div>
-                                <a href="<?php echo base_url() . 'PujariUser/PujaForm'; ?>">
-                                    <h6>Add Puja's</h6>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="row g-4">
-                        <!-- Recent Request Section -->
-                        <div class="col-lg-6 mt-5">
-                            <div class="d-flex justify-content-between ">
-                                <h5 class="mb-0">Recent Request</h5>
-                                <a href="<?php echo base_url('PujariUser/RecentRequest'); ?>">View All</a>
-                            </div>
+                        <!-- Heading and View All Button (Only Once) -->
+                        <div class="col-12 mt-5 d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Recent Request</h5>
+                            <a href="<?php echo base_url('PujariUser/RecentRequest'); ?>">View All</a>
+                        </div>
 
-                            <div class="card mt-3 card1 h-100">
+                        <!-- First Card -->
+                        <div class="col-lg-6 col-md-6 mt-3">
+                            <div class="card card1 h-100">
                                 <div class="d-flex flex-column flex-md-row h-100">
                                     <div class="image-container" style="height:100%;">
                                         <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>"
@@ -276,44 +267,27 @@
                             </div>
                         </div>
 
-                        <!-- Puja Reminder Section -->
-                        <div class="col-lg-6 mt-5">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Puja Reminder</h5>
-                                <a href="<?php echo base_url('PujariUser/PujaReminder2'); ?>">View All</a>
-                            </div>
-
-                            <div class="card mt-3 card1 h-100">
-                                <div class="d-flex flex-column flex-md-row" style="height:100%;">
+                        <!-- Second Card -->
+                        <div class="col-lg-6 col-md-6 mt-3">
+                            <div class="card card1 h-100">
+                                <div class="d-flex flex-column flex-md-row h-100">
                                     <div class="image-container" style="height:100%;">
                                         <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>"
                                             alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
                                     </div>
                                     <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
-                                        <h5>Puja - Rudraabhishek Puja</h5>
-                                        <p><strong>Date:</strong> 12/1/2025</p>
-                                        <p><strong>Time:</strong> 10:30 AM</p>
-                                        <p>
-                                            <strong><img src="<?php echo base_url('assets/images/Pujari/icon.png'); ?>"
-                                                    alt="Languages" class="img-fluid" width="15px"></strong>
-                                            English, Hindi, Marathi
-                                        </p>
-                                        <p>
-                                            <strong><img src="<?php echo base_url('assets/images/Pujari/graduate-cap_svgrepo.com.png'); ?>"
-                                                    alt="Experience" class="img-fluid" width="19px"> Exp:</strong> 23 years
-                                        </p>
-                                        <p><strong>Price:</strong> <span class="discount">₹710</span> ₹500</p>
-                                        <p><strong>Attendees:</strong> 104</p>
-                                        <p class="text-danger">
-                                            <img src="<?php echo base_url('assets/images/Pujari/time-filled_svgrepo.com.png'); ?>"
-                                                alt="Countdown" class="img-fluid" width="19px">
-                                            Starts in: 1d 4h 23m
-                                        </p>
+                                        <h6>John Doe</h6>
+                                        <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 | Time: 10:30 AM<br> Location: Nashik</p>
+                                        <p>Padit Colony Nashik</p>
+                                        <button class="btn btn-success btn-sm">Accept</button>
+                                        <button class="btn btn-danger btn-sm">Reject</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
 
                     <div class="container mt-5">
                         <h5 class="mb-3 text-Start" style="text-align: start;">User Reviews</h5>
@@ -386,7 +360,7 @@
 
 
     <footer>
-        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
