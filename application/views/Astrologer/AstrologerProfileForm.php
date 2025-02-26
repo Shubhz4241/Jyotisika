@@ -141,7 +141,7 @@
 
 <body>
     <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
     <div style="min-height: 100vh;">
         <div style="width: 100%; display: flex; justify-content: center;">
@@ -168,6 +168,18 @@
                     </select>
                     <label class="form-label">Date of Birth</label>
                     <input type="date" class="form-control" required>
+                    <div class="mb-3">
+                <label class="form-label">Place of Birth</label>
+                <input type="text" class="form-control" id="placeOfBirth" required>
+                <div class="invalid-feedback">Please enter your place of birth.</div>
+            </div>
+
+            <!-- New Field: Current Address -->
+            <div class="mb-3">
+                <label class="form-label">Current Address</label>
+                <input type="text" class="form-control" id="currentAddress" required>
+                <div class="invalid-feedback">Please enter your current address.</div>
+            </div>
                     <button type="submit" class="save-btn">Save Changes</button>
                 </form>
 
