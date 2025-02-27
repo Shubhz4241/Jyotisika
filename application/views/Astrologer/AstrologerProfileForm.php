@@ -137,7 +137,7 @@
             margin-top: 15px;
             /* Adds spacing above the save button */
         }
-        
+
 
         .dropdown-container {
             position: relative;
@@ -201,7 +201,7 @@
     <header>
         <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
-    <div>
+    <div style="min-height: 100vh;" class="py-3">
         <div style="width: 100%; display: flex; justify-content: center;">
             <div class="profile-container">
                 <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>" class="profilei" alt="Profile" alt="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>">
@@ -215,7 +215,7 @@
                     <label class="form-label">Name</label>
                     <input type="text" class="form-control" required>
                     <label class="form-label">Contact</label>
-                    <input type="number" class="form-control" required>
+                    <input type="number" class="form-control" required oninput="this.value = this.value.slice(0, 10)">
                     <label class="form-label">Email</label>
                     <input type="email" class="form-control" required>
                     <label class="form-label">Gender</label>
@@ -227,17 +227,17 @@
                     <label class="form-label">Date of Birth</label>
                     <input type="date" class="form-control" required>
                     <div class="mb-3">
-                <label class="form-label">Place of Birth</label>
-                <input type="text" class="form-control" id="placeOfBirth" required>
-                <div class="invalid-feedback">Please enter your place of birth.</div>
-            </div>
+                        <label class="form-label">Place of Birth</label>
+                        <input type="text" class="form-control" id="placeOfBirth" required>
+                        <div class="invalid-feedback">Please enter your place of birth.</div>
+                    </div>
 
-            <!-- New Field: Current Address -->
-            <div class="mb-3">
-                <label class="form-label">Current Address</label>
-                <input type="text" class="form-control" id="currentAddress" required>
-                <div class="invalid-feedback">Please enter your current address.</div>
-            </div>
+                    <!-- New Field: Current Address -->
+                    <div class="mb-3">
+                        <label class="form-label">Current Address</label>
+                        <input type="text" class="form-control" id="currentAddress" required>
+                        <div class="invalid-feedback">Please enter your current address.</div>
+                    </div>
                     <button type="submit" class="save-btn">Save Changes</button>
                 </form>
 
@@ -254,30 +254,30 @@
                 </form>
 
                 <form id="advanced" class="form-container p-3">
-                <div class="container p-0 m-O">
-        <label for="astrologyInput"><strong>Astrology Services</strong></label>
-        <div class="dropdown-container">
-            <div class="input-box" id="toggleDropdown">
-                <span>Select Astrology Service</span>
-                <span>▼</span>
-            </div>
-            <div class="dropdown-content" id="radioOptions">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="service" id="vastu">
-                    <label class="form-check-label" for="vastu">Vastu Consultation</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="service" id="palmistry">
-                    <label class="form-check-label" for="palmistry">Palmistry</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="service" id="vedic">
-                    <label class="form-check-label" for="vedic">Vedic Astrology</label>
-                </div>
-            </div>
-        </div>
-        <a href="#" class="submit-link">Submit <span class="submit-icon">→</span></a>
-    </div>
+                    <div class="container p-0 m-O">
+                        <label for="astrologyInput"><strong>Astrology Services</strong></label>
+                        <div class="dropdown-container">
+                            <div class="input-box" id="toggleDropdown">
+                                <span>Select Astrology Service</span>
+                                <span>▼</span>
+                            </div>
+                            <div class="dropdown-content" id="radioOptions">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="service" id="vastu">
+                                    <label class="form-check-label" for="vastu">Vastu Consultation</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="service" id="palmistry">
+                                    <label class="form-check-label" for="palmistry">Palmistry</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="service" id="vedic">
+                                    <label class="form-check-label" for="vedic">Vedic Astrology</label>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="submit-link">Submit <span class="submit-icon">→</span></a>
+                    </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-bold">Availability Day</label>
@@ -293,7 +293,7 @@
                     </div>
 
                     <div class="text-center">
-                    <button type="submit" class="save-btn">Save Changes</button>
+                        <button type="submit" class="save-btn">Save Changes</button>
                     </div>
                 </form>
 
@@ -318,8 +318,8 @@
         });
     </script>
     <script>
-        $(document).ready(function () {
-            $("#toggleDropdown").click(function () {
+        $(document).ready(function() {
+            $("#toggleDropdown").click(function() {
                 $("#radioOptions").slideToggle();
             });
         });

@@ -150,3 +150,4 @@ $route['RegistrationForm']='AstrologerUser/RegistrationForm';
 $route['AstrologyAndSpiritualServices1']='AstrologerUser/AstrologyAndSpiritualServices1';
 $route['AudioAndVideoCall']='AstrologerUser/AudioAndVideoCall';
 $route['AstrologerProfileForm']='AstrologerUser/AstrologerProfileForm';
+$route['AstrologerChatUI']='AstrologerUser/AstrologerChatUI';

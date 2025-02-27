@@ -40,7 +40,7 @@
         }
 
         .image-container img {
-            width: 100%;
+            width: 101%;
             height: 100%;
             object-fit: cover;
             border-top-left-radius: 10px;

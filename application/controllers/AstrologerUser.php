@@ -57,5 +57,8 @@ class AstrologerUser extends CI_Controller {
 	public function AstrologerProfileForm(){
 		$this->load->view('Astrologer/AstrologerProfileForm');
 	}
+	public function AstrologerChatUI(){
+		$this->load->view('Astrologer/AstrologerChatUI');
+	}
 	
 }
