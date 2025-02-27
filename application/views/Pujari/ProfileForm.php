@@ -202,6 +202,7 @@
         <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
     <div>
+    <div style="min-height: 100vh;" class="py-3">
         <div style="width: 100%; display: flex; justify-content: center;">
             <div class="profile-container">
                 <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>" class="profilei" alt="Profile" alt="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>">
@@ -271,6 +272,7 @@
                 </form>
             </div>
         </div>
+    </div>
     </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
