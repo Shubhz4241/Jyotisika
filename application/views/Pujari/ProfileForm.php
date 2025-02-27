@@ -23,8 +23,8 @@
         .profile-container {
             background: white;
             border-radius: 10px;
-            padding: 30px;
-            max-width: 500px;
+            padding: 30px 90px;
+            max-width: 700px;
             width: 100%;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -50,10 +50,11 @@
             background: #f8f0fa;
             padding: 10px;
             border-radius: 10px;
+            margin-bottom: 22px;
         }
 
         .tab {
-            padding: 10px 20px;
+            padding: 10px 40px;
             cursor: pointer;
             font-weight: bold;
         }
@@ -136,14 +137,71 @@
             margin-top: 15px;
             /* Adds spacing above the save button */
         }
+
+
+        .dropdown-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            background: #fff;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .form-check-input {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+        }
+
+        .submit-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        .submit-link:hover {
+            text-decoration: underline;
+        }
+
+        .submit-icon {
+            margin-left: 5px;
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
-    <div style="min-height: 100vh;">
+    <div>
         <div style="width: 100%; display: flex; justify-content: center;">
             <div class="profile-container">
                 <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>" class="profilei" alt="Profile" alt="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>">
@@ -173,13 +231,13 @@
 
                 <form id="professional" class="form-container">
                     <label class="form-label">Poojas</label>
-                    <input type="text" class="form-control" value="Ghar shanti, Rahu-ketu, Sukhi vivah" required>
+                    <input type="text" class="form-control" value="Ghar shanti, Rahu-ketu, Sukhi vivah" placeholder="Ghar shanti, Rahu-ketu, Sukhi vivah" required>
                     <label class="form-label">Duration for Ghar Shanti</label>
-                    <input type="text" class="form-control" value="3 Hrs" required>
+                    <input type="text" class="form-control" value="3 Hrs" placeholder="3 Hrs" required>
                     <label class="form-label">Duration for Rahu-ketu</label>
-                    <input type="text" class="form-control" value="3 Hrs" required>
+                    <input type="text" class="form-control" value="3 Hrs" placeholder="3 Hrs" required>
                     <label class="form-label">Duration for Sukhi Vivah</label>
-                    <input type="text" class="form-control" value="3 Hrs" required>
+                    <input type="text" class="form-control" value="3 Hrs" placeholder="3 Hrs" required>
                     <button type="submit" class="save-btn">Save Changes</button>
                 </form>
 
@@ -208,10 +266,9 @@
                     </div>
 
                     <div class="text-center">
-                    <button type="submit" class="save-btn">Save Changes</button>
+                        <button type="submit" class="save-btn">Save Changes</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
