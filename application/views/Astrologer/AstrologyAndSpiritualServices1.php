@@ -89,16 +89,16 @@
             <div class="mb-3">
             <a class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/AnalyticsAndEarning'); ?>">
         <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
-        Completed Offline Puja
+        Completed Consultations
     </a>
                 
             </div>
 
             <div class="filter-buttons">
                 <button class="active" onclick="filterData('all')">All</button>
-                <button onclick="filterData('ghar-shanti')">Ghar Shanti</button>
-                <button onclick="filterData('rahu-ketu')">Rahu-Ketu</button>
-                <button onclick="filterData('wealth')">Wealth</button>
+                <button onclick="filterData('ghar-shanti')">Vastu</button>
+                <button onclick="filterData('rahu-ketu')">Vedic</button>
+                <button onclick="filterData('wealth')">Kundli</button>
             </div>
 
             <table class="table table-bordered">

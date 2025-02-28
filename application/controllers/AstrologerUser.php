@@ -15,11 +15,11 @@ class AstrologerUser extends CI_Controller {
 	public function RegisterForm(){
 		$this->load->view('Astrologer/RegisterForm');
 	}
-	public function AnalyticsandEarning1(){
-		$this->load->view('Astrologer/AnalyticsandEarning1');
+	public function AstrologerAnalyticsandEarning1(){
+		$this->load->view('Astrologer/AstrologerAnalyticsandEarning1');
 	}
-	public function AnalyticsAndEarning2(){
-		$this->load->view('Astrologer/AnalyticsAndEarning2');
+	public function AstrologerAnalyticsAndEarning2(){
+		$this->load->view('Astrologer/AstrologerAnalyticsAndEarning2');
 	}
 	public function EarningsBreakdown(){
 		$this->load->view('Astrologer/EarningsBreakdown');

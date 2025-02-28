@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics and Earnings</title>
+    <title>Astrologer Analytics and Earnings</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -167,7 +167,7 @@
                     <div class="square-box bg-warning text-white">
                         <div>
                             <a href="<?php echo base_url('PujariUser/OfflinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
-                                <h5 class="card-title">Offline Puja</h5>
+                                <h5 class="card-title">Vastu</h5>
                                 <h2 class="card-text">40</h2>
                             </a>
                         </div>
@@ -177,7 +177,7 @@
                     <div class="square-box bg-warning-subtle text-dark">
                         <div>
                             <a href="<?php echo base_url('PujariUser/OnlinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
-                                <h5 class="card-title">Online Puja</h5>
+                                <h5 class="card-title">Vedic</h5>
                                 <h2 class="card-text">40</h2>
                             </a>
                         </div>
@@ -186,7 +186,7 @@
                 <div class="col-md-4 col-6 mb-3">
                     <div class="square-box bg-success-subtle text-dark">
                         <div>
-                            <h5 class="card-title">Mob Puja</h5>
+                            <h5 class="card-title">Kundli</h5>
                             <h2 class="card-text">40</h2>
                         </div>
                     </div>
@@ -197,7 +197,7 @@
 <div class="container">
     <div class="chart-container p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center">
-            <h4 class="text-center mb-0">Offline Puja</h4>
+            <h4 class="text-center mb-0">Vastu</h4>
             <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
         </div>
         <div class="mt-3">
@@ -207,7 +207,7 @@
 
     <div class="chart-container p-3 mb-4">
         <div class="d-flex justify-content-between align-items-center">
-            <h4 class="text-center mb-0">Online Puja</h4>
+            <h4 class="text-center mb-0">Vedic</h4>
             <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
         </div>
         <div class="mt-3">
@@ -217,7 +217,7 @@
 
     <div class="chart-container p-3">
     <div class="d-flex justify-content-between align-items-center">
-        <h4 class="text-center mb-0">Mob Puja</h4>
+        <h4 class="text-center mb-0">Kundli</h4>
         <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
     </div>
     <div class="mt-3 pie-chart-container"> 
@@ -291,7 +291,7 @@
 
    
 
-    const labels = ['Rahu-Ketu', 'Wealth', 'Ghar-shanti'];
+    const labels = ['Vastu', 'Vedic', 'Kundli'];
     const datasets = [{
             label: 'December',
             data: [4, 6, 8],
@@ -311,7 +311,7 @@
 
     renderBarChart('offlineChart', labels, datasets);
     renderBarChart('onlineChart', labels, datasets);
-    renderPieChart('mobChart', ['Rahu-Ketu', 'Wealth', 'Ghar-Shanti'], [38, 23, 39]);</script>
+    renderPieChart('mobChart', ['Vastu', 'Vedic', 'Kundli'], [38, 23, 39]);</script>
 
     </div>
     <footer>

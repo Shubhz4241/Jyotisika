@@ -151,3 +151,5 @@ $route['AstrologyAndSpiritualServices1']='AstrologerUser/AstrologyAndSpiritualSe
 $route['AudioAndVideoCall']='AstrologerUser/AudioAndVideoCall';
 $route['AstrologerProfileForm']='AstrologerUser/AstrologerProfileForm';
 $route['AstrologerChatUI']='AstrologerUser/AstrologerChatUI';
+$route['AstrologerAnalyticsandEarning1']='AstrologerUser/AstrologerAnalyticsandEarning1';
+$route['AstrologerAnalyticsAndEarning2']='AstrologerUser/AstrologerAnalyticsAndEarning2';
