@@ -254,7 +254,7 @@
         <div class="chat-window">
             <div class="chat-header">
                 <div class="d-flex align-items-center">
-                    <a class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/PujariDashboard'); ?>">
+                    <a class="text-decoration-none text-dark" href="<?php echo base_url('AstrologerUser/AstrologerDashboard'); ?>">
                         <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
                     </a>
                     <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
