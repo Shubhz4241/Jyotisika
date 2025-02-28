@@ -61,4 +61,5 @@ class AstrologerUser extends CI_Controller {
 		$this->load->view('Astrologer/AstrologerChatUI');
 	}
 	
+	
 }
