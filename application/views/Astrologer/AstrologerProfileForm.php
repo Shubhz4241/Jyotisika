@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
     <style>
         body {
             background-color: #f8f8f8;
@@ -194,6 +196,27 @@
         .submit-icon {
             margin-left: 5px;
         }
+        /* Custom Styling */
+        .swal2-popup {
+            width: 320px; /* Adjust width */
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .swal2-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .swal2-html-container {
+            font-size: 16px;
+            color: #000;
+        }
+        .swal2-confirm {
+            background-color: #5D40AE !important;
+            color: white !important;
+            padding: 10px 24px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
     </style>
 </head>
 
@@ -274,10 +297,9 @@
                                     <input class="form-check-input" type="radio" name="service" id="vedic">
                                     <label class="form-check-label" for="vedic">Vedic Astrology</label>
                                 </div>
+                                <a href="#" class="submit-link" id="submitForm">Submit <span class="submit-icon">→</span></a>  </div>
                             </div>
                         </div>
-                        <a href="#" class="submit-link">Submit <span class="submit-icon">→</span></a>
-                    </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-bold">Availability Day</label>
@@ -324,6 +346,26 @@
             });
         });
     </script>
+   <script>
+    $(document).ready(function () {
+        $("#submitForm").click(function (e) {
+            e.preventDefault(); // Prevent default link action
+
+            Swal.fire({
+                iconHtml: '<img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" width="50">',
+                title: 'Form Submission',
+                html: `<b>Note :</b> Your details will be reviewed after submission.<br><br> <b>ALL THE BEST!</b>`,
+                confirmButtonText: "OK",
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    htmlContainer: 'swal2-html-container',
+                    confirmButton: 'swal2-confirm'
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

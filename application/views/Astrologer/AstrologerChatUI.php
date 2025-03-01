@@ -262,13 +262,12 @@
                         class="profile-img rounded-circle"
                         width="30px"
                         height="30px">
-                    <h5 class="mb-0">John Doe</h5>
+                    <h5 class="mb-0">John Doe </h5>
                 </div>
 
                 <button class="btn btn-danger btn-sm"> <i class="bi bi-power"> End Session </i> </button>
-
             </div>
-
+           
             <div class="chat-content">
                 <div class="message received">Hello!</div>
                 <div class="message sent">Hi, how are you?</div>
