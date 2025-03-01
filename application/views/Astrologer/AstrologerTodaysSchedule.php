@@ -107,12 +107,12 @@
 <body>
 
 <header>
-    <?php $this->load->view('Pujari/Include/PujariNav') ?>
+    <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
 </header>
 <div style="min-height: 100vh;">
 <div class="container mt-4">
     <div class="header">
-        <a class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/PujariDashboard'); ?>">
+        <a class="text-decoration-none text-dark" href="<?php echo base_url('AstrologerUser/AstrologerDashboard'); ?>">
             <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
             Today's Schedule
         </a>
@@ -200,7 +200,7 @@
 </div>
 </div>
 <footer>
-    <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+    <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
 </footer>
 
 </body>

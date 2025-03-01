@@ -277,19 +277,19 @@
         new Chart(ctx2, {
             type: 'bar',
             data: {
-                labels: ['Offline', 'Online', 'Mob'],
+                labels: [' Vastu', 'Vedic', 'Kundli'],
                 datasets: [{
-                        label: 'Offline',
+                        label: 'Vastu',
                         data: [8, 9, 12],
                         backgroundColor: '#6C63FF'
                     },
                     {
-                        label: 'Online',
+                        label: 'Vedic',
                         data: [6, 12, 13],
                         backgroundColor: '#FF6384'
                     },
                     {
-                        label: 'Mob',
+                        label: 'Kundli',
                         data: [3, 13, 14],
                         backgroundColor: '#36A2EB'
                     }
@@ -315,7 +315,7 @@
         new Chart(ctx3, {
             type: 'doughnut',
             data: {
-                labels: ['Home Shanti', 'Wealth', 'Rahu-Ketu'],
+                labels: ['Vastu', 'Vedic', 'Kundli'],
                 datasets: [{
                     data: [39, 23, 38],
                     backgroundColor: ['#6C63FF', '#36A2EB', '#FF6384']

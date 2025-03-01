@@ -158,10 +158,10 @@
     </div>
 
     <div class="menu-items" id="menuItems">
-        <a href="<?php echo base_url() . 'PujariUser/PujariDashboard'; ?>">Home</a>
-        <a href="<?php echo base_url() . 'PujariUser/List'; ?>">Requests</a>
-        <a href="<?php echo base_url() . 'PujariUser/AnalyticsandEarning'; ?>">Analytics</a>
-        <a href="<?php echo base_url() . 'PujariUser/AnalyticsandEarning2   '; ?>">Earnings</a>
+        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerDashboard'; ?>">Home</a>
+        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerRecentRequest'; ?>">Requests</a>
+        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerAnalyticsandEarning1'; ?>">Analytics</a>
+        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerAnalyticsAndEarning2'; ?>">Earnings</a>
     </div>
 
     <div class="navbar-right">

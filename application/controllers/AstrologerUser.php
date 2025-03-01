@@ -45,11 +45,8 @@ class AstrologerUser extends CI_Controller {
 	public function RegistrationForm(){
 		$this->load->view('Astrologer/RegistrationForm');
 	}
-	public function AstrologyAndSpiritualServices1(){
-		$this->load->view('Astrologer/AstrologyAndSpiritualServices1');
-	}
-	public function AstrologyAndSpiritualServices2(){
-		$this->load->view('Astrologer/AstrologyAndSpiritualServices2');
+	public function AstrologyAndSpiritualServices(){
+		$this->load->view('Astrologer/AstrologyAndSpiritualServices');
 	}
 	public function AudioAndVideoCall(){
 		$this->load->view('Astrologer/AudioAndVideoCall');
@@ -60,6 +57,8 @@ class AstrologerUser extends CI_Controller {
 	public function AstrologerChatUI(){
 		$this->load->view('Astrologer/AstrologerChatUI');
 	}
-	
+	public function AstrologerTodaysSchedule(){
+		$this->load->view('Astrologer/AstrologerTodaysSchedule');
+	}
 	
 }

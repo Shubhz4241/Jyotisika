@@ -215,7 +215,7 @@
                             <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
                                 <div class="card py-3" style="border-radius:0;">
                                     <div class="icon-box green">📅</div>
-                                    <a href="<?php echo base_url() . 'PujariUser/TodaysSchedule'; ?>">
+                                    <a href="<?php echo base_url() . 'AstrologerUser/AstrologerTodaysSchedule'; ?>">
                                         <h6>Today's Schedule</h6>
                                     </a>
                                 </div>
@@ -233,10 +233,9 @@
                             <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
                                 <div class="card py-3" style="border-radius:0;">
                                     <div class="icon-box red">📜</div>
-                                    <a href="<?php echo base_url() . 'PujariUser/SetRate'; ?>">
+                                    <a href="<?php echo base_url() . 'AstrologerUser/AstrologerRecentRequest'; ?>">
                                         <h6>Requests</h6>
                                     </a>
-
                                 </div>
                             </div>
                         </div>

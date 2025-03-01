@@ -166,7 +166,7 @@
                 <div class="col-md-4 col-6 mb-3">
                     <div class="square-box bg-warning text-white">
                         <div>
-                            <a href="<?php echo base_url('PujariUser/OfflinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
+                            <a href="<?php echo base_url('AstrologerUser/AstrologyAndSpiritualServices'); ?>" class="stat-box bg-success text-white text-decoration-none">
                                 <h5 class="card-title">Vastu</h5>
                                 <h2 class="card-text">40</h2>
                             </a>
@@ -176,7 +176,7 @@
                 <div class="col-md-4 col-6 mb-3">
                     <div class="square-box bg-warning-subtle text-dark">
                         <div>
-                            <a href="<?php echo base_url('PujariUser/OnlinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
+                            <a href="<?php echo base_url('AstrologerUser/AstrologyAndSpiritualServices'); ?>" class="stat-box bg-success text-white text-decoration-none">
                                 <h5 class="card-title">Vedic</h5>
                                 <h2 class="card-text">40</h2>
                             </a>
@@ -186,6 +186,7 @@
                 <div class="col-md-4 col-6 mb-3">
                     <div class="square-box bg-success-subtle text-dark">
                         <div>
+                        <a href="<?php echo base_url('AstrologerUser/AstrologyAndSpiritualServices'); ?>" class="stat-box bg-success text-white text-decoration-none">
                             <h5 class="card-title">Kundli</h5>
                             <h2 class="card-text">40</h2>
                         </div>
