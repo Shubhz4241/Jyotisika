@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earnings Breakdown</title>
+    <title>Astrologer Earnings Breakdown</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -57,47 +57,48 @@
 
 <body style="font-family: 'Montserrat', serif;">
     <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
     <div style="min-height: 100vh;">
         <div class="container">
         <h5 class="mb-3">
-    <a  class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/AnalyticsAndEarning2'); ?>">
+    <a  class="text-decoration-none text-dark" href="<?php echo base_url('AstrologerUser/AstrologerAnalyticsAndEarning2'); ?>">
         <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
         Earnings Breakdown
     </a>
 </h5>
             <div class="table-container">
-                <h5>Offline puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('offline')">Filter</button></h5>
+                <h5>Vastu Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('offline')">Filter</button></h5>
                 <div class="filter-dropdown text-end" id="offlineFilterDropdown">
                     <select id="offlineFilter" onchange="filterData('offline')">
                         <option value="">All</option>
-                        <option value="Rahu-ketu">Rahu-ketu</option>
-                        <option value="Ghar shanti">Ghar shanti</option>
+                        <option value="Vastu">Vastu</option>
+                        <option value="Vedic">Vedic</option>
+                        <option value="Kundli">Kundli</option>
                     </select>
                 </div>
                 <table class="table table-bordered table-fixed  text-center">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Pooja</th>
+                            <th>Consultation Type</th>
                             <th>Fees</th>
                         </tr>
                     </thead>
                     <tbody id="offlineBody">
                         <tr>
                             <td>Jane Doe</td>
-                            <td>Rahu-ketu</td>
+                            <td>Vastu</td>
                             <td>500</td>
                         </tr>
                         <tr>
                             <td>Jane Doe</td>
-                            <td>Rahu-ketu</td>
+                            <td>Vastu</td>
                             <td>500</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
-                            <td>Ghar shanti</td>
+                            <td>Vastu</td>
                             <td>1200</td>
                         </tr>
                     </tbody>
@@ -105,41 +106,42 @@
             </div>
 
             <div class="table-container">
-                <h5>Online puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('online')">Filter</button></h5>
+                <h5>Vedic Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('online')">Filter</button></h5>
                 <div class="filter-dropdown text-end" id="onlineFilterDropdown">
                     <select id="onlineFilter" onchange="filterData('online')">
-                        <option value="">All</option>
-                        <option value="Rahu-ketu">Rahu-ketu</option>
-                        <option value="Ghar shanti">Ghar shanti</option>
+                    <option value="">All</option>
+                        <option value="Vastu">Vastu</option>
+                        <option value="Vedic">Vedic</option>
+                        <option value="Kundli">Kundli</option>
                     </select>
                 </div>
                 <table class="table table-bordered table-fixed  text-center">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Pooja</th>
+                            <th>Consultation Type</th>
                             <th>Fees</th>
                         </tr>
                     </thead>
                     <tbody id="onlineBody">
                         <tr>
                             <td>Jane Doe</td>
-                            <td>Rahu-ketu</td>
+                            <td>Vedic</td>
                             <td>500</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
-                            <td>Ghar shanti</td>
+                            <td>Vedic</td>
                             <td>1200</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
-                            <td>Ghar shanti</td>
+                            <td>Vedic</td>
                             <td>1200</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
-                            <td>Ghar shanti</td>
+                            <td>Vedic</td>
                             <td>1200</td>
                         </tr>
                     </tbody>
@@ -147,36 +149,37 @@
             </div>
 
             <div class="table-container">
-                <h5>Mob puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('mob')">Filter</button></h5>
+                <h5>Kundli Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('mob')">Filter</button></h5>
                 <div class="filter-dropdown text-end " id="mobFilterDropdown">
                     <select id="mobFilter" onchange="filterData('mob')" >
-                        <option value="">All</option>
-                        <option value="Rahu-ketu">Rahu-ketu</option>
-                        <option value="Ghar shanti">Ghar shanti</option>
+                    <option value="">All</option>
+                        <option value="Vastu">Vastu</option>
+                        <option value="Vedic">Vedic</option>
+                        <option value="Kundli">Kundli</option>
                     </select>
                 </div>
                 <table class="table table-bordered table-fixed  text-center">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Pooja</th>
+                            <th>Consultation Type</th>
                             <th>Fees</th>
                         </tr>
                     </thead>
                     <tbody id="mobBody">
                         <tr>
                             <td>Jane Doe</td>
-                            <td>Rahu-ketu</td>
+                            <td>Kundli</td>
                             <td>500</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
-                            <td>Ghar shanti</td>
+                            <td>Kundli</td>
                             <td>1200</td>
                         </tr>
                         <tr>
                             <td>Jane Doe</td>
-                            <td>Rahu-ketu</td>
+                            <td>Kundli</td>
                             <td>500</td>
                         </tr>
                     </tbody>
@@ -185,7 +188,7 @@
         </div>
     </div>
     <footer>
-        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
     <script>
         function toggleFilter(category) {

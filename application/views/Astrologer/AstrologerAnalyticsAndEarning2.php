@@ -194,16 +194,16 @@
 
 <body style="font-family: 'Montserrat', serif;">
     <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
     <div style="min-height: 100vh;">
         <div class="container">
             <div class="stat-box-container">
-                <a href="<?php echo base_url('PujariUser/EarningsBreakdown'); ?>" class="stat-box bg-success text-white text-decoration-none">
+                <a href="<?php echo base_url('AstrologerUser/AstrologerEarningsBreakdown'); ?>" class="stat-box bg-success text-white text-decoration-none">
                     <h3>2.5L</h3>
                     <p class="fw-normal">Total Earnings</p>
                 </a>
-                <a href="<?php echo base_url('PujariUser/MonthlyEarningsBreakdown'); ?>" class="stat-box bg-primary text-white text-decoration-none">
+                <a href="<?php echo base_url('AstrologerUser/AstrologerMonthlyEarningsBreakdown'); ?>" class="stat-box bg-primary text-white text-decoration-none">
                     <h3>5K</h3>
                     <p class="fw-normal">Monthly Earnings</p>
                 </a>
@@ -231,7 +231,7 @@
         </div>
     </div>
     <footer>
-        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
 
     <script>

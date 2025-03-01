@@ -158,7 +158,7 @@
 
 <body style="font-family: 'Montserrat', serif;">
     <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
     <div style="min-height: 100vh;">
         <div class="container mt-4">

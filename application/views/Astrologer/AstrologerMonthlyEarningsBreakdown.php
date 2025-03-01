@@ -60,13 +60,13 @@
 
 <body>
     <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
     <div style="min-height: 100vh;">
         <div class="container">
 
             <h5 class="mb-3">
-                <a class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/AnalyticsAndEarning2'); ?>">
+                <a class="text-decoration-none text-dark" href="<?php echo base_url('AstrologerUser/AstrologerAnalyticsAndEarning2'); ?>">
                     <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
                     Monthly Earnings Breakdown
                 </a>
@@ -80,12 +80,12 @@
 
 
             <div class="table-container" id="offlinePuja">
-                <h5>Offline puja Breakdown <button class="btn btn-light filter-btn">&#x1F50D; Filter</button></h5>
+                <h5>Vastu Breakdown <button class="btn btn-light filter-btn">&#x1F50D; Filter</button></h5>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Pooja</th>
+                            <th>Consultation Type</th>
                             <th>Fees</th>
                         </tr>
                     </thead>
@@ -94,12 +94,12 @@
             </div>
 
             <div class="table-container" id="onlinePuja">
-                <h5>Online puja Breakdown <button class="btn btn-light filter-btn">&#x1F50D; Filter</button></h5>
+                <h5>Vedic Breakdown <button class="btn btn-light filter-btn">&#x1F50D; Filter</button></h5>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Pooja</th>
+                            <th>Consultation Type</th>
                             <th>Fees</th>
                         </tr>
                     </thead>
@@ -108,12 +108,12 @@
             </div>
 
             <div class="table-container" id="mobPuja">
-                <h5>Mob puja Breakdown <button class="btn btn-light filter-btn">&#x1F50D; Filter</button></h5>
+                <h5>Kundli Breakdown <button class="btn btn-light filter-btn">&#x1F50D; Filter</button></h5>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Pooja</th>
+                            <th>Consultation Type</th>
                             <th>Fees</th>
                         </tr>
                     </thead>
@@ -123,30 +123,30 @@
         </div>
     </div>
     <footer>
-        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
     <script>
         const data = {
             "December": [
-                ["Jane Doe", "Rahu-ketu", "500"],
-                ["Jane Doe", "Rahu-ketu", "500"],
-                ["Jane Doe", "Rahu-ketu", "500"],
-                ["Jane Doe", "Rahu-ketu", "500"],
-                ["John Doe", "Ghar shanti", "1200"]
+                ["Jane Doe", "Vastu", "500"],
+                ["Jane Doe", "Vedic", "500"],
+                ["Jane Doe", "Kundli", "500"],
+                ["Jane Doe", "Kundli", "500"],
+                ["John Doe", "Kundli", "1200"]
             ],
             "November": [
-                ["Alice", "Satyanarayan", "700"],
-                ["Alice", "Navgrah Puja", "900"],
-                ["Bob", "Mahadev Abhishek", "1100"],
-                ["Charlie", "Durga Saptashati", "1500"],
-                ["John Doe", "Ghar shanti", "1200"]
+                ["Alice", "Vastu", "700"],
+                ["Alice", "Vastu", "900"],
+                ["Bob", "Vastu", "1100"],
+                ["Charlie", "Kundli", "1500"],
+                ["John Doe", "Kundli", "1200"]
             ],
             "October": [
-                ["Eve", "Ganesh Puja", "800"],
-                ["Eve", "Kali Puja", "1000"],
-                ["Mallory", "Navratri Puja", "1200"],
-                ["Trudy", "Shani Shanti", "1300"],
-                ["John Doe", "Ghar shanti", "1200"]
+                ["Eve", "Vedic", "800"],
+                ["Eve", "Vedic", "1000"],
+                ["Mallory", "Vedic", "1200"],
+                ["Trudy", "Kundli", "1300"],
+                ["John Doe", "Kundli", "1200"]
             ]
         };
 
