@@ -30,8 +30,8 @@ class AstrologerUser extends CI_Controller {
 	public function Loaderpage(){
 		$this->load->view('Astrologer/Loaderpage');
 	}
-	public function MobileNumberAndOTPForm(){
-		$this->load->view('Astrologer/MobileNumberAndOTPForm');
+	public function AstrologerMobileNumberAndOTPForm(){
+		$this->load->view('Astrologer/AstrologerMobileNumberAndOTPForm');
 	}
 	public function AstrologerMonthlyEarningsBreakdown(){
 		$this->load->view('Astrologer/AstrologerMonthlyEarningsBreakdown');
