@@ -92,7 +92,7 @@
                 <img src="<?php echo base_url('assets/images/Pujari/Pujari.png'); ?>" alt="Pujari">
                 <h5>Pujari</h5>
             </div>
-            <div class="user-card">
+            <div class="user-card" onclick="redirectToOTPForm1()">
                 <img src="<?php echo base_url('assets/images/Pujari/Astrologer.png'); ?>" alt="Astrologer">
                 <h5>Astrologer</h5>
             </div>
@@ -103,6 +103,9 @@
     <script>
         function redirectToOTPForm() {
             window.location.href = "<?php echo base_url('MobileNumberAndOTPForm'); ?>";
+        }
+        function redirectToOTPForm1() {
+            window.location.href = "<?php echo base_url('AstrologerMobileNumberAndOTPForm'); ?>";
         }
     </script>
 </body>

@@ -141,7 +141,6 @@ $route['AstrologerAnalyticsAndEarning1']='AstrologerUser/AstrologerAnalyticsAndE
 $route['AstrologerAnalyticsAndEarning2']='AstrologerUser/AstrologerAnalyticsAndEarning2';
 $route['AstrologerEarningsBreakdown']='AstrologerUser/AstrologerEarningsBreakdown';
 $route['List']='AstrologerUser/List';
-$route['Loaderpage']='AstrologerUser/Loaderpage';
 $route['AstrologerMobileNumberAndOTPForm']='AstrologerUser/AstrologerMobileNumberAndOTPForm';
 $route['AstrologerMonthlyEarningsBreakdown']='AstrologerUser/AstrologerMonthlyEarningsBreakdown';
 $route['AstrologerReg']='AstrologerUser/AstrologerReg';

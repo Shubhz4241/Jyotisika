@@ -27,9 +27,6 @@ class AstrologerUser extends CI_Controller {
 	public function List(){
 		$this->load->view('Astrologer/List');
 	}
-	public function Loaderpage(){
-		$this->load->view('Astrologer/Loaderpage');
-	}
 	public function AstrologerMobileNumberAndOTPForm(){
 		$this->load->view('Astrologer/AstrologerMobileNumberAndOTPForm');
 	}
