@@ -10,28 +10,73 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+
     <style>
         body {
             background-color: #f8f9fa;
-            font-family: "Montserrat", serif;
+            font-family: 'Montserrat', serif;
+            overflow-x: hidden;
+            /* Prevents unwanted horizontal scrolling */
         }
 
         .container {
             max-width: 1200px;
+            overflow-x: hidden;
+            /* Ensures no extra horizontal scroll */
         }
 
-        .search-bar {
+        .row {
             display: flex;
-            gap: 10px;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
-
         }
 
-        .search-bar input,
-        .search-bar select {
-            width: 300px;
+        .rate-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 280px;
+            margin: 29px;
+            /* Prevents stretching */
+        }
+
+        .search-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-wrapper,
+        .filter-wrapper {
+            flex: 1;
+            max-width: 300px;
+            position: relative;
+        }
+
+        .search-bar,
+        .filter-select {
+            width: 100%;
+            background-color: #ECE6F0;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 40px 10px 20px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-wrapper i,
+        .filter-wrapper i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7D7689;
         }
 
         .rate-card {
@@ -43,10 +88,6 @@
             width: 100%;
         }
 
-        .rate-card h5 {
-            font-weight: bold;
-        }
-
         .btn-change {
             background-color: #6fcf97;
             border: none;
@@ -56,70 +97,49 @@
             border-radius: 5px;
         }
 
-        .search-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: nowrap;
-            /* Ensures they remain in one line */
-            margin-bottom: 20px;
-        }
-
-        .search-wrapper {
-            position: relative;
-            flex-grow: 1;
-            /* Allows proper resizing */
-            max-width: 300px;
-        }
-
-        .search-bar {
-            width: 100%;
-            background-color: #ECE6F0;
-            border: none;
-            border-radius: 25px;
-            padding: 10px 40px 10px 20px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .search-wrapper i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #7D7689;
-        }
-
         .filter-select {
-            background-color: #ECE6F0;
-            border: none;
-            border-radius: 25px;
-            padding: 10px 20px;
-            font-size: 16px;
-            width: 150px;
-            outline: none;
-            flex-shrink: 0;
-            /* Prevents shrinking */
-            margin: 30px;
+            appearance: none;
+            /* Hides default dropdown arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/chevron-down.svg");
+            /* Custom dropdown icon */
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+            padding-right: 40px;
+            /* Space for the icon */
         }
 
-        @media (max-width: 768px) {
-            .search-container {
+        @media (max-width: 576px) {
+            #rateCardsContainer {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .rate-card {
+                width: 90%;
+                /* Adjust width to fit better */
+                margin: 15px auto;
+                /* Center align */
+            }
+        }
+
+        @media (max-width: 576px) {
+            #rateCardsContainer {
+                display: flex;
                 flex-wrap: wrap;
-                /* Allows wrapping only for smaller screens */
+                justify-content: center;
             }
 
-            .search-wrapper,
-            .filter-select {
+            .rate-card {
                 width: 100%;
-                max-width: 300px;
+                max-width: 320px;
+                /* Adjust width for better alignment */
+                margin: 15px auto;
+                /* Center align */
             }
-        }
-        p {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    SIZE: 14PX;
         }
     </style>
 </head>
@@ -128,8 +148,6 @@
     <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
-
-
     <div style="min-height: 100vh;">
         <div class="container mt-5">
             <h2 class="text-center">Rate Chart</h2>
@@ -138,137 +156,140 @@
                     <input type="text" class="search-bar" id="search" placeholder="Search puja name">
                     <i class="bi bi-search"></i>
                 </div>
-                <select class="filter-select" id="filter">
-                    <option value="">Filter</option>
-                    <option value="Ghar Shanti">Ghar Shanti</option>
-                    <option value="Rahu-Ketu">Rahu-Ketu</option>
-                </select>
+                <div class="filter-wrapper">
+                    <select class="filter-select" id="filter">
+                        <option value="">Filter</option>
+                        <option value="Ghar Shanti">Ghar Shanti</option>
+                        <option value="Rahu-Ketu">Rahu-Ketu</option>
+                    </select>
+                </div>
+
+
             </div>
 
-            <div id="rateCardsContainer">
+            <div id="rateCardsContainer" class="row">
                 <!-- Cards will be dynamically inserted -->
             </div>
         </div>
-    </div>
 
-    <script>
-        const pujas = [{
-                name: "Ghar Shanti",
-                originalPrice: 610,
-                discountPrice: 500
-            },
-            {
-                name: "Rahu-Ketu",
-                originalPrice: 610,
-                discountPrice: 500
-            },
-            {
-                name: "Ghar Shanti",
-                originalPrice: 610,
-                discountPrice: 500
-            },
-            {
-                name: "Rahu-Ketu",
-                originalPrice: 610,
-                discountPrice: 500
-            },
-            {
-                name: "Ghar Shanti",
-                originalPrice: 610,
-                discountPrice: 500
-            },
-            {
-                name: "Rahu-Ketu",
-                originalPrice: 610,
-                discountPrice: 500
-            },
-            {
-                name: "Ghar Shanti",
-                originalPrice: 610,
-                discountPrice: 500
-            },
-            {
-                name: "Rahu-Ketu",
-                originalPrice: 610,
-                discountPrice: 500
-            }
-        ];
-
-        function renderPujas(filter = "") {
-            const container = document.getElementById("rateCardsContainer");
-            container.innerHTML = "";
-
-            let row;
-            pujas.filter(puja => !filter || puja.name === filter).forEach((puja, index) => {
-                if (index % 4 === 0) {
-                    row = document.createElement("div");
-                    row.classList.add("row", "mb-4");
-                    container.appendChild(row);
+        <script>
+            const pujas = [{
+                    name: "Ghar Shanti",
+                    originalPrice: 610,
+                    discountPrice: 500
+                },
+                {
+                    name: "Rahu-Ketu",
+                    originalPrice: 610,
+                    discountPrice: 500
+                },
+                {
+                    name: "Ganesh Puja",
+                    originalPrice: 700,
+                    discountPrice: 600
+                },
+                {
+                    name: "Lakshmi Puja",
+                    originalPrice: 800,
+                    discountPrice: 700
+                },
+                {
+                    name: "Navagraha Puja",
+                    originalPrice: 900,
+                    discountPrice: 800
+                },
+                {
+                    name: "Saraswati Puja",
+                    originalPrice: 1000,
+                    discountPrice: 900
                 }
-                const card = document.createElement("div");
-                card.classList.add("col-md-3", "mb-4");
-                card.innerHTML = `
-                    <div class="rate-card">
-                        <h5>${puja.name}</h5>
-                        <p>Original Price: <s>₹${puja.originalPrice}</s></p>
-                        <p>Discount Price: <strong>₹${puja.discountPrice}</strong></p>
-                        <button class="btn btn-change">Change</button>
-                    </div>
-                `;
-                row.appendChild(card);
-            });
-        }
+            ];
 
-        document.getElementById("search").addEventListener("input", function() {
-            renderPujas(this.value);
-        });
-
-        document.getElementById("filter").addEventListener("change", function() {
-            renderPujas(this.value);
-        });
-
-        renderPujas();
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </div>
-
-    <footer>
-        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
-    </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            function loadPujas() {
+            function renderPujas(searchQuery = "", filter = "") {
                 const container = document.getElementById("rateCardsContainer");
-                container.innerHTML = ""; // Clear existing content
+                container.innerHTML = "";
+                searchQuery = searchQuery.toLowerCase();
+                filter = filter.toLowerCase();
 
-                let storedPujas = JSON.parse(localStorage.getItem("pujas")) || [];
+                let filteredPujas = pujas.filter(puja => {
+                    let nameMatch = puja.name.toLowerCase().includes(searchQuery);
+                    let filterMatch = !filter || puja.name.toLowerCase() === filter;
+                    return nameMatch && filterMatch;
+                });
 
-                let row;
-                storedPujas.forEach((puja, index) => {
-                    if (index % 4 === 0) {
-                        row = document.createElement("div");
-                        row.classList.add("row", "mb-4");
-                        container.appendChild(row);
-                    }
+                if (filteredPujas.length === 0) {
+                    container.innerHTML = `<p class="text-center mt-3">No matching pujas found.</p>`;
+                    return;
+                }
+
+                filteredPujas.forEach((puja) => {
                     const card = document.createElement("div");
-                    card.classList.add("col-md-3", "mb-4");
+                    card.classList.add("col-md-6", "col-lg-4", "col-xl-3", "mb-4");
                     card.innerHTML = `
-                    <div class="rate-card">
-                        <h5>${puja.name}</h5>
-                        <p>Original Price: <s>₹${puja.originalPrice}</s></p>
-                        <p>Discount Price: <strong>₹${puja.discountPrice}</strong></p>
-                        <button class="btn btn-change">Change</button>
-                    </div>
-                `;
-                    row.appendChild(card);
+                <div class="rate-card">
+                    <h5>${puja.name}</h5>
+                    <p style="font-size: 12px; color: gray;">Original Price: ₹${puja.originalPrice}</p>
+                    <p>Discount Price: <strong>₹${puja.discountPrice}</strong></p>
+                    <button class="btn btn-change">Change</button>
+                </div>
+            `;
+                    container.appendChild(card);
                 });
             }
 
-            loadPujas(); // Load saved pujas on page load
-        });
-    </script>
+            document.getElementById("search").addEventListener("input", function() {
+                renderPujas(this.value, document.getElementById("filter").value);
+            });
+
+            document.getElementById("filter").addEventListener("change", function() {
+                renderPujas(document.getElementById("search").value, this.value);
+            });
+
+            renderPujas();
+
+
+
+
+            function renderPujas(searchQuery = "", filter = "") {
+                const container = document.getElementById("rateCardsContainer");
+                container.innerHTML = "";
+                searchQuery = searchQuery.toLowerCase();
+                filter = filter.toLowerCase();
+
+                let storedPujas = JSON.parse(localStorage.getItem("pujas")) || [];
+
+                let filteredPujas = storedPujas.filter(puja => {
+                    let nameMatch = puja.name.toLowerCase().includes(searchQuery);
+                    let filterMatch = !filter || puja.name.toLowerCase() === filter;
+                    return nameMatch && filterMatch;
+                });
+
+                if (filteredPujas.length === 0) {
+                    container.innerHTML = `<p class="text-center mt-3">No matching pujas found.</p>`;
+                    return;
+                }
+
+                filteredPujas.forEach((puja) => {
+                    const card = document.createElement("div");
+                    card.classList.add("col-12", "col-sm-6", "col-md-4", "col-lg-3", "d-flex", "justify-content-center", "mb-4");
+                    card.innerHTML = `
+            <div class="rate-card">
+                <h5>${puja.name}</h5>
+                <p style="font-size: 12px; color: gray;">Original Price: ₹${puja.originalPrice}</p>
+                <p>Discount Price: <strong>₹${puja.discountPrice}</strong></p>
+                <button class="btn btn-change">Change</button>
+            </div>
+        `;
+                    container.appendChild(card);
+                });
+            }
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+    <footer>
+        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+    </footer>
 
 </body>
 
