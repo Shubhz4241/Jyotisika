@@ -76,13 +76,13 @@
         .square-box h5 {
             font-size: 16px;
             margin-bottom: 5px;
-            color:black;
+            color: black;
         }
 
         .square-box h2 {
             font-size: 30px;
             font-weight: bold;
-            color:black;
+            color: black;
         }
 
         @media (max-width: 768px) {
@@ -121,38 +121,41 @@
         .bg-success-subtle {
             background-color: #14993E54 !important;
         }
+
         .chart-container {
-    width: 90% !important; /* Increased width */
-    max-width: 1000px !important; /* Wider max width */
-}
+            width: 90% !important;
+            /* Increased width */
+            max-width: 1000px !important;
+            /* Wider max width */
+        }
 
-.pie-chart-container {
-        border: 2px solid gray;
-        border-radius: 10px;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #f9f9f9;
-    }
+        .pie-chart-container {
+            border: 2px solid gray;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f9f9f9;
+        }
 
-    .chart-container {
-        width: 90%;
-        max-width: 1000px;
-        margin: auto;
-    }
-
-    @media (max-width: 768px) {
         .chart-container {
-            width: 100%;
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
         }
-    }
 
-    @media (max-width: 576px) {
-        .chart-container canvas {
-            height: 200px !important;
+        @media (max-width: 768px) {
+            .chart-container {
+                width: 100%;
+            }
         }
-    }
+
+        @media (max-width: 576px) {
+            .chart-container canvas {
+                height: 300px !important;
+            }
+        }
     </style>
 </head>
 
@@ -186,137 +189,138 @@
                 <div class="col-md-4 col-6 mb-3">
                     <div class="square-box bg-success-subtle text-dark">
                         <div>
-                        <a href="<?php echo base_url('AstrologerUser/AstrologyAndSpiritualServices'); ?>" class="stat-box bg-success text-white text-decoration-none">
-                            <h5 class="card-title">Kundli</h5>
-                            <h2 class="card-text">40</h2>
+                            <a href="<?php echo base_url('AstrologerUser/AstrologyAndSpiritualServices'); ?>" class="stat-box bg-success text-white text-decoration-none">
+                                <h5 class="card-title">Kundli</h5>
+                                <h2 class="card-text">40</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-       <!-- Charts Section -->
-<div class="container">
-    <div class="chart-container p-3 mb-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <h4 class="text-center mb-0">Vastu</h4>
-            <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
+        <!-- Charts Section -->
+        <div class="container">
+            <div class="chart-container p-3 mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="text-center mb-0">Vastu</h4>
+                    <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
+                </div>
+                <div class="mt-3">
+                    <canvas id="offlineChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container p-3 mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="text-center mb-0">Vedic</h4>
+                    <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
+                </div>
+                <div class="mt-3">
+                    <canvas id="onlineChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="text-center mb-0">Kundli</h4>
+                    <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
+                </div>
+                <div class="mt-3 pie-chart-container">
+                    <canvas id="mobChart"></canvas>
+                </div>
+            </div>
+
         </div>
-        <div class="mt-3">
-            <canvas id="offlineChart"></canvas>
-        </div>
-    </div>
-
-    <div class="chart-container p-3 mb-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <h4 class="text-center mb-0">Vedic</h4>
-            <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
-        </div>
-        <div class="mt-3">
-            <canvas id="onlineChart"></canvas>
-        </div>
-    </div>
-
-    <div class="chart-container p-3">
-    <div class="d-flex justify-content-between align-items-center">
-        <h4 class="text-center mb-0">Kundli</h4>
-        <button class="btn btn-light btn-sm border border-dark">Last 30 Days</button>
-    </div>
-    <div class="mt-3 pie-chart-container"> 
-        <canvas id="mobChart"></canvas>
-    </div>
-</div>
-
-</div>
 
 
-<script>
-    function renderBarChart(chartId, labels, datasets) {
-        const ctx = document.getElementById(chartId).getContext('2d');
-        new Chart(ctx, {
-            type: 'bar', // Converted to bar chart
-            data: {
-                labels: labels,
-                datasets: datasets
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 2,
-                            font: {
-                                size: 12
+        <script>
+            function renderBarChart(chartId, labels, datasets) {
+                const ctx = document.getElementById(chartId).getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar', // Converted to bar chart
+                    data: {
+                        labels: labels,
+                        datasets: datasets
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
                             }
                         },
-                        max: 10
-                    }
-                }
-            }
-        });
-    }
-
-    function renderPieChart(chartId, labels, data) {
-        const ctx = document.getElementById(chartId).getContext('2d');
-        new Chart(ctx, {
-            type: 'doughnut', // Doughnut for a similar look
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: data,
-                    backgroundColor: ['#ff7f7f', '#36a2eb', '#8a6be1'], // Matching colors
-                    hoverOffset: 10
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            font: {
-                                size: 14
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 2,
+                                    font: {
+                                        size: 10
+                                    }
+                                },
+                                max: 10
                             }
                         }
                     }
-                },
-                cutout: '50%' // To make it look like a ring
+                });
             }
-        });
-    }
 
-   
+            function renderPieChart(chartId, labels, data) {
+                const ctx = document.getElementById(chartId).getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut', // Doughnut for a similar look
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: data,
+                            backgroundColor: ['#ff7f7f', '#36a2eb', '#8a6be1'], // Matching colors
+                            hoverOffset: 10
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '50%' // To make it look like a ring
+                    }
+                });
+            }
 
-    const labels = ['Vastu', 'Vedic', 'Kundli'];
-    const datasets = [{
-            label: 'December',
-            data: [4, 6, 8],
-            backgroundColor: 'rgba(75, 192, 192, 0.6)'
-        },
-        {
-            label: 'November',
-            data: [3, 7, 6],
-            backgroundColor: 'rgba(255, 99, 132, 0.6)'
-        },
-        {
-            label: 'October',
-            data: [5, 4, 9],
-            backgroundColor: 'rgba(54, 162, 235, 0.6)'
-        }
-    ];
 
-    renderBarChart('offlineChart', labels, datasets);
-    renderBarChart('onlineChart', labels, datasets);
-    renderPieChart('mobChart', ['Vastu', 'Vedic', 'Kundli'], [38, 23, 39]);</script>
+
+            const labels = ['Vastu', 'Vedic', 'Kundli'];
+            const datasets = [{
+                    label: 'December',
+                    data: [4, 6, 8],
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                },
+                {
+                    label: 'November',
+                    data: [3, 7, 6],
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                },
+                {
+                    label: 'October',
+                    data: [5, 4, 9],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                }
+            ];
+
+            renderBarChart('offlineChart', labels, datasets);
+            renderBarChart('onlineChart', labels, datasets);
+            renderPieChart('mobChart', ['Vastu', 'Vedic', 'Kundli'], [38, 23, 39]);
+        </script>
 
     </div>
     <footer>
-        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
 </body>
 

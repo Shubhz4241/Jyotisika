@@ -239,6 +239,81 @@
                         width="30px"
                         height="30px">
                     <div class="chat-info">
+                        <h6>Jane Smith</h6>
+                        <p>Let's discuss the...</p>
+                    </div>
+                    <div class="chat-time">
+                        1:15 PM <br>
+                        <span class="badge bg-success">5</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                        alt="Profile Image"
+                        class="profile-img rounded-circle"
+                        width="30px"
+                        height="30px">
+                    <div class="chat-info">
+                        <h6>Jane Smith</h6>
+                        <p>Let's discuss the...</p>
+                    </div>
+                    <div class="chat-time">
+                        1:15 PM <br>
+                        <span class="badge bg-success">5</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                        alt="Profile Image"
+                        class="profile-img rounded-circle"
+                        width="30px"
+                        height="30px">
+                    <div class="chat-info">
+                        <h6>Jane Smith</h6>
+                        <p>Let's discuss the...</p>
+                    </div>
+                    <div class="chat-time">
+                        1:15 PM <br>
+                        <span class="badge bg-success">5</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                        alt="Profile Image"
+                        class="profile-img rounded-circle"
+                        width="30px"
+                        height="30px">
+                    <div class="chat-info">
+                        <h6>Jane Smith</h6>
+                        <p>Let's discuss the...</p>
+                    </div>
+                    <div class="chat-time">
+                        1:15 PM <br>
+                        <span class="badge bg-success">5</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                        alt="Profile Image"
+                        class="profile-img rounded-circle"
+                        width="30px"
+                        height="30px">
+                    <div class="chat-info">
+                        <h6>Jane Smith</h6>
+                        <p>Let's discuss the...</p>
+                    </div>
+                    <div class="chat-time">
+                        1:15 PM <br>
+                        <span class="badge bg-success">5</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                        alt="Profile Image"
+                        class="profile-img rounded-circle"
+                        width="30px"
+                        height="30px">
+                    <div class="chat-info">
                         <h6>Mike Johnson</h6>
                         <p>Meeting at 3 PM...</p>
                     </div>
