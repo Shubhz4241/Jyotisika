@@ -28,8 +28,8 @@
         
         .puja-card img {
             width: 100%;
-            height: 500px;
-            object-fit: cover;
+            height: 200px;
+            object-fit: fill;
         }
 
         .puja-card .content {
@@ -130,14 +130,14 @@
         <div class="container mt-4">
             <h2 class="text-center mb-4">Pooja Reminder</h2>
 
-            <div class="d-flex flex-wrap justify-content-end gap-2 mb-4">
+            <div class="d-flex flex-wrap justify-content-end gap-1 mb-4">
                 <button class="btn btn-outline-secondary btn-filter active" data-type="offline">Offline Puja</button>
                 <button class="btn btn-outline-secondary btn-filter" data-type="online">Online Puja</button>
                 <button class="btn btn-outline-secondary btn-filter" data-type="mob">Mob Puja</button>
             </div>
 
             <h4 class="mb-3">Today’s Schedule</h4>
-            <div class="row row-cols-1 row-cols-md-2 g-4" id="pujaContainer"></div>
+            <div class="row row-cols-1 row-cols-md-2 g-2" id="pujaContainer"></div>
 
             <div class="d-flex justify-content-between align-items-center mt-5">
                 <h4 class="mb-3">Upcoming Schedule</h4>
