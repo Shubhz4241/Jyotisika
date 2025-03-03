@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Puja</title>
+    <title>Offline Puja</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,11 +54,7 @@
             /* Ensures stable height */
         }
 
-        .table {
-            width: 100%;
-            table-layout: fixed;
-            /* Prevents table shifting */
-        }
+        
 
         .table th {
             background-color: orange;
@@ -100,7 +96,7 @@
                 <button onclick="filterData('rahu-ketu')">Rahu-Ketu</button>
                 <button onclick="filterData('wealth')">Wealth</button>
             </div>
-
+<div style="overflow-x: auto;">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -113,6 +109,7 @@
                 </thead>
                 <tbody id="pujaTableBody"></tbody>
             </table>
+</div>
         </div>
 
         <script>

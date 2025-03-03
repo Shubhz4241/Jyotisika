@@ -14,6 +14,7 @@
     <style>
         body {
             background-color: #f8f8f8;
+            font-family: 'Montserrat', serif;
         }
 
         .table-container {

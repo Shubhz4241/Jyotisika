@@ -87,8 +87,8 @@
 
         @media (max-width: 768px) {
             .square-box {
-                width: 120px;
-                height: 120px;
+                width: 111px;
+                height: 111px;
             }
 
             .chart-container canvas {
@@ -153,6 +153,7 @@
             height: 200px !important;
         }
     }
+    
     </style>
 </head>
 
@@ -164,7 +165,7 @@
         <div class="container mt-4">
             <div class="row text-center">
                 <div class="col-md-4 col-6 mb-3">
-                    <div class="square-box bg-warning text-white">
+                    <div class="square-box bg-warning text-white m-auto">
                         <div>
                             <a href="<?php echo base_url('PujariUser/OfflinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
                                 <h5 class="card-title">Offline Puja</h5>
@@ -174,7 +175,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-6 mb-3">
-                    <div class="square-box bg-warning-subtle text-dark">
+                    <div class="square-box bg-warning-subtle text-dark m-auto">
                         <div>
                             <a href="<?php echo base_url('PujariUser/OnlinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
                                 <h5 class="card-title">Online Puja</h5>
@@ -183,8 +184,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-6 mb-3">
-                    <div class="square-box bg-success-subtle text-dark">
+                <div class="col-md-4 col-sm-12 mb-3">
+                    <div class="square-box bg-success-subtle text-dark m-auto">
                         <div>
                             <h5 class="card-title">Mob Puja</h5>
                             <h2 class="card-text">40</h2>

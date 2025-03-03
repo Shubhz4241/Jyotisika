@@ -180,8 +180,8 @@
 
         @media (max-width: 576px) {
             .stat-box {
-                width: 100px;
-                height: 100px;
+                width: 111px;
+                height: 111px;
             }
 
             .chart-container {

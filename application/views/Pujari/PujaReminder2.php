@@ -25,9 +25,10 @@
             height: 100%;
         }
 
+        
         .puja-card img {
             width: 100%;
-            height: 200px;
+            height: 500px;
             object-fit: cover;
         }
 

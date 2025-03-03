@@ -198,6 +198,12 @@
             padding: 1rem !important;
             text-align: start;
         }
+
+        .text-center {
+            text-align: center !important;
+            justify-content: center;
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -215,7 +221,7 @@
                             <div class="card py-3" style="border-radius:0;">
                                 <div class="icon-box green">📅</div>
                                 <a href="<?php echo base_url() . 'PujariUser/TodaysSchedule'; ?>">
-                                <h6>Today's Schedule</h6>
+                                    <h6>Today's Schedule</h6>
                                 </a>
                             </div>
                         </div>
