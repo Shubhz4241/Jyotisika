@@ -51,7 +51,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Puja</th>
+                <th>AstrologerService</th>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Address</th>
@@ -79,7 +79,7 @@
             <input type="text" class="form-control" id="edit-name">
         </div>
         <div class="mb-3">
-            <label for="edit-puja" class="form-label">Puja</label>
+            <label for="edit-puja" class="form-label">AstrologerService</label>
             <select class="form-select" id="edit-puja">
                 <option value="Shani Puja">Shani Puja</option>
                 <option value="Ganesh Puja">Ganesh Puja</option>
@@ -137,30 +137,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function loadDummyData() {
         const dummyData = [
-            { "name": "John Doe", "puja": "Shani Puja", "date": "2025-02-10", "time": "10:30 AM", "address": "Sector 15, Nashik", "status": "" },
-            { "name": "Jane Smith", "puja": "Ganesh Puja", "date": "2025-02-15", "time": "09:00 AM", "address": "Kothrud, Pune", "status": "" },
-            { "name": "Amit Sharma", "puja": "Maha Mrityunjaya", "date": "2025-02-18", "time": "06:00 AM", "address": "Dadar, Mumbai", "status": "" },
-            { "name": "Priya Patel", "puja": "Satyanarayan", "date": "2025-02-20", "time": "05:30 PM", "address": "Thane, Mumbai", "status": "" },
-            { "name": "Rajesh Kumar", "puja": "Rudrabhishek", "date": "2025-02-25", "time": "04:00 PM", "address": "Hadapsar, Pune", "status": "" },
-            { "name": "Sneha Joshi", "puja": "Navgraha Puja", "date": "2025-02-28", "time": "07:45 AM", "address": "Vashi, Navi Mumbai", "status": "" },
-            { "name": "Vikram Singh", "puja": "Kaal Sarp Dosh", "date": "2025-03-02", "time": "03:00 PM", "address": "Nigdi, Pune", "status": "" },
-            { "name": "Sunita Sharma", "puja": "Durga Saptashati", "date": "2025-03-05", "time": "10:00 AM", "address": "Panvel, Navi Mumbai", "status": "" },
-            { "name": "Rahul Mehta", "puja": "Lakshmi Puja", "date": "2025-03-10", "time": "08:15 AM", "address": "Shivaji Nagar, Pune", "status": "" },
-            { "name": "Ananya Verma", "puja": "Ganesh Chaturthi", "date": "2025-03-15", "time": "06:30 AM", "address": "Borivali, Mumbai", "status": "" },
-            { "name": "Karan Kapoor", "puja": "Vastu Shanti", "date": "2025-03-20", "time": "11:00 AM", "address": "Chembur, Mumbai", "status": "" },
-            { "name": "Rushikesh Thomre", "puja": "Satyanarayan Puja", "date": "2000-09-29", "time": "06:00 PM", "address": "DGP Nager 2", "status": "" },
-            { "name": "John Doe", "puja": "Shani Puja", "date": "2025-02-10", "time": "10:30 AM", "address": "Sector 15, Nashik", "status": "" },
-            { "name": "Jane Smith", "puja": "Ganesh Puja", "date": "2025-02-15", "time": "09:00 AM", "address": "Kothrud, Pune", "status": "" },
-            { "name": "Amit Sharma", "puja": "Maha Mrityunjaya", "date": "2025-02-18", "time": "06:00 AM", "address": "Dadar, Mumbai", "status": "" },
-            { "name": "Priya Patel", "puja": "Satyanarayan", "date": "2025-02-20", "time": "05:30 PM", "address": "Thane, Mumbai", "status": "" },
-            { "name": "Rajesh Kumar", "puja": "Rudrabhishek", "date": "2025-02-25", "time": "04:00 PM", "address": "Hadapsar, Pune", "status": "" },
-            { "name": "Sneha Joshi", "puja": "Navgraha Puja", "date": "2025-02-28", "time": "07:45 AM", "address": "Vashi, Navi Mumbai", "status": "" },
-            { "name": "Vikram Singh", "puja": "Kaal Sarp Dosh", "date": "2025-03-02", "time": "03:00 PM", "address": "Nigdi, Pune", "status": "" },
-            { "name": "Sunita Sharma", "puja": "Durga Saptashati", "date": "2025-03-05", "time": "10:00 AM", "address": "Panvel, Navi Mumbai", "status": "" },
-            { "name": "Rahul Mehta", "puja": "Lakshmi Puja", "date": "2025-03-10", "time": "08:15 AM", "address": "Shivaji Nagar, Pune", "status": "" },
-            { "name": "Ananya Verma", "puja": "Ganesh Chaturthi", "date": "2025-03-15", "time": "06:30 AM", "address": "Borivali, Mumbai", "status": "" },
-            { "name": "Karan Kapoor", "puja": "Vastu Shanti", "date": "2025-03-20", "time": "11:00 AM", "address": "Chembur, Mumbai", "status": "" },
-            { "name": "Rushikesh Thomre", "puja": "Satyanarayan Puja", "date": "2000-09-29", "time": "06:00 PM", "address": "DGP Nager 2", "status": "" }
+            { "name": "John Doe", "AstrologerService": "Shani Puja", "date": "2025-02-10", "time": "10:30 AM", "address": "Sector 15, Nashik", "status": "" },
+            { "name": "Jane Smith", "AstrologerService": "Ganesh Puja", "date": "2025-02-15", "time": "09:00 AM", "address": "Kothrud, Pune", "status": "" },
+            { "name": "Amit Sharma", "AstrologerService": "Maha Mrityunjaya", "date": "2025-02-18", "time": "06:00 AM", "address": "Dadar, Mumbai", "status": "" },
+            { "name": "Priya Patel", "AstrologerService": "Satyanarayan", "date": "2025-02-20", "time": "05:30 PM", "address": "Thane, Mumbai", "status": "" },
+            { "name": "Rajesh Kumar", "AstrologerService": "Rudrabhishek", "date": "2025-02-25", "time": "04:00 PM", "address": "Hadapsar, Pune", "status": "" },
+            { "name": "Sneha Joshi", "AstrologerService": "Navgraha Puja", "date": "2025-02-28", "time": "07:45 AM", "address": "Vashi, Navi Mumbai", "status": "" },
+            { "name": "Vikram Singh", "AstrologerService": "Kaal Sarp Dosh", "date": "2025-03-02", "time": "03:00 PM", "address": "Nigdi, Pune", "status": "" },
+            { "name": "Sunita Sharma", "AstrologerService": "Durga Saptashati", "date": "2025-03-05", "time": "10:00 AM", "address": "Panvel, Navi Mumbai", "status": "" },
+            { "name": "Rahul Mehta", "AstrologerService": "Lakshmi Puja", "date": "2025-03-10", "time": "08:15 AM", "address": "Shivaji Nagar, Pune", "status": "" },
+            { "name": "Ananya Verma", "AstrologerService": "Ganesh Chaturthi", "date": "2025-03-15", "time": "06:30 AM", "address": "Borivali, Mumbai", "status": "" },
+            { "name": "Karan Kapoor", "AstrologerService": "Vastu Shanti", "date": "2025-03-20", "time": "11:00 AM", "address": "Chembur, Mumbai", "status": "" },
+            { "name": "Rushikesh Thomre", "AstrologerService": "Satyanarayan Puja", "date": "2000-09-29", "time": "06:00 PM", "address": "DGP Nager 2", "status": "" },
+            { "name": "John Doe", "AstrologerService": "Shani Puja", "date": "2025-02-10", "time": "10:30 AM", "address": "Sector 15, Nashik", "status": "" },
+            { "name": "Jane Smith", "AstrologerService": "Ganesh Puja", "date": "2025-02-15", "time": "09:00 AM", "address": "Kothrud, Pune", "status": "" },
+            { "name": "Amit Sharma", "AstrologerService": "Maha Mrityunjaya", "date": "2025-02-18", "time": "06:00 AM", "address": "Dadar, Mumbai", "status": "" },
+            { "name": "Priya Patel", "AstrologerService": "Satyanarayan", "date": "2025-02-20", "time": "05:30 PM", "address": "Thane, Mumbai", "status": "" },
+            { "name": "Rajesh Kumar", "AstrologerService": "Rudrabhishek", "date": "2025-02-25", "time": "04:00 PM", "address": "Hadapsar, Pune", "status": "" },
+            { "name": "Sneha Joshi", "AstrologerService": "Navgraha Puja", "date": "2025-02-28", "time": "07:45 AM", "address": "Vashi, Navi Mumbai", "status": "" },
+            { "name": "Vikram Singh", "AstrologerService": "Kaal Sarp Dosh", "date": "2025-03-02", "time": "03:00 PM", "address": "Nigdi, Pune", "status": "" },
+            { "name": "Sunita Sharma", "AstrologerService": "Durga Saptashati", "date": "2025-03-05", "time": "10:00 AM", "address": "Panvel, Navi Mumbai", "status": "" },
+            { "name": "Rahul Mehta", "AstrologerService": "Lakshmi Puja", "date": "2025-03-10", "time": "08:15 AM", "address": "Shivaji Nagar, Pune", "status": "" },
+            { "name": "Ananya Verma", "AstrologerService": "Ganesh Chaturthi", "date": "2025-03-15", "time": "06:30 AM", "address": "Borivali, Mumbai", "status": "" },
+            { "name": "Karan Kapoor", "AstrologerService": "Vastu Shanti", "date": "2025-03-20", "time": "11:00 AM", "address": "Chembur, Mumbai", "status": "" },
+            { "name": "Rushikesh Thomre", "AstrologerService": "Satyanarayan Puja", "date": "2000-09-29", "time": "06:00 PM", "address": "DGP Nager 2", "status": "" }
         ];
         localStorage.setItem("pujaRequests", JSON.stringify(dummyData));
     }
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tableBody.innerHTML = storedData.map((data, index) => `
             <tr>
                 <td>${data.name}</td>
-                <td>${data.puja}</td>
+                <td>${data.AstrologerService}</td>
                 <td>${data.date}</td>
                 <td>${data.time}</td>
                 <td>${data.address}</td>
@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tableBody.innerHTML = storedData.map((data) => `
             <tr>
                 <td>${data.name}</td>
-                <td>${data.puja}</td>
+                <td>${data.AstrologerService}</td>
                 <td>${data.date}</td>
                 <td>${data.time}</td>
                 <td>${data.address}</td>
@@ -324,7 +324,7 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 1; i <= 20; i++) {
             dummyData.push({
                 name: `Person ${i}`,
-                puja: `Puja Type ${i}`,
+                AstrologerService: `Puja Type ${i}`,
                 date: `2025-02-${(i % 28) + 1}`,
                 time: `${(i % 12) + 1}:00 ${i % 2 === 0 ? "AM" : "PM"}`,
                 address: `Address ${i}`
@@ -344,7 +344,7 @@ document.addEventListener("DOMContentLoaded", function () {
         paginatedItems.forEach((data, index) => {
             let row = `<tr>
                 <td>${data.name}</td>
-                <td>${data.puja}</td>
+                <td>${data.AstrologerService}</td>
                 <td>${data.date}</td>
                 <td>${data.time}</td>
                 <td>${data.address}</td>
@@ -414,8 +414,5 @@ document.addEventListener("DOMContentLoaded", function () {
     loadTable(currentPage);
 });
 </script>
-
-
-
 </body>
 </html>
