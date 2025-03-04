@@ -49,7 +49,7 @@
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
         <!-- carousel section gallery -->
-        <section>
+        <!-- <section>
             <div class="container-fluid my-4">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 
@@ -81,11 +81,11 @@
                     </button>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- why choose section -->
         <section>
-            <div class="container">
+            <div class="container mt-5">
                 <h3 class="text-center my-4">Why Choose Us</h3>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-lg-3 text-center">
@@ -131,7 +131,7 @@
         <!-- Review section -->
         <section>
             <div class="container my-5">
-                <h3 class="mb-4  text-center">User Reviews</h3>
+                <h3 class="mb-4  text-center">User Services</h3>
                 <div class="owl-carousel owl1 owl-theme">
                     <div class="item">
                         <div class="card shadow " style=" border: 1px solid var(--red);">

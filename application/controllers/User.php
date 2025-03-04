@@ -135,4 +135,8 @@ class User extends CI_Controller
 	public function CustomerSupport(){
 		$this->load->view('User/CustomerSupport');
 	}
+
+	public function PoojaInfo(){
+		$this->load->view('User/PoojaInfo');
+	}
 }

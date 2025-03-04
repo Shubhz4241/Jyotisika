@@ -43,62 +43,66 @@
         </div>
         <div class="row my-4" id="cardContainer">
 
-            
-        <?php
-        $cards = [
-            [
-                'image' => 'assets/images/BookPooja/RitualReuniteYourLove.png',
-                'title' => 'Ritual: Reunite Your Love',
-                'description' => 'Heal bonds, foster harmony, and rebuild connections.',
-                'badge' => 'New'
-            ],
-            [
-                'image' => 'assets/images/BookPooja/Rahuketu&ShaniPooja.png',
-                'title' => 'Rahuketu & ShaniPooja',
-                'description' => 'Heal bonds, foster harmony, and rebuild connections.',
-                'badge' => 'Popular'
-            ],
-            [
-                'image' => 'assets/images/BookPooja/GauriShankarPooja.png',
-                'title' => 'Gauri Shankar Pooja',
-                'description' => 'Attract wealth and success into your life.',
-                'badge' => 'New'
-            ],
-            [
-                'image' => 'assets/images/BookPooja/MahaRudrabhishekpooja.png',
-                'title' => 'Maha Rudrabhishek Pooja',
-                'description' => 'Attract wealth and success into your life.',
-                'badge' => 'New'
-            ],
-            // Add more cards as needed
-        ];
 
-        foreach ($cards as $card) : ?>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 card-item">
-                <div class="card h-100 shadow-sm border-0 card-hover">
-                    <div class="position-relative">
-                        <img src="<?php echo $card['image']; ?>" class="card-img-top" alt="<?php echo $card['title']; ?>" style="height: 200px; object-fit: cover;">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-danger"><?php echo $card['badge']; ?></span>
+            <?php
+            $cards = [
+                [
+                    'image' => 'assets/images/BookPooja/RitualReuniteYourLove.png',
+                    'title' => 'Ritual: Reunite Your Love',
+                    'description' => 'Heal bonds, foster harmony, and rebuild connections.',
+                    'badge' => 'New'
+                ],
+                [
+                    'image' => 'assets/images/BookPooja/Rahuketu&ShaniPooja.png',
+                    'title' => 'Rahuketu & ShaniPooja',
+                    'description' => 'Heal bonds, foster harmony, and rebuild connections.',
+                    'badge' => 'Popular'
+                ],
+                [
+                    'image' => 'assets/images/BookPooja/GauriShankarPooja.png',
+                    'title' => 'Gauri Shankar Pooja',
+                    'description' => 'Attract wealth and success into your life.',
+                    'badge' => 'New'
+                ],
+                [
+                    'image' => 'assets/images/BookPooja/MahaRudrabhishekpooja.png',
+                    'title' => 'Maha Rudrabhishek Pooja',
+                    'description' => 'Attract wealth and success into your life.',
+                    'badge' => 'New'
+                ],
+                // Add more cards as needed
+            ];
+
+            foreach ($cards as $card) : ?>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 card-item">
+                    <div class="card h-100 shadow-sm border-0 card-hover">
+
+                        <a href="<?php echo base_url('PoojaInfo')?>">
+                            <div class="position-relative">
+                                <img src="<?php echo $card['image']; ?>" class="card-img-top" alt="<?php echo $card['title']; ?>" style="height: 200px; object-fit: cover;">
+                                <div class="position-absolute top-0 end-0 m-2">
+                                    <span class="badge bg-danger"><?php echo $card['badge']; ?></span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold"><?php echo $card['title']; ?></h5>
+                            <p class="card-text text-muted"><?php echo $card['description']; ?></p>
                         </div>
-                    </div>
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold"><?php echo $card['title']; ?></h5>
-                        <p class="card-text text-muted"><?php echo $card['description']; ?></p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <div class="d-flex justify-content-between gap-2 px-2">
-                            <a href="<?php echo base_url('OfflinePoojaris') ?>" class="btn btn-dark text-dark flex-grow-1" style="background-color:var(--yellow)">
-                                Offline
-                            </a>
-                            <a href="<?php echo base_url('OnlinePoojaris') ?>" class="btn btn-outline-dark btnHover flex-grow-1">
-                                Online
-                            </a>
+                        <div class="card-footer bg-transparent border-0">
+                            <div class="d-flex justify-content-between gap-2 px-2">
+                                <a href="<?php echo base_url('OfflinePoojaris') ?>" class="btn btn-dark text-dark flex-grow-1" style="background-color:var(--yellow)">
+                                    Offline
+                                </a>
+                                <a href="<?php echo base_url('OnlinePoojaris') ?>" class="btn btn-outline-dark btnHover flex-grow-1">
+                                    Online
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
         </div>
     </div>
 
