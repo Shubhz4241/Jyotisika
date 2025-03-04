@@ -73,7 +73,7 @@
         .icon-small {
             width: 21px !important;
             /* Adjust size as needed */
-            height: 10px !important;
+            height: 19px !important;
             vertical-align: middle;
             /* Aligns the icon with the text */
             margin-right: 5px;

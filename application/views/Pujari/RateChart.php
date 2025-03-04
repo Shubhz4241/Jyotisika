@@ -159,18 +159,44 @@
                 <div class="filter-wrapper">
                     <select class="filter-select" id="filter">
                         <option value="">Filter</option>
-                        <option value="Ghar Shanti">Ghar Shanti</option>
-                        <option value="Rahu-Ketu">Rahu-Ketu</option>
+                        <option value="Ghar Shanti">Ganesh Puja</option>
+                        <option value="Rahu-Ketu">Lakshmi Puja</option>
                     </select>
                 </div>
-
 
             </div>
 
             <div id="rateCardsContainer" class="row">
                 <!-- Cards will be dynamically inserted -->
             </div>
+            
         </div>
+<!-- Change Form Modal -->
+<div class="modal fade" id="changeModal" tabindex="-1" aria-labelledby="changeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeModalLabel">Edit Puja Price</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="changeForm">
+                    <div class="mb-3">
+                        <label for="editOriginalPrice" class="form-label">Original Price</label>
+                        <input type="number" class="form-control" id="editOriginalPrice" required>
+                        <div class="invalid-feedback">Please enter a valid original price.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDiscountPrice" class="form-label">Discount Price</label>
+                        <input type="number" class="form-control" id="editDiscountPrice" required>
+                        <div class="invalid-feedback">Please enter a valid discount price.</div>
+                    </div>
+                    <button type="button" class="btn btn-success" id="saveChangesBtn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
         <script>
             const pujas = [{
@@ -290,6 +316,111 @@
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let pujas = JSON.parse(localStorage.getItem("pujas")) || [
+            { name: "Ghar Shanti", originalPrice: 610, discountPrice: 500 },
+            { name: "Rahu-Ketu", originalPrice: 610, discountPrice: 500 },
+            { name: "Ganesh Puja", originalPrice: 700, discountPrice: 600 },
+            { name: "Lakshmi Puja", originalPrice: 800, discountPrice: 700 },
+            { name: "Navagraha Puja", originalPrice: 900, discountPrice: 800 },
+            { name: "Saraswati Puja", originalPrice: 1000, discountPrice: 900 }
+        ];
+
+        if (!localStorage.getItem("pujas")) {
+            localStorage.setItem("pujas", JSON.stringify(pujas));
+        }
+
+        function renderPujas(searchQuery = "", filter = "") {
+            const container = document.getElementById("rateCardsContainer");
+            container.innerHTML = "";
+            searchQuery = searchQuery.toLowerCase();
+            filter = filter.toLowerCase();
+
+            let storedPujas = JSON.parse(localStorage.getItem("pujas")) || [];
+            let filteredPujas = storedPujas.filter((puja, index) => {
+                let nameMatch = puja.name.toLowerCase().includes(searchQuery);
+                let filterMatch = !filter || puja.name.toLowerCase() === filter;
+                return nameMatch && filterMatch;
+            });
+
+            if (filteredPujas.length === 0) {
+                container.innerHTML = `<p class="text-center mt-3">No matching pujas found.</p>`;
+                return;
+            }
+
+            filteredPujas.forEach((puja, index) => {
+                const card = document.createElement("div");
+                card.classList.add("col-md-6", "col-lg-4", "col-xl-3", "mb-4");
+                card.innerHTML = `
+                    <div class="rate-card">
+                        <h5>${puja.name}</h5>
+                        <p style="font-size: 12px; color: gray;">Original Price: ₹<span id="originalPrice-${index}">${puja.originalPrice}</span></p>
+                        <p>Discount Price: <strong>₹<span id="discountPrice-${index}">${puja.discountPrice}</span></strong></p>
+                        <button class="btn btn-change" onclick="openEditModal(${index})">Change</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        window.openEditModal = function (index) {
+            let storedPujas = JSON.parse(localStorage.getItem("pujas")) || [];
+            let puja = storedPujas[index];
+
+            document.getElementById("editOriginalPrice").value = puja.originalPrice;
+            document.getElementById("editDiscountPrice").value = puja.discountPrice;
+            document.getElementById("saveChangesBtn").setAttribute("data-index", index);
+
+            let changeModal = new bootstrap.Modal(document.getElementById("changeModal"));
+            changeModal.show();
+        };
+
+        document.getElementById("saveChangesBtn").addEventListener("click", function () {
+            let index = this.getAttribute("data-index");
+            let storedPujas = JSON.parse(localStorage.getItem("pujas")) || [];
+            let originalPrice = document.getElementById("editOriginalPrice").value.trim();
+            let discountPrice = document.getElementById("editDiscountPrice").value.trim();
+
+            if (originalPrice === "" || discountPrice === "" || isNaN(originalPrice) || isNaN(discountPrice)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Invalid Input",
+                    text: "Please enter valid numeric prices!",
+                });
+                return;
+            }
+
+            storedPujas[index].originalPrice = parseInt(originalPrice);
+            storedPujas[index].discountPrice = parseInt(discountPrice);
+            localStorage.setItem("pujas", JSON.stringify(storedPujas));
+
+            document.getElementById(`originalPrice-${index}`).textContent = originalPrice;
+            document.getElementById(`discountPrice-${index}`).textContent = discountPrice;
+
+            let changeModal = bootstrap.Modal.getInstance(document.getElementById("changeModal"));
+            changeModal.hide();
+
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Puja prices updated successfully!",
+            });
+
+            renderPujas();
+        });
+
+        document.getElementById("search").addEventListener("input", function () {
+            renderPujas(this.value, document.getElementById("filter").value);
+        });
+
+        document.getElementById("filter").addEventListener("change", function () {
+            renderPujas(document.getElementById("search").value, this.value);
+        });
+
+        renderPujas();
+    });
+</script>
 
 </body>
 
