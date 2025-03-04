@@ -83,11 +83,13 @@ $route['ProductDetails'] ='User/ProductDetails';
 $route['ProductPayment'] ='User/ProductPayment';
 $route['Notification'] ='User/Notification';
 $route['CustomerSupport'] ='User/CustomerSupport';
+$route['PoojaInfo'] ='User/PoojaInfo';
 
 
 
 // login poge
-$route['LoginSignup'] = 'LoginSignup/LoginSignup';
+$route['Signup'] = 'UserLoginSignup/Signup';
+$route['Login'] = 'UserLoginSignup/Login';
 
 // Admin Routes
 $route['admindash'] = 'Admin/AdminDash';
