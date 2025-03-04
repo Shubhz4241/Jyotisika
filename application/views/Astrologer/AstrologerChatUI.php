@@ -17,7 +17,7 @@
         .chat-container {
             display: flex;
             height: 90vh;
-            margin: 20px;
+            /* margin: 20px; */
         }
 
         .chat-list {
@@ -431,67 +431,64 @@
     <footer>
         <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const messageInput = document.getElementById("message");
-            const sendBtn = document.getElementById("sendBtn");
-            const chatContent = document.querySelector(".chat-content");
-            const fileInput = document.getElementById("fileInput");
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const messageInput = document.getElementById("message");
+    const sendBtn = document.getElementById("sendBtn");
+    const chatContent = document.querySelector(".chat-content");
+    
+    // Example user profile images (replace with dynamic user data if needed)
+    const senderProfileImage = "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>";
+    const receiverProfileImage = "<?php echo base_url() . 'assets/images/Pujari/enthusiastic-woman-showing-okay-ok-gesture-smiling-feeling-excellent-recommend-product-helped-her-lot-grin-delighted-giving-approval-like-your-choice-standing-supportive-white-wall.png'; ?>";
 
-            // Handle Sending Messages
-            sendBtn.addEventListener("click", function() {
-                let message = messageInput.value.trim();
-                if (message === "") {
-                    alert("Message cannot be empty!");
-                    return;
-                }
+    // Handle Sending Messages
+    sendBtn.addEventListener("click", function() {
+        let message = messageInput.value.trim();
+        if (message === "") {
+            alert("Message cannot be empty!");
+            return;
+        }
 
-                // Append Message to Chat Content
-                let newMessage = document.createElement("div");
-                newMessage.classList.add("message", "sent");
-                newMessage.textContent = message;
-                chatContent.appendChild(newMessage);
+        // Append Message to Chat Content
+        let newMessage = document.createElement("div");
+        newMessage.classList.add("d-flex", "justify-content-end", "align-items-center", "mb-2");
 
-                // Clear Input
-                messageInput.value = "";
-                chatContent.scrollTop = chatContent.scrollHeight; // Auto-scroll to bottom
-            });
+        newMessage.innerHTML = `
+            <div class="message sent">${message}</div>
+            <img src="${senderProfileImage}" alt="Sender" class="profile-img rounded-circle ms-2" width="30px" height="30px">
+        `;
 
-            // Send Message on Enter Key
-            messageInput.addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    sendBtn.click();
-                }
-            });
+        chatContent.appendChild(newMessage);
 
-            // Handle File Attachment
-            fileInput.addEventListener("change", function() {
-                let file = fileInput.files[0];
-                if (file) {
-                    let newMessage = document.createElement("div");
-                    newMessage.classList.add("message", "sent");
-                    newMessage.innerHTML = `<i class="bi bi-paperclip"></i> ${file.name}`;
-                    chatContent.appendChild(newMessage);
-                    chatContent.scrollTop = chatContent.scrollHeight;
-                }
-            });
+        // Simulating receiver's reply after 1 sec (You can replace this with real-time chat logic)
+        setTimeout(() => {
+            let replyMessage = document.createElement("div");
+            replyMessage.classList.add("d-flex", "justify-content-start", "align-items-center", "mb-2");
 
-            // Handle Emoji Picker (Basic)
-            document.querySelector(".bi-emoji-smile").addEventListener("click", function() {
-                let emojiList = ["😀", "😁", "😂", "😍", "😎", "😜", "🤩", "🙌", "❤️", "🔥"];
-                let emoji = prompt("Choose an emoji:\n" + emojiList.join(" "));
-                if (emoji && emojiList.includes(emoji)) {
-                    messageInput.value += emoji; // Append emoji to input
-                }
-            });
+            replyMessage.innerHTML = `
+                <img src="${receiverProfileImage}" alt="Receiver" class="profile-img rounded-circle me-2" width="30px" height="30px">
+                <div class="message received">Thanks for your message!</div>
+            `;
 
-            // Handle Microphone Button (Simulated)
-            document.querySelector(".bi-mic").addEventListener("click", function() {
-                alert("Voice input not implemented yet! 🎤");
-            });
-        });
-    </script>
+            chatContent.appendChild(replyMessage);
+            chatContent.scrollTop = chatContent.scrollHeight; // Auto-scroll to bottom
+        }, 1000);
+
+        // Clear Input
+        messageInput.value = "";
+        chatContent.scrollTop = chatContent.scrollHeight; // Auto-scroll to bottom
+    });
+
+    // Send Message on Enter Key
+    messageInput.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            sendBtn.click();
+        }
+    });
+});
+
+   </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const chatItems = document.querySelectorAll(".chat-item");
