@@ -141,28 +141,60 @@
             <main class="p-3">
                 <div class="container">
                     <div class="row g-4">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
                                 <img src="<?php echo base_url() . 'assets/images/users.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
-                                <h1 class="mt-3">50</h1>
+                                <h1 class="mt-3 counter" data-target="450">0</h1>
                                 <p>Total Users</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
+                        <div class="col-md-3">
+                            <a href="<?php echo base_url() . 'astrologerrequests'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
                                 <img src="<?php echo base_url() . 'assets/images/astrologers.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
-                                <h1 class="mt-3">50</h1>
+                                <h1 class="mt-3 counter" data-target="150">0</h1>
                                 <p>Total Astrologer</p>
-                            </div>
+                            </a>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
+                        <div class="col-md-3">
+                            <a href="<?php echo base_url() . 'pujarirequests'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
                                 <img src="<?php echo base_url() . 'assets/images/pujari.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
-                                <h1 class="mt-3">50</h1>
+                                <h1 class="mt-3 counter" data-target="100">0</h1>
                                 <p>Total Pujari</p>
-                            </div>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="<?php echo base_url() . 'rescheduleinterview'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
+                                <img src="<?php echo base_url() . 'assets/images/rescheduleinterview.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
+                                <h1 class="mt-3 counter" data-target="870">0</h1>
+                                <p>Reschedule Interview</p>
+                            </a>
                         </div>
                     </div>
+
+                    <!-- Counter Script -->
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                            const counters = document.querySelectorAll(".counter");
+
+                            counters.forEach(counter => {
+                                const updateCount = () => {
+                                    const target = +counter.getAttribute("data-target");
+                                    const count = +counter.innerText;
+                                    const increment = target / 50; // Speed of counting
+
+                                    if (count < target) {
+                                        counter.innerText = Math.ceil(count + increment);
+                                        setTimeout(updateCount, 30); // Adjust speed here
+                                    } else {
+                                        counter.innerText = target;
+                                    }
+                                };
+
+                                updateCount();
+                            });
+                        });
+                    </script>
+
 
                     <div class="row mt-4">
                         <div class="col-12">
@@ -199,10 +231,10 @@
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="fas fa-check"></i>
+                                                                <i class="bi bi-check-lg"></i>
                                                             </a>
                                                             <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="fas fa-times"></i>
+                                                                <i class="bi bi-x-lg"></i>
                                                             </a>
                                                         </div>
                                                     </td>
@@ -219,10 +251,10 @@
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="fas fa-check"></i>
+                                                                <i class="bi bi-check-lg"></i>
                                                             </a>
                                                             <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="fas fa-times"></i>
+                                                                <i class="bi bi-x-lg"></i>
                                                             </a>
                                                         </div>
                                                     </td>
@@ -239,10 +271,10 @@
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="fas fa-check"></i>
+                                                                <i class="bi bi-check-lg"></i>
                                                             </a>
                                                             <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="fas fa-times"></i>
+                                                                <i class="bi bi-x-lg"></i>
                                                             </a>
                                                         </div>
                                                     </td>
@@ -253,7 +285,7 @@
                                         </table>
                                         <div class="card-footer text-center">
                                             <a href="<?php echo base_url('astrologerrequests'); ?>"
-                                                class="btn btn-outline-primary btn-block">
+                                                class="btn btn-block" style="background-color: #0c768a; color: white;">
                                                 See All Registrations
                                             </a>
                                         </div>
@@ -291,10 +323,10 @@
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="fas fa-check"></i>
+                                                                <i class="bi bi-check-lg"></i>
                                                             </a>
                                                             <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="fas fa-times"></i>
+                                                                <i class="bi bi-x-lg"></i>
                                                             </a>
                                                         </div>
                                                     </td>
@@ -311,10 +343,10 @@
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="fas fa-check"></i>
+                                                                <i class="bi bi-check-lg"></i>
                                                             </a>
                                                             <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="fas fa-times"></i>
+                                                                <i class="bi bi-x-lg"></i>
                                                             </a>
                                                         </div>
                                                     </td>
@@ -331,10 +363,10 @@
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="fas fa-check"></i>
+                                                                <i class="bi bi-check-lg"></i>
                                                             </a>
                                                             <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="fas fa-times"></i>
+                                                                <i class="bi bi-x-lg"></i>
                                                             </a>
                                                         </div>
                                                     </td>
@@ -344,8 +376,8 @@
 
                                         </table>
                                         <div class="card-footer text-center">
-                                            <a href="<?php echo base_url('admin/all_registrations'); ?>"
-                                                class="btn btn-outline-primary btn-block">
+                                            <a href="<?php echo base_url() . 'pujarirequests'; ?>"
+                                                class="btn btn-block" style="background-color: #0c768a; color: white;">
                                                 See All Registrations
                                             </a>
                                         </div>
@@ -386,11 +418,6 @@
         });
     </script>
     <!-- Modal Structure End -->
-
-
-    <!-- Script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Script End -->
 
     <!-- Script Toggle Sidebar -->
     <script>

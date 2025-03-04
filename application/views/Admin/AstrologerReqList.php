@@ -360,13 +360,48 @@
         <td>${item.address}</td>
         <td class="text-center">
             <div class="d-flex justify-content-center">
-                <button class="btn btn-success btn-sm me-2" onclick="handleAccept(${item.srNo})">
-                    Accept
+                <button class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#scheduleModal" onclick="openScheduleModal(${item.srNo})">
+                    <i class="bi bi-check-circle-fill"></i>
                 </button>
                 <button class="btn btn-danger btn-sm" onclick="handleReject(${item.srNo})">
-                    Reject
+                    <i class="bi bi-x-circle-fill"></i>
                 </button>
             </div>
+
+            <!-- Schedule Modal -->
+            <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="scheduleModalLabel">Schedule Interview</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="scheduleForm" onsubmit="handleSchedule(${item.srNo}); return false;">
+    <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" name="date" required />
+    </div>
+    <div class="mb-3">
+        <label for="time" class="form-label">Time</label>
+        <input type="time" class="form-control" id="time" name="time" required />
+    </div>
+    <div class="mb-3">
+        <label for="venue" class="form-label">Venue</label>
+        <input type="text" class="form-control" id="venue" name="venue" required />
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Schedule</button>
+    </div>
+</form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </td>
     </tr>`;
                                         tableBody.innerHTML += row;
@@ -443,6 +478,54 @@
                                     // Show the modal
                                     const modal = new bootstrap.Modal(document.getElementById('pdfModal'));
                                     modal.show();
+                                }
+
+                                function handleSchedule(srNo) {
+                                    // Prevent default form submission behavior
+                                    event.preventDefault();
+
+                                    // Fetch form values
+                                    const date = document.getElementById('date').value;
+                                    const time = document.getElementById('time').value;
+                                    const venue = document.getElementById('venue').value;
+
+                                    // Check if all fields are filled
+                                    if (date && time && venue) {
+                                        // Simulate form submission or add logic to handle the form data (e.g., API call)
+                                        console.log(`Scheduling interview for SR No: ${srNo}`);
+                                        console.log(`Date: ${date}, Time: ${time}, Venue: ${venue}`);
+
+                                        // Close the modal
+                                        const modal = document.getElementById('scheduleModal');
+                                        const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                                        bootstrapModal.hide();
+
+                                        // Remove any remaining modal-backdrop elements
+                                        document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+
+                                        // Reset body classes to remove modal-related styles
+                                        document.body.classList.remove('modal-open');
+                                        document.body.style = "";
+
+                                        // Show SweetAlert for successful scheduling
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: "Interview scheduled successfully",
+                                            icon: "success",
+                                            confirmButtonText: "OK",
+                                        });
+
+                                        // Optionally reset the form after successful submission
+                                        document.getElementById('scheduleForm').reset();
+                                    } else {
+                                        // Show an alert if the form is incomplete
+                                        Swal.fire({
+                                            title: "Error",
+                                            text: "Please fill all the fields",
+                                            icon: "error",
+                                            confirmButtonText: "OK",
+                                        });
+                                    }
                                 }
                             </script>
                         </div>
@@ -893,6 +976,7 @@
             sidebar.classList.remove("collapsed");
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
