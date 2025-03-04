@@ -189,6 +189,27 @@
                 font-size: 14px;
             }
         }
+        /* Mobile View css */
+        @media (max-width: 768px) {
+        .chat-container {
+            flex-direction: column;
+        }
+
+        .chat-list {
+            width: 100%;
+            display: block;
+        }
+
+        .chat-window {
+            width: 100%;
+            margin-left: 0;
+            display: none;
+        }
+
+        .chat-header .back-button {
+            display: inline-block;
+        }
+    }
     </style>
 </head>
 
@@ -309,6 +330,36 @@
                 </div>
                 <div class="chat-item">
                     <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                        alt="Profile Image"
+                        class="profile-img rounded-circle"
+                        width="30px"
+                        height="30px">
+                    <div class="chat-info">
+                        <h6>Jane Smith</h6>
+                        <p>Let's discuss the...</p>
+                    </div>
+                    <div class="chat-time">
+                        1:15 PM <br>
+                        <span class="badge bg-success">5</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                        alt="Profile Image"
+                        class="profile-img rounded-circle"
+                        width="30px"
+                        height="30px">
+                    <div class="chat-info">
+                        <h6>Jane Smith</h6>
+                        <p>Let's discuss the...</p>
+                    </div>
+                    <div class="chat-time">
+                        1:15 PM <br>
+                        <span class="badge bg-success">5</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="<?php echo base_url() .'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
                         alt="Profile Image"
                         class="profile-img rounded-circle"
                         width="30px"
@@ -441,7 +492,34 @@
             });
         });
     </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const chatItems = document.querySelectorAll(".chat-item");
+        const chatList = document.querySelector(".chat-list");
+        const chatWindow = document.querySelector(".chat-window");
+        const backButton = document.createElement("button");
+        backButton.classList.add("btn", "btn-secondary", "mb-2", "back-button");
+        backButton.innerHTML = "<i class='bi bi-arrow-left'></i> Back";
+        backButton.style.display = "none";
+        chatWindow.prepend(backButton);
 
+        chatItems.forEach(item => {
+            item.addEventListener("click", function () {
+                if (window.innerWidth <= 768) {
+                    chatList.style.display = "none";
+                    chatWindow.style.display = "block";
+                    backButton.style.display = "inline-block";
+                }
+            });
+        });
+
+        backButton.addEventListener("click", function () {
+            chatList.style.display = "block";
+            chatWindow.style.display = "none";
+            backButton.style.display = "none";
+        });
+    });
+</script>
 </body>
 
 </html>
