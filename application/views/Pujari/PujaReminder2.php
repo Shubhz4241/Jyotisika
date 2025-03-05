@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pooja Reminder</title>
+    <title>Pooja Reminder - Mob Puja</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,87 +13,98 @@
     <style>
         body {
             font-family: "Montserrat", sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 20px;
         }
 
-        .puja-card {
-            background: #f8f9fa;
+        .header {
+            background-color: #fff5e6;
+            padding: 20px;
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        
-        .puja-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: fill;
+        .header h2 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 15px;
         }
 
-        .puja-card .content {
-            padding: 15px;
-            flex-grow: 1;
+        .btn-filter {
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 14px;
+            margin: 0 5px;
         }
 
         .btn-filter.active {
-            background: #e0aaff;
-            color: black;
+            background-color: #e0aaff;
+            color: #000;
         }
 
-        .btn-set-reminder {
-            background-color: #28a745;
-            color: white;
-            font-size: 0.9rem;
-            font-weight: bold;
-            border-radius: 20px;
-            margin-top: 10px;
+        .puja-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ff9f00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 15px;
         }
 
-        .btn-set-reminder:hover {
-            background-color: #218838;
+        .puja-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
         }
 
-        @media (min-width: 768px) {
-            .puja-card {
-                flex-direction: row;
-            }
-
-            .puja-card img {
-                width: 40%;
-                height: auto;
-            }
-
-            .puja-card .content {
-                width: 60%;
-            }
+        .puja-card .content {
+            text-align: center;
+            padding: 0;
+            width: 100%;
         }
 
-        .icon-small {
-            width: 21px !important;
-            /* Adjust size as needed */
-            height: 19px !important;
+        .puja-card h5 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .puja-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
             vertical-align: middle;
-            /* Aligns the icon with the text */
             margin-right: 5px;
-            /* Adds spacing between the icon and the text */
-
         }
 
         .reminder-btn {
+            background-color: #0EDF50;
+            color: #000;
+            border: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #0EDF50;
-            color: black;
-            border: none;
-            padding: 10px 13px;        
-            font-size: 16px;
-            /* font-weight: bold; */
-            border-radius: 10px;
-            transition: 0.3s ease-in-out;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease-in-out;
+            margin-top: 10px;
         }
 
         .reminder-btn img {
@@ -104,13 +115,48 @@
 
         .reminder-btn:hover {
             background-color: #0056b3;
+            color: #fff;
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .puja-card {
+                flex-direction: row;
+                align-items: center;
+                padding: 15px;
+            }
+
+            .puja-card img {
+                width: 200px;
+                height: 200px;
+                margin-right: 15px;
+                margin-bottom: 0;
+            }
+
+            .puja-card .content {
+                text-align: left;
+                flex-grow: 1;
+            }
+
+            .row-cols-md-2 > * {
+                flex: 0 0 auto;
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .puja-card img {
+                width: 100%;
+                height: auto;
+            }
+
+            .puja-card {
+                padding: 10px;
+            }
+
             .reminder-btn {
-                font-size: 14px;
-                padding: 8px 12px;
+                font-size: 12px;
+                padding: 6px 10px;
             }
 
             .reminder-btn img {
@@ -123,157 +169,58 @@
 </head>
 
 <body>
-    <header>
-        <?php $this->load->view('Pujari/Include/PujariNav') ?>
-    </header>
-    <div style="min-height: 100vh;">
-        <div class="container mt-4">
-            <h2 class="text-center mb-4">Pooja Reminder</h2>
-
-            <div class="d-flex flex-wrap justify-content-end gap-1 mb-4">
-                <button class="btn btn-outline-secondary btn-filter active" data-type="offline">Offline Puja</button>
-                <button class="btn btn-outline-secondary btn-filter" data-type="online">Online Puja</button>
-                <button class="btn btn-outline-secondary btn-filter" data-type="mob">Mob Puja</button>
+    <div class="container">
+        <div class="header">
+            <h2>Pooja Reminder</h2>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+                <button class="btn btn-filter" data-type="offline">Offline Puja</button>
+                <button class="btn btn-filter" data-type="online">Online Puja</button>
+                <button class="btn btn-filter active" data-type="mob">Mob Puja</button>
             </div>
-
-            <h4 class="mb-3">Today’s Schedule</h4>
-            <div class="row row-cols-1 row-cols-md-2 g-2" id="pujaContainer"></div>
-
-            <div class="d-flex justify-content-between align-items-center mt-5">
-                <h4 class="mb-3">Upcoming Schedule</h4>
-                <a href="<?php echo base_url() . 'PujariUser/PujariDashboard'; ?>" class="reminder-btn text-decoration-none">
-                    <img src="<?php echo base_url() . 'assets/images/Pujari/Alarm Plus.png'; ?>" alt="Caret Icon">
-                    Set Reminder
-                </a>
-
-            </div>
-            <div class="row row-cols-1 row-cols-md-2 g-4" id="upcomingPujaContainer"></div>
         </div>
 
+        <h4 class="mb-3">Today’s Schedule</h4>
+        <div class="row row-cols-1 row-cols-md-2 g-4" id="pujaContainer"></div>
+
+        <div class="d-flex justify-content-between align-items-center mt-5">
+            <h4 class="mb-3">Upcoming Schedule</h4>
+            <a href="#" class="reminder-btn text-decoration-none">
+                <img src="https://example.com/alarm-plus.png" alt="Set Reminder Icon">
+                Set Reminder
+            </a>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 g-4" id="upcomingPujaContainer"></div>
     </div>
-    <footer>
-        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
-    </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const pujaData = {
-                offline: [{
-                        name: "Rudraabhishek Puja",
-                        date: "12/1/2025",
-                        time: "10:30 AM",
-                        location: "XYZ Road, Nashik",
-                        img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>"
-                    },
-                    {
-                        name: "Maha Laxmi Puja",
-                        date: "13/1/2025",
-                        time: "9:00 AM",
-                        location: "Temple, Pune",
-                        img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png' ?>"
-                    }
+                online: [
+                    { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", type: "Online", img: "https://example.com/kalash-puja.jpg" },
+                    { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", type: "Online", img: "https://example.com/kalash-puja.jpg" },
+                    { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", type: "Online", img: "https://example.com/kalash-puja.jpg" },
+                    { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", type: "Online", img: "https://example.com/kalash-puja.jpg" }
                 ],
-                online: [{
-                        name: "Online Rudraabhishek",
-                        date: "20/2/2025",
-                        time: "2:00 PM",
-                        location: "Online via Zoom",
-                        img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
-                    },
-                    {
-                        name: "Online Rudraabhishek",
-                        date: "20/2/2025",
-                        time: "2:00 PM",
-                        location: "Online via Zoom",
-                        img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
-                    }
-
+                offline: [
+                    { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", location: "XYZ road, ABC colony, Nashik, Maharashtra", distance: "2.5 Kms Away", type: "Offline", img: "https://example.com/shiva-statue.jpg" },
+                    { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", location: "XYZ road, ABC colony, Nashik, Maharashtra", distance: "2.5 Kms Away", type: "Offline", img: "https://example.com/shiva-statue.jpg" }
                 ],
-                mob: [{
-                        name: "Maha Mrityunjaya Jaap",
-                        date: "14/1/2025",
-                        time: "7:00 AM",
-                        languages: `<img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" class="icon-small" alt="Language"> Sanskrit, Hindi`,
-                        experience: `<img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" class="icon-small" alt="Experience"> 18 years`,
-                        fee: "700",
-                        discount: "850",
-                        attendees: "88",
-                        countdown: `<img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="icon-small" alt="Experience" width="15px" > Starts in: 2 d 6h`,
-                        img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
-                    },
-
-                    {
-                        name: "Maha Mrityunjaya Jaap",
-                        date: "14/1/2025",
-                        time: "7:00 AM",
-                        languages: `<img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" class="icon-small" alt="Language"> Sanskrit, Hindi`,
-                        experience: `<img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" class="icon-small" alt="Experience"> 18 years`,
-                        fee: "700",
-                        discount: "850",
-                        attendees: "88",
-                        countdown: `<img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="icon-small" alt="Experience" width="10px" > Starts in: 2 d 6h`,
-                        img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
-                    }
-
-
-
+                mob: [
+                    { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", languages: "English, Hindi, Marathi", experience: "23 years", fee: "500", attendees: "104", countdown: "Starts in: 1d 4h 23m", type: "Mob Puja", img: "https://example.com/shiva-statue.jpg" },
+                    { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", languages: "English, Hindi, Marathi", experience: "23 years", fee: "500", attendees: "104", countdown: "Starts in: 1d 4h 23m", type: "Mob Puja", img: "https://example.com/shiva-statue.jpg" }
                 ],
                 upcoming: {
-                    offline: [{
-                            name: "Chandi Homam",
-                            date: "25/2/2025",
-                            time: "6:30 AM",
-                            location: "Kashi Temple",
-                            img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
-                        },
-                        {
-                            name: "Chandi Homam",
-                            date: "25/2/2025",
-                            time: "6:30 AM",
-                            location: "Kashi Temple",
-                            img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
-                        }
+                    online: [
+                        { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", type: "Online", img: "https://example.com/kalash-puja.jpg" },
+                        { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", type: "Online", img: "https://example.com/kalash-puja.jpg" }
                     ],
-                    online: [{
-                            name: "Online Navratri Puja",
-                            date: "28/2/2025",
-                            time: "5:30 PM",
-                            location: "Zoom",
-                            img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
-                        },
-                        {
-                            name: "Online Navratri Puja",
-                            date: "28/2/2025",
-                            time: "5:30 PM",
-                            location: "Zoom",
-                            img: "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160.png' ?>"
-                        }
-
+                    offline: [
+                        { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", location: "XYZ road, ABC colony, Nashik, Maharashtra", distance: "2.5 Kms Away", type: "Offline", img: "https://example.com/shiva-statue.jpg" },
+                        { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", location: "XYZ road, ABC colony, Nashik, Maharashtra", distance: "2.5 Kms Away", type: "Offline", img: "https://example.com/shiva-statue.jpg" }
                     ],
-                    mob: [{
-                            name: "Graha Shanti",
-                            date: "29/2/2025",
-                            time: "7:00 AM",
-                            languages: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" class="icon-small" alt="Language"> Hindi, Marathi</span>`,
-                            experience: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" class="icon-small" alt="Experience"> 15 years</span>`,
-                            fee: "800",
-                            discount: "950",
-                            attendees: "78",
-                            countdown: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="icon-small" alt="Countdown"> Starts in: 10d 5h</span>`,
-                            img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
-                        },
-                        {
-                            name: "Graha Shanti",
-                            date: "29/2/2025",
-                            time: "7:00 AM",
-                            languages: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/icon.png'; ?>" class="icon-small" alt="Language"> Hindi, Marathi</span>`,
-                            experience: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png'; ?>" class="icon-small" alt="Experience"> 15 years</span>`,
-                            fee: "800",
-                            discount: "950",
-                            attendees: "78",
-                            countdown: `<span class="icon-container"><img src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png'; ?>" class="icon-small" alt="Countdown"> Starts in: 10d 5h</span>`,
-                            img: "<?php echo base_url() . 'assets/images/Pujari/RudraPuja.png'; ?>"
-                        }
+                    mob: [
+                        { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", languages: "English, Hindi, Marathi", experience: "23 years", fee: "500", attendees: "104", countdown: "Starts in: 1d 4h 23m", type: "Mob Puja", img: "https://example.com/shiva-statue.jpg" },
+                        { name: "Rudraabhishek Puja", date: "12/03/2025", time: "10:30 am", languages: "English, Hindi, Marathi", experience: "23 years", fee: "500", attendees: "104", countdown: "Starts in: 1d 4h 23m", type: "Mob Puja", img: "https://example.com/shiva-statue.jpg" }
                     ]
                 }
             };
@@ -286,26 +233,39 @@
 
                 if (data) {
                     data.forEach(puja => {
-                        const pujaCard = `
-                    <div class="col">
-                        <div class="puja-card">
-                            <img src="${puja.img}" alt="${puja.name}">
-                            <div class="content">
-                                <h5>${puja.name}</h5>
-                                <p><strong>Date:</strong> ${puja.date}</p>
-                                <p><strong>Time:</strong> ${puja.time}</p>
-                                ${type === "mob" ? `
-                                <p><strong>Languages:</strong> ${puja.languages}</p>
-                                <p><strong>Experience:</strong> ${puja.experience}</p>
-                                <p><strong>Fee:</strong> ₹${puja.fee}</p>
-                                <p><strong>Discounted:</strong> ₹${puja.discount}</p>
-                                <p><strong>Attendees:</strong> ${puja.attendees}</p>
-                                <p><strong>${puja.countdown}</strong></p>
-                                ` : `<p><strong>Location:</strong> ${puja.location}</p>`}
+                        let pujaCard = `
+                            <div class="col">
+                                <div class="puja-card">
+                                    <img src="${puja.img}" alt="${puja.name}">
+                                    <div class="content">
+                                        <h5>${puja.name}</h5>
+                                        <p><strong>Date:</strong> ${puja.date}</p>
+                                        <p><strong>Time:</strong> ${puja.time}</p>
+                        `;
+
+                        if (type === "mob") {
+                            pujaCard += `
+                                <p><img src="https://example.com/language-icon.png" class="icon" alt="Languages"> <strong>Languages:</strong> ${puja.languages}</p>
+                                <p><img src="https://example.com/graduation-cap.png" class="icon" alt="Experience"> <strong>Exp:</strong> ${puja.experience}</p>
+                                <p><img src="https://example.com/rupee-icon.png" class="icon" alt="Fee"> ${puja.fee}</p>
+                                <p><strong>Attendee :</strong> ${puja.attendees}</p>
+                                <p style="color: #ff0000;"><img src="https://example.com/timer-icon.png" class="icon" alt="Countdown"> ${puja.countdown}</p>
+                            `;
+                        } else if (type === "offline") {
+                            pujaCard += `
+                                <p>${puja.location}</p>
+                                <p><img src="https://example.com/location-icon.png" class="icon" alt="Distance"> ${puja.distance}</p>
+                            `;
+                        } else if (type === "online") {
+                            // No additional fields for Online Puja, just the type
+                        }
+
+                        pujaCard += `
+                                        <p><strong>Puja Type:</strong> ${puja.type}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                `;
+                        `;
                         container.innerHTML += pujaCard;
                     });
                 }
@@ -321,8 +281,9 @@
                 });
             });
 
-            updatePujaCards("offline", "pujaContainer");
-            updatePujaCards("offline", "upcomingPujaContainer", 'upcoming');
+            // Default to "Mob Puja" as shown in the image
+            updatePujaCards("mob", "pujaContainer");
+            updatePujaCards("mob", "upcomingPujaContainer", 'upcoming');
         });
     </script>
 </body>
