@@ -323,7 +323,7 @@
         </div>
     </div>
     <footer>
-        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
+        <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
     <script>
         $(document).ready(function() {
