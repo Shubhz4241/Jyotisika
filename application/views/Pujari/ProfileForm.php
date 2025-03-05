@@ -123,7 +123,7 @@
         .form-label {
             font-weight: bold;
             margin-bottom: 5px;
-            /* Adds spacing between labels and inputs */
+            margin-top: 18px;
         }
 
         .form-control {
@@ -274,15 +274,15 @@
                             <div class="dropdown-content" id="radioOptions">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="service" id="vastu">
-                                    <label class="form-check-label" for="vastu">Vastu Consultation</label>
+                                    <label class="form-check-label" for="vastu">Ghar-Shanti Puja</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="service" id="palmistry">
-                                    <label class="form-check-label" for="palmistry">Palmistry</label>
+                                    <label class="form-check-label" for="palmistry">Rudraabhishek puja</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="service" id="vedic">
-                                    <label class="form-check-label" for="vedic">Vedic Astrology</label>
+                                    <label class="form-check-label" for="vedic">Satyanarayan Puja</label>
                                 </div>
                                 <a href="#" class="submit-link" id="submitForm">Submit <span class="submit-icon">→</span></a>  </div>
                             </div>
@@ -342,7 +342,7 @@
             Swal.fire({
                 iconHtml: '<img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" width="50">',
                 title: 'Form Submission',
-                html: `<b>Note :</b> Your details will be reviewed after submission.<br><br> <b>ALL THE BEST!</b>`,
+                html: `<b>Note :</b> These skills will be visible after an short interview !<br><br> <b>ALL THE BEST!</b>`,
                 confirmButtonText: "OK",
                 customClass: {
                     popup: 'swal2-popup',
@@ -351,7 +351,8 @@
                     confirmButton: 'swal2-confirm'
                 }
             });
-        });
+        }); 
+      
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
