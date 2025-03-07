@@ -139,4 +139,8 @@ class User extends CI_Controller
 	public function PoojaInfo(){
 		$this->load->view('User/PoojaInfo');
 	}
+
+	public function getdata(){
+		
+	}
 }
