@@ -49,6 +49,7 @@
         color: white;
         /* White icon */
         transition: color 0.3s ease;
+        
     }
 
     .notification-icon i:hover {
