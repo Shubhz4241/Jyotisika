@@ -63,7 +63,7 @@
     <div class="background-container"></div>
 
     <!-- Logo positioned half inside, half outside the background image -->
-    <img src="<?php echo base_url('assets/images/Pujari/Logo.gif'); ?>" alt="Logo" class="logo">
+    <img src="<?php echo base_url('assets/images/Pujari/Logo1.gif'); ?>" alt="Logo" class="logo">
 
 </body>
 

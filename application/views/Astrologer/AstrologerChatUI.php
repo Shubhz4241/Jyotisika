@@ -17,7 +17,7 @@
         .chat-container {
             display: flex;
             height: 90vh;
-            margin: 20px;
+            /* margin: 20px; */
         }
 
         .chat-list {
@@ -189,6 +189,27 @@
                 font-size: 14px;
             }
         }
+        /* Mobile View css */
+        @media (max-width: 768px) {
+        .chat-container {
+            flex-direction: column;
+        }
+
+        .chat-list {
+            width: 100%;
+            display: block;
+        }
+
+        .chat-window {
+            width: 100%;
+            margin-left: 0;
+            display: none;
+        }
+
+        .chat-header .back-button {
+            display: inline-block;
+        }
+    }
     </style>
 </head>
 
@@ -314,6 +335,36 @@
                         width="30px"
                         height="30px">
                     <div class="chat-info">
+                        <h6>Jane Smith</h6>
+                        <p>Let's discuss the...</p>
+                    </div>
+                    <div class="chat-time">
+                        1:15 PM <br>
+                        <span class="badge bg-success">5</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                        alt="Profile Image"
+                        class="profile-img rounded-circle"
+                        width="30px"
+                        height="30px">
+                    <div class="chat-info">
+                        <h6>Jane Smith</h6>
+                        <p>Let's discuss the...</p>
+                    </div>
+                    <div class="chat-time">
+                        1:15 PM <br>
+                        <span class="badge bg-success">5</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="<?php echo base_url() .'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                        alt="Profile Image"
+                        class="profile-img rounded-circle"
+                        width="30px"
+                        height="30px">
+                    <div class="chat-info">
                         <h6>Mike Johnson</h6>
                         <p>Meeting at 3 PM...</p>
                     </div>
@@ -380,68 +431,92 @@
     <footer>
         <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const messageInput = document.getElementById("message");
-            const sendBtn = document.getElementById("sendBtn");
-            const chatContent = document.querySelector(".chat-content");
-            const fileInput = document.getElementById("fileInput");
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const messageInput = document.getElementById("message");
+    const sendBtn = document.getElementById("sendBtn");
+    const chatContent = document.querySelector(".chat-content");
+    
+    // Example user profile images (replace with dynamic user data if needed)
+    const senderProfileImage = "<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>";
+    const receiverProfileImage = "<?php echo base_url() . 'assets/images/Pujari/enthusiastic-woman-showing-okay-ok-gesture-smiling-feeling-excellent-recommend-product-helped-her-lot-grin-delighted-giving-approval-like-your-choice-standing-supportive-white-wall.png'; ?>";
 
-            // Handle Sending Messages
-            sendBtn.addEventListener("click", function() {
-                let message = messageInput.value.trim();
-                if (message === "") {
-                    alert("Message cannot be empty!");
-                    return;
+    // Handle Sending Messages
+    sendBtn.addEventListener("click", function() {
+        let message = messageInput.value.trim();
+        if (message === "") {
+            alert("Message cannot be empty!");
+            return;
+        }
+
+        // Append Message to Chat Content
+        let newMessage = document.createElement("div");
+        newMessage.classList.add("d-flex", "justify-content-end", "align-items-center", "mb-2");
+
+        newMessage.innerHTML = `
+            <div class="message sent">${message}</div>
+            <img src="${senderProfileImage}" alt="Sender" class="profile-img rounded-circle ms-2" width="30px" height="30px">
+        `;
+
+        chatContent.appendChild(newMessage);
+
+        // Simulating receiver's reply after 1 sec (You can replace this with real-time chat logic)
+        setTimeout(() => {
+            let replyMessage = document.createElement("div");
+            replyMessage.classList.add("d-flex", "justify-content-start", "align-items-center", "mb-2");
+
+            replyMessage.innerHTML = `
+                <img src="${receiverProfileImage}" alt="Receiver" class="profile-img rounded-circle me-2" width="30px" height="30px">
+                <div class="message received">Thanks for your message!</div>
+            `;
+
+            chatContent.appendChild(replyMessage);
+            chatContent.scrollTop = chatContent.scrollHeight; // Auto-scroll to bottom
+        }, 1000);
+
+        // Clear Input
+        messageInput.value = "";
+        chatContent.scrollTop = chatContent.scrollHeight; // Auto-scroll to bottom
+    });
+
+    // Send Message on Enter Key
+    messageInput.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            sendBtn.click();
+        }
+    });
+});
+
+   </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const chatItems = document.querySelectorAll(".chat-item");
+        const chatList = document.querySelector(".chat-list");
+        const chatWindow = document.querySelector(".chat-window");
+        const backButton = document.createElement("button");
+        backButton.classList.add("btn", "btn-secondary", "mb-2", "back-button");
+        backButton.innerHTML = "<i class='bi bi-arrow-left'></i> Back";
+        backButton.style.display = "none";
+        chatWindow.prepend(backButton);
+
+        chatItems.forEach(item => {
+            item.addEventListener("click", function () {
+                if (window.innerWidth <= 768) {
+                    chatList.style.display = "none";
+                    chatWindow.style.display = "block";
+                    backButton.style.display = "inline-block";
                 }
-
-                // Append Message to Chat Content
-                let newMessage = document.createElement("div");
-                newMessage.classList.add("message", "sent");
-                newMessage.textContent = message;
-                chatContent.appendChild(newMessage);
-
-                // Clear Input
-                messageInput.value = "";
-                chatContent.scrollTop = chatContent.scrollHeight; // Auto-scroll to bottom
-            });
-
-            // Send Message on Enter Key
-            messageInput.addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    sendBtn.click();
-                }
-            });
-
-            // Handle File Attachment
-            fileInput.addEventListener("change", function() {
-                let file = fileInput.files[0];
-                if (file) {
-                    let newMessage = document.createElement("div");
-                    newMessage.classList.add("message", "sent");
-                    newMessage.innerHTML = `<i class="bi bi-paperclip"></i> ${file.name}`;
-                    chatContent.appendChild(newMessage);
-                    chatContent.scrollTop = chatContent.scrollHeight;
-                }
-            });
-
-            // Handle Emoji Picker (Basic)
-            document.querySelector(".bi-emoji-smile").addEventListener("click", function() {
-                let emojiList = ["😀", "😁", "😂", "😍", "😎", "😜", "🤩", "🙌", "❤️", "🔥"];
-                let emoji = prompt("Choose an emoji:\n" + emojiList.join(" "));
-                if (emoji && emojiList.includes(emoji)) {
-                    messageInput.value += emoji; // Append emoji to input
-                }
-            });
-
-            // Handle Microphone Button (Simulated)
-            document.querySelector(".bi-mic").addEventListener("click", function() {
-                alert("Voice input not implemented yet! 🎤");
             });
         });
-    </script>
 
+        backButton.addEventListener("click", function () {
+            chatList.style.display = "block";
+            chatWindow.style.display = "none";
+            backButton.style.display = "none";
+        });
+    });
+</script>
 </body>
 
 </html>
