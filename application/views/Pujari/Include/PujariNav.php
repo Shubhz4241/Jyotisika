@@ -191,6 +191,7 @@
         .notification-container {
             width: 80%;
             /* right: 5%; */
+            margin-top: 27px;
         }
     }
 
