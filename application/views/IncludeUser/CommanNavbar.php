@@ -95,13 +95,18 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('myservices'); ?>">
-                                <i class="bi bi-gear me-2"></i> My Services
+                            <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Following'); ?>">
+                                <i class="bi bi-heart me-2"></i> Following
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('CustomerSupport'); ?>">
                                 <i class="bi bi-gear me-2"></i> Customer Support
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2 ps-4" href="<?php echo base_url(''); ?>">
+                                <i class="bi bi-share me-2"></i> Refer to Friends
                             </a>
                         </li>
                         <li>

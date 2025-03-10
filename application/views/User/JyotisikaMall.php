@@ -39,27 +39,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
 
     <style>
-        /* gallery carousel image */
-        .owl-carousel .owl-stage {
-            display: flex;
-            animation: smooth-scroll 40s linear infinite;
-        }
-
-        .owl-carousel .item {
-            flex: 0 0 auto;
-            margin: 0 10px;
-            /* Space between images */
-        }
-
-        @keyframes smooth-scroll {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
-        }
+       
 
 
         .col-md-15 {

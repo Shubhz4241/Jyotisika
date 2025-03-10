@@ -29,6 +29,9 @@
          <a href="<?php echo base_url('festival'); ?>" id="festival-link" class="btnHover btn btn-outline-dark rounded-4 shadow-sm" style="width: fit-content;">
              Festival
          </a>
+         <a href="<?php echo base_url('MobPooja'); ?>" id="MobPooja-link" class="btnHover btn btn-outline-dark rounded-4 shadow-sm" style="width: fit-content;">
+             Mob Pooja
+         </a>
      </div>
  </div>
 
@@ -45,7 +48,8 @@
             'festival': document.getElementById('festival-link'),
             'panchang': document.getElementById('panchang-link'),
             'jyotisikamall': document.getElementById('jyotisikamall-link'),
-            'kp':document.getElementById('kp-link')
+            'kp':document.getElementById('kp-link'),
+            'MobPooja':document.getElementById('MobPooja-link')
 
         };
 
