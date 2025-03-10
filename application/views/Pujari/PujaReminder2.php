@@ -165,8 +165,8 @@
 
             .puja-card-mob img {
                 width: 200px;
-                height: 100%;
-                margin-right: 15px;
+                /* height: 100%; */
+                /* margin-right: 15px; */
                 margin-bottom: 0;
             }
 
@@ -208,9 +208,18 @@
                 height: auto;
             }
 
-            .puja-card-online img {
-                width: 100%;
-                height: auto;
+             .puja-card-online img {
+                width: 200px;
+                height: 150px;
+                margin-right: 0px;
+                margin-bottom: 0;
+                border-radius: 62%;
+            }
+
+            .puja-card-online {
+                flex-direction: row;
+                align-items: center;
+
             }
 
             .puja-card-offline img {
@@ -221,7 +230,7 @@
             .puja-card-mob img {
                 width: 200px;
                 height: 100%;
-                margin-right: 15px;
+                /* margin-right: 15px; */
                 margin-bottom: 0;
             }
 
@@ -254,7 +263,7 @@
 
         @media(max-width:1020px) {
             .puja-card-mob {
-                flex-direction: column;
+                flex-direction: row;
                 align-items: center;
             }
         }
@@ -269,14 +278,14 @@
 
         @media(max-width:500px) {
             .puja-card-mob {
-                flex-direction: column;
+                flex-direction: row;
                 align-items: center;
             }
 
             .puja-card-mob img {
-                width: 102%;
+                /* width: 100%; */
                 /* height: 300px; */
-                /* object-fit: contain; */
+                object-fit: contain;
                 margin: 0;
             }
         }
@@ -482,7 +491,7 @@
                             <div class="col">
                                 <div class="${cardClass}">
                                     <img src="${puja.img}" alt="${puja.name}">
-                                    <div class="content">
+                                    <div class="content px-3">
                                         <h5>${puja.name}</h5>
                                         <p><strong>Date:</strong> ${puja.date}</p>
                                         <p><strong>Time:</strong> ${puja.time}</p>
@@ -490,11 +499,11 @@
 
                             if (type === "mob") {
                                 pujaCard += `
-                                <p><img style= "width:20px" height="20px" src="<?php echo base_url() . 'assets/images/Pujari/icon.png' ?>" class="icon" alt="Languages">${puja.languages}</p>
-                                <p><img style= "width:20px" height="20px" src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png' ?>" class="icon" alt="Experience"> <strong>Exp:</strong> ${puja.experience}</p>
-                                <p><img src="https://example.com/rupee-icon.png" class="icon" alt="Fee"> ${puja.fee}</p>
+                                <p><img style="width:20px !important; height:20px !important;" src="<?php echo base_url() . 'assets/images/Pujari/icon.png' ?>" class="icon" alt="Languages">${puja.languages}</p>
+                                <p><img style="width:20px !important; height:20px !important;" src="<?php echo base_url() . 'assets/images/Pujari/graduate-cap_svgrepo.com.png' ?>" class="icon" alt="Experience"> <strong>Exp:</strong> ${puja.experience}</p>
+                                <p><img src="https://example.com/rupee-icon.png" class="icon" alt="Fee" style="width:20px !important; height:20px !important;"> ${puja.fee}</p>
                                 <p><strong>Attendee :</strong> ${puja.attendees}</p>
-                                <p style="color:Red"><img style="width:20px; height=20px" src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png' ?>" class="icon" alt="Countdown"> ${puja.countdown}</p>
+                                <p style="color:Red"><img style="width:20px !important; height:20px !important;" src="<?php echo base_url() . 'assets/images/Pujari/time-filled_svgrepo.com.png' ?>" class="icon" alt="Countdown"> ${puja.countdown}</p>
                             `;
                             } else if (type === "offline") {
                                 pujaCard += `
