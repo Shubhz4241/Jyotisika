@@ -104,9 +104,9 @@
 
     <?php
 
-    if (isset($userinfo)) {
-        print_r($userinfo);
-    }
+    // if (isset($userinfo)) {
+    //     print_r($userinfo);
+    // }
     ?>
     <section>
         <div class="container mt-3">
