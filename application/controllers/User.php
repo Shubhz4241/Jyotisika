@@ -267,18 +267,7 @@ class User extends CI_Controller
 		$this->load->view('User/Following');
 	}
 
-	public function MobPooja(){
-		$this->load->view('User/MobPooja');
-	}
-
-	public function ShowFreeKundli(){
-		$this->load->view('User/ShowFreeKundli');
-	}
-
-	public function Following(){
-		$this->load->view('User/Following');
-	}
-
+	
 	public function getdata()
 	{
 
