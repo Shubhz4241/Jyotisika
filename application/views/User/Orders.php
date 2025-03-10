@@ -81,6 +81,11 @@
         .rating input:checked~label {
             color: var(--yellow);
         }
+
+        .btnHover:hover {
+            background-color: var(--yellow) !important;
+            color: black !important;
+        }
     </style>
 
 
@@ -258,8 +263,7 @@
 
                             foreach ($astrologers as $astrologer): ?>
                                 <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
-                                    <div class="card shadow rounded-3 h-100"
-                                        style="border: 1px solid var(--red); background-color: #fff;">
+                                    <div class="card shadow rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
                                         <div class="card-body p-3">
                                             <!-- Profile Section -->
                                             <div class="d-flex align-items-center mb-2">
@@ -308,13 +312,65 @@
                                             </div>
 
                                             <!-- Action Buttons -->
-                                            <div class="d-flex gap-2 mb-2">
-                                                <button class="btn text-dark btn-sm btn-outline-dark w-100 rounded-3" style="background-color: var(--yellow);">Chat</button>
+                                            <div class="d-flex gap-2 my-1">
+                                                <button class="btn btn-sm w-50 rounded-3 border-1"
+                                                    style="background-color: var(--yellow);">Chat</button>
+                                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3" data-bs-toggle="modal" data-bs-target="#feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>">Feedback</button>
                                             </div>
-                                            <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- modal for review astrologer -->
+                                <div class="modal fade" id="feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Feedback for <?php echo $astrologer['name']; ?></h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="feedbackForm<?php echo str_replace(' ', '', $astrologer['name']); ?>">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Rating</label>
+                                                        <div class="rating">
+                                                            <?php for ($i = 5; $i >= 1; $i--): ?>
+                                                                <input type="radio" name="rating<?php echo str_replace(' ', '', $astrologer['name']); ?>" value="<?php echo $i; ?>" id="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>" required>
+                                                                <label for="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>">★</label>
+                                                            <?php endfor; ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Message</label>
+                                                        <textarea class="form-control shadow-none" name="message" rows="3" required></textarea>
+                                                    </div>
+                                                    <button type="submit" class="btn w-100" style="background-color: var(--yellow);">Submit Feedback</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- script for that rating astrologer-->
+                                <script>
+                                    document.querySelectorAll('.rating input').forEach(input => {
+                                        input.addEventListener('change', function() {
+                                            let ratingDiv = this.closest('.rating');
+                                            let selectedValue = this.value;
+
+                                            // Reset all stars
+                                            ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
+
+                                            // Highlight selected stars
+                                            ratingDiv.querySelectorAll('input').forEach(starInput => {
+                                                if (starInput.value <= selectedValue) {
+                                                    starInput.nextElementSibling.style.color = 'var(--yellow)';
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+
                             <?php endforeach; ?>
                         </div>
 
@@ -509,7 +565,7 @@
 
 
 
-                                        <!-- modal for review -->
+                                        <!-- modal for review pooja -->
                                         <div class="modal fade" id="feedbackModal<?php echo $pooja['id']; ?>" tabindex="-1">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
@@ -539,7 +595,7 @@
                                             </div>
                                         </div>
 
-                                        <!-- script for that rating -->
+                                        <!-- script for that rating pooja-->
                                         <script>
                                             document.querySelectorAll('.rating input').forEach(input => {
                                                 input.addEventListener('change', function() {

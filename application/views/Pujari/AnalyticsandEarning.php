@@ -24,7 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 40px;
             flex-wrap: wrap;
             margin-top: 100px;
         }
@@ -35,12 +35,8 @@
             text-align: center;
             font-weight: bold;
             height: 150px;
-            /* Square height */
-            justify-content: center;
-            align-items: center;
             width: 150px;
-            /* Square width */
-            margin: 50px;
+            margin: 20px;
         }
 
         .stat-box h3 {
@@ -49,7 +45,6 @@
         }
 
         .stat-box p {
-            /* font-size: 1.2rem; */
             color: black;
         }
 
@@ -72,9 +67,7 @@
             padding: 20px;
             margin-top: 20px;
             max-width: 1000px;
-            /* Increased width */
             height: 400px;
-            /* Increased height */
             margin-left: auto;
             margin-right: auto;
         }
@@ -86,26 +79,124 @@
 
         .filter-btn {
             float: right;
+            margin-bottom: 10px;
         }
 
-        /* Make the boxes responsive */
+        /* Table styling */
+        .table-section {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+        .table-section h5 {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .table {
+            background-color: #e7f4e7;
+            border-radius: 8px;
+            overflow: hidden;
+            border-collapse: collapse; /* Ensure borders don't double up */
+        }
+
+        .table th {
+            background-color: #e7f4e7;
+            color: #333;
+            font-weight: 500;
+            border: 1px solid #ddd; /* Add border to header cells */
+            padding: 10px;
+        }
+
+        .table td {
+            color: #333;
+            border: 1px solid #ddd; /* Add border to table cells */
+            padding: 10px;
+        }
+
+        /* Alternating row colors */
+        .table tbody tr:nth-child(odd) {
+            background-color: #e7f4e7;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #d2e8d2;
+        }
+
+        /* Dropdown styling */
+        .dropdown-menu {
+            min-width: 150px;
+            max-height: 50vh;
+            overflow-y: auto;
+            z-index: 1000;
+            position: absolute !important; /* Ensure absolute positioning */
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
             .stat-box {
-                height: 150px;
-                /* Adjust for smaller screens */
+                height: 130px;
+                width: 130px;
             }
 
             .stat-box-container {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            .chart-container {
+                width: 100%;
+            }
+
+            .table-section h5 {
+                font-size: 1.1rem;
             }
         }
 
         @media (max-width: 576px) {
             .stat-box {
-                height: 120px;
-                /* Adjust for very small screens */
-                width: 180px;
+                width: 111px;
+                height: 111px;
+            }
+
+            .stat-box h3 {
+                font-size: 1.1rem;
+            }
+
+            .stat-box p {
+                font-size: 0.9rem;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+            .filter-btn {
+                float: none;
+                display: block;
+                /* margin: 0 auto 10px; */
+                text-align: center;
+            }
+
+            .table-section h5 {
+                font-size: 1rem;
+            }
+
+            .table {
+                font-size: 0.85rem;
+            }
+
+            .table th, .table td {
+                padding: 8px;
+            }
+
+            .dropdown-menu {
+                position: absolute !important; /* Override fixed positioning on mobile */
+                top: auto !important;
+                left: 0 !important;
+                right: auto !important;
+                width: 100% !important;
+                transform: none !important;
             }
         }
 
@@ -123,72 +214,6 @@
             --bs-bg-opacity: 1;
             background-color: #14993E54 !important;
         }
-
-        /* Center the stat boxes and charts */
-        .stat-box-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 50px;
-        }
-
-        .stat-box {
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            font-weight: bold;
-            height: 140px;
-            /* Reduced height */
-            width: 150px;
-            /* Reducedwidth  */
-            justify-content: center;
-            align-items: center;
-            margin: 30px;
-        }
-
-        .chart-container {
-            width: 90%;
-            /* Increased width */
-            max-width: 1200px;
-            /* Maximum limit */
-            height: 450px;
-            /* Adjusted height */
-            margin: 20px auto;
-            padding: 20px;
-            background: transparent;
-            /* Removes the white background */
-            border-radius: 10px;
-            box-shadow: none;
-            /* Removes the shadow */
-        }
-
-
-        /* Make the charts and boxes align properly */
-        @media (max-width: 768px) {
-            .stat-box-container {
-                flex-direction: row;
-                justify-content: space-around;
-            }
-
-            .chart-container {
-                width: 100%;
-                /* Make full width for small screens */
-            }
-        }
-
-        @media (max-width: 576px) {
-            .stat-box {
-                width: 111px;
-                height: 111px;
-            }
-
-            .chart-container {
-                height: 300px;
-                /* Adjusted for small screens */
-            }
-        }
     </style>
 </head>
 
@@ -199,37 +224,162 @@
     <div style="min-height: 100vh;">
         <div class="container">
             <div class="stat-box-container">
-            <a href="<?php echo base_url('PujariUser/OfflinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
-                   
+                <a href="<?php echo base_url('PujariUser/OfflinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
                     <p class="fw-normal">Offline Puja</p>
                     <h3>40</h3>
                 </a>
                 <a href="<?php echo base_url('PujariUser/OnlinePuja'); ?>" class="stat-box bg-primary text-white text-decoration-none">
-                    
                     <p class="fw-normal">Online Puja</p>
                     <h3>40</h3>
                 </a>
                 <div class="stat-box bg-warning text-dark">
-                   
                     <p class="fw-normal">Mob Puja</p>
                     <h3>40</h3>
                 </div>
             </div>
 
-
-            <div class="chart-container">
-                <h5>Offline Puja <button class="btn btn-light filter-btn">last 30 Days</button></h5>
-                <canvas id="overallEarningsChart"></canvas>
+            <!-- Offline Puja Table -->
+            <div class="table-section">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Offline Puja</h5>
+                    <button class="btn btn-outline-secondary filter-btn" data-table="offline-puja-table">
+                        <i class="bi bi-funnel"></i> Filter
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="offline-puja-table">
+                        <thead>
+                            <tr>
+                                <th>Poojas</th>
+                                <th>December</th>
+                                <th>November</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rahu-ketu</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Wealth</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Char-Shanti</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Satyanarayan puja</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Rahu-ketu</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="chart-container">
-                <h5>Online Puja<button class="btn btn-light filter-btn">last 30 Days</button></h5>
-                <canvas id="monthlyEarningsChart"></canvas>
+            <!-- Online Puja Table -->
+            <div class="table-section">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Online Puja</h5>
+                    <button class="btn btn-outline-secondary filter-btn" data-table="online-puja-table">
+                        <i class="bi bi-funnel"></i> Filter
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="online-puja-table">
+                        <thead>
+                            <tr>
+                                <th>Poojas</th>
+                                <th>December</th>
+                                <th>November</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rahu-ketu</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Wealth</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Char-Shanti</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Satyanarayan puja</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Rahu-ketu</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="chart-container">
-                <h5>Mob Puja <button class="btn btn-light filter-btn">last 30 Days</button></h5>
-                <canvas id="pendingPaymentsChart"></canvas>
+            <!-- Mob Puja Table -->
+            <div class="table-section">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Mob Puja</h5>
+                    <button class="btn btn-outline-secondary filter-btn" data-table="mob-puja-table">
+                        <i class="bi bi-funnel"></i> Filter
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="mob-puja-table">
+                        <thead>
+                            <tr>
+                                <th>Poojas</th>
+                                <th>December</th>
+                                <th>November</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rahu-ketu</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Wealth</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Char-Shanti</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Satyanarayan puja</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Rahu-ketu</td>
+                                <td>5</td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -238,118 +388,136 @@
     </footer>
 
     <script>
-        const ctx1 = document.getElementById('overallEarningsChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['Rahu-Ketu', 'Wealth', 'Ghar-shanti'],
-                datasets: [{
-                        label: 'December',
-                        data: [50, 80, 100],
-                        backgroundColor: '#6C63FF'
-                    },
-                    {
-                        label: 'November',
-                        data: [35, 97, 150],
-                        backgroundColor: '#FF6384'
-                    },
-                    {
-                        label: 'October',
-                        data: [58, 93, 163],
-                        backgroundColor: '#36A2EB'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        suggestedMin: 0,
-                        suggestedMax: 200,
-                        ticks: {
-                            stepSize: 50
-                        }
-                    }
-                }
-            }
-        });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Data for each table
+            const pujaData = [
+                { pooja: "Rahu-ketu", december: 5, november: 5 },
+                { pooja: "Wealth", december: 5, november: 5 },
+                { pooja: "Char-Shanti", december: 5, november: 5 },
+                { pooja: "Satyanarayan puja", december: 5, november: 5 },
+                { pooja: "Rahu-ketu", december: 5, november: 5 }
+            ];
 
-        const ctx2 = document.getElementById('monthlyEarningsChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Rahu-Ketu', 'Wealth', 'Ghar-shanti'],
-                datasets: [{
-                        label: 'December',
-                        data: [8, 9, 12],
-                        backgroundColor: '#6C63FF'
-                    },
-                    {
-                        label: 'November',
-                        data: [6, 12, 13],
-                        backgroundColor: '#FF6384'
-                    },
-                    {
-                        label: 'October',
-                        data: [3, 13, 14],
-                        backgroundColor: '#36A2EB'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        suggestedMin: 0,
-                        suggestedMax: 20,
-                        ticks: {
-                            stepSize: 5
-                        }
-                    }
-                }
-            }
-        });
+            // Function to create filter dropdown
+            function createFilterDropdown(button) {
+                const tableId = button.getAttribute("data-table");
+                const dropdown = document.createElement("div");
+                dropdown.classList.add("dropdown-menu", "show");
+                dropdown.innerHTML = `
+                    <h6 class="dropdown-header">Filter by Month</h6>
+                    <button class="dropdown-item filter-option" data-filter="all">All</button>
+                    <button class="dropdown-item filter-option" data-filter="december">December</button>
+                    <button class="dropdown-item filter-option" data-filter="november">November</button>
+                `;
+                // Append dropdown to the button's parent to ensure proper positioning context
+                button.parentElement.appendChild(dropdown);
 
-        const ctx3 = document.getElementById('pendingPaymentsChart').getContext('2d');
-        new Chart(ctx3, {
-            type: 'doughnut',
-            data: {
-                labels: ['December','November','October'],
-                datasets: [{
-                    data: [39, 23, 38],
-                    backgroundColor: ['#6C63FF', '#36A2EB', '#FF6384']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
+                const rect = button.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (window.innerWidth <= 576) {
+                    dropdown.style.position = "absolute";
+                    dropdown.style.top = `${rect.bottom - rect.top + scrollTop}px`;
+                    dropdown.style.left = `${rect.left}px`;
+                    dropdown.style.width = `${rect.width}px`;
+                    dropdown.style.transform = "none";
+                } else {
+                    dropdown.style.position = "absolute";
+                    dropdown.style.top = `${rect.bottom}px`;
+                    dropdown.style.right = `${window.innerWidth - rect.right}px`;
+                }
+
+                // Handle filter selection
+                dropdown.querySelectorAll(".filter-option").forEach(option => {
+                    option.addEventListener("click", function () {
+                        const filter = this.getAttribute("data-filter");
+                        updateTable(tableId, filter);
+                        dropdown.remove();
+                    });
+                });
+
+                return dropdown;
             }
+
+            // Function to update table based on filter
+            function updateTable(tableId, filter) {
+                const table = document.querySelector(`#${tableId}`);
+                const tableBody = table.querySelector("tbody");
+                const tableHead = table.querySelector("thead tr");
+                tableBody.innerHTML = "";
+
+                // Update table headers based on filter
+                if (filter === "all") {
+                    tableHead.innerHTML = `
+                        <th>Poojas</th>
+                        <th>December</th>
+                        <th>November</th>
+                    `;
+                } else if (filter === "december") {
+                    tableHead.innerHTML = `
+                        <th>Poojas</th>
+                        <th>December</th>
+                        <th>November</th>
+                    `;
+                } else if (filter === "november") {
+                    tableHead.innerHTML = `
+                        <th>Poojas</th>
+                        <th>December</th>
+                        <th>November</th>
+                    `;
+                }
+
+                // Update table rows based on filter
+                pujaData.forEach(item => {
+                    let row = `<tr>
+                        <td>${item.pooja}</td>`;
+                    if (filter === "all") {
+                        row += `<td>${item.december}</td><td>${item.november}</td>`;
+                    } else if (filter === "december") {
+                        row += `<td>${item.december}</td><td>-</td>`;
+                    } else if (filter === "november") {
+                        row += `<td>-</td><td>${item.november}</td>`;
+                    }
+                    row += `</tr>`;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            // Initialize filter buttons
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            const dropdowns = new WeakMap(); // Store dropdowns per button to manage individually
+
+            filterButtons.forEach((button) => {
+                button.addEventListener("click", function (event) {
+                    // Remove any existing dropdown for other buttons
+                    document.querySelectorAll(".dropdown-menu.show").forEach(existingDropdown => {
+                        if (existingDropdown !== dropdowns.get(button)) {
+                            existingDropdown.remove();
+                        }
+                    });
+
+                    if (dropdowns.has(button) && dropdowns.get(button)) {
+                        dropdowns.get(button).remove();
+                        dropdowns.delete(button);
+                    } else {
+                        const newDropdown = createFilterDropdown(button);
+                        dropdowns.set(button, newDropdown);
+                    }
+                    event.stopPropagation(); // Prevent immediate closing
+                });
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener("click", function (event) {
+                filterButtons.forEach(button => {
+                    const dropdown = dropdowns.get(button);
+                    if (dropdown && !event.target.closest(".filter-btn") && !dropdown.contains(event.target)) {
+                        dropdown.remove();
+                        dropdowns.delete(button);
+                    }
+                });
+            });
         });
     </script>
-
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

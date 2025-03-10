@@ -49,6 +49,7 @@
         color: white;
         /* White icon */
         transition: color 0.3s ease;
+        
     }
 
     .notification-icon i:hover {
@@ -190,6 +191,7 @@
         .notification-container {
             width: 80%;
             /* right: 5%; */
+            margin-top: 27px;
         }
     }
 

@@ -84,6 +84,9 @@ $route['ProductPayment'] ='User/ProductPayment';
 $route['Notification'] ='User/Notification';
 $route['CustomerSupport'] ='User/CustomerSupport';
 $route['PoojaInfo'] ='User/PoojaInfo';
+$route['MobPooja'] ='User/MobPooja';
+$route['ShowFreeKundli'] ='User/ShowFreeKundli';
+$route['Following'] ='User/Following';
 
 
 

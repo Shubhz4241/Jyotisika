@@ -17,7 +17,7 @@
         }
 
         .dashboard-sections {
-            padding: 20px;
+            padding: 20px 50px;
         }
 
         .card {
