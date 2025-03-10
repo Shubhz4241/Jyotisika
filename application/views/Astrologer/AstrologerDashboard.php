@@ -210,8 +210,7 @@
         <main>
             <section class="dashboard-sections container">
                 <div class="row text-center mb-4">
-                    <div class="col-12 row">
-                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 ">
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-3 ">
                             <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
                                 <div class="card py-3" style="border-radius:0;">
                                     <div class="icon-box green">📅</div>
@@ -221,7 +220,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 ">
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-3 ">
                             <div style="background-color:#BB97C1; padding:6px 2px; padding-bottom:20px; border:3px solid #BB97C1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
                                 <div class="card py-3" style="border-radius:0;">
                                     <div class="icon-box purple">🕒</div>
@@ -229,12 +228,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 ">
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-3 ">
                             <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
                                 <div class="card py-3" style="border-radius:0;">
                                     <div class="icon-box red">📜</div>
                                     <a href="<?php echo base_url() . 'AstrologerUser/AstrologerRecentRequest'; ?>">
                                         <h6>Requests</h6>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+          
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3 ">
+                            <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
+                                <div class="card py-3" style="border-radius:0;">
+                                    <div class="icon-box red">📜</div>
+                                    <a href="<?php echo base_url() . 'AstrologerUser/AstrologerRecentRequest'; ?>">
+                                        <h6>Consultations</h6>
                                     </a>
                                 </div>
                             </div>
