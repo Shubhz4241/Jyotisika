@@ -18,7 +18,7 @@
         }
 
         .table-container {
-      
+
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
@@ -49,10 +49,11 @@
         .filter-dropdown {
             display: none;
         }
+
         .mb-3 {
-    margin-bottom: 1rem !important;
-    margin-top: 100px;
-}
+            margin-bottom: 1rem !important;
+            margin-top: 100px;
+        }
     </style>
 </head>
 
@@ -62,12 +63,12 @@
     </header>
     <div style="min-height: 100vh;">
         <div class="container">
-        <h5 class="mb-3">
-    <a  class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/AnalyticsAndEarning2'); ?>">
-        <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
-        Earnings Breakdown
-    </a>
-</h5>
+            <h5 class="mb-3">
+                <a class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/AnalyticsAndEarning2'); ?>">
+                    <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
+                    Earnings Breakdown
+                </a>
+            </h5>
             <div class="table-container">
                 <h5>Offline puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('offline')">Filter</button></h5>
                 <div class="filter-dropdown text-end" id="offlineFilterDropdown">
@@ -150,7 +151,7 @@
             <div class="table-container">
                 <h5>Mob puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('mob')">Filter</button></h5>
                 <div class="filter-dropdown text-end " id="mobFilterDropdown">
-                    <select id="mobFilter" onchange="filterData('mob')" >
+                    <select id="mobFilter" onchange="filterData('mob')">
                         <option value="">All</option>
                         <option value="Rahu-ketu">Rahu-ketu</option>
                         <option value="Ghar shanti">Ghar shanti</option>

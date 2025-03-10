@@ -123,7 +123,7 @@
         .form-label {
             font-weight: bold;
             margin-bottom: 5px;
-            /* Adds spacing between labels and inputs */
+            margin-top: 18px;
         }
 
         .form-control {
@@ -194,6 +194,27 @@
         .submit-icon {
             margin-left: 5px;
         }
+          /* Custom Styling */
+          .swal2-popup {
+            width: 320px; /* Adjust width */
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .swal2-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .swal2-html-container {
+            font-size: 16px;
+            color: #000;
+        }
+        .swal2-confirm {
+            background-color: #5D40AE !important;
+            color: white !important;
+            padding: 10px 24px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
     </style>
 </head>
 
@@ -243,19 +264,33 @@
                 </form>
 
                 <form id="advanced" class="form-container p-3">
-                    <div class="mb-3">
-                        <label for="pujaName" class="form-label fw-bold">Add Pooja</label>
-                        <select class="form-select" id="pujaName" required>
-                            <option value="" disabled selected>Select Puja</option>
-                            <option value="Ganesh Puja">Ganesh Puja</option>
-                            <option value="Lakshmi Puja">Lakshmi Puja</option>
-                            <option value="Saraswati Puja">Saraswati Puja</option>
-                            <option value="Shiv Puja">Shiv Puja</option>
-                        </select>
-                    </div>
+                    <div class="container p-0 m-O">
+                        <label for="astrologyInput"><strong>Astrology Services</strong></label>
+                        <div class="dropdown-container">
+                            <div class="input-box" id="toggleDropdown">
+                                <span>Select Astrology Service</span>
+                                <span>▼</span>
+                            </div>
+                            <div class="dropdown-content" id="radioOptions">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="service" id="vastu">
+                                    <label class="form-check-label" for="vastu">Ghar-Shanti Puja</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="service" id="palmistry">
+                                    <label class="form-check-label" for="palmistry">Rudraabhishek puja</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="service" id="vedic">
+                                    <label class="form-check-label" for="vedic">Satyanarayan Puja</label>
+                                </div>
+                                <a href="#" class="submit-link" id="submitForm">Submit <span class="submit-icon">→</span></a>  </div>
+                            </div>
+                        </div>
+
                     <div class="mb-3">
                         <label class="form-label fw-bold">Availability Day</label>
-                        <input type="text" class="form-control" value="Monday - Friday" required>
+                        <input type="text" class="form-control" value="Monday - Friday" placeholder="Monday - Friday" required>
                     </div>
 
                     <div class="mb-3">
@@ -274,9 +309,17 @@
         </div>
     </div>
     </div>
+
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
+    <script>
+        $(document).ready(function() {
+            $("#toggleDropdown").click(function() {
+                $("#radioOptions").slideToggle();
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('.tab').click(function() {
@@ -291,6 +334,28 @@
             });
         });
     </script>
+    <script>
+    $(document).ready(function () {
+        $("#submitForm").click(function (e) {
+            e.preventDefault(); // Prevent default link action
+
+            Swal.fire({
+                iconHtml: '<img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" width="50">',
+                title: 'Form Submission',
+                html: `<b>Note :</b> These skills will be visible after an short interview !<br><br> <b>ALL THE BEST!</b>`,
+                confirmButtonText: "OK",
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    htmlContainer: 'swal2-html-container',
+                    confirmButton: 'swal2-confirm'
+                }
+            });
+        }); 
+      
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

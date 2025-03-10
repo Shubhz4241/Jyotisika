@@ -151,4 +151,8 @@ class User extends CI_Controller
 	public function Following(){
 		$this->load->view('User/Following');
 	}
+
+	public function getdata(){
+		
+	}
 }
