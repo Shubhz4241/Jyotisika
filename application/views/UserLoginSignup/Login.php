@@ -49,7 +49,8 @@
     <div class="container-fluid min-vh-100">
         <div class="row g-0 min-vh-100">
             <!-- Left Section: Why Sign Up -->
-            <div class="col-md-6 p-4 order-2 order-md-1 d-flex flex-column justify-content-center align-items-center" style="background: linear-gradient(135deg, #FDFBDF, #FFE085);">
+            <div class="col-md-6 p-4 order-2 order-md-1 d-flex flex-column justify-content-center align-items-center"
+                style="background: linear-gradient(135deg, #FDFBDF, #FFE085);">
                 <div style="max-width: 450px;">
                     <h3 class="fw-bold mb-4" style="color: #333; font-size: 1.5rem;">Why Sign Up?</h3>
                     <div class="benefits-list" style="font-size: 1rem; line-height: 2;">
@@ -80,21 +81,16 @@
                 style="background: #FFF;">
                 <h5 class="fw-bold mb-4" style="color: #444; font-size: 1.6rem;">LogIn to Continue</h5>
 
-                <form id="loginForm" style="width: 100%; max-width: 420px;">
+                <form id="loginForm" method="POST" action="<?php echo base_url("UserLoginSignup/login_user"); ?>" style="width: 100%; max-width: 420px;">
+
 
                     <!--  Mobile Number -->
                     <div id="mobileStep" class="mb-4">
                         <div class="mb-3">
-                            <input type="tel"
-                                class="form-control shadow-none form-control-lg rounded-2"
-                                id="mobileNumber"
-                                name="mobileNumber"
-                                placeholder="Enter Mobile Number"
-                                maxlength="10"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                pattern="[0-9]{10}"
-                                title="Please enter a valid 10-digit mobile number"
-                                required
+                            <input type="tel" class="form-control shadow-none form-control-lg rounded-2"
+                                id="mobileNumber" name="user_mobilenumber" placeholder="Enter Mobile Number" maxlength="10"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" pattern="[0-9]{10}"
+                                title="Please enter a valid 10-digit mobile number" required
                                 style="padding: 0.5rem; border: 1px solid #ddd; font-size:1.1rem">
                             <div id="mobileError" class="text-danger small"></div>
                         </div>
@@ -107,7 +103,7 @@
                     <!-- OTP Verification -->
                     <div id="otpStep" class="mb-4" style="display: none;">
                         <div class="mb-3">
-                            <input type="text" class="form-control shadow-none form-control-lg rounded-2" id="otpInput"
+                            <input type="text" name="user_otp" class="form-control shadow-none form-control-lg rounded-2" id="otpInput"
                                 placeholder="Enter OTP" maxlength="6"
                                 style="padding: 0.5rem; border: 1px solid #ddd; font-size:1.1rem">
                             <div id="otpError" class="text-danger small"></div>
@@ -118,14 +114,15 @@
                                 Resend OTP
                             </button>
                         </div>
-                        <button type="button" id="verifyOtpBtn" class="btn w-100 fw-bold"
+                        <button type="submit" id="verifyOtpBtn" class="btn w-100 fw-bold"
                             style="background: #F2DC51; border-radius: 10px; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
                             Verify OTP
                         </button>
                     </div>
                 </form>
 
-                <p class="mt-4 text-center">Don't have a Account? <a href="<?php echo base_url('Signup'); ?>" class="text-decoration-none text-dark"  style=" font-weight: 900;">Sign Up</a></p>
+                <p class="mt-4 text-center">Don't have a Account? <a href="<?php echo base_url('Signup'); ?>"
+                        class="text-decoration-none text-dark" style=" font-weight: 900;">Sign Up</a></p>
             </div>
         </div>
     </div>
@@ -154,7 +151,7 @@
             }, 1000);
         }
 
-        document.getElementById('getOtpBtn').addEventListener('click', function() {
+        document.getElementById('getOtpBtn').addEventListener('click', function () {
             const mobile = document.getElementById('mobileNumber').value.trim();
             if (mobile.length !== 10 || !/^\d+$/.test(mobile)) {
                 document.getElementById('mobileError').innerText = 'Please enter a valid 10-digit mobile number';
@@ -165,29 +162,49 @@
             startOtpTimer();
         });
 
-        document.getElementById('resendOtpBtn').addEventListener('click', function() {
+        document.getElementById('resendOtpBtn').addEventListener('click', function () {
             startOtpTimer();
         });
 
-        document.getElementById('verifyOtpBtn').addEventListener('click', function() {
-            const otp = document.getElementById('otpInput').value.trim();
-            if (otp.length === 4) { // Add your actual OTP validation logic here
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Login Successful!',
-                    text: 'Welcome to Jyotisika!   ',
-                    confirmButtonColor: '#F2DC51'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        
-                        window.location.href = '<?php echo base_url("home"); ?>';
-                    }
-                });
-            } else {
-                document.getElementById('otpError').innerText = 'Please enter a valid 4-digit OTP';
+        // document.getElementById('verifyOtpBtn').addEventListener('click', function () {
+        //     const otp = document.getElementById('otpInput').value.trim();
+        //     if (otp.length === 4) { // Add your actual OTP validation logic here
+        //         Swal.fire({
+        //             icon: 'success',
+        //             title: 'Login Successful!',
+        //             text: 'Welcome to Jyotisika!   ',
+        //             confirmButtonColor: '#F2DC51'
+        //         }).then((result) => {
+        //             if (result.isConfirmed) {
+
+        //                 window.location.href = '<?php echo base_url("home"); ?>';
+        //             }
+        //         });
+        //     } else {
+        //         document.getElementById('otpError').innerText = 'Please enter a valid 4-digit OTP';
+        //     }
+        // });
+    </script>
+
+
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let isValid = true;
+
+            // Clear previous error messages
+          
+
+            // Submit the form if all validations pass
+            if (isValid) {
+                this.submit(); // Submit the form
             }
         });
+
     </script>
+
 
     <!-- SweetAlert Cdn -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -197,7 +214,9 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary px-md-2 sticky-top" style="background-color: var(--yellow) !important;">
+<nav class="navbar navbar-expand-lg bg-body-tertiary px-md-2 sticky-top"
+    style="background-color: var(--yellow) !important;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="<?php echo base_url('assets/images/web-logo.jpg'); ?>" alt="logo image"
@@ -30,7 +31,7 @@
                 </li>
             </ul>
 
-           
+
 
             <div class="d-flex gap-2">
                 <div class="position-relative">
@@ -58,25 +59,30 @@
 
 
 
-                <a class="btn btn-primary border-0" href="<?php echo base_url('Login') ?>" style="background-color: var(--red);">
+                <a class="btn btn-primary border-0" href="<?php echo base_url('Login') ?>"
+                    style="background-color: var(--red);">
                     Login
                 </a>
 
                 <div class="dropdown">
-                    <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="User Profile" style="width: 40px; height: 40px; border-radius: 50%;">
+                    <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="User Profile"
+                            style="width: 40px; height: 40px; border-radius: 50%;">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown"
                         style="border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); border: none; min-width: 250px;">
                         <li class="text-center p-4">
                             <a href="<?php echo base_url('UserProfile') ?>" class="text-decoration-none">
                                 <div class="position-relative d-inline-block">
-                                    <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="Profile Image"
+                                    <img src="<?php echo base_url('assets/images/userProfile.png') ?>"
+                                        alt="Profile Image"
                                         style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--yellow); padding: 3px; transition: transform 0.3s;">
                                     <div class="position-absolute bottom-0 right-0 bg-success rounded-circle"
                                         style="width: 15px; height: 15px; right: 5px; border: 2px solid white;"></div>
                                 </div>
-                                <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;">User Name</p>
+                                <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;">User Name
+                                </p>
 
                             </a>
                         </li>
@@ -95,13 +101,18 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('myservices'); ?>">
-                                <i class="bi bi-gear me-2"></i> My Services
+                            <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Following'); ?>">
+                                <i class="bi bi-heart me-2"></i> Following
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('CustomerSupport'); ?>">
                                 <i class="bi bi-gear me-2"></i> Customer Support
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2 ps-4" href="<?php echo base_url(''); ?>">
+                                <i class="bi bi-share me-2"></i> Refer to Friends
                             </a>
                         </li>
                         <li>
