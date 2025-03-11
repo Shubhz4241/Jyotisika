@@ -57,5 +57,11 @@ class AstrologerUser extends CI_Controller {
 	public function AstrologerTodaysSchedule(){
 		$this->load->view('Astrologer/AstrologerTodaysSchedule');
 	}
+	public function AstrologerFeedBackCard(){
+		$this->load->view('Astrologer/AstrologerFeedBackCard');
+	}
+	public function ConsultationCards(){
+		$this->load->view('Astrologer/ConsultationCards');
+	}
 	
 }

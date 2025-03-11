@@ -46,7 +46,7 @@
     }
 
     .notification-icon i {
-        color: white;
+        color: black;
         /* White icon */
         transition: color 0.3s ease;
         
