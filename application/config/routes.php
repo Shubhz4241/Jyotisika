@@ -84,12 +84,20 @@ $route['ProductPayment'] ='User/ProductPayment';
 $route['Notification'] ='User/Notification';
 $route['CustomerSupport'] ='User/CustomerSupport';
 $route['PoojaInfo'] ='User/PoojaInfo';
+$route['MobPooja'] ='User/MobPooja';
+$route['ShowFreeKundli'] ='User/ShowFreeKundli';
+$route['Following'] ='User/Following';
+
+
 
 
 
 // login poge
 $route['Signup'] = 'UserLoginSignup/Signup';
 $route['Login'] = 'UserLoginSignup/Login';
+$route['Logout'] = 'UserLoginSignup/Logout';
+
+
 
 // Admin Routes
 $route['admindash'] = 'Admin/AdminDash';

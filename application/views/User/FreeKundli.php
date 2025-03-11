@@ -105,7 +105,7 @@
                             <input type="number" name="hour" id="hour" placeholder="Hour" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" >
+                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
                         </div>
                         <div class="col-12 col-md-4">
                             <input type="number" name="second" id="second" placeholder="Second" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
@@ -115,9 +115,11 @@
                     <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
 
                     <center>
-                        <button type="submit" style="background-color: var(--yellow);" class="btn my-2 p-2 rounded-1">
-                            Show Kundli
-                        </button>
+
+                        <a class="btn my-2 p-2 rounded-1" href="<?php echo base_url('ShowFreeKundli')?>" style="background-color: var(--yellow);">
+                            Get Kundli
+                        </a>
+
                     </center>
                 </form>
             </div>
