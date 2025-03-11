@@ -377,7 +377,7 @@
 
 <body>
     <header>
-        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
+        <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
     <div style="min-height: 100vh;">
         <div class="container">
@@ -683,7 +683,7 @@
         </div>
     </div>
     <footer>
-        <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
+        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
 </body>
 
