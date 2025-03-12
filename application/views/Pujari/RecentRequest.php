@@ -21,7 +21,7 @@
             color: white;
             text-align: center;
         }
-        .table td {
+        .table td{
             /* text-align: center; */
         }
         .filter-btn {

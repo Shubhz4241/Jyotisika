@@ -17,7 +17,8 @@
         }
 
         .dashboard-sections {
-            padding: 20px 50px;
+            padding: 20px;
+            
         }
 
         .card {
@@ -225,7 +226,7 @@
                             <div style="background-color:#BB97C1; padding:6px 2px; padding-bottom:20px; border:3px solid #BB97C1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
                                 <div class="card py-3" style="border-radius:0;">
                                     <div class="icon-box purple">🕒</div>
-                                    <h6>Total Users</h6>
+                                    <h6>Consultations</h6>
                                 </div>
                             </div>
                         </div>
@@ -289,8 +290,12 @@
 
 
                     <div class="container mt-5">
-                        <h5 class="mb-3 text-Start" style="text-align: start;">User Reviews</h5>
-
+                       
+                    <div class="d-flex justify-content-between align-items-center mb-3 ">
+        <h5 class="mb-0">User Reviews</h5>
+        <a href="<?php echo base_url('AstrologerUser/AstrologerFeedBackCard'); ?>" class="btn btn-link" style="text-decoration: none; color: #7C7C7C;">View All</a>
+    </div>
+                        
                         <div class="review-container" style="width:100%;">
                             <!-- Left Arrow -->
                             <button class="carousel-btn left" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
@@ -304,8 +309,7 @@
                                         <div class="review-card text-center">
                                             <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
                                             <blockquote>
-                                                “We had the privilege of having Pandit Ji perform a Satyanarayan Puja at our home, and the experience was truly divine.”
-                                            </blockquote>
+                                            “We had the privilege of having Pandit Ji perform a Satyanarayan Puja at our home, and the experience was truly divine. He explained every step of the rituals with great clarity and patience, ensuring we understood their significance. The arrangements were seamless, and his chants created a serene and spiritual atmosphere. Highly professional, punctual, and knowledgeable—Pandit Ji made the ceremony memorable for our family”                                            </blockquote>
                                             <div class="stars">
                                                 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                                                 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>

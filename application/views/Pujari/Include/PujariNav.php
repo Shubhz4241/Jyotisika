@@ -46,7 +46,7 @@
     }
 
     .notification-icon i {
-        color: white;
+        color: black;
         /* White icon */
         transition: color 0.3s ease;
         
@@ -245,14 +245,14 @@
 
     <div class="menu-items" id="menuItems">
         <a href="<?php echo base_url() . 'PujariUser/PujariDashboard'; ?>">Home</a>
-        <a href="<?php echo base_url() . 'PujariUser/List'; ?>">Pujas</a>
+        <!-- <a href="<?php echo base_url() . 'PujariUser/List'; ?>">Pujas</a> -->
         <a href="<?php echo base_url() . 'PujariUser/AnalyticsandEarning'; ?>">Analytics</a>
         <a href="<?php echo base_url() . 'PujariUser/AnalyticsandEarning2   '; ?>">Earnings</a>
     </div>
 
     <div class="navbar-right">
         <!-- Notification Icon -->
-        <div class="notification-icon" id="notificationIcon">
+        <div class="notification-icon" id="notificationIcon" >
             <i class="bi bi-bell-fill"></i>
         </div>
 

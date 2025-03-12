@@ -24,7 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 40px;
+            /* gap: 40px; */
             flex-wrap: wrap;
             margin-top: 100px;
         }
@@ -97,20 +97,23 @@
             background-color: #e7f4e7;
             border-radius: 8px;
             overflow: hidden;
-            border-collapse: collapse; /* Ensure borders don't double up */
+            border-collapse: collapse;
+            /* Ensure borders don't double up */
         }
 
         .table th {
             background-color: #e7f4e7;
             color: #333;
             font-weight: 500;
-            border: 1px solid #ddd; /* Add border to header cells */
+            border: 1px solid #ddd;
+            /* Add border to header cells */
             padding: 10px;
         }
 
         .table td {
             color: #333;
-            border: 1px solid #ddd; /* Add border to table cells */
+            border: 1px solid #ddd;
+            /* Add border to table cells */
             padding: 10px;
         }
 
@@ -129,14 +132,15 @@
             max-height: 50vh;
             overflow-y: auto;
             z-index: 1000;
-            position: absolute !important; /* Ensure absolute positioning */
+            position: absolute !important;
+            /* Ensure absolute positioning */
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .stat-box {
-                height: 130px;
-                width: 130px;
+                height: 105px;
+                width: 120px;
             }
 
             .stat-box-container {
@@ -154,10 +158,10 @@
         }
 
         @media (max-width: 576px) {
-            .stat-box {
+            /* .stat-box {
                 width: 111px;
                 height: 111px;
-            }
+            } */
 
             .stat-box h3 {
                 font-size: 1.1rem;
@@ -186,12 +190,14 @@
                 font-size: 0.85rem;
             }
 
-            .table th, .table td {
+            .table th,
+            .table td {
                 padding: 8px;
             }
 
             .dropdown-menu {
-                position: absolute !important; /* Override fixed positioning on mobile */
+                position: absolute !important;
+                /* Override fixed positioning on mobile */
                 top: auto !important;
                 left: 0 !important;
                 right: auto !important;
@@ -388,14 +394,33 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             // Data for each table
-            const pujaData = [
-                { pooja: "Rahu-ketu", december: 5, november: 5 },
-                { pooja: "Wealth", december: 5, november: 5 },
-                { pooja: "Char-Shanti", december: 5, november: 5 },
-                { pooja: "Satyanarayan puja", december: 5, november: 5 },
-                { pooja: "Rahu-ketu", december: 5, november: 5 }
+            const pujaData = [{
+                    pooja: "Rahu-ketu",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Wealth",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Char-Shanti",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Satyanarayan puja",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Rahu-ketu",
+                    december: 5,
+                    november: 5
+                }
             ];
 
             // Function to create filter dropdown
@@ -428,7 +453,7 @@
 
                 // Handle filter selection
                 dropdown.querySelectorAll(".filter-option").forEach(option => {
-                    option.addEventListener("click", function () {
+                    option.addEventListener("click", function() {
                         const filter = this.getAttribute("data-filter");
                         updateTable(tableId, filter);
                         dropdown.remove();
@@ -487,7 +512,7 @@
             const dropdowns = new WeakMap(); // Store dropdowns per button to manage individually
 
             filterButtons.forEach((button) => {
-                button.addEventListener("click", function (event) {
+                button.addEventListener("click", function(event) {
                     // Remove any existing dropdown for other buttons
                     document.querySelectorAll(".dropdown-menu.show").forEach(existingDropdown => {
                         if (existingDropdown !== dropdowns.get(button)) {
@@ -507,7 +532,7 @@
             });
 
             // Close dropdown when clicking outside
-            document.addEventListener("click", function (event) {
+            document.addEventListener("click", function(event) {
                 filterButtons.forEach(button => {
                     const dropdown = dropdowns.get(button);
                     if (dropdown && !event.target.closest(".filter-btn") && !dropdown.contains(event.target)) {

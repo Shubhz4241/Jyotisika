@@ -22,12 +22,41 @@
             text-align: center;
         }
         .table td {
-            text-align: center;
+            vertical-align: middle;
         }
         .filter-btn {
             display: flex;
             justify-content: end;
             margin-bottom: 15px;
+        }
+        .dropdown-menu {
+            min-width: 200px;
+            padding: 10px;
+        }
+        .filter-section {
+            margin-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            .table {
+                font-size: 14px;
+            }
+            .btn-sm {
+                padding: 4px 8px;
+            }
+            .dropdown-menu {
+                min-width: 180px;
+            }
+        }
+        @media (max-width: 576px) {
+            .table {
+                font-size: 12px;
+            }
+            .dropdown-menu {
+                min-width: 160px;
+            }
+            .filter-btn {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -37,344 +66,191 @@
     <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
 </header>
 <div style="min-height: 100vh;">
-<div class="container mt-5" >
-    <div class="d-flex justify-content-between pt-4">
-    <h5 class="mb-4">Recent Request</h5>
-    <div class="filter-btn">
-        <button class="btn btn-outline-secondary">
-            <i class="bi bi-funnel"></i> Filter By
-        </button>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between pt-4 flex-column flex-md-row">
+        <h5 class="mb-4">Recent Request</h5>
+        <div class="filter-btn">
+            <button class="btn btn-outline-secondary">
+                <i class="bi bi-funnel"></i> Filter By
+            </button>
+        </div>
     </div>
+    <div style="overflow-x: auto;">
+        <table class="table table-bordered" id="puja-table">
+            <thead id="puja-table-header">
+                <tr>
+                    <th>Name</th>
+                    <th>Consultation</th>
+                    <th>Mode</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="puja-table-body"></tbody>
+        </table>
     </div>
-<div style="overflow-x: auto;">
-    <table class="table table-bordered" style="overflow: auto;">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>AstrologerService</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Address</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="puja-table-body"></tbody>
-    </table>
-</div>
 
-
-<!-- Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Request</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-    <form id="edit-form">
-        <input type="hidden" id="edit-row-index">
-        <div class="mb-3">
-            <label for="edit-name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="edit-name">
-        </div>
-        <div class="mb-3">
-            <label for="edit-puja" class="form-label">AstrologerService</label>
-            <select class="form-select" id="edit-puja">
-                <option value="Shani Puja">Shani Puja</option>
-                <option value="Ganesh Puja">Ganesh Puja</option>
-                <option value="Lakshmi Puja">Lakshmi Puja</option>
-                <option value="Navgrah Puja">Navgrah Puja</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="edit-date" class="form-label">Date</label>
-            <input type="date" class="form-control" id="edit-date">
-        </div>
-        <div class="mb-3">
-            <label for="edit-time" class="form-label">Time</label>
-            <input type="time" class="form-control" id="edit-time">
-        </div>
-        <div class="mb-3">
-            <label for="edit-address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="edit-address">
-        </div>
-        <div class="text-center">
-            <button type="button" class="btn btn-primary" id="save-changes">Save Changes</button>
-        </div>
-    </form>
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center" id="pagination"></ul>
+    </nav>
 </div>
 </div>
-    </div>
-    </div>
-       <!-- Pagination -->
-       <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                <li class="page-item"><a class="page-link" href="#">10</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    </div>
-    <footer>
-    <?php $this->load->view('Pujari/Include/PujariFooter') ?>  
+<footer>
+    <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>  
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.6/sweetalert2.all.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const tableBody = document.querySelector("#puja-table-body");
-
-    function loadDummyData() {
-        const dummyData = [
-            { "name": "John Doe", "AstrologerService": "Shani Puja", "date": "2025-02-10", "time": "10:30 AM", "address": "Sector 15, Nashik", "status": "" },
-            { "name": "Jane Smith", "AstrologerService": "Ganesh Puja", "date": "2025-02-15", "time": "09:00 AM", "address": "Kothrud, Pune", "status": "" },
-            { "name": "Amit Sharma", "AstrologerService": "Maha Mrityunjaya", "date": "2025-02-18", "time": "06:00 AM", "address": "Dadar, Mumbai", "status": "" },
-            { "name": "Priya Patel", "AstrologerService": "Satyanarayan", "date": "2025-02-20", "time": "05:30 PM", "address": "Thane, Mumbai", "status": "" },
-            { "name": "Rajesh Kumar", "AstrologerService": "Rudrabhishek", "date": "2025-02-25", "time": "04:00 PM", "address": "Hadapsar, Pune", "status": "" },
-            { "name": "Sneha Joshi", "AstrologerService": "Navgraha Puja", "date": "2025-02-28", "time": "07:45 AM", "address": "Vashi, Navi Mumbai", "status": "" },
-            { "name": "Vikram Singh", "AstrologerService": "Kaal Sarp Dosh", "date": "2025-03-02", "time": "03:00 PM", "address": "Nigdi, Pune", "status": "" },
-            { "name": "Sunita Sharma", "AstrologerService": "Durga Saptashati", "date": "2025-03-05", "time": "10:00 AM", "address": "Panvel, Navi Mumbai", "status": "" },
-            { "name": "Rahul Mehta", "AstrologerService": "Lakshmi Puja", "date": "2025-03-10", "time": "08:15 AM", "address": "Shivaji Nagar, Pune", "status": "" },
-            { "name": "Ananya Verma", "AstrologerService": "Ganesh Chaturthi", "date": "2025-03-15", "time": "06:30 AM", "address": "Borivali, Mumbai", "status": "" },
-            { "name": "Karan Kapoor", "AstrologerService": "Vastu Shanti", "date": "2025-03-20", "time": "11:00 AM", "address": "Chembur, Mumbai", "status": "" },
-            { "name": "Rushikesh Thomre", "AstrologerService": "Satyanarayan Puja", "date": "2000-09-29", "time": "06:00 PM", "address": "DGP Nager 2", "status": "" },
-            { "name": "John Doe", "AstrologerService": "Shani Puja", "date": "2025-02-10", "time": "10:30 AM", "address": "Sector 15, Nashik", "status": "" },
-            { "name": "Jane Smith", "AstrologerService": "Ganesh Puja", "date": "2025-02-15", "time": "09:00 AM", "address": "Kothrud, Pune", "status": "" },
-            { "name": "Amit Sharma", "AstrologerService": "Maha Mrityunjaya", "date": "2025-02-18", "time": "06:00 AM", "address": "Dadar, Mumbai", "status": "" },
-            { "name": "Priya Patel", "AstrologerService": "Satyanarayan", "date": "2025-02-20", "time": "05:30 PM", "address": "Thane, Mumbai", "status": "" },
-            { "name": "Rajesh Kumar", "AstrologerService": "Rudrabhishek", "date": "2025-02-25", "time": "04:00 PM", "address": "Hadapsar, Pune", "status": "" },
-            { "name": "Sneha Joshi", "AstrologerService": "Navgraha Puja", "date": "2025-02-28", "time": "07:45 AM", "address": "Vashi, Navi Mumbai", "status": "" },
-            { "name": "Vikram Singh", "AstrologerService": "Kaal Sarp Dosh", "date": "2025-03-02", "time": "03:00 PM", "address": "Nigdi, Pune", "status": "" },
-            { "name": "Sunita Sharma", "AstrologerService": "Durga Saptashati", "date": "2025-03-05", "time": "10:00 AM", "address": "Panvel, Navi Mumbai", "status": "" },
-            { "name": "Rahul Mehta", "AstrologerService": "Lakshmi Puja", "date": "2025-03-10", "time": "08:15 AM", "address": "Shivaji Nagar, Pune", "status": "" },
-            { "name": "Ananya Verma", "AstrologerService": "Ganesh Chaturthi", "date": "2025-03-15", "time": "06:30 AM", "address": "Borivali, Mumbai", "status": "" },
-            { "name": "Karan Kapoor", "AstrologerService": "Vastu Shanti", "date": "2025-03-20", "time": "11:00 AM", "address": "Chembur, Mumbai", "status": "" },
-            { "name": "Rushikesh Thomre", "AstrologerService": "Satyanarayan Puja", "date": "2000-09-29", "time": "06:00 PM", "address": "DGP Nager 2", "status": "" }
-        ];
-        localStorage.setItem("pujaRequests", JSON.stringify(dummyData));
-    }
-
-    function loadTable() {
-        const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-        tableBody.innerHTML = storedData.map((data, index) => `
-            <tr>
-                <td>${data.name}</td>
-                <td>${data.AstrologerService}</td>
-                <td>${data.date}</td>
-                <td>${data.time}</td>
-                <td>${data.address}</td>
-                <td>
-                    <button class="btn btn-outline-success btn-sm approve-btn me-2" data-index="${index}">
-                        <i class="bi bi-check-lg"></i>
-                    </button>
-                    <button class="btn btn-outline-danger btn-sm delete-btn" data-index="${index}">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                </td>
-            </tr>
-        `).join("");
-    }
-
-    loadDummyData();
-    loadTable();
-
-    tableBody.addEventListener("click", function (event) {
-        if (event.target.closest(".approve-btn")) {
-            const indexToApprove = event.target.closest(".approve-btn").dataset.index;
-            let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-            storedData[indexToApprove].status = "Approved";
-            localStorage.setItem("pujaRequests", JSON.stringify(storedData));
-
-            // Change tick button color to green
-            event.target.closest(".approve-btn").classList.remove("btn-outline-success");
-            event.target.closest(".approve-btn").classList.add("btn-success");
-
-            Swal.fire({
-                title: "Approved!",
-                text: "The request has been approved successfully.",
-                icon: "success",
-                confirmButtonColor: "#28a745"
-            });
-        }
-
-        if (event.target.closest(".delete-btn")) {
-            const indexToDelete = event.target.closest(".delete-btn").dataset.index;
-            let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-            Swal.fire({
-                title: "Are you sure?",
-                text: "Do you want to reject this request?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#6c757d",
-                confirmButtonText: "Yes, Reject"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    storedData.splice(indexToDelete, 1);
-                    localStorage.setItem("pujaRequests", JSON.stringify(storedData));
-                    Swal.fire({
-                        title: "Rejected!",
-                        text: "The request has been rejected successfully.",
-                        icon: "error",
-                        confirmButtonColor: "#d33"
-                    });
-                    loadTable();
-                }
-            });
-        }
-    });
-});
-</script>
-
-
-<script>
     document.addEventListener("DOMContentLoaded", function () {
-    const tableBody = document.querySelector("#puja-table-body");
-    const filterButton = document.querySelector(".filter-btn button");
-    let filterDropdown;
+        const tableHeader = document.querySelector("#puja-table-header");
+        const tableBody = document.querySelector("#puja-table-body");
+        const paginationContainer = document.querySelector("#pagination");
+        const filterButton = document.querySelector(".filter-btn button");
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let filterDropdown;
+        // Store selected filters
+        let selectedModes = [];
+        let selectedStatuses = [];
+        let selectedConsultations = [];
 
-    // Function to create filter dropdown
-    function createFilterDropdown() {
-        filterDropdown = document.createElement("div");
-        filterDropdown.classList.add("dropdown-menu", "show");
-        filterDropdown.innerHTML = `
-            <button class="dropdown-item" id="filter-accept">Accept</button>
-            <button class="dropdown-item" id="filter-reject">Reject</button>
-        `;
-        document.body.appendChild(filterDropdown);
+        // Load dummy data
+        function loadDummyData() {
+            const dummyData = [
+        { "name": "Rahul Sharma", "Consultation": "Vedic", "Mode": "Online", "date": "2025-03-01", "time": "09:00 AM", "address": "Viman Nagar, Pune", "status": "Approved" },
+        { "name": "Sneha Gupta", "Consultation": "Vedic", "Mode": "Online", "date": "2025-03-02", "time": "10:30 AM", "address": "Andheri, Mumbai", "status": "Accepted" },
+        { "name": "Anita Rao", "Consultation": "Vastu", "Mode": "Offline", "date": "2025-03-16", "time": "09:00 AM", "address": "Shivaji Nagar, Pune", "status": "Rejected" },
+        { "name": "Ajay Verma", "Consultation": "Kundli", "Mode": "Online", "date": "2025-03-31", "time": "09:00 AM", "address": "Pune", "status": "Approved" },
+        { "name": "Shalini Gupta", "Consultation": "Kundli", "Mode": "Online", "date": "2025-04-15", "time": "09:00 AM", "address": "Pune", "status": "Rejected" },
+        { "name": "Manoj Desai", "Consultation": "Vedic", "Mode": "Online", "date": "2025-03-05", "time": "11:00 AM", "address": "Borivali, Mumbai", "status": "Approved" },
+        { "name": "Meena Khanna", "Consultation": "Vastu", "Mode": "Offline", "date": "2025-03-07", "time": "03:00 PM", "address": "Kothrud, Pune", "status": "Accepted" },
+        { "name": "Ramesh Iyer", "Consultation": "Kundli", "Mode": "Online", "date": "2025-03-10", "time": "01:30 PM", "address": "Nashik", "status": "Accepted" },
+        { "name": "Priya Jain", "Consultation": "Vastu", "Mode": "Offline", "date": "2025-03-12", "time": "04:00 PM", "address": "Dadar, Mumbai", "status": "Approved" },
+        { "name": "Suresh Kumar", "Consultation": "Kundli", "Mode": "Online", "date": "2025-03-18", "time": "10:00 AM", "address": "Pune", "status": "Accepted" },
+        { "name": "Pooja Nair", "Consultation": "Vedic", "Mode": "Offline", "date": "2025-03-20", "time": "02:00 PM", "address": "Thane", "status": "Rejected" },
+        { "name": "Vikas Malhotra", "Consultation": "Vastu", "Mode": "Online", "date": "2025-03-22", "time": "09:30 AM", "address": "Aurangabad", "status": "Approved" },
+        { "name": "Amit Sharma", "Consultation": "Kundli", "Mode": "Offline", "date": "2025-03-25", "time": "12:00 PM", "address": "Colaba, Mumbai", "status": "Accepted" },
+        { "name": "Ritika Das", "Consultation": "Vastu", "Mode": "Online", "date": "2025-03-28", "time": "08:30 AM", "address": "Bandra, Mumbai", "status": "Approved" },
+        { "name": "Nitin Tiwari", "Consultation": "Vedic", "Mode": "Offline", "date": "2025-04-01", "time": "11:30 AM", "address": "Mulund, Mumbai", "status": "Rejected" },
+        { "name": "Kavita Rao", "Consultation": "Kundli", "Mode": "Online", "date": "2025-04-05", "time": "05:00 PM", "address": "Nagpur", "status": "Rejected" },
+        { "name": "Rohan Patil", "Consultation": "Vedic", "Mode": "Offline", "date": "2025-04-07", "time": "07:00 PM", "address": "Pimpri-Chinchwad", "status": "Accepted" },
+        { "name": "Sonali Mehta", "Consultation": "Vastu", "Mode": "Online", "date": "2025-04-09", "time": "06:30 PM", "address": "Hyderabad", "status": "Approved" },
+        { "name": "Sameer Joshi", "Consultation": "Kundli", "Mode": "Offline", "date": "2025-04-12", "time": "03:45 PM", "address": "Chennai", "status": "Approved" },
+        { "name": "Deepak Agarwal", "Consultation": "Vastu", "Mode": "Online", "date": "2025-04-15", "time": "10:15 AM", "address": "Kolkata", "status": "Rejected" }
+    ];
 
-        // Position dropdown correctly
-        const rect = filterButton.getBoundingClientRect();
-        filterDropdown.style.position = "absolute";
-        filterDropdown.style.top = `${rect.bottom}px`;
-        filterDropdown.style.left = `${rect.left}px`;
+        if (!localStorage.getItem("pujaRequests")) {
+            localStorage.setItem("pujaRequests", JSON.stringify(dummyData));
+        }
     }
 
-    // Show filter dropdown on button click
-    filterButton.addEventListener("click", function () {
-        if (filterDropdown) {
-            filterDropdown.remove();
-            filterDropdown = null;
-        } else {
-            createFilterDropdown();
-        }
-    });
-
-    // Handle filter selection
-    document.body.addEventListener("click", function (event) {
-        if (event.target.id === "filter-accept" || event.target.id === "filter-reject") {
-            const isAccepted = event.target.id === "filter-accept";
-            updateTableForFilter(isAccepted);
-            filterDropdown.remove();
-            filterDropdown = null;
-        }
-    });
-
-    function updateTableForFilter(isAccepted) {
-        const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-        tableBody.innerHTML = storedData.map((data) => `
-            <tr>
-                <td>${data.name}</td>
-                <td>${data.AstrologerService}</td>
-                <td>${data.date}</td>
-                <td>${data.time}</td>
-                <td>${data.address}</td>
-                <td class="status-col">${isAccepted ? "Approved" : "Rejected"}</td>
-            </tr>
-        `).join("");
-
-        // Change column name from "Action" to "Status"
-        document.querySelector(".table thead tr th:last-child").textContent = "Status";
-    }
-
-    // Close dropdown when clicking outside
-    document.addEventListener("click", function (event) {
-        if (filterDropdown && !filterButton.contains(event.target) && !filterDropdown.contains(event.target)) {
-            filterDropdown.remove();
-            filterDropdown = null;
-        }
-    });
-});
-
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const tableBody = document.querySelector("#puja-table-body");
-    const prevButton = document.querySelector(".pagination .page-item:first-child a");
-    const nextButton = document.querySelector(".pagination .page-item:last-child a");
-    const paginationContainer = document.querySelector(".pagination");
-
-    let currentPage = 1;
-    const itemsPerPage = 10;
-
-    // Generate and store dummy data if not already stored
-    if (!localStorage.getItem("pujaRequests")) {
-        let dummyData = [];
-        for (let i = 1; i <= 20; i++) {
-            dummyData.push({
-                name: `Person ${i}`,
-                AstrologerService: `Puja Type ${i}`,
-                date: `2025-02-${(i % 28) + 1}`,
-                time: `${(i % 12) + 1}:00 ${i % 2 === 0 ? "AM" : "PM"}`,
-                address: `Address ${i}`
-            });
-        }
-        localStorage.setItem("pujaRequests", JSON.stringify(dummyData));
-    }
-
-    let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-
+    // Load table with pagination and filters
     function loadTable(page) {
+        const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
+        let filteredData = storedData;
+
+        // Apply mode filter
+        if (selectedModes.length > 0) {
+            filteredData = filteredData.filter(data => selectedModes.includes(data.Mode.toLowerCase()));
+        }
+
+        // Apply status filter
+        if (selectedStatuses.length > 0) {
+            filteredData = filteredData.filter(data => selectedStatuses.includes(data.status.toLowerCase()));
+            tableHeader.innerHTML = `
+                <tr>
+                    <th>Name</th>
+                    <th>Consultation</th>
+                    <th>Mode</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                </tr>`;
+        } else {
+            tableHeader.innerHTML = `
+                <tr>
+                    <th>Name</th>
+                    <th>Consultation</th>
+                    <th>Mode</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>`;
+        }
+
+        // Apply consultation filter
+        if (selectedConsultations.length > 0) {
+            filteredData = filteredData.filter(data => selectedConsultations.includes(data.Consultation));
+        }
+
+        // Load table body
         tableBody.innerHTML = "";
         let start = (page - 1) * itemsPerPage;
         let end = start + itemsPerPage;
-        let paginatedItems = storedData.slice(start, end);
+        let paginatedItems = filteredData.slice(start, end);
 
         paginatedItems.forEach((data, index) => {
-            let row = `<tr>
-                <td>${data.name}</td>
-                <td>${data.AstrologerService}</td>
-                <td>${data.date}</td>
-                <td>${data.time}</td>
-                <td>${data.address}</td>
-                <td>
-                    <button class="btn btn-outline-success btn-sm approve-btn me-2" data-index="${index}">
-                        <i class="bi bi-check-lg"></i>
-                    </button>
-                    <button class="btn btn-outline-danger btn-sm delete-btn" data-index="${index}">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                </td>
-            </tr>`;
+            console.log(data)
+            let globalIndex = storedData.indexOf(data);
+            let row;
+            if (selectedStatuses.length > 0) {
+                row = `<tr>
+                    <td>${data.name}</td>
+                    <td>${data.Consultation}</td>
+                    <td>${data.Mode}</td>
+                    <td>${data.date}</td>
+                    <td>${data.time}</td>
+                    <td>${data.address}</td>
+                    <td class="status-col">${data.status}</td>
+                </tr>`;
+            } else {
+                row = `<tr>
+                    <td>${data.name}</td>
+                    <td>${data.Consultation}</td>
+                    <td>${data.Mode}</td>
+                    <td>${data.date}</td>
+                    <td>${data.time}</td>
+                    <td>${data.address}</td>
+                    <td>
+                        <button class="btn btn-outline-success btn-sm approve-btn me-2 ${data.status === "Approved" ? "btn-success" : ""}" data-index="${globalIndex}">
+                            <i class="bi bi-check-lg"></i>
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm delete-btn" data-index="${globalIndex}">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </td>
+                </tr>`;
+            }
             tableBody.innerHTML += row;
         });
 
-        updatePagination(page);
+        updatePagination(page, filteredData.length);
     }
 
-    function updatePagination(activePage) {
+    // Update pagination
+    function updatePagination(activePage, totalItems) {
+        let totalPages = Math.ceil(totalItems / itemsPerPage);
         paginationContainer.innerHTML = `
             <li class="page-item ${activePage === 1 ? "disabled" : ""}">
                 <a class="page-link" href="#" id="prevPage">Previous</a>
             </li>`;
 
-        let totalPages = Math.ceil(storedData.length / itemsPerPage);
         for (let i = 1; i <= totalPages; i++) {
-            paginationContainer.innerHTML += `
-                <li class="page-item ${i === activePage ? "active" : ""}">
-                    <a class="page-link page-number" href="#" data-page="${i}">${i}</a>
-                </li>`;
+            if (i <= 2 || i > totalPages - 2 || i === activePage) {
+                paginationContainer.innerHTML += `
+                    <li class="page-item ${i === activePage ? "active" : ""}">
+                        <a class="page-link page-number" href="#" data-page="${i}">${i}</a>
+                    </li>`;
+            } else if (i === 3 && activePage < 3) {
+                paginationContainer.innerHTML += `
+                    <li class="page-item"><a class="page-link" href="#">...</a></li>`;
+            }
         }
 
         paginationContainer.innerHTML += `
@@ -382,10 +258,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <a class="page-link" href="#" id="nextPage">Next</a>
             </li>`;
 
-        attachEventListeners();
+        attachPaginationListeners();
     }
 
-    function attachEventListeners() {
+    function attachPaginationListeners() {
         document.querySelectorAll(".page-number").forEach(pageBtn => {
             pageBtn.addEventListener("click", function (event) {
                 event.preventDefault();
@@ -404,13 +280,166 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById("nextPage")?.addEventListener("click", function (event) {
             event.preventDefault();
-            if ((currentPage * itemsPerPage) < storedData.length) {
+            const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
+            let filteredData = storedData;
+
+            if (selectedModes.length > 0) {
+                filteredData = filteredData.filter(data => selectedModes.includes(data.Mode.toLowerCase()));
+            }
+
+            if (selectedStatuses.length > 0) {
+                filteredData = filteredData.filter(data => selectedStatuses.includes(data.status.toLowerCase()));
+            }
+
+            if (selectedConsultations.length > 0) {
+                filteredData = filteredData.filter(data => selectedConsultations.includes(data.Consultation()));
+            }
+
+            if ((currentPage * itemsPerPage) < filteredData.length) {
                 currentPage++;
                 loadTable(currentPage);
             }
         });
     }
 
+    // Approve and Delete functionality
+    tableBody.addEventListener("click", function (event) {
+        if (event.target.closest(".approve-btn")) {
+            const indexToApprove = event.target.closest(".approve-btn").dataset.index;
+            let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
+            storedData[indexToApprove].status = "Approved";
+            localStorage.setItem("pujaRequests", JSON.stringify(storedData));
+
+            event.target.closest(".approve-btn").classList.remove("btn-outline-success");
+            event.target.closest(".approve-btn").classList.add("btn-success");
+
+            Swal.fire({
+                title: "Approved!",
+                text: "The request has been approved successfully.",
+                icon: "success",
+                confirmButtonColor: "#28a745"
+            });
+
+            loadTable(currentPage);
+        }
+
+        if (event.target.closest(".delete-btn")) {
+            const indexToDelete = event.target.closest(".delete-btn").dataset.index;
+            let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Do you want to reject this request?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#6c757d",
+                confirmButtonText: "Yes, Reject"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    storedData[indexToDelete].status = "Rejected";
+                    localStorage.setItem("pujaRequests", JSON.stringify(storedData));
+                    Swal.fire({
+                        title: "Rejected!",
+                        text: "The request has been rejected successfully.",
+                        icon: "error",
+                        confirmButtonColor: "#d33"
+                    });
+                    loadTable(currentPage);
+                }
+            });
+        }
+    });
+
+    // Filter functionality with checkboxes
+    function createFilterDropdown() {
+        filterDropdown = document.createElement("div");
+        filterDropdown.classList.add("dropdown-menu", "show");
+        filterDropdown.innerHTML = `
+            <div class="filter-section">
+                <h6 class="dropdown-header">Filter by Mode</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="mode-online" value="online">
+                    <label class="form-check-label" for="mode-online">Online</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="mode-offline" value="offline">
+                    <label class="form-check-label" for="mode-offline">Offline</label>
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="filter-section">
+                <h6 class="dropdown-header">Filter by Status</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="filter-accept" value="approved">
+                    <label class="form-check-label" for="filter-accept">Accept</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="filter-reject" value="rejected">
+                    <label class="form-check-label" for="filter-reject">Reject</label>
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="filter-section">
+                <h6 class="dropdown-header">Filter by Consultation</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="consultation-vastu" value="vastu">
+                    <label class="form-check-label" for="consultation-vastu">Vastu</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="consultation-vedic" value="vedic">
+                    <label class="form-check-label" for="consultation-vedic">Vedic</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="consultation-kundli" value="kundli">
+                    <label class="form-check-label" for="consultation-kundli">Kundli</label>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(filterDropdown);
+
+        const rect = filterButton.getBoundingClientRect();
+        filterDropdown.style.position = "absolute";
+        filterDropdown.style.top = `${rect.bottom}px`;
+        filterDropdown.style.left = `${rect.left}px`;
+
+        // Add event listeners to checkboxes
+        filterDropdown.querySelectorAll('.form-check-input').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateFilters();
+                currentPage = 1;
+                loadTable(currentPage);
+            });
+        });
+    }
+
+    // Update selected filters
+    function updateFilters() {
+        selectedModes = Array.from(filterDropdown.querySelectorAll('input[id^="mode-"]:checked'))
+            .map(checkbox => checkbox.value);
+        selectedStatuses = Array.from(filterDropdown.querySelectorAll('input[id^="filter-"]:checked'))
+            .map(checkbox => checkbox.value);
+        selectedConsultations = Array.from(filterDropdown.querySelectorAll('input[id^="consultation-"]:checked'))
+            .map(checkbox => checkbox.value);
+    }
+
+    filterButton.addEventListener("click", function () {
+        if (filterDropdown) {
+            filterDropdown.remove();
+            filterDropdown = null;
+        } else {
+            createFilterDropdown();
+        }
+    });
+
+    document.addEventListener("click", function (event) {
+        if (filterDropdown && !filterButton.contains(event.target) && !filterDropdown.contains(event.target)) {
+            filterDropdown.remove();
+            filterDropdown = null;
+        }
+    });
+
+    // Initialize the table
+    loadDummyData();
     loadTable(currentPage);
 });
 </script>

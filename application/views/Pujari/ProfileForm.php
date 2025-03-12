@@ -220,7 +220,7 @@
 
 <body>
     <header>
-        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
+        <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
     <div>
     <div style="min-height: 100vh;" class="py-3">
@@ -320,7 +320,7 @@
             });
         });
     </script>
-    <script>
+   <script>
         $(document).ready(function() {
             $('.tab').click(function() {
                 $('.tab').removeClass('active');
@@ -332,6 +332,14 @@
                 e.preventDefault();
                 alert('Details saved successfully!');
             });
+
+            // Add this to show Advanced tab when coming from Add Puja
+            if (window.location.pathname.includes('profileForm')) {
+                $('.tab').removeClass('active');
+                $('#advancedTab').addClass('active');
+                $('.form-container').removeClass('active');
+                $('#advanced').addClass('active');
+            }
         });
     </script>
     <script>
