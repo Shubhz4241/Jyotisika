@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.6/sweetalert2.min.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -142,6 +144,28 @@
             align-items: center;
             justify-content: center;
         }
+        /* Suggestion Box Styles */
+        .suggestion-box {
+            position: absolute;
+            bottom: 50px;
+            width: 90%;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+        .suggestion-item {
+            padding: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .suggestion-item:hover {
+            background: #f5f5f5;
+        }
         @media (max-width: 768px) {
             .chat-input {
                 height: 35px;
@@ -200,13 +224,13 @@
                         id="chat-profile-img">
                     <h5 class="mb-0" id="chat-user-name">Loading...</h5>
                 </div>
-                <button class="btn btn-danger btn-sm"><i class="bi bi-power"> End Session </i></button>
+                <button class="btn btn-danger btn-sm" id="endSessionBtn"><i class="bi bi-power"> End Session </i></button>
             </div>
             <div class="chat-content" id="chat-content">
                 <!-- Chat messages will be dynamically loaded here -->
             </div>
             <div class="chat-input-container d-flex align-items-center p-2 rounded">
-                <div class="chat-input d-flex align-items-center bg-light flex-grow-1 rounded px-2">
+                <div class="chat-input d-flex align-items-center bg-light flex-grow-1 rounded px-2" style="position: relative;">
                     <i class="bi bi-emoji-smile text-secondary me-2"></i>
                     <input type="text" id="message" class="form-control border-0 bg-light" placeholder="Type message..." style="outline: none; box-shadow: none;">
                     <label for="fileInput" class="text-secondary me-2" style="cursor: pointer;">
@@ -214,6 +238,8 @@
                         <input type="file" id="fileInput" class="d-none">
                     </label>
                     <i class="bi bi-mic text-secondary"></i>
+                    <!-- Suggestion Box -->
+                    <div class="suggestion-box" id="suggestionBox"></div>
                 </div>
                 <button id="sendBtn" class="btn btn-primary ms-2"><i class="bi bi-send"></i></button>
             </div>
@@ -224,6 +250,8 @@
         <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
 
+    <!-- Add SweetAlert2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.6/sweetalert2.all.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const chatListBody = document.getElementById("chat-list-body");
@@ -232,6 +260,8 @@
             const chatContent = document.getElementById("chat-content");
             const messageInput = document.getElementById("message");
             const sendBtn = document.getElementById("sendBtn");
+            const endSessionBtn = document.getElementById("endSessionBtn");
+            const suggestionBox = document.getElementById("suggestionBox");
 
             // Retrieve selected user from localStorage
             const selectedUser = JSON.parse(localStorage.getItem("selectedChatUser")) || {};
@@ -316,8 +346,7 @@
             });
 
             // Handle sending messages
-            sendBtn.addEventListener("click", function () {
-                let message = messageInput.value.trim();
+            function sendMessage(message) {
                 if (message === "" || !selectedUser.name) {
                     alert(selectedUser.name ? "Message cannot be empty!" : "Please select a user first!");
                     return;
@@ -351,6 +380,12 @@
 
                 messageInput.value = "";
                 chatContent.scrollTop = chatContent.scrollHeight;
+                suggestionBox.style.display = "none"; // Hide suggestion box after sending
+            }
+
+            sendBtn.addEventListener("click", function () {
+                let message = messageInput.value.trim();
+                sendMessage(message);
             });
 
             // Send message on Enter key
@@ -358,6 +393,76 @@
                 if (event.key === "Enter") {
                     event.preventDefault();
                     sendBtn.click();
+                }
+            });
+
+            // End Session Sweet Alert
+            endSessionBtn.addEventListener("click", function () {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Do you want to end this chat session?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#6c757d",
+                    confirmButtonText: "Yes, End Session",
+                    cancelButtonText: "No, Stay"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Session Ended!",
+                            text: "The chat session has been terminated.",
+                            icon: "success",
+                            confirmButtonColor: "#28a745"
+                        }).then(() => {
+                            // Optionally redirect or clear chat
+                            chatContent.innerHTML = `<div class="message received">Session has ended.</div>`;
+                            messageInput.disabled = true;
+                            sendBtn.disabled = true;
+                        });
+                    }
+                });
+            });
+
+            // Message Suggestion Functionality
+            const suggestions = [
+                "How can I assist you today?",
+                "What’s on your mind?",
+                "Let me check that for you.",
+                "Can you provide more details?",
+                "I’ll get back to you soon."
+            ];
+
+            messageInput.addEventListener("input", function () {
+                const value = this.value.trim().toLowerCase();
+                if (value.length > 0) {
+                    const filteredSuggestions = suggestions.filter(s => s.toLowerCase().includes(value));
+                    if (filteredSuggestions.length > 0) {
+                        suggestionBox.innerHTML = "";
+                        filteredSuggestions.forEach(suggestion => {
+                            const suggestionItem = document.createElement("div");
+                            suggestionItem.classList.add("suggestion-item");
+                            suggestionItem.textContent = suggestion;
+                            suggestionItem.addEventListener("click", function () {
+                                messageInput.value = suggestion;
+                                suggestionBox.style.display = "none";
+                                sendMessage(suggestion); // Auto-send the selected suggestion
+                            });
+                            suggestionBox.appendChild(suggestionItem);
+                        });
+                        suggestionBox.style.display = "block";
+                    } else {
+                        suggestionBox.style.display = "none";
+                    }
+                } else {
+                    suggestionBox.style.display = "none";
+                }
+            });
+
+            // Hide suggestion box when clicking outside
+            document.addEventListener("click", function (event) {
+                if (!messageInput.contains(event.target) && !suggestionBox.contains(event.target)) {
+                    suggestionBox.style.display = "none";
                 }
             });
         });
