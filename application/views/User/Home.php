@@ -112,12 +112,21 @@
         <div class="container mt-3">
             <div class="row gx-6 gy-3 justify-content-center">
                 <!-- Astrology Sign -->
+                <!-- <div class="col-auto">
+                    <a href="<?php echo base_url('horoscopereadmore') ?>"
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="Aris"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold"> <?php echo $this->lang->line('Aris'); ?></p>
+                    </a>
+                </div> -->
+
                 <div class="col-auto">
                     <a href="<?php echo base_url('horoscopereadmore') ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="Aris"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Aris</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"> Aris</p>
                     </a>
                 </div>
 
@@ -285,7 +294,7 @@
     <!-- Astrologer on call or chat -->
     <section>
         <div class="container my-4">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrologers</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"><?php echo $this->lang->line('Astrologers'); ?></h2>
             <div class="row my-4" id="cardContainer">
                 <?php for ($i = 0; $i < 10; $i++): ?>
                     <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
