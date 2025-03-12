@@ -199,6 +199,7 @@
             padding: 1rem !important;
             text-align: start;
         }
+   
     </style>
 </head>
 
@@ -260,7 +261,7 @@
                                     </div>
                                     <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
                                         <h6>John Doe</h6>
-                                        <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 | Time: 10:30 AM<br> Location: Nashik</p>
+                                        <p>Date: 12/1/2025 <br> Time: 10:30 AM<br> Location: Nashik</p>
                                         <p>Padit Colony Nashik</p>
                                         <button class="btn btn-success btn-sm">Accept</button>
                                         <button class="btn btn-danger btn-sm">Reject</button>
@@ -279,7 +280,7 @@
                                     </div>
                                     <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
                                         <h6>John Doe</h6>
-                                        <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 | Time: 10:30 AM<br> Location: Nashik</p>
+                                        <p>Date: 12/1/2025 <br> Time: 10:30 AM<br> Location: Nashik</p>
                                         <p>Padit Colony Nashik</p>
                                         <button class="btn btn-success btn-sm">Accept</button>
                                         <button class="btn btn-danger btn-sm">Reject</button>
