@@ -47,13 +47,10 @@ class UserLoginSignup extends CI_Controller
 
 		$responsedata = json_decode($response, true);
 		if (($responsedata["status"] == "error")) {
-			// Handle error
+
 			echo "Failed to retrieve data.";
 			redirect("UserLoginSignup/Signup");
 		} else if (($responsedata["status"] == "success")) {
-			// Process the response
-
-
 
 			$userdata = $responsedata["data"];
 
@@ -78,15 +75,18 @@ class UserLoginSignup extends CI_Controller
 
 	}
 
-	public function login_user(){
+	public function login_user()
+	{
 
 		$api_url = "http://localhost/jyotisika_api/User/User_Auth/Login_user";
-		
+
 		$formdata = $this->input->post();
 
 		if (empty($formdata)) {
+			$this->session->set_flashdata('error', 'Pls enter all the fileds');
 			redirect("UserLoginSignup/Login");
-			exit();
+
+
 		}
 
 		$ch = curl_init();
@@ -99,21 +99,17 @@ class UserLoginSignup extends CI_Controller
 
 
 		$responsedata = json_decode($response, true);
-		if (($responsedata["status"] == "error")) {
-			// Handle error
-			echo "Failed to retrieve data.";
+		if (($responsedata["status"] == "error") && isset($responsedata["data"])) {
+
+
+
+			$this->session->set_flashdata('error', $responsedata["message"]);
+
 			redirect("UserLoginSignup/Login");
-		} else if (($responsedata["status"] == "success")) {
-			// Process the response
-
-
-
-			$userdata = $responsedata["data"];
-
-			// $data['userdata'] =$responsedata["data"];
+		} else if (($responsedata["status"] == "success") && isset($responsedata["data"])) {
 
 			if ($responsedata["data"]) {
-				// Login successful, set session
+				$userdata = $responsedata["data"];
 				$user_session_data = [
 					'user_id' => $userdata["user_id"],
 					'user_name' => $userdata["user_name"],
@@ -123,26 +119,42 @@ class UserLoginSignup extends CI_Controller
 				];
 				$this->session->set_userdata($user_session_data);
 
+				$this->session->set_flashdata('success', $responsedata["message"]);
 				redirect('User/home');
 
 
 			}
+		} else if (($responsedata["status"] == "usernotexit")) {
+
+			$this->session->set_flashdata('usernotexit', $responsedata["message"]);
+
+			redirect("UserLoginSignup/Login");
+		} else if (($responsedata["status"] == "otp_failed")) {
+
+			$this->session->set_flashdata('otp_failed', $responsedata["message"]);
+
+			redirect("UserLoginSignup/Login");
+		} else {
+			$this->session->set_flashdata('error', "something went wrong");
+			redirect("UserLoginSignup/Login");
 		}
 
 
 	}
 
 
-	public function Logout(){
+	public function Logout()
+	{
 		$this->session->sess_destroy();
 		redirect("UserLoginSignup/Login");
 		exit();
 	}
 
-	public function Updateprofile(){
-		
 
-	}
+
+
+
+
 
 
 

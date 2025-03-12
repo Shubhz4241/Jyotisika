@@ -64,7 +64,7 @@
     <?php
 
     if (!empty($userinfo)) {
-        print_r($userinfo);
+       
 
         $user_name = isset($userinfo["user_name"]) ? $userinfo["user_name"] : '';
         $user_gender = isset($userinfo["user_gender"]) ? $userinfo["user_gender"] : '';
@@ -80,26 +80,34 @@
         $user_City = isset($userinfo["user_City"]) ? $userinfo["user_City"] : '';
         $user_Pincode = isset($userinfo["user_Pincode"]) ? $userinfo["user_Pincode"] : '';
 
+
+        $profile_image = isset($userinfo["user_image"]) && !empty($userinfo["user_image"]) ? $userinfo["user_image"] : 'assets/images/profileImage.png';
+
+
+
     }
 
     ?>
     <main>
         <div class="container my-5">
             <div class="row">
-                <form action=<?php echo base_url("UserAction/update_userprofile"); ?> method="POST"
-                 id="userProfileForm"  enctype="multipart/form-data">
+                <form action=<?php echo base_url("UserAction/Updateprofile"); ?> method="POST" id="userProfileForm"
+                    enctype="multipart/form-data">
                     <div class="row shadow p-4 rounded bg-light">
                         <div class="col-md-12 d-flex justify-content-center">
                             <div class="mb-3 text-center">
                                 <label for="profileImage" class="form-label fw-bold">Profile Image</label>
                                 <div>
+
+
                                     <label for="profileImage">
-                                        <img src="<?php echo base_url('assets/images/profileImage.png'); ?>"
-                                            alt="Default Profile Image" id="profileImagePreview" class="rounded-circle"
-                                            style="width: 150px; cursor: pointer;">
+                                        <img src="<?php echo base_url($profile_image); ?>" alt="Profile Image"
+                                            id="profileImagePreview" class="rounded-circle"
+                                            style="width: 150px; height: 150px; cursor: pointer;">
                                     </label>
                                 </div>
-                                <input type="file" class="form-control" id="profileImage" name="profileImage"
+
+                                <input type="file" class="form-control" id="profileImage" name="user_image"
                                     onchange="previewProfileImage(event)" style="display: none;">
                             </div>
                         </div>
@@ -117,16 +125,20 @@
 
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="firstName" class="form-label">First Name</label>
+                                <label for="firstName" class="form-label">Full Name</label>
                                 <input type="text" value="<?php echo $user_name ?>" class="form-control" id="firstName"
                                     name="user_name" required autocomplete="off">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" value="Doe"
-                                    required autocomplete="off">
+                                <label for="lastName" class="form-label">Mobile Number</label>
+                                <input type="text" hidden class="form-control" value="<?php echo $profile_image; ?>"
+                                    name="current_image_name">
+
+
+                                <input type="text" disabled class="form-control" id="lastName" name="lastName"
+                                    value="<?php echo $user_mobilenumber ?>" required autocomplete="off">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -205,7 +217,7 @@
                 document.getElementById("userProfileForm").addEventListener("submit", function (event) {
                     let isValid = true;
 
-                   
+
 
                     if (!isValid) {
                         event.preventDefault(); // Prevent form submission if validation fails
@@ -213,16 +225,60 @@
                 });
             </script>
 
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    <?php if ($this->session->flashdata('success')): ?>
+                        Swal.fire({
+                            icon: 'success',
+
+                            text: '<?php echo $this->session->flashdata('success'); ?>',
+                            confirmButtonText: 'OK'
+                        });
+                    <?php endif; ?>
+
+                    <?php if ($this->session->flashdata('warning')): ?>
+                        Swal.fire({
+                            icon: 'warning',
+
+                            text: '<?php echo $this->session->flashdata('warning'); ?>',
+                            confirmButtonText: 'OK'
+                        });
+                    <?php endif; ?>
+
+                    <?php if ($this->session->flashdata('error')): ?>
+                        Swal.fire({
+                            icon: 'warning',
+
+                            text: '<?php echo $this->session->flashdata('error'); ?>',
+                            confirmButtonText: 'OK'
+                        });
+                    <?php endif; ?>
+
+                    
+                    
+
+
+                    <?php if ($this->session->flashdata('upload_error_photo')): ?>
+                        Swal.fire({
+                            icon: 'warning',
+                            html: `<?php echo $this->session->flashdata('upload_error_photo'); ?>`,
+                          
+                            confirmButtonText: 'OK'
+                        });
+                    <?php endif; ?>
+                    
+
+
+                });
+            </script>
+
+
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 
 
     </main>
-
-
-
-
-
-
 
     <footer>
         <?php $this->load->view('IncludeUser/CommanFooter'); ?>

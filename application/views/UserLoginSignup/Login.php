@@ -206,6 +206,48 @@
     </script>
 
 
+<script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    <?php if ($this->session->flashdata('otp_failed')): ?>
+                        Swal.fire({
+                            icon: 'warning',
+
+                            text: '<?php echo $this->session->flashdata('otp_failed'); ?>',
+                            confirmButtonText: 'OK'
+                        });
+                    <?php endif; ?>
+
+                    <?php if ($this->session->flashdata('usernotexit')): ?>
+                        Swal.fire({
+                            icon: 'warning',
+
+                            text: '<?php echo $this->session->flashdata('usernotexit'); ?>',
+                            confirmButtonText: 'OK'
+                        });
+                    <?php endif; ?>
+
+                    <?php if ($this->session->flashdata('error')): ?>
+                        Swal.fire({
+                            icon: 'warning',
+
+                            text: '<?php echo $this->session->flashdata('error'); ?>',
+                            confirmButtonText: 'OK'
+                        });
+                    <?php endif; ?>
+
+                    
+                    
+
+
+                
+                    
+
+
+                });
+            </script>
+
+
+
     <!-- SweetAlert Cdn -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

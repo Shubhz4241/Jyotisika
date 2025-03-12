@@ -11,9 +11,27 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>">Home</a>
+                    <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>"> <?php echo $this->lang->line('home'); ?></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-black" href="<?php echo base_url('todayhoroscope'); ?>"> <?php echo $this->lang->line('Horoscope'); ?></a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>"><?php echo $this->lang->line('Astrologers'); ?></a>
+                </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>"><?php echo $this->lang->line('WhyUs'); ?></a>
+                </li>
+            </ul> -->
+
+             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>"> Home</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link text-black" href="<?php echo base_url('todayhoroscope'); ?>">Horoscope</a>
@@ -21,13 +39,11 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>">Astrologers</a>
+                    <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>"> Astrologers</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('Poojaris') ?>">Pujari</a>
-                </li> -->
+               
                 <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">Why Us</a>
+                    <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">WhyUs</a>
                 </li>
             </ul>
 
@@ -35,16 +51,23 @@
 
             <div class="d-flex gap-2">
                 <div class="position-relative">
-
                     <i class="bi bi-translate position-absolute ps-2"
                         style="top: 50%; left: 0px; transform: translateY(-50%);"></i>
-                    <select name="cars" id="cars" class="p-1 px-4 rounded-2">
-                        <option value="English">English</option>
-                        <option value="Marathi">Marathi</option>
-                        <option value="Hindi">Hindi</option>
 
+                    <select id="languageSwitcher" class="p-1 px-4 rounded-2">
+                        <option value="english" <?php echo ($this->session->userdata('site_language') == 'english') ? 'selected' : ''; ?>>English</option>
+                        <option value="marathi" <?php echo ($this->session->userdata('site_language') == 'marathi') ? 'selected' : ''; ?>>Marathi</option>
+                        <option value="hindi" <?php echo ($this->session->userdata('site_language') == 'hindi') ? 'selected' : ''; ?>>Hindi</option>
                     </select>
                 </div>
+
+                <script>
+                    document.getElementById('languageSwitcher').addEventListener('change', function () {
+                        var selectedLang = this.value;
+                        window.location.href = "<?php echo base_url('User/change_language/'); ?>" + selectedLang;
+                    });
+                </script>
+
                 <!-- <div class="position-relative">
                     <i class="bi bi-translate position-absolute"
                         style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
@@ -87,7 +110,8 @@
                                     </div>
 
 
-                                    <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;"> <?php echo  $this->session->userdata('user_name') ?>
+                                    <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;">
+                                        <?php echo $this->session->userdata('user_name') ?>
                                     </p>
 
 

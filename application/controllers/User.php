@@ -10,6 +10,7 @@ class User extends CI_Controller
 		$this->load->helper(array('form', 'url'));
 
 		$this->load->library('session'); // Load session library
+		
 
 
 	}
@@ -66,24 +67,38 @@ class User extends CI_Controller
 
 
 	public function Home()
-	{
-		$user_id = $this->session->userdata('user_id');
-		$data = [];
+{
+    $user_id = $this->session->userdata('user_id');
+    $data = [];
 
-		if (!empty($user_id)) {
-			$getdata = $this->get_userdata($user_id);
+    if (!empty($user_id)) {
+        $getdata = $this->get_userdata($user_id);
 
-			if ($getdata != null) {
+        if ($getdata != null) {
+            $data["userinfo"] = $getdata;
+        }
+    }
 
-				$data["userinfo"] = $getdata;
-			} else {
-				$data = [];
-			}
-		}
+	
+    $language = $this->session->userdata('site_language') ?? 'english';
 
-		$this->load->view('User/Home', $data);
+    
+    $this->lang->load('message', $language);
+	
 
-	}
+  
+    
+    $this->load->view('User/Home', $data);
+}
+
+
+	public function change_language($lang = "english") {
+		
+        $this->session->set_userdata('site_language', $lang);
+        redirect($_SERVER['HTTP_REFERER']); // Redirect back to the previous page
+    }
+    
+   
 
 
 	public function Demo()
@@ -92,26 +107,36 @@ class User extends CI_Controller
 	}
 	public function FreeKundli()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/FreeKundli');
 	}
 
 	public function BookPooja()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/BookPooja');
 	}
 
 	public function KundliMatching()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/KundliMatching');
 	}
 
 	public function Festival()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/Festival');
 	}
 
 	public function Panchang()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/Panchang');
 	}
 
@@ -132,6 +157,13 @@ class User extends CI_Controller
 
 	public function KP()
 	{
+	
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+    
+		
+		
 		$this->load->view('User/KP');
 	}
 
@@ -195,10 +227,6 @@ class User extends CI_Controller
 
 			$this->load->view("UserLoginSignup/Login");
 		} else {
-
-
-
-
 			$data["userinfo"] = $this->get_userdata($user_id);
 
 			if (!$data["userinfo"]) {
@@ -255,19 +283,22 @@ class User extends CI_Controller
 		$this->load->view('User/PoojaInfo');
 	}
 
-	public function MobPooja(){
+	public function MobPooja()
+	{
 		$this->load->view('User/MobPooja');
 	}
 
-	public function ShowFreeKundli(){
+	public function ShowFreeKundli()
+	{
 		$this->load->view('User/ShowFreeKundli');
 	}
 
-	public function Following(){
+	public function Following()
+	{
 		$this->load->view('User/Following');
 	}
 
-	
+
 	public function getdata()
 	{
 
