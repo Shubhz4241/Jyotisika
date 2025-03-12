@@ -37,27 +37,28 @@
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
 
     <main>
-    <style>
+        <style>
             /* Custom styles for yellow theme */
             .nav-pills .nav-link.active {
-            background-color: var(--yellow) !important;
-            color: black !important;
+                background-color: var(--yellow) !important;
+                color: black !important;
             }
-            
+
             .accordion-button:not(.collapsed) {
-            background-color: var(--yellow) !important;
-            color: black !important;
+                background-color: var(--yellow) !important;
+                color: black !important;
             }
+
             .accordion-button:focus {
-            border-color: #fff7b8 !important;
-            box-shadow: 0 0 0 0.25rem rgba(255, 247, 184, 0.25) !important;
+                border-color: #fff7b8 !important;
+                box-shadow: 0 0 0 0.25rem rgba(255, 247, 184, 0.25) !important;
             }
         </style>
 
         <section class="container my-5">
+            <!-- Previous FAQ section code remains unchanged -->
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <!-- Question Categories as Nav Tabs -->
                     <ul class="nav nav-pills flex-column shadow-sm" id="faqTabs" role="tablist">
                         <li class="nav-item " role="presentation">
                             <button class="nav-link text-dark active w-100 text-start" id="general-tab" data-bs-toggle="pill" data-bs-target="#general" type="button" role="tab">
@@ -206,10 +207,24 @@
                         </div>
                     </div>
 
-                   
+
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <div class="p-4  rounded-3 shadow-sm">
+                        <h4 class="mb-3">Still have questions?</h4>
+                        <p class="mb-3">We're here to help! If your query isn't listed above, feel free to reach out to us.</p>
+                        <a href="#" class="btn btn-warning btn-lg px-4">
+                            <i class="bi bi-envelope-fill me-2"></i>Contact Us
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
+
+
 
 
 

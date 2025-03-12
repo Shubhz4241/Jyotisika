@@ -235,6 +235,7 @@
     <footer>
         <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
+    
 
     <script>
         const ctx1 = document.getElementById('overallEarningsChart').getContext('2d');
