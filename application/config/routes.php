@@ -90,9 +90,14 @@ $route['Following'] ='User/Following';
 
 
 
+
+
 // login poge
 $route['Signup'] = 'UserLoginSignup/Signup';
 $route['Login'] = 'UserLoginSignup/Login';
+$route['Logout'] = 'UserLoginSignup/Logout';
+
+
 
 // Admin Routes
 $route['admindash'] = 'Admin/AdminDash';

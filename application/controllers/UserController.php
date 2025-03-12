@@ -3,11 +3,7 @@
 defined("BASEPATH") Or ("No Direct Script Access Allowed");
 class UserController extends CI_Controller
 {
-    // function __construct()
-    // {
-    //     parent::__construct();
-    // }
-
+   
     function AddUserForm()
     {
         $this->load->view("UserForm");

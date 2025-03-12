@@ -246,7 +246,7 @@
     <div class="menu-items" id="menuItems">
     <a href="<?php echo base_url() . 'AstrologerUser/AstrologerDashboard'; ?>">Home</a>
         <a href="<?php echo base_url() . 'AstrologerUser/AstrologerRecentRequest'; ?>">Requests</a>
-        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerAnalyticsandEarning1'; ?>">Analytics</a>
+        <!-- <a href="<?php echo base_url() . 'AstrologerUser/AstrologerAnalyticsandEarning1'; ?>">Analytics</a> -->
         <a href="<?php echo base_url() . 'AstrologerUser/AstrologerAnalyticsAndEarning2'; ?>">Earnings</a>
 
     </div>

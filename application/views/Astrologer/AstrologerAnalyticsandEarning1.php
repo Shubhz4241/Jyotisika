@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analytics & Earnings 1</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,20 +66,38 @@
             color: black;
         }
 
-        .chart-container {
+        .table-container {
             padding: 20px;
             margin-top: 20px;
-            max-width: 1000px;
-            /* Increased width */
-            height: 400px;
-            /* Increased height */
+            max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        canvas {
-            width: 100% !important;
-            height: 100% !important;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #e0e0e0;
+            font-weight: 600;
+        }
+
+        /* Alternating row colors */
+        tbody tr:nth-child(odd) {
+            background-color: #e7f4e7; /* Light green */
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #c8e6c9; /* Slightly darker green */
         }
 
         .filter-btn {
@@ -99,6 +115,10 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .table-container {
+                width: 100%;
+            }
         }
 
         @media (max-width: 576px) {
@@ -106,6 +126,10 @@
                 height: 120px;
                 /* Adjust for very small screens */
                 width: 180px;
+            }
+
+            .table-container table {
+                font-size: 12px;
             }
         }
 
@@ -119,12 +143,12 @@
             background-color: #F2DC5194 !important;
         }
 
-        /* .bg-warning {
+        .bg-warning {
             --bs-bg-opacity: 1;
             background-color: #14993E54 !important;
-        } */
+        }
 
-        /* Center the stat boxes and charts */
+        /* Center the stat boxes and tables */
         .stat-box-container {
             display: flex;
             justify-content: center;
@@ -142,37 +166,31 @@
             height: 140px;
             /* Reduced height */
             width: 150px;
-            /* Reducedwidth  */
+            /* Reduced width */
             justify-content: center;
             align-items: center;
             margin: 30px;
         }
 
-        .chart-container {
+        .table-container {
             width: 90%;
             /* Increased width */
             max-width: 1200px;
             /* Maximum limit */
-            height: 450px;
-            /* Adjusted height */
             margin: 20px auto;
             padding: 20px;
             background: transparent;
-            /* Removes the white background */
             border-radius: 10px;
-            box-shadow: none;
-            /* Removes the shadow */
         }
 
-
-        /* Make the charts and boxes align properly */
+        /* Make the tables and boxes align properly */
         @media (max-width: 768px) {
             .stat-box-container {
                 flex-direction: row;
                 justify-content: space-around;
             }
 
-            .chart-container {
+            .table-container {
                 width: 100%;
                 /* Make full width for small screens */
             }
@@ -184,9 +202,8 @@
                 height: 100px;
             }
 
-            .chart-container {
-                height: 300px;
-                /* Adjusted for small screens */
+            .table-container {
+                padding: 10px;
             }
         }
     </style>
@@ -208,27 +225,134 @@
                     <h3>40</h3>
                 </a>
                 <div class="stat-box bg-warning text-dark d-flex" style=" background-color: #14993E54 !important;">
-                <a href="<?php echo base_url('AstrologerUser/AstrologyAndSpiritualServices'); ?>" class="stat-box text-white text-decoration-none">
-                    <p class="fw-normal">Kundli</p>
-                    <h3>40</h3>
-                </a>
+                    <a href="<?php echo base_url('AstrologerUser/AstrologyAndSpiritualServices'); ?>" class="stat-box text-white text-decoration-none">
+                        <p class="fw-normal">Kundli</p>
+                        <h3>40</h3>
+                    </a>
                 </div>
             </div>
 
-
-            <div class="chart-container">
+            <!-- Vastu Table -->
+            <div class="table-container">
                 <h5>Vastu <button class="btn btn-light filter-btn">Filter</button></h5>
-                <canvas id="overallEarningsChart"></canvas>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Poojas</th>
+                            <th>December</th>
+                            <th>November</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rahu-ketu</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Wealth</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Char-Shanti</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Satyanarayan puja</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Rahu-ketu</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <div class="chart-container">
+            <!-- Vedic Table -->
+            <div class="table-container">
                 <h5>Vedic <button class="btn btn-light filter-btn">Filter</button></h5>
-                <canvas id="monthlyEarningsChart"></canvas>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Poojas</th>
+                            <th>December</th>
+                            <th>November</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rahu-ketu</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Wealth</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Char-Shanti</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Satyanarayan puja</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Rahu-ketu</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <div class="chart-container">
+            <!-- Kundli Table -->
+            <div class="table-container">
                 <h5>Kundli <button class="btn btn-light filter-btn">Filter</button></h5>
-                <canvas id="pendingPaymentsChart"></canvas>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Poojas</th>
+                            <th>December</th>
+                            <th>November</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rahu-ketu</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Wealth</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Char-Shanti</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Satyanarayan puja</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Rahu-ketu</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -236,100 +360,6 @@
         <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
     
-
-    <script>
-        const ctx1 = document.getElementById('overallEarningsChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['Vastu', 'Vedic', 'Kundli'],
-                datasets: [{
-                        label: 'December',
-                        data: [50, 80, 100],
-                        backgroundColor: '#6C63FF'
-                    },
-                    {
-                        label: 'November',
-                        data: [35, 97, 150],
-                        backgroundColor: '#FF6384'
-                    },
-                    {
-                        label: 'October',
-                        data: [58, 93, 163],
-                        backgroundColor: '#36A2EB'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        suggestedMin: 0,
-                        suggestedMax: 200,
-                        ticks: {
-                            stepSize: 50
-                        }
-                    }
-                }
-            }
-        });
-
-        const ctx2 = document.getElementById('monthlyEarningsChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: [' Vastu', 'Vedic', 'Kundli'],
-                datasets: [{
-                        label: 'Vastu',
-                        data: [8, 9, 12],
-                        backgroundColor: '#6C63FF'
-                    },
-                    {
-                        label: 'Vedic',
-                        data: [6, 12, 13],
-                        backgroundColor: '#FF6384'
-                    },
-                    {
-                        label: 'Kundli',
-                        data: [3, 13, 14],
-                        backgroundColor: '#36A2EB'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        suggestedMin: 0,
-                        suggestedMax: 20,
-                        ticks: {
-                            stepSize: 5
-                        }
-                    }
-                }
-            }
-        });
-
-        const ctx3 = document.getElementById('pendingPaymentsChart').getContext('2d');
-        new Chart(ctx3, {
-            type: 'doughnut',
-            data: {
-                labels: ['Vastu', 'Vedic', 'Kundli'],
-                datasets: [{
-                    data: [39, 23, 38],
-                    backgroundColor: ['#6C63FF', '#36A2EB', '#FF6384']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-    </script>
 
 </body>
 
