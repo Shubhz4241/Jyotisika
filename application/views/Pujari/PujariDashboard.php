@@ -22,8 +22,6 @@
         }
 
         .card {
-            /* border-radius: 12px; */
-
             transition: all 0.3s ease;
         }
 
@@ -82,7 +80,6 @@
             background-color: white;
             color: black;
             text-align: center;
-
         }
 
         .stars {
@@ -91,13 +88,13 @@
         }
 
         .card1 {
-            min-height: 350px !important;
+            min-height: 300px !important;
         }
 
         /* Responsive Fixes */
         @media (max-width: 1158px) {
             .card2 {
-                width: 100% !important;
+                width: 100 !important;
             }
         }
 
@@ -120,7 +117,6 @@
         .carousel {
             width: 100%;
             max-width: 800px;
-            /* Adjust width as needed */
             overflow: hidden;
         }
 
@@ -139,7 +135,6 @@
 
         .carousel-btn img {
             width: 90px;
-            /* Adjust size */
             height: auto;
         }
 
@@ -170,13 +165,11 @@
         .image-container {
             width: 100%;
             max-width: 240px;
-            /* Adjust this as per design */
             height: 100%;
         }
 
         .image-container img {
             object-fit: cover;
-            /* Ensures the image covers the full height */
         }
 
         @media (max-width: 768px) {
@@ -186,14 +179,9 @@
 
             .image-container {
                 max-width: 100%;
-                /* Full width on small screens */
                 height: auto;
             }
         }
-
-        /* .mb-3 {
-            margin-top: 3rem !important;
-        } */
 
         .p-3 {
             padding: 1rem !important;
@@ -223,7 +211,6 @@
             display: none;
             position: fixed;
             top: 100px;
-            /* Keeps the form below the navbar */
             left: 50%;
             transform: translateX(-50%);
             background: #fff;
@@ -234,9 +221,7 @@
             max-width: 400px;
             z-index: 999;
             max-height: 80vh;
-            /* Prevents form from exceeding screen height */
             overflow-y: auto;
-            /* Scroll inside if content is long */
             transition: all 0.3s ease-in-out;
         }
 
@@ -270,6 +255,16 @@
             border: 1px solid #ccc;
         }
 
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
         /* Submit Button */
         .btn-submit {
             background: #f8b400;
@@ -290,7 +285,6 @@
         @media (max-width: 576px) {
             .form-container {
                 top: 80px;
-                /* Adjust form position for smaller screens */
                 width: 95%;
                 max-width: 450px;
             }
@@ -299,7 +293,59 @@
         .col-lg-2 {
             flex: 1;
             min-width: 180px;
-            /* Adjust based on content */
+        }
+
+        /* Updated Puja Reminder Styling */
+        .puja-reminder-content {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .puja-reminder-content h5 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .puja-reminder-content p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        }
+
+        .puja-reminder-content .price-discount {
+            text-decoration: line-through;
+            color: #888;
+            margin-right: 5px;
+        }
+
+        .puja-reminder-content .price-final {
+            color: #000;
+            font-weight: 600;
+        }
+
+        .puja-reminder-content .text-danger {
+            color: #ff0000 !important;
+        }
+
+        .puja-reminder-content img {
+            vertical-align: middle;
+        }
+
+        .puja-reminder-content .puja-type {
+            font-weight: 400;
+            color: #333;
+        }
+
+        /* Ensure Exp and Price on the same line */
+        .exp-price-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
         }
     </style>
 </head>
@@ -323,14 +369,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#BB97C1; padding:6px 2px; padding-bottom:20px; border:3px solid #BB97C1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <div class="card py-3" style="border-radius:0;">
-                                <div class="icon-box purple">🕒</div>
-                                <h6>Upcoming Puja's</h6>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
                         <div style="background-color:#FF2E11BF; padding:6px 2px; padding-bottom:20px; border:3px solid #FF2E11BF; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                             <div class="card py-3" style="border-radius:0;">
@@ -338,23 +376,19 @@
                                 <a href="<?php echo base_url() . 'PujariUser/SetRate'; ?>">
                                     <h6>Rate Chart</h6>
                                 </a>
-
                             </div>
                         </div>
                     </div>
-                    <!-- index.php or your main page -->
                     <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
                         <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                             <div class="card py-3" style="border-radius:0;">
                                 <div class="icon-box yellow">➕</div>
-                                <!-- Assuming this is in a CodeIgniter project -->
                                 <a href="<?php echo base_url('PujariUser/profileForm'); ?>" class="text-decoration-none" id="addPujaLink">
                                     <h6>Add Puja's</h6>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <!-- Arrange Mob Puja Button -->
                     <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
                         <div style="background-color:#FF9500; padding:6px 2px; padding-bottom:20px; border:3px solid #FF9500; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                             <div class="card py-3 text-center ms-0" style="border-radius:0; cursor:pointer;" id="showForm">
@@ -372,28 +406,33 @@
                         <div class="form-container" id="pujaForm">
                             <button class="close-btn" id="closeForm">×</button>
                             <h5 class="mb-3 text-center">Contact Form</h5>
-                            <form>
+                            <form id="pujaFormSubmit">
                                 <div class="mb-2">
                                     <label class="form-label d-block text-start">Pooja</label>
-                                    <input type="text" class="form-control" placeholder="Enter Pooja">
+                                    <input type="text" class="form-control" id="pooja" name="pooja" placeholder="e.g., Rudraabhishek Puja" required>
+                                    <div class="invalid-feedback">Please enter the name of the Pooja.</div>
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label d-block text-start">Date</label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" class="form-control" id="date" name="date" required>
+                                    <div class="invalid-feedback">Please select a valid future date.</div>
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label d-block text-start">Original Price</label>
-                                    <input type="text" class="form-control" placeholder="Enter Original Price">
+                                    <input type="number" class="form-control" id="originalPrice" name="originalPrice" placeholder="e.g., 1000" min="1" required>
+                                    <div class="invalid-feedback">Please enter a valid original price (positive number).</div>
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label d-block text-start">Discount Price</label>
-                                    <input type="text" class="form-control" placeholder="Enter Discount Price">
+                                    <input type="number" class="form-control" id="discountPrice" name="discountPrice" placeholder="e.g., 800" min="0" required>
+                                    <div class="invalid-feedback">Please enter a valid discount price (positive number, less than original price).</div>
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label d-block text-start">Time</label>
-                                    <input type="time" class="form-control">
+                                    <input type="time" class="form-control" id="time" name="time" required>
+                                    <div class="invalid-feedback">Please select a time for the Pooja.</div>
                                 </div>
-                                <button type="submit" class="btn btn-warning w-100">Save Changes</button>
+                                <button type="submit" class="btn btn-warning w-100 btn-submit">Save Changes</button>
                             </form>
                         </div>
                     </div>
@@ -414,7 +453,7 @@
                                     </div>
                                     <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
                                         <h6>John Doe</h6>
-                                        <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 | Time: 10:30 AM<br> Location: Nashik</p>
+                                        <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 <br> Time: 10:30 AM<br> Location: Nashik</p>
                                         <p>Padit Colony Nashik</p>
                                         <button class="btn btn-success btn-sm">Accept</button>
                                         <button class="btn btn-danger btn-sm">Reject</button>
@@ -423,7 +462,7 @@
                             </div>
                         </div>
 
-                        <!-- Puja Reminder Section -->
+                        <!-- Puja Reminder Section (Updated to have Exp and Price on the same line) -->
                         <div class="col-lg-6 mt-5">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">Puja Reminder</h5>
@@ -436,26 +475,29 @@
                                         <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>"
                                             alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
                                     </div>
-                                    <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
+                                    <div class="ms-md-3 p-3 mt-3 mt-md-0 puja-reminder-content flex-grow-1">
                                         <h5>Puja - Rudraabhishek Puja</h5>
-                                        <p><strong>Date:</strong> 12/1/2025</p>
-                                        <p><strong>Time:</strong> 10:30 AM</p>
+                                        <p><strong>Date:</strong> 12/2/2025</p>
+                                        <p><strong>Time:</strong> 10:30 am</p>
                                         <p>
                                             <strong><img src="<?php echo base_url('assets/images/Pujari/icon.png'); ?>"
                                                     alt="Languages" class="img-fluid" width="15px"></strong>
                                             English, Hindi, Marathi
                                         </p>
-                                        <p>
-                                            <strong><img src="<?php echo base_url('assets/images/Pujari/graduate-cap_svgrepo.com.png'); ?>"
-                                                    alt="Experience" class="img-fluid" width="19px"> Exp:</strong> 23 years
+                                        <p class="exp-price-container">
+                                            <span>
+                                                <strong><img src="<?php echo base_url('assets/images/Pujari/graduate-cap_svgrepo.com.png'); ?>"
+                                                        alt="Experience" class="img-fluid" width="19px"> Exp:</strong> 23 years
+                                            </span>
+                                            <span><strong>Price:</strong> <span class="price-discount">₹710</span> <span class="price-final">₹500</span></span>
                                         </p>
-                                        <p><strong>Price:</strong> <span class="discount">₹710</span> ₹500</p>
-                                        <p><strong>Attendees:</strong> 104</p>
+                                        <p><strong>Attendee:</strong> 104</p>
                                         <p class="text-danger">
                                             <img src="<?php echo base_url('assets/images/Pujari/time-filled_svgrepo.com.png'); ?>"
                                                 alt="Countdown" class="img-fluid" width="19px">
-                                            Starts in: 1d 4h 23m
+                                            Starts in 1d 4h 23m
                                         </p>
+                                        <p class="puja-type"><strong>Puja Type -</strong> Mob Puja</p>
                                     </div>
                                 </div>
                             </div>
@@ -531,13 +573,11 @@
         </main>
     </div>
 
-
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Include SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -580,6 +620,72 @@
                     });
                 });
             });
+
+            // Form Validation and SweetAlert on Submit
+            const form = document.getElementById('pujaFormSubmit');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                let isValid = true;
+                const pooja = document.getElementById('pooja');
+                const date = document.getElementById('date');
+                const originalPrice = document.getElementById('originalPrice');
+                const discountPrice = document.getElementById('discountPrice');
+                const time = document.getElementById('time');
+
+                // Reset validation states
+                pooja.classList.remove('is-invalid');
+                date.classList.remove('is-invalid');
+                originalPrice.classList.remove('is-invalid');
+                discountPrice.classList.remove('is-invalid');
+                time.classList.remove('is-invalid');
+
+                // Validate Pooja (not empty)
+                if (!pooja.value.trim()) {
+                    pooja.classList.add('is-invalid');
+                    isValid = false;
+                }
+
+                // Validate Date (not empty and not in the past)
+                const today = new Date().toISOString().split('T')[0];
+                if (!date.value || date.value < today) {
+                    date.classList.add('is-invalid');
+                    isValid = false;
+                }
+
+                // Validate Original Price (positive number)
+                if (!originalPrice.value || originalPrice.value <= 0) {
+                    originalPrice.classList.add('is-invalid');
+                    isValid = false;
+                }
+
+                // Validate Discount Price (positive number, less than original price)
+                if (!discountPrice.value || discountPrice.value < 0 || parseFloat(discountPrice.value) > parseFloat(originalPrice.value)) {
+                    discountPrice.classList.add('is-invalid');
+                    isValid = false;
+                }
+
+                // Validate Time (not empty)
+                if (!time.value) {
+                    time.classList.add('is-invalid');
+                    isValid = false;
+                }
+
+                // If all validations pass, show SweetAlert and close the form
+                if (isValid) {
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Puja details have been saved successfully.",
+                        icon: "success",
+                        confirmButtonColor: "#28a745",
+                        confirmButtonText: "OK"
+                    }).then(() => {
+                        // Reset the form and close it
+                        form.reset();
+                        $("#pujaForm, #overlay").fadeOut();
+                    });
+                }
+            });
         });
     </script>
     <script>
@@ -595,7 +701,6 @@
             });
         });
     </script>
-
 </body>
 
 </html>
