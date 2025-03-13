@@ -146,6 +146,12 @@ $route['jyotisikastore'] = 'Admin/JyotisikaStore';
 $route['profile'] = 'Admin/Profile';
 $route['anyliticsandreports'] = 'Admin/AnyliticsandReports';
 $route['rescheduleinterview'] = 'Admin/RescheduleInterview';
+$route['viewastrologer'] = 'Admin/ViewAstrologer';
+$route['viewpujari'] = 'Admin/ViewPujari';
+$route['astrologerslist'] = 'Admin/AstrologersList';
+$route['astrologerreview'] = 'Admin/AstrologerReview';
+$route['pujariList'] = 'Admin/PujariList';
+$route['pujarireview'] = 'Admin/PujariReview';
 
 // Login Admin Routes
 $route['login'] = 'LoginForgotAdmin/LoginAdmin';

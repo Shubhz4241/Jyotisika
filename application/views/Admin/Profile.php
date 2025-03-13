@@ -443,7 +443,7 @@
 
                                 <!-- Submit Button -->
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                                    <button type="submit" class="btn btn-primary w-100" style="background-color: #0c768a;">Submit</button>
                                 </div>
                             </form>
                         </div>

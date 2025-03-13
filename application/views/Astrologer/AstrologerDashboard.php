@@ -199,6 +199,7 @@
             padding: 1rem !important;
             text-align: start;
         }
+   
     </style>
 </head>
 
@@ -216,7 +217,7 @@
                             <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
                                 <div class="card py-3" style="border-radius:0;">
                                     <div class="icon-box green">📅</div>
-                                    <a href="<?php echo base_url() . 'AstrologerUser/AstrologerTodaysSchedule'; ?>">
+                                    <a href="<?php echo base_url() . 'AstrologerUser/ConsultationCards'; ?>">
                                         <h6>Today's Schedule</h6>
                                     </a>
                                 </div>
@@ -225,8 +226,10 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 mb-3 ">
                             <div style="background-color:#BB97C1; padding:6px 2px; padding-bottom:20px; border:3px solid #BB97C1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
                                 <div class="card py-3" style="border-radius:0;">
-                                    <div class="icon-box purple">🕒</div>
-                                    <h6>Consultations</h6>
+                                    <div class="icon-box red">📜</div>
+                                    <a href="<?php echo base_url() . 'AstrologerUser/AstrologyAndSpiritualServices'; ?>">
+                                        <h6>Consultations</h6>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -258,7 +261,7 @@
                                     </div>
                                     <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
                                         <h6>John Doe</h6>
-                                        <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 | Time: 10:30 AM<br> Location: Nashik</p>
+                                        <p>Date: 12/1/2025 <br> Time: 10:30 AM<br> Location: Nashik</p>
                                         <p>Padit Colony Nashik</p>
                                         <button class="btn btn-success btn-sm">Accept</button>
                                         <button class="btn btn-danger btn-sm">Reject</button>
@@ -277,7 +280,7 @@
                                     </div>
                                     <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
                                         <h6>John Doe</h6>
-                                        <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 | Time: 10:30 AM<br> Location: Nashik</p>
+                                        <p>Date: 12/1/2025 <br> Time: 10:30 AM<br> Location: Nashik</p>
                                         <p>Padit Colony Nashik</p>
                                         <button class="btn btn-success btn-sm">Accept</button>
                                         <button class="btn btn-danger btn-sm">Reject</button>

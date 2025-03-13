@@ -134,11 +134,11 @@
 
                                 <!-- Action Buttons -->
                                 <div class="d-flex gap-2">
-                                  
-                                        <button  data-bs-toggle="modal" data-bs-target="#bookpooja" class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);">
-                                            Book Pooja
-                                        </button>
-                                   
+
+                                    <button data-bs-toggle="modal" data-bs-target="#bookpooja" class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);">
+                                        Book Pooja
+                                    </button>
+
                                 </div>
                             </div>
                         </div>
@@ -149,42 +149,47 @@
 
         <div class="modal fade" id="bookpooja" tabindex="-1" aria-labelledby="bookpoojaLabel" aria-hidden="true">
             <div class="modal-dialog ">
-                <div class="modal-content">
-                    <div class="d-flex justify-content-between align-items-center p-3">
-                        <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
+                <form>
+                    <div class="modal-content">
+                        <div class="d-flex justify-content-between align-items-center p-3">
+                            <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label class="form-label fw-bold">Address</label>
                                     <textarea class="form-control shadow-none" rows="3"
-                                        placeholder="Enter your complete address"></textarea>
+                                        placeholder="Enter your complete address" required
+                                        oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s]/g, ''); })(this)"
+                                        pattern="^[A-Za-z0-9À-ž\s]+$"
+                                        title="Enter Alphabets and Numbers Only"></textarea>
                                 </div>
 
                                 <div class="col-12">
                                     <label class="form-label fw-bold">Preferred Date</label>
-                                    <input type="date" class="form-control shadow-none">
+                                    <input type="date" class="form-control shadow-none"
+                                        min="<?php echo date('Y-m-d'); ?>"
+                                        required>
                                 </div>
 
                                 <div class="col-12">
                                     <label class="form-label fw-bold">Preferred Time</label>
-                                    <input type="time" class="form-control shadow-none">
+                                    <input type="time" class="form-control shadow-none" required>
                                 </div>
 
-
-
                             </div>
-                        </form>
-                    </div>
-                    <div class="p-3 d-flex justify-content-center align-items-center gap-3">
 
-                        <button type="submit" class="btn text-dark" style="background-color: var(--yellow);" >
-                            Confirm Booking
-                        </button>
+                        </div>
+                        <div class="p-3 d-flex justify-content-center align-items-center gap-3">
+
+                            <button type="submit" class="btn text-dark" style="background-color: var(--yellow);">
+                                Confirm Booking
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -202,10 +207,10 @@
                     const experience = parseInt(experienceText.split(' ')[0]); // Extract the number of years
 
                     const matchesSearch = title.includes(input) || expertise.includes(input) || language.includes(input);
-                    const matchesExperience = experienceFilter === "" || 
-                        (experienceFilter === "1" && experience <= 2) || 
-                        (experienceFilter === "2" && experience > 2 && experience <= 5) || 
-                        (experienceFilter === "3" && experience > 5 && experience <= 8) || 
+                    const matchesExperience = experienceFilter === "" ||
+                        (experienceFilter === "1" && experience <= 2) ||
+                        (experienceFilter === "2" && experience > 2 && experience <= 5) ||
+                        (experienceFilter === "3" && experience > 5 && experience <= 8) ||
                         (experienceFilter === "4" && experience > 8);
 
                     if (matchesSearch && matchesExperience) {

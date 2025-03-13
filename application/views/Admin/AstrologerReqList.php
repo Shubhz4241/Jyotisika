@@ -169,8 +169,6 @@
 
                         <!-- PENDING TAB -->
                         <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab" tabindex="0">
-
-                            <!-- main table container -->
                             <div class="container mt-3 mb-4">
                                 <!-- Search Bar -->
                                 <input type="text" id="searchBar" class="form-control mb-3 border-3 shadow-none" placeholder="Search..." onkeyup="filterData()">
@@ -180,21 +178,22 @@
                                     <table class="table table-bordered table-light table-hover table-responsive" id="leaveTable">
                                         <thead>
                                             <tr>
-                                                <th style="min-width: 120px;">Sr. No</th>
-                                                <th style="min-width: 220px;">Name</th>
+                                                <th style="min-width: 100px;">Sr. No</th>
+                                                <th style="min-width: 120px;">Profile</th>
+                                                <th style="min-width: 180px;">Name</th>
                                                 <th style="min-width: 150px;">Contact</th>
-                                                <th style="min-width: 180px;">Experience</th>
-                                                <th style="min-width: 150px;">Service</th>
-                                                <th style="min-width: 150px;">Document</th>
-                                                <th style="min-width: 220px;">Address</th>
+                                                <th style="min-width: 200px;">Email</th>
+                                                <th style="min-width: 120px;">Gender</th>
+                                                <th style="min-width: 180px;">Language Known</th>
+                                                <th style="min-width: 200px;">Specialities</th>
+                                                <th style="min-width: 180px;">Aadhar PDF</th>
+                                                <th style="min-width: 200px;">Certifications PDF</th>
                                                 <th style="min-width: 150px;" class="text-center">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tableBody">
-                                        </tbody>
+                                        <tbody id="tableBody"></tbody>
                                     </table>
                                 </div>
-
 
                                 <!-- Pagination Buttons -->
                                 <div class="d-flex justify-content-end gap-2">
@@ -203,332 +202,224 @@
                                     <button id="nextBtn" class="btn btn-sm btn-primary" onclick="nextPage()">Next</button>
                                 </div>
 
-                            </div>
-                            <!-- PDF Modal -->
-                            <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="pdfModalLabel">Document Preview</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <iframe id="pdfViewer" src="" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                                <!-- PDF Modal -->
+                                <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="pdfModalLabel">View PDF</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <iframe id="pdfViewer" src="" width="100%" height="500px"></iframe>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <script>
-                                let currentPage = 1;
-                                const rowsPerPage = 8;
-
-                                // Updated Sample Data
-                                const dummyData = [{
-                                        srNo: "1",
-                                        name: "John Doe",
-                                        contact: "123-456-7890",
-                                        experience: "5 years",
-                                        service: "Web Development",
-                                        document: "Resume.pdf",
-                                        address: "123 Main Street, City A"
-                                    },
-                                    {
-                                        srNo: "2",
-                                        name: "Jane Smith",
-                                        contact: "987-654-3210",
-                                        experience: "3 years",
-                                        service: "Graphic Design",
-                                        document: "Portfolio.pdf",
-                                        address: "456 Elm Street, City B"
-                                    },
-                                    {
-                                        srNo: "3",
-                                        name: "Mike Johnson",
-                                        contact: "555-555-5555",
-                                        experience: "7 years",
-                                        service: "App Development",
-                                        document: "References.pdf",
-                                        address: "789 Oak Avenue, City C"
-                                    },
-                                    {
-                                        srNo: "4",
-                                        name: "Emily Brown",
-                                        contact: "444-444-4444",
-                                        experience: "2 years",
-                                        service: "UI/UX Design",
-                                        document: "Designs.pdf",
-                                        address: "321 Maple Drive, City D"
-                                    },
-                                    {
-                                        srNo: "5",
-                                        name: "David Lee",
-                                        contact: "333-333-3333",
-                                        experience: "4 years",
-                                        service: "IT Support",
-                                        document: "Certifications.pdf",
-                                        address: "654 Pine Street, City E"
-                                    },
-                                    {
-                                        srNo: "6",
-                                        name: "Sarah Wilson",
-                                        contact: "222-222-2222",
-                                        experience: "6 years",
-                                        service: "SEO Marketing",
-                                        document: "SEO_Report.pdf",
-                                        address: "987 Cedar Road, City F"
-                                    },
-                                    {
-                                        srNo: "7",
-                                        name: "Tom Harris",
-                                        contact: "111-111-1111",
-                                        experience: "1 year",
-                                        service: "Content Writing",
-                                        document: "Articles.pdf",
-                                        address: "123 Birch Lane, City G"
-                                    },
-                                    {
-                                        srNo: "8",
-                                        name: "Lisa Chen",
-                                        contact: "666-666-6666",
-                                        experience: "8 years",
-                                        service: "Project Management",
-                                        document: "Projects.pdf",
-                                        address: "789 Willow Way, City H"
-                                    },
-                                    {
-                                        srNo: "9",
-                                        name: "Lisa Chen",
-                                        contact: "666-666-6666",
-                                        experience: "8 years",
-                                        service: "Project Management",
-                                        document: "Projects.pdf",
-                                        address: "789 Willow Way, City H"
-                                    },
-                                    {
-                                        srNo: "10",
-                                        name: "Lisa Chen",
-                                        contact: "666-666-6666",
-                                        experience: "8 years",
-                                        service: "Project Management",
-                                        document: "Projects.pdf",
-                                        address: "789 Willow Way, City H"
-                                    },
-                                    {
-                                        srNo: "11",
-                                        name: "Lisa Chen",
-                                        contact: "666-666-6666",
-                                        experience: "8 years",
-                                        service: "Project Management",
-                                        document: "Projects.pdf",
-                                        address: "789 Willow Way, City H"
-                                    },
-                                    {
-                                        srNo: "12",
-                                        name: "Lisa Chen",
-                                        contact: "666-666-6666",
-                                        experience: "8 years",
-                                        service: "Project Management",
-                                        document: "Projects.pdf",
-                                        address: "789 Willow Way, City H"
-                                    },
-                                ];
-
-                                let filteredData = [...dummyData]; // Keep a filtered copy of the data
-
-                                // Function to display data based on page
-                                function displayData(page) {
-                                    const start = (page - 1) * rowsPerPage;
-                                    const end = start + rowsPerPage;
-                                    const paginatedData = filteredData.slice(start, end);
-
-                                    const tableBody = document.getElementById('tableBody');
-                                    tableBody.innerHTML = ''; // Clear existing table content
-
-                                    paginatedData.forEach(item => {
-                                        const row = `
-    <tr>
-        <td>${item.srNo}</td>
-        <td>${item.name}</td>
-        <td>${item.contact}</td>
-        <td>${item.experience}</td>
-        <td>${item.service}</td>
-        <td>
-            <a href="#" onclick="openPdfModal('${item.document}')">${item.document}</a>
-        </td>
-        <td>${item.address}</td>
-        <td class="text-center">
-            <div class="d-flex justify-content-center">
-                <button class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#scheduleModal" onclick="openScheduleModal(${item.srNo})">
-                    <i class="bi bi-check-circle-fill"></i>
-                </button>
-                <button class="btn btn-danger btn-sm" onclick="handleReject(${item.srNo})">
-                    <i class="bi bi-x-circle-fill"></i>
-                </button>
-            </div>
-
-            <!-- Schedule Modal -->
-            <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="scheduleModalLabel">Schedule Interview</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <form id="scheduleForm" onsubmit="handleSchedule(${item.srNo}); return false;">
-    <div class="mb-3">
-        <label for="date" class="form-label">Date</label>
-        <input type="date" class="form-control" id="date" name="date" required />
-    </div>
-    <div class="mb-3">
-        <label for="time" class="form-label">Time</label>
-        <input type="time" class="form-control" id="time" name="time" required />
-    </div>
-    <div class="mb-3">
-        <label for="venue" class="form-label">Venue</label>
-        <input type="text" class="form-control" id="venue" name="venue" required />
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Schedule</button>
-    </div>
-</form>
 
+                        <script>
+                            let currentPage = 1;
+                            const rowsPerPage = 8;
 
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            // Sample Data
+                            const dummyData = [{
+                                    srNo: "1",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "John Doe",
+                                    contact: "123-456-7890",
+                                    email: "johndoe@example.com",
+                                    gender: "Male",
+                                    language: "English, Spanish",
+                                    specialities: "Web Development, UI/UX",
+                                    aadhar: "Aadhar_Document.pdf",
+                                    certifications: "FullStack_Certificate.pdf"
+                                },
+                                {
+                                    srNo: "2",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "Jane Smith",
+                                    contact: "987-654-3210",
+                                    email: "janesmith@example.com",
+                                    gender: "Female",
+                                    language: "English, French",
+                                    specialities: "Graphic Design, Branding",
+                                    aadhar: "Aadhar_Jane.pdf",
+                                    certifications: "Adobe_Design_Certificate.pdf"
+                                },
+                                {
+                                    srNo: "3",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "Jane Smith",
+                                    contact: "987-654-3210",
+                                    email: "janesmith@example.com",
+                                    gender: "Female",
+                                    language: "English, French",
+                                    specialities: "Graphic Design, Branding",
+                                    aadhar: "Aadhar_Jane.pdf",
+                                    certifications: "Adobe_Design_Certificate.pdf"
+                                },
+                                {
+                                    srNo: "4",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "Jane Smith",
+                                    contact: "987-654-3210",
+                                    email: "janesmith@example.com",
+                                    gender: "Female",
+                                    language: "English, French",
+                                    specialities: "Graphic Design, Branding",
+                                    aadhar: "Aadhar_Jane.pdf",
+                                    certifications: "Adobe_Design_Certificate.pdf"
+                                },
+                                {
+                                    srNo: "5",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "Jane Smith",
+                                    contact: "987-654-3210",
+                                    email: "janesmith@example.com",
+                                    gender: "Female",
+                                    language: "English, French",
+                                    specialities: "Graphic Design, Branding",
+                                    aadhar: "Aadhar_Jane.pdf",
+                                    certifications: "Adobe_Design_Certificate.pdf"
+                                },
+                                {
+                                    srNo: "6",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "Jane Smith",
+                                    contact: "987-654-3210",
+                                    email: "janesmith@example.com",
+                                    gender: "Female",
+                                    language: "English, French",
+                                    specialities: "Graphic Design, Branding",
+                                    aadhar: "Aadhar_Jane.pdf",
+                                    certifications: "Adobe_Design_Certificate.pdf"
+                                },
+                                {
+                                    srNo: "7",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "Jane Smith",
+                                    contact: "987-654-3210",
+                                    email: "janesmith@example.com",
+                                    gender: "Female",
+                                    language: "English, French",
+                                    specialities: "Graphic Design, Branding",
+                                    aadhar: "Aadhar_Jane.pdf",
+                                    certifications: "Adobe_Design_Certificate.pdf"
+                                },
+                                {
+                                    srNo: "8",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "Jane Smith",
+                                    contact: "987-654-3210",
+                                    email: "janesmith@example.com",
+                                    gender: "Female",
+                                    language: "English, French",
+                                    specialities: "Graphic Design, Branding",
+                                    aadhar: "Aadhar_Jane.pdf",
+                                    certifications: "Adobe_Design_Certificate.pdf"
+                                },
+                                {
+                                    srNo: "9",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "Jane Smith",
+                                    contact: "987-654-3210",
+                                    email: "janesmith@example.com",
+                                    gender: "Female",
+                                    language: "English, French",
+                                    specialities: "Graphic Design, Branding",
+                                    aadhar: "Aadhar_Jane.pdf",
+                                    certifications: "Adobe_Design_Certificate.pdf"
+                                },
+                                {
+                                    srNo: "10",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "Jane Smith",
+                                    contact: "987-654-3210",
+                                    email: "janesmith@example.com",
+                                    gender: "Female",
+                                    language: "English, French",
+                                    specialities: "Graphic Design, Branding",
+                                    aadhar: "Aadhar_Jane.pdf",
+                                    certifications: "Adobe_Design_Certificate.pdf"
+                                },
+                                {
+                                    srNo: "11",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "Jane Smith",
+                                    contact: "987-654-3210",
+                                    email: "janesmith@example.com",
+                                    gender: "Female",
+                                    language: "English, French",
+                                    specialities: "Graphic Design, Branding",
+                                    aadhar: "Aadhar_Jane.pdf",
+                                    certifications: "Adobe_Design_Certificate.pdf"
+                                },
+                            ];
 
-        </td>
-    </tr>`;
-                                        tableBody.innerHTML += row;
+                            let filteredData = [...dummyData];
 
-                                    });
+                            function displayData(page) {
+                                const start = (page - 1) * rowsPerPage;
+                                const end = start + rowsPerPage;
+                                const paginatedData = filteredData.slice(start, end);
 
-                                    updatePagination();
-                                    updateShowingEntries(start + 1, Math.min(end, filteredData.length), filteredData.length);
-                                }
+                                const tableBody = document.getElementById("tableBody");
+                                tableBody.innerHTML = "";
 
-                                // Update pagination
-                                function updatePagination() {
-                                    const pageNumbers = document.getElementById('pageNumbers');
-                                    pageNumbers.innerHTML = ''; // Clear existing page numbers
+                                paginatedData.forEach(item => {
+                                    const row = `
+                                        <tr>
+                                            <td>${item.srNo}</td>
+                                            <td><img src="${item.profile}" alt="Profile" style="width:50px; height:50px; border-radius:50%;"></td>
+                                            <td>${item.name}</td>
+                                            <td>${item.contact}</td>
+                                            <td>${item.email}</td>
+                                            <td>${item.gender}</td>
+                                            <td>${item.language}</td>
+                                            <td>${item.specialities}</td>
+                                            <td><a href="#" onclick="openPdfModal('${item.aadhar}')">${item.aadhar}</a></td>
+                                            <td><a href="#" onclick="openPdfModal('${item.certifications}')">${item.certifications}</a></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-primary" onclick="window.location.href='viewastrologer?srNo=${item.srNo}'">View</button>
+                                            </td>
+                                        </tr>
+                                    `;
+                                    tableBody.innerHTML += row;
+                                });
+                            }
 
-                                    const totalPages = Math.ceil(filteredData.length / rowsPerPage);
-                                    for (let i = 1; i <= totalPages; i++) {
-                                        const btn = document.createElement('button');
-                                        btn.className = `btn btn-sm ${currentPage === i ? 'btn-primary' : 'btn-secondary'}`;
-                                        btn.textContent = i;
-                                        btn.onclick = () => {
-                                            currentPage = i;
-                                            displayData(currentPage);
-                                        };
-                                        pageNumbers.appendChild(btn);
-                                    }
+                            function openPdfModal(pdfFileName) {
+                                const pdfViewer = document.getElementById('pdfViewer');
+                                const pdfUrl = `assets/images/CC UNIT II.pdf`; // Update with the correct file path
+                                pdfViewer.src = pdfUrl;
 
-                                    document.getElementById('prevBtn').disabled = currentPage === 1;
-                                    document.getElementById('nextBtn').disabled = currentPage === totalPages;
-                                }
+                                const modal = new bootstrap.Modal(document.getElementById('pdfModal'));
+                                modal.show();
+                            }
 
-                                // Update entries showing info
-                                function updateShowingEntries(start, end, total) {
-                                    document.getElementById('startIndex').textContent = start;
-                                    document.getElementById('endIndex').textContent = end;
-                                    document.getElementById('totalEntries').textContent = total;
-                                }
+                            function viewDetails(srNo) {
+                                alert(`Viewing details for Sr. No: ${srNo}`);
+                            }
 
-                                // Filter data based on search
-                                function filterData() {
-                                    const searchQuery = document.getElementById('searchBar').value.toLowerCase();
-                                    filteredData = dummyData.filter(item => {
-                                        return Object.values(item).some(val => String(val).toLowerCase().includes(searchQuery));
-                                    });
-
-                                    currentPage = 1; // Reset to first page when searching
+                            function previousPage() {
+                                if (currentPage > 1) {
+                                    currentPage--;
                                     displayData(currentPage);
                                 }
+                            }
 
-                                // Handle previous page
-                                function previousPage() {
-                                    if (currentPage > 1) {
-                                        currentPage--;
-                                        displayData(currentPage);
-                                    }
+                            function nextPage() {
+                                if (currentPage * rowsPerPage < filteredData.length) {
+                                    currentPage++;
+                                    displayData(currentPage);
                                 }
+                            }
 
-                                // Handle next page
-                                function nextPage() {
-                                    if (currentPage < Math.ceil(filteredData.length / rowsPerPage)) {
-                                        currentPage++;
-                                        displayData(currentPage);
-                                    }
-                                }
+                            displayData(currentPage);
+                        </script>
 
-                                // Initial data display
-                                displayData(currentPage);
-
-                                function openPdfModal(pdfFileName) {
-                                    const pdfViewer = document.getElementById('pdfViewer');
-                                    const pdfUrl = `assets/images/CC UNIT II.pdf`; // Update with the correct file path
-                                    pdfViewer.src = pdfUrl;
-
-                                    // Show the modal
-                                    const modal = new bootstrap.Modal(document.getElementById('pdfModal'));
-                                    modal.show();
-                                }
-
-                                function handleSchedule(srNo) {
-                                    // Prevent default form submission behavior
-                                    event.preventDefault();
-
-                                    // Fetch form values
-                                    const date = document.getElementById('date').value;
-                                    const time = document.getElementById('time').value;
-                                    const venue = document.getElementById('venue').value;
-
-                                    // Check if all fields are filled
-                                    if (date && time && venue) {
-                                        // Simulate form submission or add logic to handle the form data (e.g., API call)
-                                        console.log(`Scheduling interview for SR No: ${srNo}`);
-                                        console.log(`Date: ${date}, Time: ${time}, Venue: ${venue}`);
-
-                                        // Close the modal
-                                        const modal = document.getElementById('scheduleModal');
-                                        const bootstrapModal = bootstrap.Modal.getInstance(modal);
-                                        bootstrapModal.hide();
-
-                                        // Remove any remaining modal-backdrop elements
-                                        document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
-
-                                        // Reset body classes to remove modal-related styles
-                                        document.body.classList.remove('modal-open');
-                                        document.body.style = "";
-
-                                        // Show SweetAlert for successful scheduling
-                                        Swal.fire({
-                                            title: "Success",
-                                            text: "Interview scheduled successfully",
-                                            icon: "success",
-                                            confirmButtonText: "OK",
-                                        });
-
-                                        // Optionally reset the form after successful submission
-                                        document.getElementById('scheduleForm').reset();
-                                    } else {
-                                        // Show an alert if the form is incomplete
-                                        Swal.fire({
-                                            title: "Error",
-                                            text: "Please fill all the fields",
-                                            icon: "error",
-                                            confirmButtonText: "OK",
-                                        });
-                                    }
-                                }
-                            </script>
-                        </div>
 
                         <!-- ACCEPTED TAB -->
                         <div class="tab-pane fade" id="accepted" role="tabpanel" aria-labelledby="accepted-tab" tabindex="0">
@@ -541,14 +432,17 @@
                                     <table class="table table-bordered table-light table-hover table-responsive" id="acceptedLeaveTable">
                                         <thead>
                                             <tr>
-                                                <th style="min-width: 120px;">Sr.No</th>
-                                                <th style="min-width: 220px;">Name</th>
+                                                <th style="min-width: 100px;">Sr. No</th>
+                                                <th style="min-width: 120px;">Profile</th>
+                                                <th style="min-width: 180px;">Name</th>
                                                 <th style="min-width: 150px;">Contact</th>
-                                                <th style="min-width: 180px;">Experience</th>
-                                                <th style="min-width: 150px;">Service</th>
-                                                <th style="min-width: 150px;">Document</th>
-                                                <th style="min-width: 250px;">Address</th>
-                                                <th style="min-width: 150px;" class="text-center">Actions</th>
+                                                <th style="min-width: 200px;">Email</th>
+                                                <th style="min-width: 120px;">Gender</th>
+                                                <th style="min-width: 180px;">Language Known</th>
+                                                <th style="min-width: 200px;">Specialities</th>
+                                                <th style="min-width: 180px;">Aadhar PDF</th>
+                                                <th style="min-width: 200px;">Certifications PDF</th>
+                                                <th style="min-width: 150px;" class="text-center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="acceptedTableBody">
@@ -589,21 +483,123 @@
                                 // Sample Data
                                 const dummyData2 = [{
                                         srNo: "1",
+                                        profile: "assets/images/astrologer.png",
                                         name: "John Doe",
-                                        contact: "9876543210",
-                                        experience: "5 years",
-                                        service: "Web Development",
-                                        document: "Resume.pdf",
-                                        address: "123 Main St, Cityville"
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
                                     },
                                     {
                                         srNo: "2",
-                                        name: "Jane Smith",
-                                        contact: "9876543211",
-                                        experience: "3 years",
-                                        service: "Graphic Design",
-                                        document: "Portfolio.pdf",
-                                        address: "456 Elm St, Townsville"
+                                        profile: "assets/images/astrologer.png",
+                                        name: "John Doe",
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
+                                    },
+                                    {
+                                        srNo: "3",
+                                        profile: "assets/images/astrologer.png",
+                                        name: "John Doe",
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
+                                    },
+                                    {
+                                        srNo: "4",
+                                        profile: "assets/images/astrologer.png",
+                                        name: "John Doe",
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
+                                    },
+                                    {
+                                        srNo: "5",
+                                        profile: "assets/images/astrologer.png",
+                                        name: "John Doe",
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
+                                    },
+                                    {
+                                        srNo: "6",
+                                        profile: "assets/images/astrologer.png",
+                                        name: "John Doe",
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
+                                    },
+                                    {
+                                        srNo: "7",
+                                        profile: "assets/images/astrologer.png",
+                                        name: "John Doe",
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
+                                    },
+                                    {
+                                        srNo: "8",
+                                        profile: "assets/images/astrologer.png",
+                                        name: "John Doe",
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
+                                    },
+                                    {
+                                        srNo: "9",
+                                        profile: "assets/images/astrologer.png",
+                                        name: "John Doe",
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
+                                    },
+                                    {
+                                        srNo: "10",
+                                        profile: "assets/images/astrologer.png",
+                                        name: "John Doe",
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
                                     },
                                     // Add more dummy entries as required
                                 ];
@@ -621,22 +617,21 @@
 
                                     paginatedData.forEach(item => {
                                         const row = `
-            <tr>
-                <td>${item.srNo}</td>
-                <td>${item.name}</td>
-                <td>${item.contact}</td>
-                <td>${item.experience}</td>
-                <td>${item.service}</td>
-
-                 <td>
-                        <a href="#" onclick="openPdfModal2('${item.document}')">${item.document}</a>
-                </td>
-                
-                <td>${item.address}</td>
-                <td class="text-center">
-                    <span class="badge bg-success">Approved</span>
-                </td>
-            </tr>`;
+                                        <tr>
+                                            <td>${item.srNo}</td>
+                                            <td><img src="${item.profile}" alt="Profile" style="width:50px; height:50px; border-radius:50%;"></td>
+                                            <td>${item.name}</td>
+                                            <td>${item.contact}</td>
+                                            <td>${item.email}</td>
+                                            <td>${item.gender}</td>
+                                            <td>${item.language}</td>
+                                            <td>${item.specialities}</td>
+                                            <td><a href="#" onclick="openPdfModal2('${item.aadhar}')">${item.aadhar}</a></td>
+                                            <td><a href="#" onclick="openPdfModal2('${item.certifications}')">${item.certifications}</a></td>
+                                            <td class="text-center">
+                                                <span class="badge bg-success">Approved</span>
+                                            </td>
+                                        </tr>`;
                                         tableBody.innerHTML += row;
                                     });
 
@@ -727,13 +722,16 @@
                                     <table class="table table-bordered table-light table-hover table-responsive" id="rejectedLeaveTable">
                                         <thead>
                                             <tr>
-                                                <th style="min-width: 120px;">Sr. No</th>
-                                                <th style="min-width: 220px;">Name</th>
-                                                <th style="min-width: 200px;">Contact</th>
-                                                <th style="min-width: 180px;">Experience</th>
-                                                <th style="min-width: 180px;">Service</th>
-                                                <th style="min-width: 180px;">Document</th>
-                                                <th style="min-width: 250px;">Address</th>
+                                                <th style="min-width: 100px;">Sr. No</th>
+                                                <th style="min-width: 120px;">Profile</th>
+                                                <th style="min-width: 180px;">Name</th>
+                                                <th style="min-width: 150px;">Contact</th>
+                                                <th style="min-width: 200px;">Email</th>
+                                                <th style="min-width: 120px;">Gender</th>
+                                                <th style="min-width: 180px;">Language Known</th>
+                                                <th style="min-width: 200px;">Specialities</th>
+                                                <th style="min-width: 180px;">Aadhar PDF</th>
+                                                <th style="min-width: 200px;">Certifications PDF</th>
                                                 <th style="min-width: 150px;" class="text-center">Action</th>
                                             </tr>
                                         </thead>
@@ -774,48 +772,15 @@
                                 // Sample Data
                                 const dummyData3 = [{
                                         srNo: "1",
+                                        profile: "assets/images/astrologer.png",
                                         name: "John Doe",
                                         contact: "123-456-7890",
-                                        experience: "5 years",
-                                        service: "Web Development",
-                                        document: "Resume.pdf",
-                                        address: "123 Main St, Cityville"
-                                    },
-                                    {
-                                        srNo: "2",
-                                        name: "Jane Smith",
-                                        contact: "987-654-3210",
-                                        experience: "3 years",
-                                        service: "UI/UX Design",
-                                        document: "Portfolio.pdf",
-                                        address: "456 Elm St, Townsville"
-                                    },
-                                    {
-                                        srNo: "3",
-                                        name: "Mike Johnson",
-                                        contact: "456-789-0123",
-                                        experience: "7 years",
-                                        service: "Project Management",
-                                        document: "Certifications.pdf",
-                                        address: "789 Pine St, Metropolis"
-                                    },
-                                    {
-                                        srNo: "4",
-                                        name: "Emily Brown",
-                                        contact: "321-654-9870",
-                                        experience: "2 years",
-                                        service: "Content Writing",
-                                        document: "Writing_Sample.docx",
-                                        address: "101 Maple Ave, Smalltown"
-                                    },
-                                    {
-                                        srNo: "5",
-                                        name: "David Lee",
-                                        contact: "654-321-0987",
-                                        experience: "4 years",
-                                        service: "SEO Specialist",
-                                        document: "Case_Study.pdf",
-                                        address: "202 Oak St, Bigcity"
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
                                     },
                                     // Add more entries as needed
                                 ];
@@ -833,21 +798,21 @@
 
                                     paginatedData.forEach(item => {
                                         const row = `
-                <tr>
-                    <td>${item.srNo}</td>
-                    <td>${item.name}</td>
-                    <td>${item.contact}</td>
-                    <td>${item.experience}</td>
-                    <td>${item.service}</td>
-                    <td>
-                        <a href="#" onclick="openPdfModal3('${item.document}')">${item.document}</a>
-                </td>
-                    <td>${item.address}</td>
-                    <td class="text-center">
-    <span class="badge bg-danger">Rejected</span>
-</td>
-
-                </tr>`;
+                                    <tr>
+                                        <td>${item.srNo}</td>
+                                        <td><img src="${item.profile}" alt="Profile" style="width:50px; height:50px; border-radius:50%;"></td>
+                                        <td>${item.name}</td>
+                                        <td>${item.contact}</td>
+                                        <td>${item.email}</td>
+                                        <td>${item.gender}</td>
+                                        <td>${item.language}</td>
+                                        <td>${item.specialities}</td>
+                                        <td><a href="#" onclick="openPdfModal3('${item.aadhar}')">${item.aadhar}</a></td>
+                                        <td><a href="#" onclick="openPdfModal3('${item.certifications}')">${item.certifications}</a></td>
+                                        <td class="text-center">
+                                            <span class="badge bg-danger">Rejected</span>
+                                        </td>
+                                    </tr>`;
                                         tableBody.innerHTML += row;
                                     });
 

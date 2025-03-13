@@ -43,30 +43,37 @@
 
                     <h5>Boy's Details</h5>
 
-                    <input type="text" name="name" id="name" placeholder="Name" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                    <input type="text" name="name" id="name" placeholder="Name" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required
+                        oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
+                        pattern="^[^\s][A-Za-zÀ-ž\s]+$"
+                        title="Enter Alphabets Only">
 
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <input type="number" name="day" id="day" placeholder="Day" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="day" id="day" placeholder="Day" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="1" max="31">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="month" id="month" placeholder="Month" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="month" id="month" placeholder="Month" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="1" max="12">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="year" id="year" placeholder="Year" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="year" id="year" placeholder="Year" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="1900" max="2024">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="hour" id="hour" placeholder="Hour" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="hour" id="hour" placeholder="Hour" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="23">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="59">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="second" id="second" placeholder="Second" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="second" id="second" placeholder="Second" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="59">
                         </div>
                     </div>
 
-                    <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                    <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off"
+                        class="form-control shadow-none my-2 p-2 rounded-1" required
+                        pattern="^[a-zA-Z\s\-\.',]+$"
+                        title="Please enter a valid city name"
+                        oninput="this.value = this.value.replace(/[^a-zA-Z\s\-\.',]/g, '')">
 
                 </div>
 
@@ -77,26 +84,30 @@
 
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <input type="number" name="day" id="day" placeholder="Day" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="day" id="day" placeholder="Day" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="1" max="31">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="month" id="month" placeholder="Month" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="month" id="month" placeholder="Month" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="1" max="12">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="year" id="year" placeholder="Year" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="year" id="year" placeholder="Year" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="1900" max="2024">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="hour" id="hour" placeholder="Hour" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="hour" id="hour" placeholder="Hour" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="23">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="59">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="second" id="second" placeholder="Second" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="second" id="second" placeholder="Second" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="59">
                         </div>
                     </div>
 
-                    <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                    <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off"
+                        class="form-control shadow-none my-2 p-2 rounded-1" required
+                        pattern="^[a-zA-Z\s\-\.',]+$"
+                        title="Please enter a valid city name"
+                        oninput="this.value = this.value.replace(/[^a-zA-Z\s\-\.',]/g, '')">
 
                 </div>
                 <div class="col-12 d-flex gap-2 justify-content-center mt-3">

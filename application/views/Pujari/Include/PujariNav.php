@@ -49,7 +49,7 @@
         color: black;
         /* White icon */
         transition: color 0.3s ease;
-        
+
     }
 
     .notification-icon i:hover {
@@ -62,8 +62,8 @@
         display: none;
         /* Initially hidden */
         position: absolute;
-        top: 50px;
-        right: 70px;
+        top: 68px;
+        right: 72px;
         /* Adjusted to prevent overflow near profile image */
         background: #fff;
         width: 350px;
@@ -191,7 +191,7 @@
         .notification-container {
             width: 80%;
             /* right: 5%; */
-            margin-top: 27px;
+            margin-top: 3px;
         }
     }
 
@@ -252,7 +252,7 @@
 
     <div class="navbar-right">
         <!-- Notification Icon -->
-        <div class="notification-icon" id="notificationIcon" >
+        <div class="notification-icon" id="notificationIcon">
             <i class="bi bi-bell-fill"></i>
         </div>
 

@@ -312,7 +312,7 @@
             </div>
         </div>
 
-        <a href="<?php echo base_url() . 'PujariUser/ProfileForm'; ?>">
+        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerProfileForm'; ?>">
             <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
                 alt="Profile Image"
                 class="profile-img rounded-circle"
