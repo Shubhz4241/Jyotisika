@@ -489,7 +489,7 @@
                                                 <strong><img src="<?php echo base_url('assets/images/Pujari/graduate-cap_svgrepo.com.png'); ?>"
                                                         alt="Experience" class="img-fluid" width="19px"> Exp:</strong> 23 years
                                             </span>
-                                            <span><strong>Price:</strong> <span class="price-discount">₹710</span> <span class="price-final">₹500</span></span>
+                                            <span><span class="price-discount">₹710</span> <span class="price-final">₹500</span></span>
                                         </p>
                                         <p><strong>Attendee:</strong> 104</p>
                                         <p class="text-danger">
