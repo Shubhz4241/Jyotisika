@@ -43,5 +43,29 @@ class Admin extends CI_Controller {
 		
 		$this->load->view('Admin/RescheduleInterview');
 	}
+	public function ViewAstrologer(){
+		
+		$this->load->view('Admin/ViewAstrologer');
+	}
+	public function ViewPujari(){
+		
+		$this->load->view('Admin/ViewPujari');
+	}
+	public function AstrologersList(){
+		
+		$this->load->view('Admin/AstrologersList');
+	}
+	public function AstrologerReview(){
+		
+		$this->load->view('Admin/AstrologerReview');
+	}
+	public function PujariList(){
+		
+		$this->load->view('Admin/PujariList');
+	}
+	public function PujariReview(){
+		
+		$this->load->view('Admin/PujariReview');
+	}
     
 }

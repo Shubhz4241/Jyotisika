@@ -180,7 +180,7 @@
             background-color: #0EDF50; /* Green for Online */
             color: #fff;
             border: none;
-            padding: 5px 10px;
+            padding: 2px 10px;
             font-size: 12px;
             border-radius: 10px;
             display: inline-flex;
@@ -320,7 +320,7 @@
                 position: absolute;
                 top: 8px;
                 right: 8px;
-                padding: 5px 10px;
+                padding: 2px 10px;
                 font-size: 12px;
                
             }
@@ -336,7 +336,7 @@
                 position: absolute;
                 top: 8px;
                 right: 8px;
-                padding: 5px 10px;
+                padding: 2px 10px;
                 font-size: 12px;
                 margin-top:-4px;
             }

@@ -395,7 +395,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addModalLabel" style="background-color: #0c768a; color: white;">Add Product</h5>
+                            <h5 class="modal-title" id="addModalLabel">Add Product</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -425,7 +425,7 @@
                                     <input type="file" class="form-control" id="image" aria-describedby="image" accept="image/*" required>
                                     <div class="invalid-feedback">Please select a valid image file.</div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #0c768a; color: white;">Add</button>
                             </form>
                         </div>
                     </div>
