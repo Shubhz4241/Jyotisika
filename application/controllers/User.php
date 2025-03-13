@@ -4,10 +4,102 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class User extends CI_Controller
 {
 
-	public function Home()
+	public function __construct()
 	{
-		$this->load->view('User/Home');
+		parent::__construct();
+		$this->load->helper(array('form', 'url'));
+
+		$this->load->library('session'); // Load session library
+		
+
+
 	}
+
+
+	public function get_userdata($user_id)
+	{
+
+		if (!$user_id) {
+			show_error("User is not logged in", 401);
+			return null;
+		}
+
+		$api_url = "http://localhost/jyotisika_api/User/User_Auth/getuser_info";
+
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["session_id" => $user_id]));
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Set timeout for API call
+
+		$response = curl_exec($ch);
+		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$curl_error = curl_error($ch);
+		curl_close($ch);
+
+		if ($curl_error) {
+			show_error("cURL Error: " . $curl_error, 500);
+			return null;
+		}
+
+		if ($http_code !== 200) {
+			show_error($response . $http_code, 500);
+			return null;
+		} else if ($http_code == 200) {
+
+			$data['userdata'] = json_decode($response, true);
+
+			if (!$data['userdata'] || !isset($data['userdata']['status']) || $data['userdata']['status'] !== "success") {
+				show_error("Invalid user data received from API", 500);
+				return null;
+			} else if ($data['userdata']['status'] == "success") {
+				$data["userinfo"] = $data['userdata']['data'];
+				return $data["userinfo"];
+			} else {
+				return null;
+			}
+
+		}
+
+	}
+
+
+	public function Home()
+{
+    $user_id = $this->session->userdata('user_id');
+    $data = [];
+
+    if (!empty($user_id)) {
+        $getdata = $this->get_userdata($user_id);
+
+        if ($getdata != null) {
+            $data["userinfo"] = $getdata;
+        }
+    }
+
+	
+    $language = $this->session->userdata('site_language') ?? 'english';
+
+    
+    $this->lang->load('message', $language);
+	
+
+  
+    
+    $this->load->view('User/Home', $data);
+}
+
+
+	public function change_language($lang = "english") {
+		
+        $this->session->set_userdata('site_language', $lang);
+        redirect($_SERVER['HTTP_REFERER']); // Redirect back to the previous page
+    }
+    
+   
+
 
 	public function Demo()
 	{
@@ -15,26 +107,36 @@ class User extends CI_Controller
 	}
 	public function FreeKundli()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/FreeKundli');
 	}
 
 	public function BookPooja()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/BookPooja');
 	}
 
 	public function KundliMatching()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/KundliMatching');
 	}
 
 	public function Festival()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/Festival');
 	}
 
 	public function Panchang()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/Panchang');
 	}
 
@@ -55,6 +157,13 @@ class User extends CI_Controller
 
 	public function KP()
 	{
+	
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+    
+		
+		
 		$this->load->view('User/KP');
 	}
 
@@ -108,31 +217,90 @@ class User extends CI_Controller
 		$this->load->view('User/Poojaris');
 	}
 
-	public function UserProfile(){
-		$this->load->view('User/UserProfile');
+
+
+	public function UserProfile()
+	{
+		$user_id = $this->session->userdata('user_id');
+
+		if (!$user_id) {
+
+			$this->load->view("UserLoginSignup/Login");
+		} else {
+			$data["userinfo"] = $this->get_userdata($user_id);
+
+			if (!$data["userinfo"]) {
+				show_error("Failed to fetch user profile", 500);
+				$this->load->view("User/Login");
+			}
+
+			$this->load->view("User/UserProfile", $data);
+		}
 	}
-	public function Orders(){
+
+
+
+
+
+
+
+
+
+
+
+	public function Orders()
+	{
 		$this->load->view('User/Orders');
 	}
 
-	public function AstrologyServices(){
+	public function AstrologyServices()
+	{
 		$this->load->view('User/AstrologyServices');
 	}
 
-	public function ProductDetails (){
+	public function ProductDetails()
+	{
 		$this->load->view('User/ProductDetails');
 	}
 
-	public function ProductPayment(){
+	public function ProductPayment()
+	{
 		$this->load->view('User/ProductPayment');
-	}	
+	}
 
 	public function Notification()
 	{
 		$this->load->view('User/Notification');
 	}
 
-	public function CustomerSupport(){
+	public function CustomerSupport()
+	{
 		$this->load->view('User/CustomerSupport');
+	}
+
+	public function PoojaInfo()
+	{
+		$this->load->view('User/PoojaInfo');
+	}
+
+	public function MobPooja()
+	{
+		$this->load->view('User/MobPooja');
+	}
+
+	public function ShowFreeKundli()
+	{
+		$this->load->view('User/ShowFreeKundli');
+	}
+
+	public function Following()
+	{
+		$this->load->view('User/Following');
+	}
+
+
+	public function getdata()
+	{
+
 	}
 }

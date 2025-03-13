@@ -83,11 +83,21 @@ $route['ProductDetails'] ='User/ProductDetails';
 $route['ProductPayment'] ='User/ProductPayment';
 $route['Notification'] ='User/Notification';
 $route['CustomerSupport'] ='User/CustomerSupport';
+$route['PoojaInfo'] ='User/PoojaInfo';
+$route['MobPooja'] ='User/MobPooja';
+$route['ShowFreeKundli'] ='User/ShowFreeKundli';
+$route['Following'] ='User/Following';
+
+
 
 
 
 // login poge
-$route['LoginSignup'] = 'LoginSignup/LoginSignup';
+$route['Signup'] = 'UserLoginSignup/Signup';
+$route['Login'] = 'UserLoginSignup/Login';
+$route['Logout'] = 'UserLoginSignup/Logout';
+
+
 
 // Admin Routes
 $route['admindash'] = 'Admin/AdminDash';
@@ -109,3 +119,54 @@ $route['pujarireview'] = 'Admin/PujariReview';
 
 // Login Admin Routes
 $route['login'] = 'LoginForgotAdmin/LoginAdmin';
+
+
+//Pujari Module
+$route['PujariReg'] = 'PujariUser/PujariReg';
+$route['RegisterForm']='PujariUser/RegisterForm';
+$route['PujariDashboard']='PujariUser/PujariDashboard';
+$route['PujariNav']='PujariUser/PujariNav';
+$route['PujariFooter']='PujariUser/PujariFooter';
+$route['RecentRequest']='PujariUser/RecentRequest';
+$route['SetRate']='PujariUser/SetRate';
+$route['RateChart']='PujariUser/RateChart';
+$route['List']='PujariUser/List';
+$route['PujaForm']='PujariUser/PujaForm';
+$route['AnalyticsandEarning']='PujariUser/AnalyticsandEarning';
+$route['OnlinePuja']='PujariUser/OnlinePuja';
+$route['OfflinePuja']='PujariUser/OfflinePuja';
+$route['ProfileForm']='PujariUser/ProfileForm';
+$route['AnalyticsAndEarning2']='PujariUser/AnalyticsAndEarning2';
+$route['EarningsBreakdown']='PujariUser/EarningsBreakdown';
+$route['MonthlyEarningsBreakdown']='PujariUser/MonthlyEarningsBreakdown';
+$route['MobileNumberAndOTPForm']='PujariUser/MobileNumberAndOTPForm';
+$route['PujaReminder']='PujariUser/PujaReminder';
+$route['PujaReminder2']='PujariUser/PujaReminder2';
+$route['PujaReminder3']='PujariUser/PujaReminder3';
+$route['UserSelection']='PujariUser/UserSelection';
+$route['Loaderpage']='PujariUser/Loaderpage';
+$route['RegistrationForm']='PujariUser/RegistrationForm';
+$route['TodaysSchedule']='PujariUser/TodaysSchedule';
+
+// Astrologer Module
+$route['AstrologerNav']='AstrologerUser/AstrologerNav';
+$route['AstrologerDashboard']='AstrologerUser/AstrologerDashboard';
+$route['AstrologerFooter']='AstrologerUser/AstrologerFooter';
+$route['RegisterForm']='AstrologerUser/RegisterForm';
+$route['AstrologerAnalyticsAndEarning1']='AstrologerUser/AstrologerAnalyticsAndEarning1';
+$route['AstrologerAnalyticsAndEarning2']='AstrologerUser/AstrologerAnalyticsAndEarning2';
+$route['AstrologerEarningsBreakdown']='AstrologerUser/AstrologerEarningsBreakdown';
+$route['List']='AstrologerUser/List';
+$route['AstrologerMobileNumberAndOTPForm']='AstrologerUser/AstrologerMobileNumberAndOTPForm';
+$route['AstrologerMonthlyEarningsBreakdown']='AstrologerUser/AstrologerMonthlyEarningsBreakdown';
+$route['AstrologerReg']='AstrologerUser/AstrologerReg';
+$route['AstrologerRecentRequest']='AstrologerUser/AstrologerRecentRequest';
+$route['RegistrationForm']='AstrologerUser/RegistrationForm';
+$route['AudioAndVideoCall']='AstrologerUser/AudioAndVideoCall';
+$route['AstrologerProfileForm']='AstrologerUser/AstrologerProfileForm';
+$route['AstrologerChatUI']='AstrologerUser/AstrologerChatUI';
+$route['AstrologerAnalyticsandEarning1']='AstrologerUser/AstrologerAnalyticsandEarning1';
+$route['AstrologyAndSpiritualServices']='AstrologerUser/AstrologyAndSpiritualServices';
+$route['AstrologerTodaysSchedule']='AstrologerUser/AstrologerTodaysSchedule';
+$route['AstrologerFeedBackCard']='AstrologerUser/AstrologerFeedBackCard';
+$route['ConsultationCards']='AstrologerUser/ConsultationCards';

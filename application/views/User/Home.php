@@ -101,15 +101,32 @@
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
     <!-- astro signs -->
+
+    <?php
+
+    // if (isset($userinfo)) {
+    //     print_r($userinfo);
+    // }
+    ?>
     <section>
         <div class="container mt-3">
             <div class="row gx-6 gy-3 justify-content-center">
                 <!-- Astrology Sign -->
-                <div class="col-auto">
-                    <a href="<?php echo base_url('horoscopereadmore')?>" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                <!-- <div class="col-auto">
+                    <a href="<?php echo base_url('horoscopereadmore') ?>"
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="Aris"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Aris</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"> <?php echo $this->lang->line('Aris'); ?></p>
+                    </a>
+                </div> -->
+
+                <div class="col-auto">
+                    <a href="<?php echo base_url('horoscopereadmore') ?>"
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="Aris"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold"> Aris</p>
                     </a>
                 </div>
 
@@ -253,17 +270,21 @@
     <!--CAROUSEL CODE  -->
     <section>
         <div class="container my-4">
-            <div id="carouselExampleIndicators" class="carousel slide rounded-4" data-bs-ride="carousel" style="overflow: hidden;">
-                
+            <div id="carouselExampleIndicators" class="carousel slide rounded-4" data-bs-ride="carousel"
+                style="overflow: hidden;">
+
                 <div class="carousel-inner rounded-4">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png')?>" alt="slide">
+                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png') ?>"
+                            alt="slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png')?>" alt="slide">
+                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png') ?>"
+                            alt="slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png')?>" alt="slide">
+                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png') ?>"
+                            alt="slide">
                     </div>
                 </div>
             </div>
@@ -273,9 +294,9 @@
     <!-- Astrologer on call or chat -->
     <section>
         <div class="container my-4">
-        <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrologers</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"><?php echo $this->lang->line('Astrologers'); ?></h2>
             <div class="row my-4" id="cardContainer">
-                <?php for ($i = 0; $i < 4; $i++): ?>
+                <?php for ($i = 0; $i < 10; $i++): ?>
                     <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
                         <div class="card shadow-sm rounded-3 h-100"
                             style="border: 1px solid var(--red); background-color: #fff;">
@@ -328,8 +349,19 @@
 
                                 <!-- Action Buttons -->
                                 <div class="d-flex gap-2 mb-2">
-                                    <button class="btn btn-sm w-50 rounded-3 border-1"
-                                        style="background-color: var(--yellow);">Chat</button>
+
+                                    <?php if ($this->session->userdata('user_id')): ?>
+                                        <button class="btn btn-sm w-50 rounded-3 border-1"
+                                            style="background-color: var(--yellow);">Chat</button>
+                                    <?php else: ?>
+                                        <button id="chatlink" class="btn btn-sm w-50 rounded-3 border-1"
+                                           style="background-color: var(--yellow);">Chat</button>
+
+                                    <?php endif ?>
+
+
+
+
                                     <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
                                 </div>
                                 <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
@@ -339,7 +371,8 @@
                 <?php endfor; ?>
 
                 <div class="text-center mt-4">
-                    <a href="<?php echo base_url('astrologers')?>" class="btn fw-bold" style="background-color: var(--yellow);">View More</a>
+                    <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold"
+                        style="background-color: var(--yellow);">View More</a>
                 </div>
             </div>
         </div>
@@ -652,7 +685,8 @@
                     </a>
                 </div>
                 <div class="text-center mt-4">
-                    <a href="<?php echo base_url('AstrologyServices')?>" class="btn fw-bold" style="background-color: var(--yellow);">See More</a>
+                    <a href="<?php echo base_url('AstrologyServices') ?>" class="btn fw-bold"
+                        style="background-color: var(--yellow);">See More</a>
                 </div>
             </div>
         </div>
@@ -760,7 +794,36 @@
 
 
         });
+
+
+
+        document.getElementById("chatlink").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default redirection
+
+        <?php if (!$this->session->userdata('user_id')): ?>
+            Swal.fire({
+                title: "Login Required",
+                text: "Pls login to access this servise",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Login",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to Signup/Login page
+                }
+            });
+        <?php else: ?>
+            window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
+        <?php endif; ?>
+    });
+
+
+
+        
     </script>
+    
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz4fnFO9gybBogGzDO9Jq/Uy1p1Lw2jG/q04FH04EZoQUlBgDkfiC9UvN0"
