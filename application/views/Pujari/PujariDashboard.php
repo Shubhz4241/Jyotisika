@@ -342,14 +342,15 @@
                             </div>
                         </div>
                     </div>
+                    <!-- index.php or your main page -->
                     <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
                         <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                             <div class="card py-3" style="border-radius:0;">
                                 <div class="icon-box yellow">➕</div>
-                                <!-- <a href="<?php echo base_url() . 'PujariUser/PujaForm'; ?>"> -->
-                                <h6>Add Puja's</h6>
+                                <!-- Assuming this is in a CodeIgniter project -->
+                                <a href="<?php echo base_url('PujariUser/profileForm'); ?>" class="text-decoration-none" id="addPujaLink">
+                                    <h6>Add Puja's</h6>
                                 </a>
-
                             </div>
                         </div>
                     </div>

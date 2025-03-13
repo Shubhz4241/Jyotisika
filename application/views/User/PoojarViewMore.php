@@ -147,44 +147,47 @@
                     <div class="modal fade" id="bookpooja" tabindex="-1" aria-labelledby="bookpoojaLabel"
                         aria-hidden="true">
                         <div class="modal-dialog ">
-                            <div class="modal-content">
-                                <div class="d-flex justify-content-between align-items-center p-3">
-                                    <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
+                            <form>
+                                <div class="modal-content">
+                                    <div class="d-flex justify-content-between align-items-center p-3">
+                                        <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
                                         <div class="row g-3">
                                             <div class="col-12">
                                                 <label class="form-label fw-bold">Address</label>
                                                 <textarea class="form-control shadow-none" rows="3"
-                                                    placeholder="Enter your complete address"></textarea>
+                                                    placeholder="Enter your complete address" required
+                                                    oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s]/g, ''); })(this)"
+                                                    pattern="^[A-Za-z0-9À-ž\s]+$"
+                                                    title="Enter Alphabets and Numbers Only"></textarea>
                                             </div>
 
                                             <div class="col-12">
                                                 <label class="form-label fw-bold">Preferred Date</label>
-                                                <input type="date" class="form-control shadow-none">
+                                                <input type="date" class="form-control shadow-none"
+                                                    min="<?php echo date('Y-m-d'); ?>"
+                                                    required>
                                             </div>
 
                                             <div class="col-12">
                                                 <label class="form-label fw-bold">Preferred Time</label>
-                                                <input type="time" class="form-control shadow-none">
+                                                <input type="time" class="form-control shadow-none" required>
                                             </div>
 
-                                           
-                                            
                                         </div>
-                                    </form>
+
+                                    </div>
+                                    <div class="p-3 d-flex justify-content-center align-items-center gap-3">
+
+                                        <button type="submit" class="btn text-dark" style="background-color: var(--yellow);">
+                                            Confirm Booking
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="p-3 d-flex justify-content-center align-items-center gap-3">
-                                   
-                                    <button type="submit" class="btn text-dark"
-                                        style="background-color: var(--yellow);">
-                                        Confirm Booking
-                                    </button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
 
@@ -342,7 +345,7 @@
 
     <!-- Code for carousel  -->
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.owl1').owlCarousel({
                 loop: true,
                 margin: 10,
@@ -416,12 +419,12 @@
             positionNavButtons();
 
             // Reposition on window resize
-            $(window).resize(function () {
+            $(window).resize(function() {
                 positionNavButtons();
             });
 
             // Prevent hover color change
-            $('.owl-nav button').hover(function () {
+            $('.owl-nav button').hover(function() {
                 $(this).css('background', 'transparent');
             });
         });

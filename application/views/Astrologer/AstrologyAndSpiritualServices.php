@@ -127,7 +127,7 @@
     <div style="min-height: 100vh;">
         <div class="container">
             <div class="mb-3">
-                <a class="text-decoration-none text-dark" href="<?php echo base_url('AstrologerUser/AstrologerAnalyticsAndEarning1'); ?>">
+                <a class="text-decoration-none text-dark" href="<?php echo base_url('AstrologerUser/AstrologerDashboard'); ?>">
                     <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
                     Completed Consultations
                 </a>

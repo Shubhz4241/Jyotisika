@@ -18,6 +18,7 @@
 
         .dashboard-sections {
             padding: 20px;
+            
         }
 
         .card {
@@ -215,7 +216,7 @@
                             <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
                                 <div class="card py-3" style="border-radius:0;">
                                     <div class="icon-box green">📅</div>
-                                    <a href="<?php echo base_url() . 'AstrologerUser/AstrologerTodaysSchedule'; ?>">
+                                    <a href="<?php echo base_url() . 'AstrologerUser/ConsultationCards'; ?>">
                                         <h6>Today's Schedule</h6>
                                     </a>
                                 </div>
@@ -224,8 +225,10 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 mb-3 ">
                             <div style="background-color:#BB97C1; padding:6px 2px; padding-bottom:20px; border:3px solid #BB97C1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
                                 <div class="card py-3" style="border-radius:0;">
-                                    <div class="icon-box purple">🕒</div>
-                                    <h6>Consultations</h6>
+                                    <div class="icon-box red">📜</div>
+                                    <a href="<?php echo base_url() . 'AstrologerUser/AstrologyAndSpiritualServices'; ?>">
+                                        <h6>Consultations</h6>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -289,8 +292,12 @@
 
 
                     <div class="container mt-5">
-                        <h5 class="mb-3 text-Start" style="text-align: start;">User Reviews</h5>
-
+                       
+                    <div class="d-flex justify-content-between align-items-center mb-3 ">
+        <h5 class="mb-0">User Reviews</h5>
+        <a href="<?php echo base_url('AstrologerUser/AstrologerFeedBackCard'); ?>" class="btn btn-link" style="text-decoration: none; color: #7C7C7C;">View All</a>
+    </div>
+                        
                         <div class="review-container" style="width:100%;">
                             <!-- Left Arrow -->
                             <button class="carousel-btn left" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">

@@ -162,3 +162,5 @@ $route['AstrologerChatUI']='AstrologerUser/AstrologerChatUI';
 $route['AstrologerAnalyticsandEarning1']='AstrologerUser/AstrologerAnalyticsandEarning1';
 $route['AstrologyAndSpiritualServices']='AstrologerUser/AstrologyAndSpiritualServices';
 $route['AstrologerTodaysSchedule']='AstrologerUser/AstrologerTodaysSchedule';
+$route['AstrologerFeedBackCard']='AstrologerUser/AstrologerFeedBackCard';
+$route['ConsultationCards']='AstrologerUser/ConsultationCards';

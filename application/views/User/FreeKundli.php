@@ -60,16 +60,16 @@
             <div class="col-12 col-md-6">
                 <h5>Get Your Kundli by Birth Date</h5>
 
-                <form action="">
+                <form id="kundliForm" onsubmit="return validateForm(event)">
                     <input type="text" name="name" id="name" placeholder="Name" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required
                         oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
                         pattern="^[^\s][A-Za-zÀ-ž\s]+$"
-                        title="Enter Alphabets Only">
+                        title="Enter Alphabets Only">
 
-                    <div class="row flex-row justify-content-center  ">
-                        <div class="col-12 col-md-6 d-flex align-items-center text-start mb-2 mb-md-0 ">
-                            <input type="radio" class="form-check-input d-none" name="gender" id="male" value="male">
-                            <label for="male" class="btn border gender-label py-2 w-100 text-gray " style="color:gray !important;">Male</label>
+                    <div class="row flex-row justify-content-center">
+                        <div class="col-12 col-md-6 d-flex align-items-center text-start mb-2 mb-md-0">
+                            <input type="radio" class="form-check-input d-none" name="gender" id="male" value="male" required>
+                            <label for="male" class="btn border gender-label py-2 w-100 text-gray" style="color:gray !important;">Male</label>
                         </div>
                         <div class="col-12 col-md-6 d-flex align-items-center">
                             <input type="radio" class="form-check-input d-none" name="gender" id="female" value="female">
@@ -79,47 +79,35 @@
 
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <input type="number" name="day" id="day" placeholder="Day" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="31"
-                                oninput="(function(element) { 
-                            element.value = element.value.replace(/[^0-9]/g, '');
-                            if (parseInt(element.value) > 31) {
-                                element.value = '31';
-                            }
-                        })(this)"
-                                title="Enter amount paid (0-10000)">
+                            <input type="number" name="day" id="day" placeholder="Day" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="1" max="31">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="month" id="month" placeholder="Month" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="12"
-                                oninput="(function(element) { 
-                            element.value = element.value.replace(/[^0-9]/g, '');
-                            if (parseInt(element.value) > 12) {
-                                element.value = '12';
-                            }
-                        })(this)"
-                                title="Enter amount paid (0-10000)">
+                            <input type="number" name="month" id="month" placeholder="Month" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="1" max="12">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="year" id="year" placeholder="Year" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="year" id="year" placeholder="Year" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="1900" max="2024">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="hour" id="hour" placeholder="Hour" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="hour" id="hour" placeholder="Hour" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="23">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="59">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="second" id="second" placeholder="Second" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                            <input type="number" name="second" id="second" placeholder="Second" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="59">
                         </div>
                     </div>
 
-                    <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1">
+                    <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off" 
+                        class="form-control shadow-none my-2 p-2 rounded-1" required
+                        pattern="^[a-zA-Z\s\-\.',]+$"
+                        title="Please enter a valid city name"
+                        oninput="this.value = this.value.replace(/[^a-zA-Z\s\-\.',]/g, '')">
 
                     <center>
-
-                        <a class="btn my-2 p-2 rounded-1" href="<?php echo base_url('ShowFreeKundli')?>" style="background-color: var(--yellow);">
+                        <button type="submit" class="btn my-2 p-2 fw-bold rounded-1" style="background-color: var(--yellow);">
                             Get Kundli
-                        </a>
-
+                        </button>
                     </center>
                 </form>
             </div>
@@ -149,43 +137,28 @@
     <!-- footer -->
     <?php $this->load->view('IncludeUser/CommanFooter'); ?>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('.owl1').owlCarousel({
-                loop: true,
-                margin: 10,
-                responsiveClass: true,
-                dots: false,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 1,
-                        nav: false
-                    },
-                    800: {
-                        items: 2,
-                        nav: false
-                    },
-                    1000: {
-                        items: 4,
-                        nav: true,
-                        loop: false
-                    }
-                }
-            });
-        });
-    </script>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzDO9Jq/Uy1p1Lw2jG/q04FH04EZoQUlBgDkfiC9UvN0" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyl2nq2K9KVDL9VkUsRxKSh3zO7lHcKrCdP4I3ZeGIDc9HrT2yztVR" crossorigin="anonymous"></script>
+
+
+    <!-- validation for form -->
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            var form = document.getElementById('kundliForm');
+            if (form.checkValidity()) {
+                window.location.href = '<?php echo base_url('ShowFreeKundli') ?>';
+            }
+            return false;
+        }
+    </script>
+
 
 </body>
 

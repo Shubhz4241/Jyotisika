@@ -12,8 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -43,7 +43,7 @@
 
         <div class="container">
 
-            <!-- recharge and seach section  -->
+            <!-- seach section  -->
             <div class="row my-4">
                 <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
                     <select class="form-select w-auto shadow-none" aria-label="Filter by experience"
@@ -141,37 +141,46 @@
         <!-- Modal -->
         <div class="modal fade" id="bookpooja" tabindex="-1" aria-labelledby="bookpoojaLabel" aria-hidden="true">
             <div class="modal-dialog ">
-                <div class="modal-content">
-                    <div class="d-flex justify-content-between align-items-center p-3">
-                        <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
+                <form>
+                    <div class="modal-content">
+                        <div class="d-flex justify-content-between align-items-center p-3">
+                            <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
                             <div class="row g-3">
-                                
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Address</label>
+                                    <textarea class="form-control shadow-none" rows="3"
+                                        placeholder="Enter your complete address" required
+                                        oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s]/g, ''); })(this)"
+                                        pattern="^[A-Za-z0-9À-ž\s]+$"
+                                        title="Enter Alphabets and Numbers Only"></textarea>
+                                </div>
+
                                 <div class="col-12">
                                     <label class="form-label fw-bold">Preferred Date</label>
-                                    <input type="date" class="form-control shadow-none">
+                                    <input type="date" class="form-control shadow-none"
+                                        min="<?php echo date('Y-m-d'); ?>"
+                                        required>
                                 </div>
 
                                 <div class="col-12">
                                     <label class="form-label fw-bold">Preferred Time</label>
-                                    <input type="time" class="form-control shadow-none">
+                                    <input type="time" class="form-control shadow-none" required>
                                 </div>
 
-
-
                             </div>
-                        </form>
-                    </div>
-                    <div class="p-3 d-flex justify-content-center align-items-center gap-3">
+                        </div>
+                        <div class="p-3 d-flex justify-content-center align-items-center gap-3">
 
-                        <button type="submit" class="btn text-dark" style="background-color: var(--yellow);">
-                            Confirm Booking
-                        </button>
+                            <button type="submit" class="btn text-dark" style="background-color: var(--yellow);">
+                                Confirm Booking
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -206,8 +215,6 @@
             // Add event listener for search input
             document.getElementById("searchInput").addEventListener("input", filterCards);
             document.getElementById("experienceFilter").addEventListener("change", filterCards);
-
-
         </script>
 
     </main>

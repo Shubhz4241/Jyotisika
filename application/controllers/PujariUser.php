@@ -72,4 +72,5 @@ class PujariUser extends CI_Controller {
 	public function TodaysSchedule(){
 		$this->load->view('Pujari/TodaysSchedule');
 	}
+	
 }

@@ -105,43 +105,43 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.6/sweetalert2.all.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const tableHeader = document.querySelector("#puja-table-header");
-    const tableBody = document.querySelector("#puja-table-body");
-    const paginationContainer = document.querySelector("#pagination");
-    const filterButton = document.querySelector(".filter-btn button");
-    let currentPage = 1;
-    const itemsPerPage = 10;
-    let filterDropdown;
-    // Store selected filters
-    let selectedModes = [];
-    let selectedStatuses = [];
-    let selectedConsultations = [];
+    document.addEventListener("DOMContentLoaded", function () {
+        const tableHeader = document.querySelector("#puja-table-header");
+        const tableBody = document.querySelector("#puja-table-body");
+        const paginationContainer = document.querySelector("#pagination");
+        const filterButton = document.querySelector(".filter-btn button");
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let filterDropdown;
+        // Store selected filters
+        let selectedModes = [];
+        let selectedStatuses = [];
+        let selectedConsultations = [];
 
-    // Load dummy data
-    function loadDummyData() {
-        const dummyData = [
-    { "name": "Rahul Sharma", "Consultation": "Vedic", "Mode": "Online", "date": "2025-03-01", "time": "09:00 AM", "address": "Viman Nagar, Pune", "status": "Approved" },
-    { "name": "Sneha Gupta", "Consultation": "Vedic", "Mode": "Online", "date": "2025-03-02", "time": "10:30 AM", "address": "Andheri, Mumbai", "status": "Accepted" },
-    { "name": "Anita Rao", "Consultation": "Vastu", "Mode": "Offline", "date": "2025-03-16", "time": "09:00 AM", "address": "Shivaji Nagar, Pune", "status": "Rejected" },
-    { "name": "Ajay Verma", "Consultation": "Kundli", "Mode": "Online", "date": "2025-03-31", "time": "09:00 AM", "address": "Pune", "status": "Approved" },
-    { "name": "Shalini Gupta", "Consultation": "Kundli", "Mode": "Online", "date": "2025-04-15", "time": "09:00 AM", "address": "Pune", "status": "Rejected" },
-    { "name": "Manoj Desai", "Consultation": "Vedic", "Mode": "Online", "date": "2025-03-05", "time": "11:00 AM", "address": "Borivali, Mumbai", "status": "Approved" },
-    { "name": "Meena Khanna", "Consultation": "Vastu", "Mode": "Offline", "date": "2025-03-07", "time": "03:00 PM", "address": "Kothrud, Pune", "status": "Accepted" },
-    { "name": "Ramesh Iyer", "Consultation": "Kundli", "Mode": "Online", "date": "2025-03-10", "time": "01:30 PM", "address": "Nashik", "status": "Accepted" },
-    { "name": "Priya Jain", "Consultation": "Vastu", "Mode": "Offline", "date": "2025-03-12", "time": "04:00 PM", "address": "Dadar, Mumbai", "status": "Approved" },
-    { "name": "Suresh Kumar", "Consultation": "Kundli", "Mode": "Online", "date": "2025-03-18", "time": "10:00 AM", "address": "Pune", "status": "Accepted" },
-    { "name": "Pooja Nair", "Consultation": "Vedic", "Mode": "Offline", "date": "2025-03-20", "time": "02:00 PM", "address": "Thane", "status": "Rejected" },
-    { "name": "Vikas Malhotra", "Consultation": "Vastu", "Mode": "Online", "date": "2025-03-22", "time": "09:30 AM", "address": "Aurangabad", "status": "Approved" },
-    { "name": "Amit Sharma", "Consultation": "Kundli", "Mode": "Offline", "date": "2025-03-25", "time": "12:00 PM", "address": "Colaba, Mumbai", "status": "Accepted" },
-    { "name": "Ritika Das", "Consultation": "Vastu", "Mode": "Online", "date": "2025-03-28", "time": "08:30 AM", "address": "Bandra, Mumbai", "status": "Approved" },
-    { "name": "Nitin Tiwari", "Consultation": "Vedic", "Mode": "Offline", "date": "2025-04-01", "time": "11:30 AM", "address": "Mulund, Mumbai", "status": "Rejected" },
-    { "name": "Kavita Rao", "Consultation": "Kundli", "Mode": "Online", "date": "2025-04-05", "time": "05:00 PM", "address": "Nagpur", "status": "Rejected" },
-    { "name": "Rohan Patil", "Consultation": "Vedic", "Mode": "Offline", "date": "2025-04-07", "time": "07:00 PM", "address": "Pimpri-Chinchwad", "status": "Accepted" },
-    { "name": "Sonali Mehta", "Consultation": "Vastu", "Mode": "Online", "date": "2025-04-09", "time": "06:30 PM", "address": "Hyderabad", "status": "Approved" },
-    { "name": "Sameer Joshi", "Consultation": "Kundli", "Mode": "Offline", "date": "2025-04-12", "time": "03:45 PM", "address": "Chennai", "status": "Approved" },
-    { "name": "Deepak Agarwal", "Consultation": "Vastu", "Mode": "Online", "date": "2025-04-15", "time": "10:15 AM", "address": "Kolkata", "status": "Rejected" }
-];
+        // Load dummy data
+        function loadDummyData() {
+            const dummyData = [
+        { "name": "Rahul Sharma", "Consultation": "Vedic", "Mode": "Online", "date": "2025-03-01", "time": "09:00 AM", "address": "Viman Nagar, Pune", "status": "Approved" },
+        { "name": "Sneha Gupta", "Consultation": "Vedic", "Mode": "Online", "date": "2025-03-02", "time": "10:30 AM", "address": "Andheri, Mumbai", "status": "Accepted" },
+        { "name": "Anita Rao", "Consultation": "Vastu", "Mode": "Offline", "date": "2025-03-16", "time": "09:00 AM", "address": "Shivaji Nagar, Pune", "status": "Rejected" },
+        { "name": "Ajay Verma", "Consultation": "Kundli", "Mode": "Online", "date": "2025-03-31", "time": "09:00 AM", "address": "Pune", "status": "Approved" },
+        { "name": "Shalini Gupta", "Consultation": "Kundli", "Mode": "Online", "date": "2025-04-15", "time": "09:00 AM", "address": "Pune", "status": "Rejected" },
+        { "name": "Manoj Desai", "Consultation": "Vedic", "Mode": "Online", "date": "2025-03-05", "time": "11:00 AM", "address": "Borivali, Mumbai", "status": "Approved" },
+        { "name": "Meena Khanna", "Consultation": "Vastu", "Mode": "Offline", "date": "2025-03-07", "time": "03:00 PM", "address": "Kothrud, Pune", "status": "Accepted" },
+        { "name": "Ramesh Iyer", "Consultation": "Kundli", "Mode": "Online", "date": "2025-03-10", "time": "01:30 PM", "address": "Nashik", "status": "Accepted" },
+        { "name": "Priya Jain", "Consultation": "Vastu", "Mode": "Offline", "date": "2025-03-12", "time": "04:00 PM", "address": "Dadar, Mumbai", "status": "Approved" },
+        { "name": "Suresh Kumar", "Consultation": "Kundli", "Mode": "Online", "date": "2025-03-18", "time": "10:00 AM", "address": "Pune", "status": "Accepted" },
+        { "name": "Pooja Nair", "Consultation": "Vedic", "Mode": "Offline", "date": "2025-03-20", "time": "02:00 PM", "address": "Thane", "status": "Rejected" },
+        { "name": "Vikas Malhotra", "Consultation": "Vastu", "Mode": "Online", "date": "2025-03-22", "time": "09:30 AM", "address": "Aurangabad", "status": "Approved" },
+        { "name": "Amit Sharma", "Consultation": "Kundli", "Mode": "Offline", "date": "2025-03-25", "time": "12:00 PM", "address": "Colaba, Mumbai", "status": "Accepted" },
+        { "name": "Ritika Das", "Consultation": "Vastu", "Mode": "Online", "date": "2025-03-28", "time": "08:30 AM", "address": "Bandra, Mumbai", "status": "Approved" },
+        { "name": "Nitin Tiwari", "Consultation": "Vedic", "Mode": "Offline", "date": "2025-04-01", "time": "11:30 AM", "address": "Mulund, Mumbai", "status": "Rejected" },
+        { "name": "Kavita Rao", "Consultation": "Kundli", "Mode": "Online", "date": "2025-04-05", "time": "05:00 PM", "address": "Nagpur", "status": "Rejected" },
+        { "name": "Rohan Patil", "Consultation": "Vedic", "Mode": "Offline", "date": "2025-04-07", "time": "07:00 PM", "address": "Pimpri-Chinchwad", "status": "Accepted" },
+        { "name": "Sonali Mehta", "Consultation": "Vastu", "Mode": "Online", "date": "2025-04-09", "time": "06:30 PM", "address": "Hyderabad", "status": "Approved" },
+        { "name": "Sameer Joshi", "Consultation": "Kundli", "Mode": "Offline", "date": "2025-04-12", "time": "03:45 PM", "address": "Chennai", "status": "Approved" },
+        { "name": "Deepak Agarwal", "Consultation": "Vastu", "Mode": "Online", "date": "2025-04-15", "time": "10:15 AM", "address": "Kolkata", "status": "Rejected" }
+    ];
 
         if (!localStorage.getItem("pujaRequests")) {
             localStorage.setItem("pujaRequests", JSON.stringify(dummyData));
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Apply consultation filter
         if (selectedConsultations.length > 0) {
-            filteredData = filteredData.filter(data => selectedConsultations.includes(data.Consultation.toLowerCase()));
+            filteredData = filteredData.filter(data => selectedConsultations.includes(data.Consultation));
         }
 
         // Load table body
@@ -196,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let paginatedItems = filteredData.slice(start, end);
 
         paginatedItems.forEach((data, index) => {
+            console.log(data)
             let globalIndex = storedData.indexOf(data);
             let row;
             if (selectedStatuses.length > 0) {
@@ -291,7 +292,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             if (selectedConsultations.length > 0) {
-                filteredData = filteredData.filter(data => selectedConsultations.includes(data.Consultation.toLowerCase()));
+                filteredData = filteredData.filter(data => selectedConsultations.includes(data.Consultation()));
             }
 
             if ((currentPage * itemsPerPage) < filteredData.length) {

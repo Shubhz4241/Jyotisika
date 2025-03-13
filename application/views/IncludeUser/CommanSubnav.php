@@ -50,6 +50,9 @@
             'jyotisikamall': document.getElementById('jyotisikamall-link'),
             'kp':document.getElementById('kp-link'),
             'MobPooja':document.getElementById('MobPooja-link')
+            
+            
+
 
         };
 
@@ -71,3 +74,5 @@
         }
     });
 </script>
+
+

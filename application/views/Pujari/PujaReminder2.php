@@ -175,7 +175,7 @@
         /* Reminder Button Styling (Top-Right Corner) */
         .reminder-btn-online {
             position: absolute;
-            top: 10px;
+            top: 2px;
             right: 10px;
             background-color: #0EDF50; /* Green for Online */
             color: #fff;
@@ -204,7 +204,7 @@
 
         .reminder-btn-offline {
             position: absolute;
-            top: 10px;
+            top: 2px;
             right: 10px;
             background-color: #FF5733; /* Orange for Offline */
             color: #fff;
@@ -233,7 +233,7 @@
 
         .reminder-btn-mob {
             position: absolute;
-            top: 10px;
+            top: 2px;
             right: 10px;
             background-color: #007BFF; /* Blue for Mob */
             color: #fff;
@@ -275,7 +275,7 @@
         .puja-card-mob img {
             width: 200px;
             height: 100%;
-            margin-bottom: 10px;
+            /* margin-bottom: 10px; */
         }
 
         .puja-card-online,
@@ -322,8 +322,24 @@
                 right: 8px;
                 padding: 5px 10px;
                 font-size: 12px;
+               
             }
-
+            .reminder-btn-mob {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                padding: 5px 10px;
+                font-size: 12px;
+                margin-top: 267px;
+            }
+            .reminder-btn-online {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                padding: 5px 10px;
+                font-size: 12px;
+                margin-top:-4px;
+            }
             .reminder-btn-online img,
             .reminder-btn-offline img,
             .reminder-btn-mob img {
