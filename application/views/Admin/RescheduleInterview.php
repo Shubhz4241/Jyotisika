@@ -54,119 +54,7 @@
             font-size: 0.9rem;
         }
 
-  /* Mobile Responsiveness Improvements */
-  @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-
-            .main {
-                padding: 10px !important;
-            }
-
-            .container {
-                padding: 0 10px;
-            }
-
-            /* Responsive Table Styling */
-            .table-responsive {
-                overflow-x: auto;
-            }
-
-            .table {
-                width: 100%;
-                margin-bottom: 1rem;
-                background-color: transparent;
-            }
-
-            .table thead {
-                display: table-header-group;
-            }
-
-            .table tbody tr {
-                display: table-row;
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-            }
-
-            .table th, .table td {
-                display: table-cell;
-                padding: 8px;
-                vertical-align: middle;
-                border: 1px solid #ddd;
-            }
-
-            /* Responsive Filter and Search */
-            .d-flex.justify-content-between {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            #roleFilter, .btn-group {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-
-            .btn-group {
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-
-            .btn-group .btn {
-                flex-grow: 1;
-                margin: 2px;
-            }
-
-            /* Pagination Controls */
-            .pagination-controls {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 10px;
-            }
-
-            #prevBtn, #nextBtn {
-                width: 100%;
-            }
-
-            #pageNumbers {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px;
-            }
-
-            #pageNumbers .btn {
-                flex-grow: 0;
-            }
-
-            /* Action Column Styling */
-            .table td:last-child {
-                text-align: center;
-            }
-
-            .bi-trash {
-                font-size: 1rem;
-                cursor: pointer;
-            }
-        }
-
-        /* Ensure full width on smaller screens */
-        @media (max-width: 480px) {
-            .container {
-                width: 100%;
-                padding: 0 5px;
-            }
-
-            .table {
-                font-size: 12px;
-            }
-
-            .table th, .table td {
-                padding: 6px;
-            }
-        }
-
-                /* Mobile Responsiveness Improvements */
+        /* Mobile Responsiveness Improvements */
         @media (max-width: 768px) {
             body {
                 font-size: 14px;
@@ -201,7 +89,8 @@
                 border: 1px solid #ddd;
             }
 
-            .table th, .table td {
+            .table th,
+            .table td {
                 display: table-cell;
                 padding: 8px;
                 vertical-align: middle;
@@ -214,7 +103,8 @@
                 gap: 10px;
             }
 
-            #roleFilter, .btn-group {
+            #roleFilter,
+            .btn-group {
                 width: 100%;
                 margin-bottom: 10px;
             }
@@ -236,7 +126,8 @@
                 gap: 10px;
             }
 
-            #prevBtn, #nextBtn {
+            #prevBtn,
+            #nextBtn {
                 width: 100%;
             }
 
@@ -273,7 +164,124 @@
                 font-size: 12px;
             }
 
-            .table th, .table td {
+            .table th,
+            .table td {
+                padding: 6px;
+            }
+        }
+
+        /* Mobile Responsiveness Improvements */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .main {
+                padding: 10px !important;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            /* Responsive Table Styling */
+            .table-responsive {
+                overflow-x: auto;
+            }
+
+            .table {
+                width: 100%;
+                margin-bottom: 1rem;
+                background-color: transparent;
+            }
+
+            .table thead {
+                display: table-header-group;
+            }
+
+            .table tbody tr {
+                display: table-row;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+            }
+
+            .table th,
+            .table td {
+                display: table-cell;
+                padding: 8px;
+                vertical-align: middle;
+                border: 1px solid #ddd;
+            }
+
+            /* Responsive Filter and Search */
+            .d-flex.justify-content-between {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #roleFilter,
+            .btn-group {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .btn-group {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .btn-group .btn {
+                flex-grow: 1;
+                margin: 2px;
+            }
+
+            /* Pagination Controls */
+            .pagination-controls {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            #prevBtn,
+            #nextBtn {
+                width: 100%;
+            }
+
+            #pageNumbers {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            #pageNumbers .btn {
+                flex-grow: 0;
+            }
+
+            /* Action Column Styling */
+            .table td:last-child {
+                text-align: center;
+            }
+
+            .bi-trash {
+                font-size: 1rem;
+                cursor: pointer;
+            }
+        }
+
+        /* Ensure full width on smaller screens */
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                padding: 0 5px;
+            }
+
+            .table {
+                font-size: 12px;
+            }
+
+            .table th,
+            .table td {
                 padding: 6px;
             }
         }
@@ -357,9 +365,9 @@
 
                     <!-- Pagination Controls -->
                     <div class="d-flex justify-content-end gap-2">
-                        <button id="prevBtn" class="btn btn-sm btn-primary" onclick="previousPage()">Previous</button>
+                        <button id="prevBtn" class="btn btn-sm btn text-white" style="background-color: #0c768a;" onclick="previousPage()">Previous</button>
                         <div id="pageNumbers" class="btn-group"></div>
-                        <button id="nextBtn" class="btn btn-sm btn-primary" onclick="nextPage()">Next</button>
+                        <button id="nextBtn" class="btn btn-sm btn text-white" style="background-color: #0c768a;" onclick="nextPage()">Next</button>
                     </div>
                 </div>
 
@@ -727,21 +735,37 @@
                     }
 
                     function submitReschedule() {
+                        // Get form values
                         let date = document.getElementById("interviewDate").value;
                         let time = document.getElementById("interviewTime").value;
                         let venue = document.getElementById("interviewVenue").value;
 
-                        if (!date || !time || !venue) {
-                            alert("Please fill all fields before submitting.");
+                        // Check if all fields are filled
+                        if (date === "" || time === "" || venue === "") {
+                            Swal.fire({
+                                icon: "warning",
+                                title: "Missing Information",
+                                text: "Please fill all the fields before rescheduling.",
+                            });
                             return;
                         }
 
-                        // Here, you can send this data to the backend if needed
-                        console.log(`Rescheduled Interview -> Date: ${date}, Time: ${time}, Venue: ${venue}`);
+                        // Show SweetAlert success message
+                        Swal.fire({
+                            icon: "success",
+                            title: "Interview Scheduled Successfully!",
+                            confirmButtonText: "OK",
+                        }).then(() => {
+                            // Close the Bootstrap modal
+                            let modal = document.getElementById("rescheduleModal");
+                            let bootstrapModal = bootstrap.Modal.getInstance(modal); // Get modal instance
+                            bootstrapModal.hide(); // Hide modal
 
-                        alert("Interview Rescheduled Successfully!");
-                        var rescheduleModal = bootstrap.Modal.getInstance(document.getElementById('rescheduleModal'));
-                        rescheduleModal.hide();
+                            // Optionally reset the form fields
+                            document.getElementById("interviewDate").value = "";
+                            document.getElementById("interviewTime").value = "";
+                            document.getElementById("interviewVenue").value = "";
+                        });
                     }
                 </script>
 
@@ -772,8 +796,8 @@
                                     <input type="time" class="form-control" id="interviewTime">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="interviewVenue" class="form-label">Venue</label>
-                                    <input type="text" class="form-control" id="interviewVenue" placeholder="Enter Venue">
+                                    <label for="interviewVenue" class="form-label">Meeting Link</label>
+                                    <input type="text" class="form-control" id="interviewVenue" placeholder="Enter Link">
                                 </div>
 
                                 <!-- Submit Button -->
