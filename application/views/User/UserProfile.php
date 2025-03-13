@@ -64,7 +64,7 @@
     <?php
 
     if (!empty($userinfo)) {
-       
+
 
         $user_name = isset($userinfo["user_name"]) ? $userinfo["user_name"] : '';
         $user_gender = isset($userinfo["user_gender"]) ? $userinfo["user_gender"] : '';
@@ -82,9 +82,6 @@
 
 
         $profile_image = isset($userinfo["user_image"]) && !empty($userinfo["user_image"]) ? $userinfo["user_image"] : 'assets/images/profileImage.png';
-
-
-
     }
 
     ?>
@@ -115,7 +112,7 @@
                         <script>
                             function previewProfileImage(event) {
                                 var reader = new FileReader();
-                                reader.onload = function () {
+                                reader.onload = function() {
                                     var output = document.getElementById('profileImagePreview');
                                     output.src = reader.result;
                                 }
@@ -127,14 +124,25 @@
                             <div class="mb-3">
                                 <label for="firstName" class="form-label">Full Name</label>
                                 <input type="text" value="<?php echo $user_name ?>" class="form-control" id="firstName"
-                                    name="user_name" required autocomplete="off">
+                                    name="user_name" required autocomplete="off" required
+                                    oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
+                                    pattern="^[^\s][A-Za-zÀ-ž\s]+$"
+                                    title="Enter Alphabets Only">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Mobile Number</label>
                                 <input type="text" hidden class="form-control" value="<?php echo $profile_image; ?>"
-                                    name="current_image_name">
+                                    name="current_image_name" required
+                                    oninput="(function(element) { 
+					                    element.value = element.value.replace(/[^\d]/g, '').substring(0, 10); 
+					                    if (!/^\d{10}$/.test(element.value)) {
+					                        element.setCustomValidity('Please enter a 10-digit number.');
+					                    } else {
+					                        element.setCustomValidity('');
+					                    }
+					                })(this)">
 
 
                                 <input type="text" disabled class="form-control" id="lastName" name="lastName"
@@ -155,7 +163,8 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="dob" class="form-label">Date of Birth</label>
-                                <input type="date" class="form-control" id="dob" name="user_dob"
+                                <input type="date" class="form-control" id="dob" name="user_dob" 
+                                    max="<?php echo date('Y-m-d'); ?>"
                                     value="<?php echo $user_dob ?>" required autocomplete="off">
                             </div>
                         </div>
@@ -163,35 +172,44 @@
                             <div class="mb-3">
                                 <label for="tob" class="form-label">Time of Birth</label>
                                 <input type="time" class="form-control" id="user_TimeofBirth" name="user_TimeofBirth"
-                                    value="<?php echo $user_TimeofBirth; ?>" autocomplete="off">
+                                    value="<?php echo $user_TimeofBirth; ?>" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="pob" class="form-label">Place of Birth</label>
                                 <input type="text" class="form-control" id="user_PlaceofBirth" name="user_PlaceofBirth"
-                                    value="<?php echo $user_PlaceofBirth; ?>" autocomplete="off">
+                                    value="<?php echo $user_PlaceofBirth; ?>" autocomplete="off" required
+                                    pattern="^[a-zA-Z\s]+$"
+                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
+                                    title="Please enter only letters and spaces"> 
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="address" class="form-label">Current Address</label>
                                 <input type="text" class="form-control" id="address" name="user_CurrentAddress"
-                                    value="<?php echo $user_CurrentAddress; ?>" autocomplete="off">
+                                    value="<?php echo $user_CurrentAddress; ?>" autocomplete="off" required 
+                                oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s]/g, ''); })(this)"
+                                pattern="^[A-Za-z0-9À-ž\s]+$" 
+                                title="Enter Alphabets and Numbers Only"
+>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="city" class="form-label">City</label>
                                 <input type="text" class="form-control" id="city" name="user_City"
-                                    value="<?php echo $user_City; ?>" autocomplete="off">
+                                    value="<?php echo $user_City; ?>" autocomplete="off" required
+                                    oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, ''); })(this)">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="pincode" class="form-label">Pincode</label>
                                 <input type="text" class="form-control" id="pincode" name="user_Pincode"
-                                    value="<?php echo $user_Pincode; ?>" autocomplete="off">
+                                    value="<?php echo $user_Pincode; ?>" autocomplete="off" required
+                                    oninput="(function(element) { element.value = element.value.replace(/[^0-9]/g, ''); })(this)">
                             </div>
                         </div>
                         <center>
@@ -214,7 +232,7 @@
                 }
 
 
-                document.getElementById("userProfileForm").addEventListener("submit", function (event) {
+                document.getElementById("userProfileForm").addEventListener("submit", function(event) {
                     let isValid = true;
 
 
@@ -226,7 +244,7 @@
             </script>
 
             <script>
-                document.addEventListener('DOMContentLoaded', function () {
+                document.addEventListener('DOMContentLoaded', function() {
                     <?php if ($this->session->flashdata('success')): ?>
                         Swal.fire({
                             icon: 'success',
@@ -254,19 +272,19 @@
                         });
                     <?php endif; ?>
 
-                    
-                    
+
+
 
 
                     <?php if ($this->session->flashdata('upload_error_photo')): ?>
                         Swal.fire({
                             icon: 'warning',
                             html: `<?php echo $this->session->flashdata('upload_error_photo'); ?>`,
-                          
+
                             confirmButtonText: 'OK'
                         });
                     <?php endif; ?>
-                    
+
 
 
                 });
