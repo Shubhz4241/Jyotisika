@@ -362,7 +362,7 @@
             <section class="dashboard-sections container">
                 <div class="row text-center mb-4 justify-content-center">
                     <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
+                        <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); max-width: 250px; margin: auto;">
                             <div class="card py-3" style="border-radius:0;">
                                 <div class="icon-box green">📅</div>
                                 <a href="<?php echo base_url() . 'AstrologerUser/ConsultationCards'; ?>">
@@ -372,7 +372,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#FF2E11BF; padding:6px 2px; padding-bottom:20px; border:3px solid #FF2E11BF; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
+                        <div style="background-color:#FF2E11BF; padding:6px 2px; padding-bottom:20px; border:3px solid #FF2E11BF; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); max-width: 250px; margin: auto;">
                             <div class="card py-3" style="border-radius:0;">
                                 <div class="icon-box red">📜</div>
                                 <a href="<?php echo base_url() . 'AstrologerUser/AstrologyAndSpiritualServices'; ?>">
@@ -382,7 +382,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 250px; margin: auto;">
+                        <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); max-width: 250px; margin: auto;">
                             <div class="card py-3" style="border-radius:0;">
                                 <div class="icon-box yellow">➕</div>
                                 <a href="<?php echo base_url() . 'AstrologerUser/AstrologerRecentRequest'; ?>">
@@ -448,10 +448,10 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="card mt-3 card1 h-100">
+                                <div class="col-lg-6 mt-4">
+                                    <div class="card card1 h-100">
                                         <div class="d-flex flex-column flex-md-row h-100">
-                                            <div class="image-container" style="height:100%;">
+                                            <div class="image-container " style="height:100%;">
                                                 <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>"
                                                     alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
                                             </div>
@@ -467,8 +467,8 @@
                                 </div>
 
                                 <!-- New Recent Request Card (Added Beside the Existing One) -->
-                                <div class="col-lg-6">
-                                    <div class="card mt-3 card1 h-100">
+                                <div class="col-lg-6 mt-4">
+                                    <div class="card card1 h-100">
                                         <div class="d-flex flex-column flex-md-row h-100">
                                             <div class="image-container" style="height:100%;">
                                                 <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>"
