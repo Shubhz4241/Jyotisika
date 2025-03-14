@@ -112,7 +112,7 @@
             </form>
             <div class="text-center mt-3">
                 <p>Don’t have an account?
-                    <a href="<?php echo base_url('RegistrationForm'); ?>" class="text-primary">Register now</a>
+                    <a href="<?php echo base_url('AstrogerRegistrationForm'); ?>" class="text-primary">Register now</a>
                 </p>
             </div>
 
@@ -206,10 +206,8 @@
         verifyOtpBtn.addEventListener('click', () => {
             otpForm.style.display = 'none';
             successMessage.style.display = 'block';
-            // Redirect to AstrologerDashboard after 2 seconds
-            setTimeout(() => {
-                window.location.href = '<?php echo base_url("AstrologerDashboard"); ?>';
-            }, 2000);
+            // Redirect to AstrologerDashboard immediately
+            window.location.href = '<?php echo base_url("AstrologerDashboard"); ?>';
         });
     </script>
 
