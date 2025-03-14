@@ -206,8 +206,13 @@
         verifyOtpBtn.addEventListener('click', () => {
             otpForm.style.display = 'none';
             successMessage.style.display = 'block';
-            // Redirect to AstrologerDashboard immediately
-            window.location.href = '<?php echo base_url("AstrologerDashboard"); ?>';
+            // Debug the URL
+            const dashboardUrl = '<?php echo base_url("AstrologerDashboard"); ?>';
+            console.log('Redirecting to:', dashboardUrl);
+            // Immediate redirect
+            window.location.href = dashboardUrl;
+            // Fallback hardcoded URL (replace with your correct base URL if needed)
+            // window.location.href = 'http://yourdomain.com/AstrologerDashboard';
         });
     </script>
 
