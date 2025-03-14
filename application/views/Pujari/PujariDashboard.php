@@ -313,7 +313,8 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            flex-wrap: wrap;
+            /* Allow wrapping for smaller screens */
         }
 
         .puja-reminder-content .price-discount {
@@ -345,7 +346,8 @@
             display: flex;
             gap: 15px;
             align-items: center;
-            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            flex-wrap: wrap;
+            /* Allow wrapping for smaller screens */
         }
     </style>
 </head>
@@ -505,8 +507,10 @@
                     </div>
 
                     <div class="container mt-5">
-                        <h5 class="mb-3 mt-5 text-Start" style="text-align: start;">User Reviews</h5>
-
+                        <div class="d-flex justify-content-between align-items-center mb-2 mt-4 ">
+                            <h5 class="mb-0">User Reviews</h5>
+                            <a href="<?php echo base_url('PujariUser/PujariFeedBackCard'); ?>" class="btn btn-link" style="text-decoration: none; color: #7C7C7C;">View All</a>
+                        </div>
                         <div class="review-container" style="width:100%;">
                             <!-- Left Arrow -->
                             <button class="carousel-btn left" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">

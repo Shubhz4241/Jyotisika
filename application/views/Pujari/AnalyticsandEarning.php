@@ -24,29 +24,28 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 40px;
             flex-wrap: wrap;
             margin-top: 100px;
         }
 
         .stat-box {
             border-radius: 10px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             font-weight: bold;
-            height: 120px; /* Reduced from 150px */
-            width: 120px; /* Reduced from 150px */
-            margin: 15px; /* Reduced margin for better spacing */
+            height: 150px;
+            width: 150px;
+            margin: 20px;
         }
 
         .stat-box h3 {
-            font-size: 1.1rem; /* Reduced font size */
+            font-size: 1.3rem;
             color: black;
-            margin-bottom: 5px;
         }
 
         .stat-box p {
             color: black;
-            font-size: 0.9rem; /* Reduced font size */
         }
 
         .stat-box.bg-success {
@@ -99,6 +98,7 @@
             border-radius: 8px;
             overflow: hidden;
             border-collapse: collapse;
+            /* Ensure borders don't double up */
         }
 
         .table th {
@@ -106,22 +106,24 @@
             color: #333;
             font-weight: 500;
             border: 1px solid #ddd;
+            /* Add border to header cells */
             padding: 10px;
         }
 
         .table td {
             color: #333;
             border: 1px solid #ddd;
+            /* Add border to table cells */
             padding: 10px;
         }
 
         /* Alternating row colors */
         .table tbody tr:nth-child(odd) {
-            background-color: transparent; /* No background color for odd rows */
+            background-color: #e7f4e7;
         }
 
         .table tbody tr:nth-child(even) {
-            background-color: #d2e8d2; /* Background color for even rows */
+            background-color: #d2e8d2;
         }
 
         /* Dropdown styling */
@@ -131,21 +133,14 @@
             overflow-y: auto;
             z-index: 1000;
             position: absolute !important;
+            /* Ensure absolute positioning */
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .stat-box {
-                height: 90px; /* Further reduced for medium screens */
-                width: 90px;
-            }
-
-            .stat-box h3 {
-                font-size: 0.95rem;
-            }
-
-            .stat-box p {
-                font-size: 0.8rem;
+                height: 105px;
+                width: 120px;
             }
 
             .stat-box-container {
@@ -163,17 +158,17 @@
         }
 
         @media (max-width: 576px) {
-            .stat-box {
-                height: 90px; /* Further reduced for small screens */
-                width: 90px;
-            }
+            /* .stat-box {
+                width: 111px;
+                height: 111px;
+            } */
 
             .stat-box h3 {
-                font-size: 0.85rem;
+                font-size: 1.1rem;
             }
 
             .stat-box p {
-                font-size: 0.75rem;
+                font-size: 0.9rem;
             }
 
             .chart-container {
@@ -183,6 +178,7 @@
             .filter-btn {
                 float: none;
                 display: block;
+                /* margin: 0 auto 10px; */
                 text-align: center;
             }
 
@@ -201,6 +197,7 @@
 
             .dropdown-menu {
                 position: absolute !important;
+                /* Override fixed positioning on mobile */
                 top: auto !important;
                 left: 0 !important;
                 right: auto !important;
@@ -319,7 +316,7 @@
                                 <td>5</td>
                             </tr>
                             <tr>
-                                <td>We、健康alth</td>
+                                <td>Wealth</td>
                                 <td>5</td>
                                 <td>5</td>
                             </tr>
@@ -399,12 +396,31 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Data for each table
-            const pujaData = [
-                { pooja: "Rahu-ketu", december: 5, november: 5 },
-                { pooja: "Wealth", december: 5, november: 5 },
-                { pooja: "Char-Shanti", december: 5, november: 5 },
-                { pooja: "Satyanarayan puja", december: 5, november: 5 },
-                { pooja: "Rahu-ketu", december: 5, november: 5 }
+            const pujaData = [{
+                    pooja: "Rahu-ketu",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Wealth",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Char-Shanti",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Satyanarayan puja",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Rahu-ketu",
+                    december: 5,
+                    november: 5
+                }
             ];
 
             // Function to create filter dropdown
@@ -461,42 +477,34 @@
                         <th>December</th>
                         <th>November</th>
                     `;
-                    // Show all data
-                    pujaData.forEach(item => {
-                        const row = `<tr>
-                            <td>${item.pooja}</td>
-                            <td>${item.december}</td>
-                            <td>${item.november}</td>
-                        </tr>`;
-                        tableBody.innerHTML += row;
-                    });
                 } else if (filter === "december") {
                     tableHead.innerHTML = `
                         <th>Poojas</th>
                         <th>December</th>
+                        <th>November</th>
                     `;
-                    // Show only December data
-                    pujaData.forEach(item => {
-                        const row = `<tr>
-                            <td>${item.pooja}</td>
-                            <td>${item.december}</td>
-                        </tr>`;
-                        tableBody.innerHTML += row;
-                    });
                 } else if (filter === "november") {
                     tableHead.innerHTML = `
                         <th>Poojas</th>
+                        <th>December</th>
                         <th>November</th>
                     `;
-                    // Show only November data
-                    pujaData.forEach(item => {
-                        const row = `<tr>
-                            <td>${item.pooja}</td>
-                            <td>${item.november}</td>
-                        </tr>`;
-                        tableBody.innerHTML += row;
-                    });
                 }
+
+                // Update table rows based on filter
+                pujaData.forEach(item => {
+                    let row = `<tr>
+                        <td>${item.pooja}</td>`;
+                    if (filter === "all") {
+                        row += `<td>${item.december}</td><td>${item.november}</td>`;
+                    } else if (filter === "december") {
+                        row += `<td>${item.december}</td><td>-</td>`;
+                    } else if (filter === "november") {
+                        row += `<td>-</td><td>${item.november}</td>`;
+                    }
+                    row += `</tr>`;
+                    tableBody.innerHTML += row;
+                });
             }
 
             // Initialize filter buttons

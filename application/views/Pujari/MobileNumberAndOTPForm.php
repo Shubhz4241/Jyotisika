@@ -206,6 +206,10 @@
         verifyOtpBtn.addEventListener('click', () => {
             otpForm.style.display = 'none';
             successMessage.style.display = 'block';
+            // Redirect to PujariDashboard after 2 seconds
+            setTimeout(() => {
+                window.location.href = '<?php echo base_url("PujariDashboard"); ?>';
+            }, 2000);
         });
     </script>
 
@@ -219,6 +223,10 @@
             document.getElementById('mobile-form').style.display = 'none';
             document.getElementById('otp-form').style.display = 'none';
             document.getElementById('success-message').style.display = 'block';
+            // Redirect to PujariDashboard after 2 seconds
+            setTimeout(() => {
+                window.location.href = '<?php echo base_url("PujariDashboard"); ?>';
+            }, 2000);
         }
     });
 </script>
