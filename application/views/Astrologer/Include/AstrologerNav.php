@@ -62,8 +62,8 @@
         display: none;
         /* Initially hidden */
         position: absolute;
-        top: 50px;
-        right: 70px;
+        top: 65px;
+        right: 72px;
         /* Adjusted to prevent overflow near profile image */
         background: #fff;
         width: 350px;
@@ -191,7 +191,7 @@
         .notification-container {
             width: 80%;
             /* right: 5%; */
-            margin-top: 27px;
+            margin-top: 2px;
         }
     }
 
