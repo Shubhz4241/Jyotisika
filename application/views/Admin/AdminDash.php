@@ -59,6 +59,24 @@
             font-size: 0.9rem;
         }
 
+        .profile-img-container {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ddd;
+            /* Optional border */
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         /* Mobile Responsiveness Improvements */
         @media (max-width: 768px) {
             .main {
@@ -122,6 +140,25 @@
                 max-width: 250px;
             }
         }
+
+        .profile-img-container {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ddd;
+            /* Optional border */
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     </style>
 
 </head>
@@ -142,21 +179,23 @@
                 <div class="container">
                     <div class="row g-4">
                         <div class="col-md-3">
-                            <div class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
-                                <img src="<?php echo base_url() . 'assets/images/users.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
-                                <h1 class="mt-3 counter" data-target="450">0</h1>
-                                <p>Total Users</p>
-                            </div>
+                            <a href="<?php echo base_url() . 'usermanagement'; ?>" class="text-decoration-none">
+                                <div class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
+                                    <img src="<?php echo base_url() . 'assets/images/users.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
+                                    <h1 class="mt-3 counter" data-target="450">0</h1>
+                                    <p>Total Users</p>
+                                </div>
+                            </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="<?php echo base_url() . 'astrologerrequests'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
+                            <a href="<?php echo base_url() . 'astrologerslist'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
                                 <img src="<?php echo base_url() . 'assets/images/astrologers.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
                                 <h1 class="mt-3 counter" data-target="150">0</h1>
                                 <p>Total Astrologer</p>
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="<?php echo base_url() . 'pujarirequests'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
+                            <a href="<?php echo base_url() . 'pujariList'; ?>" class="card border-0 d-flex flex-column align-items-center justify-content-center shadow pt-3">
                                 <img src="<?php echo base_url() . 'assets/images/pujari.png'; ?>" alt="icon" class="img-fluid border-0" style="width: 60px; height: 60px; object-fit: cover;">
                                 <h1 class="mt-3 counter" data-target="100">0</h1>
                                 <p>Total Pujari</p>
@@ -204,184 +243,212 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
-                                            <thead class="thead-light">
+                                        <table class="table table-bordered table-hover align-middle">
+                                            <thead class="thead-light text-center">
                                                 <tr>
+                                                    <th>Profile</th>
                                                     <th>Name</th>
                                                     <th>Contact</th>
-                                                    <th>Experience</th>
-                                                    <th>Service</th>
-                                                    <th>Document</th>
-                                                    <th>Address</th>
+                                                    <th>Email</th>
+                                                    <th>Gender</th>
+                                                    <th>Languages</th>
+                                                    <th>Specialities</th>
+                                                    <th>Aadhar Card</th>
+                                                    <th>Certifications</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <!-- Dummy Data -->
+                                            <tbody class="text-center">
+                                                <!-- Row 1 -->
                                                 <tr>
+                                                    <td>
+                                                        <div class="profile-img-container">
+                                                            <img src="assets/images/astrologer.png" alt="John Doe" class="profile-img rounded-circle" width="50">
+                                                        </div>
+                                                    </td>
                                                     <td>John Doe</td>
                                                     <td>+1 123-456-7890</td>
-                                                    <td>5 Years</td>
+                                                    <td>john.doe@example.com</td>
+                                                    <td>Male</td>
+                                                    <td>English, Spanish</td>
                                                     <td>Web Development</td>
-                                                    <!-- Button to trigger the modal -->
                                                     <td>
-                                                        <a href="#" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
                                                     </td>
-                                                    <td>123 Elm Street, Springfield</td>
+                                                    <td>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
+                                                    </td>
                                                     <td>
                                                         <div class="d-flex justify-content-center">
-                                                            <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="bi bi-check-lg"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="bi bi-x-lg"></i>
-                                                            </a>
+                                                            <a href="#" style="color: white; background-color: #0c768a;" class="btn btn-sm btn-primary">View</a>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <!-- Row 2 -->
                                                 <tr>
+                                                    <td>
+                                                        <div class="profile-img-container">
+                                                            <img src="assets/images/astrologer.png" alt="Jane Smith" class="profile-img rounded-circle" width="50">
+                                                        </div>
+                                                    </td>
                                                     <td>Jane Smith</td>
                                                     <td>+1 987-654-3210</td>
-                                                    <td>3 Years</td>
+                                                    <td>jane.smith@example.com</td>
+                                                    <td>Female</td>
+                                                    <td>English, French</td>
                                                     <td>Graphic Design</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
                                                     </td>
-                                                    <td>456 Oak Avenue, Metropolis</td>
+                                                    <td>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
+                                                    </td>
                                                     <td>
                                                         <div class="d-flex justify-content-center">
-                                                            <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="bi bi-check-lg"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="bi bi-x-lg"></i>
-                                                            </a>
+                                                            <a href="#" style="color: white; background-color: #0c768a;" class="btn btn-sm btn-primary">View</a>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <!-- Row 3 -->
                                                 <tr>
+                                                    <td>
+                                                        <div class="profile-img-container">
+                                                            <img src="assets/images/bannerImage.png" alt="Michael Brown" class="profile-img rounded-circle" width="50">
+                                                        </div>
+                                                    </td>
                                                     <td>Michael Brown</td>
                                                     <td>+1 555-123-4567</td>
-                                                    <td>10 Years</td>
+                                                    <td>michael.brown@example.com</td>
+                                                    <td>Male</td>
+                                                    <td>English, German</td>
                                                     <td>SEO Optimization</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
                                                     </td>
-                                                    <td>789 Pine Lane, Gotham</td>
+                                                    <td>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
+                                                    </td>
                                                     <td>
                                                         <div class="d-flex justify-content-center">
-                                                            <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="bi bi-check-lg"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="bi bi-x-lg"></i>
-                                                            </a>
+                                                            <a href="#" style="color: white; background-color: #0c768a;" class="btn">View</a>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <!-- End Dummy Data -->
                                             </tbody>
-
                                         </table>
-                                        <div class="card-footer text-center">
-                                            <a href="<?php echo base_url('astrologerrequests'); ?>"
-                                                class="btn btn-block" style="background-color: #0c768a; color: white;">
-                                                See All Registrations
-                                            </a>
-                                        </div>
+                                    </div>
 
+                                    <div class="card-footer text-center">
+                                        <a href="<?php echo base_url('astrologerrequests'); ?>" class="btn btn-block" style="background-color: #0c768a; color: white;">
+                                            See All Registrations
+                                        </a>
                                     </div>
                                 </div>
+
+
                                 <div class="card-header">
                                     <h4 class="card-title">Recent Poojari Requests</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
-                                            <thead class="thead-light">
+                                        <table class="table table-bordered table-hover align-middle">
+                                            <thead class="thead-light text-center">
                                                 <tr>
+                                                    <th>Profile</th>
                                                     <th>Name</th>
                                                     <th>Contact</th>
-                                                    <th>Experience</th>
-                                                    <th>Service</th>
-                                                    <th>Document</th>
-                                                    <th>Address</th>
+                                                    <th>Email</th>
+                                                    <th>Gender</th>
+                                                    <th>Languages</th>
+                                                    <th>Specialities</th>
+                                                    <th>Aadhar Card</th>
+                                                    <th>Certifications</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <!-- Dummy Data -->
+                                            <tbody class="text-center">
+                                                <!-- Row 1 -->
                                                 <tr>
+                                                    <td>
+                                                        <div class="profile-img-container">
+                                                            <img src="assets/images/astrologer.png" alt="John Doe" class="profile-img rounded-circle" width="50">
+                                                        </div>
+                                                    </td>
                                                     <td>John Doe</td>
                                                     <td>+1 123-456-7890</td>
-                                                    <td>5 Years</td>
+                                                    <td>john.doe@example.com</td>
+                                                    <td>Male</td>
+                                                    <td>English, Spanish</td>
                                                     <td>Web Development</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
                                                     </td>
-                                                    <td>123 Elm Street, Springfield</td>
+                                                    <td>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
+                                                    </td>
                                                     <td>
                                                         <div class="d-flex justify-content-center">
-                                                            <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="bi bi-check-lg"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="bi bi-x-lg"></i>
-                                                            </a>
+                                                            <a href="#" style="color: white; background-color: #0c768a;" class="btn btn-sm btn-primary">View</a>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <!-- Row 2 -->
                                                 <tr>
+                                                    <td>
+                                                        <div class="profile-img-container">
+                                                            <img src="assets/images/astrologer.png" alt="Jane Smith" class="profile-img rounded-circle" width="50">
+                                                        </div>
+                                                    </td>
                                                     <td>Jane Smith</td>
                                                     <td>+1 987-654-3210</td>
-                                                    <td>3 Years</td>
+                                                    <td>jane.smith@example.com</td>
+                                                    <td>Female</td>
+                                                    <td>English, French</td>
                                                     <td>Graphic Design</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
                                                     </td>
-                                                    <td>456 Oak Avenue, Metropolis</td>
+                                                    <td>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
+                                                    </td>
                                                     <td>
                                                         <div class="d-flex justify-content-center">
-                                                            <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="bi bi-check-lg"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="bi bi-x-lg"></i>
-                                                            </a>
+                                                            <a href="#" style="color: white; background-color: #0c768a;" class="btn btn-sm btn-primary">View</a>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <!-- Row 3 -->
                                                 <tr>
+                                                    <td>
+                                                        <div class="profile-img-container">
+                                                            <img src="assets/images/bannerImage.png" alt="Michael Brown" class="profile-img rounded-circle" width="50">
+                                                        </div>
+                                                    </td>
                                                     <td>Michael Brown</td>
                                                     <td>+1 555-123-4567</td>
-                                                    <td>10 Years</td>
+                                                    <td>michael.brown@example.com</td>
+                                                    <td>Male</td>
+                                                    <td>English, German</td>
                                                     <td>SEO Optimization</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
                                                     </td>
-                                                    <td>789 Pine Lane, Gotham</td>
+                                                    <td>
+                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
+                                                    </td>
                                                     <td>
                                                         <div class="d-flex justify-content-center">
-                                                            <a href="#" class="btn btn-sm btn-success me-2">
-                                                                <i class="bi bi-check-lg"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm btn-danger">
-                                                                <i class="bi bi-x-lg"></i>
-                                                            </a>
+                                                            <a href="#" style="color: white; background-color: #0c768a;" class="btn btn-sm btn-primary">View</a>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <!-- End Dummy Data -->
                                             </tbody>
-
                                         </table>
-                                        <div class="card-footer text-center">
-                                            <a href="<?php echo base_url() . 'pujarirequests'; ?>"
-                                                class="btn btn-block" style="background-color: #0c768a; color: white;">
-                                                See All Registrations
-                                            </a>
-                                        </div>
-
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <a href="<?php echo base_url('pujarirequests'); ?>" class="btn btn-block" style="background-color: #0c768a; color: white;">
+                                            See All Registrations
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -409,7 +476,7 @@
     </div>
 
     <script>
-        document.querySelectorAll('.btn-info').forEach(button => {
+        document.querySelectorAll('.pdfmodal').forEach(button => {
             button.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent default anchor behavior
                 const pdfUrl = "assets/images/CC UNIT II.pdf"; // Replace with your PDF URL

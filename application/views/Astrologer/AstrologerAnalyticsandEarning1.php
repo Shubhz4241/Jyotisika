@@ -359,6 +359,7 @@
     <footer>
         <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
+    
 
 </body>
 

@@ -12,9 +12,16 @@ $lang['WhyUs'] = "आम्ही का?";
 
 $lang['WhyUs'] = "आम्ही का?";
 
-
+$lang['KundliBirthChart'] = "राशिफल";
 
 $lang['Aris'] = "मेंढा";
+
+//Home page
+
+$lang['ViewMore'] = "अधिक पहा";
+
+$lang['AstrologicalRemedies'] = "तुमच्या समस्यांपासून मुक्त होण्यासाठी ज्योतिषीय उपाय";
+$lang['FreeHoroscope'] = "मोफत कुंडली आणि ज्योतिष सेवा";
 
 
 

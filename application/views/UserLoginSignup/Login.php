@@ -235,12 +235,14 @@
                         });
                     <?php endif; ?>
 
-                    
-                    
+                    <?php if ($this->session->flashdata('dberror')): ?>
+                        Swal.fire({
+                            icon: 'warning',
 
-
-                
-                    
+                            text: '<?php echo $this->session->flashdata('dberror'); ?>',
+                            confirmButtonText: 'OK'
+                        });
+                    <?php endif; ?>
 
 
                 });
