@@ -117,15 +117,27 @@
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="Aris"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Aris</p>
+                        
+                        <p class="mt-2 mb-0 text-dark fw-bold">  <?php echo !empty($this->lang->line('Aris')) ? $this->lang->line('Aris') : 'Aris'; ?></p>
+
                     </a>
                 </div>
+           
+
+                <!-- <div class="col-auto">
+                    <a href="<?php echo base_url('horoscopereadmore') ?>"
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                        <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="Aris"
+                            class="rounded-circle p-2 shadow-sm">
+                        <p class="mt-2 mb-0 text-dark fw-bold"> Aris</p>
+                    </a>s
+                </div> -->
 
                 <div class="col-auto">
                     <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/taurus.png'); ?>" alt="Taurus"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Taurus</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">  Taurus</p>
                     </a>
                 </div>
 
@@ -285,7 +297,7 @@
     <!-- Astrologer on call or chat -->
     <section>
         <div class="container my-4">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrologers</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"><?php echo $this->lang->line('Astrologers'); ?></h2>
             <div class="row my-4" id="cardContainer">
                 <?php for ($i = 0; $i < 10; $i++): ?>
                     <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
@@ -363,7 +375,7 @@
 
                 <div class="text-center mt-4">
                     <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold"
-                        style="background-color: var(--yellow);">View More</a>
+                        style="background-color: var(--yellow);"> <?php echo $this->lang->line('ViewMore')?></a>
                 </div>
             </div>
         </div>
@@ -463,8 +475,8 @@
     <!-- Astrological  Remedies  To  Get  Rid  Of  Your  Problems -->
     <section>
         <div class="container my-4">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrological Remedies To Get Rid Of Your
-                Problems</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"><?php echo $this->lang->line('AstrologicalRemedies')?></a>
+            </div></h2>
             <div class="owl-carousel owl1 owl-theme">
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
@@ -548,7 +560,7 @@
     <!-- Free Horoscope and Astrology Services -->
     <section>
         <div class="container my-4">
-            <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">Free Horoscope and Astrology Services</h3>
+            <h3 class="text-center mb-4 fw-bold" style="color: var(--red);"><?php echo $this->lang->line('FreeHoroscope')?></h3>
             <div class="row g-4 justify-content-center">
                 <!-- Card 1 -->
                 <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -677,7 +689,7 @@
                 </div>
                 <div class="text-center mt-4">
                     <a href="<?php echo base_url('AstrologyServices') ?>" class="btn fw-bold"
-                        style="background-color: var(--yellow);">See More</a>
+                        style="background-color: var(--yellow);"><?php echo $this->lang->line('ViewMore')?></a>
                 </div>
             </div>
         </div>
@@ -687,9 +699,7 @@
     <!-- Footer -->
     <?php $this->load->view('IncludeUser/CommanFooter'); ?>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
-
+   
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="

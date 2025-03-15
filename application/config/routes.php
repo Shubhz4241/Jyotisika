@@ -55,48 +55,84 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 // User Routes
-$route['home'] = 'User/Home';
-$route['demo'] = 'User/Demo';
-$route['freekundli'] = 'User/FreeKundli';
-$route['bookpooja'] = 'User/BookPooja';
-$route['kundlimatching'] = 'User/KundliMatching';
-$route['festival'] = 'User/Festival';
-$route['panchang'] = 'User/Panchang';
-$route['jyotisikamall'] = 'User/JyotisikaMall';
-$route['todayhoroscope'] = 'User/TodayHoroscope';
-$route['horoscopereadmore'] = 'User/HoroscopeReadmore';
-$route['kp'] = 'User/KP';
-$route['astrologers'] = 'User/Astrologers';
-$route['ViewAstrologer'] = 'User/ViewAstrologer';
-$route['PoojarViewMore'] ='User/PoojarViewMore';
-$route['OfflinePoojaris'] ='User/OfflinePoojaris';
-$route['FestivalReadmore'] ='User/FestivalReadmore';
-$route['WhyUs'] ='User/WhyUs';
-$route['OnlinePoojaris'] ='User/OnlinePoojaris';
-$route['Recharge'] ='User/Recharge';
-$route['ServiceDetails'] ='User/ServiceDetails';
-$route['Poojaris'] ='User/Poojaris';
-$route['UserProfile'] ='User/UserProfile';
-$route['Orders'] ='User/Orders';
-$route['AstrologyServices'] ='User/AstrologyServices';
-$route['ProductDetails'] ='User/ProductDetails';
-$route['ProductPayment'] ='User/ProductPayment';
-$route['Notification'] ='User/Notification';
-$route['CustomerSupport'] ='User/CustomerSupport';
-$route['PoojaInfo'] ='User/PoojaInfo';
-$route['MobPooja'] ='User/MobPooja';
-$route['ShowFreeKundli'] ='User/ShowFreeKundli';
-$route['Following'] ='User/Following';
-
-
-
-
 
 // login poge
 $route['Signup'] = 'UserLoginSignup/Signup';
 $route['Login'] = 'UserLoginSignup/Login';
 $route['Logout'] = 'UserLoginSignup/Logout';
 
+
+
+//User self page
+$route['home'] = 'User/Home';
+$route['UserProfile'] ='User/UserProfile';
+
+
+
+//data get from Api pages
+$route['freekundli'] = 'User/FreeKundli';
+$route['kundlimatching'] = 'User/KundliMatching';
+$route['panchang'] = 'User/Panchang';
+$route['todayhoroscope'] = 'User/TodayHoroscope';
+$route['horoscopereadmore'] = 'User/HoroscopeReadmore';
+$route['kp'] = 'User/KP';
+$route['ShowFreeKundli'] ='User/ShowFreeKundli';
+
+
+
+//Data from astroller 
+$route['astrologers'] = 'User/Astrologers';
+$route['ViewAstrologer'] = 'User/ViewAstrologer';
+$route['AstrologyServices'] ='User/AstrologyServices';
+$route['Following'] ='User/Following';
+
+
+
+//data from pujari side book puja section
+$route['PoojarViewMore'] ='User/PoojarViewMore';
+$route['OfflinePoojaris'] ='User/OfflinePoojaris';
+$route['bookpooja'] = 'User/BookPooja';
+$route['OnlinePoojaris'] ='User/OnlinePoojaris';
+$route['Poojaris'] ='User/Poojaris';
+$route['PoojaInfo'] ='User/PoojaInfo';
+
+
+
+//data from admin side  Festivals
+$route['festival'] = 'User/Festival';
+$route['FestivalReadmore'] ='User/FestivalReadmore';
+
+
+
+//data from admin  Jyotisika mall section
+$route['jyotisikamall'] = 'User/JyotisikaMall';
+$route['ProductDetails'] ='User/ProductDetails';
+$route['ProductPayment'] ='User/ProductPayment';
+
+
+//Notification section 
+$route['Orders'] ='User/Orders';
+$route['Notification'] ='User/Notification';
+$route['CustomerSupport'] ='User/CustomerSupport';
+
+
+
+//Mob puja section
+$route['MobPooja'] ='User/MobPooja';
+
+
+//Why us page
+$route['WhyUs'] ='User/WhyUs';
+
+
+
+$route['demo'] = 'User/Demo';
+$route['Recharge'] ='User/Recharge';
+$route['ServiceDetails'] ='User/ServiceDetails';
+
+
+
+//user end ---User route end--- 
 
 
 // Admin Routes
@@ -110,6 +146,12 @@ $route['jyotisikastore'] = 'Admin/JyotisikaStore';
 $route['profile'] = 'Admin/Profile';
 $route['anyliticsandreports'] = 'Admin/AnyliticsandReports';
 $route['rescheduleinterview'] = 'Admin/RescheduleInterview';
+$route['viewastrologer'] = 'Admin/ViewAstrologer';
+$route['viewpujari'] = 'Admin/ViewPujari';
+$route['astrologerslist'] = 'Admin/AstrologersList';
+$route['astrologerreview'] = 'Admin/AstrologerReview';
+$route['pujariList'] = 'Admin/PujariList';
+$route['pujarireview'] = 'Admin/PujariReview';
 
 // Login Admin Routes
 $route['login'] = 'LoginForgotAdmin/LoginAdmin';
@@ -141,6 +183,7 @@ $route['UserSelection']='PujariUser/UserSelection';
 $route['Loaderpage']='PujariUser/Loaderpage';
 $route['RegistrationForm']='PujariUser/RegistrationForm';
 $route['TodaysSchedule']='PujariUser/TodaysSchedule';
+$route['PujariFeedBackCard']='PujariUser/PujariFeedBackCard';
 
 // Astrologer Module
 $route['AstrologerNav']='AstrologerUser/AstrologerNav';
@@ -155,7 +198,7 @@ $route['AstrologerMobileNumberAndOTPForm']='AstrologerUser/AstrologerMobileNumbe
 $route['AstrologerMonthlyEarningsBreakdown']='AstrologerUser/AstrologerMonthlyEarningsBreakdown';
 $route['AstrologerReg']='AstrologerUser/AstrologerReg';
 $route['AstrologerRecentRequest']='AstrologerUser/AstrologerRecentRequest';
-$route['RegistrationForm']='AstrologerUser/RegistrationForm';
+$route['AstrogerRegistrationForm']='AstrologerUser/AstrogerRegistrationForm';
 $route['AudioAndVideoCall']='AstrologerUser/AudioAndVideoCall';
 $route['AstrologerProfileForm']='AstrologerUser/AstrologerProfileForm';
 $route['AstrologerChatUI']='AstrologerUser/AstrologerChatUI';

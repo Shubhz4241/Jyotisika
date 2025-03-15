@@ -180,13 +180,16 @@
                                     <table class="table table-bordered table-light table-hover table-responsive" id="leaveTable">
                                         <thead>
                                             <tr>
-                                                <th style="min-width: 120px;">Sr. No</th>
-                                                <th style="min-width: 220px;">Name</th>
+                                                <th style="min-width: 100px;">Sr. No</th>
+                                                <th style="min-width: 120px;">Profile</th>
+                                                <th style="min-width: 180px;">Name</th>
                                                 <th style="min-width: 150px;">Contact</th>
-                                                <th style="min-width: 180px;">Experience</th>
-                                                <th style="min-width: 150px;">Service</th>
-                                                <th style="min-width: 150px;">Document</th>
-                                                <th style="min-width: 220px;">Address</th>
+                                                <th style="min-width: 200px;">Email</th>
+                                                <th style="min-width: 120px;">Gender</th>
+                                                <th style="min-width: 180px;">Language Known</th>
+                                                <th style="min-width: 200px;">Specialities</th>
+                                                <th style="min-width: 180px;">Aadhar PDF</th>
+                                                <th style="min-width: 200px;">Certifications PDF</th>
                                                 <th style="min-width: 150px;" class="text-center">Action</th>
                                             </tr>
                                         </thead>
@@ -226,114 +229,17 @@
 
                                 // Updated Sample Data
                                 const dummyData = [{
-                                        srNo: "1",
-                                        name: "John Doe",
-                                        contact: "123-456-7890",
-                                        experience: "5 years",
-                                        service: "Web Development",
-                                        document: "Resume.pdf",
-                                        address: "123 Main Street, City A"
-                                    },
-                                    {
-                                        srNo: "2",
-                                        name: "Jane Smith",
-                                        contact: "987-654-3210",
-                                        experience: "3 years",
-                                        service: "Graphic Design",
-                                        document: "Portfolio.pdf",
-                                        address: "456 Elm Street, City B"
-                                    },
-                                    {
-                                        srNo: "3",
-                                        name: "Mike Johnson",
-                                        contact: "555-555-5555",
-                                        experience: "7 years",
-                                        service: "App Development",
-                                        document: "References.pdf",
-                                        address: "789 Oak Avenue, City C"
-                                    },
-                                    {
-                                        srNo: "4",
-                                        name: "Emily Brown",
-                                        contact: "444-444-4444",
-                                        experience: "2 years",
-                                        service: "UI/UX Design",
-                                        document: "Designs.pdf",
-                                        address: "321 Maple Drive, City D"
-                                    },
-                                    {
-                                        srNo: "5",
-                                        name: "David Lee",
-                                        contact: "333-333-3333",
-                                        experience: "4 years",
-                                        service: "IT Support",
-                                        document: "Certifications.pdf",
-                                        address: "654 Pine Street, City E"
-                                    },
-                                    {
-                                        srNo: "6",
-                                        name: "Sarah Wilson",
-                                        contact: "222-222-2222",
-                                        experience: "6 years",
-                                        service: "SEO Marketing",
-                                        document: "SEO_Report.pdf",
-                                        address: "987 Cedar Road, City F"
-                                    },
-                                    {
-                                        srNo: "7",
-                                        name: "Tom Harris",
-                                        contact: "111-111-1111",
-                                        experience: "1 year",
-                                        service: "Content Writing",
-                                        document: "Articles.pdf",
-                                        address: "123 Birch Lane, City G"
-                                    },
-                                    {
-                                        srNo: "8",
-                                        name: "Lisa Chen",
-                                        contact: "666-666-6666",
-                                        experience: "8 years",
-                                        service: "Project Management",
-                                        document: "Projects.pdf",
-                                        address: "789 Willow Way, City H"
-                                    },
-                                    {
-                                        srNo: "9",
-                                        name: "Lisa Chen",
-                                        contact: "666-666-6666",
-                                        experience: "8 years",
-                                        service: "Project Management",
-                                        document: "Projects.pdf",
-                                        address: "789 Willow Way, City H"
-                                    },
-                                    {
-                                        srNo: "10",
-                                        name: "Lisa Chen",
-                                        contact: "666-666-6666",
-                                        experience: "8 years",
-                                        service: "Project Management",
-                                        document: "Projects.pdf",
-                                        address: "789 Willow Way, City H"
-                                    },
-                                    {
-                                        srNo: "11",
-                                        name: "Lisa Chen",
-                                        contact: "666-666-6666",
-                                        experience: "8 years",
-                                        service: "Project Management",
-                                        document: "Projects.pdf",
-                                        address: "789 Willow Way, City H"
-                                    },
-                                    {
-                                        srNo: "12",
-                                        name: "Lisa Chen",
-                                        contact: "666-666-6666",
-                                        experience: "8 years",
-                                        service: "Project Management",
-                                        document: "Projects.pdf",
-                                        address: "789 Willow Way, City H"
-                                    },
-                                ];
+                                    srNo: "1",
+                                    profile: "assets/images/astrologer.png",
+                                    name: "John Doe",
+                                    contact: "123-456-7890",
+                                    email: "johndoe@example.com",
+                                    gender: "Male",
+                                    language: "English, Spanish",
+                                    specialities: "Web Development, UI/UX",
+                                    aadhar: "Aadhar_Document.pdf",
+                                    certifications: "FullStack_Certificate.pdf"
+                                }, ];
 
                                 let filteredData = [...dummyData]; // Keep a filtered copy of the data
 
@@ -348,62 +254,21 @@
 
                                     paginatedData.forEach(item => {
                                         const row = `
-    <tr>
-        <td>${item.srNo}</td>
-        <td>${item.name}</td>
-        <td>${item.contact}</td>
-        <td>${item.experience}</td>
-        <td>${item.service}</td>
-        <td>
-            <a href="#" onclick="openPdfModal('${item.document}')">${item.document}</a>
-        </td>
-        <td>${item.address}</td>
-        <td class="text-center">
-            <div class="d-flex justify-content-center">
-                <button class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#scheduleModal" onclick="openScheduleModal(${item.srNo})">
-                    <i class="bi bi-check-circle-fill"></i>
-                </button>
-                <button class="btn btn-danger btn-sm" onclick="handleReject(${item.srNo})">
-                    <i class="bi bi-x-circle-fill"></i>
-                </button>
-            </div>
-
-            <!-- Schedule Modal -->
-            <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="scheduleModalLabel">Schedule Interview</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="scheduleForm" onsubmit="handleSchedule(${item.srNo}); return false;">
-                        <div class="mb-3">
-                            <label for="date" class="form-label">Date</label>
-                            <input type="date" class="form-control" id="date" name="date" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="time" class="form-label">Time</label>
-                            <input type="time" class="form-control" id="time" name="time" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="venue" class="form-label">Venue</label>
-                            <input type="text" class="form-control" id="venue" name="venue" required />
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Schedule</button>
-                        </div>
-                            </form>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </td>
-    </tr>`;
+<tr>
+                                            <td>${item.srNo}</td>
+                                            <td><img src="${item.profile}" alt="Profile" style="width:50px; height:50px; border-radius:50%;"></td>
+                                            <td>${item.name}</td>
+                                            <td>${item.contact}</td>
+                                            <td>${item.email}</td>
+                                            <td>${item.gender}</td>
+                                            <td>${item.language}</td>
+                                            <td>${item.specialities}</td>
+                                            <td><a href="#" onclick="openPdfModal('${item.aadhar}')">${item.aadhar}</a></td>
+                                            <td><a href="#" onclick="openPdfModal('${item.certifications}')">${item.certifications}</a></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-primary" onclick="window.location.href='viewpujari?srNo=${item.srNo}'">View</button>
+                                            </td>
+                                        </tr>`;
                                         tableBody.innerHTML += row;
 
                                     });
@@ -541,14 +406,17 @@
                                     <table class="table table-bordered table-light table-hover table-responsive" id="acceptedLeaveTable">
                                         <thead>
                                             <tr>
-                                                <th style="min-width: 120px;">Sr.No</th>
-                                                <th style="min-width: 220px;">Name</th>
+                                                <th style="min-width: 100px;">Sr. No</th>
+                                                <th style="min-width: 120px;">Profile</th>
+                                                <th style="min-width: 180px;">Name</th>
                                                 <th style="min-width: 150px;">Contact</th>
-                                                <th style="min-width: 180px;">Experience</th>
-                                                <th style="min-width: 150px;">Service</th>
-                                                <th style="min-width: 150px;">Document</th>
-                                                <th style="min-width: 250px;">Address</th>
-                                                <th style="min-width: 150px;" class="text-center">Actions</th>
+                                                <th style="min-width: 200px;">Email</th>
+                                                <th style="min-width: 120px;">Gender</th>
+                                                <th style="min-width: 180px;">Language Known</th>
+                                                <th style="min-width: 200px;">Specialities</th>
+                                                <th style="min-width: 180px;">Aadhar PDF</th>
+                                                <th style="min-width: 200px;">Certifications PDF</th>
+                                                <th style="min-width: 150px;" class="text-center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="acceptedTableBody">
@@ -589,21 +457,27 @@
                                 // Sample Data
                                 const dummyData2 = [{
                                         srNo: "1",
+                                        profile: "assets/images/astrologer.png",
                                         name: "John Doe",
-                                        contact: "9876543210",
-                                        experience: "5 years",
-                                        service: "Web Development",
-                                        document: "Resume.pdf",
-                                        address: "123 Main St, Cityville"
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
                                     },
                                     {
                                         srNo: "2",
-                                        name: "Jane Smith",
-                                        contact: "9876543211",
-                                        experience: "3 years",
-                                        service: "Graphic Design",
-                                        document: "Portfolio.pdf",
-                                        address: "456 Elm St, Townsville"
+                                        profile: "assets/images/astrologer.png",
+                                        name: "John Doe",
+                                        contact: "123-456-7890",
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
                                     },
                                     // Add more dummy entries as required
                                 ];
@@ -622,21 +496,20 @@
                                     paginatedData.forEach(item => {
                                         const row = `
             <tr>
-                <td>${item.srNo}</td>
-                <td>${item.name}</td>
-                <td>${item.contact}</td>
-                <td>${item.experience}</td>
-                <td>${item.service}</td>
-
-                 <td>
-                        <a href="#" onclick="openPdfModal2('${item.document}')">${item.document}</a>
-                </td>
-                
-                <td>${item.address}</td>
-                <td class="text-center">
-                    <span class="badge bg-success">Approved</span>
-                </td>
-            </tr>`;
+                                            <td>${item.srNo}</td>
+                                            <td><img src="${item.profile}" alt="Profile" style="width:50px; height:50px; border-radius:50%;"></td>
+                                            <td>${item.name}</td>
+                                            <td>${item.contact}</td>
+                                            <td>${item.email}</td>
+                                            <td>${item.gender}</td>
+                                            <td>${item.language}</td>
+                                            <td>${item.specialities}</td>
+                                            <td><a href="#" onclick="openPdfModal2('${item.aadhar}')">${item.aadhar}</a></td>
+                                            <td><a href="#" onclick="openPdfModal2('${item.certifications}')">${item.certifications}</a></td>
+                                            <td class="text-center">
+                                                <span class="badge bg-success">Approved</span>
+                                            </td>
+                                        </tr>`;
                                         tableBody.innerHTML += row;
                                     });
 
@@ -726,14 +599,17 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-light table-hover table-responsive" id="rejectedLeaveTable">
                                         <thead>
-                                            <tr>
-                                                <th style="min-width: 120px;">Sr. No</th>
-                                                <th style="min-width: 220px;">Name</th>
-                                                <th style="min-width: 200px;">Contact</th>
-                                                <th style="min-width: 180px;">Experience</th>
-                                                <th style="min-width: 180px;">Service</th>
-                                                <th style="min-width: 180px;">Document</th>
-                                                <th style="min-width: 250px;">Address</th>
+                                        <tr>
+                                                <th style="min-width: 100px;">Sr. No</th>
+                                                <th style="min-width: 120px;">Profile</th>
+                                                <th style="min-width: 180px;">Name</th>
+                                                <th style="min-width: 150px;">Contact</th>
+                                                <th style="min-width: 200px;">Email</th>
+                                                <th style="min-width: 120px;">Gender</th>
+                                                <th style="min-width: 180px;">Language Known</th>
+                                                <th style="min-width: 200px;">Specialities</th>
+                                                <th style="min-width: 180px;">Aadhar PDF</th>
+                                                <th style="min-width: 200px;">Certifications PDF</th>
                                                 <th style="min-width: 150px;" class="text-center">Action</th>
                                             </tr>
                                         </thead>
@@ -774,48 +650,15 @@
                                 // Sample Data
                                 const dummyData3 = [{
                                         srNo: "1",
+                                        profile: "assets/images/astrologer.png",
                                         name: "John Doe",
                                         contact: "123-456-7890",
-                                        experience: "5 years",
-                                        service: "Web Development",
-                                        document: "Resume.pdf",
-                                        address: "123 Main St, Cityville"
-                                    },
-                                    {
-                                        srNo: "2",
-                                        name: "Jane Smith",
-                                        contact: "987-654-3210",
-                                        experience: "3 years",
-                                        service: "UI/UX Design",
-                                        document: "Portfolio.pdf",
-                                        address: "456 Elm St, Townsville"
-                                    },
-                                    {
-                                        srNo: "3",
-                                        name: "Mike Johnson",
-                                        contact: "456-789-0123",
-                                        experience: "7 years",
-                                        service: "Project Management",
-                                        document: "Certifications.pdf",
-                                        address: "789 Pine St, Metropolis"
-                                    },
-                                    {
-                                        srNo: "4",
-                                        name: "Emily Brown",
-                                        contact: "321-654-9870",
-                                        experience: "2 years",
-                                        service: "Content Writing",
-                                        document: "Writing_Sample.docx",
-                                        address: "101 Maple Ave, Smalltown"
-                                    },
-                                    {
-                                        srNo: "5",
-                                        name: "David Lee",
-                                        contact: "654-321-0987",
-                                        experience: "4 years",
-                                        service: "SEO Specialist",
-                                        document: "Case_Study.pdf",
-                                        address: "202 Oak St, Bigcity"
+                                        email: "johndoe@example.com",
+                                        gender: "Male",
+                                        language: "English, Spanish",
+                                        specialities: "Web Development, UI/UX",
+                                        aadhar: "Aadhar_Document.pdf",
+                                        certifications: "FullStack_Certificate.pdf"
                                     },
                                     // Add more entries as needed
                                 ];
@@ -835,14 +678,15 @@
                                         const row = `
                 <tr>
                     <td>${item.srNo}</td>
-                    <td>${item.name}</td>
-                    <td>${item.contact}</td>
-                    <td>${item.experience}</td>
-                    <td>${item.service}</td>
-                    <td>
-                        <a href="#" onclick="openPdfModal3('${item.document}')">${item.document}</a>
-                </td>
-                    <td>${item.address}</td>
+                                            <td><img src="${item.profile}" alt="Profile" style="width:50px; height:50px; border-radius:50%;"></td>
+                                            <td>${item.name}</td>
+                                            <td>${item.contact}</td>
+                                            <td>${item.email}</td>
+                                            <td>${item.gender}</td>
+                                            <td>${item.language}</td>
+                                            <td>${item.specialities}</td>
+                     <td><a href="#" onclick="openPdfModal3('${item.aadhar}')">${item.aadhar}</a></td>
+                                            <td><a href="#" onclick="openPdfModal3('${item.certifications}')">${item.certifications}</a></td>
                     <td class="text-center">
     <span class="badge bg-danger">Rejected</span>
 </td>

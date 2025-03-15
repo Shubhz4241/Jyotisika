@@ -152,11 +152,16 @@
                                 <tr>
                                     <th>Sr. No.</th>
                                     <th>Name</th>
-                                    <th>Address</th>
                                     <th>Contact No</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Date of Birth</th>
+                                    <th>Place of Birth</th>
+                                    <th>Address</th>
                                     <th>Service Taken</th>
                                     <th>Action</th>
                                 </tr>
+
                             </thead>
                             <tbody id="tableBody">
                                 <!-- Data will be displayed here -->
@@ -180,87 +185,137 @@
                     // Sample Data
                     const dummyData = [{
                             name: "John Doe",
-                            address: "123 Main Street",
                             contactNo: "1234567890",
+                            email: "johndoe@example.com",
+                            gender: "Male",
+                            dateOfBirth: "1990-05-14",
+                            placeOfBirth: "New York",
+                            address: "123 Main Street",
                             serviceTaken: 2,
                             action: `<button class="btn btn-danger delete-btn" data-id="1">
-                        <i class="bi bi-trash-fill"></i>
-                     </button>`
+                    <i class="bi bi-trash-fill"></i>
+                 </button>`
                         },
                         {
                             name: "Jane Smith",
-                            address: "456 Elm Street",
                             contactNo: "0987654321",
+                            email: "janesmith@example.com",
+                            gender: "Female",
+                            dateOfBirth: "1995-08-21",
+                            placeOfBirth: "Los Angeles",
+                            address: "456 Elm Street",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="2">
-                        <i class="bi bi-trash-fill"></i>
-                     </button>`
+                    <i class="bi bi-trash-fill"></i>
+                 </button>`
                         },
                         {
-                            name: "Jane Smith",
-                            address: "456 Elm Street",
-                            contactNo: "0987654321",
-                            serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="2">
-                        <i class="bi bi-trash-fill"></i>
-                     </button>`
+                            name: "Alice Brown",
+                            contactNo: "1122334455",
+                            email: "alicebrown@example.com",
+                            gender: "Female",
+                            dateOfBirth: "1988-11-02",
+                            placeOfBirth: "Chicago",
+                            address: "789 Pine Avenue",
+                            serviceTaken: 3,
+                            action: `<button class="btn btn-danger delete-btn" data-id="3">
+                    <i class="bi bi-trash-fill"></i>
+                 </button>`
                         },
                         {
-                            name: "Jane Smith",
-                            address: "456 Elm Street",
-                            contactNo: "0987654321",
+                            name: "Michael Johnson",
+                            contactNo: "6677889900",
+                            email: "michaelj@example.com",
+                            gender: "Male",
+                            dateOfBirth: "1992-06-10",
+                            placeOfBirth: "San Francisco",
+                            address: "101 Maple Lane",
                             serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="2">
-                        <i class="bi bi-trash-fill"></i>
-                     </button>`
+                            action: `<button class="btn btn-danger delete-btn" data-id="4">
+                    <i class="bi bi-trash-fill"></i>
+                 </button>`
                         },
                         {
-                            name: "Jane Smith",
-                            address: "456 Elm Street",
-                            contactNo: "0987654321",
+                            name: "Michael Johnson",
+                            contactNo: "6677889900",
+                            email: "michaelj@example.com",
+                            gender: "Male",
+                            dateOfBirth: "1992-06-10",
+                            placeOfBirth: "San Francisco",
+                            address: "101 Maple Lane",
                             serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="2">
-                        <i class="bi bi-trash-fill"></i>
-                     </button>`
+                            action: `<button class="btn btn-danger delete-btn" data-id="4">
+                    <i class="bi bi-trash-fill"></i>
+                 </button>`
                         },
                         {
-                            name: "Jane Smith",
-                            address: "456 Elm Street",
-                            contactNo: "0987654321",
+                            name: "Michael Johnson",
+                            contactNo: "6677889900",
+                            email: "michaelj@example.com",
+                            gender: "Male",
+                            dateOfBirth: "1992-06-10",
+                            placeOfBirth: "San Francisco",
+                            address: "101 Maple Lane",
                             serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="2">
-                        <i class="bi bi-trash-fill"></i>
-                     </button>`
+                            action: `<button class="btn btn-danger delete-btn" data-id="4">
+                    <i class="bi bi-trash-fill"></i>
+                 </button>`
                         },
                         {
-                            name: "Jane Smith",
-                            address: "456 Elm Street",
-                            contactNo: "0987654321",
+                            name: "Michael Johnson",
+                            contactNo: "6677889900",
+                            email: "michaelj@example.com",
+                            gender: "Male",
+                            dateOfBirth: "1992-06-10",
+                            placeOfBirth: "San Francisco",
+                            address: "101 Maple Lane",
                             serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="2">
-                        <i class="bi bi-trash-fill"></i>
-                     </button>`
+                            action: `<button class="btn btn-danger delete-btn" data-id="4">
+                    <i class="bi bi-trash-fill"></i>
+                 </button>`
                         },
                         {
-                            name: "Jane Smith",
-                            address: "456 Elm Street",
-                            contactNo: "0987654321",
+                            name: "Michael Johnson",
+                            contactNo: "6677889900",
+                            email: "michaelj@example.com",
+                            gender: "Male",
+                            dateOfBirth: "1992-06-10",
+                            placeOfBirth: "San Francisco",
+                            address: "101 Maple Lane",
                             serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="2">
-                        <i class="bi bi-trash-fill"></i>
-                     </button>`
+                            action: `<button class="btn btn-danger delete-btn" data-id="4">
+                    <i class="bi bi-trash-fill"></i>
+                 </button>`
                         },
                         {
-                            name: "Jane Smith",
-                            address: "456 Elm Street",
-                            contactNo: "0987654321",
+                            name: "Michael Johnson",
+                            contactNo: "6677889900",
+                            email: "michaelj@example.com",
+                            gender: "Male",
+                            dateOfBirth: "1992-06-10",
+                            placeOfBirth: "San Francisco",
+                            address: "101 Maple Lane",
                             serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="2">
-                        <i class="bi bi-trash-fill"></i>
-                     </button>`
+                            action: `<button class="btn btn-danger delete-btn" data-id="4">
+                    <i class="bi bi-trash-fill"></i>
+                 </button>`
+                        },
+                        {
+                            name: "Michael Johnson",
+                            contactNo: "6677889900",
+                            email: "michaelj@example.com",
+                            gender: "Male",
+                            dateOfBirth: "1992-06-10",
+                            placeOfBirth: "San Francisco",
+                            address: "101 Maple Lane",
+                            serviceTaken: 1,
+                            action: `<button class="btn btn-danger delete-btn" data-id="4">
+                    <i class="bi bi-trash-fill"></i>
+                 </button>`
                         },
                         // Add more entries as needed
                     ];
+
 
                     let filteredData = [...dummyData]; // Keep a filtered copy of the data
 
@@ -278,11 +333,16 @@
                             <tr>
                                 <td>${start + index + 1}</td>  <!-- Serial number continues -->
                                 <td>${item.name}</td>
-                                <td>${item.address}</td>
                                 <td>${item.contactNo}</td>
+                                <td>${item.email}</td>
+                                <td>${item.gender}</td>
+                                <td>${item.dateOfBirth}</td>
+                                <td>${item.placeOfBirth}</td>
+                                <td>${item.address}</td>
                                 <td>${item.serviceTaken}</td>
                                 <td class="text-center">${item.action}</td>
-                            </tr>`;
+                            </tr>
+                            `;
                             tableBody.innerHTML += row;
                         });
 

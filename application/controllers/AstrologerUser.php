@@ -39,8 +39,8 @@ class AstrologerUser extends CI_Controller {
 	public function AstrologerRecentRequest(){
 		$this->load->view('Astrologer/AstrologerRecentRequest');
 	}
-	public function RegistrationForm(){
-		$this->load->view('Astrologer/RegistrationForm');
+	public function AstrogerRegistrationForm(){
+		$this->load->view('Astrologer/AstrogerRegistrationForm');
 	}
 	public function AstrologyAndSpiritualServices(){
 		$this->load->view('Astrologer/AstrologyAndSpiritualServices');

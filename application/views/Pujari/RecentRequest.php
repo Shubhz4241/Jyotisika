@@ -20,9 +20,17 @@
             background-color: #ff9900;
             color: white;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            padding: 10px; /* Consistent padding */
         }
-        .table td{
-            /* text-align: center; */
+        .table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px; /* Consistent padding */
+            white-space: nowrap; /* Prevent text wrapping */
+            overflow: hidden; /* Hide overflow within cells */
         }
         .filter-btn {
             display: flex;
@@ -32,6 +40,30 @@
         .distance-col img {
             width: 50px;
             height: 50px;
+        }
+        .table {
+            table-layout: fixed; /* Keep table layout fixed */
+            width: 100%;
+            border-collapse: collapse; /* Prevent cell spacing issues */
+            min-width: 1000px; /* Ensure table is wide enough to trigger scrollbar */
+        }
+        .table th, .table td {
+            width: 14.28%; /* Equal width for 7 columns */
+            min-width: 150px; /* Minimum width for readability and stability */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        .dropdown-menu {
+            min-width: 200px;
+            padding: 10px;
+        }
+        .filter-section {
+            margin-bottom: 10px;
+        }
+        /* Ensure table container allows horizontal scrolling */
+        div[style="overflow-x: auto;"] {
+            overflow-x: auto;
+            width: 100%;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
         }
     </style>
 </head>
@@ -51,7 +83,7 @@
     </div>
     </div>
 <div style="overflow-x: auto;">
-    <table class="table table-bordered" style="overflow: auto;" id="puja-table">
+    <table class="table table-bordered" id="puja-table">
         <thead id="puja-table-header">
             <tr>
                 <th>Name</th>
@@ -67,26 +99,25 @@
     </table>
 </div>
 
-<!-- Edit Modal (Removed since not needed) -->
-       <!-- Pagination -->
-       <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center" id="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                <li class="page-item"><a class="page-link" href="#">10</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    </div>
-    <footer>
+<!-- Pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center" id="pagination">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">...</a></li>
+        <li class="page-item"><a class="page-link" href="#">10</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
+</div>
+</div>
+<footer>
     <?php $this->load->view('Pujari/Include/PujariFooter') ?>  
 </footer>
 
@@ -100,8 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const filterButton = document.querySelector(".filter-btn button");
     let currentPage = 1;
     const itemsPerPage = 10;
-    let currentModeFilter = "all"; // Default mode filter
-    let currentStatusFilter = "all"; // Default status filter
+    let selectedModes = [];
+    let selectedStatuses = [];
     let filterDropdown;
 
     // Load dummy data with 15 online, 15 offline, 15 approved, and 15 rejected entries
@@ -181,8 +212,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let filteredData = storedData;
 
         // Apply mode filter
-        if (currentModeFilter === "online") {
-            filteredData = filteredData.filter(data => data.Mode === "Online");
+        if (selectedModes.length > 0) {
+            filteredData = filteredData.filter(data => selectedModes.includes(data.Mode.toLowerCase()));
+        }
+
+        // Apply status filter
+        if (selectedStatuses.length > 0) {
+            filteredData = filteredData.filter(data => selectedStatuses.includes(data.status.toLowerCase()));
             tableHeader.innerHTML = `
                 <tr>
                     <th>Name</th>
@@ -191,10 +227,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     <th>Date</th>
                     <th>Time</th>
                     <th>Address</th>
-                    <th>Action</th>
+                    <th>Status</th>
                 </tr>`;
-        } else if (currentModeFilter === "offline") {
-            filteredData = filteredData.filter(data => data.Mode === "Offline");
+        } else if (selectedModes.length === 1 && selectedModes.includes("offline")) {
             tableHeader.innerHTML = `
                 <tr>
                     <th>Name</th>
@@ -219,34 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </tr>`;
         }
 
-        // Apply status filter
-        if (currentStatusFilter === "approved") {
-            filteredData = filteredData.filter(data => data.status === "Approved");
-            tableHeader.innerHTML = `
-                <tr>
-                    <th>Name</th>
-                    <th>Puja</th>
-                    <th>Mode</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Address</th>
-                    <th>Status</th>
-                </tr>`;
-        } else if (currentStatusFilter === "rejected") {
-            filteredData = filteredData.filter(data => data.status === "Rejected");
-            tableHeader.innerHTML = `
-                <tr>
-                    <th>Name</th>
-                    <th>Puja</th>
-                    <th>Mode</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Address</th>
-                    <th>Status</th>
-                </tr>`;
-        }
-
-        // Load table body
+        // Load table body without truncation
         tableBody.innerHTML = "";
         let start = (page - 1) * itemsPerPage;
         let end = start + itemsPerPage;
@@ -255,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
         paginatedItems.forEach((data, index) => {
             let globalIndex = storedData.indexOf(data);
             let row;
-            if (currentStatusFilter === "approved" || currentStatusFilter === "rejected") {
+            if (selectedStatuses.length > 0) {
                 row = `<tr>
                     <td>${data.name}</td>
                     <td>${data.puja}</td>
@@ -273,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${data.date}</td>
                     <td>${data.time}</td>
                     <td>${data.address}</td>
-                    ${currentModeFilter === "offline" ? `<td class="distance-col">${data.distance ? `<img src="${data.distance}" alt="Distance">` : ""}</td>` : ''}
+                    ${selectedModes.length === 1 && selectedModes.includes("offline") ? `<td class="distance-col">${data.distance ? `<img src="${data.distance}" alt="Distance">` : ""}</td>` : ""}
                     <td>
                         <button class="btn btn-outline-success btn-sm approve-btn me-2 ${data.status === "Approved" ? "btn-success" : ""}" data-index="${globalIndex}">
                             <i class="bi bi-check-lg"></i>
@@ -340,16 +348,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
             let filteredData = storedData;
 
-            if (currentModeFilter === "online") {
-                filteredData = filteredData.filter(data => data.Mode === "Online");
-            } else if (currentModeFilter === "offline") {
-                filteredData = filteredData.filter(data => data.Mode === "Offline");
+            if (selectedModes.length > 0) {
+                filteredData = filteredData.filter(data => selectedModes.includes(data.Mode.toLowerCase()));
             }
-
-            if (currentStatusFilter === "approved") {
-                filteredData = filteredData.filter(data => data.status === "Approved");
-            } else if (currentStatusFilter === "rejected") {
-                filteredData = filteredData.filter(data => data.status === "Rejected");
+            if (selectedStatuses.length > 0) {
+                filteredData = filteredData.filter(data => selectedStatuses.includes(data.status.toLowerCase()));
             }
 
             if ((currentPage * itemsPerPage) < filteredData.length) {
@@ -407,19 +410,34 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Filter functionality
+    // Filter functionality with checkboxes
     function createFilterDropdown() {
         filterDropdown = document.createElement("div");
         filterDropdown.classList.add("dropdown-menu", "show");
         filterDropdown.innerHTML = `
-            <h6 class="dropdown-header">Filter by Mode</h6>
-            <button class="dropdown-item" id="mode-all">All</button>
-            <button class="dropdown-item" id="mode-online">Online</button>
-            <button class="dropdown-item" id="mode-offline">Offline</button>
+            <div class="filter-section">
+                <h6 class="dropdown-header">Filter by Mode</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="mode-online" value="online">
+                    <label class="form-check-label" for="mode-online">Online</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="mode-offline" value="offline">
+                    <label class="form-check-label" for="mode-offline">Offline</label>
+                </div>
+            </div>
             <div class="dropdown-divider"></div>
-            <h6 class="dropdown-header">Filter by Status</h6>
-            <button class="dropdown-item" id="filter-accept">Accept</button>
-            <button class="dropdown-item" id="filter-reject">Reject</button>
+            <div class="filter-section">
+                <h6 class="dropdown-header">Filter by Status</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="filter-approved" value="approved">
+                    <label class="form-check-label" for="filter-approved">Approved</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="filter-rejected" value="rejected">
+                    <label class="form-check-label" for="filter-rejected">Rejected</label>
+                </div>
+            </div>
         `;
         document.body.appendChild(filterDropdown);
 
@@ -427,6 +445,23 @@ document.addEventListener("DOMContentLoaded", function () {
         filterDropdown.style.position = "absolute";
         filterDropdown.style.top = `${rect.bottom}px`;
         filterDropdown.style.left = `${rect.left}px`;
+
+        // Add event listeners to checkboxes
+        filterDropdown.querySelectorAll('.form-check-input').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateFilters();
+                currentPage = 1;
+                loadTable(currentPage);
+            });
+        });
+    }
+
+    // Update selected filters
+    function updateFilters() {
+        selectedModes = Array.from(filterDropdown.querySelectorAll('input[id^="mode-"]:checked'))
+            .map(checkbox => checkbox.value);
+        selectedStatuses = Array.from(filterDropdown.querySelectorAll('input[id^="filter-"]:checked'))
+            .map(checkbox => checkbox.value);
     }
 
     filterButton.addEventListener("click", function () {
@@ -435,24 +470,6 @@ document.addEventListener("DOMContentLoaded", function () {
             filterDropdown = null;
         } else {
             createFilterDropdown();
-        }
-    });
-
-    document.body.addEventListener("click", function (event) {
-        if (event.target.id.startsWith("mode-")) {
-            currentModeFilter = event.target.id.split("-")[1];
-            currentStatusFilter = "all"; // Reset status filter when mode filter is applied
-            currentPage = 1; // Reset to first page on filter change
-            loadTable(currentPage);
-            filterDropdown.remove();
-            filterDropdown = null;
-        } else if (event.target.id === "filter-accept" || event.target.id === "filter-reject") {
-            currentStatusFilter = event.target.id === "filter-accept" ? "approved" : "rejected";
-            currentModeFilter = "all"; // Reset mode filter when status filter is applied
-            currentPage = 1; // Reset to first page on filter change
-            loadTable(currentPage);
-            filterDropdown.remove();
-            filterDropdown = null;
         }
     });
 
