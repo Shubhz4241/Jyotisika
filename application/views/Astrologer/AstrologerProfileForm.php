@@ -125,14 +125,14 @@
         .form-label {
             font-weight: bold;
             margin-bottom: 5px;
-            /* Adds spacing between labels and inputs */
+            
         }
 
         .form-control {
             margin-bottom: 20px;
-            /* Increases space between input fields */
+            
             padding: 10px;
-            /* Optional: Makes input fields more spacious */
+            
         }
 
         .save-btn {
