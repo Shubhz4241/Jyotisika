@@ -64,7 +64,7 @@
     <div style="min-height: 100vh;">
         <div class="container">
             <h5 class="mb-3">
-                <a class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/AnalyticsAndEarning2'); ?>">
+                <a class="text-decoration-none text-dark" href="<?php echo base_url('AstrologerUser/AstrologerAnalyticsAndEarning2'); ?>">
                     <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
                     Earnings Breakdown
                 </a>
@@ -78,7 +78,7 @@
                         <option value="Ghar shanti">Ghar shanti</option>
                     </select>
                 </div>
-                <table class="table table-bordered table-fixed  text-center table table-striped">
+                <table class="table table-bordered table-fixed  text-center table table-striped ">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -96,6 +96,11 @@
                             <td>Jane Doe</td>
                             <td>Rahu-ketu</td>
                             <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Ghar shanti</td>
+                            <td>1200</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
@@ -144,6 +149,11 @@
                             <td>Ghar shanti</td>
                             <td>1200</td>
                         </tr>
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>Rahu-ketu</td>
+                            <td>500</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -175,6 +185,11 @@
                             <td>John Doe</td>
                             <td>Ghar shanti</td>
                             <td>1200</td>
+                        </tr>
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>Rahu-ketu</td>
+                            <td>500</td>
                         </tr>
                         <tr>
                             <td>Jane Doe</td>

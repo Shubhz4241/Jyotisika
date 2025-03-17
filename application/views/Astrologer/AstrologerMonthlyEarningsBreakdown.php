@@ -72,9 +72,9 @@
 
         h5 {
             margin-top: 0;
-            margin-bottom: 2.5rem;
+            /* margin-bottom: 2.5rem; */
             font-weight: 500;
-            line-height: 2.2;
+            line-height: 1.4;
             color: var(--bs-heading-color);
         }
 
@@ -138,7 +138,7 @@
     <div style="min-height: 100vh;">
         <div class="container">
             <h5 class="mb-3">
-                <a class="text-decoration-none text-dark" href="<?php echo base_url('PujariUser/AnalyticsAndEarning2'); ?>">
+                <a class="text-decoration-none text-dark" href="<?php echo base_url('AstrologerUser/AstrologerAnalyticsAndEarning2'); ?>">
                     <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
                     Monthly Earnings Breakdown
                 </a>

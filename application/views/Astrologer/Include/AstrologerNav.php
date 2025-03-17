@@ -6,7 +6,7 @@
 
     /* Navbar Styling */
     .navbar {
-        background-color: #fff;
+        background-color: #F6CE57;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         padding: 10px 40px;
         position: fixed;
@@ -17,14 +17,13 @@
 
     .logo-container img {
         width: 70px;
-        /* Reduced logo size */
         height: auto;
     }
 
     .menu-items a {
         text-decoration: none;
         color: #000;
-        margin: 0 23px;
+        margin: 0 45px;
         font-weight: 500;
     }
 
@@ -47,35 +46,29 @@
 
     .notification-icon i {
         color: black;
-        /* White icon */
         transition: color 0.3s ease;
-        
     }
 
     .notification-icon i:hover {
-        color: #0A6DFF
-            /* Blue hover effect */
+        color: #0A6DFF;
     }
 
     /* Notification Container (Dropdown) */
     .notification-container {
         display: none;
-        /* Initially hidden */
         position: absolute;
         top: 65px;
-        right: 72px;
-        /* Adjusted to prevent overflow near profile image */
+        right: 200px;
         background: #fff;
         width: 350px;
+        max-width: 90vw; /* Added for responsiveness */
         border-radius: 10px;
         padding: 15px;
         border: 2px solid #333;
-        /* Light black border */
         box-shadow: 0px 4px 10px rgba(252, 251, 251, 0.1);
         z-index: 1001;
     }
 
-    /* Prevent Overflow on Profile Image */
     .notification-container::before {
         content: "";
         position: absolute;
@@ -89,7 +82,6 @@
         border-top: 2px solid #333;
     }
 
-    /* Header */
     .notification-header {
         display: flex;
         justify-content: space-between;
@@ -108,12 +100,13 @@
         cursor: pointer;
     }
 
-    /* Notification Actions */
     .notification-actions {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-top: 10px;
+        flex-wrap: wrap; /* Added for responsiveness */
+        gap: 10px; /* Added for responsiveness */
     }
 
     .tabs a {
@@ -137,7 +130,6 @@
         margin-left: 10px;
     }
 
-    /* Notifications List */
     .notification-list {
         margin-top: 15px;
         max-height: 250px;
@@ -174,7 +166,6 @@
         color: gray;
     }
 
-    /* Previous Notification Link */
     .previous-notifications {
         text-align: center;
         margin-top: 15px;
@@ -186,15 +177,40 @@
         text-decoration: none;
     }
 
-    /* Responsive Notification */
-    @media (max-width: 768px) {
-        .notification-container {
-            width: 80%;
-            /* right: 5%; */
-            margin-top: 2px;
-        }
+    .live-btn {
+        text-decoration: none;
+        background-color: #E90505;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 4px;
+        margin: 0 23px;
+        font-weight: 500;
+        cursor: pointer; /* Added for better UX */
     }
 
+    .live-btn:hover {
+        background-color: darkred;
+        color: white;
+    }
+
+    /* Responsive Notification */
+    @media (max-width: 768px) {
+        .navbar {
+            padding: 10px 20px; /* Added for better mobile padding */
+        }
+
+        .notification-container {
+            width: 90vw; /* Updated from 80% */
+            right: 5vw; /* Updated positioning */
+            left: auto; /* Added for proper alignment */
+            top: 60px; /* Adjusted to match navbar */
+            margin-top: 0; /* Removed margin-top: 2px */
+        }
+
+        .notification-container::before {
+            right: 15px; /* Adjusted arrow position */
+        }
+    }
 
     /* Responsive Menu */
     .menu-toggle {
@@ -224,19 +240,44 @@
         .menu-items a {
             display: block;
             padding: 10px;
+            margin: 10px 0; /* Updated for better spacing */
         }
 
         .menu-toggle {
             display: block;
         }
+
+        .live-btn {
+            margin: 0 10px; /* Adjusted for mobile */
+        }
+    }
+
+    /* Additional responsiveness for very small screens */
+    @media (max-width: 480px) {
+        .notification-container {
+            width: 95vw;
+            right: 2.5vw;
+        }
+
+        .notification-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+
+        .time {
+            align-self: flex-end;
+        }
     }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Navbar -->
 <nav class="navbar d-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center">
         <div class="logo-container">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+            <!-- <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo"> -->
         </div>
         <div class="menu-toggle" id="menuToggle">
             <i class="bi bi-list"></i>
@@ -244,11 +285,11 @@
     </div>
 
     <div class="menu-items" id="menuItems">
-    <a href="<?php echo base_url() . 'AstrologerUser/AstrologerDashboard'; ?>">Home</a>
-        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerRecentRequest'; ?>">Requests</a>
-        <!-- <a href="<?php echo base_url() . 'AstrologerUser/AstrologerAnalyticsandEarning1'; ?>">Analytics</a> -->
         <a href="<?php echo base_url() . 'AstrologerUser/AstrologerAnalyticsAndEarning2'; ?>">Earnings</a>
-
+        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerFeedBackCard'; ?>">Feedback</a>
+        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerChatUI'; ?>">Chat</a>
+        <!-- <a href="<?php echo base_url() . 'AstrologerUser/ProductList'; ?>">Products</a> -->
+        <!-- <a href="#" class="live-btn">Live</a> -->
     </div>
 
     <div class="navbar-right">
@@ -261,7 +302,7 @@
         <div class="notification-container" id="notificationDropdown" style="display: none;">
             <div class="notification-header d-flex justify-content-between align-items-center">
                 <h3 class="title">Notification</h3>
-                <button class="close-btn" id="closeNotification">&times;</button>
+                <button class="close-btn" id="closeNotification">×</button>
             </div>
 
             <!-- Notification Actions -->
@@ -319,8 +360,7 @@
                 width="30px"
                 height="30px">
         </a>
-
-
+        <button class="live-btn" id="liveButton">Live</button> <!-- Updated to button with ID -->
     </div>
 </nav>
 
@@ -335,7 +375,7 @@
     const closeNotification = document.getElementById('closeNotification');
 
     notificationIcon.addEventListener('click', (event) => {
-        event.stopPropagation(); // Prevents the click from closing immediately
+        event.stopPropagation();
         notificationDropdown.style.display =
             notificationDropdown.style.display === 'block' ? 'none' : 'block';
     });
@@ -349,8 +389,27 @@
             notificationDropdown.style.display = 'none';
         }
     });
-</script>
 
+    // Live Button SweetAlert
+    document.getElementById('liveButton').addEventListener('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Download The App Now',
+            text: 'Would you like to download our app to go live?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#E90505',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, Download',
+            cancelButtonText: 'No, Thanks'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Add your download link or redirect here
+                window.location.href = 'your-app-download-link';
+            }
+        });
+    });
+</script>
 
 <!-- Bootstrap Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

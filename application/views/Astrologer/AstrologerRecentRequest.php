@@ -17,7 +17,7 @@
             overflow: visible !important;
         }
         .table th {
-            background-color: #ff9900;
+            background-color: #8BC24A;
             color: white;
             text-align: center;
             border: 1px solid #ddd;

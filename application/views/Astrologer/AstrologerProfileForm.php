@@ -125,14 +125,14 @@
         .form-label {
             font-weight: bold;
             margin-bottom: 5px;
-            
+            /* Adds spacing between labels and inputs */
         }
 
         .form-control {
             margin-bottom: 20px;
-            
+            /* Increases space between input fields */
             padding: 10px;
-            
+            /* Optional: Makes input fields more spacious */
         }
 
         .save-btn {
@@ -156,6 +156,7 @@
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
+            margin-bottom: 22px;
         }
 
         .dropdown-content {
@@ -221,7 +222,7 @@
 </head>
 
 <body>
-    <header>
+<header>
         <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
     <div style="min-height: 100vh;" class="py-3">

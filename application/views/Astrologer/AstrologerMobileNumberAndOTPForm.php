@@ -106,7 +106,7 @@
         <!-- Mobile Number Form -->
         <div id="mobile-form">
             <div class="logo-container">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+                <img src="<?php echo base_url() . 'assets/images/Astrologer/Rectangle 5201.png' ?>" alt="Logo">
             </div>
             <form>
                 <div class="mb-3">
@@ -125,7 +125,7 @@
         <!-- OTP Form -->
         <div id="otp-form" style="display: none;">
             <div class="logo-container">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+                <img src="<?php echo base_url() . 'assets/images/Astrologer/Rectangle 5201.png' ?>" alt="Logo">
             </div>
             <p class="text-center">We have Sent the code on +91************95</p>
             <form>
@@ -252,7 +252,7 @@
 
             // Delay redirect by 3 seconds to show success message
             setTimeout(() => {
-                const dashboardUrl = '<?php echo base_url("AstrologerDashboard"); ?>';
+                const dashboardUrl = '<?php echo base_url("AstrologerAnalyticsAndEarning2"); ?>';
                 console.log('Redirecting to:', dashboardUrl);
                 window.location.href = dashboardUrl;
             }, 3000); // 3-second delay
@@ -271,7 +271,7 @@
                 document.getElementById('success-message').style.display = 'block';
                 // Redirect to AstrologerDashboard after 3 seconds
                 setTimeout(() => {
-                    window.location.href = '<?php echo base_url("AstrologerDashboard"); ?>';
+                    window.location.href = '<?php echo base_url("AstrologerAnalyticsAndEarning2"); ?>';
                 }, 3000);
             }
         });
