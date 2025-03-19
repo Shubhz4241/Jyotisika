@@ -24,7 +24,6 @@
             position: relative;
         }
 
-        /* Background image only covers bottom 50% */
         .background-container {
             position: absolute;
             bottom: 0;
@@ -90,23 +89,31 @@
             color: #6c757d;
         }
 
-        /* Invalid input styling */
         .invalid-input {
             border-color: #dc3545 !important;
+        }
+
+        /* Added styling for the new OTP message */
+        #otpSentMessage {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Background Image (Covers bottom half) -->
     <div class="background-container"></div>
 
     <div id="form-container">
         <!-- Mobile Number Form -->
         <div id="mobile-form">
             <div class="logo-container">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
             <form>
                 <div class="mb-3">
@@ -125,9 +132,11 @@
         <!-- OTP Form -->
         <div id="otp-form" style="display: none;">
             <div class="logo-container">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
-            <p class="text-center">We have Sent the code on +91************95</p>
+            <!-- Added new message div for OTP sent confirmation -->
+            <div id="otpSentMessage"></div>
+            <p class="text-center" id="otpMessage">We have Sent the code on +91************95</p>
             <form>
                 <div class="d-flex justify-content-between mb-3">
                     <input type="text" class="form-control text-center me-2 otp-input" maxlength="1" required oninput="validateOtpInput(this)">
@@ -135,9 +144,7 @@
                     <input type="text" class="form-control text-center me-2 otp-input" maxlength="1" required oninput="validateOtpInput(this)">
                     <input type="text" class="form-control text-center otp-input" maxlength="1" required oninput="validateOtpInput(this)">
                 </div>
-
                 <button type="button" id="verifyOtpBtn" class="btn btn-custom w-100">Verify OTP</button>
-                <!-- Resend OTP Timer Section -->
                 <div class="text-center mb-3">
                     <span id="resendTimer">Resend OTP in <span id="countdown">00:30</span></span>
                     <button type="button" id="resendOtpBtn" class="btn btn-link p-1" style="display: none;">Resend OTP</button>
@@ -146,16 +153,17 @@
         </div>
 
         <!-- Success Message -->
-        <div id="success-message">
+        <div id="success-message" style="display: none;">
             <div class="checkmark">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Logo">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Logo">
             </div>
             <p>Application Submitted Successfully!</p>
             <small>Thank you for your submission! Our team is reviewing your application.</small>
-            <small>Note:- You will receive an update within 48 hours. If you have any queries, feel free to contact our support team."</small>
+            <small>Note:- You will receive an update within 48 hours. If you have any queries, feel free to contact our support team.</small>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const mobileForm = document.getElementById('mobile-form');
         const otpForm = document.getElementById('otp-form');
@@ -163,29 +171,24 @@
         const mobileInput = document.getElementById('mobile');
         const getOtpBtn = document.getElementById('getOtpBtn');
         const verifyOtpBtn = document.getElementById('verifyOtpBtn');
-        const otpMessage = document.querySelector('#otp-form p');
+        const otpMessage = document.getElementById('otpMessage');
         const countdownElement = document.getElementById('countdown');
         const resendOtpBtn = document.getElementById('resendOtpBtn');
         const otpInputs = document.querySelectorAll('.otp-input');
         let countdown;
 
         function validateMobileNumber(input) {
-            input.value = input.value.replace(/[^0-9]/g, ''); // Allow only numbers
+            input.value = input.value.replace(/[^0-9]/g, '');
             getOtpBtn.style.display = input.value.length === 10 ? 'block' : 'none';
         }
 
         function validateOtpInput(input) {
-            // Allow only numbers
             input.value = input.value.replace(/[^0-9]/g, '');
-            
-            // Add invalid class if input is empty or not a number
             if (input.value === '' || isNaN(input.value)) {
                 input.classList.add('invalid-input');
             } else {
                 input.classList.remove('invalid-input');
             }
-
-            // Move to next input if current is filled
             if (input.value.length === 1) {
                 const nextInput = input.nextElementSibling;
                 if (nextInput && nextInput.classList.contains('otp-input')) {
@@ -212,6 +215,8 @@
                 let firstTwo = mobileInput.value.substring(0, 2);
                 let lastTwo = mobileInput.value.substring(8, 10);
                 otpMessage.innerHTML = `We have Sent the code on +91 ${firstTwo}******${lastTwo}`;
+                // Added the new message to the otpSentMessage div
+                document.getElementById('otpSentMessage').innerHTML = `A OTP (One Time Passcode) has been sent to +91 ${firstTwo}******${lastTwo}. Please enter the OTP in the field below to verify your phone.`;
                 mobileForm.style.display = 'none';
                 otpForm.style.display = 'block';
                 startCountdown();
@@ -226,7 +231,6 @@
             countdown = setInterval(() => {
                 timeLeft--;
                 countdownElement.textContent = `00:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
-
                 if (timeLeft <= 0) {
                     clearInterval(countdown);
                     document.getElementById('resendTimer').style.display = 'none';
@@ -242,34 +246,23 @@
         });
 
         verifyOtpBtn.addEventListener('click', () => {
-            // Validate OTP form before proceeding
             if (!validateOtpForm()) {
-                return; // Stop if validation fails
+                return;
             }
-
             otpForm.style.display = 'none';
             successMessage.style.display = 'block';
-            // Redirect to PujariDashboard after 2 seconds
             setTimeout(() => {
                 window.location.href = '<?php echo base_url("PujariDashboard"); ?>';
             }, 3000);
         });
-    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+        // Prefill mobile number from URL parameter if available
         document.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const successParam = urlParams.get("success");
-
-            if (successParam === "true") {
-                document.getElementById('mobile-form').style.display = 'none';
-                document.getElementById('otp-form').style.display = 'none';
-                document.getElementById('success-message').style.display = 'block';
-                // Redirect to PujariDashboard after 2 seconds
-                setTimeout(() => {
-                    window.location.href = '<?php echo base_url("PujariDashboard"); ?>';
-                }, 3000);
+            const contact = urlParams.get("contact");
+            if (contact && contact.length === 10) {
+                mobileInput.value = contact;
+                validateMobileNumber(mobileInput); // Show "Get OTP" button if valid
             }
         });
     </script>
