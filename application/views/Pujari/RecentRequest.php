@@ -23,14 +23,14 @@
             position: sticky;
             top: 0;
             z-index: 1;
-            padding: 10px; /* Consistent padding */
+            padding: 10px;
         }
         .table td {
             text-align: center;
             vertical-align: middle;
-            padding: 10px; /* Consistent padding */
-            white-space: nowrap; /* Prevent text wrapping */
-            overflow: hidden; /* Hide overflow within cells */
+            padding: 10px;
+            white-space: nowrap;
+            overflow: hidden;
         }
         .filter-btn {
             display: flex;
@@ -42,15 +42,15 @@
             height: 50px;
         }
         .table {
-            table-layout: fixed; /* Keep table layout fixed */
+            table-layout: fixed;
             width: 100%;
-            border-collapse: collapse; /* Prevent cell spacing issues */
-            min-width: 1000px; /* Ensure table is wide enough to trigger scrollbar */
+            border-collapse: collapse;
+            min-width: 1000px;
         }
         .table th, .table td {
-            width: 14.28%; /* Equal width for 7 columns */
-            min-width: 150px; /* Minimum width for readability and stability */
-            box-sizing: border-box; /* Include padding in width calculation */
+            width: 14.28%;
+            min-width: 150px;
+            box-sizing: border-box;
         }
         .dropdown-menu {
             min-width: 200px;
@@ -59,11 +59,24 @@
         .filter-section {
             margin-bottom: 10px;
         }
-        /* Ensure table container allows horizontal scrolling */
         div[style="overflow-x: auto;"] {
             overflow-x: auto;
             width: 100%;
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+            -webkit-overflow-scrolling: touch;
+        }
+        /* Updated class name to match the button class */
+        .approve-btn {
+            transition: background-color 0.3s ease;
+        }
+        .approve-btn.btn-success {
+            background-color: #28a745 !important;
+            color: white !important;
+            border-color: #28a745 !important;
+        }
+        /* New rule to wrap text in Address column */
+        .table td:nth-child(6) { /* Targeting the 6th column (Address) */
+            white-space: normal;
+            overflow: visible;
         }
     </style>
 </head>
@@ -75,46 +88,46 @@
 <div style="min-height: 100vh;">
 <div class="container mt-5">
     <div class="d-flex justify-content-between pt-4">
-    <h5 class="mb-4">Recent Request</h5>
-    <div class="filter-btn">
-        <button class="btn btn-outline-secondary">
-            <i class="bi bi-funnel"></i> Filter By
-        </button>
+        <h5 class="mb-4">Recent Request</h5>
+        <div class="filter-btn">
+            <button class="btn btn-outline-secondary" id="filterButton">
+                <i class="bi bi-funnel"></i> Filter By
+            </button>
+        </div>
     </div>
+    <div style="overflow-x: auto;">
+        <table class="table table-bordered" id="puja-table">
+            <thead id="puja-table-header">
+                <tr>
+                    <th>Name</th>
+                    <th>Puja</th>
+                    <th>Mode</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="puja-table-body"></tbody>
+        </table>
     </div>
-<div style="overflow-x: auto;">
-    <table class="table table-bordered" id="puja-table">
-        <thead id="puja-table-header">
-            <tr>
-                <th>Name</th>
-                <th>Puja</th>
-                <th>Mode</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Address</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="puja-table-body"></tbody>
-    </table>
-</div>
 
-<!-- Pagination -->
-<nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center" id="pagination">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">...</a></li>
-        <li class="page-item"><a class="page-link" href="#">10</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-        </li>
-    </ul>
-</nav>
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center" id="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">...</a></li>
+            <li class="page-item"><a class="page-link" href="#">10</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 </div>
 <footer>
@@ -128,17 +141,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const tableHeader = document.querySelector("#puja-table-header");
     const tableBody = document.querySelector("#puja-table-body");
     const paginationContainer = document.querySelector("#pagination");
-    const filterButton = document.querySelector(".filter-btn button");
+    const filterButton = document.getElementById("filterButton");
     let currentPage = 1;
     const itemsPerPage = 10;
     let selectedModes = [];
     let selectedStatuses = [];
     let filterDropdown;
 
-    // Load dummy data with 15 online, 15 offline, 15 approved, and 15 rejected entries
+    // Load dummy data
     function loadDummyData() {
         const dummyData = [
-            // 15 Online entries
             { "name": "Rahul Sharma", "puja": "Shani Puja", "Mode": "Online", "date": "2025-03-01", "time": "09:00 AM", "address": "Viman Nagar, Pune", "distance": "", "status": "" },
             { "name": "Sneha Gupta", "puja": "Ganesh Puja", "Mode": "Online", "date": "2025-03-02", "time": "10:30 AM", "address": "Andheri, Mumbai", "distance": "", "status": "" },
             { "name": "Arjun Patel", "puja": "Lakshmi Puja", "Mode": "Online", "date": "2025-03-03", "time": "07:00 AM", "address": "Goregaon, Mumbai", "distance": "", "status": "" },
@@ -154,7 +166,6 @@ document.addEventListener("DOMContentLoaded", function () {
             { "name": "Pooja Sharma", "puja": "Lakshmi Puja", "Mode": "Online", "date": "2025-03-13", "time": "07:00 AM", "address": "Vashi, Navi Mumbai", "distance": "", "status": "" },
             { "name": "Kiran Patel", "puja": "Navgrah Puja", "Mode": "Online", "date": "2025-03-14", "time": "06:00 PM", "address": "Wakad, Pune", "distance": "", "status": "" },
             { "name": "Meera Das", "puja": "Satyanarayan Puja", "Mode": "Online", "date": "2025-03-15", "time": "05:00 PM", "address": "Borivali, Mumbai", "distance": "", "status": "" },
-            // 15 Offline entries
             { "name": "Anita Rao", "puja": "Shani Puja", "Mode": "Offline", "date": "2025-03-16", "time": "09:00 AM", "address": "Shivaji Nagar, Pune", "distance": "https://via.placeholder.com/50", "status": "" },
             { "name": "Suresh Kumar", "puja": "Ganesh Puja", "Mode": "Offline", "date": "2025-03-17", "time": "10:30 AM", "address": "Thane, Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
             { "name": "Meena Iyer", "puja": "Lakshmi Puja", "Mode": "Offline", "date": "2025-03-18", "time": "07:00 AM", "address": "Navi Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
@@ -170,7 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
             { "name": "Nikhil Sharma", "puja": "Lakshmi Puja", "Mode": "Offline", "date": "2025-03-28", "time": "07:00 AM", "address": "Pimpri, Pune", "distance": "https://via.placeholder.com/50", "status": "" },
             { "name": "Divya Patel", "puja": "Navgrah Puja", "Mode": "Offline", "date": "2025-03-29", "time": "06:00 PM", "address": "Thane West, Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
             { "name": "Vinay Iyer", "puja": "Satyanarayan Puja", "Mode": "Offline", "date": "2025-03-30", "time": "05:00 PM", "address": "Navi Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
-            // 15 Approved entries
             { "name": "Ajay Verma", "puja": "Shani Puja", "Mode": "Online", "date": "2025-03-31", "time": "09:00 AM", "address": "Pune", "distance": "", "status": "Approved" },
             { "name": "Priyanka Roy", "puja": "Ganesh Puja", "Mode": "Online", "date": "2025-04-01", "time": "10:30 AM", "address": "Mumbai", "distance": "", "status": "Approved" },
             { "name": "Rakesh Tiwari", "puja": "Lakshmi Puja", "Mode": "Online", "date": "2025-04-02", "time": "07:00 AM", "address": "Pune", "distance": "", "status": "Approved" },
@@ -186,7 +196,6 @@ document.addEventListener("DOMContentLoaded", function () {
             { "name": "Nisha Sharma", "puja": "Lakshmi Puja", "Mode": "Online", "date": "2025-04-12", "time": "07:00 AM", "address": "Pune", "distance": "", "status": "Approved" },
             { "name": "Arvind Patel", "puja": "Navgrah Puja", "Mode": "Online", "date": "2025-04-13", "time": "06:00 PM", "address": "Mumbai", "distance": "", "status": "Approved" },
             { "name": "Jyoti Nair", "puja": "Satyanarayan Puja", "Mode": "Online", "date": "2025-04-14", "time": "05:00 PM", "address": "Pune", "distance": "", "status": "Approved" },
-            // 15 Rejected entries
             { "name": "Shalini Gupta", "puja": "Shani Puja", "Mode": "Online", "date": "2025-04-15", "time": "09:00 AM", "address": "Pune", "distance": "", "status": "Rejected" },
             { "name": "Rahul Desai", "puja": "Ganesh Puja", "Mode": "Online", "date": "2025-04-16", "time": "10:30 AM", "address": "Mumbai", "distance": "", "status": "Rejected" },
             { "name": "Pooja Nair", "puja": "Lakshmi Puja", "Mode": "Online", "date": "2025-04-17", "time": "07:00 AM", "address": "Pune", "distance": "", "status": "Rejected" },
@@ -209,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Load table with pagination and filters
     function loadTable(page) {
         const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-        let filteredData = storedData;
+        let filteredData = [...storedData]; // Create a copy to avoid modifying original data
 
         // Apply mode filter
         if (selectedModes.length > 0) {
@@ -254,14 +263,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 </tr>`;
         }
 
-        // Load table body without truncation
+        // Load table body
         tableBody.innerHTML = "";
         let start = (page - 1) * itemsPerPage;
         let end = start + itemsPerPage;
         let paginatedItems = filteredData.slice(start, end);
 
         paginatedItems.forEach((data, index) => {
-            let globalIndex = storedData.indexOf(data);
+            let globalIndex = storedData.indexOf(storedData.find(item => item.name === data.name && item.date === data.date));
             let row;
             if (selectedStatuses.length > 0) {
                 row = `<tr>
@@ -271,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${data.date}</td>
                     <td>${data.time}</td>
                     <td>${data.address}</td>
-                    <td class="status-col">${data.status}</td>
+                    <td class="status-col">${data.status || ''}</td>
                 </tr>`;
             } else {
                 row = `<tr>
@@ -283,10 +292,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${data.address}</td>
                     ${selectedModes.length === 1 && selectedModes.includes("offline") ? `<td class="distance-col">${data.distance ? `<img src="${data.distance}" alt="Distance">` : ""}</td>` : ""}
                     <td>
-                        <button class="btn btn-outline-success btn-sm approve-btn me-2 ${data.status === "Approved" ? "btn-success" : ""}" data-index="${globalIndex}">
+                        <button class="btn btn-outline-success btn-sm approve-btn me-2 ${data.status === 'Approved' ? 'btn-success' : ''}" data-index="${globalIndex}">
                             <i class="bi bi-check-lg"></i>
                         </button>
-                        <button class="btn btn-outline-danger btn-sm delete-btn" data-index="${globalIndex}">
+                        <button class="btn btn-outline-danger btn-sm reject-btn" data-index="${globalIndex}">
                             <i class="bi bi-x-lg"></i>
                         </button>
                     </td>
@@ -346,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("nextPage")?.addEventListener("click", function (event) {
             event.preventDefault();
             const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-            let filteredData = storedData;
+            let filteredData = [...storedData];
 
             if (selectedModes.length > 0) {
                 filteredData = filteredData.filter(data => selectedModes.includes(data.Mode.toLowerCase()));
@@ -362,30 +371,60 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Approve and Delete functionality
+    // Approve and Reject functionality
     tableBody.addEventListener("click", function (event) {
+        const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
         if (event.target.closest(".approve-btn")) {
             const indexToApprove = event.target.closest(".approve-btn").dataset.index;
-            let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
+            if (storedData[indexToApprove].status === "Approved") {
+                Swal.fire({
+                    title: "Already Approved!",
+                    text: "This request has already been approved.",
+                    icon: "warning",
+                    confirmButtonColor: "#28a745"
+                });
+                return;
+            } else if (storedData[indexToApprove].status === "Rejected") {
+                Swal.fire({
+                    title: "Cannot Approve!",
+                    text: "This request has already been rejected.",
+                    icon: "warning",
+                    confirmButtonColor: "#28a745"
+                });
+                return;
+            }
             storedData[indexToApprove].status = "Approved";
             localStorage.setItem("pujaRequests", JSON.stringify(storedData));
-
             event.target.closest(".approve-btn").classList.remove("btn-outline-success");
             event.target.closest(".approve-btn").classList.add("btn-success");
-
             Swal.fire({
                 title: "Approved!",
                 text: "The request has been approved successfully.",
                 icon: "success",
                 confirmButtonColor: "#28a745"
             });
-
             loadTable(currentPage);
         }
 
-        if (event.target.closest(".delete-btn")) {
-            const indexToDelete = event.target.closest(".delete-btn").dataset.index;
-            let storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
+        if (event.target.closest(".reject-btn")) {
+            const indexToReject = event.target.closest(".reject-btn").dataset.index;
+            if (storedData[indexToReject].status === "Rejected") {
+                Swal.fire({
+                    title: "Already Rejected!",
+                    text: "This request has already been rejected.",
+                    icon: "warning",
+                    confirmButtonColor: "#d33"
+                });
+                return;
+            } else if (storedData[indexToReject].status === "Approved") {
+                Swal.fire({
+                    title: "Cannot Reject!",
+                    text: "This request has already been approved.",
+                    icon: "warning",
+                    confirmButtonColor: "#d33"
+                });
+                return;
+            }
             Swal.fire({
                 title: "Are you sure?",
                 text: "Do you want to reject this request?",
@@ -396,7 +435,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 confirmButtonText: "Yes, Reject"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    storedData[indexToDelete].status = "Rejected"; // Mark as Rejected instead of deleting
+                    storedData[indexToReject].status = "Rejected";
                     localStorage.setItem("pujaRequests", JSON.stringify(storedData));
                     Swal.fire({
                         title: "Rejected!",
@@ -450,7 +489,7 @@ document.addEventListener("DOMContentLoaded", function () {
         filterDropdown.querySelectorAll('.form-check-input').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 updateFilters();
-                currentPage = 1;
+                currentPage = 1; // Reset to first page on filter change
                 loadTable(currentPage);
             });
         });

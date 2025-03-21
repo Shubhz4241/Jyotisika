@@ -82,7 +82,7 @@
                 <h5 class="text-center fw-bold mb-4" style="color: #444; font-size: 1.6rem;">SignUp to Continue</h5>
 
                 <form id="loginForm" method="POST" style="width: 100%; max-width: 420px;"
-                    action="<?php echo base_url("UserLoginSignup/userdata")?>">
+                    action="<?php echo base_url("UserLoginSignup/register_user") ?>">
                     <!--  Mobile Number -->
                     <div id="mobileStep" class="mb-4">
                         <div class="mb-3">
@@ -102,7 +102,8 @@
                     <!-- OTP Verification -->
                     <div id="otpStep" class="mb-4" style="display: none;">
                         <div class="mb-3">
-                            <input type="text" name="user_otp" class="form-control shadow-none form-control-lg rounded-2" id="otpInput"
+                            <input type="text" name="user_otp"
+                                class="form-control shadow-none form-control-lg rounded-2" id="otpInput"
                                 placeholder="Enter OTP" maxlength="4" minlength="4" pattern="[0-9]{4}"
                                 style="padding: 0.5rem; border: 1px solid #ddd; font-size:1.1rem">
                             <div id="otpError" class="text-danger small"></div>
@@ -297,12 +298,80 @@
     </script>
 
 
+    <script>
+        document.getElementById("chatlink").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default redirection
+
+            <?php if (!$this->session->userdata('usermobilenumberexit')): ?>
+            Swal.fire({
+                title: "Login Required",
+                text: "usermobilenumberexit",
+                icon: "warning",
+
+            });
+
+            <?php endif ?>
+        });
+
+
+    </script>
+
+
+   
+
+
+        <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity = "sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin = "anonymous" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            <?php if ($this->session->flashdata('usermobilenumberexit')): ?>
+            Swal.fire({
+                icon: 'warning',
+
+                text: '<?php echo $this->session->flashdata('usermobilenumberexit'); ?>',
+                confirmButtonText: 'OK'
+            });
+     
+        <?php endif; ?>
+
+        <?php if ($this->session->flashdata('error')): ?>
+            Swal.fire({
+                icon: 'warning',
+
+                text: '<?php echo $this->session->flashdata('error'); ?>',
+                confirmButtonText: 'OK'
+            });
+
+        <?php endif; ?>
+
+        <?php if ($this->session->flashdata('dbqueryerror')): ?>
+            Swal.fire({
+                icon: 'warning',
+
+                text: '<?php echo $this->session->flashdata('dbqueryerror'); ?>',
+                confirmButtonText: 'OK'
+            });
+
+        <?php endif; ?>
+
+
+        <?php if ($this->session->flashdata('sessionnotset')): ?>
+            Swal.fire({
+                icon: 'warning',
+
+                text: '<?php echo $this->session->flashdata('sessionnotset'); ?>',
+                confirmButtonText: 'OK'
+            });
+
+        <?php endif; ?>
+
+    });
+ </script>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>

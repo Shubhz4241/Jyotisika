@@ -11,17 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         body {
-
             font-family: 'Montserrat', serif;
             background-image: url('<?php echo base_url("assets/images/Pujari/OTPVarificationForm.png"); ?>');
             background-position: center bottom;
-            /* Position image at the bottom */
             background-size: 100% auto;
-            /* Full width, auto height */
             background-repeat: no-repeat;
-            /* Prevent repeating */
             background-attachment: fixed;
-            /* Keeps the image fixed */
             min-height: 100vh;
             margin: 0;
             padding: 20px;
@@ -37,9 +32,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 800px;
-            /* margin-top: 50px; */
             margin-bottom: 50px;
-
         }
 
         .form-group {
@@ -82,11 +75,10 @@
             height: 6px;
             background-color: #ddd;
             margin-bottom: 20px;
-            color:#99AFCD;
+            color: #99AFCD;
             width: 90px;
             border-radius: 14px;
         }
-
 
         #fileList {
             display: flex;
@@ -94,7 +86,6 @@
             gap: 5px;
         }
 
-        /* File item styling */
         .file-item {
             background: #f8f9fa;
             border-radius: 5px;
@@ -110,13 +101,32 @@
             border: 1px solid #ddd;
         }
 
-
-        /* Remove (Cross) Button Styling */
         .remove-file {
             background: none;
             border: none;
             font-size: 14px;
             cursor: pointer;
+        }
+
+        /* Dropdown specific styles */
+        .dropdown-menu {
+            min-width: 100%;
+        }
+
+        .dropdown-item {
+            padding: 5px 10px;
+        }
+
+        .form-check-input {
+            margin-right: 5px;
+        }
+
+        /* Fix for specialties dropdown button */
+        #specialtiesDropdown {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: left;
         }
     </style>
 </head>
@@ -124,7 +134,7 @@
 <body>
     <div class="container">
         <div class="logo-container">
-            <img src="assets/images/Pujari/logo.png" alt="Jyotisika Logo">
+            <img src="assets/images/Astrologer/Rectangle 5201.png" alt="Jyotisika Logo">
         </div>
         <h4 class="text-center">Apply for Pujari Role</h4>
         <hr>
@@ -165,18 +175,27 @@
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Specialties</label>
-                    <input type="text" class="form-control" id="specialties" required minlength="3" placeholder="Enter Specialties">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle form-control" type="button" id="specialtiesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Specialties
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="specialtiesDropdown">
+                            <li><label class="dropdown-item"><input type="checkbox" name="specialties" value="Vedic Astrology"> Vedic Astrology</label></li>
+                            <li><label class="dropdown-item"><input type="checkbox" name="specialties" value="Numerology"> Numerology</label></li>
+                            <li><label class="dropdown-item"><input type="checkbox" name="specialties" value="Palmistry"> Palmistry</label></li>
+                            <li><label class="dropdown-item"><input type="checkbox" name="specialties" value="Tarot Reading"> Tarot Reading</label></li>
+                            <li><label class="dropdown-item"><input type="checkbox" name="specialties" value="Vastu Shastra"> Vastu Shastra</label></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Aadhaar Card</label>
                     <input type="file" class="form-control" id="aadhaarCard" accept=".pdf,.jpg,.png" required>
                 </div>
-
                 <div class="col-md-6 form-group">
                     <label>Experience (in years)</label>
                     <input type="number" class="form-control" id="experience" required min="0" max="50" placeholder="Enter experience in years">
                 </div>
-
                 <div class="col-md-6 form-group">
                     <label>Certificates (optional)</label>
                     <input type="file" class="form-control" id="certificates" accept=".pdf,.jpg,.png" multiple>
@@ -187,6 +206,7 @@
         </form>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.getElementById("contact").addEventListener("input", function(event) {
             this.value = this.value.replace(/\D/g, '');
@@ -197,10 +217,9 @@
             event.preventDefault(); // Prevent actual form submission
 
             // Redirect directly to success message section in MobileNumberAndOTPForm
-            window.location.href = "<?php echo base_url('MobileNumberAndOTPForm'); ?>?success=true";
+            window.location.href = "<?php echo base_url('AstrologerMobileNumberAndOTPForm'); ?>?success=true";
         });
     </script>
-
     <script>
         let selectedFiles = []; // Store selected files
 
@@ -250,6 +269,25 @@
             selectedFiles.splice(index, 1); // Remove file from array
             displayFiles(); // Refresh file list
         }
+    </script>
+    <script>
+        // Update dropdown button text when selections change
+        const checkboxes = document.querySelectorAll('input[name="specialties"]');
+        const dropdownButton = document.getElementById('specialtiesDropdown');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const selected = Array.from(checkboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.value);
+                
+                if (selected.length > 0) {
+                    dropdownButton.textContent = selected.join(', ');
+                } else {
+                    dropdownButton.textContent = 'Select Specialties';
+                }
+            });
+        });
     </script>
 </body>
 

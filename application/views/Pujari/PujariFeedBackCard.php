@@ -110,7 +110,6 @@
         }
 
         @media (max-width: 768px) {
-    
             .feedback-card {
                 padding: 15px;
             }
@@ -120,7 +119,8 @@
                 align-items: flex-start;
             }
 
-            .user-details, .stars {
+            .user-details,
+            .stars {
                 margin: 5px 0;
             }
 
@@ -162,15 +162,16 @@
 
 <body>
     <header>
-        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
+        <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
-        <div class="container">
+    <div style="min-height: 100vh;">
+        <div class="container mt-5">
             <h2>Feedbacks</h2>
             <div class="row">
                 <!-- Card 1 -->
                 <div class="col-md-4">
                     <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
+                        <p>"This Pujari provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
                         <div class="user-info">
                             <div class="user-details">
                                 <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
@@ -194,7 +195,7 @@
                 <!-- Card 2 -->
                 <div class="col-md-4">
                     <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
+                        <p>"This Pujari provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
                         <div class="user-info">
                             <div class="user-details">
                                 <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
@@ -218,7 +219,7 @@
                 <!-- Card 3 -->
                 <div class="col-md-4">
                     <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
+                        <p>"This Pujari provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
                         <div class="user-info">
                             <div class="user-details">
                                 <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
@@ -242,7 +243,7 @@
                 <!-- Card 4 -->
                 <div class="col-md-4">
                     <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
+                        <p>"This Pujari provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
                         <div class="user-info">
                             <div class="user-details">
                                 <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
@@ -266,7 +267,7 @@
                 <!-- Card 5 -->
                 <div class="col-md-4">
                     <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
+                        <p>"This Pujari provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
                         <div class="user-info">
                             <div class="user-details">
                                 <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
@@ -290,7 +291,7 @@
                 <!-- Card 6 -->
                 <div class="col-md-4">
                     <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
+                        <p>"This Pujari provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
                         <div class="user-info">
                             <div class="user-details">
                                 <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
@@ -312,9 +313,9 @@
                 </div>
             </div>
         </div>
-    
+    </div>
     <footer>
-        <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
+        <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
 
     <script>

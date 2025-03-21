@@ -39,10 +39,10 @@
 
 
     <main>
-        <div class="container py-5">
-            <!-- Select Year and Place + When is Christmas Card -->
-            <div class="row g-4 mb-4">
-                <!-- Form Section -->
+        <div class="container ">
+         
+            <!-- <div class="row g-4 mb-4">
+               
                 <div class="col-12 col-md-6 d-flex">
                     <div class="p-4 border rounded shadow-sm  w-100 d-flex flex-column justify-content-between">
                         <h2 class="mb-4 text-uppercase text-center font-weight-bold" style="letter-spacing: 1px;">Select
@@ -69,7 +69,7 @@
                     </div>
                 </div>
 
-                <!-- Christmas Card -->
+               
                 <div class="col-12 col-md-6 d-flex justify-content-center shadow-sm  border rounded">
                     <div class="card  h-100 w-100 border-0 d-flex flex-column justify-content-between">
                         <div class="card-body text-center h-100 pt-5">
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Festival Image + About the Festival -->
             <div class="row g-4 mb-5">
@@ -96,6 +96,9 @@
                         <p>
                             Traditions vary across cultures, but the spirit of Christmas brings warmth and happiness to
                             everyone. From singing carols to lighting up homes, this festival symbolizes hope and unity.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio doloribus quas explicabo ipsam consequatur minima quibusdam rerum, voluptas, quod, omnis amet eum quis laudantium doloremque quasi atque sint sit architecto tempora? Consequatur maxime reiciendis consequuntur reprehenderit culpa, mollitia officiis minima placeat ducimus enim laborum beatae atque aperiam nemo est ipsam?
                         </p>
                         
                     </div>

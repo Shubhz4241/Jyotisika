@@ -156,6 +156,7 @@
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
+            margin-bottom: 22px;
         }
 
         .dropdown-content {
@@ -221,7 +222,7 @@
 </head>
 
 <body>
-    <header>
+<header>
         <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
     <div style="min-height: 100vh;" class="py-3">

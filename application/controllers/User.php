@@ -9,13 +9,24 @@ class User extends CI_Controller
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
 
-		$this->load->library('session'); // Load session library
-		
+		$this->load->library('session'); 
+
 
 
 	}
 
 
+//-------------------------CHANGE LANGUAVAGE ---------------------------------------------------------------------
+
+	public function change_language($lang = "english")
+	{
+
+		$this->session->set_userdata('site_language', $lang);
+		redirect($_SERVER['HTTP_REFERER']); // Redirect back to the previous page
+	}
+
+
+//-----------------------------------GET USER DATA ----------------------------------------------------------------
 	public function get_userdata($user_id)
 	{
 
@@ -32,18 +43,14 @@ class User extends CI_Controller
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["session_id" => $user_id]));
-		curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Set timeout for API call
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
 		$response = curl_exec($ch);
 		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$curl_error = curl_error($ch);
 		curl_close($ch);
 
-		if ($curl_error) {
-			show_error("cURL Error: " . $curl_error, 500);
-			return null;
-		}
-
+		
 		if ($http_code !== 200) {
 			show_error($response . $http_code, 500);
 			return null;
@@ -66,155 +73,30 @@ class User extends CI_Controller
 	}
 
 
+
+//------------------------------------------- USER  SELF PAGES---------------------------------------------------------------------
+
 	public function Home()
-{
-    $user_id = $this->session->userdata('user_id');
-    $data = [];
-
-    if (!empty($user_id)) {
-        $getdata = $this->get_userdata($user_id);
-
-        if ($getdata != null) {
-            $data["userinfo"] = $getdata;
-        }
-    }
-
-	
-    $language = $this->session->userdata('site_language') ?? 'english';
-
-    
-    $this->lang->load('message', $language);
-	
-
-  
-    
-    $this->load->view('User/Home', $data);
-}
-
-
-	public function change_language($lang = "english") {
-		
-        $this->session->set_userdata('site_language', $lang);
-        redirect($_SERVER['HTTP_REFERER']); // Redirect back to the previous page
-    }
-    
-   
-
-
-	public function Demo()
 	{
-		$this->load->view('User/Demo');
-	}
-	public function FreeKundli()
-	{
+		$user_id = $this->session->userdata('user_id');
+		$data = [];
+
+		if (!empty($user_id)) {
+			$getdata = $this->get_userdata($user_id);
+
+			if ($getdata != null) {
+				$data["userinfo"] = $getdata;
+			} else {
+				redirect("UserLoginSignup/Login");
+			}
+		}
+
+
 		$language = $this->session->userdata('site_language') ?? 'english';
+
+
 		$this->lang->load('message', $language);
-		$this->load->view('User/FreeKundli');
-	}
-
-	public function BookPooja()
-	{
-		$language = $this->session->userdata('site_language') ?? 'english';
-		$this->lang->load('message', $language);
-		$this->load->view('User/BookPooja');
-	}
-
-	public function KundliMatching()
-	{
-		$language = $this->session->userdata('site_language') ?? 'english';
-		$this->lang->load('message', $language);
-		$this->load->view('User/KundliMatching');
-	}
-
-	public function Festival()
-	{
-		$language = $this->session->userdata('site_language') ?? 'english';
-		$this->lang->load('message', $language);
-		$this->load->view('User/Festival');
-	}
-
-	public function Panchang()
-	{
-		$language = $this->session->userdata('site_language') ?? 'english';
-		$this->lang->load('message', $language);
-		$this->load->view('User/Panchang');
-	}
-
-	public function JyotisikaMall()
-	{
-		$this->load->view('User/JyotisikaMall');
-	}
-
-	public function TodayHoroscope()
-	{
-		$this->load->view('User/TodayHoroscope');
-	}
-
-	public function HoroscopeReadmore()
-	{
-		$this->load->view('User/HoroscopeReadmore');
-	}
-
-	public function KP()
-	{
-	
-		$language = $this->session->userdata('site_language') ?? 'english';
-		$this->lang->load('message', $language);
-
-    
-		
-		
-		$this->load->view('User/KP');
-	}
-
-	public function Astrologers()
-	{
-		$this->load->view('User/Astrologers');
-	}
-
-	public function ViewAstrologer()
-	{
-		$this->load->view('User/ViewAstrologer');
-	}
-
-	public function PoojarViewMore()
-	{
-		$this->load->view('User/PoojarViewMore');
-	}
-
-	public function OfflinePoojaris()
-	{
-		$this->load->view('User/OfflinePoojaris');
-	}
-
-	public function FestivalReadmore()
-	{
-		$this->load->view('User/FestivalReadmore');
-	}
-
-	public function WhyUs()
-	{
-		$this->load->view('User/WhyUs');
-	}
-
-	public function OnlinePoojaris()
-	{
-		$this->load->view("user/OnlinePoojaris");
-	}
-
-	public function Recharge()
-	{
-		$this->load->view('User/Recharge');
-	}
-
-	public function ServiceDetails()
-	{
-		$this->load->view('User/ServiceDetails');
-	}
-
-	public function Poojaris()
-	{
-		$this->load->view('User/Poojaris');
+		$this->load->view('User/Home', $data);
 	}
 
 
@@ -245,19 +127,71 @@ class User extends CI_Controller
 
 
 
+	
 
 
-
-	public function Orders()
+// ------------------------------------------USER API PAGES -------------------------------------------------------------
+	public function FreeKundli()
 	{
-		$this->load->view('User/Orders');
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+		$this->load->view('User/FreeKundli');
 	}
 
-	public function AstrologyServices()
+	
+
+	public function KundliMatching()
 	{
-		$this->load->view('User/AstrologyServices');
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+		$this->load->view('User/KundliMatching');
+	}
+	public function Panchang()
+	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+		$this->load->view('User/Panchang');
 	}
 
+	public function KP()
+	{
+
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+		$this->load->view('User/KP');
+	}
+
+
+
+
+//------------------------------------------USER FESTIVAL PAGES---------------------------------------------------------
+
+	public function Festival()
+	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+		$this->load->view('User/Festival');
+	}
+
+
+	public function FestivalReadmore()
+	{
+		$this->load->view('User/FestivalReadmore');
+	}
+
+
+
+
+	
+//------------------------------------------JYOTISIKA MALL---------------------------------------------------------------------------
+	public function JyotisikaMall()
+	{
+		$this->load->view('User/JyotisikaMall');
+	}
+
+	
 	public function ProductDetails()
 	{
 		$this->load->view('User/ProductDetails');
@@ -268,29 +202,41 @@ class User extends CI_Controller
 		$this->load->view('User/ProductPayment');
 	}
 
-	public function Notification()
+
+
+
+
+
+
+//-------------------------------- HOROSCOPE PAGES ------------------------------------------------------------------
+	public function TodayHoroscope()
 	{
-		$this->load->view('User/Notification');
+		$this->load->view('User/TodayHoroscope');
 	}
 
-	public function CustomerSupport()
+	public function HoroscopeReadmore()
 	{
-		$this->load->view('User/CustomerSupport');
+		$this->load->view('User/HoroscopeReadmore');
 	}
 
-	public function PoojaInfo()
+
+
+
+
+	//----------------------------------ASTROLOGERS PAGES ---------------------------------------------------------
+	public function Astrologers()
 	{
-		$this->load->view('User/PoojaInfo');
+		$this->load->view('User/Astrologers');
 	}
 
-	public function MobPooja()
+	public function ViewAstrologer()
 	{
-		$this->load->view('User/MobPooja');
+		$this->load->view('User/ViewAstrologer');
 	}
 
-	public function ShowFreeKundli()
+	public function AstrologyServices()
 	{
-		$this->load->view('User/ShowFreeKundli');
+		$this->load->view('User/AstrologyServices');
 	}
 
 	public function Following()
@@ -299,8 +245,135 @@ class User extends CI_Controller
 	}
 
 
+
+
+//---------------------------------------Book PUJA AND PUJARI SECTION ---------------------------------------------------
+
+
+	public function BookPooja()
+	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+		$this->load->view('User/BookPooja');
+	}
+
+	public function PoojaInfo()
+	{
+		$this->load->view('User/PoojaInfo');
+	}
+
+
+
+	public function OfflinePoojaris()
+	{
+		$this->load->view('User/OfflinePoojaris');
+	}
+
+
+
+
+	public function PoojarViewMore()
+	{
+		$this->load->view('User/PoojarViewMore');
+	}
+
+
+	public function OnlinePoojaris()
+	{
+		$this->load->view("user/OnlinePoojaris");
+	}
+
+	
+
+	
+	
+
+	
+
+
+	public function Poojaris()
+	{
+		$this->load->view('User/Poojaris');
+	}
+
+
+
+	
+
+
+
+
+
+//---------------------------------------USER NOTIFICATION SECTION  -----------------------------------------------
+	public function ServiceDetails()
+	{
+		$this->load->view('User/ServiceDetails');
+	}
+
+
+
+
+	public function Orders()
+	{
+		$this->load->view('User/Orders');
+	}
+
+	
+	public function Notification()
+	{
+		$this->load->view('User/Notification');
+	}
+
+
+
+	public function CustomerSupport()
+	{
+		$this->load->view('User/CustomerSupport');
+	}
+
+	
+	//----------------------------------------USER MOB PUJA --------------------------------------------------
+
+	public function MobPooja()
+	{
+		$this->load->view('User/MobPooja');
+	}
+
+
+
+
+
+//----------------------------------------------------SOME OTHER PAGES-------------------------------------
+
+public function WhyUs()
+{
+	$this->load->view('User/WhyUs');
+}
+
+
+
+	// ------------------------USER OTHER PARTS -------------------------------------------------------------
+	public function ShowFreeKundli()
+	{
+		$this->load->view('User/ShowFreeKundli');
+	}
+
+
+
+	
+
+	public function Recharge()
+	{
+		$this->load->view('User/Recharge');
+	}
+
 	public function getdata()
 	{
 
+	}
+
+	public function Demo()
+	{
+		$this->load->view('User/Demo');
 	}
 }

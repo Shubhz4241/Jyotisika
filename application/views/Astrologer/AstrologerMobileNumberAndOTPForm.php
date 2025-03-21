@@ -89,6 +89,11 @@
             margin-top: 10px;
             color: #6c757d;
         }
+
+        /* Invalid input styling */
+        .invalid-input {
+            border-color: #dc3545 !important;
+        }
     </style>
 </head>
 
@@ -101,7 +106,7 @@
         <!-- Mobile Number Form -->
         <div id="mobile-form">
             <div class="logo-container">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+                <img src="<?php echo base_url() . 'assets/images/Astrologer/Rectangle 5201.png' ?>" alt="Logo">
             </div>
             <form>
                 <div class="mb-3">
@@ -112,24 +117,23 @@
             </form>
             <div class="text-center mt-3">
                 <p>Don’t have an account?
-                    <a href="<?php echo base_url('RegistrationForm'); ?>" class="text-primary">Register now</a>
+                    <a href="<?php echo base_url('AstrogerRegistrationForm'); ?>" class="text-primary">Register now</a>
                 </p>
             </div>
-
         </div>
 
         <!-- OTP Form -->
         <div id="otp-form" style="display: none;">
             <div class="logo-container">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+                <img src="<?php echo base_url() . 'assets/images/Astrologer/Rectangle 5201.png' ?>" alt="Logo">
             </div>
             <p class="text-center">We have Sent the code on +91************95</p>
             <form>
                 <div class="d-flex justify-content-between mb-3">
-                    <input type="text" class="form-control text-center me-2" maxlength="1" required>
-                    <input type="text" class="form-control text-center me-2" maxlength="1" required>
-                    <input type="text" class="form-control text-center me-2" maxlength="1" required>
-                    <input type="text" class="form-control text-center" maxlength="1" required>
+                    <input type="text" class="form-control text-center me-2 otp-input" maxlength="1" required oninput="validateOtpInput(this)">
+                    <input type="text" class="form-control text-center me-2 otp-input" maxlength="1" required oninput="validateOtpInput(this)">
+                    <input type="text" class="form-control text-center me-2 otp-input" maxlength="1" required oninput="validateOtpInput(this)">
+                    <input type="text" class="form-control text-center otp-input" maxlength="1" required oninput="validateOtpInput(this)">
                 </div>
 
                 <button type="button" id="verifyOtpBtn" class="btn btn-custom w-100">Verify OTP</button>
@@ -147,8 +151,8 @@
                 <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Logo">
             </div>
             <p>Application Submitted Successfully!</p>
-            <small>Thank you for your submission! Our team is reviewing your application. </small>
-            <small>Note:- You will receive an update within 48 hours. If you have any queries, feel free to contact our support team."</small>
+            <small>Thank you for your submission! Our team is reviewing your application.</small>
+            <small>Note:- You will receive an update within 48 hours. If you have any queries, feel free to contact our support team.</small>
         </div>
     </div>
 
@@ -162,11 +166,45 @@
         const otpMessage = document.querySelector('#otp-form p');
         const countdownElement = document.getElementById('countdown');
         const resendOtpBtn = document.getElementById('resendOtpBtn');
+        const otpInputs = document.querySelectorAll('.otp-input');
         let countdown;
 
         function validateMobileNumber(input) {
             input.value = input.value.replace(/[^0-9]/g, ''); // Allow only numbers
             getOtpBtn.style.display = input.value.length === 10 ? 'block' : 'none';
+        }
+
+        function validateOtpInput(input) {
+            // Allow only numbers
+            input.value = input.value.replace(/[^0-9]/g, '');
+            
+            // Add invalid class if input is empty or not a number
+            if (input.value === '' || isNaN(input.value)) {
+                input.classList.add('invalid-input');
+            } else {
+                input.classList.remove('invalid-input');
+            }
+
+            // Move to next input if current is filled
+            if (input.value.length === 1) {
+                const nextInput = input.nextElementSibling;
+                if (nextInput && nextInput.classList.contains('otp-input')) {
+                    nextInput.focus();
+                }
+            }
+        }
+
+        function validateOtpForm() {
+            let isValid = true;
+            otpInputs.forEach(input => {
+                if (input.value === '' || isNaN(input.value)) {
+                    input.classList.add('invalid-input');
+                    isValid = false;
+                } else {
+                    input.classList.remove('invalid-input');
+                }
+            });
+            return isValid;
         }
 
         getOtpBtn.addEventListener('click', () => {
@@ -204,25 +242,40 @@
         });
 
         verifyOtpBtn.addEventListener('click', () => {
+            // Validate OTP form before proceeding
+            if (!validateOtpForm()) {
+                return; // Stop if validation fails
+            }
+
             otpForm.style.display = 'none';
             successMessage.style.display = 'block';
+
+            // Delay redirect by 3 seconds to show success message
+            setTimeout(() => {
+                const dashboardUrl = '<?php echo base_url("AstrologerAnalyticsAndEarning2"); ?>';
+                console.log('Redirecting to:', dashboardUrl);
+                window.location.href = dashboardUrl;
+            }, 3000); // 3-second delay
         });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const successParam = urlParams.get("success");
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const successParam = urlParams.get("success");
 
-        if (successParam === "true") {
-            document.getElementById('mobile-form').style.display = 'none';
-            document.getElementById('otp-form').style.display = 'none';
-            document.getElementById('success-message').style.display = 'block';
-        }
-    });
-</script>
-
+            if (successParam === "true") {
+                document.getElementById('mobile-form').style.display = 'none';
+                document.getElementById('otp-form').style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+                // Redirect to AstrologerDashboard after 3 seconds
+                setTimeout(() => {
+                    window.location.href = '<?php echo base_url("AstrologerAnalyticsAndEarning2"); ?>';
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 
 </html>

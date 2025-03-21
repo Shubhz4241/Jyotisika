@@ -39,7 +39,7 @@
             <p> <span style="color: var(--red);">Hinduism</span> is celebrated for its rich tapestry of festivals, each brimming with cultural and spiritual significance. Over time, these festivals have evolved, embracing new traditions and meanings while preserving their ancient roots.</p>
         </div>
         
-        <div class="row my-4">
+        <!-- <div class="row my-4">
             <div class="col-12 d-flex justify-content-center">
                 <select id="stateFilter" class="form-select mx-2 shadow-none" onchange="filterFestivals()">
                     <option value="">Select State</option>
@@ -69,9 +69,9 @@
                     <option value="2026">2026</option>
                 </select>
             </div>
-        </div>
+        </div> -->
 
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center mt-3">
             <div class="card p-2 " style="width:fit-content">
                 <p class="card-text fs-5"> <span style="color: var(--red);">Today's Festival :</span> There is no festival Today.</p>
             </div>

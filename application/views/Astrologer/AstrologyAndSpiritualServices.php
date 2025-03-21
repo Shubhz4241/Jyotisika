@@ -36,15 +36,16 @@
             padding: 10px 20px;
             background-color: #fff;
             color: black;
-            font-weight: bold;
+            font-weight: 400;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .filter-buttons button.active,
         .filter-buttons button:hover {
-            background-color: #f5c71a;
-            color: #fff;
+            background-color: #FAD6F6;
+            color: black;
+            
         }
 
         /* Responsive Table */
@@ -69,7 +70,7 @@
         }
 
         .table th {
-            background-color: orange;
+            background-color: #8BC24A;
             color: #fff;
             text-align: center;
             padding: 12px;

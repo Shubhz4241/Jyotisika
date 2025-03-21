@@ -78,7 +78,7 @@
                         <option value="Ghar shanti">Ghar shanti</option>
                     </select>
                 </div>
-                <table class="table table-bordered table-fixed  text-center">
+                <table class="table table-bordered table-fixed  text-center table table-striped">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -115,7 +115,7 @@
                         <option value="Ghar shanti">Ghar shanti</option>
                     </select>
                 </div>
-                <table class="table table-bordered table-fixed  text-center">
+                <table class="table table-bordered table-fixed  text-center table table-striped">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -157,7 +157,7 @@
                         <option value="Ghar shanti">Ghar shanti</option>
                     </select>
                 </div>
-                <table class="table table-bordered table-fixed  text-center">
+                <table class="table table-bordered table-fixed  text-center table table-striped">
                     <thead>
                         <tr>
                             <th>Name</th>

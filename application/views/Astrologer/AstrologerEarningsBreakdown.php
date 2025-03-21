@@ -14,10 +14,11 @@
     <style>
         body {
             background-color: #f8f8f8;
+            font-family: 'Montserrat', serif;
         }
 
         .table-container {
-      
+
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
@@ -48,57 +49,62 @@
         .filter-dropdown {
             display: none;
         }
+
         .mb-3 {
-    margin-bottom: 1rem !important;
-    margin-top: 100px;
-}
+            margin-bottom: 1rem !important;
+            margin-top: 100px;
+        }
     </style>
 </head>
 
 <body style="font-family: 'Montserrat', serif;">
     <header>
-        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
+    <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
     <div style="min-height: 100vh;">
         <div class="container">
-        <h5 class="mb-3">
-    <a  class="text-decoration-none text-dark" href="<?php echo base_url('AstrologerUser/AstrologerAnalyticsAndEarning2'); ?>">
-        <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
-        Earnings Breakdown
-    </a>
-</h5>
+            <h5 class="mb-3">
+                <a class="text-decoration-none text-dark" href="<?php echo base_url('AstrologerUser/AstrologerAnalyticsAndEarning2'); ?>">
+                    <img src="<?php echo base_url('assets/images/Pujari/arrow_back.png'); ?>" alt="Back">
+                    Earnings Breakdown
+                </a>
+            </h5>
             <div class="table-container">
-                <h5>Vastu Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('offline')">Filter</button></h5>
+                <h5>Offline puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('offline')">Filter</button></h5>
                 <div class="filter-dropdown text-end" id="offlineFilterDropdown">
                     <select id="offlineFilter" onchange="filterData('offline')">
                         <option value="">All</option>
-                        <option value="Vastu">Vastu</option>
-                        <option value="Vedic">Vedic</option>
-                        <option value="Kundli">Kundli</option>
+                        <option value="Rahu-ketu">Rahu-ketu</option>
+                        <option value="Ghar shanti">Ghar shanti</option>
                     </select>
                 </div>
-                <table class="table table-bordered table-fixed  text-center">
+                <table class="table table-bordered table-fixed  text-center table table-striped ">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Consultation Type</th>
+                            <th>Pooja</th>
                             <th>Fees</th>
                         </tr>
                     </thead>
                     <tbody id="offlineBody">
                         <tr>
                             <td>Jane Doe</td>
-                            <td>Vastu</td>
+                            <td>Rahu-ketu</td>
                             <td>500</td>
                         </tr>
                         <tr>
                             <td>Jane Doe</td>
-                            <td>Vastu</td>
+                            <td>Rahu-ketu</td>
                             <td>500</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
-                            <td>Vastu</td>
+                            <td>Ghar shanti</td>
+                            <td>1200</td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Ghar shanti</td>
                             <td>1200</td>
                         </tr>
                     </tbody>
@@ -106,80 +112,88 @@
             </div>
 
             <div class="table-container">
-                <h5>Vedic Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('online')">Filter</button></h5>
+                <h5>Online puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('online')">Filter</button></h5>
                 <div class="filter-dropdown text-end" id="onlineFilterDropdown">
                     <select id="onlineFilter" onchange="filterData('online')">
-                    <option value="">All</option>
-                        <option value="Vastu">Vastu</option>
-                        <option value="Vedic">Vedic</option>
-                        <option value="Kundli">Kundli</option>
+                        <option value="">All</option>
+                        <option value="Rahu-ketu">Rahu-ketu</option>
+                        <option value="Ghar shanti">Ghar shanti</option>
                     </select>
                 </div>
-                <table class="table table-bordered table-fixed  text-center">
+                <table class="table table-bordered table-fixed  text-center table table-striped">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Consultation Type</th>
+                            <th>Pooja</th>
                             <th>Fees</th>
                         </tr>
                     </thead>
                     <tbody id="onlineBody">
                         <tr>
                             <td>Jane Doe</td>
-                            <td>Vedic</td>
+                            <td>Rahu-ketu</td>
                             <td>500</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
-                            <td>Vedic</td>
+                            <td>Ghar shanti</td>
                             <td>1200</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
-                            <td>Vedic</td>
+                            <td>Ghar shanti</td>
                             <td>1200</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
-                            <td>Vedic</td>
+                            <td>Ghar shanti</td>
                             <td>1200</td>
+                        </tr>
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>Rahu-ketu</td>
+                            <td>500</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="table-container">
-                <h5>Kundli Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('mob')">Filter</button></h5>
+                <h5>Mob puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('mob')">Filter</button></h5>
                 <div class="filter-dropdown text-end " id="mobFilterDropdown">
-                    <select id="mobFilter" onchange="filterData('mob')" >
-                    <option value="">All</option>
-                        <option value="Vastu">Vastu</option>
-                        <option value="Vedic">Vedic</option>
-                        <option value="Kundli">Kundli</option>
+                    <select id="mobFilter" onchange="filterData('mob')">
+                        <option value="">All</option>
+                        <option value="Rahu-ketu">Rahu-ketu</option>
+                        <option value="Ghar shanti">Ghar shanti</option>
                     </select>
                 </div>
-                <table class="table table-bordered table-fixed  text-center">
+                <table class="table table-bordered table-fixed  text-center table table-striped">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Consultation Type</th>
+                            <th>Pooja</th>
                             <th>Fees</th>
                         </tr>
                     </thead>
                     <tbody id="mobBody">
                         <tr>
                             <td>Jane Doe</td>
-                            <td>Kundli</td>
+                            <td>Rahu-ketu</td>
                             <td>500</td>
                         </tr>
                         <tr>
                             <td>John Doe</td>
-                            <td>Kundli</td>
+                            <td>Ghar shanti</td>
                             <td>1200</td>
                         </tr>
                         <tr>
                             <td>Jane Doe</td>
-                            <td>Kundli</td>
+                            <td>Rahu-ketu</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>Rahu-ketu</td>
                             <td>500</td>
                         </tr>
                     </tbody>
@@ -188,7 +202,7 @@
         </div>
     </div>
     <footer>
-        <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
+    <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
     <script>
         function toggleFilter(category) {
