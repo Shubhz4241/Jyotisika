@@ -375,7 +375,7 @@
                         <div style="background-color:#FF2E11BF; padding:6px 2px; padding-bottom:20px; border:3px solid #FF2E11BF; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                             <div class="card py-3" style="border-radius:0;">
                                 <div class="icon-box red">📜</div>
-                                <a href="<?php echo base_url() . 'PujariUser/SetRate'; ?>">
+                                <a href="<?php echo base_url() . 'PujariUser/RateChart'; ?>">
                                     <h6>Rate Chart</h6>
                                 </a>
                             </div>
