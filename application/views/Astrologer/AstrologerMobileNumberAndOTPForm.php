@@ -7,6 +7,8 @@
     <title>Mobile Number and OTP Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         * {
             margin: 0;
@@ -113,7 +115,7 @@
         <!-- Mobile Number Form -->
         <div id="mobile-form">
             <div class="logo-container">
-            <img src="<?php echo base_url() . 'assets/images/Astrologer/Rectangle 5201.png' ?>" alt="Logo">
+                <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
             <form>
                 <div class="mb-3">
@@ -129,14 +131,18 @@
             </div>
         </div>
 
+        <script>
+
+        </script>
+
         <!-- OTP Form -->
         <div id="otp-form" style="display: none;">
             <div class="logo-container">
-            <img src="<?php echo base_url() . 'assets/images/Astrologer/Rectangle 5201.png' ?>" alt="Logo">
+                <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
             <!-- Added new message div for OTP sent confirmation -->
             <div id="otpSentMessage"></div>
-            <p class="text-center" id="otpMessage">We have Sent the code on +91************95</p>
+            <p class="text-center" id="otpMessage">We have Sent the code on <span>+91************95</span></p>
             <form>
                 <div class="d-flex justify-content-between mb-3">
                     <input type="text" class="form-control text-center me-2 otp-input" maxlength="1" required oninput="validateOtpInput(this)">
@@ -155,7 +161,8 @@
         <!-- Success Message -->
         <div id="success-message" style="display: none;">
             <div class="checkmark">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Logo">            </div>
+                <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Logo">
+            </div>
             <p>Application Submitted Successfully!</p>
             <small>Thank you for your submission! Our team is reviewing your application.</small>
             <small>Note:- You will receive an update within 48 hours. If you have any queries, feel free to contact our support team.</small>
@@ -209,18 +216,61 @@
             return isValid;
         }
 
-        getOtpBtn.addEventListener('click', () => {
-            if (mobileInput.value.length === 10) {
-                let firstTwo = mobileInput.value.substring(0, 2);
-                let lastTwo = mobileInput.value.substring(8, 10);
-                otpMessage.innerHTML = `We have Sent the code on +91 ${firstTwo}******${lastTwo}`;
-                // Added the new message to the otpSentMessage div
-                document.getElementById('otpSentMessage').innerHTML = `A OTP (One Time Passcode) has been sent to +91 ${firstTwo}******${lastTwo}. Please enter the OTP in the field below to verify your phone.`;
-                mobileForm.style.display = 'none';
-                otpForm.style.display = 'block';
-                startCountdown();
+        document.getElementById('getOtpBtn').addEventListener('click', function() {
+            const mobileInput = document.getElementById('mobile').value.trim();
+
+            if (mobileInput.length === 10) {
+                const formData = new FormData();
+                formData.append('phone', `+91${mobileInput}`);
+
+                fetch('<?php echo base_url() . 'astrologer/send_otp_login' ?>', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            let firstTwo = mobileInput.substring(0, 2);
+                            let lastTwo = mobileInput.substring(8, 10);
+
+                            otpMessage.innerHTML = `We have sent the code on +91 ${firstTwo}******${lastTwo}`;
+                            document.getElementById('otpSentMessage').innerHTML =
+                                `A OTP (One Time Passcode) has been sent to +91 ${firstTwo}******${lastTwo}. Please enter the OTP in the field below to verify your phone.`;
+
+                            mobileForm.style.display = 'none';
+                            otpForm.style.display = 'block';
+                            startCountdown();
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: data.message
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: data.message || 'Failed to send OTP. Please try again.'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Something went wrong. Please try again.'
+                        });
+                        console.error('Error:', error);
+                    });
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Invalid Number',
+                    text: 'Please enter a valid 10-digit phone number.'
+                });
             }
         });
+
 
         function startCountdown() {
             let timeLeft = 30;
@@ -248,21 +298,45 @@
             if (!validateOtpForm()) {
                 return;
             }
-            otpForm.style.display = 'none';
-            successMessage.style.display = 'block';
-            setTimeout(() => {
-                window.location.href = '<?php echo base_url("AstrologerAnalyticsAndEarning2"); ?>';
-            }, 3000);
-        });
 
-        // Prefill mobile number from URL parameter if available
-        document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const contact = urlParams.get("contact");
-            if (contact && contact.length === 10) {
-                mobileInput.value = contact;
-                validateMobileNumber(mobileInput); // Show "Get OTP" button if valid
-            }
+            const mobileNumber = document.getElementById('mobile').value.trim();
+            const otpInputs = Array.from(document.querySelectorAll('.otp-input'))
+                .map(input => input.value).join('');
+
+            const formData = new FormData();
+            formData.append('phone', `+91${mobileNumber}`);
+            formData.append('otp', otpInputs);
+
+            fetch('<?php echo base_url() . 'astrologer/verify_otp_login'?>', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: data.message
+                        }).then(() => {
+                            window.location.href = '<?php echo base_url("AstrologerAnalyticsAndEarning2"); ?>';
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message || 'OTP verification failed.'
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Something went wrong. Please try again.'
+                    });
+                    console.error('Error:', error);
+                });
         });
     </script>
 </body>

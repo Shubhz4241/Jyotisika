@@ -264,7 +264,7 @@
             const suggestionBox = document.getElementById("suggestionBox");
 
             // Retrieve selected user from localStorage
-            const selectedUser = JSON.parse(localStorage.getItem("selectedChatUser")) || {};
+            let selectedUser = JSON.parse(localStorage.getItem("selectedChatUser")) || {};
             if (selectedUser.name) {
                 chatUserName.textContent = selectedUser.name;
                 // Optionally update profile image if dynamic source is available
@@ -274,40 +274,109 @@
 
             // Load chat list dynamically from stored requests
             const storedData = JSON.parse(localStorage.getItem("pujaRequests")) || [];
-            chatListBody.innerHTML = "";
-            storedData.forEach((data, index) => {
-                const isSelected = data.name === selectedUser.name;
-                const chatItem = `
-                    <div class="chat-item ${isSelected ? 'active' : ''}" data-index="${index}">
-                        <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
-                            alt="Profile Image"
-                            class="profile-img rounded-circle"
-                            width="30px"
-                            height="30px">
-                        <div class="chat-info">
-                            <h6>${data.name}</h6>
-                            <p>${data.Consultation} - ${data.Mode}</p>
-                        </div>
-                        <div class="chat-time">
-                            ${data.time} <br>
-                            <span class="badge bg-success">1</span>
-                        </div>
-                    </div>`;
-                chatListBody.innerHTML += chatItem;
+            // Add message count and sessionEnded to each chat item in storedData
+            storedData.forEach(data => {
+                if (!data.hasOwnProperty('messageCount')) {
+                    data.messageCount = 1; // Default message count
+                }
+                if (!data.hasOwnProperty('sessionEnded')) {
+                    data.sessionEnded = false; // Default session state
+                }
             });
+
+            // Save updated storedData back to localStorage
+            localStorage.setItem("pujaRequests", JSON.stringify(storedData));
+
+            // Function to render chat list
+            function renderChatList() {
+                chatListBody.innerHTML = "";
+                storedData.forEach((data, index) => {
+                    const isSelected = data.name === selectedUser.name;
+                    const chatItem = `
+                        <div class="chat-item ${isSelected ? 'active' : ''}" data-index="${index}">
+                            <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                                alt="Profile Image"
+                                class="profile-img rounded-circle"
+                                width="30px"
+                                height="30px">
+                            <div class="chat-info">
+                                <h6>${data.name}</h6>
+                                <p>${data.Consultation} - ${data.Mode}</p>
+                            </div>
+                            <div class="chat-time">
+                                ${data.time} <br>
+                                ${data.messageCount > 0 ? `<span class="badge bg-success">${data.messageCount}</span>` : ''}
+                            </div>
+                        </div>`;
+                    chatListBody.innerHTML += chatItem;
+                });
+
+                // Re-attach event listeners to the newly rendered chat items
+                const chatItems = document.querySelectorAll(".chat-item");
+                chatItems.forEach(item => {
+                    item.addEventListener("click", function () {
+                        const index = this.dataset.index;
+                        const newSelectedUser = storedData[index];
+                        // Update message count to 0 for the selected chat
+                        storedData[index].messageCount = 0;
+                        localStorage.setItem("pujaRequests", JSON.stringify(storedData));
+                        localStorage.setItem("selectedChatUser", JSON.stringify(newSelectedUser));
+                        selectedUser = newSelectedUser; // Update selectedUser
+                        chatUserName.textContent = newSelectedUser.name;
+
+                        // Check if the session for this chat has ended
+                        if (newSelectedUser.sessionEnded) {
+                            chatContent.innerHTML = `<div class="message received">Session has ended.</div>`;
+                            messageInput.disabled = true;
+                            sendBtn.disabled = true;
+                        } else {
+                            chatContent.innerHTML = `
+                                <div class="message received">Hello from ${newSelectedUser.name}!</div>
+                                <div class="message sent">Hi, how can I assist you today?</div>
+                            `;
+                            messageInput.disabled = false;
+                            sendBtn.disabled = false;
+                        }
+
+                        // Highlight the selected chat item
+                        chatItems.forEach(i => i.classList.remove("active"));
+                        this.classList.add("active");
+
+                        // Re-render the chat list to update the badge
+                        renderChatList();
+
+                        if (window.innerWidth <= 768) {
+                            chatList.style.display = "none";
+                            chatWindow.style.display = "block";
+                            backButton.style.display = "inline-block";
+                        }
+                    });
+                });
+            }
+
+            // Initial render of chat list
+            renderChatList();
 
             // Load initial chat content for the selected user
             if (selectedUser.name) {
-                chatContent.innerHTML = `
-                    <div class="message received">Hello from ${selectedUser.name}!</div>
-                    <div class="message sent">Hi, how can I assist you today?</div>
-                `;
+                if (selectedUser.sessionEnded) {
+                    chatContent.innerHTML = `<div class="message received">Session has ended.</div>`;
+                    messageInput.disabled = true;
+                    sendBtn.disabled = true;
+                } else {
+                    chatContent.innerHTML = `
+                        <div class="message received">Hello from ${selectedUser.name}!</div>
+                        <div class="message sent">Hi, how can I assist you today?</div>
+                    `;
+                    messageInput.disabled = false;
+                    sendBtn.disabled = false;
+                }
             } else {
                 chatContent.innerHTML = `<div class="message received">Please select a user to start chatting.</div>`;
             }
 
-            // Handle chat item click
-            const chatItems = document.querySelectorAll(".chat-item");
+            // Handle chat item click (already handled in renderChatList)
+
             const chatList = document.querySelector(".chat-list");
             const chatWindow = document.querySelector(".chat-window");
             const backButton = document.createElement("button");
@@ -315,29 +384,6 @@
             backButton.innerHTML = "<i class='bi bi-arrow-left'></i> Back";
             backButton.style.display = "none";
             chatWindow.prepend(backButton);
-
-            chatItems.forEach(item => {
-                item.addEventListener("click", function () {
-                    const index = this.dataset.index;
-                    const newSelectedUser = storedData[index];
-                    localStorage.setItem("selectedChatUser", JSON.stringify(newSelectedUser));
-                    chatUserName.textContent = newSelectedUser.name;
-                    chatContent.innerHTML = `
-                        <div class="message received">Hello from ${newSelectedUser.name}!</div>
-                        <div class="message sent">Hi, how can I assist you today?</div>
-                    `;
-
-                    // Highlight the selected chat item
-                    chatItems.forEach(i => i.classList.remove("active"));
-                    this.classList.add("active");
-
-                    if (window.innerWidth <= 768) {
-                        chatList.style.display = "none";
-                        chatWindow.style.display = "block";
-                        backButton.style.display = "inline-block";
-                    }
-                });
-            });
 
             backButton.addEventListener("click", function () {
                 chatList.style.display = "block";
@@ -398,6 +444,31 @@
 
             // End Session Sweet Alert
             endSessionBtn.addEventListener("click", function () {
+                // Check if a user is selected
+                if (!selectedUser.name) {
+                    Swal.fire({
+                        title: "No User Selected",
+                        text: "Please select a user to end the session.",
+                        icon: "warning",
+                        confirmButtonColor: "#d33"
+                    });
+                    return;
+                }
+
+                // Find the index of the selected user in storedData
+                const selectedUserIndex = storedData.findIndex(data => data.name === selectedUser.name);
+
+                // Check if the session for this chat has already ended
+                if (storedData[selectedUserIndex].sessionEnded) {
+                    Swal.fire({
+                        title: "Session Already Ended",
+                        text: "The chat session for this user has already been terminated.",
+                        icon: "info",
+                        confirmButtonColor: "#6c757d"
+                    });
+                    return;
+                }
+
                 Swal.fire({
                     title: "Are you sure?",
                     text: "Do you want to end this chat session?",
@@ -415,7 +486,11 @@
                             icon: "success",
                             confirmButtonColor: "#28a745"
                         }).then(() => {
-                            // Optionally redirect or clear chat
+                            // Mark the session as ended for this specific chat
+                            storedData[selectedUserIndex].sessionEnded = true;
+                            localStorage.setItem("pujaRequests", JSON.stringify(storedData));
+                            selectedUser.sessionEnded = true; // Update the selectedUser object
+                            localStorage.setItem("selectedChatUser", JSON.stringify(selectedUser));
                             chatContent.innerHTML = `<div class="message received">Session has ended.</div>`;
                             messageInput.disabled = true;
                             sendBtn.disabled = true;

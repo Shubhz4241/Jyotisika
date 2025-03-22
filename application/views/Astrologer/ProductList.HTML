@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .table-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        table {
+            min-width: 900px;
+        }
+        th {
+            background-color: #AFCB56; /* Green background for table headers as requested */
+            color: white;
+            text-align: center;
+        }
+        td, th {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        .product-image {
+            width: 115px;
+    height: 72px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .action-icons i {
+            cursor: pointer;
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        .btn-add-product {
+            background-color:rgb(121, 186, 255);
+            color: black;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none;
+            margin-top: 5px;
+        }
+        .table-container {
+            position: relative;
+            z-index: 1;
+        }
+        .modal-backdrop {
+            z-index: 1040 !important;
+        }
+        .modal {
+            z-index: 1050 !important;
+        }
+
+        /* Updated Styles for both Add and Edit Product Forms to match the image */
+        .product-modal .modal-content {
+            background: #fff; /* White background as per the image */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .product-modal .modal-header {
+            background: #fff; /* White header background */
+            color: #333; /* Dark text for the title */
+            border-bottom: none; /* Remove bottom border */
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center; /* Center the title */
+        }
+        .product-modal .modal-title {
+            font-weight: 600;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .product-modal .btn-close {
+            filter: brightness(0) invert(0); /* Dark close button */
+        }
+        .product-modal .modal-body {
+            padding: 30px;
+        }
+        .product-modal .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .product-modal .form-group label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+            text-align: left;
+        }
+        .product-modal .form-group input,
+        .product-modal .form-group select {
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1rem;
+            background-color: #E6F0E9; /* Light green background as per the image */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-modal .form-group input:focus,
+        .product-modal .form-group select:focus {
+            border-color: #AFCB56;
+            box-shadow: 0 0 5px rgba(175, 203, 86, 0.3);
+            outline: none;
+        }
+        .product-modal .form-group input[type="file"] {
+            padding: 8px;
+            border: 1px solid #ced4da; /* Solid border for file input */
+            border-radius: 8px;
+            background: #E6F0E9; /* Light green background */
+        }
+        .product-modal .form-group select {
+            appearance: none;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEgMS41TDEuNSAxTDYgNS41TDEwLjUgMUwxMSAxLjVMMiA3LjVMMSAxLjVaIiBmaWxsPSIjNjY2Ii8+PC9zdmc+') no-repeat right 15px center;
+            background-size: 12px;
+            background-color: #E6F0E9; /* Light green background */
+        }
+        .product-modal .error {
+            font-size: 0.875rem;
+            color: #dc3545;
+            display: none;
+            margin-top: 5px;
+        }
+        .product-modal button[type="submit"] {
+            background: #8BC24A; /* Green button as per the image */
+            color: white;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 12px 40px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+            display: block;
+            margin: 0 auto; /* Center the button */
+        }
+        .product-modal button[type="submit"]:hover {
+            background: #97ad47;
+        }
+        .product-modal .form-group.invalid input,
+        .product-modal .form-group.invalid select {
+            border-color: #dc3545;
+            box-shadow: 0 0 5px rgba(220, 53, 69, 0.3);
+        }
+        .product-modal .form-group.invalid .error {
+            display: block;
+        }
+
+        /* Grid layout for the form */
+        .product-modal .modal-body form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns as per the image */
+            gap: 20px;
+        }
+        .product-modal .modal-body form .form-group {
+            margin-bottom: 0; /* Remove margin-bottom to align with grid */
+        }
+        /* Make the submit button span across all columns */
+        .product-modal .modal-body form button[type="submit"] {
+            grid-column: span 3; /* Span across all 3 columns */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
+    </header>
+    <div style="min-height: 100vh;">
+
+    <div class="container mt-4">
+        <!-- Product List and Add Product button on the same line -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="mb-0">Product List</h3>
+            <button class="btn btn-add-product" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                + Add Product
+            </button>
+        </div>
+        <div class="table-container">
+            <table class="table table-bordered text-center align-middle" id="productTable">
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Product Image</th>
+                        <th>Product Name</th>
+                        <th>Actual Price</th>
+                        <th>Discount Price</th>
+                        <th>Ratings</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-index="0">
+                        <td>1</td>
+                        <td> <img src="<?php echo base_url('assets/images/image (1).png'); ?>" alt="Product" class="product-image"></td>
+                        <td>Diamond Ring</td>
+                        <td>₹4999</td>
+                        <td>₹4099</td>
+                        <td>4.5 ratings</td>
+                        <td class="action-icons">
+                            <i class="bi bi-pencil-square text-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProductModal" data-srno="1" data-name="Diamond Ring" data-actualprice="4999" data-discountprice="4099" data-ratings="4.5" data-index="0"></i>
+                            <i class="bi bi-trash text-danger delete-btn" data-index="0"></i>
+                        </td>
+                    </tr>
+                    <tr data-index="1">
+                        <td>2</td>
+                        <td> <img src="<?php echo base_url('assets/images/image (1).png'); ?>" alt="Product" class="product-image"></td>
+                        <td>Bracelet</td>
+                        <td>₹4999</td>
+                        <td>₹4099</td>
+                        <td>4.5 ratings</td>
+                        <td class="action-icons">
+                            <i class="bi bi-pencil-square text-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProductModal" data-srno="2" data-name="Bracelet" data-actualprice="4999" data-discountprice="4099" data-ratings="4.5" data-index="1"></i>
+                            <i class="bi bi-trash text-danger delete-btn" data-index="1"></i>
+                        </td>
+                    </tr>
+                    <tr data-index="2">
+                        <td>3</td>
+                        <td> <img src="<?php echo base_url('assets/images/image (1).png'); ?>" alt="Product" class="product-image"></td>
+                        <td>Rudraksh</td>
+                        <td>₹4999</td>
+                        <td>₹4099</td>
+                        <td>4.5 ratings</td>
+                        <td class="action-icons">
+                            <i class="bi bi-pencil-square text-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProductModal" data-srno="3" data-name="Rudraksh" data-actualprice="4999" data-discountprice="4099" data-ratings="4.5" data-index="2"></i>
+                            <i class="bi bi-trash text-danger delete-btn" data-index="2"></i>
+                        </td>
+                    </tr>
+                    <tr data-index="3">
+                        <td>4</td>
+                        <td> <img src="<?php echo base_url('assets/images/image (2).png'); ?>" alt="Product" class="product-image"></td>
+                        <td>Diamond Ring</td>
+                        <td>₹4999</td>
+                        <td>₹4099</td>
+                        <td>4.5 ratings</td>
+                        <td class="action-icons">
+                            <i class="bi bi-pencil-square text-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProductModal" data-srno="4" data-name="Diamond Ring" data-actualprice="4999" data-discountprice="4099" data-ratings="4.5" data-index="3"></i>
+                            <i class="bi bi-trash text-danger delete-btn" data-index="3"></i>
+                        </td>
+                    </tr>
+                    <tr data-index="4">
+                        <td>5</td>
+                        <td> <img src="<?php echo base_url('assets/images/image (3).png'); ?>" alt="Product" class="product-image"></td>
+                        <td>Money Necklace</td>
+                        <td>₹4999</td>
+                        <td>₹4099</td>
+                        <td>4.5 ratings</td>
+                        <td class="action-icons">
+                            <i class="bi bi-pencil-square text-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProductModal" data-srno="5" data-name="Money Necklace" data-actualprice="4999" data-discountprice="4099" data-ratings="4.5" data-index="4"></i>
+                            <i class="bi bi-trash text-danger delete-btn" data-index="4"></i>
+                        </td>
+                    </tr>
+                    <tr data-index="5">
+                        <td>6</td>
+                        <td> <img src="<?php echo base_url('assets/images/image (3).png'); ?>" alt="Product" class="product-image"></td>
+                        <td>Gold Earrings</td>
+                        <td>₹7999</td>
+                        <td>₹6999</td>
+                        <td>4.8 ratings</td>
+                        <td class="action-icons">
+                            <i class="bi bi-pencil-square text-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProductModal" data-srno="6" data-name="Gold Earrings" data-actualprice="7999" data-discountprice="6999" data-ratings="4.8" data-index="5"></i>
+                            <i class="bi bi-trash text-danger delete-btn" data-index="5"></i>
+                        </td>
+                    </tr>
+                    <tr data-index="6">
+                        <td>7</td>
+                        <td> <img src="<?php echo base_url('assets/images/Rectangle 5196.png'); ?>" alt="Product" class="product-image"></td>
+                        <td>Silver Anklet</td>
+                        <td>₹2999</td>
+                        <td>₹2499</td>
+                        <td>4.2 ratings</td>
+                        <td class="action-icons">
+                            <i class="bi bi-pencil-square text-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProductModal" data-srno="7" data-name="Silver Anklet" data-actualprice="2999" data-discountprice="2499" data-ratings="4.2" data-index="6"></i>
+                            <i class="bi bi-trash text-danger delete-btn" data-index="6"></i>
+                        </td>
+                    </tr>
+                    <tr data-index="7">
+                        <td>8</td>
+                        <td> <img src="<?php echo base_url('assets/images/Rectangle 5196.png'); ?>" alt="Product" class="product-image"></td>
+                        <td>Pearl Pendant</td>
+                        <td>₹3999</td>
+                        <td>₹3499</td>
+                        <td>4.3 ratings</td>
+                        <td class="action-icons">
+                            <i class="bi bi-pencil-square text-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProductModal" data-srno="8" data-name="Pearl Pendant" data-actualprice="3999" data-discountprice="3499" data-ratings="4.3" data-index="7"></i>
+                            <i class="bi bi-trash text-danger delete-btn" data-index="7"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal fade product-modal" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Add Product Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="productForm" novalidate onsubmit="return validateForm(event, 'add')">
+                        <div class="form-group">
+                            <label for="srNo">Sr.No <span class="text-danger">*</span></label>
+                            <input type="text" id="srNo" name="srNo" class="form-control" placeholder="Enter Serial Number" oninput="restrictSrNo(this)" required>
+                            <span class="error" id="srNoError">Please enter a valid serial number (positive integer only)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="productImage">Product Image <span class="text-danger">*</span></label>
+                            <input type="file" id="productImage" name="productImage" class="form-control" accept="image/*" required>
+                            <span class="error" id="productImageError">Please upload a valid image file (jpg, png, jpeg)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="productName">Product Name <span class="text-danger">*</span></label>
+                            <input type="text" id="productName" name="productName" class="form-control" placeholder="Enter Product Name" required>
+                            <span class="error" id="productNameError">Product name is required (max 50 characters, letters and spaces only)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="actualPrice">Actual Price <span class="text-danger">*</span></label>
+                            <input type="number" id="actualPrice" name="actualPrice" class="form-control" placeholder="Enter Actual Price" min="1" step="0.01" required>
+                            <span class="error" id="actualPriceError">Please enter a valid price (between 1 and 1,000,000)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="discountPrice">Discount Price <span class="text-danger">*</span></label>
+                            <input type="number" id="discountPrice" name="discountPrice" class="form-control" placeholder="Enter Discount Price" min="1" step="0.01" required>
+                            <span class="error" id="discountPriceError">Discount price must be greater than 0 and less than or equal to actual price</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="ratings">Ratings <span class="text-danger">*</span></label>
+                            <select id="ratings" name="ratings" class="form-control" required>
+                                <option value="" disabled selected>Select Rating</option>
+                                <option value="4.8">4.8</option>
+                                <option value="4.5">4.5</option>
+                                <option value="4.3">4.3</option>
+                                <option value="4.2">4.2</option>
+                                <option value="4.0">4.0</option>
+                                <option value="3.5">3.5</option>
+                                <option value="3.0">3.0</option>
+                            </select>
+                            <span class="error" id="ratingsError">Please select a rating</span>
+                        </div>
+                        <button type="submit" class="btn">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Updated Edit Product Modal -->
+    <div class="modal fade product-modal" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">Edit Product Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm" novalidate onsubmit="return validateForm(event, 'edit')">
+                        <input type="hidden" id="editSrNoHidden" name="editSrNoHidden">
+                        <div class="form-group">
+                            <label for="editSrNo">Sr.No <span class="text-danger">*</span></label>
+                            <input type="text" id="editSrNo" name="editSrNo" class="form-control" placeholder="Enter Serial Number" oninput="restrictSrNo(this)" required>
+                            <span class="error" id="editSrNoError">Please enter a valid serial number (positive integer only)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductImage">Product Image</label>
+                            <input type="file" id="editProductImage" name="editProductImage" class="form-control" accept="image/*">
+                            <span class="error" id="editProductImageError">Please upload a valid image file (jpg, png, jpeg)</span>
+                            <img id="editCurrentImage" src="" alt="Current Image" class="product-image mt-2" style="display: none;">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductName">Product Name <span class="text-danger">*</span></label>
+                            <input type="text" id="editProductName" name="editProductName" class="form-control" placeholder="Enter Product Name" required>
+                            <span class="error" id="editProductNameError">Product name is required (max 50 characters, letters and spaces only)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editActualPrice">Actual Price <span class="text-danger">*</span></label>
+                            <input type="number" id="editActualPrice" name="editActualPrice" class="form-control" placeholder="Enter Actual Price" min="1" step="0.01" required>
+                            <span class="error" id="editActualPriceError">Please enter a valid price (between 1 and 1,000,000)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDiscountPrice">Discount Price <span class="text-danger">*</span></label>
+                            <input type="number" id="editDiscountPrice" name="editDiscountPrice" class="form-control" placeholder="Enter Discount Price" min="1" step="0.01" required>
+                            <span class="error" id="editDiscountPriceError">Discount price must be greater than 0 and less than or equal to actual price</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editRatings">Ratings <span class="text-danger">*</span></label>
+                            <select id="editRatings" name="editRatings" class="form-control" required>
+                                <option value="" disabled>Select Rating</option>
+                                <option value="4.8">4.8</option>
+                                <option value="4.5">4.5</option>
+                                <option value="4.3">4.3</option>
+                                <option value="4.2">4.2</option>
+                                <option value="4.0">4.0</option>
+                                <option value="3.5">3.5</option>
+                                <option value="3.0">3.0</option>
+                            </select>
+                            <span class="error" id="editRatingsError">Please select a rating</span>
+                        </div>
+                        <button type="submit" class="btn">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer>
+        <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Restrict Sr. No input to positive integers only
+        function restrictSrNo(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');
+            if (input.value <= 0 || input.value === '') {
+                input.value = '';
+            }
+        }
+
+        // Delete confirmation and row removal
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const index = this.getAttribute('data-index');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You won\'t be able to revert this!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const row = document.querySelector(`#productTable tr[data-index="${index}"]`);
+                        if (row) {
+                            row.remove();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Deleted!',
+                                text: 'Product deleted successfully!',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+        // Edit button click handler
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const srNo = this.getAttribute('data-srno');
+                const name = this.getAttribute('data-name');
+                const actualPrice = this.getAttribute('data-actualprice');
+                const discountPrice = this.getAttribute('data-discountprice');
+                const ratings = this.getAttribute('data-ratings');
+                const index = this.getAttribute('data-index');
+
+                // Fetch the current image from the table row
+                const row = document.querySelector(`#productTable tr[data-index="${index}"]`);
+                const currentImage = row.cells[1].querySelector('img').src;
+
+                // Populate edit form
+                document.getElementById('editSrNoHidden').value = srNo;
+                document.getElementById('editSrNo').value = srNo;
+                document.getElementById('editProductName').value = name;
+                document.getElementById('editActualPrice').value = actualPrice.replace('₹', '');
+                document.getElementById('editDiscountPrice').value = discountPrice.replace('₹', '');
+                document.getElementById('editRatings').value = ratings.replace(' ratings', '');
+                document.getElementById('editCurrentImage').src = currentImage; // Set the current image
+                document.getElementById('editCurrentImage').style.display = 'block';
+            });
+        });
+
+        // Form validation and submission
+        function validateForm(event, mode) {
+            event.preventDefault();
+            let isValid = true;
+
+            let srNoField, productImageField, productNameField, actualPriceField, discountPriceField, ratingsField;
+            let srNoError, productImageError, productNameError, actualPriceError, discountPriceError, ratingsError;
+
+            if (mode === 'add') {
+                srNoField = document.getElementById('srNo');
+                productImageField = document.getElementById('productImage');
+                productNameField = document.getElementById('productName');
+                actualPriceField = document.getElementById('actualPrice');
+                discountPriceField = document.getElementById('discountPrice');
+                ratingsField = document.getElementById('ratings');
+                srNoError = document.getElementById('srNoError');
+                productImageError = document.getElementById('productImageError');
+                productNameError = document.getElementById('productNameError');
+                actualPriceError = document.getElementById('actualPriceError');
+                discountPriceError = document.getElementById('discountPriceError');
+                ratingsError = document.getElementById('ratingsError');
+
+                // Reset invalid state
+                const formGroups = document.querySelectorAll('#productForm .form-group');
+                formGroups.forEach(group => group.classList.remove('invalid'));
+
+                // Sr. No validation
+                const srNo = srNoField.value.trim();
+                const srNoRegex = /^[1-9][0-9]*$/;
+                if (!srNo || !srNoRegex.test(srNo)) {
+                    srNoField.closest('.form-group').classList.add('invalid');
+                    srNoError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    srNoError.style.display = 'none';
+                }
+
+                // Product Image validation
+                const productImage = productImageField.files;
+                const allowedImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                if (productImage.length === 0) {
+                    productImageField.closest('.form-group').classList.add('invalid');
+                    productImageError.textContent = 'Please upload a product image';
+                    productImageError.style.display = 'block';
+                    isValid = false;
+                } else if (!allowedImageTypes.includes(productImage[0].type)) {
+                    productImageField.closest('.form-group').classList.add('invalid');
+                    productImageError.textContent = 'Please upload a valid image file (jpg, png, jpeg)';
+                    productImageError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    productImageError.style.display = 'none';
+                }
+
+                // Product Name validation
+                const productName = productNameField.value.trim();
+                const productNameRegex = /^[A-Za-z\s]{1,50}$/;
+                if (!productName) {
+                    productNameField.closest('.form-group').classList.add('invalid');
+                    productNameError.textContent = 'Product name is required';
+                    productNameError.style.display = 'block';
+                    isValid = false;
+                } else if (!productNameRegex.test(productName)) {
+                    productNameField.closest('.form-group').classList.add('invalid');
+                    productNameError.textContent = 'Product name must be 1-50 characters long and contain only letters and spaces';
+                    productNameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    productNameError.style.display = 'none';
+                }
+
+                // Actual Price validation
+                const actualPrice = parseFloat(actualPriceField.value);
+                if (!actualPrice || actualPrice <= 0 || actualPrice > 1000000) {
+                    actualPriceField.closest('.form-group').classList.add('invalid');
+                    actualPriceError.textContent = 'Please enter a valid price (between 1 and 1,000,000)';
+                    actualPriceError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    actualPriceError.style.display = 'none';
+                }
+
+                // Discount Price validation
+                const discountPrice = parseFloat(discountPriceField.value);
+                if (!discountPrice || discountPrice <= 0 || discountPrice > 1000000) {
+                    discountPriceField.closest('.form-group').classList.add('invalid');
+                    discountPriceError.textContent = 'Please enter a valid discount price (between 1 and 1,000,000)';
+                    discountPriceError.style.display = 'block';
+                    isValid = false;
+                } else if (discountPrice > actualPrice) {
+                    discountPriceField.closest('.form-group').classList.add('invalid');
+                    discountPriceError.textContent = 'Discount price must be less than or equal to actual price';
+                    discountPriceError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    discountPriceError.style.display = 'none';
+                }
+
+                // Ratings validation
+                const ratings = ratingsField.value;
+                if (!ratings) {
+                    ratingsField.closest('.form-group').classList.add('invalid');
+                    ratingsError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    ratingsError.style.display = 'none';
+                }
+            } else if (mode === 'edit') {
+                srNoField = document.getElementById('editSrNo');
+                productImageField = document.getElementById('editProductImage');
+                productNameField = document.getElementById('editProductName');
+                actualPriceField = document.getElementById('editActualPrice');
+                discountPriceField = document.getElementById('editDiscountPrice');
+                ratingsField = document.getElementById('editRatings');
+                srNoError = document.getElementById('editSrNoError');
+                productImageError = document.getElementById('editProductImageError');
+                productNameError = document.getElementById('editProductNameError');
+                actualPriceError = document.getElementById('editActualPriceError');
+                discountPriceError = document.getElementById('editDiscountPriceError');
+                ratingsError = document.getElementById('editRatingsError');
+
+                // Reset invalid state
+                const formGroups = document.querySelectorAll('#editProductForm .form-group');
+                formGroups.forEach(group => group.classList.remove('invalid'));
+
+                // Sr. No validation
+                const srNo = srNoField.value.trim();
+                const srNoRegex = /^[1-9][0-9]*$/;
+                if (!srNo || !srNoRegex.test(srNo)) {
+                    srNoField.closest('.form-group').classList.add('invalid');
+                    srNoError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    srNoError.style.display = 'none';
+                }
+
+                // Product Image validation (optional for edit)
+                const productImage = productImageField.files;
+                const allowedImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                if (productImage.length > 0 && !allowedImageTypes.includes(productImage[0].type)) {
+                    productImageField.closest('.form-group').classList.add('invalid');
+                    productImageError.textContent = 'Please upload a valid image file (jpg, png, jpeg)';
+                    productImageError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    productImageError.style.display = 'none';
+                }
+
+                // Product Name validation
+                const productName = productNameField.value.trim();
+                const productNameRegex = /^[A-Za-z\s]{1,50}$/;
+                if (!productName) {
+                    productNameField.closest('.form-group').classList.add('invalid');
+                    productNameError.textContent = 'Product name is required';
+                    productNameError.style.display = 'block';
+                    isValid = false;
+                } else if (!productNameRegex.test(productName)) {
+                    productNameField.closest('.form-group').classList.add('invalid');
+                    productNameError.textContent = 'Product name must be 1-50 characters long and contain only letters and spaces';
+                    productNameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    productNameError.style.display = 'none';
+                }
+
+                // Actual Price validation
+                const actualPrice = parseFloat(actualPriceField.value);
+                if (!actualPrice || actualPrice <= 0 || actualPrice > 1000000) {
+                    actualPriceField.closest('.form-group').classList.add('invalid');
+                    actualPriceError.textContent = 'Please enter a valid price (between 1 and 1,000,000)';
+                    actualPriceError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    actualPriceError.style.display = 'none';
+                }
+
+                // Discount Price validation
+                const discountPrice = parseFloat(discountPriceField.value);
+                if (!discountPrice || discountPrice <= 0 || discountPrice > 1000000) {
+                    discountPriceField.closest('.form-group').classList.add('invalid');
+                    discountPriceError.textContent = 'Please enter a valid discount price (between 1 and 1,000,000)';
+                    discountPriceError.style.display = 'block';
+                    isValid = false;
+                } else if (discountPrice > actualPrice) {
+                    discountPriceField.closest('.form-group').classList.add('invalid');
+                    discountPriceError.textContent = 'Discount price must be less than or equal to actual price';
+                    discountPriceError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    discountPriceError.style.display = 'none';
+                }
+
+                // Ratings validation
+                const ratings = ratingsField.value;
+                if (!ratings) {
+                    ratingsField.closest('.form-group').classList.add('invalid');
+                    ratingsError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    ratingsError.style.display = 'none';
+                }
+            }
+
+            if (isValid) {
+                if (mode === 'add') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Product added successfully!',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('productForm').reset();
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
+                            modal.hide();
+                            document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+                            document.body.classList.remove('modal-open');
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                } else if (mode === 'edit') {
+                    const index = document.getElementById('editSrNoHidden').value - 1; // Convert SrNo to 0-based index
+                    const newName = document.getElementById('editProductName').value;
+                    const newActualPrice = '₹' + document.getElementById('editActualPrice').value;
+                    const newDiscountPrice = '₹' + document.getElementById('editDiscountPrice').value;
+                    const newRatings = document.getElementById('editRatings').value + ' ratings';
+
+                    // Update table row
+                    const row = document.querySelector(`#productTable tr[data-index="${index}"]`);
+                    if (row) {
+                        row.cells[0].textContent = document.getElementById('editSrNo').value; // Sr. No
+                        row.cells[2].textContent = newName; // Product Name
+                        row.cells[3].textContent = newActualPrice; // Actual Price
+                        row.cells[4].textContent = newDiscountPrice; // Discount Price
+                        row.cells[5].textContent = newRatings; // Ratings
+
+                        // Update the image if a new one is uploaded
+                        const newImage = document.getElementById('editProductImage').files;
+                        if (newImage.length > 0) {
+                            const imageUrl = URL.createObjectURL(newImage[0]);
+                            row.cells[1].querySelector('img').src = imageUrl;
+                        }
+                    }
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Updated!',
+                        text: 'Product updated successfully!',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('editProductForm').reset();
+                            document.getElementById('editCurrentImage').style.display = 'none'; // Hide the current image after reset
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('editProductModal'));
+                            modal.hide();
+                            document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+                            document.body.classList.remove('modal-open');
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                }
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
