@@ -161,8 +161,8 @@
         }
 
         .text-center {
-            margin-top: 39px;
-            margin-bottom: 1.5rem;
+            margin-top: 20px;
+            margin-bottom: 1rem;
         }
 
         .py-3 {
@@ -189,8 +189,8 @@
                 <div class="filter-wrapper">
                     <select class="filter-select" id="filter">
                         <option value="">Filter</option>
-                        <option value="Ghar Shanti">Ganesh Puja</option>
-                        <option value="Rahu-Ketu">Lakshmi Puja</option>
+                        <option value="Ganesh Puja">Ganesh Puja</option>
+                        <option value="Lakshmi Puja">Lakshmi Puja</option>
                     </select>
                 </div>
                 <!-- Add SetRate button in the top right corner -->
@@ -439,11 +439,24 @@
                 let originalPrice = document.getElementById("editOriginalPrice").value.trim();
                 let discountPrice = document.getElementById("editDiscountPrice").value.trim();
 
-                if (originalPrice === "" || discountPrice === "" || isNaN(originalPrice) || isNaN(discountPrice)) {
+                // Validation for Original Price (must be a positive number, at least 1)
+                let originalPriceValue = parseFloat(originalPrice);
+                if (isNaN(originalPriceValue) || originalPriceValue < 1) {
                     Swal.fire({
                         icon: "error",
                         title: "Invalid Input",
-                        text: "Please enter valid numeric prices!",
+                        text: "Original Price must be a positive number and at least 1!",
+                    });
+                    return;
+                }
+
+                // Validation for Discount Price (must be a non-negative number, less than or equal to original price)
+                let discountPriceValue = parseFloat(discountPrice);
+                if (isNaN(discountPriceValue) || discountPriceValue < 0 || discountPriceValue > originalPriceValue) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Invalid Input",
+                        text: "Discount Price must be a non-negative number and less than or equal to the Original Price!",
                     });
                     return;
                 }
@@ -465,6 +478,15 @@
                 });
 
                 renderPujas();
+            });
+
+            // Prevent negative values by blocking the minus key and 'e' for number inputs in the modal
+            document.querySelectorAll('#changeForm input[type="number"]').forEach(input => {
+                input.addEventListener("keydown", function(event) {
+                    if (event.key === "-" || event.key === "e") {
+                        event.preventDefault();
+                    }
+                });
             });
 
             document.getElementById("search").addEventListener("input", function() {
