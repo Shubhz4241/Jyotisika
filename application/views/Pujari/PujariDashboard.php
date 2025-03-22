@@ -403,41 +403,47 @@
                     <!-- Overlay -->
                     <div class="overlay" id="overlay"></div>
 
-                    <!-- Contact Form (Below Navbar) -->
-                    <div class="container">
-                        <div class="form-container" id="pujaForm">
-                            <button class="close-btn" id="closeForm">×</button>
-                            <h5 class="mb-3 text-center">Contact Form</h5>
-                            <form id="pujaFormSubmit">
-                                <div class="mb-2">
-                                    <label class="form-label d-block text-start">Pooja</label>
-                                    <input type="text" class="form-control" id="pooja" name="pooja" placeholder="e.g., Rudraabhishek Puja" required>
-                                    <div class="invalid-feedback">Please enter the name of the Pooja.</div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label d-block text-start">Date</label>
-                                    <input type="date" class="form-control" id="date" name="date" required>
-                                    <div class="invalid-feedback">Please select a valid future date.</div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label d-block text-start">Original Price</label>
-                                    <input type="number" class="form-control" id="originalPrice" name="originalPrice" placeholder="e.g., 1000" min="1" required>
-                                    <div class="invalid-feedback">Please enter a valid original price (positive number).</div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label d-block text-start">Discount Price</label>
-                                    <input type="number" class="form-control" id="discountPrice" name="discountPrice" placeholder="e.g., 800" min="0" required>
-                                    <div class="invalid-feedback">Please enter a valid discount price (positive number, less than original price).</div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label d-block text-start">Time</label>
-                                    <input type="time" class="form-control" id="time" name="time" required>
-                                    <div class="invalid-feedback">Please select a time for the Pooja.</div>
-                                </div>
-                                <button type="submit" class="btn btn-warning w-100 btn-submit">Save Changes</button>
-                            </form>
-                        </div>
-                    </div>
+                      <!-- Contact Form (Below Navbar) -->
+<div class="container">
+    <div class="form-container" id="pujaForm">
+        <button class="close-btn" id="closeForm">×</button>
+        <h5 class="mb-3 text-center">Contact Form</h5>
+        <form id="pujaFormSubmit">
+            <div class="mb-2">
+                <label class="form-label d-block text-start">Pooja</label>
+                <input type="text" class="form-control" id="pooja" name="pooja" placeholder="e.g., Rudraabhishek Puja" required>
+                <div class="invalid-feedback">Please enter the name of the Pooja (letters and spaces only).</div>
+            </div>
+            <div class="mb-2">
+                <label class="form-label d-block text-start">Date</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+                <div class="invalid-feedback">Please select a valid future date.</div>
+            </div>
+            <div class="mb-2">
+                <label class="form-label d-block text-start">Original Price</label>
+                <input type="number" class="form-control" id="originalPrice" name="originalPrice" placeholder="e.g., 1000" min="1" required>
+                <div class="invalid-feedback">Please enter a valid original price (positive number, at least 1).</div>
+            </div>
+            <div class="mb-2">
+                <label class="form-label d-block text-start">Discount Price</label>
+                <input type="number" class="form-control" id="discountPrice" name="discountPrice" placeholder="e.g., 800" min="0" required>
+                <div class="invalid-feedback">Please enter a valid discount price (positive number, less than or equal to original price).</div>
+            </div>
+            <div class="mb-2">
+                <label class="form-label d-block text-start">Time</label>
+                <input type="time" class="form-control" id="time" name="time" required>
+                <div class="invalid-feedback">Please select a time for the Pooja.</div>
+            </div>
+            <!-- Added Attendee Field with Placeholder and Validation -->
+            <div class="mb-2">
+                <label class="form-label d-block text-start">Attendee</label>
+                <input type="number" class="form-control" id="attendee" name="attendee" placeholder="e.g., 10" min="1" required>
+                <div class="invalid-feedback">Please enter a valid number of attendees (positive number, at least 1).</div>
+            </div>
+            <button type="submit" class="btn btn-warning w-100 btn-submit">Save Changes</button>
+        </form>
+    </div>
+</div>
 
                     <div class="row g-4">
                         <!-- Recent Request Section -->
@@ -705,6 +711,88 @@
             });
         });
     </script>
+    <script>
+    document.getElementById('pujaFormSubmit').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission until validation passes
+
+        let isValid = true;
+        const form = this;
+
+        // Get all form fields
+        const poojaInput = document.getElementById('pooja');
+        const dateInput = document.getElementById('date');
+        const originalPriceInput = document.getElementById('originalPrice');
+        const discountPriceInput = document.getElementById('discountPrice');
+        const timeInput = document.getElementById('time');
+        const attendeeInput = document.getElementById('attendee');
+
+        // Reset previous validation states
+        form.querySelectorAll('.form-control').forEach(input => {
+            input.classList.remove('is-invalid');
+        });
+
+        // Validate Pooja (only letters and spaces allowed, no special characters)
+        const poojaValue = poojaInput.value.trim();
+        const poojaRegex = /^[A-Za-z\s]+$/; // Allow only letters and spaces
+        if (!poojaValue || !poojaRegex.test(poojaValue)) {
+            poojaInput.classList.add('is-invalid');
+            isValid = false;
+        }
+
+        // Validate Date (must be a future date)
+        const selectedDate = new Date(dateInput.value);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Reset time for comparison
+        selectedDate.setHours(0, 0, 0, 0);
+        if (!dateInput.value || selectedDate <= today) {
+            dateInput.classList.add('is-invalid');
+            isValid = false;
+        }
+
+        // Validate Original Price (must be a positive number, at least 1)
+        const originalPrice = parseFloat(originalPriceInput.value);
+        if (isNaN(originalPrice) || originalPrice < 1) {
+            originalPriceInput.classList.add('is-invalid');
+            isValid = false;
+        }
+
+        // Validate Discount Price (must be a positive number, less than or equal to original price)
+        const discountPrice = parseFloat(discountPriceInput.value);
+        if (isNaN(discountPrice) || discountPrice < 0 || discountPrice > originalPrice) {
+            discountPriceInput.classList.add('is-invalid');
+            isValid = false;
+        }
+
+        // Validate Time (must not be empty)
+        if (!timeInput.value) {
+            timeInput.classList.add('is-invalid');
+            isValid = false;
+        }
+
+        // Validate Attendee (must be a positive number, at least 1)
+        const attendee = parseInt(attendeeInput.value);
+        if (isNaN(attendee) || attendee < 1) {
+            attendeeInput.classList.add('is-invalid');
+            isValid = false;
+        }
+
+        // If all validations pass, you can proceed with your existing form submission logic
+        if (isValid) {
+            console.log('Form validated successfully! Proceed with your submission logic...');
+            // Add your form submission logic here (e.g., AJAX call, Sweet Alert, etc.)
+            form.reset(); // Reset the form after successful validation
+        }
+    });
+
+    // Prevent negative values by blocking the minus key for number inputs
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('keydown', function(event) {
+            if (event.key === '-' || event.key === 'e') { // Block minus sign and 'e' (scientific notation)
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 </body>
 
 </html>
