@@ -152,6 +152,9 @@ $route['astrologerslist'] = 'Admin/AstrologersList';
 $route['astrologerreview'] = 'Admin/AstrologerReview';
 $route['pujariList'] = 'Admin/PujariList';
 $route['pujarireview'] = 'Admin/PujariReview';
+$route['adminorders'] = 'Admin/AdminOrders';
+$route['trackandship'] = 'Admin/TrackandShip';
+$route['trackorderdetails'] = 'Admin/Track_Order_Details';
 
 // Login Admin Routes
 $route['login'] = 'LoginForgotAdmin/LoginAdmin';

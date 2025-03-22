@@ -176,6 +176,18 @@ html, body {
                             <div class="card-name">Astrologer Michael Brown</div>
                         </div>
                     </a>
+                    <a href="<?php echo base_url() . 'astrologerreview'; ?>" class="text-decoration-none card-link">
+                        <div class="card">
+                            <img src="assets/images/astrologerimg.png" alt="Card Image">
+                            <div class="card-name">Astrologer Michael Brown</div>
+                        </div>
+                    </a>
+                    <a href="<?php echo base_url() . 'astrologerreview'; ?>" class="text-decoration-none card-link">
+                        <div class="card">
+                            <img src="assets/images/astrologerimg.png" alt="Card Image">
+                            <div class="card-name">Astrologer Michael Brown</div>
+                        </div>
+                    </a>
                 </div>
             </main>
             <!-- Main Component End -->

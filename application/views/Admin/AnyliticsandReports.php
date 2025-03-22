@@ -27,9 +27,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
     <style>
         /* Apply Inter font to the entire page */
@@ -129,6 +128,67 @@
         .nav-pills .nav-link.active {
             background-color: #0c768a;
         }
+
+        .nav-pills {
+            justify-content: center;
+            /* Centering nav-pills */
+        }
+
+        .nav-link {
+            font-size: 18px;
+            /* font-weight: bold; */
+        }
+
+        .container {
+            max-width: 900px;
+            /* Adjust table width */
+        }
+
+        /* Ensure consistent row height */
+        table tbody tr {
+            height: 80px;
+        }
+
+        /* Truncated Review Column */
+        .review-column {
+            position: relative;
+            max-width: 300px;
+            height: 50px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+            cursor: pointer;
+        }
+
+        /* Tooltip styling */
+        .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            left: 50%;
+            bottom: 100%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: normal;
+            width: auto;
+            max-width: 250px;
+            text-align: left;
+            transition: opacity 0.3s ease-in-out;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        /* Show tooltip on hover */
+        .review-column:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -145,470 +205,144 @@
             <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
             <br>
             <!-- Navbar End -->
-            <!-- <h2 class="text-center">Reports and Anlytics</h1> -->
-            <div class="d-flex align-items-center justify-content-around">
-                <h2 class="text-center ">
-                    Reports and Analytics</h2>
 
-                <div class="text-center ">
-                    <div class="dropdown ms-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #0c768a; color: white;">
-                            Select Report
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#" onclick="showReport('reportone')">Puja</a>
-                            <a class="dropdown-item" href="#" onclick="showReport('reporttwo')">Service</a>
-                            <a class="dropdown-item" href="#" onclick="showReport('reportthree')">Products</a>
-                        </div>
+            <div class="container mt-4">
+                <!-- Nav Pills -->
+                <ul class="nav nav-pills mb-3" id="analysisTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="product-tab" data-bs-toggle="pill" data-bs-target="#product-analysis" type="button" role="tab">Product Analysis</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="service-tab" data-bs-toggle="pill" data-bs-target="#service-analysis" type="button" role="tab">Service Analysis</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="puja-tab" data-bs-toggle="pill" data-bs-target="#puja-analysis" type="button" role="tab">Puja Analysis</button>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="analysisContent">
+                    <!-- Product Analysis Tab -->
+                    <div class="tab-pane fade show active" id="product-analysis" role="tabpanel">
+                        <!-- <h3 class="text-center">Product Sales Report</h3> -->
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th style="width: 5%;">Sr. No</th>
+                                    <th style="width: 20%;">Product Name</th>
+                                    <th style="width: 15%;">Total Sales</th>
+                                    <th style="width: 15%;">Revenue</th>
+                                    <th style="width: 15%;">Ratings</th>
+                                    <th style="width: 30%;">Product Review</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $products = [
+                                    ["name" => "Product A", "sales" => 120, "revenue" => 24000, "rating" => 4, "review" => "Great product! Great product! Great product! Great product!Great product!Great product!Great product!Great product!Great product!Great product!"],
+                                    ["name" => "Product B", "sales" => 80, "revenue" => 16000, "rating" => 5, "review" => "Best product! Great product! Great product!Great product!Great product!"],
+                                ];
+                                $sr_no = 1;
+                                foreach ($products as $product) { ?>
+                                    <tr>
+                                        <td><?php echo $sr_no++; ?></td>
+                                        <td><?php echo $product['name']; ?></td>
+                                        <td><?php echo $product['sales']; ?></td>
+                                        <td><?php echo "₹" . number_format($product['revenue'], 2); ?></td>
+                                        <td>
+                                            <?php for ($i = 0; $i < $product['rating']; $i++) {
+                                                echo '<i class="bi bi-star-fill text-warning"></i> ';
+                                            } ?>
+                                            (<?php echo $product['rating']; ?>)
+                                        </td>
+                                        <td class="review-column" title="<?php echo $product['review']; ?>"><?php echo $product['review']; ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Service Analysis Tab -->
+                    <div class="tab-pane fade" id="service-analysis" role="tabpanel">
+                        <!-- <h3 class="text-center">Service Sales Report</h3> -->
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th style="width: 5%;">Sr. No</th>
+                                    <th style="width: 20%;">Service Name</th>
+                                    <th style="width: 15%;">Total Bookings</th>
+                                    <th style="width: 15%;">Revenue</th>
+                                    <th style="width: 15%;">Ratings</th>
+                                    <th style="width: 30%;">Service Review</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $services = [
+                                    ["name" => "Web Development", "bookings" => 50, "revenue" => 50000, "rating" => 5, "review" => "Excellent service! Great product! Great product!Great product!Great product!Great product!Great product!Great product!Great product!Great product!Great product!Great product!Great product!"],
+                                    ["name" => "Graphic Design", "bookings" => 30, "revenue" => 30000, "rating" => 4, "review" => "Very creative work! Great product! Great product!Great product!Great product!Great product!Great product!Great product!Great product!"],
+                                ];
+                                $sr_no = 1;
+                                foreach ($services as $service) { ?>
+                                    <tr>
+                                        <td><?php echo $sr_no++; ?></td>
+                                        <td><?php echo $service['name']; ?></td>
+                                        <td><?php echo $service['bookings']; ?></td>
+                                        <td><?php echo "₹" . number_format($service['revenue'], 2); ?></td>
+                                        <td>
+                                            <?php for ($i = 0; $i < $service['rating']; $i++) {
+                                                echo '<i class="bi bi-star-fill text-warning"></i> ';
+                                            } ?>
+                                            (<?php echo $service['rating']; ?>)
+                                        </td>
+                                        <td class="review-column" title="<?php echo $service['review']; ?>"><?php echo $service['review']; ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Puja Analysis Tab -->
+                    <div class="tab-pane fade" id="puja-analysis" role="tabpanel">
+                        <!-- <h3 class="text-center">Puja Sales Report</h3> -->
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th style="width: 5%;">Sr. No</th>
+                                    <th style="width: 20%;">Puja Name</th>
+                                    <th style="width: 15%;">Total Bookings</th>
+                                    <th style="width: 15%;">Revenue</th>
+                                    <th style="width: 15%;">Ratings</th>
+                                    <th style="width: 30%;">Puja Review</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $pujas = [
+                                    ["name" => "Ganesh Puja", "bookings" => 20, "revenue" => 20000, "rating" => 5, "review" => "Very peaceful and spiritual!Very peaceful and spiritual!Very peaceful and spiritual!Very peaceful and spiritual!"],
+                                    ["name" => "Navgrah Puja", "bookings" => 15, "revenue" => 15000, "rating" => 4, "review" => "Well-organized! Great product! Great product!Great product!Great product!Great product!Great product!Great product!"],
+                                ];
+                                $sr_no = 1;
+                                foreach ($pujas as $puja) { ?>
+                                    <tr>
+                                        <td><?php echo $sr_no++; ?></td>
+                                        <td><?php echo $puja['name']; ?></td>
+                                        <td><?php echo $puja['bookings']; ?></td>
+                                        <td><?php echo "₹" . number_format($puja['revenue'], 2); ?></td>
+                                        <td>
+                                            <?php for ($i = 0; $i < $puja['rating']; $i++) {
+                                                echo '<i class="bi bi-star-fill text-warning"></i> ';
+                                            } ?>
+                                            (<?php echo $puja['rating']; ?>)
+                                        </td>
+                                        <td class="review-column" title="<?php echo $puja['review']; ?>"><?php echo $puja['review']; ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-
-            <br>
-
-
-
-            <div class="report px-5 mb-5" id="reportone">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="m-0">Top Puja</h5>
-                        <!-- Nav Pills for Quarter, Month, Day -->
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <button class="nav-link active" id="btn-quarter" onclick="updateChart('quarter')">Quarter</button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link" id="btn-month" onclick="updateChart('month')">Month</button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link" id="btn-day" onclick="updateChart('day')">Day</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body d-flex justify-content-center">
-                        <canvas id="myChart" style="width:100%;max-width:1000px"></canvas>
-                    </div>
-                </div>
-                <br>
-
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="m-0">Top Puja Sales</h5>
-                        <!-- Dropdown for selecting sales type -->
-                        <select id="salesType" class="form-select" style="width: 150px;" onchange="updateDoughnutChart()">
-                            <option value="online">Online</option>
-                            <option value="offline">Offline</option>
-                            <option value="mob">Mob</option>
-                        </select>
-                    </div>
-                    <div class="card-body d-flex justify-content-center">
-                        <div style="display: flex; align-items: center;">
-                            <!-- Doughnut Chart -->
-                            <canvas id="top-5-selling-puja" style="max-width: 300px; height: 300px;"></canvas>
-                            <!-- Legend Container -->
-                            <div id="chart-legend" style="margin-left: 20px; font-size: 14px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="report px-5 mb-5" id="reporttwo" style="display: none;">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="m-0">Top Puja Two</h5>
-                        <ul class="nav nav-pills">
-                            <li class="nav-item"><button class="nav-link active" onclick="updateChart('quarter2', 'myChart2')">Quarter</button></li>
-                            <li class="nav-item"><button class="nav-link" onclick="updateChart('month2', 'myChart2')">Month</button></li>
-                            <li class="nav-item"><button class="nav-link" onclick="updateChart('day2', 'myChart2')">Day</button></li>
-                        </ul>
-                    </div>
-                    <div class="card-body d-flex justify-content-center">
-                        <canvas id="myChart2" style="width:100%;max-width:1000px"></canvas>
-                    </div>
-                </div>
-                <br>
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="m-0">Top Puja Sales</h5>
-                        <!-- <select id="salesType2" class="form-select" style="width: 150px;" onchange="updateDoughnutChart('top-5-selling-puja2')">
-                            <option value="online">Online</option>
-                            <option value="offline">Offline</option>
-                            <option value="mob">Mob</option>
-                        </select> -->
-                    </div>
-                    <div class="card-body d-flex justify-content-center">
-                        <canvas id="top-5-selling-puja2" style="max-width: 600px; height: 400px;"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="report px-5 mb-5" id="reportthree" style="display: none;">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="m-0">Top Puja Three</h5>
-                        <ul class="nav nav-pills">
-                            <li class="nav-item"><button class="nav-link active" onclick="updateChart('quarter3', 'myChart3')">Quarter</button></li>
-                            <li class="nav-item"><button class="nav-link" onclick="updateChart('month3', 'myChart3')">Month</button></li>
-                            <li class="nav-item"><button class="nav-link" onclick="updateChart('day3', 'myChart3')">Day</button></li>
-                        </ul>
-                    </div>
-                    <div class="card-body d-flex justify-content-center">
-                        <canvas id="myChart3" style="width:100%;max-width:1000px"></canvas>
-                    </div>
-                </div>
-                <br>
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="m-0">Top Puja Sales</h5>
-                        <!-- <select id="salesType3" class="form-select" style="width: 150px;" onchange="updateDoughnutChart('top-5-selling-puja3')">
-                            <option value="online">Online</option>
-                            <option value="offline">Offline</option>
-                            <option value="mob">Mob</option>
-                        </select> -->
-                    </div>
-                    <div class="card-body d-flex justify-content-center">
-                        <canvas id="top-5-selling-puja3" style="max-width: 600px; height: 400px;"></canvas>
-                    </div>
-                </div>
-
-                <style>
-                    #top-5-selling-puja3 {
-                        position: relative;
-                    }
-
-                    #top-5-selling-puja3 .chartjs-wrapper {
-                        position: absolute;
-                        right: 0;
-                        top: 0;
-                    }
-                </style>
-            </div>
-
-            <script>
-                function showReport(reportId) {
-                    // Hide all reports
-                    document.querySelectorAll('.report').forEach(report => {
-                        report.style.display = 'none';
-                    });
-
-                    // Show selected report
-                    document.getElementById(reportId).style.display = 'block';
-                }
-            </script>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    // Chart Configuration
-                    const ctx = document.getElementById('myChart').getContext('2d');
-                    let currentChart;
-
-                    const chartData = {
-                        quarter: {
-                            labels: ["Q1", "Q2", "Q3", "Q4"],
-                            datasets: [{
-                                    label: "Sum of sales",
-                                    data: [3300, 4000, 10000, 8000],
-                                    borderColor: "red",
-                                    fill: false
-                                },
-                                {
-                                    label: "Sales last year",
-                                    data: [5000, 7000, 9000, 11000],
-                                    borderColor: "green",
-                                    fill: false
-                                }
-                            ]
-                        },
-                        month: {
-                            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                            datasets: [{
-                                    label: "Sum of sales",
-                                    data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478, 7130, 9678],
-                                    borderColor: "red",
-                                    fill: false
-                                },
-                                {
-                                    label: "Sales last year",
-                                    data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000, 7630, 9978],
-                                    borderColor: "green",
-                                    fill: false
-                                }
-                            ]
-                        },
-                        day: {
-                            labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                            datasets: [{
-                                    label: "Sum of sales",
-                                    data: [300, 400, 500, 700, 900, 1000, 1100],
-                                    borderColor: "red",
-                                    fill: false
-                                },
-                                {
-                                    label: "Sales last year",
-                                    data: [500, 600, 700, 800, 900, 1100, 1200],
-                                    borderColor: "green",
-                                    fill: false
-                                }
-                            ]
-                        }
-                    };
-
-                    function createChart(period) {
-                        if (currentChart) {
-                            currentChart.destroy(); // Destroy the existing chart before creating a new one
-                        }
-                        currentChart = new Chart(ctx, {
-                            type: "line",
-                            data: chartData[period],
-                            options: {
-                                responsive: true,
-                                plugins: {
-                                    legend: {
-                                        display: true
-                                    }
-                                }
-                            }
-                        });
-                    }
-
-                    // Initialize chart with "month" as the default view
-                    createChart("month");
-
-                    // Function to update the chart when clicking Quarter, Month, or Day
-                    function updateChart(period) {
-                        createChart(period);
-
-                        // Update active button
-                        document.querySelectorAll('.nav-link').forEach(button => button.classList.remove('active'));
-                        document.getElementById(`btn-${period}`).classList.add('active');
-                    }
-
-                    // Attach event listeners to buttons
-                    document.getElementById("btn-quarter").addEventListener("click", function() {
-                        updateChart("quarter");
-                    });
-                    document.getElementById("btn-month").addEventListener("click", function() {
-                        updateChart("month");
-                    });
-                    document.getElementById("btn-day").addEventListener("click", function() {
-                        updateChart("day");
-                    });
-
-                });
-                // Chart Data for Online, Offline, and Mob Sales
-                const salesData = {
-                    online: {
-                        labels: ["Puja A", "Puja B", "Puja C", "Puja D", "Puja E"],
-                        datasets: [{
-                            data: [2500, 1800, 1500, 1200, 900],
-                            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#ff9800", "#00bcd4"]
-                        }]
-                    },
-                    offline: {
-                        labels: ["Puja X", "Puja Y", "Puja Z", "Puja M", "Puja N"],
-                        datasets: [{
-                            data: [1800, 1400, 1200, 1000, 700],
-                            backgroundColor: ["#4CAF50", "#FF9800", "#9C27B0", "#3F51B5", "#E91E63"]
-                        }]
-                    },
-                    mob: {
-                        labels: ["Puja 1", "Puja 2", "Puja 3", "Puja 4", "Puja 5"],
-                        datasets: [{
-                            data: [2200, 1600, 1300, 1100, 800],
-                            backgroundColor: ["#795548", "#607D8B", "#FFEB3B", "#F44336", "#009688"]
-                        }]
-                    }
-                };
-
-                // Initialize the Chart
-                const ctx2 = document.getElementById('top-5-selling-puja').getContext('2d');
-                let top5SellingPujaChart = new Chart(ctx2, {
-                    type: 'doughnut',
-                    data: {
-                        labels: salesData.online.labels, // Default to "Online"
-                        datasets: [{
-                            data: salesData.online.datasets[0].data,
-                            backgroundColor: salesData.online.datasets[0].backgroundColor
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        }
-                    }
-                });
-
-                // Function to Update Chart on Dropdown Change
-                // Function to Update Chart on Dropdown Change
-                function updateDoughnutChart() {
-                    const selectedType = document.getElementById('salesType').value;
-
-                    // Check if the selected type exists in salesData
-                    if (!salesData[selectedType]) {
-                        console.error("Invalid sales type selected:", selectedType);
-                        return;
-                    }
-
-                    // Destroy existing chart
-                    if (top5SellingPujaChart) {
-                        top5SellingPujaChart.destroy();
-                    }
-
-                    // Recreate the chart with new data
-                    const ctx2 = document.getElementById('top-5-selling-puja').getContext('2d');
-                    top5SellingPujaChart = new Chart(ctx2, {
-                        type: 'doughnut',
-                        data: {
-                            labels: salesData[selectedType].labels,
-                            datasets: [{
-                                data: salesData[selectedType].datasets[0].data,
-                                backgroundColor: salesData[selectedType].datasets[0].backgroundColor
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    display: false
-                                }
-                            }
-                        }
-                    });
-
-                    // Update the legend
-                    createLegend(top5SellingPujaChart);
-                }
-
-                // Function to Generate Custom Legend
-                function createLegend(chart) {
-                    const legendContainer = document.getElementById('chart-legend');
-                    legendContainer.innerHTML = chart.data.labels.map((label, i) => `
-                        <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                            <span style="width: 14px; height: 14px; background-color: ${chart.data.datasets[0].backgroundColor[i]}; display: inline-block; margin-right: 8px; border-radius: 3px;"></span>
-                            <span>${label}</span>
-                        </div>
-                    `).join('');
-                }
-
-                // Initialize the Legend on Page Load
-                createLegend(top5SellingPujaChart);
-
-                document.getElementById("salesType").addEventListener("change", updateDoughnutChart);
-            </script>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    // Sample Data for Line and Doughnut Charts
-                    const lineChartData = {
-                        quarter2: [200, 300, 150, 400, 250],
-                        month2: [120, 180, 100, 250, 190],
-                        day2: [80, 120, 60, 200, 140],
-                        quarter3: [180, 250, 130, 370, 220],
-                        month3: [110, 170, 90, 230, 170],
-                        day3: [70, 110, 50, 180, 130]
-                    };
-
-                    const salesData = {
-                        online: [30, 50, 70, 40, 60],
-                        offline: [20, 40, 60, 30, 50],
-                        mob: [10, 30, 50, 20, 40]
-                    };
-
-                    // Function to Create a Line Chart
-                    function createLineChart(ctx, data) {
-                        return new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-                                datasets: [{
-                                    label: "Sales",
-                                    backgroundColor: "rgba(54, 162, 235, 0.2)",
-                                    borderColor: "rgba(54, 162, 235, 1)",
-                                    borderWidth: 2,
-                                    data: data
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        });
-                    }
-
-                    // Function to Create a Doughnut Chart
-                    function createDoughnutChart(ctx, data) {
-                        return new Chart(ctx, {
-                            type: 'doughnut',
-                            data: {
-                                labels: ["Product A", "Product B", "Product C", "Product D", "Product E"],
-                                datasets: [{
-                                    label: "Sales",
-                                    backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
-                                    data: data
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false
-                            }
-                        });
-                    }
-
-                    // Initialize Charts
-                    const myChart2 = createLineChart(document.getElementById("myChart2"), lineChartData.quarter2);
-                    const myChart3 = createLineChart(document.getElementById("myChart3"), lineChartData.quarter3);
-                    const doughnutChart2 = createDoughnutChart(document.getElementById("top-5-selling-puja2"), salesData.online);
-                    const doughnutChart3 = createDoughnutChart(document.getElementById("top-5-selling-puja3"), salesData.online);
-
-                    // Function to Update Line Charts Based on Nav Pills
-                    window.updateChart = function(timeFrame, chartId) {
-                        let chart;
-                        if (chartId === "myChart2") chart = myChart2;
-                        else if (chartId === "myChart3") chart = myChart3;
-
-                        if (chart) {
-                            chart.data.datasets[0].data = lineChartData[timeFrame];
-                            chart.update();
-                        }
-
-                        // Update Active Class for Buttons
-                        let parentDiv = chartId === "myChart2" ? "reporttwo" : "reportthree";
-                        document.querySelectorAll(`#${parentDiv} .nav-link`).forEach(btn => btn.classList.remove("active"));
-                        document.querySelector(`[onclick="updateChart('${timeFrame}', '${chartId}')"]`).classList.add("active");
-                    };
-
-                    // Function to Update Doughnut Charts Based on Sales Type Selection
-                    window.updateDoughnutChart = function(chartId) {
-                        let chart;
-                        let selectElement;
-                        if (chartId === "top-5-selling-puja2") {
-                            chart = doughnutChart2;
-                            selectElement = document.getElementById("salesType2");
-                        } else if (chartId === "top-5-selling-puja3") {
-                            chart = doughnutChart3;
-                            selectElement = document.getElementById("salesType3");
-                        }
-
-                        if (chart && selectElement) {
-                            let selectedType = selectElement.value;
-                            chart.data.datasets[0].data = salesData[selectedType];
-                            chart.update();
-                        }
-                    };
-                });
-            </script>
 
         </div>
     </div>

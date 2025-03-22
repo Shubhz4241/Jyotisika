@@ -67,5 +67,17 @@ class Admin extends CI_Controller {
 		
 		$this->load->view('Admin/PujariReview');
 	}
+	public function AdminOrders(){
+		
+		$this->load->view('Admin/AdminOrders');
+	}
+	public function TrackandShip(){
+		
+		$this->load->view('Admin/TrackandShip');
+	}
+	public function Track_Order_Details(){
+		
+		$this->load->view('Admin/Track_Order_Details');
+	}
     
 }
