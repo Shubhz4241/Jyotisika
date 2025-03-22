@@ -6,7 +6,7 @@
 
     /* Navbar Styling */
     .navbar {
-        background-color: #F6CE57;
+        background-color: #0C768A;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         padding: 1px 40px;
         position: fixed;
@@ -28,7 +28,7 @@
 
     .menu-items a {
         text-decoration: none;
-        color: #000;
+        color: white;
         margin: 0 23px;
         font-weight: 500;
     }
@@ -51,7 +51,7 @@
     }
 
     .notification-icon i {
-        color: black;
+        color: white;
         transition: color 0.3s ease;
     }
 
@@ -297,7 +297,7 @@
         .menu-items {
             display: none;
             flex-direction: column;
-            background-color: white;
+            background-color: #0C768A;
             position: absolute;
             top: 60px;
             left: 0;
@@ -312,7 +312,7 @@
         }
 
         .menu-items a {
-            display: block;
+            display: white;
             padding: 10px;
             margin: 10px 0; /* Updated for better spacing */
         }
