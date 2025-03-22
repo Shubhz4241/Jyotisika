@@ -356,7 +356,7 @@
     <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
-
+    <div style="min-height: 100vh;">
     <div>
         <main>
             <section class="dashboard-sections container">
@@ -367,6 +367,16 @@
                                 <div class="icon-box green">📅</div>
                                 <a href="<?php echo base_url() . 'PujariUser/TodaysSchedule'; ?>">
                                     <h6>Today's Schedule</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
+                        <div style="background-color:#BB97C1; padding:6px 2px; padding-bottom:20px; border:3px solid #BB97C1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <div class="card py-3" style="border-radius:0;">
+                                <div class="icon-box red">📜</div>
+                                <!-- <a href="<?php echo base_url() . 'PujariUser/RateChart'; ?>"> -->
+                                    <h6>Upcoming Puja’s</h6>
                                 </a>
                             </div>
                         </div>
@@ -582,7 +592,7 @@
             </section>
         </main>
     </div>
-
+    </div>
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
@@ -793,6 +803,7 @@
         });
     });
 </script>
+    
 </body>
 
 </html>
