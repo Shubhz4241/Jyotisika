@@ -810,5 +810,24 @@
         });
     });
 </script>
+<script>
+    (function() {
+        // Run when the page is fully loaded
+        window.addEventListener('load', function() {
+            // Check URL for tab parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const tab = urlParams.get('tab');
+
+            // If tab is 'advanced', switch to the Advanced tab
+            if (tab === 'advanced') {
+                // Use jQuery to update the active tab
+                jQuery('.tab').removeClass('active');
+                jQuery('.form-container').removeClass('active');
+                jQuery('.tab[data-target="#advanced"]').addClass('active');
+                jQuery('#advanced').addClass('active');
+            }
+        });
+    })();
+</script>
 </body>
 </html>

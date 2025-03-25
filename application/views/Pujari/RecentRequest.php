@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedStatuses = [];
     let filterDropdown;
 
-    // Load dummy data
+    // Load dummy data (Removed all Offline entries)
     function loadDummyData() {
         const dummyData = [
             { "name": "Rahul Sharma", "puja": "Shani Puja", "Mode": "Online", "date": "2025-03-01", "time": "09:00 AM", "address": "Viman Nagar, Pune", "distance": "", "status": "" },
@@ -166,31 +166,11 @@ document.addEventListener("DOMContentLoaded", function () {
             { "name": "Pooja Sharma", "puja": "Lakshmi Puja", "Mode": "Online", "date": "2025-03-13", "time": "07:00 AM", "address": "Vashi, Navi Mumbai", "distance": "", "status": "" },
             { "name": "Kiran Patel", "puja": "Navgrah Puja", "Mode": "Online", "date": "2025-03-14", "time": "06:00 PM", "address": "Wakad, Pune", "distance": "", "status": "" },
             { "name": "Meera Das", "puja": "Satyanarayan Puja", "Mode": "Online", "date": "2025-03-15", "time": "05:00 PM", "address": "Borivali, Mumbai", "distance": "", "status": "" },
-            { "name": "Anita Rao", "puja": "Shani Puja", "Mode": "Offline", "date": "2025-03-16", "time": "09:00 AM", "address": "Shivaji Nagar, Pune", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Suresh Kumar", "puja": "Ganesh Puja", "Mode": "Offline", "date": "2025-03-17", "time": "10:30 AM", "address": "Thane, Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Meena Iyer", "puja": "Lakshmi Puja", "Mode": "Offline", "date": "2025-03-18", "time": "07:00 AM", "address": "Navi Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Rohan Joshi", "puja": "Navgrah Puja", "Mode": "Offline", "date": "2025-03-19", "time": "06:00 PM", "address": "Hadapsar, Pune", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Kavita Nair", "puja": "Satyanarayan Puja", "Mode": "Offline", "date": "2025-03-20", "time": "05:00 PM", "address": "Chembur, Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Vijay Reddy", "puja": "Rudrabhishek", "Mode": "Offline", "date": "2025-03-21", "time": "08:00 AM", "address": "Kothrud, Pune", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Pooja Singh", "puja": "Kaal Sarp Dosh", "Mode": "Offline", "date": "2025-03-22", "time": "03:00 PM", "address": "Dadar, Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Amita Shah", "puja": "Durga Saptashati", "Mode": "Offline", "date": "2025-03-23", "time": "09:30 AM", "address": "Vashi, Navi Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Deepak Menon", "puja": "Vastu Shanti", "Mode": "Offline", "date": "2025-03-24", "time": "11:00 AM", "address": "Wakad, Pune", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Sunita Das", "puja": "Maha Mrityunjaya", "Mode": "Offline", "date": "2025-03-25", "time": "07:00 AM", "address": "Borivali, Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Rajesh Kumar", "puja": "Shani Puja", "Mode": "Offline", "date": "2025-03-26", "time": "09:00 AM", "address": "Aundh, Pune", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Shalini Gupta", "puja": "Ganesh Puja", "Mode": "Offline", "date": "2025-03-27", "time": "10:30 AM", "address": "Malad, Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Nikhil Sharma", "puja": "Lakshmi Puja", "Mode": "Offline", "date": "2025-03-28", "time": "07:00 AM", "address": "Pimpri, Pune", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Divya Patel", "puja": "Navgrah Puja", "Mode": "Offline", "date": "2025-03-29", "time": "06:00 PM", "address": "Thane West, Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
-            { "name": "Vinay Iyer", "puja": "Satyanarayan Puja", "Mode": "Offline", "date": "2025-03-30", "time": "05:00 PM", "address": "Navi Mumbai", "distance": "https://via.placeholder.com/50", "status": "" },
             { "name": "Ajay Verma", "puja": "Shani Puja", "Mode": "Online", "date": "2025-03-31", "time": "09:00 AM", "address": "Pune", "distance": "", "status": "Approved" },
             { "name": "Priyanka Roy", "puja": "Ganesh Puja", "Mode": "Online", "date": "2025-04-01", "time": "10:30 AM", "address": "Mumbai", "distance": "", "status": "Approved" },
             { "name": "Rakesh Tiwari", "puja": "Lakshmi Puja", "Mode": "Online", "date": "2025-04-02", "time": "07:00 AM", "address": "Pune", "distance": "", "status": "Approved" },
             { "name": "Neeta Joshi", "puja": "Navgrah Puja", "Mode": "Online", "date": "2025-04-03", "time": "06:00 PM", "address": "Mumbai", "distance": "", "status": "Approved" },
             { "name": "Suman Patel", "puja": "Satyanarayan Puja", "Mode": "Online", "date": "2025-04-04", "time": "05:00 PM", "address": "Pune", "distance": "", "status": "Approved" },
-            { "name": "Vikas Rao", "puja": "Rudrabhishek", "Mode": "Offline", "date": "2025-04-05", "time": "08:00 AM", "address": "Mumbai", "distance": "https://via.placeholder.com/50", "status": "Approved" },
-            { "name": "Anjali Kumar", "puja": "Kaal Sarp Dosh", "Mode": "Offline", "date": "2025-04-06", "time": "03:00 PM", "address": "Pune", "distance": "https://via.placeholder.com/50", "status": "Approved" },
-            { "name": "Manoj Singh", "puja": "Durga Saptashati", "Mode": "Offline", "date": "2025-04-07", "time": "09:30 AM", "address": "Mumbai", "distance": "https://via.placeholder.com/50", "status": "Approved" },
-            { "name": "Rekha Malhotra", "puja": "Vastu Shanti", "Mode": "Offline", "date": "2025-04-08", "time": "11:00 AM", "address": "Pune", "distance": "https://via.placeholder.com/50", "status": "Approved" },
-            { "name": "Gaurav Sharma", "puja": "Maha Mrityunjaya", "Mode": "Offline", "date": "2025-04-09", "time": "07:00 AM", "address": "Mumbai", "distance": "https://via.placeholder.com/50", "status": "Approved" },
             { "name": "Sonia Gupta", "puja": "Shani Puja", "Mode": "Online", "date": "2025-04-10", "time": "09:00 AM", "address": "Pune", "distance": "", "status": "Approved" },
             { "name": "Rohit Kapoor", "puja": "Ganesh Puja", "Mode": "Online", "date": "2025-04-11", "time": "10:30 AM", "address": "Mumbai", "distance": "", "status": "Approved" },
             { "name": "Nisha Sharma", "puja": "Lakshmi Puja", "Mode": "Online", "date": "2025-04-12", "time": "07:00 AM", "address": "Pune", "distance": "", "status": "Approved" },
@@ -201,11 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
             { "name": "Pooja Nair", "puja": "Lakshmi Puja", "Mode": "Online", "date": "2025-04-17", "time": "07:00 AM", "address": "Pune", "distance": "", "status": "Rejected" },
             { "name": "Amit Singh", "puja": "Navgrah Puja", "Mode": "Online", "date": "2025-04-18", "time": "06:00 PM", "address": "Mumbai", "distance": "", "status": "Rejected" },
             { "name": "Sunita Reddy", "puja": "Satyanarayan Puja", "Mode": "Online", "date": "2025-04-19", "time": "05:00 PM", "address": "Pune", "distance": "", "status": "Rejected" },
-            { "name": "Karan Iyer", "puja": "Rudrabhishek", "Mode": "Offline", "date": "2025-04-20", "time": "08:00 AM", "address": "Mumbai", "distance": "https://via.placeholder.com/50", "status": "Rejected" },
-            { "name": "Nisha Patel", "puja": "Kaal Sarp Dosh", "Mode": "Offline", "date": "2025-04-21", "time": "03:00 PM", "address": "Pune", "distance": "https://via.placeholder.com/50", "status": "Rejected" },
-            { "name": "Vivek Sharma", "puja": "Durga Saptashati", "Mode": "Offline", "date": "2025-04-22", "time": "09:30 AM", "address": "Mumbai", "distance": "https://via.placeholder.com/50", "status": "Rejected" },
-            { "name": "Rita Kapoor", "puja": "Vastu Shanti", "Mode": "Offline", "date": "2025-04-23", "time": "11:00 AM", "address": "Pune", "distance": "https://via.placeholder.com/50", "status": "Rejected" },
-            { "name": "Arun Das", "puja": "Maha Mrityunjaya", "Mode": "Offline", "date": "2025-04-24", "time": "07:00 AM", "address": "Mumbai", "distance": "https://via.placeholder.com/50", "status": "Rejected" },
             { "name": "Meera Sen", "puja": "Shani Puja", "Mode": "Online", "date": "2025-04-25", "time": "09:00 AM", "address": "Pune", "distance": "", "status": "Rejected" },
             { "name": "Siddharth Rao", "puja": "Ganesh Puja", "Mode": "Online", "date": "2025-04-26", "time": "10:30 AM", "address": "Mumbai", "distance": "", "status": "Rejected" },
             { "name": "Lata Sharma", "puja": "Lakshmi Puja", "Mode": "Online", "date": "2025-04-27", "time": "07:00 AM", "address": "Pune", "distance": "", "status": "Rejected" },
@@ -237,18 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     <th>Time</th>
                     <th>Address</th>
                     <th>Status</th>
-                </tr>`;
-        } else if (selectedModes.length === 1 && selectedModes.includes("offline")) {
-            tableHeader.innerHTML = `
-                <tr>
-                    <th>Name</th>
-                    <th>Puja</th>
-                    <th>Mode</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Address</th>
-                    <th class="distance-header">Distance</th>
-                    <th>Action</th>
                 </tr>`;
         } else {
             tableHeader.innerHTML = `
@@ -290,7 +253,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${data.date}</td>
                     <td>${data.time}</td>
                     <td>${data.address}</td>
-                    ${selectedModes.length === 1 && selectedModes.includes("offline") ? `<td class="distance-col">${data.distance ? `<img src="${data.distance}" alt="Distance">` : ""}</td>` : ""}
                     <td>
                         <button class="btn btn-outline-success btn-sm approve-btn me-2 ${data.status === 'Approved' ? 'btn-success' : ''}" data-index="${globalIndex}">
                             <i class="bi bi-check-lg"></i>
@@ -454,18 +416,6 @@ document.addEventListener("DOMContentLoaded", function () {
         filterDropdown = document.createElement("div");
         filterDropdown.classList.add("dropdown-menu", "show");
         filterDropdown.innerHTML = `
-            <div class="filter-section">
-                <h6 class="dropdown-header">Filter by Mode</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="mode-online" value="online">
-                    <label class="form-check-label" for="mode-online">Online</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="mode-offline" value="offline">
-                    <label class="form-check-label" for="mode-offline">Offline</label>
-                </div>
-            </div>
-            <div class="dropdown-divider"></div>
             <div class="filter-section">
                 <h6 class="dropdown-header">Filter by Status</h6>
                 <div class="form-check">
