@@ -61,7 +61,9 @@
 
             <!-- cards -->
             <div class="row my-4" id="cardContainer">
-                <?php 
+                <?php
+
+
                 $astrologers = [
                     [
                         'name' => 'Acharya Mishra Ji',
@@ -90,70 +92,84 @@
                         'languages' => 'English, Hindi, Marathi',
                         'rating' => 4
                     ],
-                    
+
                 ];
 
                 foreach ($astrologers as $astrologer): ?>
-                <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
-                    <div class="card shadow rounded-3 h-100"
-                        style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <!-- Profile Section -->
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                                    <img src="<?php echo base_url('assets/images/' . $astrologer['image']); ?>" alt="image"
-                                        class="rounded-circle"
-                                        style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);"><?php echo $astrologer['name']; ?>
-                                        </h6>
+                    <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
+                        <div class="card shadow rounded-3 h-100"
+                            style="border: 1px solid var(--red); background-color: #fff;">
+                            <div class="card-body p-3">
+                                <!-- Profile Section -->
+                                <div class="d-flex align-items-center mb-2">
+                                    <a href="<?php echo base_url('ViewAstrologer'); ?>">
+                                        <img src="<?php echo base_url('assets/images/' . $astrologer['image']); ?>"
+                                            alt="image" class="rounded-circle"
+                                            style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                     </a>
+                                    <div class="ms-2">
+                                        <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
+                                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                <?php echo $astrologer['name']; ?>
+                                            </h6>
+                                        </a>
 
-                                    <div class="d-flex align-items-center gap-1">
-                                        <?php for ($i = 0; $i < $astrologer['rating']; $i++): ?>
-                                            <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                style="width: 15px; height: 15px;">
-                                        <?php endfor; ?>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <?php for ($i = 0; $i < $astrologer['rating']; $i++): ?>
+                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
+                                                    style="width: 15px; height: 15px;">
+                                            <?php endfor; ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Details Section -->
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
-                                        style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise"><?php echo $astrologer['expertise']; ?></small>
+                                <!-- Details Section -->
+                                <div class="d-flex flex-column gap-1 mb-2">
+                                    <div class="d-flex align-items-center">
+                                        <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
+                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                        <small class="card-expertise"><?php echo $astrologer['expertise']; ?></small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
+                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                        <small><?php echo $astrologer['experience']; ?></small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
+                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                        <small><?php echo $astrologer['price']; ?></small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
+                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                        <small class="card-language"><?php echo $astrologer['languages']; ?></small>
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
-                                        style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small><?php echo $astrologer['experience']; ?></small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
-                                        style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small><?php echo $astrologer['price']; ?></small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
-                                        style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-language"><?php echo $astrologer['languages']; ?></small>
-                                </div>
-                            </div>
 
-                            <!-- Action Buttons -->
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1"
-                                    style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
+                                <!-- Action Buttons -->
+                                <div class="d-flex gap-2 mb-2">
+                                    <?php if ($this->session->userdata('user_id')): ?>
+                                        <button class="btn btn-sm w-50 rounded-3 border-1"
+                                            style="background-color: var(--yellow);">Chat</button>
+                                    <?php else: ?>
+                                        <button id="chatlink" class="btn btn-sm w-50 rounded-3 border-1 btnlog"
+                                            style="background-color: var(--yellow);">Chat</button>
+                                    <?php endif; ?>
+
+
+                                    <?php if ($this->session->userdata('user_id')): ?>
+                                        <button
+                                            class="btn btnHover btn-sm btn-outline-success w-50 rounded-3 call-btn">Call</button>
+                                    <?php else: ?>
+                                        <button
+                                            class="btn btnHover btn-sm btn-outline-dark  w-50 rounded-3 call-btn">Call</button>
+                                    <?php endif; ?>
+                                </div>
+                                <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
                             </div>
-                            <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
                         </div>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -181,6 +197,75 @@
             document.getElementById("searchInput").addEventListener("input", filterCards);
         </script>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const chatButtons = document.getElementsByClassName("btnlog");
+
+                Array.from(chatButtons).forEach(button => {
+                    button.addEventListener("click", function (event) {
+                        event.preventDefault(); // Prevent default redirection
+
+                        <?php if (!$this->session->userdata('user_id')): ?>
+                            Swal.fire({
+                                title: "Login Required",
+                                text: "Please login to access this service",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonText: "Login",
+                                cancelButtonText: "Cancel",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to login page
+                                }
+                            });
+                        <?php else: ?>
+                            window.location.href = "<?php echo base_url('Chat'); ?>"; // Redirect to chat if user is logged in
+                        <?php endif; ?>
+                    });
+                });
+            });
+        </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const callButtons = document.querySelectorAll(".call-btn");
+
+        callButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                <?php if (!$this->session->userdata('user_id')): ?>
+                    Swal.fire({
+                        title: "Login Required",
+                        text: "Please login to access this feature",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Login",
+                        cancelButtonText: "Cancel",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "<?php echo base_url('Login'); ?>";
+                        }
+                    });
+                <?php else: ?>
+                    handleCallClick();
+                <?php endif; ?>
+            });
+        });
+    });
+
+    function handleCallClick() {
+        Swal.fire({
+            title: "Initiating Call",
+            text: "Connecting you to the service...",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false
+        });
+
+       
+    }
+</script>
     </main>
 
     <footer>

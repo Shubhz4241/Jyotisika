@@ -122,19 +122,17 @@
                             <span class="text-decoration-line-through text-muted">₹ 1299.00</span>
                         </div>
 
-                        <!-- Quantity Selector
-                        <div class="quantity-section mb-4">
-                            <label for="quantity" class="form-label">Quantity:</label>
-                            <div class="input-group" style="width: 150px;">
-                                <button class="btn" type="button" onclick="decrementQuantity()">-</button>
-                                <input type="number" class="form-control text-center rounded-2" id="quantity" value="1" min="1">
-                                <button class="btn " type="button" onclick="incrementQuantity()">+</button>
-                            </div>
-                        </div> -->
+                      
 
-                        <!-- Add to Cart Button -->
-                        <a class="btn w-50 mb-4" href="<?php echo base_url('ProductPayment')?>" style="background-color: var(--yellow);">Buy Now</a>
+                        <?php if ($this->session->userdata('user_id')): ?>
+                            <a class="btn w-50 mb-4" href="<?php echo base_url('ProductPayment'); ?>" 
+                            style="background-color: var(--yellow);">Buy Now</a>
+                        <?php else: ?>
+                            <a id="buy-now-btn" class="btn w-50 mb-4" href="#" 
+                            style="background-color: var(--yellow);">Buy Now</a>
+                        <?php endif ?>
 
+                        
 
                         <!-- Product Information -->
                         <div class="product-info mb-4">
@@ -168,6 +166,25 @@
                     }
                 }
             </script>
+    <script>
+        document.getElementById("buy-now-btn").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent navigation
+
+            Swal.fire({
+                title: "Login Required",
+                text: "Please log in to continue your purchase.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Login",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to login page
+                }
+            });
+        });
+    </script>
+
 
         </section>
 

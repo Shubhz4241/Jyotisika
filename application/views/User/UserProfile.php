@@ -90,8 +90,11 @@
             // Store relative path for form submission
             $profile_image_path = $userinfo["user_image"];
             $profile_image_url = "http://localhost/jyotisika_api/" . ltrim($profile_image_path, '/');
+
         } else {
             // Use default image (relative path for form, full URL for display)
+    
+
             $profile_image_path = $default_image_path;
             $profile_image_url = $default_image_url;
         }
@@ -102,8 +105,7 @@
     <main>
         <div class="container my-5">
             <div class="row">
-                <form action=<?php echo base_url("UserAction/Updateprofile"); ?> method="POST" id="userProfileForm"
-                    enctype="multipart/form-data">
+                <form id="userProfileForm" enctype="multipart/form-data">
                     <div class="row shadow p-4 rounded bg-light">
                         <div class="col-md-12 d-flex justify-content-center">
                             <div class="mb-3 text-center">
@@ -232,6 +234,67 @@
 
 
             <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const userProfileForm = document.getElementById("userProfileForm");
+
+                    userProfileForm.addEventListener("submit", async function (event) {
+                        event.preventDefault(); // Prevent default form submission
+
+                        const formData = new FormData(userProfileForm); // Collect form data
+
+                        // Manually append session_id from PHP
+                        formData.append("session_id", "<?php echo $this->session->userdata('user_id'); ?>");
+
+                        // Show a processing alert using SweetAlert2
+                        Swal.fire({
+                            title: "Processing...",
+                            text: "Please wait while we update your profile.",
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+
+                        try {
+                            const response = await fetch("http://localhost/jyotisika_api/User/User_Auth/update_userprofile", {
+                                method: "POST",
+                                body: formData
+                            });
+
+                            const data = await response.json();
+                            console.log("API Response:", data);
+
+                            if (data.status === "success") {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Profile Updated!",
+                                    text: "Your changes have been saved successfully.",
+                                    confirmButtonText: "OK"
+                                }).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Update Failed",
+                                    text: data.message || "Something went wrong, please try again.",
+                                });
+                            }
+                        } catch (error) {
+                            console.error("Error:", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops!",
+                                text: "Something went wrong! Please try again later.",
+                            });
+                        }
+                    });
+                });
+
+
+            </script>
+
+            <!-- <script>
                 function 
                 (fieldId) {
                     var field = document.getElementById(fieldId);
@@ -243,6 +306,8 @@
                 }
 
 
+
+
                 document.getElementById("userProfileForm").addEventListener("submit", function (event) {
                     let isValid = true;
 
@@ -252,7 +317,7 @@
                         event.preventDefault(); // Prevent form submission if validation fails
                     }
                 });
-            </script>
+            </script> -->
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     <?php if ($this->session->flashdata('success')): ?>

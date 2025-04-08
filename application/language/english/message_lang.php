@@ -12,7 +12,18 @@ $lang['KundliBirthChart'] = "Kundli/BirthChart";
 
 
 
-$lang['Aris'] = "Aris";
+$lang['Aries'] = "Aris";
+$lang['Taurus'] = "Taurus";
+$lang['Gemini'] = "Gemini";
+$lang['Cancer'] = "Cancer";
+$lang['Leo'] = "Leo";
+$lang['Virgo'] = "Virgo";
+$lang['Scorpio'] = "Scorpio";
+$lang['Sagittarius'] = "Sagittarius";
+$lang['Capricorn'] = "Capricorn";
+$lang['Aquarius'] = "Aquarius";
+$lang['Pisces'] = "Pisces";
+
 
 //Home page 
 
@@ -22,6 +33,30 @@ $lang['AstrologicalRemedies'] = "Astrological Remedies To Get Rid Of Your Proble
 
 
 $lang['FreeHoroscope'] = "Free Horoscope and Astrology Services";
+
+
+
+
+
+//
+
+
+//Comman Nav Bar
+
+
+
+$lang['bookpuja'] = "bookpuja";
+
+
+$lang['freekundali'] = "Free Kundli";
+
+$lang['kundlimatching'] = "Kundli Matching";
+$lang['jyotisikamall'] = "Jyotisika Mall";
+$lang['panchang'] = "Panchang";
+$lang['kp'] = "KP";
+$lang['festival'] = "Festival";
+$lang['MobPooja'] = "Mob Pooja";
+
 
 
 ?>

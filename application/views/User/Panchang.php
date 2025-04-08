@@ -7,9 +7,14 @@
     <title>Jyotisika:Festival</title>
 
     <!-- bootstrap link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- GOOGLE FONTS -->
@@ -31,6 +36,7 @@
 
 </head>
 
+
 <body>
 
     <!-- Navbar -->
@@ -49,19 +55,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="bg-color">Date</td>
-                        <td class="bg-color">19 December-2024</td>
+
+                    <?php print_r($titiData);
+                    $tithi_data = json_decode($titiData['output'], true);
+                    print_r($tithi_data);
+                    ?>
+
+                    <!-- <?php print_r($nakshatraData);
+                    $nakshatraData = $nakshatraData['output'];
+                    print_r($nakshatraData);
+                    ?> -->
+
+                  
+                    <td class="bg-color">Date</td>
+                    <td class="bg-color"><?php echo date("d F Y"); ?></td>
+
 
                     </tr>
                     <tr>
                         <td class="bg-color">Today's Tithi </td>
-                        <td class="bg-color">Chaturthi upto 10:05</td>
+                        <td class="bg-color"><?php print_r($tithi_data["name"]); ?></td>
 
                     </tr>
                     <tr>
                         <td class="bg-color">Today's Nakshatra </td>
-                        <td class="bg-color">Ashlesha upto 26:00</td>
+                        <td class="bg-color">Today's Nakshatra </td>
+                        <!-- <?php print_r($nakshatraData["name"].  $nakshatraData["starts_at"] ."----TO---".$nakshatraData["ends_at"] )?> -->
 
                     </tr>
                     <tr>
@@ -147,32 +166,6 @@
             </table>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -72,6 +72,8 @@
 
 <body>
 
+
+<?php print_r($product) ?>
     <header>
 
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
@@ -99,78 +101,80 @@
                 </div>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                     <?php
-                    $products = [
-                        [
-                            'title' => 'Rudraksh',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '999',
-                            'original_price' => '1299'
-                        ],
-                        [
-                            'title' => 'Yantra',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '799',
-                            'original_price' => '1099'
-                        ],
-                        [
-                            'title' => 'Gemstones',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '1499',
-                            'original_price' => '1999'
-                        ],
-                        [
-                            'title' => 'Idols',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '2499',
-                            'original_price' => '2999'
-                        ],
-                        [
-                            'title' => 'Rudraksh',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '999',
-                            'original_price' => '1299'
-                        ],
-                        [
-                            'title' => 'Yantra',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '799',
-                            'original_price' => '1099'
-                        ],
-                        [
-                            'title' => 'Gemstones',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '1499',
-                            'original_price' => '1999'
-                        ],
-                        [
-                            'title' => 'Idols',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '2499',
-                            'original_price' => '2999'
-                        ],
-                    ];
+
+                    $products = $product;
+                    // $products = [
+                    //     [
+                    //         'title' => 'Rudraksh',
+                    //         'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
+                    //         'link' => 'ProductDetails',
+                    //         'price' => '999',
+                    //         'original_price' => '1299'
+                    //     ],
+                    //     [
+                    //         'title' => 'Yantra',
+                    //         'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
+                    //         'link' => 'ProductDetails',
+                    //         'price' => '799',
+                    //         'original_price' => '1099'
+                    //     ],
+                    //     [
+                    //         'title' => 'Gemstones',
+                    //         'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
+                    //         'link' => 'ProductDetails',
+                    //         'price' => '1499',
+                    //         'original_price' => '1999'
+                    //     ],
+                    //     [
+                    //         'title' => 'Idols',
+                    //         'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
+                    //         'link' => 'ProductDetails',
+                    //         'price' => '2499',
+                    //         'original_price' => '2999'
+                    //     ],
+                    //     [
+                    //         'title' => 'Rudraksh',
+                    //         'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
+                    //         'link' => 'ProductDetails',
+                    //         'price' => '999',
+                    //         'original_price' => '1299'
+                    //     ],
+                    //     [
+                    //         'title' => 'Yantra',
+                    //         'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
+                    //         'link' => 'ProductDetails',
+                    //         'price' => '799',
+                    //         'original_price' => '1099'
+                    //     ],
+                    //     [
+                    //         'title' => 'Gemstones',
+                    //         'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
+                    //         'link' => 'ProductDetails',
+                    //         'price' => '1499',
+                    //         'original_price' => '1999'
+                    //     ],
+                    //     [
+                    //         'title' => 'Idols',
+                    //         'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
+                    //         'link' => 'ProductDetails',
+                    //         'price' => '2499',
+                    //         'original_price' => '2999'
+                    //     ],
+                    // ];
                     foreach ($products as $product) {
                         ?>
                         <div class="col d-flex justify-content-center">
                             <div class="card product-card h-100 shadow-sm m-0 p-0" style="border: 1px solid #f0f0f0;">
-                                <img src="<?php echo $product['image']; ?>" class="card-img-top" alt="<?php echo $product['title']; ?>"
+                                <img src="<?php echo $product['product_image']; ?>" class="card-img-top" alt="<?php echo $product['product_name']; ?>"
                                     style=" object-fit: contain;">
                                 <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title text-center fw-bold mb-2" style="color: var(--text-color);"><?php echo $product['title']; ?></h5>
+                                    <h5 class="card-title text-center fw-bold mb-2" style="color: var(--text-color);"><?php echo $product['product_name']; ?></h5>
                                     <div class="d-flex justify-content-center align-items-center mb-3">
-                                        <span class="text-decoration-line-through text-muted me-2">Rs.<?php echo $product['original_price']; ?></span>
-                                        <span class="fw-bold" style="color: var(--red);">Rs.<?php echo $product['price']; ?></span>
+                                        <!-- <span class="text-decoration-line-through text-muted me-2">Rs.<?php echo $product['original_price']; ?></span> -->
+                                        <span class="fw-bold" style="color: var(--red);">Rs.<?php echo $product['product_price']; ?></span>
                                     </div>
                                     <div class="mt-auto text-center">
-                                        <a href="<?php echo $product['link']; ?>" class="btn btn-sm  mt-2"
+                                        <a href="ProductDetails" class="btn btn-sm  mt-2"
                                             style="background-color: var(--yellow); color: var(--text-color);">
                                             View Details
                                         </a>

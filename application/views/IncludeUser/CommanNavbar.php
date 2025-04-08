@@ -1,4 +1,36 @@
 <!-- NAVBAR -->
+<!-- 
+<div class="sidebar">
+    <h3 id="user-name">Loading...</h3>
+    <p id="user-email"></p>
+</div> -->
+<!-- <script>
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("<?php echo base_url() . "User/get_userinfo" ?>") 
+        .then(response => response.json()) 
+        .then(data => {
+            if (data.success) {
+                
+                let userImage = data.data.user_image 
+                    ? `http://localhost/jyotisika_api/${data.data.user_image}` 
+                    : "<?php echo base_url('assets/images/userProfile.png') ?>";
+                
+              
+                document.getElementById("dropdown-profile-image").src = userImage;
+                document.getElementById("sidebar-profile-image").src = userImage;
+
+                
+                console.log("Profile Image URL:", userImage);
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching user data:", error);
+        });
+});
+</script> -->
+
+
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary px-md-2 sticky-top"
     style="background-color: var(--yellow) !important;">
     <div class="container-fluid">
@@ -11,25 +43,31 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>"> <?php echo $this->lang->line('home'); ?></a>
+                    <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>">
+                        <?php echo $this->lang->line('home') ? $this->lang->line('home') : 'Home'; ?>
+                    </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link text-black" href="<?php echo base_url('todayhoroscope'); ?>"> <?php echo $this->lang->line('Horoscope'); ?></a>
+                    <a class="nav-link text-black" href="<?php echo base_url('todayhoroscope'); ?>">
+                        <?php echo $this->lang->line('Horoscope') ? $this->lang->line('Horoscope') : 'Horoscope'; ?>
+                    </a>
                 </li>
-
-
                 <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>"><?php echo $this->lang->line('Astrologers'); ?></a>
+                    <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>">
+                        <?php echo $this->lang->line('Astrologers') ? $this->lang->line('Astrologers') : 'Astrologers'; ?>
+                    </a>
                 </li>
-               
                 <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>"><?php echo $this->lang->line('WhyUs'); ?></a>
+                    <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">
+                        <?php echo $this->lang->line('WhyUs') ? $this->lang->line('WhyUs') : 'Why Us'; ?>
+                    </a>
                 </li>
-            </ul> -->
+            </ul>
 
-             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>"> Home</a>
                 </li>
@@ -41,11 +79,11 @@
                 <li class="nav-item">
                     <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>"> Astrologers</a>
                 </li>
-               
+
                 <li class="nav-item">
                     <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">WhyUs</a>
                 </li>
-            </ul>
+            </ul> -->
 
 
 
@@ -56,8 +94,8 @@
 
                     <select id="languageSwitcher" class="p-1 px-4 rounded-2">
                         <option value="english" <?php echo ($this->session->userdata('site_language') == 'english') ? 'selected' : ''; ?>>English</option>
-                        <option value="marathi" <?php echo ($this->session->userdata('site_language') == 'marathi') ? 'selected' : ''; ?>>Marathi</option>
-                        <option value="hindi" <?php echo ($this->session->userdata('site_language') == 'hindi') ? 'selected' : ''; ?>>Hindi</option>
+                        <option value="marathi" <?php echo ($this->session->userdata('site_language') == 'marathi') ? 'selected' : ''; ?>>मराठी</option>
+                        <option value="hindi" <?php echo ($this->session->userdata('site_language') == 'hindi') ? 'selected' : ''; ?>>हिन्दी</option>
                     </select>
                 </div>
 
@@ -90,11 +128,31 @@
                 <?php endif; ?>
 
                 <div class="dropdown">
-                    <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="User Profile"
-                            style="width: 40px; height: 40px; border-radius: 50%;">
-                    </a>
+                    <?php if ($this->session->userdata('user_id')): ?>
+
+                        <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img id="dropdown-profile-image" src="<?php
+                            echo !empty($this->session->userdata('user_image'))
+                                ? "http://localhost/jyotisika_api/" . $this->session->userdata('user_image')
+                                : base_url('assets/images/userProfile.png');
+                            ?>" alt="User Profile" style="width: 40px; height: 40px; border-radius: 50%;">
+
+
+
+                        </a>
+
+                    <?php else: ?>
+                        <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img id="dropdown-profile-image" src="<?php echo base_url('assets/images/userProfile.png') ?>"
+                                alt="User Profile" style="width: 40px; height: 40px; border-radius: 50%;">
+                        </a>
+
+                    <?php endif ?>
+
+
+
 
                     <?php if ($this->session->userdata('user_id')): ?>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown"
@@ -102,16 +160,26 @@
                             <li class="text-center p-4">
                                 <a href="<?php echo base_url('UserProfile') ?>" class="text-decoration-none">
                                     <div class="position-relative d-inline-block">
-                                        <img src="<?php echo base_url('assets/images/userProfile.png') ?>"
-                                            alt="Profile Image"
+                                        <!-- Profile Image with ID for JS to update -->
+                                        <img id="sidebar-profile-image" src="<?php
+                                        echo !empty($this->session->userdata('user_image'))
+                                            ? "http://localhost/jyotisika_api/" . $this->session->userdata('user_image')
+                                            : base_url('assets/images/userProfile.png');
+                                        ?>" alt="Profile Image"
                                             style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--yellow); padding: 3px; transition: transform 0.3s;">
+
+
                                         <div class="position-absolute bottom-0 right-0 bg-success rounded-circle"
-                                            style="width: 15px; height: 15px; right: 5px; border: 2px solid white;"></div>
+                                            style="width: 15px; height: 15px; right: 5px; border: 2px solid white;">
+                                        </div>
                                     </div>
 
-
                                     <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;">
-                                        <?php echo $this->session->userdata('user_name') ?>
+                                        <?php
+                                        echo !empty($this->session->userdata('user_name'))
+                                            ? $this->session->userdata('user_name')
+                                            : "Guest User";
+                                        ?>
                                     </p>
 
 
@@ -161,22 +229,22 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown"
                             style="border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); border: none; min-width: 250px;">
                             <li class="text-center p-4" id="myprofilelink">
-                                <a href="<?php echo base_url('UserProfile') ?>" class="text-decoration-none">
-                                    <div class="position-relative d-inline-block">
-                                        <img src="<?php echo base_url('assets/images/userProfile.png') ?>"
-                                            alt="Profile Image"
-                                            style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--yellow); padding: 3px; transition: transform 0.3s;">
-                                        <div class="position-absolute bottom-0 right-0 bg-success rounded-circle"
-                                            style="width: 15px; height: 15px; right: 5px; border: 2px solid white;"></div>
-                                    </div>
+
+                                <div class="position-relative d-inline-block">
+                                    <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="Profile Image"
+                                        style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--yellow); padding: 3px; transition: transform 0.3s;">
+                                    <div class="position-absolute bottom-0 right-0 bg-success rounded-circle"
+                                        style="width: 15px; height: 15px; right: 5px; border: 2px solid white;"></div>
+                                </div>
 
 
-                                    <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;"> Hello User
-                                    </p>
-                                    <p class="mt-1 mb-0 text-dark" style="font-weight: 400; font-size: 1rem;"> To access
-                                        your jyotisika account ,pls log in
-                                    </p>
-                                </a>
+                                <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;"> Hello User
+                                </p>
+                                <p id="myparaLink" class="mt-1 mb-0 text-dark" style="font-weight: 400; font-size: 1rem; ">
+                                    To access
+                                    your jyotisika account ,pls log in
+                                </p>
+
                             </li>
                             <li>
                                 <hr class="dropdown-divider mx-1">
@@ -248,6 +316,54 @@
             window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
         <?php endif; ?>
     });
+
+
+    document.getElementById("myOrdersLink").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default redirection
+
+        <?php if (!$this->session->userdata('user_id')): ?>
+            Swal.fire({
+                title: "Login Required",
+                text: "Pls login to access this servise",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Login",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to Signup/Login page
+                }
+            });
+        <?php else: ?>
+            window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
+        <?php endif; ?>
+
+    });
+
+
+    document.getElementById("myparaLink").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default redirection
+
+        <?php if (!$this->session->userdata('user_id')): ?>
+            Swal.fire({
+                title: "Login Required",
+                text: "Pls login to access this servise",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Login",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to Signup/Login page
+                }
+            });
+        <?php else: ?>
+            window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
+        <?php endif; ?>
+
+    });
+
+
 
 
 </script>

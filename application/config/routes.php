@@ -73,11 +73,14 @@ $route['UserProfile'] ='User/UserProfile';
 $route['freekundli'] = 'User/FreeKundli';
 $route['kundlimatching'] = 'User/KundliMatching';
 $route['panchang'] = 'User/Panchang';
-$route['todayhoroscope'] = 'User/TodayHoroscope';
-$route['horoscopereadmore'] = 'User/HoroscopeReadmore';
+
 $route['kp'] = 'User/KP';
 $route['ShowFreeKundli'] ='User/ShowFreeKundli';
 
+
+$route['todayhoroscope'] = 'User/TodayHoroscope';
+$route['horoscopereadmore/(:any)'] = 'User/HoroscopeReadmore/$1';
+// $route['horoscopereadmore/(:any)'] = 'YourController/HoroscopeReadmore/$1';
 
 
 //Data from astroller 

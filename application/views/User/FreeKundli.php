@@ -47,6 +47,8 @@
 
 <body>
 
+<?php echo $this->session->userdata('mobile_number');?>
+
 
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
 

@@ -26,7 +26,7 @@
 
 </head>
 
-<body>
+<b>
 
 
     <style>
@@ -81,16 +81,20 @@
                 style="background: #FFF;">
                 <h5 class="fw-bold mb-4" style="color: #444; font-size: 1.6rem;">LogIn to Continue</h5>
 
-                <form id="loginForm" method="POST" action="<?php echo base_url("UserLoginSignup/login_user"); ?>" style="width: 100%; max-width: 420px;">
+                <!-- <form id="loginForm" method="POST" action="<?php echo base_url("UserLoginSignup/login_user"); ?>"
+                    style="width: 100%; max-width: 420px;"> -->
+
+                <form id="loginForm" style="width: 100%; max-width: 420px;">
+
 
 
                     <!--  Mobile Number -->
                     <div id="mobileStep" class="mb-4">
                         <div class="mb-3">
                             <input type="tel" class="form-control shadow-none form-control-lg rounded-2"
-                                id="mobileNumber" name="user_mobilenumber" placeholder="Enter Mobile Number" maxlength="10"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" pattern="[0-9]{10}"
-                                title="Please enter a valid 10-digit mobile number" required
+                                id="mobileNumber" name="user_mobilenumber" placeholder="Enter Mobile Number"
+                                maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" required
                                 style="padding: 0.5rem; border: 1px solid #ddd; font-size:1.1rem">
                             <div id="mobileError" class="text-danger small"></div>
                         </div>
@@ -103,7 +107,8 @@
                     <!-- OTP Verification -->
                     <div id="otpStep" class="mb-4" style="display: none;">
                         <div class="mb-3">
-                            <input type="text" name="user_otp" class="form-control shadow-none form-control-lg rounded-2" id="otpInput"
+                            <input type="text" name="user_otp"
+                                class="form-control shadow-none form-control-lg rounded-2" id="otpInput"
                                 placeholder="Enter OTP" maxlength="6"
                                 style="padding: 0.5rem; border: 1px solid #ddd; font-size:1.1rem">
                             <div id="otpError" class="text-danger small"></div>
@@ -114,7 +119,12 @@
                                 Resend OTP
                             </button>
                         </div>
-                        <button type="submit" id="verifyOtpBtn" class="btn w-100 fw-bold"
+                        <!-- <button type="submit" id="verifyOtpBtn" class="btn w-100 fw-bold"
+                            style="background: #F2DC51; border-radius: 10px; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                            Verify OTP
+                        </button> -->
+
+                        <button id="verifyOtpBtn" class="btn w-100 fw-bold"
                             style="background: #F2DC51; border-radius: 10px; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
                             Verify OTP
                         </button>
@@ -166,87 +176,222 @@
             startOtpTimer();
         });
 
-        // document.getElementById('verifyOtpBtn').addEventListener('click', function () {
-        //     const otp = document.getElementById('otpInput').value.trim();
-        //     if (otp.length === 4) { // Add your actual OTP validation logic here
-        //         Swal.fire({
-        //             icon: 'success',
-        //             title: 'Login Successful!',
-        //             text: 'Welcome to Jyotisika!   ',
-        //             confirmButtonColor: '#F2DC51'
-        //         }).then((result) => {
-        //             if (result.isConfirmed) {
 
-        //                 window.location.href = '<?php echo base_url("home"); ?>';
-        //             }
-        //         });
-        //     } else {
-        //         document.getElementById('otpError').innerText = 'Please enter a valid 4-digit OTP';
-        //     }
-        // });
     </script>
 
 
 
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+        document.addEventListener("DOMContentLoaded", function () {
+            const getOtpBtn = document.getElementById("getOtpBtn");
+            const mobileNumberInput = document.getElementById("mobileNumber");
+            const mobileError = document.getElementById("mobileError");
 
-            let isValid = true;
+            function sendOtp() {
+                let phoneNumber = mobileNumberInput.value.trim();
 
-            // Clear previous error messages
-          
+                // Validate mobile number
+                if (phoneNumber.length !== 10 || !/^\d+$/.test(phoneNumber)) {
+                    mobileError.innerText = "Please enter a valid 10-digit mobile number";
+                    return;
+                }
+                mobileError.innerText = ""; // Clear error if valid
 
-            // Submit the form if all validations pass
-            if (isValid) {
-                this.submit(); // Submit the form
+                fetch("http://localhost/jyotisika_api/User/User_Auth/SendOtp", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ mobile_number: phoneNumber })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("API Response:", data);
+                        if (data.status === "success") {
+                            Swal.fire({
+                                icon: "success",
+                                title: "OTP Sent!",
+                                text: "Check your mobile for the OTP.",
+                            });
+
+                            document.getElementById("mobileStep").style.display = "none";
+                            document.getElementById("otpStep").style.display = "block";
+                            startOtpTimer();
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: data.error || "Failed to send OTP. Please try again.",
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Something went wrong!",
+                        });
+                    });
             }
+
+            getOtpBtn.addEventListener("click", sendOtp);
+
+            mobileNumberInput.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    sendOtp();
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const verifyOtpBtn = document.getElementById("verifyOtpBtn");
+            const otpInput = document.getElementById("otpInput");
+            const mobileNumberInput = document.getElementById("mobileNumber");
+
+            function verifyOtp() {
+                let phoneNumber = mobileNumberInput.value.trim();
+                let otp = otpInput.value.trim();
+
+                if (!otp) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Empty OTP",
+                        text: "Please enter the OTP!",
+                    });
+                    return;
+                }
+
+                fetch("http://localhost/jyotisika_api/User/User_Auth/VerifyOtp", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ mobile_number: phoneNumber, otp: otp })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("API Response:", data);
+
+                        if (data.status === "success") {
+                            Swal.fire({
+                                icon: "success",
+                                title: "OTP Verified",
+                                text: "Verification successful! Redirecting...",
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                otpInput.value = "";
+                                window.location.href = "<?php echo base_url('User/home'); ?>";
+                            });
+                        } else if (data.status === "otpmatchreg") {
+                            Swal.fire({
+                                icon: "info",
+                                title: "Registration Required",
+                                text: "OTP matched but user not registered. Please register!",
+                                confirmButtonText: "OK"
+                            });
+                            otpInput.value = "";
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Verification Failed",
+                                text: data.message || "Invalid OTP. Please try again!",
+                            });
+
+                            otpInput.value = ""; // Clear OTP field on failure
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Something went wrong! Please try again.",
+                        });
+
+                        otpInput.value = ""; // Clear OTP field on failure
+                    });
+            }
+
+            // Click event for Verify OTP button
+            verifyOtpBtn.addEventListener("click", verifyOtp);
+
+            // Handle Enter key press in OTP input field
+            otpInput.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); // Prevent form submission
+                    verifyOtp(); // Call the verifyOtp function
+                }
+            });
         });
 
     </script>
 
 
-<script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    <?php if ($this->session->flashdata('otp_failed')): ?>
-                        Swal.fire({
-                            icon: 'warning',
-
-                            text: '<?php echo $this->session->flashdata('otp_failed'); ?>',
-                            confirmButtonText: 'OK'
-                        });
-                    <?php endif; ?>
-
-                    <?php if ($this->session->flashdata('usernotexit')): ?>
-                        Swal.fire({
-                            icon: 'warning',
-
-                            text: '<?php echo $this->session->flashdata('usernotexit'); ?>',
-                            confirmButtonText: 'OK'
-                        });
-                    <?php endif; ?>
-
-                    <?php if ($this->session->flashdata('error')): ?>
-                        Swal.fire({
-                            icon: 'warning',
-
-                            text: '<?php echo $this->session->flashdata('error'); ?>',
-                            confirmButtonText: 'OK'
-                        });
-                    <?php endif; ?>
-
-                    <?php if ($this->session->flashdata('dberror')): ?>
-                        Swal.fire({
-                            icon: 'warning',
-
-                            text: '<?php echo $this->session->flashdata('dberror'); ?>',
-                            confirmButtonText: 'OK'
-                        });
-                    <?php endif; ?>
 
 
+    <!-- <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let isValid = true;
+
+           
+
+            
+            if (isValid) {
+                this.submit(); 
+            }
+        });
+
+    </script> -->
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            <?php if ($this->session->flashdata('otp_failed')): ?>
+                Swal.fire({
+                    icon: 'warning',
+
+                    text: '<?php echo $this->session->flashdata('otp_failed'); ?>',
+                    confirmButtonText: 'OK'
                 });
-            </script>
+            <?php endif; ?>
+
+            <?php if ($this->session->flashdata('usernotexit')): ?>
+                Swal.fire({
+                    icon: 'warning',
+
+                    text: '<?php echo $this->session->flashdata('usernotexit'); ?>',
+                    confirmButtonText: 'OK'
+                });
+            <?php endif; ?>
+
+            <?php if ($this->session->flashdata('error')): ?>
+                Swal.fire({
+                    icon: 'warning',
+
+                    text: '<?php echo $this->session->flashdata('error'); ?>',
+                    confirmButtonText: 'OK'
+                });
+            <?php endif; ?>
+
+            <?php if ($this->session->flashdata('dberror')): ?>
+                Swal.fire({
+                    icon: 'warning',
+
+                    text: '<?php echo $this->session->flashdata('dberror'); ?>',
+                    confirmButtonText: 'OK'
+                });
+            <?php endif; ?>
+
+
+        });
+    </script>
 
 
 
@@ -255,12 +400,9 @@
 
 
 
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-</body>
+    </body>
 
 </html>

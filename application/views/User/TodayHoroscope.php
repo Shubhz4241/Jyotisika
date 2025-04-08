@@ -56,6 +56,7 @@
 
 <body>
 
+
     <!-- Navbar -->
     <header class="sticky-top">
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
@@ -76,12 +77,10 @@
                 <div class="col-12 col-lg-8">
                     <h1 class="fw-bold" style="color: var(--red)">Horoscope</h1>
                     <p class="fs-3">Success for 12 Zodiacs This Year</p>
-                    <p style="text-align:justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolore
-                        corrupti tempora explicabo
-                        doloremque sit, temporibus, obcaecati dignissimos saepe perspiciatis maxime, modi repudiandae
-                        praesentium quos ad laboriosam molestiae nobis. Aliquid. Lorem ipsum dolor sit, amet consectetur
-                        adipisicing elit. Dolore reiciendis laboriosam eaque reprehenderit hic iste quia explicabo
-                        suscipit non fugiat.
+                    <p style="text-align:justify">In 2025, various zodiac signs are predicted to experience success in
+                        different areas, with some signs like Taurus, Leo, and Capricorn potentially seeing significant
+                        career advancements and financial growth, while others like Aries, Gemini, and Aquarius may
+                        experience transformative periods and financial growth.
                     </p>
                 </div>
             </div>
@@ -142,7 +141,8 @@
 
                 foreach ($horoscopes as $horoscope): ?>
                     <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                        <div class="card  border-0 rounded-4 hover-zoom h-100" style="width: 18rem;  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;" >
+                        <div class="card  border-0 rounded-4 hover-zoom h-100"
+                            style="width: 18rem;  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                             <div class="text-center mt-3">
                                 <img class="border-0 img-fluid mx-auto "
                                     src="<?php echo base_url('assets/images/' . $horoscope['image']); ?>"
@@ -150,27 +150,22 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title text-center fw-bold" style="color: var(--red)">
-                                    <?php echo $horoscope['name']; ?> Horoscope 2025
+                                    <?php echo $horoscope['name']; ?> Horoscope Today
                                 </h5>
-                                <div class="card-text" style="height: 60px; overflow: hidden; position: relative;">
-                                    <p class="text-muted" style="text-align:justify;">Lorem ipsum dolor, sit amet
-                                        consectetur
-                                        adipisicing elit. Natus eveniet, asperiores minus officia iste, totam corrupti
-                                        aliquid
-                                        commodi necessitatibus quasi nobis, obcaecati dolorum hic neque ullam! Voluptatibus
-                                        quis
-                                        obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique ut
-                                        culpa sapiente animi magni et quos, consequuntur amet quam est? lorem</p>
+                                <!-- <div class="card-text" style="height: 60px; overflow: hidden; position: relative;">
+                                    <p class="text-muted" style="text-align:justify;">Loading..</p>
                                     <div class="fade-overlay"
                                         style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(transparent, white);">
                                     </div>
-                                </div>
-                                <p class="mt-3 mb-1"> <span class="fw-bold">Remedies:</span> <span class="text-muted">Lorem Ipsum
-                                        Contrary to popular belief</span></p>
+                                </div> -->
+                                <!-- <p class="mt-3 mb-1"> <span class="fw-bold">Remedies:</span> <span class="text-muted">Lorem
+                                        Ipsum
+                                        Contrary to popular belief</span></p> -->
                             </div>
                             <div class="text-center mb-3">
-                                <a href="<?php echo base_url('horoscopereadmore'); ?>"
-                                    class="btn btn-hover btn-outline-dark rounded-pill px-4">Read More</a>
+
+                                <a href="<?php echo base_url('horoscopereadmore/') . $horoscope['name']; ?>"
+                                    class="btn btn-hover btn-outline-dark rounded-pill px-4">View</a>
                             </div>
                         </div>
                     </div>
@@ -185,7 +180,92 @@
         <?php $this->load->view('IncludeUser/CommanFooter'); ?>
     </footer>
 
+    <script>
 
+        document.addEventListener("DOMContentLoaded", function () {
+            let url = "<?php echo base_url('User/getrashidata'); ?>";
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success && data.status === 200) {
+                        const horoscopesData = data.data; // Extract horoscope data
+                        updateHoroscopes(horoscopesData);
+                    } else {
+                        console.error("Failed to fetch horoscope data:", data);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching horoscope data:", error);
+                });
+        });
+
+        // Function to update the HTML dynamically
+        function updateHoroscopes(horoscopeData) {
+            const horoscopeContainer = document.querySelector(".row.my-4"); // Target container
+
+            if (!horoscopeContainer) return;
+
+            horoscopeContainer.innerHTML = ""; // Clear existing content
+
+            const horoscopes = [
+                { name: "Aries", image: "aris.png" },
+                { name: "Taurus", image: "taurus.png" },
+                { name: "Gemini", image: "gemini.png" },
+                { name: "Cancer", image: "cancer.png" },
+                { name: "Leo", image: "leo.png" },
+                { name: "Virgo", image: "virgo.png" },
+                { name: "Libra", image: "libra.png" },
+                { name: "Scorpio", image: "scorpio.png" },
+                { name: "Sagittarius", image: "sagittarius.png" },
+                { name: "Capricorn", image: "capricorn.png" },
+                { name: "Aquarius", image: "aquarius.png" },
+                { name: "Pisces", image: "pisces.png" }
+            ];
+
+            horoscopes.forEach(horoscope => {
+                let signName = horoscope.name;
+                let horoscopeInfo = horoscopeData[signName]?.data?.horoscope_data || "No data available";
+
+                let cardHTML = `
+            <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                <div class="card border-0 rounded-4 hover-zoom h-100"
+                    style="width: 18rem; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                    <div class="text-center mt-3">
+                        <img class="border-0 img-fluid mx-auto"
+                            src="<?php echo base_url('assets/images/'); ?>${horoscope.image}"
+                            alt="${signName}" style="width:75px; height:75px;">
+                    </div>
+                   <div class="card-body">
+    <h5 class="card-title text-center fw-bold" style="color: var(--red)">
+        ${signName} Horoscope Today
+    </h5>
+    <div class="card-text" style="height: 60px; overflow: hidden; position: relative;">
+        <p class="text-muted" style="text-align:justify;">${horoscopeInfo}</p>
+        <div class="fade-overlay"
+            style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(transparent, white);">
+        </div>
+    </div>
+</div>
+<div class="text-center mb-3">
+    <a href="<?php echo base_url('horoscopereadmore/'); ?>${signName.toLowerCase()}" 
+        class="btn btn-hover btn-outline-dark rounded-pill px-4">Read More</a>
+</div>
+
+                </div>
+            </div>
+        `;
+
+                horoscopeContainer.innerHTML += cardHTML; // Append to container
+            });
+        }
+
+    </script>
 
 
 </body>

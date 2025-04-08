@@ -95,6 +95,8 @@
 
 <body>
 
+
+
     <!-- Navbar -->
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
 
@@ -113,16 +115,18 @@
             <div class="row gx-6 gy-3 justify-content-center">
                 <!-- Astrology Sign -->
                 <div class="col-auto">
-                    <a href="<?php echo base_url('horoscopereadmore') ?>"
+                    <a href="<?php echo base_url('horoscopereadmore/Aries'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="Aris"
                             class="rounded-circle p-2 shadow-sm">
-                        
-                        <p class="mt-2 mb-0 text-dark fw-bold">  <?php echo !empty($this->lang->line('Aris')) ? $this->lang->line('Aris') : 'Aris'; ?></p>
 
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Aries')) ? $this->lang->line('Aries') : 'Aries'; ?>
+                        </p>
                     </a>
+
                 </div>
-           
+
 
                 <!-- <div class="col-auto">
                     <a href="<?php echo base_url('horoscopereadmore') ?>"
@@ -134,82 +138,101 @@
                 </div> -->
 
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                     <a href="<?php echo base_url('horoscopereadmore/Taurus'); ?>"
+                  
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/taurus.png'); ?>" alt="Taurus"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">  Taurus</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">   <?php echo !empty($this->lang->line('Taurus')) ? $this->lang->line('Taurus') : 'Taurus'; ?></p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                     <a href="<?php echo base_url('horoscopereadmore/Gemini'); ?>"
+                
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/gemini.png'); ?>" alt="Gemini"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Gemini</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Gemini')) ? $this->lang->line('Gemini') : 'Gemini'; ?></p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                     <a href="<?php echo base_url('horoscopereadmore/Cancer'); ?>"
+                    
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/cancer.png'); ?>" alt="Cancer"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Cancer</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Cancer')) ? $this->lang->line('Cancer') : 'Cancer'; ?></p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                     <a href="<?php echo base_url('horoscopereadmore/Leo'); ?>"
+                    
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/leo.png'); ?>" alt="Leo"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Leo</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Leo')) ? $this->lang->line('Leo') : 'Leo'; ?></p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                     <a href="<?php echo base_url('horoscopereadmore/Virgo'); ?>"
+                  
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/virgo.png'); ?>" alt="Virgo"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Virgo</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Virgo')) ? $this->lang->line('Virgo') : 'Virgo'; ?></p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                     <a href="<?php echo base_url('horoscopereadmore/Scorpio'); ?>"
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/scorpio.png'); ?>" alt="Scorpio"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Scorpio</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Scorpio')) ? $this->lang->line('Scorpio') : 'Scorpio'; ?></p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                     <a href="<?php echo base_url('horoscopereadmore/Sagittarius'); ?>"
+                   
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/sagittarius.png'); ?>" alt="Sagittarius"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Sagittarius</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Sagittarius')) ? $this->lang->line('Sagittarius') : 'Sagittarius'; ?></p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                     <a href="<?php echo base_url('horoscopereadmore/Capricorn'); ?>"
+                  
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/capricon.png'); ?>" alt="Capricorn"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Capricorn</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Capricorn')) ? $this->lang->line('Capricorn') : 'Capricorn'; ?></p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                      <a href="<?php echo base_url('horoscopereadmore/Aquarius'); ?>"
+                   
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/aquarius.png'); ?>" alt="Aquarius"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Aquarius</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Aquarius')) ? $this->lang->line('Aquarius') : 'Aquarius'; ?></p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                    <a href="#" class="astro-card d-flex flex-column align-items-center text-decoration-none">
+                     <a href="<?php echo base_url('horoscopereadmore/Pisces'); ?>"
+                   
+                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/pisces.png'); ?>" alt="Pisces"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">Pisces</p>
+                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Pisces')) ? $this->lang->line('Pisces') : 'Pisces'; ?></p>
                     </a>
                 </div>
             </div>
@@ -297,7 +320,8 @@
     <!-- Astrologer on call or chat -->
     <section>
         <div class="container my-4">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"><?php echo $this->lang->line('Astrologers'); ?></h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
+                <?php echo $this->lang->line('Astrologers'); ?></h2>
             <div class="row my-4" id="cardContainer">
                 <?php for ($i = 0; $i < 10; $i++): ?>
                     <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
@@ -358,7 +382,7 @@
                                             style="background-color: var(--yellow);">Chat</button>
                                     <?php else: ?>
                                         <button id="chatlink" class="btn btn-sm w-50 rounded-3 border-1"
-                                           style="background-color: var(--yellow);">Chat</button>
+                                            style="background-color: var(--yellow);">Chat</button>
 
                                     <?php endif ?>
 
@@ -375,7 +399,7 @@
 
                 <div class="text-center mt-4">
                     <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold"
-                        style="background-color: var(--yellow);"> <?php echo $this->lang->line('ViewMore')?></a>
+                        style="background-color: var(--yellow);"> <?php echo $this->lang->line('ViewMore') ?></a>
                 </div>
             </div>
         </div>
@@ -475,92 +499,95 @@
     <!-- Astrological  Remedies  To  Get  Rid  Of  Your  Problems -->
     <section>
         <div class="container my-4">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"><?php echo $this->lang->line('AstrologicalRemedies')?></a>
-            </div></h2>
-            <div class="owl-carousel owl1 owl-theme">
-                <div class="item">
-                    <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/rudraksh.png'); ?>" class="card-img-top"
-                            alt="Finance Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Rudraksh</h5>
-                            <p class="card-text">
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                            </p>
-                            <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
-                            </center>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/gamestones.png'); ?>" class="card-img-top"
-                            alt="Finance Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Gamestones</h5>
-                            <p class="card-text">
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                            </p>
-                            <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
-                            </center>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/yantras.png'); ?>" class="card-img-top"
-                            alt="Finance Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Yantras</h5>
-                            <p class="card-text">
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                            </p>
-                            <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
-                            </center>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/mala.png'); ?>" class="card-img-top"
-                            alt="Finance Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Mala</h5>
-                            <p class="card-text">
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                            </p>
-                            <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
-                            </center>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/jadi.png'); ?>" class="card-img-top"
-                            alt="Finance Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Jadi</h5>
-                            <p class="card-text">
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                            </p>
-                            <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
-                            </center>
-                        </div>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
+                <?php echo $this->lang->line('AstrologicalRemedies') ?></a>
+        </div>
+        </h2>
+        <div class="owl-carousel owl1 owl-theme">
+            <div class="item">
+                <div class="card shadow " style=" border: 1px solid var(--red);">
+                    <img src="<?php echo base_url('assets/images/rudraksh.png'); ?>" class="card-img-top"
+                        alt="Finance Image">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Rudraksh</h5>
+                        <p class="card-text">
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                        </p>
+                        <center>
+                            <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
+                        </center>
                     </div>
                 </div>
             </div>
+            <div class="item">
+                <div class="card shadow " style=" border: 1px solid var(--red);">
+                    <img src="<?php echo base_url('assets/images/gamestones.png'); ?>" class="card-img-top"
+                        alt="Finance Image">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Gamestones</h5>
+                        <p class="card-text">
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                        </p>
+                        <center>
+                            <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card shadow " style=" border: 1px solid var(--red);">
+                    <img src="<?php echo base_url('assets/images/yantras.png'); ?>" class="card-img-top"
+                        alt="Finance Image">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Yantras</h5>
+                        <p class="card-text">
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                        </p>
+                        <center>
+                            <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card shadow " style=" border: 1px solid var(--red);">
+                    <img src="<?php echo base_url('assets/images/mala.png'); ?>" class="card-img-top"
+                        alt="Finance Image">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Mala</h5>
+                        <p class="card-text">
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                        </p>
+                        <center>
+                            <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="card shadow " style=" border: 1px solid var(--red);">
+                    <img src="<?php echo base_url('assets/images/jadi.png'); ?>" class="card-img-top"
+                        alt="Finance Image">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Jadi</h5>
+                        <p class="card-text">
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                        </p>
+                        <center>
+                            <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </section>
 
     <!-- Free Horoscope and Astrology Services -->
     <section>
         <div class="container my-4">
-            <h3 class="text-center mb-4 fw-bold" style="color: var(--red);"><?php echo $this->lang->line('FreeHoroscope')?></h3>
+            <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">
+                <?php echo $this->lang->line('FreeHoroscope') ?></h3>
             <div class="row g-4 justify-content-center">
                 <!-- Card 1 -->
                 <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -689,7 +716,7 @@
                 </div>
                 <div class="text-center mt-4">
                     <a href="<?php echo base_url('AstrologyServices') ?>" class="btn fw-bold"
-                        style="background-color: var(--yellow);"><?php echo $this->lang->line('ViewMore')?></a>
+                        style="background-color: var(--yellow);"><?php echo $this->lang->line('ViewMore') ?></a>
                 </div>
             </div>
         </div>
@@ -699,7 +726,7 @@
     <!-- Footer -->
     <?php $this->load->view('IncludeUser/CommanFooter'); ?>
 
-   
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -799,32 +826,32 @@
 
 
         document.getElementById("chatlink").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default redirection
+            event.preventDefault(); // Prevent default redirection
 
-        <?php if (!$this->session->userdata('user_id')): ?>
-            Swal.fire({
-                title: "Login Required",
-                text: "Pls login to access this servise",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Login",
-                cancelButtonText: "Cancel",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to Signup/Login page
-                }
-            });
-        <?php else: ?>
-            window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
-        <?php endif; ?>
-    });
+            <?php if (!$this->session->userdata('user_id')): ?>
+                Swal.fire({
+                    title: "Login Required",
+                    text: "Pls login to access this servise",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Login",
+                    cancelButtonText: "Cancel",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to Signup/Login page
+                    }
+                });
+            <?php else: ?>
+                window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
+            <?php endif; ?>
+        });
 
 
 
-        
+
     </script>
-    
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz4fnFO9gybBogGzDO9Jq/Uy1p1Lw2jG/q04FH04EZoQUlBgDkfiC9UvN0"
