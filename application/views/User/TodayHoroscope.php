@@ -75,14 +75,17 @@
                         class="rotating-image" style="width:320px; height:320px;">
                 </div>
                 <div class="col-12 col-lg-8">
-                    <h1 class="fw-bold" style="color: var(--red)">Horoscope</h1>
-                    <p class="fs-3">Success for 12 Zodiacs This Year</p>
-                    <p style="text-align:justify">In 2025, various zodiac signs are predicted to experience success in
-                        different areas, with some signs like Taurus, Leo, and Capricorn potentially seeing significant
-                        career advancements and financial growth, while others like Aries, Gemini, and Aquarius may
-                        experience transformative periods and financial growth.
+                    <h1 class="fw-bold" style="color: var(--red)">
+                        <?php echo $this->lang->line('Horoscope') ?: "Horoscope"; ?>
+                    </h1>
+                    <p class="fs-3">
+                        <?php echo $this->lang->line('Horoscope_Success_Heading') ?: "Success for 12 Zodiacs This Year"; ?>
+                    </p>
+                    <p style="text-align:justify">
+                        <?php echo $this->lang->line('Horoscope_Description') ?: "In 2025, various zodiac signs are predicted to experience success in different areas, with some signs like Taurus, Leo, and Capricorn potentially seeing significant career advancements and financial growth, while others like Aries, Gemini, and Aquarius may experience transformative periods and financial growth."; ?>
                     </p>
                 </div>
+
             </div>
 
             <!-- all sign horoscope card -->

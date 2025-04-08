@@ -39,6 +39,8 @@
 
 
     <main>
+
+   
         <div class="container ">
          
             <!-- <div class="row g-4 mb-4">
@@ -87,20 +89,11 @@
                 <!-- About the Festival -->
                 <div class="col-12">
                     <div class="p-4 border rounded shadow-sm  w-100 d-flex flex-column justify-content-between">
-                        <h3 class="text-dark mb-3">Christmas Festival</h3>
+                        <h3 class="text-dark mb-3"><?php echo $festivaldata[0]["festivals_title"] ?></h3>
                         <p>
-                            Christmas is a joyful festival celebrated worldwide to commemorate the birth of Jesus
-                            Christ. It is a time of giving, sharing, and spreading love. People decorate Christmas
-                            trees, exchange gifts, and gather for festive meals with family and friends.
+                           <?php echo $festivaldata[0]["festivals_decription"]; ?>
                         </p>
-                        <p>
-                            Traditions vary across cultures, but the spirit of Christmas brings warmth and happiness to
-                            everyone. From singing carols to lighting up homes, this festival symbolizes hope and unity.
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio doloribus quas explicabo ipsam consequatur minima quibusdam rerum, voluptas, quod, omnis amet eum quis laudantium doloremque quasi atque sint sit architecto tempora? Consequatur maxime reiciendis consequuntur reprehenderit culpa, mollitia officiis minima placeat ducimus enim laborum beatae atque aperiam nemo est ipsam?
-                        </p>
-                        
+                       
                     </div>
                 </div>
             </div>

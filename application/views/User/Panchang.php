@@ -56,10 +56,10 @@
                 </thead>
                 <tbody>
 
-                    <?php print_r($titiData);
+                    <!-- <?php print_r($titiData);
                     $tithi_data = json_decode($titiData['output'], true);
                     print_r($tithi_data);
-                    ?>
+                    ?> -->
 
                     <!-- <?php print_r($nakshatraData);
                     $nakshatraData = $nakshatraData['output'];
@@ -80,6 +80,7 @@
                     <tr>
                         <td class="bg-color">Today's Nakshatra </td>
                         <td class="bg-color">Today's Nakshatra </td>
+                        <!-- <td class="bg-color"><?php print_r($nakshatraData["name"].  $nakshatraData["starts_at"] ."----TO---".$nakshatraData["ends_at"] )?> </td> -->
                         <!-- <?php print_r($nakshatraData["name"].  $nakshatraData["starts_at"] ."----TO---".$nakshatraData["ends_at"] )?> -->
 
                     </tr>

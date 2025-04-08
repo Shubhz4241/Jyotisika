@@ -63,6 +63,8 @@
 
     <?php
 
+    // print_r($userinfo);
+
     if (!empty($userinfo)) {
 
 
@@ -80,24 +82,14 @@
         $user_City = isset($userinfo["user_City"]) ? $userinfo["user_City"] : '';
         $user_Pincode = isset($userinfo["user_Pincode"]) ? $userinfo["user_Pincode"] : '';
 
+        $profile_image_path = isset($userinfo["user_image"]) && !empty($userinfo["user_image"]) 
+        ? base_url($userinfo["user_image"]) 
+        : base_url('assets/images/profileimage.png');
 
+        $current_image =  isset($userinfo["user_image"]) && !empty($userinfo["user_image"])  ? ($userinfo["user_image"])  : ('assets/images/profileimage.png');
 
+       
 
-        $default_image_path = "assets/images/profileImage.png"; // Relative default image path
-        $default_image_url = "http://localhost/Jyotisika/" . $default_image_path; // Full default image URL
-    
-        if (!empty($userinfo["user_image"])) {
-            // Store relative path for form submission
-            $profile_image_path = $userinfo["user_image"];
-            $profile_image_url = "http://localhost/jyotisika_api/" . ltrim($profile_image_path, '/');
-
-        } else {
-            // Use default image (relative path for form, full URL for display)
-    
-
-            $profile_image_path = $default_image_path;
-            $profile_image_url = $default_image_url;
-        }
 
     }
 
@@ -114,7 +106,7 @@
 
 
                                     <label for="profileImage">
-                                        <img src="<?php echo $profile_image_url; ?>" alt="Profile Image"
+                                        <img src="<?php echo $profile_image_path; ?>" alt="Profile Image"
                                             id="profileImagePreview" class="rounded-circle"
                                             style="width: 150px; height: 150px; cursor: pointer;">
                                     </label>
@@ -148,15 +140,9 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Mobile Number</label>
-                                <input type="hidden" class="form-control" value="<?php echo $profile_image_path; ?>"
-                                    name="current_image_name" oninput="(function(element) { 
-                                        element.value = element.value.replace(/[^\d]/g, '').substring(0, 10); 
-                                        if (!/^\d{10}$/.test(element.value)) {
-                                            element.setCustomValidity('Please enter a 10-digit number.');
-                                        } else {
-                                            element.setCustomValidity('');
-                                        }
-                            })(this)">
+                                <input type="hidden" class="form-control"
+                                            value="<?php echo  $current_image; ?>" name="current_image_name">
+
 
 
                                 <input type="text" disabled class="form-control" id="lastName" name="lastName"
@@ -256,7 +242,7 @@
                         });
 
                         try {
-                            const response = await fetch("http://localhost/jyotisika_api/User/User_Auth/update_userprofile", {
+                            const response = await fetch("<?php echo base_url('User_Api_Controller/update_userprofile'); ?>", {
                                 method: "POST",
                                 body: formData
                             });

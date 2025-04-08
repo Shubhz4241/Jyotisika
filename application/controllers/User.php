@@ -25,6 +25,8 @@ class User extends CI_Controller
 
 
 	//-----------------------------------GET USER DATA ----------------------------------------------------------------
+
+
 	public function get_userdata($user_id)
 	{
 
@@ -33,7 +35,8 @@ class User extends CI_Controller
 			return null;
 		}
 
-		$api_url = "http://localhost/jyotisika_api/User/User_Auth/getuser_info";
+		// $api_url = "http://localhost/Astrology/User_Api_Controller/getuser_info";
+		$api_url = base_url("User_Api_Controller/getuser_info");
 
 
 		$ch = curl_init();
@@ -71,28 +74,31 @@ class User extends CI_Controller
 	}
 
 
-	public function get_userinfo()
-	{
-
-		$this->load->library('session');
 
 
-		$user_id = $this->session->userdata('user_id');
 
-		if (!$user_id) {
-			echo json_encode(["error" => "User not logged in"]);
-			return;
-		}
+	// public function get_userinfo()
+	// {
+
+	// 	$this->load->library('session');
 
 
-		$user_data = $this->get_userdata($user_id);
+	// 	$user_id = $this->session->userdata('user_id');
 
-		if ($user_data) {
-			echo json_encode(["success" => true, "data" => $user_data]);
-		} else {
-			echo json_encode(["error" => "Failed to retrieve user data"]);
-		}
-	}
+	// 	if (!$user_id) {
+	// 		echo json_encode(["error" => "User not logged in"]);
+	// 		return;
+	// 	}
+
+
+	// 	$user_data = $this->get_userdata($user_id);
+
+	// 	if ($user_data) {
+	// 		echo json_encode(["success" => true, "data" => $user_data]);
+	// 	} else {
+	// 		echo json_encode(["error" => "Failed to retrieve user data"]);
+	// 	}
+	// }
 
 
 
@@ -104,30 +110,37 @@ class User extends CI_Controller
 	public function Home()
 	{
 		$user_id = $this->session->userdata('user_id');
-		$data = [];
+		// print_r($user_id);
+		// $data = [];
 
-		if (!empty($user_id)) {
-			$getdata = $this->get_userdata($user_id);
+		// if (!empty($user_id)) {
+		// 	$getdata = $this->get_userdata($user_id);
 
-			if ($getdata != null) {
-				$data["userinfo"] = $getdata;
-			} else {
-				redirect("UserLoginSignup/Login");
-			}
-		}
+		// 	if ($getdata != null) {
+		// 		$data["userinfo"] = $getdata;
+		// 	} else {
+		// 		redirect("UserLoginSignup/Login");
+		// 	}
+		// }
 
 
 		$language = $this->session->userdata('site_language') ?? 'english';
 
+		$data['astrologersdata'] = $this->Astrologer();
 
 		$this->lang->load('message', $language);
-		$this->load->view('User/Home', $data);
+		$this->load->view('User/Home' ,$data);
 	}
 
 
+	
+	
 
 	public function UserProfile()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+		
 		$user_id = $this->session->userdata('user_id');
 
 		if (!$user_id) {
@@ -141,12 +154,15 @@ class User extends CI_Controller
 				$this->load->view("User/Login");
 			}
 
+		
+
 			$this->load->view("User/UserProfile", $data);
 		}
 	}
 
 
 
+	
 
 
 
@@ -257,7 +273,7 @@ class User extends CI_Controller
 		$response = curl_exec($curl);
 
 		curl_close($curl);
-		echo $response;
+		
 
 
 		$nakshatraData = json_decode($response, true);
@@ -289,15 +305,83 @@ class User extends CI_Controller
 
 	public function Festival()
 	{
+		
+		
 		$language = $this->session->userdata('site_language') ?? 'english';
 		$this->lang->load('message', $language);
-		$this->load->view('User/Festival');
+
+		$api_url = base_url("User_Api_Controller/GetFestivals");
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$response = curl_exec($ch);
+		curl_close($ch);
+
+
+		$response_data = json_decode($response, true);
+
+
+		$data["festivals"] = $response_data["data"];
+
+		
+
+	
+		
+
+		$this->load->view('User/Festival', $data);
 	}
 
 
-	public function FestivalReadmore()
+	public function FestivalReadmore($festival_id)
 	{
-		$this->load->view('User/FestivalReadmore');
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+		if (!$festival_id) {
+			show_error("User ID is required", 400);
+			return;
+		}
+
+		// $api_url = "http://localhost/Astrology/User_Api_Controller/GetAstrologerById";
+
+		$api_url = base_url("User_Api_Controller/getfestivalbyid");
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["festival_id" => $festival_id]));
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+		$response = curl_exec($ch);
+		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$curl_error = curl_error($ch);
+		curl_close($ch);
+
+		if ($response === false) {
+			show_error("cURL Error: " . $curl_error, 500);
+			return;
+		}
+
+		$decoded = json_decode($response, true);
+
+		if (json_last_error() !== JSON_ERROR_NONE) {
+			show_error("Invalid JSON response from API", 500);
+			return;
+		}
+
+		if ($http_code !== 200 || !isset($decoded["status"]) || $decoded["status"] !== "success") {
+			show_error($decoded["message"] ?? "Failed to fetch astrologer details", $http_code);
+			return;
+		}
+
+		$data["festivaldata"] = $decoded["data"];
+
+		
+
+		$this->load->view('User/FestivalReadmore', $data);
 	}
 
 
@@ -309,37 +393,9 @@ class User extends CI_Controller
 	{
 
 		
-		$api_url = "http://localhost/jyotisika_api/User/Jyotisika_mall/get_product";
-		// // Use base_url() instead of hardcoded localhost URL
+	
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $api_url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POST, false); // Since it's a GET request
-		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
-
-		$response = curl_exec($ch);
-		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		$curl_error = curl_error($ch);
-		curl_close($ch);
-
-		if ($http_code !== 200) {
-			show_error("API Error: " . $curl_error, 500);
-			return null;
-		}
-
-		$decoded_response = json_decode($response, true);
-
-		if (!$decoded_response || !isset($decoded_response['status']) || $decoded_response['status'] !== "success") {
-			show_error("Invalid API response", 500);
-			return null;
-		}
-
-
-		$data["product"] = $decoded_response['data'];
-
-		$this->load->view('User/JyotisikaMall', $data);
+		$this->load->view('User/JyotisikaMall');
 	}
 
 
@@ -365,6 +421,8 @@ class User extends CI_Controller
 
 
 		
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		
       
          
@@ -467,6 +525,10 @@ class User extends CI_Controller
 	public function HoroscopeReadmore($sign) // Default to Taurus if no sign is provided
 	{
 
+		$language = $this->session->userdata('site_language') ?? 'english';
+
+
+		$this->lang->load('message', $language);
 
 		$api_url = "https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=$sign&day=TODAY";
 
@@ -495,6 +557,11 @@ class User extends CI_Controller
 
 	public function HoroscopeReadmores($sign = "Taurus")
 	{
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+
+
+		$this->lang->load('message', $language);
 		$api_url = "https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=$sign&day=TODAY";
 
 		$ch = curl_init();
@@ -516,6 +583,29 @@ class User extends CI_Controller
 
 
 	//----------------------------------ASTROLOGERS PAGES ---------------------------------------------------------
+
+	function Astrologer()
+	{
+		$api_url = base_url("User_Api_Controller/get_astrologer");
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$response = curl_exec($ch);
+		curl_close($ch);
+
+
+		$response_data = json_decode($response, true);
+
+
+
+		if (isset($response_data["status"]) && $response_data["status"] == "success") {
+			$data = $response_data["data"];
+		} else {
+			$data = null;
+		}
+		return $data;
+	}
 	public function Astrologers()
 	{
 
@@ -524,50 +614,75 @@ class User extends CI_Controller
 
 		$this->lang->load('message', $language);
 
+		$data['astrologersdata'] = $this->Astrologer();
 
-		$api_url = "http://localhost/jyotisika_api/User/Astrologer_actions/get_astrologer";
-		// // Use base_url() instead of hardcoded localhost URL
+		
+		$this->load->view('User/Astrologers', $data);
+		
+	}
+
+
+	public function ViewAstrologer($astrologer_id)
+	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+
+
+		$this->lang->load('message', $language);
+
+	
+
+		if (!$astrologer_id) {
+			show_error("User ID is required", 400);
+			return;
+		}
+
+		// $api_url = "http://localhost/Astrology/User_Api_Controller/GetAstrologerById";
+
+		$api_url = base_url("User_Api_Controller/getastrologerbyid");
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $api_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POST, false); // Since it's a GET request
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["astrologerid" => $astrologer_id]));
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
 
 		$response = curl_exec($ch);
 		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$curl_error = curl_error($ch);
 		curl_close($ch);
 
-		if ($http_code !== 200) {
-			show_error("API Error: " . $curl_error, 500);
-			return null;
+		if ($response === false) {
+			show_error("cURL Error: " . $curl_error, 500);
+			return;
 		}
 
-		$decoded_response = json_decode($response, true);
+		$decoded = json_decode($response, true);
 
-		if (!$decoded_response || !isset($decoded_response['status']) || $decoded_response['status'] !== "success") {
-			show_error("Invalid API response", 500);
-			return null;
+		if (json_last_error() !== JSON_ERROR_NONE) {
+			show_error("Invalid JSON response from API", 500);
+			return;
 		}
 
+		if ($http_code !== 200 || !isset($decoded["status"]) || $decoded["status"] !== "success") {
+			show_error($decoded["message"] ?? "Failed to fetch astrologer details", $http_code);
+			return;
+		}
 
-		$data["astroinfo"] = $decoded_response['data'];
-
-		print_r($data["astroinfo"]);
-
-		$this->load->view('User/Astrologers', $data); // Pass data to view
-	}
+		$data["astrologer"] = $decoded["data"];
 
 
-	public function ViewAstrologer()
-	{
-		$this->load->view('User/ViewAstrologer');
+
+		// print_r($data["astrologer"]);
+		$this->load->view('User/ViewAstrologer' , $data);
 	}
 
 	public function AstrologyServices()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+
+
+		$this->lang->load('message', $language);
 		$this->load->view('User/AstrologyServices');
 	}
 
@@ -679,9 +794,19 @@ class User extends CI_Controller
 
 	public function WhyUs()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view('User/WhyUs');
 	}
 
+
+
+	//---------------------------------------------Chat--------------------------------------------------------------------
+
+	public function Chat()
+	{
+		$this->load->view('User/Chat');
+	}
 
 
 	// ------------------------USER OTHER PARTS -------------------------------------------------------------
@@ -707,5 +832,39 @@ class User extends CI_Controller
 	public function Demo()
 	{
 		$this->load->view('User/Demo');
+	}
+
+	public function Wallet()
+	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+
+		$data = [];
+		$session_id = $this->session->userdata("user_id");
+
+		if (!empty($session_id)) {
+			$getdata = $this->get_userdata($session_id);
+
+			if ($getdata !== null) {
+				$data["userinfo"] = $getdata;
+			} else {
+				$data["userinfo"] = [];
+			}
+		} else {
+			$data["userinfo"] = [];
+
+		}
+
+		// print_r($data["userinfo"]);
+		$this->load->view('User/Wallet', $data);
+	}
+
+
+	public function Privacypolicy(){
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+		$this->load->view('User/Privacypolicy');
 	}
 }

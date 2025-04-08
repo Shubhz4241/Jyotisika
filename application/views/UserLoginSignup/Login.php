@@ -199,7 +199,7 @@
                 }
                 mobileError.innerText = ""; // Clear error if valid
 
-                fetch("http://localhost/jyotisika_api/User/User_Auth/SendOtp", {
+                fetch("<?php echo base_url('User_Api_Controller/sendOtpmobile'); ?>", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ mobile_number: phoneNumber })
@@ -266,7 +266,7 @@
                     return;
                 }
 
-                fetch("http://localhost/jyotisika_api/User/User_Auth/VerifyOtp", {
+                fetch("<?php echo base_url('User_Api_Controller/VerifyOtp'); ?>", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ mobile_number: phoneNumber, otp: otp })

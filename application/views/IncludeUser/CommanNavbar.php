@@ -1,36 +1,3 @@
-<!-- NAVBAR -->
-<!-- 
-<div class="sidebar">
-    <h3 id="user-name">Loading...</h3>
-    <p id="user-email"></p>
-</div> -->
-<!-- <script>
-document.addEventListener("DOMContentLoaded", function () {
-    fetch("<?php echo base_url() . "User/get_userinfo" ?>") 
-        .then(response => response.json()) 
-        .then(data => {
-            if (data.success) {
-                
-                let userImage = data.data.user_image 
-                    ? `http://localhost/jyotisika_api/${data.data.user_image}` 
-                    : "<?php echo base_url('assets/images/userProfile.png') ?>";
-                
-              
-                document.getElementById("dropdown-profile-image").src = userImage;
-                document.getElementById("sidebar-profile-image").src = userImage;
-
-                
-                console.log("Profile Image URL:", userImage);
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching user data:", error);
-        });
-});
-</script> -->
-
-
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary px-md-2 sticky-top"
     style="background-color: var(--yellow) !important;">
     <div class="container-fluid">
@@ -42,6 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+
+        <?php
+        $user_image = $this->session->userdata('user_image');
+        $profile_image_path = !empty($user_image)
+            ? base_url($user_image)
+            : base_url('assets/images/profileimage.png');
+        ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -67,27 +42,51 @@ document.addEventListener("DOMContentLoaded", function () {
             </ul>
 
 
-            <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>"> Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link text-black" href="<?php echo base_url('todayhoroscope'); ?>">Horoscope</a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>"> Astrologers</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">WhyUs</a>
-                </li>
-            </ul> -->
-
 
 
             <div class="d-flex gap-2">
+
+                <a href="<?php echo base_url('wallet'); ?>"
+                    class="btn border-1 btn-sm rounded-1 d-flex align-items-center gap-2 mb-2 mb-xl-0">
+                    <i class="bi bi-wallet2"></i>
+                    <span id="wallet-amount">₹ 0</span>
+                </a>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        console.log("DOM fully loaded, calling fetchWalletBalance()");
+                        fetchWalletBalance();
+                    });
+
+                    function fetchWalletBalance() {
+                        // Get session ID from PHP
+
+                        let formData = new URLSearchParams();
+
+                        fetch("<?php echo base_url('User_Api_Controller/getuser_infos'); ?>", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            },
+
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.status === "success") {
+                                    console.log("hello");
+                                    console.log(data);
+                                    let val = data.data.amount;
+                                    document.getElementById("wallet-amount").textContent = "₹ " + val;
+                                } else {
+                                    console.error("Error fetching wallet balance:", data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Fetch error:", error);
+                            });
+                    }
+
+                </script>
                 <div class="position-relative">
                     <i class="bi bi-translate position-absolute ps-2"
                         style="top: 50%; left: 0px; transform: translateY(-50%);"></i>
@@ -106,37 +105,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 </script>
 
-                <!-- <div class="position-relative">
-                    <i class="bi bi-translate position-absolute"
-                        style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
-                    <select class=" shadow-none" aria-label="Default select example"
-                        style="width: 150px; padding-left: 30px;">
-                        <option selected>English</option>
-                        <option value="1">Marathi</option>
-                        <option value="2">Hindi</option>
-                        <option value="3">Tamil</option>
-                    </select>
-                </div> -->
 
 
 
                 <?php if (!$this->session->userdata('user_id')): ?>
                     <a class="btn btn-primary border-0" href="<?php echo base_url('Login'); ?>"
                         style="background-color: var(--red);">
-                        Login
+                        <?php echo $this->lang->line('Login_Button') ?: "Login"; ?>
                     </a>
                 <?php endif; ?>
+
 
                 <div class="dropdown">
                     <?php if ($this->session->userdata('user_id')): ?>
 
                         <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <img id="dropdown-profile-image" src="<?php
-                            echo !empty($this->session->userdata('user_image'))
-                                ? "http://localhost/jyotisika_api/" . $this->session->userdata('user_image')
-                                : base_url('assets/images/userProfile.png');
-                            ?>" alt="User Profile" style="width: 40px; height: 40px; border-radius: 50%;">
+                            <img id="dropdown-profile-image" src="<?php echo $profile_image_path; ?>" alt="User Profile"
+                                style="width: 40px; height: 40px; border-radius: 50%;">
 
 
 
@@ -161,11 +147,9 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <a href="<?php echo base_url('UserProfile') ?>" class="text-decoration-none">
                                     <div class="position-relative d-inline-block">
                                         <!-- Profile Image with ID for JS to update -->
-                                        <img id="sidebar-profile-image" src="<?php
-                                        echo !empty($this->session->userdata('user_image'))
-                                            ? "http://localhost/jyotisika_api/" . $this->session->userdata('user_image')
-                                            : base_url('assets/images/userProfile.png');
-                                        ?>" alt="Profile Image"
+
+                                        <img id="sidebar-profile-image" src=" <?php echo $profile_image_path; ?>"
+                                            alt="Profile Image"
                                             style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--yellow); padding: 3px; transition: transform 0.3s;">
 
 
@@ -188,22 +172,22 @@ document.addEventListener("DOMContentLoaded", function () {
                             <li>
                                 <hr class="dropdown-divider mx-3">
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Notification'); ?>">
                                     <i class="bi bi-bell me-2"></i> Notifications
                                     <span class="badge bg-danger rounded-pill float-end me-2">3</span>
                                 </a>
-                            </li>
-                            <li>
+                            </li> -->
+                            <!-- <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Orders'); ?>">
                                     <i class="bi bi-bag me-2"></i> My Orders
                                 </a>
-                            </li>
-                            <li>
+                            </li> -->
+                            <!-- <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Following'); ?>">
                                     <i class="bi bi-heart me-2"></i> Following
                                 </a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('CustomerSupport'); ?>">
                                     <i class="bi bi-gear me-2"></i> Customer Support
@@ -229,7 +213,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown"
                             style="border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); border: none; min-width: 250px;">
                             <li class="text-center p-4" id="myprofilelink">
-
                                 <div class="position-relative d-inline-block">
                                     <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="Profile Image"
                                         style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--yellow); padding: 3px; transition: transform 0.3s;">
@@ -237,37 +220,35 @@ document.addEventListener("DOMContentLoaded", function () {
                                         style="width: 15px; height: 15px; right: 5px; border: 2px solid white;"></div>
                                 </div>
 
-
-                                <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;"> Hello User
+                                <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;">
+                                    <?php echo $this->lang->line('Hello_User') ?: "Hello User"; ?>
                                 </p>
-                                <p id="myparaLink" class="mt-1 mb-0 text-dark" style="font-weight: 400; font-size: 1rem; ">
-                                    To access
-                                    your jyotisika account ,pls log in
+                                <p id="myparaLink" class="mt-1 mb-0 text-dark" style="font-weight: 400; font-size: 1rem;">
+                                    <?php echo $this->lang->line('Access_Account') ?: "To access your Jyotishika account, please log in."; ?>
                                 </p>
-
                             </li>
                             <li>
                                 <hr class="dropdown-divider mx-1">
                             </li>
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="#" id="myOrdersLink">
-                                    <i class="bi bi-bag me-2"></i> My Orders
+                                    <i class="bi bi-bag me-2"></i>
+                                    <?php echo $this->lang->line('My_Orders') ?: "My Orders"; ?>
                                 </a>
                             </li>
-
 
                             <li>
                                 <hr class="dropdown-divider mx-3">
                             </li>
 
-
                             <li>
                                 <a class="dropdown-item py-2 ps-4 text-danger" href="<?php echo base_url('Login'); ?>">
-                                    <i class="bi bi-box-arrow-right me-2"></i> Log in
+                                    <i class="bi bi-box-arrow-right me-2"></i>
+                                    <?php echo $this->lang->line('Login') ?: "Log in"; ?>
                                 </a>
                             </li>
-
                         </ul>
+
 
                     <?php endif ?>
 

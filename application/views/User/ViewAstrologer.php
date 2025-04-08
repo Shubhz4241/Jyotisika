@@ -43,6 +43,39 @@
 
 <body>
 
+<?php
+    // Initialize variables with empty values to prevent undefined variable errors
+    $id = '';
+    $name = '';
+    $email = '';
+    $phone = '';
+    // $profile_image = base_url('assets/images/default-profile.png'); // Default profile image
+    $experience = '';
+    $specialties = '';
+    $languages = '';
+    $address = '';
+    $status = "<span class='text-danger'>Offline</span>"; // Default status
+    
+    $is_following = '';
+
+    // If astrologer data is available, set the variables
+    
+    // print_r($astrologer);
+    if (isset($astrologer) && !empty($astrologer)) {
+
+        $ast = $astrologer[0];
+        $id = $ast['id'];
+        $name = $ast['name'];
+        $email = $ast['email'];
+        $languages = $ast['languages'];
+        $specialties =  $ast['specialties'];
+        $experience = $ast['experience'];
+        $price_per_minute = $ast['price_per_minute'];
+        // $profile_image = !empty($astrologers['profile_image']) ? base_url($astrologers['profile_image']) : base_url('assets/images/astrologer.png');
+    
+    }
+    ?>
+
     <header>
         <!-- Navbar -->
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
@@ -77,15 +110,15 @@
                                             class="rounded-circle border border-3 border-white me-3"
                                             style="width: 120px; height: 120px; object-fit: cover;">
                                         <div>
-                                            <h5 class="text-white fw-bold mb-1">Acharya Mishra Ji</h5>
+                                            <h5 class="text-white fw-bold mb-1"><?php echo  $name ?></h5>
                                             <div class="d-flex align-items-center mb-2">
                                                 <?php for ($i = 0; $i < 3; $i++): ?>
                                                     <i class="bi bi-star-fill text-warning me-1"></i>
                                                 <?php endfor; ?>
                                             </div>
-                                            <button class="btn btn-light btn-sm rounded-4 px-3">
+                                            <!-- <button class="btn btn-light btn-sm rounded-4 px-3">
                                                 <i class="bi bi-person-plus-fill me-1"></i>Follow
-                                            </button>
+                                            </button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -103,8 +136,8 @@
                                                             <i class="bi bi-stars text-danger"></i>
                                                         </div>
                                                         <div>
-                                                            <h6 class="mb-0 fw-bold">Expertise</h6>
-                                                            <span class="card-expertise">Vastu, Vedic</span>
+                                                            <h6 class="mb-0 fw-bold">specialties</h6>
+                                                            <span class="card-expertise"><?php echo $specialties ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center">
@@ -114,7 +147,7 @@
                                                         </div>
                                                         <div>
                                                             <h6 class="mb-0 fw-bold">Experience</h6>
-                                                            <span>4+ Years</span>
+                                                            <span><?php echo $experience ?>+ Years</span>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center">
@@ -124,7 +157,7 @@
                                                         </div>
                                                         <div>
                                                             <h6 class="mb-0 fw-bold">Languages</h6>
-                                                            <span class="card-language">English, Hindi, Marathi</span>
+                                                            <span class="card-language"><?php echo  $languages ?></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -134,7 +167,7 @@
                                             <div class="col-md-4 d-flex flex-column justify-content-between mt-3 mt-md-0">
                                                 <div class="text-center mb-3">
                                                     <h5 class="fw-bold text-danger mb-1">Consultation Fee</h5>
-                                                    <h4 class="fw-bold">₹25/min</h4>
+                                                    <h4 class="fw-bold">₹<?php echo $price_per_minute ?>/min</h4>
                                                 </div>
                                                 <div class="d-grid gap-2">
                                                     <button class="btn  rounded-3 text-dark"
@@ -155,21 +188,21 @@
                     </div>
                     <div class="col-12">
                         <h6 class="fs-5 fw-bold">About</h6>
-                        <p style="text-align:justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
+                        <!-- <p style="text-align:justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
                             sapiente omnis, quidem, rerum voluptas quis voluptate natus dolorum velit, iure modi nihil
                             maxime harum vel fuga commodi nisi! Eum, quae! Lorem ipsum dolor sit amet, consectetur
                             adipisicing elit. Animi nam consequatur, accusantium vitae nobis ea ab totam labore, sed qui
                             velit dicta earum omnis, eaque cum quidem odio. Dolorem, iste. Lorem, ipsum dolor sit amet
                             consectetur adipisicing elit. Placeat aspernatur itaque mollitia nisi, et deserunt in
                             perspiciatis rerum asperiores exercitationem!
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Review section -->
-        <section>
+        <!-- <section>
             <div class="container mb-5">
                 <h5 class=" mb-4 fw-bold">User Reviews</h5>
                 <div class="owl-carousel owl1 owl-theme">
@@ -295,7 +328,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
     </main>
 

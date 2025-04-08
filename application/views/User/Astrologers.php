@@ -33,6 +33,8 @@
 
 <body>
 
+    <!-- <?php print_r($astrologersdata) ?> -->
+
     <header>
         <!-- Navbar -->
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
@@ -60,62 +62,68 @@
             </div>
 
             <!-- cards -->
+
+            <!-- <?php
+
+
+            $astrologers = [
+                [
+                    'name' => 'Acharya Mishra Ji',
+                    'image' => 'astrologer.png',
+                    'expertise' => 'Vastu, Vedic',
+                    'experience' => '4+ Years',
+                    'price' => 'Rs.25/min',
+                    'languages' => 'English, Hindi, Marathi',
+                    'rating' => 3
+                ],
+                [
+                    'name' => 'Pandit Ji',
+                    'image' => 'astrologer.png',
+                    'expertise' => 'Vastu, Vedic',
+                    'experience' => '10+ Years',
+                    'price' => 'Rs.50/min',
+                    'languages' => 'English, Hindi, Marathi',
+                    'rating' => 5
+                ],
+                [
+                    'name' => 'Karan Ji',
+                    'image' => 'astrologer.png',
+                    'expertise' => 'Vastu, Vedic',
+                    'experience' => '7+ Years',
+                    'price' => 'Rs.40/min',
+                    'languages' => 'English, Hindi, Marathi',
+                    'rating' => 4
+                ],
+
+            ];
+
+            ?> -->
+
             <div class="row my-4" id="cardContainer">
-                <?php
-
-
-                $astrologers = [
-                    [
-                        'name' => 'Acharya Mishra Ji',
-                        'image' => 'astrologer.png',
-                        'expertise' => 'Vastu, Vedic',
-                        'experience' => '4+ Years',
-                        'price' => 'Rs.25/min',
-                        'languages' => 'English, Hindi, Marathi',
-                        'rating' => 3
-                    ],
-                    [
-                        'name' => 'Pandit Ji',
-                        'image' => 'astrologer.png',
-                        'expertise' => 'Vastu, Vedic',
-                        'experience' => '10+ Years',
-                        'price' => 'Rs.50/min',
-                        'languages' => 'English, Hindi, Marathi',
-                        'rating' => 5
-                    ],
-                    [
-                        'name' => 'Karan Ji',
-                        'image' => 'astrologer.png',
-                        'expertise' => 'Vastu, Vedic',
-                        'experience' => '7+ Years',
-                        'price' => 'Rs.40/min',
-                        'languages' => 'English, Hindi, Marathi',
-                        'rating' => 4
-                    ],
-
-                ];
-
-                foreach ($astrologers as $astrologer): ?>
+               
+            <?php  if (!empty($astrologersdata)): ?>
+                <?php foreach ($astrologersdata as $astrologer): ?>
                     <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
                         <div class="card shadow rounded-3 h-100"
                             style="border: 1px solid var(--red); background-color: #fff;">
                             <div class="card-body p-3">
                                 <!-- Profile Section -->
                                 <div class="d-flex align-items-center mb-2">
-                                    <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                                        <img src="<?php echo base_url('assets/images/' . $astrologer['image']); ?>"
-                                            alt="image" class="rounded-circle"
+                                <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']);?>" class="text-decoration-none">
+                                        <img src="<?php echo base_url('assets/images/astrologer.png'); ?> " alt="image"
+                                            class="rounded-circle"
                                             style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                     </a>
                                     <div class="ms-2">
-                                        <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
+                                         
+                                        <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']);?>" class="text-decoration-none">
                                             <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
                                                 <?php echo $astrologer['name']; ?>
                                             </h6>
                                         </a>
 
                                         <div class="d-flex align-items-center gap-1">
-                                            <?php for ($i = 0; $i < $astrologer['rating']; $i++): ?>
+                                            <?php for ($i = 0; $i < 4; $i++): ?>
                                                 <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
                                                     style="width: 15px; height: 15px;">
                                             <?php endfor; ?>
@@ -128,17 +136,17 @@
                                     <div class="d-flex align-items-center">
                                         <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
                                             style="width: 15px; height: 15px; margin-right: 5px;">
-                                        <small class="card-expertise"><?php echo $astrologer['expertise']; ?></small>
+                                        <small class="card-expertise"><?php echo $astrologer['specialties']; ?></small>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
                                             style="width: 15px; height: 15px; margin-right: 5px;">
-                                        <small><?php echo $astrologer['experience']; ?></small>
+                                        <small><?php echo $astrologer['experience']; ?> + Years</small>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
                                             style="width: 15px; height: 15px; margin-right: 5px;">
-                                        <small><?php echo $astrologer['price']; ?></small>
+                                        <small><?php echo $astrologer['price_per_minute']; ?> per minite</small>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
@@ -171,6 +179,13 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+
+                <?php else: ?>
+        <!-- If no astrologers are available -->
+        <div class="col-12 text-center">
+            <p class="fw-bold text-danger">No astrologers available at the moment. Please check back later.</p>
+        </div>
+    <?php endif; ?>
             </div>
         </div>
 
@@ -226,46 +241,46 @@
             });
         </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const callButtons = document.querySelectorAll(".call-btn");
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const callButtons = document.querySelectorAll(".call-btn");
 
-        callButtons.forEach(button => {
-            button.addEventListener("click", function (event) {
-                event.preventDefault();
+                callButtons.forEach(button => {
+                    button.addEventListener("click", function (event) {
+                        event.preventDefault();
 
-                <?php if (!$this->session->userdata('user_id')): ?>
-                    Swal.fire({
-                        title: "Login Required",
-                        text: "Please login to access this feature",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonText: "Login",
-                        cancelButtonText: "Cancel",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "<?php echo base_url('Login'); ?>";
-                        }
+                        <?php if (!$this->session->userdata('user_id')): ?>
+                            Swal.fire({
+                                title: "Login Required",
+                                text: "Please login to access this feature",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonText: "Login",
+                                cancelButtonText: "Cancel",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?php echo base_url('Login'); ?>";
+                                }
+                            });
+                        <?php else: ?>
+                            handleCallClick();
+                        <?php endif; ?>
                     });
-                <?php else: ?>
-                    handleCallClick();
-                <?php endif; ?>
+                });
             });
-        });
-    });
 
-    function handleCallClick() {
-        Swal.fire({
-            title: "Initiating Call",
-            text: "Connecting you to the service...",
-            icon: "success",
-            timer: 2000,
-            showConfirmButton: false
-        });
+            function handleCallClick() {
+                Swal.fire({
+                    title: "Initiating Call",
+                    text: "Connecting you to the service...",
+                    icon: "success",
+                    timer: 2000,
+                    showConfirmButton: false
+                });
 
-       
-    }
-</script>
+
+            }
+        </script>
     </main>
 
     <footer>

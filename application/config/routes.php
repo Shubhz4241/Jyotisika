@@ -85,11 +85,15 @@ $route['horoscopereadmore/(:any)'] = 'User/HoroscopeReadmore/$1';
 
 //Data from astroller 
 $route['astrologers'] = 'User/Astrologers';
-$route['ViewAstrologer'] = 'User/ViewAstrologer';
+$route['ViewAstrologer/(:num)'] = 'User/ViewAstrologer/$1';
+
 $route['AstrologyServices'] ='User/AstrologyServices';
 $route['Following'] ='User/Following';
 
 
+$route['privacypolicy'] = 'User/Privacypolicy';
+
+$route['wallet'] = 'User/Wallet';
 
 //data from pujari side book puja section
 $route['PoojarViewMore'] ='User/PoojarViewMore';
@@ -103,7 +107,7 @@ $route['PoojaInfo'] ='User/PoojaInfo';
 
 //data from admin side  Festivals
 $route['festival'] = 'User/Festival';
-$route['FestivalReadmore'] ='User/FestivalReadmore';
+$route['FestivalReadmore/(:num)'] ='User/FestivalReadmore/$1';
 
 
 
@@ -133,6 +137,7 @@ $route['demo'] = 'User/Demo';
 $route['Recharge'] ='User/Recharge';
 $route['ServiceDetails'] ='User/ServiceDetails';
 
+$route['chat'] = 'User/Chat';
 
 
 //user end ---User route end--- 

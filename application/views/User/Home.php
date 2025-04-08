@@ -104,6 +104,8 @@
 
     <!-- astro signs -->
 
+    <!-- <?php print_r($astrologersdata) ?> -->
+
     <?php
 
     // if (isset($userinfo)) {
@@ -138,101 +140,112 @@
                 </div> -->
 
                 <div class="col-auto">
-                     <a href="<?php echo base_url('horoscopereadmore/Taurus'); ?>"
-                  
+                    <a href="<?php echo base_url('horoscopereadmore/Taurus'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/taurus.png'); ?>" alt="Taurus"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">   <?php echo !empty($this->lang->line('Taurus')) ? $this->lang->line('Taurus') : 'Taurus'; ?></p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Taurus')) ? $this->lang->line('Taurus') : 'Taurus'; ?>
+                        </p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                     <a href="<?php echo base_url('horoscopereadmore/Gemini'); ?>"
-                
+                    <a href="<?php echo base_url('horoscopereadmore/Gemini'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/gemini.png'); ?>" alt="Gemini"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Gemini')) ? $this->lang->line('Gemini') : 'Gemini'; ?></p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Gemini')) ? $this->lang->line('Gemini') : 'Gemini'; ?>
+                        </p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                     <a href="<?php echo base_url('horoscopereadmore/Cancer'); ?>"
-                    
+                    <a href="<?php echo base_url('horoscopereadmore/Cancer'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/cancer.png'); ?>" alt="Cancer"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Cancer')) ? $this->lang->line('Cancer') : 'Cancer'; ?></p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Cancer')) ? $this->lang->line('Cancer') : 'Cancer'; ?>
+                        </p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                     <a href="<?php echo base_url('horoscopereadmore/Leo'); ?>"
-                    
+                    <a href="<?php echo base_url('horoscopereadmore/Leo'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/leo.png'); ?>" alt="Leo"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Leo')) ? $this->lang->line('Leo') : 'Leo'; ?></p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Leo')) ? $this->lang->line('Leo') : 'Leo'; ?>
+                        </p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                     <a href="<?php echo base_url('horoscopereadmore/Virgo'); ?>"
-                  
+                    <a href="<?php echo base_url('horoscopereadmore/Virgo'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/virgo.png'); ?>" alt="Virgo"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Virgo')) ? $this->lang->line('Virgo') : 'Virgo'; ?></p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Virgo')) ? $this->lang->line('Virgo') : 'Virgo'; ?>
+                        </p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                     <a href="<?php echo base_url('horoscopereadmore/Scorpio'); ?>"
+                    <a href="<?php echo base_url('horoscopereadmore/Scorpio'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/scorpio.png'); ?>" alt="Scorpio"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Scorpio')) ? $this->lang->line('Scorpio') : 'Scorpio'; ?></p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Scorpio')) ? $this->lang->line('Scorpio') : 'Scorpio'; ?>
+                        </p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                     <a href="<?php echo base_url('horoscopereadmore/Sagittarius'); ?>"
-                   
+                    <a href="<?php echo base_url('horoscopereadmore/Sagittarius'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/sagittarius.png'); ?>" alt="Sagittarius"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Sagittarius')) ? $this->lang->line('Sagittarius') : 'Sagittarius'; ?></p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Sagittarius')) ? $this->lang->line('Sagittarius') : 'Sagittarius'; ?>
+                        </p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                     <a href="<?php echo base_url('horoscopereadmore/Capricorn'); ?>"
-                  
+                    <a href="<?php echo base_url('horoscopereadmore/Capricorn'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/capricon.png'); ?>" alt="Capricorn"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Capricorn')) ? $this->lang->line('Capricorn') : 'Capricorn'; ?></p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Capricorn')) ? $this->lang->line('Capricorn') : 'Capricorn'; ?>
+                        </p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                      <a href="<?php echo base_url('horoscopereadmore/Aquarius'); ?>"
-                   
+                    <a href="<?php echo base_url('horoscopereadmore/Aquarius'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/aquarius.png'); ?>" alt="Aquarius"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Aquarius')) ? $this->lang->line('Aquarius') : 'Aquarius'; ?></p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Aquarius')) ? $this->lang->line('Aquarius') : 'Aquarius'; ?>
+                        </p>
                     </a>
                 </div>
 
                 <div class="col-auto">
-                     <a href="<?php echo base_url('horoscopereadmore/Pisces'); ?>"
-                   
+                    <a href="<?php echo base_url('horoscopereadmore/Pisces'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
                         <img src="<?php echo base_url('assets/images/pisces.png'); ?>" alt="Pisces"
                             class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold"><?php echo !empty($this->lang->line('Pisces')) ? $this->lang->line('Pisces') : 'Pisces'; ?></p>
+                        <p class="mt-2 mb-0 text-dark fw-bold">
+                            <?php echo !empty($this->lang->line('Pisces')) ? $this->lang->line('Pisces') : 'Pisces'; ?>
+                        </p>
                     </a>
                 </div>
             </div>
@@ -321,88 +334,95 @@
     <section>
         <div class="container my-4">
             <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
-                <?php echo $this->lang->line('Astrologers'); ?></h2>
+                <?php echo $this->lang->line('Astrologers'); ?>
+            </h2>
             <div class="row my-4" id="cardContainer">
-                <?php for ($i = 0; $i < 10; $i++): ?>
-                    <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
-                        <div class="card shadow-sm rounded-3 h-100"
-                            style="border: 1px solid var(--red); background-color: #fff;">
-                            <div class="card-body p-3">
-                                <!-- Profile Section -->
-                                <div class="d-flex align-items-center mb-2">
-                                    <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                                        <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
-                                            class="rounded-circle"
-                                            style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                    </a>
-                                    <div class="ms-2">
-                                        <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
-                                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Acharya Mishra Ji
-                                            </h6>
-                                        </a>
 
-                                        <div class="d-flex align-items-center gap-1">
-                                            <?php for ($j = 0; $j < 3; $j++): ?>
-                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                    style="width: 15px; height: 15px;">
-                                            <?php endfor; ?>
+
+                <div class="row my-4" id="cardContainer">
+                    <?php if (!empty($astrologersdata)): ?>
+                        <?php foreach ($astrologersdata as $astrologer): ?>
+                            <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
+                                <div class="card shadow-sm rounded-3 h-100"
+                                    style="border: 1px solid var(--red); background-color: #fff;">
+                                    <div class="card-body p-3">
+                                        <!-- Profile Section -->
+                                        <div class="d-flex align-items-center mb-2">
+                                            <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>">
+                                                <img src="<?php echo base_url('assets/images/astrologer.png'); ?> " alt="image"
+                                                    class="rounded-circle"
+                                                    style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+                                            </a>
+                                            <div class="ms-2">
+                                                <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>"
+                                                    class="text-decoration-none">
+                                                    <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                        <?php echo $astrologer['name']; ?>
+                                                    </h6>
+                                                </a>
+
+                                                <div class="d-flex align-items-center gap-1">
+                                                    <?php for ($j = 0; $j < 4; $j++): ?>
+                                                        <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
+                                                            style="width: 15px; height: 15px;">
+                                                    <?php endfor; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Details Section -->
+                                        <div class="d-flex flex-column gap-1 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
+                                                    style="width: 15px; height: 15px; margin-right: 5px;">
+                                                <small class="card-expertise"><?php echo $astrologer['specialties']; ?></small>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <img src="<?php echo base_url('assets/images/experience.png'); ?>"
+                                                    alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
+                                                <small><?php echo $astrologer['experience']; ?>+ Years</small>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
+                                                    style="width: 15px; height: 15px; margin-right: 5px;">
+                                                <small>Rs.<?php echo $astrologer['price_per_minute']; ?>/min</small>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
+                                                    style="width: 15px; height: 15px; margin-right: 5px;">
+                                                <small class="card-language"><?php echo $astrologer['languages']; ?></small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Action Buttons -->
+                                        <div class="d-flex gap-2 mb-2">
+                                            <?php if ($this->session->userdata('user_id')): ?>
+                                                <button class="btn btn-sm w-50 rounded-3 border-1"
+                                                    style="background-color: var(--yellow);" onclick="chatscreen()">Chat</button>
+                                            <?php else: ?>
+                                                <button id="chatlink" class="btn btn-sm w-50 rounded-3 border-1"
+                                                    style="background-color: var(--yellow);">Chat</button>
+                                            <?php endif ?>
+
+                                            <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Details Section -->
-                                <div class="d-flex flex-column gap-1 mb-2">
-                                    <div class="d-flex align-items-center">
-                                        <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
-                                            style="width: 15px; height: 15px; margin-right: 5px;">
-                                        <small class="card-expertise">Vastu, Vedic</small>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
-                                            style="width: 15px; height: 15px; margin-right: 5px;">
-                                        <small>4+ Years</small>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
-                                            style="width: 15px; height: 15px; margin-right: 5px;">
-                                        <small>Rs.25/min</small>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
-                                            style="width: 15px; height: 15px; margin-right: 5px;">
-                                        <small class="card-language">English, Hindi, Marathi</small>
-                                    </div>
-                                </div>
-
-                                <!-- Action Buttons -->
-                                <div class="d-flex gap-2 mb-2">
-
-                                    <?php if ($this->session->userdata('user_id')): ?>
-                                        <button class="btn btn-sm w-50 rounded-3 border-1"
-                                            style="background-color: var(--yellow);">Chat</button>
-                                    <?php else: ?>
-                                        <button id="chatlink" class="btn btn-sm w-50 rounded-3 border-1"
-                                            style="background-color: var(--yellow);">Chat</button>
-
-                                    <?php endif ?>
-
-
-
-
-                                    <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                                </div>
-                                <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
                             </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="col-12 text-center">
+                            <p class="fw-bold text-danger">No astrologers found.</p>
                         </div>
-                    </div>
-                <?php endfor; ?>
+                    <?php endif; ?>
 
-                <div class="text-center mt-4">
-                    <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold"
-                        style="background-color: var(--yellow);"> <?php echo $this->lang->line('ViewMore') ?></a>
+                    <div class="text-center mt-4">
+                        <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold"
+                            style="background-color: var(--yellow);"> <?php echo $this->lang->line('ViewMore') ?></a>
+                    </div>
                 </div>
+
             </div>
-        </div>
     </section>
 
     <!-- Astrological Services For Accurate Answers And Better Future -->
@@ -497,7 +517,7 @@
 
 
     <!-- Astrological  Remedies  To  Get  Rid  Of  Your  Problems -->
-    <section>
+    <!-- <section>
         <div class="container my-4">
             <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
                 <?php echo $this->lang->line('AstrologicalRemedies') ?></a>
@@ -581,13 +601,14 @@
             </div>
         </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Free Horoscope and Astrology Services -->
     <section>
         <div class="container my-4">
             <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">
-                <?php echo $this->lang->line('FreeHoroscope') ?></h3>
+                <?php echo $this->lang->line('FreeHoroscope') ?>
+            </h3>
             <div class="row g-4 justify-content-center">
                 <!-- Card 1 -->
                 <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -601,12 +622,16 @@
                 </div> -->
                 <!-- Card 2 -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 ">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
                             <img src="<?php echo base_url('assets/images/HoroscopeMatching.png'); ?>"
                                 alt="Horoscope Matching" class="mx-auto mb-3"
                                 style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Horoscope Matching <br> <small>(Birth Chart)</small></p>
+                            <p class="fw-bold text-dark">
+                                <?php echo $this->lang->line('Horoscope_Matching') ?: "Horoscope Matching"; ?> <br>
+                                <small>(<?php echo $this->lang->line('Birth_Chart') ?: "Birth Chart"; ?>)</small>
+                            </p>
+
                         </div>
                     </a>
                 </div>
@@ -622,12 +647,16 @@
                 </div> -->
                 <!-- Card 4 -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
                         <div class="card text-center shadow rounded  border-0 p-3 h-100 card-hover">
                             <img src="<?php echo base_url('assets/images/talkToAstrologer.png'); ?>"
                                 alt="Talk To Astrologer" class="mx-auto mb-3"
                                 style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Talk To Astrologer <br> <small>(Birth Chart)</small></p>
+                            <p class="fw-bold text-dark">
+                                <?php echo $this->lang->line('Talk_To_Astrologer') ?: "Talk To Astrologer"; ?> <br>
+                                <small>(<?php echo $this->lang->line('Birth_Chart') ?: "Birth Chart"; ?>)</small>
+                            </p>
+
                         </div>
                     </a>
                 </div>
@@ -644,12 +673,15 @@
                 -->
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
                             <img src="<?php echo base_url('assets/images/numerologyCalculator.png'); ?>"
                                 alt="Numerology Calculator" class="mx-auto mb-3"
                                 style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Numerology Calculator </p>
+                            <p class="fw-bold text-dark">
+                                <?php echo $this->lang->line('Numerology_Calculator') ?: "Numerology Calculator"; ?>
+                            </p>
+
                         </div>
                     </a>
                 </div>
@@ -706,11 +738,14 @@
                 </div> -->
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 ">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
                         <div class="card text-center shadow border-0 p-3 h-100 rounded card-hover">
                             <img src="<?php echo base_url('assets/images/babyName.png'); ?>" alt="Today's Rahukal"
                                 class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Baby Name </p>
+                            <p class="fw-bold text-dark">
+                                <?php echo $this->lang->line('Baby_Name') ?: "Baby Name"; ?>
+                            </p>
+
                         </div>
                     </a>
                 </div>
@@ -737,6 +772,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        function chatscreen() {
+            window.location.href = "<?php echo base_url("chat") ?>"; // Change this to your actual chat page URL
+        }
+
         $(document).ready(function () {
             $('.owl1').owlCarousel({
                 loop: true,

@@ -53,73 +53,73 @@
                         'image' => 'assets/images/kundli.png',
                         'title' => 'Kundli',
                         'description' => '(Birth Chart)',
-                        'link' => '#'
+                        'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/HoroscopeMatching.png',
                         'title' => 'Horoscope Matching',
                         'description' => '(Birth Chart)',
-                        'link' => '#'
+                        'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/examResult.png',
                         'title' => 'Exam Result',
                         'description' => '(Birth Chart)',
-                        'link' => '#'
+                        'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/talkToAstrologer.png',
                         'title' => 'Talk To Astrologer',
                         'description' => '(Birth Chart)',
-                        'link' => '#'
+                        'link' => 'astrologers'
                     ],
                      [
                         'image' => 'assets/images/askQuestion.png',
                         'title' => 'Ask Questions',
                         'description' => '(Birth Chart)',
-                         'link' => '#'
+                         'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/numerologyCalculator.png',
                         'title' => 'Numerology Calculator',
                         'description' => '',
-                        'link' => '#'
+                        'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/sadeSatiLifeReport.png',
                         'title' => 'Sade Sati Life Report',
                         'description' => '',
-                        'link' => '#'
+                        'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/hindiKundli.png',
                         'title' => 'Hindi Kundli',
                         'description' => '',
-                        'link' => '#'
+                        'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/yearAnalysis.png',
                         'title' => 'Year Analysis',
                         'description' => '',
-                        'link' => '#'
+                        'link' => 'astrologers'
                     ],
                      [
                         'image' => 'assets/images/kaalsarpDosha.png',
                         'title' => 'Kaalsarp Dosha',
                          'description' => '',
-                         'link' => '#'
+                         'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/paidService.png',
                         'title' => 'Paid Service',
                          'description' => '',
-                         'link' => '#'
+                         'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/babyName.png',
                         'title' => 'Baby Name',
                          'description' => '',
-                         'link' => '#'
+                         'link' => 'astrologers'
                     ],
 
                 ];

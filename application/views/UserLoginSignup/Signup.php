@@ -344,7 +344,7 @@
                     }
                 });
 
-                fetch("http://localhost/jyotisika_api/User/User_Auth/SendOtp", {
+                fetch("<?php echo base_url('User_Api_Controller/sendOtpmobile'); ?>", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ mobile_number: phoneNumber })
@@ -427,7 +427,7 @@
                     }
                 });
 
-                fetch("http://localhost/jyotisika_api/User/User_Auth/VerifyOtp", {
+                fetch("<?php echo base_url('User_Api_Controller/VerifyOtp'); ?>", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ mobile_number: phoneNumber, otp: otp })
@@ -452,12 +452,14 @@
                                 title: "OTP Matched",
                                 text: "Please complete your registration.",
                             }).then(() => {
-                                document.getElementById("otpStep").style.display = "none";
+
+                               document.getElementById("otpStep").innerHTML = ""; // Clears OTP step before registration
+
                                 document.getElementById("userDetailsStep").style.display = "block";
                             });
                         } else {
                             Swal.fire({
-                                icon: "error",
+                                icon: "warning",
                                 title: "Verification Failed",
                                 text: data.message || "Invalid OTP, please try again.",
                             });
@@ -498,7 +500,7 @@
 
                 const formData = {
                     mobile_number: document.getElementById("mobileNumber").value,
-                    otp: document.getElementById("otpInput").value,
+                 
                     user_name: document.getElementById("fullName").value,
                     user_gender: document.getElementById("gender").value,
                     user_dob: document.getElementById("dob").value
@@ -514,7 +516,7 @@
                     }
                 });
 
-                fetch("http://localhost/jyotisika_api/User/User_Auth/reg_user", {
+                fetch("<?php echo base_url('User_Api_Controller/reg_user'); ?>", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
