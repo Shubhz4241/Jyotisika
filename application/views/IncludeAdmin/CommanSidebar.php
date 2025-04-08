@@ -206,6 +206,22 @@
             </a>
         </li>
 
+        <!-- Orders -->
+        <li class="sidebar-item">
+            <a href="<?php echo base_url() . 'adminorders'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 16px;">
+                <i class="bi bi-bag-dash" style="color: white;"></i>
+                <span class="ms-1" style="color: white;">Orders</span>
+            </a>
+        </li>
+
+        <!-- Track and Ship -->
+        <li class="sidebar-item">
+            <a href="<?php echo base_url() . 'trackandship'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 16px;">
+                <i class="bi bi-truck" style="color: white;"></i>
+                <span class="ms-1" style="color: white;">Track/Ship</span>
+            </a>
+        </li>
+
         <!-- Service Management -->
         <li class="sidebar-item">
             <a href="<?php echo base_url() . 'ManasviDocumentation'; ?>" class="sidebar-link dropdown-toggle collapsed text-white " id="people-dropdown" data-bs-toggle="collapse"

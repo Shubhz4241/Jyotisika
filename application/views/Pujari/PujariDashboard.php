@@ -88,7 +88,7 @@
         }
 
         .card1 {
-            min-height: 300px !important;
+            min-height: 330px !important;
         }
 
         /* Responsive Fixes */
@@ -104,6 +104,7 @@
 
         .pujari-content {
             min-width: 200px;
+
         }
 
         .review-container {
@@ -191,7 +192,7 @@
         .text-center {
             text-align: center !important;
             justify-content: center;
-            margin-left: 10px;
+            margin-left: 17px;
         }
 
         /* Overlay Styling */
@@ -313,7 +314,8 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            flex-wrap: wrap;
+            /* Allow wrapping for smaller screens */
         }
 
         .puja-reminder-content .price-discount {
@@ -345,7 +347,13 @@
             display: flex;
             gap: 15px;
             align-items: center;
-            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            flex-wrap: wrap;
+            /* Allow wrapping for smaller screens */
+        }
+
+        .review-card {
+            margin: auto;
+
         }
     </style>
 </head>
@@ -354,225 +362,243 @@
     <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
-
-    <div>
-        <main>
-            <section class="dashboard-sections container">
-                <div class="row text-center mb-4 justify-content-center">
-                    <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <div style="min-height: 100vh;">
+        <div>
+            <main>
+                <section class="dashboard-sections container">
+                    <div class="row text-center mb-4 justify-content-center">
+                        <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
+                            <div style="background-color:#82E5A1; padding:6px 2px; padding-bottom:20px; border:3px solid #82E5A1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                                <div class="card py-3" style="border-radius:0;">
+                                    <div class="icon-box green">📅</div>
+                                    <a href="<?php echo base_url() . 'PujariUser/TodaysSchedule'; ?>">
+                                        <h6>Today's Schedule</h6>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
+                        <div style="background-color:#BB97C1; padding:6px 2px; padding-bottom:20px; border:3px solid #BB97C1; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                             <div class="card py-3" style="border-radius:0;">
-                                <div class="icon-box green">📅</div>
-                                <a href="<?php echo base_url() . 'PujariUser/TodaysSchedule'; ?>">
-                                    <h6>Today's Schedule</h6>
-                                </a>
+                                <div class="icon-box red">📜</div> -->
+                        <!-- <a href="<?php echo base_url() . 'PujariUser/RateChart'; ?>"> -->
+                        <!-- <h6>Upcoming Puja’s</h6> -->
+                        <!-- </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#FF2E11BF; padding:6px 2px; padding-bottom:20px; border:3px solid #FF2E11BF; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <div class="card py-3" style="border-radius:0;">
-                                <div class="icon-box red">📜</div>
-                                <a href="<?php echo base_url() . 'PujariUser/SetRate'; ?>">
-                                    <h6>Rate Chart</h6>
-                                </a>
+                    </div> -->
+                        <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
+                            <div style="background-color:#FF2E11BF; padding:6px 2px; padding-bottom:20px; border:3px solid #FF2E11BF; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                                <div class="card py-3" style="border-radius:0;">
+                                    <div class="icon-box red">📜</div>
+                                    <a href="<?php echo base_url() . 'PujariUser/RateChart'; ?>">
+                                        <h6>Rate Chart</h6>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <div class="card py-3" style="border-radius:0;">
-                                <div class="icon-box yellow">➕</div>
-                                <a href="<?php echo base_url('PujariUser/profileForm'); ?>" class="text-decoration-none" id="addPujaLink">
-                                    <h6>Add Puja's</h6>
-                                </a>
+                        <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
+                            <div style="background-color:#F8DC89; padding:6px 2px; padding-bottom:20px; border:3px solid #F8DC89; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                                <div class="card py-3" style="border-radius:0;">
+                                    <div class="icon-box yellow">➕</div>
+                                    <a href="<?php echo base_url('PujariUser/profileForm?tab=advanced'); ?>" class="text-decoration-none" id="addPujaLink">
+                                        <h6>Add Puja's</h6>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
-                        <div style="background-color:#FF9500; padding:6px 2px; padding-bottom:20px; border:3px solid #FF9500; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <div class="card py-3 text-center ms-0" style="border-radius:0; cursor:pointer;" id="showForm">
-                                <div class="icon-box yellow">➕</div>
-                                <h6>Arrange Mob Puja</h6>
+                        <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
+                            <div style="background-color:#FF9500; padding:6px 2px; padding-bottom:20px; border:3px solid #FF9500; border-radius:10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                                <div class="card py-3 text-center ms-0" style="border-radius:0; cursor:pointer;" id="showForm">
+                                    <div class="icon-box yellow">➕</div>
+                                    <h6>Arrange Mob Puja</h6>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Overlay -->
-                    <div class="overlay" id="overlay"></div>
+                        <!-- Overlay -->
+                        <div class="overlay" id="overlay"></div>
 
-                    <!-- Contact Form (Below Navbar) -->
-                    <div class="container">
-                        <div class="form-container" id="pujaForm">
-                            <button class="close-btn" id="closeForm">×</button>
-                            <h5 class="mb-3 text-center">Contact Form</h5>
-                            <form id="pujaFormSubmit">
-                                <div class="mb-2">
-                                    <label class="form-label d-block text-start">Pooja</label>
-                                    <input type="text" class="form-control" id="pooja" name="pooja" placeholder="e.g., Rudraabhishek Puja" required>
-                                    <div class="invalid-feedback">Please enter the name of the Pooja.</div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label d-block text-start">Date</label>
-                                    <input type="date" class="form-control" id="date" name="date" required>
-                                    <div class="invalid-feedback">Please select a valid future date.</div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label d-block text-start">Original Price</label>
-                                    <input type="number" class="form-control" id="originalPrice" name="originalPrice" placeholder="e.g., 1000" min="1" required>
-                                    <div class="invalid-feedback">Please enter a valid original price (positive number).</div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label d-block text-start">Discount Price</label>
-                                    <input type="number" class="form-control" id="discountPrice" name="discountPrice" placeholder="e.g., 800" min="0" required>
-                                    <div class="invalid-feedback">Please enter a valid discount price (positive number, less than original price).</div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label d-block text-start">Time</label>
-                                    <input type="time" class="form-control" id="time" name="time" required>
-                                    <div class="invalid-feedback">Please select a time for the Pooja.</div>
-                                </div>
-                                <button type="submit" class="btn btn-warning w-100 btn-submit">Save Changes</button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="row g-4">
-                        <!-- Recent Request Section -->
-                        <div class="col-lg-6 mt-5">
-                            <div class="d-flex justify-content-between ">
-                                <h5 class="mb-0">Recent Request</h5>
-                                <a href="<?php echo base_url('PujariUser/RecentRequest'); ?>">View All</a>
-                            </div>
-
-                            <div class="card mt-3 card1 h-100">
-                                <div class="d-flex flex-column flex-md-row h-100">
-                                    <div class="image-container" style="height:100%;">
-                                        <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>"
-                                            alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
+                        <!-- Contact Form (Below Navbar) -->
+                        <div class="container">
+                            <div class="form-container" id="pujaForm">
+                                <button class="close-btn" id="closeForm">×</button>
+                                <h5 class="mb-3 text-center">Contact Form</h5>
+                                <form id="pujaFormSubmit">
+                                    <div class="mb-2">
+                                        <label class="form-label d-block text-start">Pooja</label>
+                                        <input type="text" class="form-control" id="pooja" name="pooja" placeholder="e.g., Rudraabhishek Puja" required>
+                                        <div class="invalid-feedback">Please enter the name of the Pooja (letters and spaces only).</div>
                                     </div>
-                                    <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
-                                        <h6>John Doe</h6>
-                                        <p>Puja: Ghar Shanti Puja<br> Date: 12/1/2025 <br> Time: 10:30 AM<br> Location: Nashik</p>
-                                        <p>Padit Colony Nashik</p>
-                                        <button class="btn btn-success btn-sm">Accept</button>
-                                        <button class="btn btn-danger btn-sm">Reject</button>
+                                    <div class="mb-2">
+                                        <label class="form-label d-block text-start">Date</label>
+                                        <input type="date" class="form-control" id="date" name="date" required>
+                                        <div class="invalid-feedback">Please select a valid future date.</div>
                                     </div>
-                                </div>
+                                    <div class="mb-2">
+                                        <label class="form-label d-block text-start">Original Price</label>
+                                        <input type="number" class="form-control" id="originalPrice" name="originalPrice" placeholder="e.g., 1000" min="1" required>
+                                        <div class="invalid-feedback">Please enter a valid original price (positive number, at least 1).</div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label d-block text-start">Discount Price</label>
+                                        <input type="number" class="form-control" id="discountPrice" name="discountPrice" placeholder="e.g., 800" min="0" required>
+                                        <div class="invalid-feedback">Please enter a valid discount price (positive number, less than or equal to original price).</div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label d-block text-start">Time</label>
+                                        <input type="time" class="form-control" id="time" name="time" required>
+                                        <div class="invalid-feedback">Please select a time for the Pooja.</div>
+                                    </div>
+                                    <!-- Added Attendee Field with Placeholder and Validation -->
+                                    <div class="mb-2">
+                                        <label class="form-label d-block text-start">Attendee</label>
+                                        <input type="number" class="form-control" id="attendee" name="attendee" placeholder="e.g., 10" min="1" required>
+                                        <div class="invalid-feedback">Please enter a valid number of attendees (positive number, at least 1).</div>
+                                    </div>
+                                    <button type="submit" class="btn btn-warning w-100 btn-submit">Save Changes</button>
+                                </form>
                             </div>
                         </div>
 
-                        <!-- Puja Reminder Section (Updated to have Exp and Price on the same line) -->
-                        <div class="col-lg-6 mt-5">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Puja Reminder</h5>
-                                <a href="<?php echo base_url('PujariUser/PujaReminder2'); ?>">View All</a>
+                        <div class="row g-4">
+                            <!-- Recent Request Section -->
+                            <div class="col-lg-6 mt-5">
+                                <div class="d-flex justify-content-between ">
+                                    <h5 class="mb-0">Recent Request</h5>
+                                    <a href="<?php echo base_url('PujariUser/RecentRequest'); ?>">View All</a>
+                                </div>
+
+                                <div class="card mt-3 card1 ">
+                                    <div class="d-flex flex-column flex-md-row h-100">
+                                        <div class="image-container" style="height:100%;">
+                                            <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>"
+                                                alt="User" class="img-fluid w-100 rounded-start">
+                                        </div>
+                                        <div class="ms-md-3 p-3 mt-3 mt-md-0 pujari-content flex-grow-1">
+                                            <h6>John Doe</h6>
+                                            <p><strong>Puja:</strong> Ghar Shanti Puja<br> <strong>Date:</strong> 12/1/2025 <br> <strong>Time:</strong> 10:30 AM<br><strong>Location:</strong> Nashik</p>
+                                            <p>Padit Colony Nashik</p>
+                                            <button class="btn btn-success btn-sm">Accept</button>
+                                            <button class="btn btn-danger btn-sm">Reject</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="card mt-3 card1 h-100">
-                                <div class="d-flex flex-column flex-md-row" style="height:100%;">
-                                    <div class="image-container" style="height:100%;">
-                                        <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>"
-                                            alt="User" class="img-fluid w-100 rounded-start" style="height:100%;">
-                                    </div>
-                                    <div class="ms-md-3 p-3 mt-3 mt-md-0 puja-reminder-content flex-grow-1">
-                                        <h5>Puja - Rudraabhishek Puja</h5>
-                                        <p><strong>Date:</strong> 12/2/2025</p>
-                                        <p><strong>Time:</strong> 10:30 am</p>
-                                        <p>
+                            <!-- Puja Reminder Section (Updated to have Exp and Price on the same line) -->
+                            <div class="col-lg-6 mt-5">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Puja Reminder</h5>
+                                    <a href="<?php echo base_url('PujariUser/PujaReminder2'); ?>">View All</a>
+                                </div>
+
+                                <div class="card mt-3 card1">
+                                    <div class="d-flex flex-column flex-md-row" style="height:100%;">
+                                        <div class="image-container" style="height:100%;">
+                                            <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160.png'); ?>"
+                                                alt="User" class="img-fluid w-100 rounded-start">
+                                        </div>
+                                        <div class="ms-md-3 p-3 mt-3 mt-md-0 puja-reminder-content flex-grow-1">
+                                            <h5>Puja - Rudraabhishek Puja</h5>
+                                            <p><strong>Date:</strong> 12/2/2025</p>
+                                            <p><strong>Time:</strong> 10:30 am</p>
+                                            <!-- <p>
                                             <strong><img src="<?php echo base_url('assets/images/Pujari/icon.png'); ?>"
                                                     alt="Languages" class="img-fluid" width="15px"></strong>
                                             English, Hindi, Marathi
-                                        </p>
-                                        <p class="exp-price-container">
-                                            <span>
+                                        </p> -->
+                                            <p class="exp-price-container">
+                                                <!-- <span>
                                                 <strong><img src="<?php echo base_url('assets/images/Pujari/graduate-cap_svgrepo.com.png'); ?>"
                                                         alt="Experience" class="img-fluid" width="19px"> Exp:</strong> 23 years
-                                            </span>
-                                            <span><strong>Price:</strong> <span class="price-discount">₹710</span> <span class="price-final">₹500</span></span>
-                                        </p>
-                                        <p><strong>Attendee:</strong> 104</p>
-                                        <p class="text-danger">
-                                            <img src="<?php echo base_url('assets/images/Pujari/time-filled_svgrepo.com.png'); ?>"
-                                                alt="Countdown" class="img-fluid" width="19px">
-                                            Starts in 1d 4h 23m
-                                        </p>
-                                        <p class="puja-type"><strong>Puja Type -</strong> Mob Puja</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container mt-5">
-                        <h5 class="mb-3 mt-5 text-Start" style="text-align: start;">User Reviews</h5>
-
-                        <div class="review-container" style="width:100%;">
-                            <!-- Left Arrow -->
-                            <button class="carousel-btn left" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
-                                <img src="<?php echo base_url() . 'assets\images\Pujari\Caret Left (3).png'; ?>" alt="Previous">
-                            </button>
-
-                            <!-- Review Carousel -->
-                            <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <div class="review-card text-center">
-                                            <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
-                                            <blockquote>
-                                                “We had the privilege of having Pandit Ji perform a Satyanarayan Puja at our home, and the experience was truly divine.”
-                                            </blockquote>
-                                            <div class="stars">
-                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                            </div>
-                                            <p class="fw-bold">Jane Doe</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="carousel-item">
-                                        <div class="review-card text-center">
-                                            <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
-                                            <blockquote>
-                                                “Amazing experience! Pandit Ji explained every ritual in detail and made the Puja very special.”
-                                            </blockquote>
-                                            <div class="stars">
-                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-half"></i>
-                                            </div>
-                                            <p class="fw-bold">John Smith</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="carousel-item">
-                                        <div class="review-card text-center">
-                                            <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
-                                            <blockquote>
-                                                “Highly recommend Pandit Ji lor for any religious ceremony. Very professional and knowledgeable.”
-                                            </blockquote>
-                                            <div class="stars">
-                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                            </div>
-                                            <p class="fw-bold">Priya Sharma</p>
+                                            </span> -->
+                                                <span><span class="price-discount">₹710</span> <span class="price-final">₹500</span></span>
+                                            </p>
+                                            <p><strong>Attendee:</strong> 104</p>
+                                            <p class="text-danger">
+                                                <img src="<?php echo base_url('assets/images/Pujari/time-filled_svgrepo.com.png'); ?>"
+                                                    alt="Countdown" class="img-fluid" width="19px">
+                                                Starts in 1d 4h 23m
+                                            </p>
+                                            <p class="puja-type"><strong>Puja Type -</strong> Mob Puja</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Right Arrow -->
-                            <button class="carousel-btn right" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
-                                <img src="<?php echo base_url() . 'assets\images\Pujari\Caret Left.png'; ?>" alt="Next">
-                            </button>
                         </div>
-                    </div>
-            </section>
-        </main>
+
+                        <div class="container mt-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2 mt-4 ">
+                                <h5 class="mb-0">User Reviews</h5>
+                                <a href="<?php echo base_url('PujariUser/PujariFeedBackCard'); ?>" class="btn btn-link" style="text-decoration: none; color: #7C7C7C;">View All</a>
+                            </div>
+                            <div class="review-container" style="width:100%;">
+                                <!-- Left Arrow -->
+                                <button class="carousel-btn left" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+                                    <img src="<?php echo base_url() . 'assets\images\Pujari\Caret Left (3).png'; ?>" alt="Previous">
+                                </button>
+
+                                <!-- Review Carousel -->
+                                <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <div class="review-card text-center">
+                                                <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
+                                                <blockquote>
+                                                    “We had the privilege of having Pandit Ji perform a Satyanarayan Puja at our home, and the experience was truly divine.”
+                                                </blockquote>
+                                                <div class="stars">
+                                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                </div>
+                                                <p class="fw-bold">Jane Doe</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-item">
+                                            <div class="review-card text-center">
+                                                <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
+                                                <blockquote>
+                                                    “Amazing experience! Pandit Ji explained every ritual in detail and made the Puja very special.”
+                                                </blockquote>
+                                                <div class="stars">
+                                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-half"></i>
+                                                </div>
+                                                <p class="fw-bold">John Smith</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-item">
+                                            <div class="review-card text-center">
+                                                <img src="<?php echo base_url() . 'assets/images/Pujari/Profileimg.png' ?>" class="img-fluid rounded-circle" width="80">
+                                                <blockquote>
+                                                    “Highly recommend Pandit Ji lor for any religious ceremony. Very professional and knowledgeable.”
+                                                </blockquote>
+                                                <div class="stars">
+                                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                </div>
+                                                <p class="fw-bold">Priya Sharma</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Right Arrow -->
+                                <button class="carousel-btn right" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+                                    <img src="<?php echo base_url() . 'assets\images\Pujari\Caret Left.png'; ?>" alt="Next">
+                                </button>
+                            </div>
+                        </div>
+                </section>
+            </main>
+        </div>
     </div>
-
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
@@ -701,6 +727,89 @@
             });
         });
     </script>
+    <script>
+        document.getElementById('pujaFormSubmit').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission until validation passes
+
+            let isValid = true;
+            const form = this;
+
+            // Get all form fields
+            const poojaInput = document.getElementById('pooja');
+            const dateInput = document.getElementById('date');
+            const originalPriceInput = document.getElementById('originalPrice');
+            const discountPriceInput = document.getElementById('discountPrice');
+            const timeInput = document.getElementById('time');
+            const attendeeInput = document.getElementById('attendee');
+
+            // Reset previous validation states
+            form.querySelectorAll('.form-control').forEach(input => {
+                input.classList.remove('is-invalid');
+            });
+
+            // Validate Pooja (only letters and spaces allowed, no special characters)
+            const poojaValue = poojaInput.value.trim();
+            const poojaRegex = /^[A-Za-z\s]+$/; // Allow only letters and spaces
+            if (!poojaValue || !poojaRegex.test(poojaValue)) {
+                poojaInput.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            // Validate Date (must be a future date)
+            const selectedDate = new Date(dateInput.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Reset time for comparison
+            selectedDate.setHours(0, 0, 0, 0);
+            if (!dateInput.value || selectedDate <= today) {
+                dateInput.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            // Validate Original Price (must be a positive number, at least 1)
+            const originalPrice = parseFloat(originalPriceInput.value);
+            if (isNaN(originalPrice) || originalPrice < 1) {
+                originalPriceInput.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            // Validate Discount Price (must be a positive number, less than or equal to original price)
+            const discountPrice = parseFloat(discountPriceInput.value);
+            if (isNaN(discountPrice) || discountPrice < 0 || discountPrice > originalPrice) {
+                discountPriceInput.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            // Validate Time (must not be empty)
+            if (!timeInput.value) {
+                timeInput.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            // Validate Attendee (must be a positive number, at least 1)
+            const attendee = parseInt(attendeeInput.value);
+            if (isNaN(attendee) || attendee < 1) {
+                attendeeInput.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            // If all validations pass, you can proceed with your existing form submission logic
+            if (isValid) {
+                console.log('Form validated successfully! Proceed with your submission logic...');
+                // Add your form submission logic here (e.g., AJAX call, Sweet Alert, etc.)
+                form.reset(); // Reset the form after successful validation
+            }
+        });
+
+        // Prevent negative values by blocking the minus key for number inputs
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === '-' || event.key === 'e') { // Block minus sign and 'e' (scientific notation)
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

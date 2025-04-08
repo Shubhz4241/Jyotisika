@@ -7,6 +7,8 @@
     <title>Mobile Number and OTP Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         * {
             margin: 0;
@@ -24,7 +26,6 @@
             position: relative;
         }
 
-        /* Background image only covers bottom 50% */
         .background-container {
             position: absolute;
             bottom: 0;
@@ -89,12 +90,25 @@
             margin-top: 10px;
             color: #6c757d;
         }
+
+        .invalid-input {
+            border-color: #dc3545 !important;
+        }
+
+        /* Added styling for the new OTP message */
+        #otpSentMessage {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
-
-    <!-- Background Image (Covers bottom half) -->
     <div class="background-container"></div>
 
     <div id="form-container">
@@ -112,28 +126,31 @@
             </form>
             <div class="text-center mt-3">
                 <p>Don’t have an account?
-                    <a href="<?php echo base_url('RegistrationForm'); ?>" class="text-primary">Register now</a>
+                    <a href="<?php echo base_url('AstrogerRegistrationForm'); ?>" class="text-primary">Register now</a>
                 </p>
             </div>
-
         </div>
+
+        <script>
+
+        </script>
 
         <!-- OTP Form -->
         <div id="otp-form" style="display: none;">
             <div class="logo-container">
                 <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
-            <p class="text-center">We have Sent the code on +91************95</p>
+            <!-- Added new message div for OTP sent confirmation -->
+            <div id="otpSentMessage"></div>
+            <p class="text-center" id="otpMessage">We have Sent the code on <span>+91************95</span></p>
             <form>
                 <div class="d-flex justify-content-between mb-3">
-                    <input type="text" class="form-control text-center me-2" maxlength="1" required>
-                    <input type="text" class="form-control text-center me-2" maxlength="1" required>
-                    <input type="text" class="form-control text-center me-2" maxlength="1" required>
-                    <input type="text" class="form-control text-center" maxlength="1" required>
+                    <input type="text" class="form-control text-center me-2 otp-input" maxlength="1" required oninput="validateOtpInput(this)">
+                    <input type="text" class="form-control text-center me-2 otp-input" maxlength="1" required oninput="validateOtpInput(this)">
+                    <input type="text" class="form-control text-center me-2 otp-input" maxlength="1" required oninput="validateOtpInput(this)">
+                    <input type="text" class="form-control text-center otp-input" maxlength="1" required oninput="validateOtpInput(this)">
                 </div>
-
                 <button type="button" id="verifyOtpBtn" class="btn btn-custom w-100">Verify OTP</button>
-                <!-- Resend OTP Timer Section -->
                 <div class="text-center mb-3">
                     <span id="resendTimer">Resend OTP in <span id="countdown">00:30</span></span>
                     <button type="button" id="resendOtpBtn" class="btn btn-link p-1" style="display: none;">Resend OTP</button>
@@ -142,16 +159,17 @@
         </div>
 
         <!-- Success Message -->
-        <div id="success-message">
+        <div id="success-message" style="display: none;">
             <div class="checkmark">
                 <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Logo">
             </div>
             <p>Application Submitted Successfully!</p>
-            <small>Thank you for your submission! Our team is reviewing your application. </small>
-            <small>Note:- You will receive an update within 48 hours. If you have any queries, feel free to contact our support team."</small>
+            <small>Thank you for your submission! Our team is reviewing your application.</small>
+            <small>Note:- You will receive an update within 48 hours. If you have any queries, feel free to contact our support team.</small>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const mobileForm = document.getElementById('mobile-form');
         const otpForm = document.getElementById('otp-form');
@@ -159,26 +177,100 @@
         const mobileInput = document.getElementById('mobile');
         const getOtpBtn = document.getElementById('getOtpBtn');
         const verifyOtpBtn = document.getElementById('verifyOtpBtn');
-        const otpMessage = document.querySelector('#otp-form p');
+        const otpMessage = document.getElementById('otpMessage');
         const countdownElement = document.getElementById('countdown');
         const resendOtpBtn = document.getElementById('resendOtpBtn');
+        const otpInputs = document.querySelectorAll('.otp-input');
         let countdown;
 
         function validateMobileNumber(input) {
-            input.value = input.value.replace(/[^0-9]/g, ''); // Allow only numbers
+            input.value = input.value.replace(/[^0-9]/g, '');
             getOtpBtn.style.display = input.value.length === 10 ? 'block' : 'none';
         }
 
-        getOtpBtn.addEventListener('click', () => {
-            if (mobileInput.value.length === 10) {
-                let firstTwo = mobileInput.value.substring(0, 2);
-                let lastTwo = mobileInput.value.substring(8, 10);
-                otpMessage.innerHTML = `We have Sent the code on +91 ${firstTwo}******${lastTwo}`;
-                mobileForm.style.display = 'none';
-                otpForm.style.display = 'block';
-                startCountdown();
+        function validateOtpInput(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');
+            if (input.value === '' || isNaN(input.value)) {
+                input.classList.add('invalid-input');
+            } else {
+                input.classList.remove('invalid-input');
+            }
+            if (input.value.length === 1) {
+                const nextInput = input.nextElementSibling;
+                if (nextInput && nextInput.classList.contains('otp-input')) {
+                    nextInput.focus();
+                }
+            }
+        }
+
+        function validateOtpForm() {
+            let isValid = true;
+            otpInputs.forEach(input => {
+                if (input.value === '' || isNaN(input.value)) {
+                    input.classList.add('invalid-input');
+                    isValid = false;
+                } else {
+                    input.classList.remove('invalid-input');
+                }
+            });
+            return isValid;
+        }
+
+        document.getElementById('getOtpBtn').addEventListener('click', function() {
+            const mobileInput = document.getElementById('mobile').value.trim();
+
+            if (mobileInput.length === 10) {
+                const formData = new FormData();
+                formData.append('phone', `+91${mobileInput}`);
+
+                fetch('<?php echo base_url() . 'astrologer/send_otp_login' ?>', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            let firstTwo = mobileInput.substring(0, 2);
+                            let lastTwo = mobileInput.substring(8, 10);
+
+                            otpMessage.innerHTML = `We have sent the code on +91 ${firstTwo}******${lastTwo}`;
+                            document.getElementById('otpSentMessage').innerHTML =
+                                `A OTP (One Time Passcode) has been sent to +91 ${firstTwo}******${lastTwo}. Please enter the OTP in the field below to verify your phone.`;
+
+                            mobileForm.style.display = 'none';
+                            otpForm.style.display = 'block';
+                            startCountdown();
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: data.message
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: data.message || 'Failed to send OTP. Please try again.'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Something went wrong. Please try again.'
+                        });
+                        console.error('Error:', error);
+                    });
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Invalid Number',
+                    text: 'Please enter a valid 10-digit phone number.'
+                });
             }
         });
+
 
         function startCountdown() {
             let timeLeft = 30;
@@ -188,7 +280,6 @@
             countdown = setInterval(() => {
                 timeLeft--;
                 countdownElement.textContent = `00:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
-
                 if (timeLeft <= 0) {
                     clearInterval(countdown);
                     document.getElementById('resendTimer').style.display = 'none';
@@ -204,25 +295,50 @@
         });
 
         verifyOtpBtn.addEventListener('click', () => {
-            otpForm.style.display = 'none';
-            successMessage.style.display = 'block';
+            if (!validateOtpForm()) {
+                return;
+            }
+
+            const mobileNumber = document.getElementById('mobile').value.trim();
+            const otpInputs = Array.from(document.querySelectorAll('.otp-input'))
+                .map(input => input.value).join('');
+
+            const formData = new FormData();
+            formData.append('phone', `+91${mobileNumber}`);
+            formData.append('otp', otpInputs);
+
+            fetch('<?php echo base_url() . 'astrologer/verify_otp_login'?>', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: data.message
+                        }).then(() => {
+                            window.location.href = '<?php echo base_url("AstrologerAnalyticsAndEarning2"); ?>';
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message || 'OTP verification failed.'
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Something went wrong. Please try again.'
+                    });
+                    console.error('Error:', error);
+                });
         });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const successParam = urlParams.get("success");
-
-        if (successParam === "true") {
-            document.getElementById('mobile-form').style.display = 'none';
-            document.getElementById('otp-form').style.display = 'none';
-            document.getElementById('success-message').style.display = 'block';
-        }
-    });
-</script>
-
 </body>
 
 </html>

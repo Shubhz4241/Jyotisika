@@ -86,6 +86,7 @@
 
         .filter-btn {
             float: right;
+            background-color: #E3E0FF;
         }
 
         /* Make the boxes responsive */
@@ -142,7 +143,7 @@
             height: 140px;
             /* Reduced height */
             width: 150px;
-            /* Reducedwidth  */
+            /* Reduced width */
             justify-content: center;
             align-items: center;
             margin: 30px;
@@ -164,7 +165,6 @@
             /* Removes the shadow */
         }
 
-
         /* Make the charts and boxes align properly */
         @media (max-width: 768px) {
             .stat-box-container {
@@ -180,8 +180,8 @@
 
         @media (max-width: 576px) {
             .stat-box {
-                width: 100px;
-                height: 100px;
+                width: 110px;
+                height: 110px;
             }
 
             .chart-container {
@@ -212,7 +212,6 @@
                     <p class="fw-normal">Pending Payments</p>
                 </div>
             </div>
-
 
             <div class="chart-container">
                 <h5>Overall Earnings <button class="btn btn-light filter-btn">Filter</button></h5>
@@ -277,7 +276,7 @@
         new Chart(ctx2, {
             type: 'bar',
             data: {
-                labels: [' Vastu', 'Vedic', 'Kundli'],
+                labels: ['Vastu', 'Vedic', 'Kundli'],
                 datasets: [{
                         label: 'Vastu',
                         data: [8, 9, 12],
@@ -315,7 +314,7 @@
         new Chart(ctx3, {
             type: 'doughnut',
             data: {
-                labels: ['Vastu', 'Vedic', 'Kundli'],
+                labels: ['Home Shanti', 'Wealth', 'Rahu-Ketu'],
                 datasets: [{
                     data: [39, 23, 38],
                     backgroundColor: ['#6C63FF', '#36A2EB', '#FF6384']
@@ -323,7 +322,22 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    }
+                },
+                layout: {
+                    padding: 20
+                },
+                elements: {
+                    arc: {
+                        borderWidth: 2, // Light gray border
+                        borderColor: '#D3D3D3' // Light gray color
+                        
+                    }
+                }
             }
         });
     </script>

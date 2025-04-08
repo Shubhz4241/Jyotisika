@@ -155,6 +155,9 @@ $route['astrologerslist'] = 'Admin/AstrologersList';
 $route['astrologerreview'] = 'Admin/AstrologerReview';
 $route['pujariList'] = 'Admin/PujariList';
 $route['pujarireview'] = 'Admin/PujariReview';
+$route['adminorders'] = 'Admin/AdminOrders';
+$route['trackandship'] = 'Admin/TrackandShip';
+$route['trackorderdetails'] = 'Admin/Track_Order_Details';
 
 // Login Admin Routes
 $route['login'] = 'LoginForgotAdmin/LoginAdmin';
@@ -186,6 +189,7 @@ $route['UserSelection']='PujariUser/UserSelection';
 $route['Loaderpage']='PujariUser/Loaderpage';
 $route['RegistrationForm']='PujariUser/RegistrationForm';
 $route['TodaysSchedule']='PujariUser/TodaysSchedule';
+$route['PujariFeedBackCard']='PujariUser/PujariFeedBackCard';
 
 // Astrologer Module
 $route['AstrologerNav']='AstrologerUser/AstrologerNav';
@@ -200,7 +204,7 @@ $route['AstrologerMobileNumberAndOTPForm']='AstrologerUser/AstrologerMobileNumbe
 $route['AstrologerMonthlyEarningsBreakdown']='AstrologerUser/AstrologerMonthlyEarningsBreakdown';
 $route['AstrologerReg']='AstrologerUser/AstrologerReg';
 $route['AstrologerRecentRequest']='AstrologerUser/AstrologerRecentRequest';
-$route['RegistrationForm']='AstrologerUser/RegistrationForm';
+$route['AstrogerRegistrationForm']='AstrologerUser/AstrogerRegistrationForm';
 $route['AudioAndVideoCall']='AstrologerUser/AudioAndVideoCall';
 $route['AstrologerProfileForm']='AstrologerUser/AstrologerProfileForm';
 $route['AstrologerChatUI']='AstrologerUser/AstrologerChatUI';

@@ -24,14 +24,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* gap: 40px; */
+            gap: 40px;
             flex-wrap: wrap;
             margin-top: 100px;
         }
 
         .stat-box {
             border-radius: 10px;
-            padding: 20px;
+            padding: 16px;
             text-align: center;
             font-weight: bold;
             height: 150px;
@@ -49,17 +49,17 @@
         }
 
         .stat-box.bg-success {
-            background-color: #B1DDBF;
+            background-color: #F1810063;
             color: white;
         }
 
         .stat-box.bg-primary {
-            background-color: #E3E0FF;
+            background-color: #F2DC5194;
             color: white;
         }
 
         .stat-box.bg-warning {
-            background-color: #F8EB9A;
+            background-color: #14993E54;
             color: black;
         }
 
@@ -158,11 +158,6 @@
         }
 
         @media (max-width: 576px) {
-            /* .stat-box {
-                width: 111px;
-                height: 111px;
-            } */
-
             .stat-box h3 {
                 font-size: 1.1rem;
             }
@@ -178,7 +173,6 @@
             .filter-btn {
                 float: none;
                 display: block;
-                /* margin: 0 auto 10px; */
                 text-align: center;
             }
 
@@ -197,7 +191,6 @@
 
             .dropdown-menu {
                 position: absolute !important;
-                /* Override fixed positioning on mobile */
                 top: auto !important;
                 left: 0 !important;
                 right: auto !important;
@@ -253,7 +246,7 @@
                     </button>
                 </div>
                 <div class="table-responsive">
-                    <table class="table" id="offline-puja-table">
+                    <table class="table table table-striped" id="offline-puja-table" >
                         <thead>
                             <tr>
                                 <th>Poojas</th>
@@ -262,31 +255,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Rahu-ketu</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Wealth</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Char-Shanti</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Satyanarayan puja</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Rahu-ketu</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
+                            <!-- Dummy data will be populated by JavaScript -->
                         </tbody>
                     </table>
                 </div>
@@ -301,7 +270,7 @@
                     </button>
                 </div>
                 <div class="table-responsive">
-                    <table class="table" id="online-puja-table">
+                    <table class="table table table-striped" id="online-puja-table">
                         <thead>
                             <tr>
                                 <th>Poojas</th>
@@ -310,31 +279,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Rahu-ketu</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Wealth</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Char-Shanti</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Satyanarayan puja</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Rahu-ketu</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
+                            <!-- Dummy data will be populated by JavaScript -->
                         </tbody>
                     </table>
                 </div>
@@ -349,7 +294,7 @@
                     </button>
                 </div>
                 <div class="table-responsive">
-                    <table class="table" id="mob-puja-table">
+                    <table class="table table table-striped" id="mob-puja-table">
                         <thead>
                             <tr>
                                 <th>Poojas</th>
@@ -358,31 +303,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Rahu-ketu</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Wealth</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Char-Shanti</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Satyanarayan puja</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>Rahu-ketu</td>
-                                <td>5</td>
-                                <td>5</td>
-                            </tr>
+                            <!-- Dummy data will be populated by JavaScript -->
                         </tbody>
                     </table>
                 </div>
@@ -395,33 +316,47 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Data for each table
-            const pujaData = [{
-                    pooja: "Rahu-ketu",
-                    december: 5,
-                    november: 5
-                },
-                {
-                    pooja: "Wealth",
-                    december: 5,
-                    november: 5
-                },
-                {
-                    pooja: "Char-Shanti",
-                    december: 5,
-                    november: 5
-                },
-                {
-                    pooja: "Satyanarayan puja",
-                    december: 5,
-                    november: 5
-                },
-                {
-                    pooja: "Rahu-ketu",
-                    december: 5,
-                    november: 5
-                }
+            // Expanded dummy data for all tables
+            const pujaData = [
+                { pooja: "Rahu-ketu", december: 5, november: 5 },
+                { pooja: "Wealth", december: 5, november: 5 },
+                { pooja: "Char-Shanti", december: 5, november: 5 },
+                { pooja: "Satyanarayan puja", december: 5, november: 5 },
+                { pooja: "Lakshmi Puja", december: 4, november: 4 },
+                { pooja: "Ganesh Puja", december: 6, november: 6 },
+                { pooja: "Navgrah Puja", december: 3, november: 3 },
+                { pooja: "Rudrabhishek", december: 7, november: 7 },
+                { pooja: "Kaal Sarp Dosh", december: 2, november: 2 },
+                { pooja: "Durga Saptashati", december: 8, november: 8 }
             ];
+
+            // Validation function
+            function validateData(data) {
+                return data.every(item => {
+                    return typeof item.pooja === 'string' && 
+                           !isNaN(item.december) && item.december >= 0 && 
+                           !isNaN(item.november) && item.november >= 0;
+                });
+            }
+
+            // Initialize tables with data
+            if (validateData(pujaData)) {
+                ['offline-puja-table', 'online-puja-table', 'mob-puja-table'].forEach(tableId => {
+                    const table = document.querySelector(`#${tableId}`);
+                    const tableBody = table.querySelector("tbody");
+                    tableBody.innerHTML = ''; // Clear existing rows
+                    pujaData.forEach(item => {
+                        const row = `<tr>
+                            <td>${item.pooja}</td>
+                            <td>${item.december}</td>
+                            <td>${item.november}</td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                });
+            } else {
+                console.error("Invalid data detected!");
+            }
 
             // Function to create filter dropdown
             function createFilterDropdown(button) {
@@ -434,7 +369,6 @@
                     <button class="dropdown-item filter-option" data-filter="december">December</button>
                     <button class="dropdown-item filter-option" data-filter="november">November</button>
                 `;
-                // Append dropdown to the button's parent to ensure proper positioning context
                 button.parentElement.appendChild(dropdown);
 
                 const rect = button.getBoundingClientRect();
@@ -468,7 +402,7 @@
                 const table = document.querySelector(`#${tableId}`);
                 const tableBody = table.querySelector("tbody");
                 const tableHead = table.querySelector("thead tr");
-                tableBody.innerHTML = "";
+                tableBody.innerHTML = '';
 
                 // Update table headers based on filter
                 if (filter === "all") {
@@ -492,28 +426,31 @@
                 }
 
                 // Update table rows based on filter
-                pujaData.forEach(item => {
-                    let row = `<tr>
-                        <td>${item.pooja}</td>`;
-                    if (filter === "all") {
-                        row += `<td>${item.december}</td><td>${item.november}</td>`;
-                    } else if (filter === "december") {
-                        row += `<td>${item.december}</td><td>-</td>`;
-                    } else if (filter === "november") {
-                        row += `<td>-</td><td>${item.november}</td>`;
-                    }
-                    row += `</tr>`;
-                    tableBody.innerHTML += row;
-                });
+                if (validateData(pujaData)) {
+                    pujaData.forEach(item => {
+                        let row = `<tr>
+                            <td>${item.pooja}</td>`;
+                        if (filter === "all") {
+                            row += `<td>${item.december}</td><td>${item.november}</td>`;
+                        } else if (filter === "december") {
+                            row += `<td>${item.december}</td><td>-</td>`;
+                        } else if (filter === "november") {
+                            row += `<td>-</td><td>${item.november}</td>`;
+                        }
+                        row += `</tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                } else {
+                    tableBody.innerHTML = '<tr><td colspan="3">Invalid data!</td></tr>';
+                }
             }
 
             // Initialize filter buttons
             const filterButtons = document.querySelectorAll(".filter-btn");
-            const dropdowns = new WeakMap(); // Store dropdowns per button to manage individually
+            const dropdowns = new WeakMap();
 
             filterButtons.forEach((button) => {
                 button.addEventListener("click", function(event) {
-                    // Remove any existing dropdown for other buttons
                     document.querySelectorAll(".dropdown-menu.show").forEach(existingDropdown => {
                         if (existingDropdown !== dropdowns.get(button)) {
                             existingDropdown.remove();
@@ -527,7 +464,7 @@
                         const newDropdown = createFilterDropdown(button);
                         dropdowns.set(button, newDropdown);
                     }
-                    event.stopPropagation(); // Prevent immediate closing
+                    event.stopPropagation();
                 });
             });
 

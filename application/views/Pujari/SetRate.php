@@ -25,7 +25,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            /* min-height: 100vh; */
             padding: 27px;
         }
 
@@ -72,7 +72,7 @@
     <header>
         <?php $this->load->view('Pujari/Include/PujariNav') ?>
     </header>
-    <div style="min-height: 100vh;">
+    <div style="min-height: 90vh;">
         <!-- Main Content -->
         <div class="content-container">
             <div class="form-container">
@@ -112,8 +112,23 @@
                     var originalPrice = $("#originalPrice").val();
                     var discountPrice = $("#discountPrice").val();
 
-                    if (pujaName === "" || originalPrice === "" || discountPrice === "") {
-                        alert("Please fill in all fields!");
+                    // Validation for Puja Name (must not be the default option)
+                    if (pujaName === "") {
+                        alert("Please select a valid Puja Name!");
+                        return;
+                    }
+
+                    // Validation for Original Price (must be a positive number, at least 1)
+                    var originalPriceValue = parseFloat(originalPrice);
+                    if (isNaN(originalPriceValue) || originalPriceValue < 1) {
+                        alert("Original Price must be a positive number and at least 1!");
+                        return;
+                    }
+
+                    // Validation for Discount Price (must be a non-negative number, less than or equal to original price)
+                    var discountPriceValue = parseFloat(discountPrice);
+                    if (isNaN(discountPriceValue) || discountPriceValue < 0 || discountPriceValue > originalPriceValue) {
+                        alert("Discount Price must be a non-negative number and less than or equal to the Original Price!");
                         return;
                     }
 
@@ -129,6 +144,13 @@
                             alert(response);
                         }
                     });
+                });
+
+                // Prevent negative values by blocking the minus key and 'e' for number inputs
+                $("input[type='number']").on("keydown", function(event) {
+                    if (event.key === "-" || event.key === "e") {
+                        event.preventDefault();
+                    }
                 });
             });
         </script>
@@ -149,8 +171,23 @@
                 var originalPrice = $("#originalPrice").val();
                 var discountPrice = $("#discountPrice").val();
 
-                if (pujaName === "" || originalPrice === "" || discountPrice === "") {
-                    alert("Please fill in all fields!");
+                // Validation for Puja Name (must not be the default option)
+                if (pujaName === "") {
+                    alert("Please select a valid Puja Name!");
+                    return;
+                }
+
+                // Validation for Original Price (must be a positive number, at least 1)
+                var originalPriceValue = parseFloat(originalPrice);
+                if (isNaN(originalPriceValue) || originalPriceValue < 1) {
+                    alert("Original Price must be a positive number and at least 1!");
+                    return;
+                }
+
+                // Validation for Discount Price (must be a non-negative number, less than or equal to original price)
+                var discountPriceValue = parseFloat(discountPrice);
+                if (isNaN(discountPriceValue) || discountPriceValue < 0 || discountPriceValue > originalPriceValue) {
+                    alert("Discount Price must be a non-negative number and less than or equal to the Original Price!");
                     return;
                 }
 
@@ -168,11 +205,15 @@
                 // Redirect to Rate Chart Page
                 window.location.href = "RateChart"; // Change URL based on actual file name
             });
+
+            // Prevent negative values by blocking the minus key and 'e' for number inputs
+            $("input[type='number']").on("keydown", function(event) {
+                if (event.key === "-" || event.key === "e") {
+                    event.preventDefault();
+                }
+            });
         });
     </script>
-
-
-
 </body>
 
 </html>
