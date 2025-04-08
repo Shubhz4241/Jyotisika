@@ -298,6 +298,71 @@ MOBDIG",
             echo json_encode(['status' => 'error', 'message' => 'User data not found.']);
         }
     }
+
+
+    public function SetAstrologerStatus()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+            return;
+        }
+
+        if (!$this->session->userdata('is_logged_in')) {
+            http_response_code(401);
+            echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+            return;
+        }
+
+        $astrologer_id = $this->session->userdata('id');
+        $status = $this->input->post('status');
+
+        if (empty($status)) {
+            http_response_code(400);
+            echo json_encode(['status' => 'error', 'message' => 'Status is required.']);
+            return;
+        }
+
+        $this->Astrologer_model->setAstrologerStatus($astrologer_id, $status);
+
+        http_response_code(200);
+        echo json_encode(['status' => 'success', 'message' => 'Status updated successfully.']);
+    }
+
+    public function Check_online()
+    {
+
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            http_response_code(405);
+            echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+            return;
+        }
+
+        if (!$this->session->userdata('is_logged_in')) {
+            http_response_code(401);
+            echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+            return;
+        }
+
+        $astrologer_id = $this->session->userdata('id');
+
+        if (empty($astrologer_id)) {
+            http_response_code(400);
+            echo json_encode(['status' => 'error', 'message' => 'Astrologer ID not found.']);
+            return;
+        }
+
+        $status = $this->Astrologer_model->getAstrologerStatus($astrologer_id);
+    
+        if ($status) {
+            http_response_code(200);
+            echo json_encode(['status' => 'success', 'data' => $status]);
+        } else {
+            http_response_code(404);
+            echo json_encode(['status' => 'error', 'message' => 'No status found.']);
+        }
+    }
     
 
 }

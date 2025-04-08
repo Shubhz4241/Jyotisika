@@ -63,4 +63,24 @@ class Astrologer_model extends CI_Model {
         return $this->db->get_where('otps', ['mobile' => $phone])->row_array();
     }
 
+    public function setAstrologerStatus($user_id, $status)
+    {
+        if ($status == 'online') {
+            $status = 1;
+        } else {
+            $status = 0;
+        }
+        $this->db->where('id', $user_id);
+        $this->db->update('astrologer_registration', ['is_online' => $status]);
+    }
+
+
+    public function getAstrologerStatus($user_id)
+    {
+        $this->db->select('is_online');
+        $this->db->from('astrologer_registration');
+        $this->db->where('id', $user_id);
+        return $this->db->get()->row();
+    }
+
 }
