@@ -508,34 +508,111 @@
     });
 
     // Online/Offline Status Toggle with SweetAlert
-    let isOnline = false; // Initial status is Offline
-    const statusToggle = document.getElementById('statusToggle');
+    document.addEventListener('DOMContentLoaded', () => {
+        let isOnline = false;
+        let activityTimer;
+        const inactivityTimeout = 60000; // 1 minute
+        const statusToggle = document.getElementById('statusToggle');
 
-    // Check if there's a saved status in localStorage
-    const savedStatus = localStorage.getItem('isOnline');
-    if (savedStatus !== null) {
-        isOnline = savedStatus === 'true';
-        statusToggle.checked = isOnline;
-    }
+        // Fetch initial status from API
+        fetch('<?php echo base_url() . 'astrologer/check_astrologer_status' ?>')
+            .then(response => response.json())
+            .then(data => {
+                if (data.data.is_online == 1) {
+                    isOnline = true;
+                    statusToggle.checked = true;
+                }
+            })
+            .catch(error => console.error('Error fetching status:', error));
 
-    statusToggle.addEventListener('change', function() {
-        isOnline = statusToggle.checked; // Update status based on toggle state
-        localStorage.setItem('isOnline', isOnline); // Save the status to localStorage
+        // 🔄 Update status function
+        function updateStatus(status, showPopup = false) {
+            const formData = new FormData();
+            formData.append('status', status);
 
-        Swal.fire({
-            title: `You are now ${isOnline ? 'Online' : 'Offline'}!`,
-            text: isOnline ? 'You are now available for users.' : 'You are now unavailable for users.',
-            icon: isOnline ? 'success' : 'info',
-            confirmButtonText: 'OK',
-            customClass: {
-                popup: 'custom-swal-popup',
-                title: 'custom-swal-title',
-                content: 'custom-swal-content',
-                confirmButton: 'custom-swal-confirm'
-            },
-            buttonsStyling: false
+            fetch('<?php echo base_url() . 'astrologer/set_online_offline_status' ?>', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(() => {
+                    isOnline = (status === 'online');
+                    statusToggle.checked = isOnline;
+
+                    if (showPopup) {
+                        Swal.fire({
+                            title: `You are now ${isOnline ? 'Online' : 'Offline'}!`,
+                            text: isOnline ? 'You are now available for users.' : 'You are now unavailable for users.',
+                            icon: isOnline ? 'success' : 'info',
+                            confirmButtonText: 'OK',
+                            customClass: {
+                                popup: 'custom-swal-popup',
+                                title: 'custom-swal-title',
+                                content: 'custom-swal-content',
+                                confirmButton: 'custom-swal-confirm'
+                            },
+                            buttonsStyling: false
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating status:', error);
+                    statusToggle.checked = isOnline; // Revert toggle
+                });
+        }
+
+        // 🧠 Reset activity timer
+        function resetActivityTimer() {
+            clearTimeout(activityTimer);
+
+            if (!document.hidden && !isOnline) {
+                updateStatus("online");
+            }
+
+            activityTimer = setTimeout(() => {
+                updateStatus("offline");
+            }, inactivityTimeout);
+        }
+
+        // ⌨️ Detect user activity
+        ["mousemove", "keydown", "click", "touchstart"].forEach(event => {
+            document.addEventListener(event, resetActivityTimer);
         });
+
+        // 👁️ Detect tab hide/show
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                updateStatus("offline");
+                clearTimeout(activityTimer);
+            } else {
+                resetActivityTimer();
+            }
+        });
+
+        // 🚪 Detect tab close
+        window.addEventListener("beforeunload", () => {
+            const formData = new URLSearchParams();
+            formData.append("status", "offline");
+            navigator.sendBeacon('<?php echo base_url() . 'astrologer/set_online_offline_status' ?>', formData);
+        });
+
+        // 🔁 Heartbeat every 30s (only if online and tab visible)
+        setInterval(() => {
+            if (isOnline && !document.hidden) {
+                updateStatus("online");
+            }
+        }, 30000);
+
+        // 🎚️ Manual toggle
+        statusToggle.addEventListener('click', () => {
+            const newStatus = statusToggle.checked ? 'online' : 'offline';
+            updateStatus(newStatus, true);
+        });
+
+        // Start
+        resetActivityTimer();
     });
+
 
     // Custom CSS for SweetAlert (injected via JavaScript)
     const style = document.createElement('style');

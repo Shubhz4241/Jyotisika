@@ -218,3 +218,14 @@ $route['AstrologyAndSpiritualServices']='AstrologerUser/AstrologyAndSpiritualSer
 $route['AstrologerTodaysSchedule']='AstrologerUser/AstrologerTodaysSchedule';
 $route['AstrologerFeedBackCard']='AstrologerUser/AstrologerFeedBackCard';
 $route['ConsultationCards']='AstrologerUser/ConsultationCards';
+
+
+
+
+// routes for the astrologer controllger 
+$route['astrologer/register']='Astrologer_api_controller/Register_post';
+$route['astrologer/send_otp_login']='Astrologer_api_controller/Send_Otp_Login';
+$route['astrologer/verify_otp_login']='Astrologer_api_controller/Verify_otp_Login';
+$route['astrologer/resend_Otp_Login']='Astrologer_api_controller/Resend_Otp_Login';
+$route['astrologer/set_online_offline_status'] = 'Astrologer_api_controller/SetAstrologerStatus';//set the online offline status of the astrologer
+$route['astrologer/check_astrologer_status'] = 'Astrologer_api_controller/Check_online';//check the status of the astrologer is he online or offline
