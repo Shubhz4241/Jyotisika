@@ -11,9 +11,15 @@ class UserLoginSignup extends CI_Controller
 		$this->load->helper(array('form', 'url'));
 
 		$this->load->library('session');
+		$this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    $this->output->set_header("Cache-Control: post-check=0, pre-check=0", false);
+    $this->output->set_header("Pragma: no-cache");
 
 
 	}
+
+	
+
 
 	public function Signup()
 	{
@@ -263,12 +269,21 @@ class UserLoginSignup extends CI_Controller
 
 
 
-	public function Logout()
-	{
-		$this->session->sess_destroy();
-		$this->load->view('UserLoginSignup/Login');
+	// public function Logout()
+	// {
+	// 	$this->session->sess_destroy();
+	// 	$this->load->view('UserLoginSignup/Login');
 		
-	}
+	// }
+
+	public function Logout()
+{
+    $this->session->unset_userdata('user_mobilenumber');
+    $this->session->unset_userdata('user_otp');
+    $this->session->sess_destroy();
+    redirect('UserLoginSignup/Login'); // Ensure redirection instead of just loading a view
+}
+
 
 
 
