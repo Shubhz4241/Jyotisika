@@ -37,6 +37,7 @@ $lang['Customer_Support'] = "ग्राहक सहायता";
 $lang['Refer_Friends'] = "मित्रों को संदर्भित करें";
 $lang['Logout'] = "लॉग आउट";
 
+$lang['term'] = "नियम और शर्तें - ज्योतिषिका";
 
 //Home page
 

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jyotisika:Privacy Policy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions</title>
 
-    <!-- bootstrap link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -34,6 +32,7 @@
 
     <!-- EXTERNAL CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,7 +59,7 @@
             color: #444;
         }
         .terms p {
-          
+            line-height: 1.6;
         }
         .accept-btn {
             display: block;
@@ -78,72 +77,65 @@
         .accept-btn:hover {
             background: #218838;
         }
-
-       
-        
-        ul {
-            padding-left: 20px;
-        }
     </style>
 </head>
 <body>
+    
 <header>
         <!-- Navbar -->
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
-
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
-    <div class="container">
-  
-    <div class="terms">
-        <h1>Privacy Policy</h1>
-       
-        <p>This Privacy Policy describes how Jyotisika collects, uses, and protects your information.</p>
-        
-        <h3>1. Information We Collect</h3>
-        <ul>
-            <li><strong>Personal Info:</strong> Name, email, phone number, date of birth, gender (for horoscope matching).</li>
-            <li><strong>Payment Info:</strong> Processed securely through Razorpay; we do not store card details.</li>
-            <li><strong>Usage Data:</strong> IP address, browser type, and interaction logs.</li>
-        </ul>
-        
-        <h3>2. How We Use Your Information</h3>
-        <ul>
-            <li>To provide personalized horoscope and astrology services.</li>
-            <li>To process payments and send service-related communication.</li>
-            <li>To improve our services through analytics and feedback.</li>
-        </ul>
-        
-        <h3>3. Sharing Your Information</h3>
-        <ul>
-            <li>We do not sell or share your personal data with third parties, except:</li>
-            <li>Payment processing via Razorpay.</li>
-            <li>Legal obligations if required.</li>
-        </ul>
-        
-        <h3>4. Security Measures</h3>
-        <ul>
-            <li>We use encryption, firewalls, and regular monitoring to secure your data.</li>
-            <li>User data is stored in secure, access-controlled environments.</li>
-        </ul>
-        
-        <h3>5. Cookies</h3>
-        <p>Jyotisika uses cookies to enhance your browsing experience and analyze site usage.</p>
-        
-        <h3>6. User Rights</h3>
-        <p>You can request to access, update, or delete your personal data by contacting us.</p>
-        
-        <h3>7. Changes to Policy</h3>
-        <p>We may update this policy; the latest version will be posted on this page.</p>
-        
-        <h3>8. Contact Us</h3>
-        <p>If you have any questions, please contact us at: [your email/contact form]</p>
-  
-        <button class="accept-btn" onclick="acceptTerms()">Accept Terms</button>
-        </div>
-</div>
 
+
+    <div class="container">
+        <h1>Terms and Conditions</h1>
+        <p>Welcome to Jyotisika! By accessing or using our website, you agree to be bound by the following Terms and Conditions.</p>
+        
+        <h3>1. Use of Services</h3>
+        <ul>
+            <li>Jyotisika provides horoscope readings, daily panchang, and live astrology chat sessions.</li>
+            <li>Users must be 18 years or older to use paid services.</li>
+            <li>You agree not to misuse the website or its services.</li>
+        </ul>
+        
+        <h3>2. User Accounts</h3>
+        <ul>
+            <li>You may be required to create an account to access certain features.</li>
+            <li>You are responsible for maintaining the confidentiality of your login credentials.</li>
+        </ul>
+        
+        <h3>3. Payment and Refund</h3>
+        <ul>
+            <li>Payments for astrology consultations are processed via Razorpay.</li>
+            <li>All purchases are non-refundable unless the service is not delivered as promised.</li>
+            <li>Jyotisika reserves the right to change pricing at any time.</li>
+        </ul>
+        
+        <h3>4. Chat Consultations</h3>
+        <ul>
+            <li>Astrology consultations are for guidance purposes only and not a substitute for professional advice (e.g., medical, legal, financial).</li>
+            <li>Chat sessions may be recorded for quality and dispute resolution.</li>
+        </ul>
+        
+        <h3>5. Intellectual Property</h3>
+        <ul>
+            <li>All content including text, graphics, logos, and videos are the property of Jyotisika or its content creators.</li>
+            <li>You may not copy, reproduce, or distribute content without permission.</li>
+        </ul>
+        
+        <h3>6. Termination</h3>
+        <p>We may terminate or suspend access to our services for violations of these terms without prior notice.</p>
+        
+        <h3>7. Liability Limitation</h3>
+        <p>Jyotisika is not liable for any indirect, incidental, or consequential damages from use of the services.</p>
+        
+        <h3>8. Governing Law</h3>
+        <p>These terms shall be governed by the laws of India.</p>
+
+        <button class="accept-btn" onclick="acceptTerms()">Accept Terms</button>
+    </div>
 
     <footer>
         <!-- footer -->

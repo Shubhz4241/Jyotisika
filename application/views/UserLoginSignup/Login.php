@@ -124,7 +124,7 @@
                             Verify OTP
                         </button> -->
 
-                        <button id="verifyOtpBtn" class="btn w-100 fw-bold"
+                        <button type="submit" id="verifyOtpBtn" class="btn w-100 fw-bold"
                             style="background: #F2DC51; border-radius: 10px; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
                             Verify OTP
                         </button>
@@ -246,90 +246,60 @@
         });
     </script>
 
-
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const verifyOtpBtn = document.getElementById("verifyOtpBtn");
-            const otpInput = document.getElementById("otpInput");
-            const mobileNumberInput = document.getElementById("mobileNumber");
+        document.getElementById("verifyOtpBtn").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default form submission
 
-            function verifyOtp() {
-                let phoneNumber = mobileNumberInput.value.trim();
-                let otp = otpInput.value.trim();
+            let phoneNumber = document.getElementById("mobileNumber").value.trim();
+            let otp = document.getElementById("otpInput").value.trim();
 
-                if (!otp) {
-                    Swal.fire({
-                        icon: "warning",
-                        title: "Empty OTP",
-                        text: "Please enter the OTP!",
-                    });
-                    return;
-                }
-
-                fetch("<?php echo base_url('User_Api_Controller/VerifyOtp'); ?>", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ mobile_number: phoneNumber, otp: otp })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log("API Response:", data);
-
-                        if (data.status === "success") {
-                            Swal.fire({
-                                icon: "success",
-                                title: "OTP Verified",
-                                text: "Verification successful! Redirecting...",
-                                timer: 2000,
-                                showConfirmButton: false
-                            }).then(() => {
-                                otpInput.value = "";
-                                window.location.href = "<?php echo base_url('User/home'); ?>";
-                            });
-                        } else if (data.status === "otpmatchreg") {
-                            Swal.fire({
-                                icon: "info",
-                                title: "Registration Required",
-                                text: "OTP matched but user not registered. Please register!",
-                                confirmButtonText: "OK"
-                            });
-                            otpInput.value = "";
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Verification Failed",
-                                text: data.message || "Invalid OTP. Please try again!",
-                            });
-
-                            otpInput.value = ""; // Clear OTP field on failure
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "Something went wrong! Please try again.",
-                        });
-
-                        otpInput.value = ""; // Clear OTP field on failure
-                    });
+            if (!otp) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Empty OTP",
+                    text: "Please enter the OTP!",
+                });
+                return;
             }
 
-            // Click event for Verify OTP button
-            verifyOtpBtn.addEventListener("click", verifyOtp);
+            fetch("<?php echo base_url('User_Api_Controller/VerifyOtp'); ?>", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mobile_number: phoneNumber, otp: otp })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("API Response:", data);
 
-            // Handle Enter key press in OTP input field
-            otpInput.addEventListener("keypress", function (event) {
-                if (event.key === "Enter") {
-                    event.preventDefault(); // Prevent form submission
-                    verifyOtp(); // Call the verifyOtp function
-                }
-            });
+                    if (data.status === "success") {
+                        Swal.fire({
+                            icon: "success",
+                            title: "OTP Verified",
+                            text: "Verification successful! Redirecting...",
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = "<?php echo base_url('User/home'); ?>";
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Verification Failed",
+                            text: data.message || "Invalid OTP. Please try again!",
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Something went wrong! Please try again.",
+                    });
+                });
         });
 
     </script>
-
 
 
 

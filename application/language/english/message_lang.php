@@ -96,6 +96,7 @@ $lang['Horoscope'] = "Horoscope";
 $lang['Festivals'] = "Festivals";
 $lang['Remedies'] = "Remedies";
 
+$lang['term'] = "Terms And Conditions";
 
 
 

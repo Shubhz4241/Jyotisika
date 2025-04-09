@@ -61,7 +61,7 @@ $route['Signup'] = 'UserLoginSignup/Signup';
 $route['Login'] = 'UserLoginSignup/Login';
 $route['Logout'] = 'UserLoginSignup/Logout';
 
-
+$route['terms'] = 'User/Terms';
 
 //User self page
 $route['home'] = 'User/Home';

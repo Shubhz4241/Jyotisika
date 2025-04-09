@@ -60,7 +60,7 @@
             color: #444;
         }
         .terms p {
-          
+            line-height: 1.6;
         }
         .accept-btn {
             display: block;
@@ -78,12 +78,6 @@
         .accept-btn:hover {
             background: #218838;
         }
-
-       
-        
-        ul {
-            padding-left: 20px;
-        }
     </style>
 </head>
 <body>
@@ -95,53 +89,20 @@
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
     <div class="container">
-  
+    <h1><?php echo $this->lang->line('Terms_Conditions_Title') ?: "Terms and Conditions"; ?></h1>
     <div class="terms">
-        <h1>Privacy Policy</h1>
-       
-        <p>This Privacy Policy describes how Jyotisika collects, uses, and protects your information.</p>
-        
-        <h3>1. Information We Collect</h3>
-        <ul>
-            <li><strong>Personal Info:</strong> Name, email, phone number, date of birth, gender (for horoscope matching).</li>
-            <li><strong>Payment Info:</strong> Processed securely through Razorpay; we do not store card details.</li>
-            <li><strong>Usage Data:</strong> IP address, browser type, and interaction logs.</li>
-        </ul>
-        
-        <h3>2. How We Use Your Information</h3>
-        <ul>
-            <li>To provide personalized horoscope and astrology services.</li>
-            <li>To process payments and send service-related communication.</li>
-            <li>To improve our services through analytics and feedback.</li>
-        </ul>
-        
-        <h3>3. Sharing Your Information</h3>
-        <ul>
-            <li>We do not sell or share your personal data with third parties, except:</li>
-            <li>Payment processing via Razorpay.</li>
-            <li>Legal obligations if required.</li>
-        </ul>
-        
-        <h3>4. Security Measures</h3>
-        <ul>
-            <li>We use encryption, firewalls, and regular monitoring to secure your data.</li>
-            <li>User data is stored in secure, access-controlled environments.</li>
-        </ul>
-        
-        <h3>5. Cookies</h3>
-        <p>Jyotisika uses cookies to enhance your browsing experience and analyze site usage.</p>
-        
-        <h3>6. User Rights</h3>
-        <p>You can request to access, update, or delete your personal data by contacting us.</p>
-        
-        <h3>7. Changes to Policy</h3>
-        <p>We may update this policy; the latest version will be posted on this page.</p>
-        
-        <h3>8. Contact Us</h3>
-        <p>If you have any questions, please contact us at: [your email/contact form]</p>
-  
-        <button class="accept-btn" onclick="acceptTerms()">Accept Terms</button>
-        </div>
+        <h3><?php echo $this->lang->line('Terms_Conditions_Min_Working_Hours') ?: "1. Minimum Working Hours"; ?></h3>
+        <p><?php echo $this->lang->line('Terms_Conditions_Min_Working_Hours_Desc') ?: "As a registered astrologer or pujari, you must work for at least 8 hours per day."; ?></p>
+
+        <h3><?php echo $this->lang->line('Terms_Conditions_Confidentiality') ?: "2. Confidentiality & Personal Information Sharing"; ?></h3>
+        <p><?php echo $this->lang->line('Terms_Conditions_Confidentiality_Desc') ?: "Sharing personal contact details is strictly prohibited. Violation will result in a fine of ₹51,000."; ?></p>
+
+        <h3><?php echo $this->lang->line('Terms_Conditions_Exclusivity') ?: "3. Exclusivity Agreement"; ?></h3>
+        <p><?php echo $this->lang->line('Terms_Conditions_Exclusivity_Desc') ?: "While working with us, you cannot register or provide services on other astrology platforms."; ?></p>
+    </div>
+    <button class="accept-btn" onclick="acceptTerms()">
+        <?php echo $this->lang->line('Accept_Terms_Button') ?: "Accept Terms"; ?>
+    </button>
 </div>
 
 
@@ -157,3 +118,4 @@
     </script>
 </body>
 </html>
+

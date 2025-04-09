@@ -40,6 +40,8 @@ $lang['Customer_Support'] = "ग्राहक समर्थन";
 $lang['Refer_Friends'] = "मित्रांना संदर्भित करा";
 $lang['Logout'] = "बाहेर पडा";
 
+$lang['term'] = "नियम आणि अटी - ज्योतिषिका";
+
 //Home page
 
 $lang['ViewMore'] = "अधिक पहा";

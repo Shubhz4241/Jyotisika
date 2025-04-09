@@ -867,4 +867,9 @@ class User extends CI_Controller
 		$this->lang->load('message', $language);
 		$this->load->view('User/Privacypolicy');
 	}
+
+	public function Terms(){
+
+		$this->load->view("User/Terms");
+	}
 }
