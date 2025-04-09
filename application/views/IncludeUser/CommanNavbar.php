@@ -195,11 +195,11 @@
                                     <?php echo $this->lang->line('Customer_Support') ? $this->lang->line('Customer_Support') : 'Customer_Support'; ?>
                                 </a>
                             </li>
-                            <li>
-                                <a class="dropdown-item py-2 ps-4" href="<?php echo base_url(''); ?>">
+                            <!-- <li>
+                                <a class="dropdown-item py-2 ps-4" href="#">
                                     <i class="bi bi-share me-2"></i> Refer to Friends
                                 </a>
-                            </li>
+                            </li> -->
                             <li>
                                 <hr class="dropdown-divider mx-3">
                             </li>
