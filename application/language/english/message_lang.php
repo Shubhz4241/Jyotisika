@@ -35,6 +35,10 @@ $lang['My_Orders'] = "My Orders";
 $lang['Login'] = "Log in";
 
 
+$lang['Customer_Support'] = "Customer Support";
+$lang['Refer_Friends'] = "Refer to Friends";
+$lang['Logout'] = "Logout";
+
 //Home page 
 
 $lang['ViewMore'] = "View More";

@@ -266,8 +266,8 @@ class UserLoginSignup extends CI_Controller
 	public function Logout()
 	{
 		$this->session->sess_destroy();
-		redirect("UserLoginSignup/Login");
-		exit();
+		$this->load->view('UserLoginSignup/Login');
+		
 	}
 
 

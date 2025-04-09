@@ -36,7 +36,9 @@ $lang['Access_Account'] = "तुमचे ज्योतिषिका खा
 $lang['My_Orders'] = "माझी ऑर्डर्स";
 $lang['Login'] = "लॉग इन करा";
 
-
+$lang['Customer_Support'] = "ग्राहक समर्थन";
+$lang['Refer_Friends'] = "मित्रांना संदर्भित करा";
+$lang['Logout'] = "बाहेर पडा";
 
 //Home page
 

@@ -123,7 +123,8 @@
                 <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center festival-card" data-state="<?php echo $card['state']; ?>" data-month="<?php echo $card['month']; ?>" data-year="<?php echo $card['year']; ?>"> -->
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center festival-card">
                     <div class="card p-2" style="width: 16rem;">
-                        <img src="<?php echo $card["festivals_image"]  ?>" class="card-img-top" alt="image">
+                    <img src="<?php echo $card["festivals_image"]  ?>" class="card-img-top" alt="image"
+                    style="height: 250px; width: 100%; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title text-center"><?php echo $card['festivals_title']; ?></h5>
                             <center>

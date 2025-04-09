@@ -32,6 +32,12 @@ $lang['Access_Account'] = "अपना ज्योतिषिका खात
 $lang['My_Orders'] = "मेरे ऑर्डर";
 $lang['Login'] = "लॉग इन करें";
 
+
+$lang['Customer_Support'] = "ग्राहक सहायता";
+$lang['Refer_Friends'] = "मित्रों को संदर्भित करें";
+$lang['Logout'] = "लॉग आउट";
+
+
 //Home page
 
 $lang['ViewMore'] = "और देखें";

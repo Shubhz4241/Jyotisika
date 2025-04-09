@@ -190,7 +190,9 @@
                             </li> -->
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('CustomerSupport'); ?>">
-                                    <i class="bi bi-gear me-2"></i> Customer Support
+                                    <i class="bi bi-gear me-2"></i>
+                                    
+                                    <?php echo $this->lang->line('Customer_Support') ? $this->lang->line('Customer_Support') : 'Customer_Support'; ?>
                                 </a>
                             </li>
                             <li>
