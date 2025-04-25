@@ -229,3 +229,17 @@ $route['astrologer/verify_otp_login']='Astrologer_api_controller/Verify_otp_Logi
 $route['astrologer/resend_Otp_Login']='Astrologer_api_controller/Resend_Otp_Login';
 $route['astrologer/set_online_offline_status'] = 'Astrologer_api_controller/SetAstrologerStatus';//set the online offline status of the astrologer
 $route['astrologer/check_astrologer_status'] = 'Astrologer_api_controller/Check_online';//check the status of the astrologer is he online or offline
+
+// routes for the HR Admin
+$route['HRAdmin'] = 'HRAdminController/home';
+$route['HRAdmin/login'] = 'Admin/login';
+$route['HRAdmin/Astrolger']='HrAdminController/astrologer';
+$route['HRAdmin/Pujari'] = 'HrAdminController/pujari';
+$route['HRAdmin/Profile'] = 'HrAdminController/profile';
+$route['HRAdmin/AstrologerRequest'] = 'HrAdminController/astrorequest';
+$route['HRAdmin/PujariRequest'] = 'HrAdminController/pujarirequest';
+$route['HRAdmin/ViewallAstrologers'] = 'HrAdminController/viewallAstrologers';
+$route['HRAdmin/ViewallPujaris'] = 'HrAdminController/viewallPujari';
+$route['HRAdmin/ViewAstrologerProfile'] = 'HrAdminController/viewastrologerprofile';
+$route['HRAdmin/ViewpujariProfile'] = 'HrAdminController/viewpujariprofile';
+$route['HRAdmin/Reinterviews'] = 'HrAdminController/reinterviews';
