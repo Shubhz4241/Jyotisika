@@ -633,6 +633,19 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+        const toggler = document.querySelector(".toggler-btn");
+        const closeBtn = document.querySelector(".close-sidebar");
+        const sidebar = document.querySelector("#sidebar");
+
+        toggler.addEventListener("click", function() {
+            sidebar.classList.toggle("collapsed");
+        });
+
+        closeBtn.addEventListener("click", function() {
+            sidebar.classList.remove("collapsed");
+        });
+    </script>
 </body>
 
 </html>
