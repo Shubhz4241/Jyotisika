@@ -57,7 +57,8 @@
         .counter-card {
             border-radius: 15px;
             border: 1px solid rgba(18, 18, 18);
-            box-shadow: 0px 8px 10px rgba(4, 1, 1, 0.2);            padding: 15px;
+            box-shadow: 0px 8px 10px rgba(4, 1, 1, 0.2);       
+            padding: 15px;
             background-color: white;
             height: 160px;
             display: flex;
