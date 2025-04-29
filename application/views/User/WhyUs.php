@@ -250,6 +250,10 @@
             </div>
         </section>
 
+      
+
+   
+
         <!-- Code for carousel  -->
         <script>
             $(document).ready(function () {
