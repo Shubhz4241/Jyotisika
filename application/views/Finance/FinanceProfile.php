@@ -20,11 +20,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="icon" href="assets/images/admin/logo.png" type="image/png">
-
+    <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         * {
-            font-family: 'Inter', sans-serif;
+            font-family: 'rokkitt', sans-serif;
             box-sizing: border-box;
         }
 
@@ -425,14 +426,14 @@
 <body style="background-color:rgb(228, 236, 241);">
     <div class="d-flex">
         <!-- Sidebar -->
-        <?php $this->load->view('Inventory/InventorySidebar'); ?>
+        <?php $this->load->view('Finance/FinanceSidebar'); ?>
 
         <!-- SIDEBAR END -->
 
         <!-- Main Component -->
         <div class="main">
             <!-- Navbar -->
-            <?php $this->load->view('Inventory/InventoryNavbar'); ?>
+            <?php $this->load->view('Finance/FinanceNavbar'); ?>
 
             <div class="container">
                 <!-- Header Section (Admin Profile and Tabs in One Line) -->
