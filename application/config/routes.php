@@ -248,7 +248,7 @@ $route['HRAdmin/Reinterviews'] = 'HrAdminController/reinterviews';
 
 
 // routes for sales
-$route['dashboard'] = 'Sales/Dashboard';
+$route['salesdashboard'] = 'Sales/Dashboard';
 $route['allastrologer'] = 'Sales/AllAstrologer';
 $route['viewastrologerprofile'] = 'Sales/ViewAstrologerProfile';
 $route['allpoojaris'] = 'Sales/Allpoojaris';
