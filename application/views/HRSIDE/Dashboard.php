@@ -58,6 +58,7 @@
             border-radius: 15px;
             border: 1px solid rgba(18, 18, 18);
             box-shadow: 0px 8px 10px rgba(4, 1, 1, 0.2);       
+
             padding: 15px;
             background-color: white;
             height: 160px;
@@ -67,7 +68,7 @@
             transition: transform 0.3s ease;
         }
 
-       
+
 
         .counter-card img {
             width: 100px;
@@ -219,7 +220,7 @@
                                         <h2 class="mt-1 counter">150+</h2>
                                         <p>Astrologer</p>
                                     </div>
-                                    <img src="<?php echo base_url('assets/images/HRside/Astrology.png')?>" alt="Astrologer icon" class="counter-icon">
+                                    <img src="<?php echo base_url('assets/images/HRside/Astrology.png') ?>" alt="Astrologer icon" class="counter-icon">
                                 </div>
                             </a>
                         </div>
@@ -231,21 +232,21 @@
                                         <h2 class="mt-1 counter">150+</h2>
                                         <p>Pujari</p>
                                     </div>
-                                    <img src="<?php echo base_url('assets/images/HRside/Priest.png')?>" alt="Pujari icon" class="counter-icon">
+                                    <img src="<?php echo base_url('assets/images/HRside/Priest.png') ?>" alt="Pujari icon" class="counter-icon">
                                 </div>
                             </a>
                         </div>
 
                         <div class="col-md-3 col-sm-6">
-                        <a href="<?php echo site_url('HRAdmin/Reinterviews'); ?>" class="text-decoration-none text-dark">
+                            <a href="<?php echo site_url('HRAdmin/Reinterviews'); ?>" class="text-decoration-none text-dark">
 
-                            <div class="counter-card">
-                                <div class="counter-card-content">
-                                    <h2 class="mt-1 counter">150+</h2>
-                                    <p>Re-Interview</p>
+                                <div class="counter-card">
+                                    <div class="counter-card-content">
+                                        <h2 class="mt-1 counter">150+</h2>
+                                        <p>Re-Interview</p>
+                                    </div>
+                                    <img src="<?php echo base_url('assets/images/HRside/Interview.png') ?>" alt="Reinterview icon" class="counter-icon">
                                 </div>
-                                <img src="<?php echo base_url('assets/images/HRside/Interview.png')?>" alt="Reinterview icon" class="counter-icon">
-                            </div>
                             </a>
                         </div>
                     </div>
@@ -269,7 +270,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" width="40"" width="40"></td>
+                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png') ?>" width="40"" width=" 40"></td>
                                     <td>John Doe</td>
                                     <td>9529577564</td>
                                     <td>johndoe@example.com</td>
@@ -280,7 +281,7 @@
                                     <td><button class="btn btn-view">View</button></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" width="40"" width="40"></td>
+                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png') ?>" width="40"" width=" 40"></td>
                                     <td>John Doe</td>
                                     <td>9529577564</td>
                                     <td>johndoe@example.com</td>
@@ -291,7 +292,7 @@
                                     <td><button class="btn btn-view">View</button></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" width="40"" width="40"></td>
+                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png') ?>" width="40"" width=" 40"></td>
                                     <td>John Doe</td>
                                     <td>9529577564</td>
                                     <td>johndoe@example.com</td>
@@ -328,7 +329,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" width="40"" width="40"></td>
+                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png') ?>" width="40"" width=" 40"></td>
                                     <td>John Doe</td>
                                     <td>9529577564</td>
                                     <td>johndoe@example.com</td>
@@ -339,7 +340,7 @@
                                     <td><button class="btn btn-view">View</button></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" width="40"" width="40"></td>
+                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png') ?>" width="40"" width=" 40"></td>
                                     <td>John Doe</td>
                                     <td>9529577564</td>
                                     <td>johndoe@example.com</td>
@@ -350,7 +351,7 @@
                                     <td><button class="btn btn-view">View</button></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" width="40"" width="40"></td>
+                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png') ?>" width="40"" width=" 40"></td>
                                     <td>John Doe</td>
                                     <td>9529577564</td>
                                     <td>johndoe@example.com</td>

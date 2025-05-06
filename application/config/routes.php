@@ -243,3 +243,29 @@ $route['HRAdmin/ViewallPujaris'] = 'HrAdminController/viewallPujari';
 $route['HRAdmin/ViewAstrologerProfile'] = 'HrAdminController/viewastrologerprofile';
 $route['HRAdmin/ViewpujariProfile'] = 'HrAdminController/viewpujariprofile';
 $route['HRAdmin/Reinterviews'] = 'HrAdminController/reinterviews';
+
+
+
+
+// routes for sales
+$route['dashboard'] = 'Sales/Dashboard';
+$route['allastrologer'] = 'Sales/AllAstrologer';
+$route['viewastrologerprofile'] = 'Sales/ViewAstrologerProfile';
+$route['allpoojaris'] = 'Sales/Allpoojaris';
+$route['viewpoojariprofile'] = 'Sales/ViewPoojariProfile';
+$route['products'] = 'Sales/Products';
+$route['profile'] = 'Sales/Profile';
+$route['orders'] = 'Sales/Orders';
+$route['ordersdetails'] = 'Sales/OrdersDetails';
+
+
+//routes for inverntory
+
+$route['dashboard'] = 'Inventory/Dashboard';
+$route['profile'] = 'Inventory/Profile';
+
+
+//routes for finance
+$route['financeastrologer'] = 'Finance/FinanceAstrologer';
+$route['FinancePoojari'] = 'Finance/FinancePoojari';
+$route['financeprofile'] = 'Finance/FinanceProfile';
