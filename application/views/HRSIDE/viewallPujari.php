@@ -26,7 +26,7 @@
 
     <style>
         * {
-            font-family: 'Rokkitt', serif;
+            font-family: 'Inter', serif;
         }
 
 

@@ -1,7 +1,7 @@
-<style>
-    body {
+<style>body {
         margin: 0;
         padding: 0;
+        font-family: 'inter'!important;
     }
 
 
@@ -45,11 +45,7 @@
         border: 0;
     }
 
-    .toggler-btn i {
-        font-size: 1.75rem;
-        color: #333;
-        font-weight: 600;
-    }
+    
 
 
     #sidebar.collapsed~.main .navbar {
@@ -69,7 +65,10 @@
         position: relative;
         border-bottom: none;
     }
-
+.sidebar-link{
+    height: 60px;
+    align-items: center;
+}
     .close-sidebar {
         display: none;
         position: absolute;
@@ -77,37 +76,41 @@
         top: 50%;
         transform: translateY(-50%);
         color: #333;
-        font-size: 1.5rem;
         cursor: pointer;
     }
 
     a.sidebar-link {
-        padding: .625rem 1.625rem;
+        padding: .5rem 1.25rem;
         color: #333;
         position: relative;
         transition: all 0.35s;
-        display: block;
-        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
         border: none;
+        gap: 20px;
+        color: white;
+
     }
 
     a.sidebar-link:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-        color: #000;
+        background-color: white;
+        color: black;
     }
 
     .sidebar-link[data-bs-toggle="collapse"]::after {
-        border: solid;
-        border-width: 0 .075rem .075rem 0;
-        content: "";
-        display: inline-block;
-        padding: 2px;
-        position: absolute;
-        right: 1.5rem;
-        top: 1.4rem;
-        transform: rotate(-135deg);
-        transition: all .2s ease-out;
-    }
+    border: solid;
+    border-width: 0 .075rem .075rem 0;
+    content: "";
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.4rem;
+    transform: rotate(-135deg);
+    transition: all .2s ease-out;
+    margin-left: 10px; /* ✅ This adds a 10px gap from the text */
+}
+
 
     .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
         transform: rotate(45deg);
@@ -140,6 +143,25 @@
         overflow-y: auto;
     }
 
+    .sidebar-link.active-link {
+    background-color: white !important;
+    color: black !important;
+    border-radius: 5px;
+}
+
+.sidebar-link.active-link span,
+.sidebar-link.active-link img {
+    filter: brightness(0);
+     /* Makes the image black */
+}
+.sidebar-link:hover{
+    border-radius:5px ;
+}
+.sidebar-link:hover span,
+.sidebar-link:hover i {
+    filter: brightness(0) !important; /* Makes text and image black on hover */
+}
+
 
     @media (max-width:768px) {
         #sidebar {
@@ -168,8 +190,7 @@
             width: 100%;
             left: 0;
         }
-    }
-</style>
+    }</style>
 
 <aside id="sidebar" class="sidebar-toggle">
     <div class="sidebar-logo ">
@@ -180,73 +201,73 @@
         <!-- Profile Image & Name -->
         <li class="sidebar-item text-center mb-4 ">
             <a href="<?php echo base_url() . 'admindash'; ?>">
-                <img src="<?php echo base_url() . 'assets\images\Admin logo.png'; ?>" alt="HR Profile"
-                    class="rounded-circle mb-2" style="width: 160px; height: 140px;    filter: drop-shadow(0 0 8px rgba(234, 239, 44, 1));">
+                <img src="<?php echo base_url() . 'assets\images\newlogo.png.png'; ?>" alt="HR Profile"
+                    class="rounded-circle mb-2" style="width: 134px; height: 134px;">
             </a>
             <!-- <h6 class="text-dark mb-3">HR Manager</h6> -->
             <div class="d-flex justify-content-center gap-2">
-                <!-- <a href="<?php echo base_url() . 'ManasviHome'; ?>" class="btn btn-primary rounded-1 " style="font-size: 16px;">Manasvi</a> -->
-                <!-- <a href="<?php echo base_url() . 'EaglebyteHome'; ?>" class="btn btn-outline-primary px-3 rounded-1" style="font-size: 16px;">Eaglebyte</a> -->
+                <!-- <a href="<?php echo base_url() . 'ManasviHome'; ?>" class="btn btn-primary rounded-1 " style="font-size: 20px;">Manasvi</a> -->
+                <!-- <a href="<?php echo base_url() . 'EaglebyteHome'; ?>" class="btn btn-outline-primary px-3 rounded-1" style="font-size: 20px;">Eaglebyte</a> -->
             </div>
         </li>
 
         <!-- HOME -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'admindash'; ?>" class="sidebar-link " id="ManasviHome-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'admindash'; ?>" class="sidebar-link " id="ManasviHome-link" style="font-size: 20px;">
                 <i class="bi bi-house-fill" style="color: white;"></i>
-                <span class="ms-1" style="color: white;">Dashboard</span>
+                <span class="ms-1" style="color: white;font-weight: 400;">Dashboard</span>
             </a>
         </li>
 
         <!-- User Management -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'usermanagement'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'usermanagement'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 20px;">
                 <i class="bi bi-person-vcard" style="color: white;"></i>
-                <span class="ms-1" style="color: white;">User Management</span>
+                <span class="ms-1" style="color: white;font-weight: 400;">User Management</span>
             </a>
         </li>
 
         <!-- Orders -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'adminorders'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'adminorders'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 20px;">
                 <i class="bi bi-bag-dash" style="color: white;"></i>
-                <span class="ms-1" style="color: white;">Orders</span>
+                <span class="ms-1" style="color: white;font-weight: 400;">Orders</span>
             </a>
         </li>
 
         <!-- Track and Ship -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'trackandship'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'trackandship'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 20px;">
                 <i class="bi bi-truck" style="color: white;"></i>
-                <span class="ms-1" style="color: white;">Track/Ship</span>
+                <span class="ms-1" style="color: white;font-weight: 400;">Track/Ship</span>
             </a>
         </li>
 
         <!-- Service Management -->
         <li class="sidebar-item">
             <a href="<?php echo base_url() . 'ManasviDocumentation'; ?>" class="sidebar-link dropdown-toggle collapsed text-white " id="people-dropdown" data-bs-toggle="collapse"
-                data-bs-target="#peopleSubmenu" aria-expanded="false" style="font-size: 16px;">
+                data-bs-target="#peopleSubmenu" aria-expanded="false" style="font-size: 20px;">
                 <i class="bi bi-clipboard-check " style="color: white;"></i>
-                <span class="ms-1" style="color: white;">Service Management</span>
+                <span class="ms-1" style="color: white;font-weight: 400;">Service Management</span>
             </a>
             <div class="collapse" id="peopleSubmenu">
                 <ul class="nav flex-column ms-3">
                     <li class="nav-item">
-                        <a href="<?php echo base_url() . 'festivals'; ?>" class="sidebar-link" id="TotalEmployee-link" style="font-size: 16px;">
+                        <a href="<?php echo base_url() . 'festivals'; ?>" class="sidebar-link" id="TotalEmployee-link" style="font-size: 20px;">
                             <!-- <i class="bi bi-person-workspace"></i> -->
-                            <span class="ms-1" style="color: white;">Festivals</span>
+                            <span class="ms-1" style="color: white;font-weight: 400;">Festivals</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo base_url() . 'poojalist'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 16px;">
+                        <a href="<?php echo base_url() . 'poojalist'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 20px;">
                             <!-- <i class="bi bi-mortarboard-fill"></i> -->
-                            <span class="ms-1" style="color: white;"> Puja</span>
+                            <span class="ms-1" style="color: white;font-weight: 400;"> Puja</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo base_url() . 'jyotisikastore'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 16px;">
+                        <a href="<?php echo base_url() . 'jyotisikastore'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 20px;">
                             <!-- <i class="bi bi-mortarboard-fill"></i> -->
-                            <span class="ms-1" style="color: white;"> Jyotisika Store</span>
+                            <span class="ms-1" style="color: white;font-weight: 400;"> Jyotisika Store</span>
                         </a>
                     </li>
                 </ul>
@@ -255,17 +276,17 @@
 
         <!-- MANAGE EVENT -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'anyliticsandreports'; ?>" class="sidebar-link" id="Manageevent-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'anyliticsandreports'; ?>" class="sidebar-link" id="Manageevent-link" style="font-size: 20px;">
                 <i class="bi bi-file-bar-graph" style="color: white;"></i>
-                <span class="ms-1" style="color: white;">Analytics & Reports</span>
+                <span class="ms-1" style="color: white;font-weight: 400;">Analytics & Reports</span>
             </a>
         </li>
 
         <!-- INTERVIEW ANALYSIS -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'profile'; ?>" class="sidebar-link" id="InterviewAnalysis-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'profile'; ?>" class="sidebar-link" id="InterviewAnalysis-link" style="font-size: 20px;">
                 <i class="bi bi-person-circle" style="color: white;"></i>
-                <span class="ms-1" style="color: white;">Profile</span>
+                <span class="ms-1" style="color: white;font-weight: 400;">Profile</span>
             </a>
         </li>
 
@@ -274,9 +295,9 @@
 
     <!-- LOGOUT -->
     <div class="sidebar-footer mb-3">
-        <a href="<?php echo base_url() . 'login'; ?>" class="sidebar-link" style="font-size: 16px;">
+        <a href="<?php echo base_url() . 'login'; ?>" class="sidebar-link" style="font-size: 20px;">
             <i class="bi bi-box-arrow-left" style="color: white;"></i>
-            <span class="ms-1" style="color: white;">Logout</span>
+            <span class="ms-1" style="color: white;font-weight: 400;">Logout</span>
         </a>
     </div>
 
