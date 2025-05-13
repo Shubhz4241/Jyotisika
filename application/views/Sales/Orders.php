@@ -23,7 +23,7 @@
 
     <style>
         * {
-            font-family: 'Rokkitt', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         h1,

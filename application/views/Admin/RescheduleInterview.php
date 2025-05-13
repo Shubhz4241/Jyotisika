@@ -5,863 +5,849 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin:Reschedule Interview</title>
-    <!-- Bootstrap CSS for styling and layout -->
+    <title>Admin: Profile</title>
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS file -->
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets\css\style.css' ?>">
-    <!-- bootstrap icon -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;500;700&display=swap" rel="stylesheet">
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- GOOGLE FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
-        /* Apply Inter font to the entire page */
         * {
-            font-family: 'Inter', sans-serif !important;
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
         }
 
-        /* Customize headers and table fonts for better readability */
-        h1,
-        h4 {
+        body {
+            background-color: rgb(228, 236, 241);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 5px;
+        }
+
+        .search-filter-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 40px 0;
+            width: 100%;
+        }
+
+        .search-input-container {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+        }
+
+        .search-input {
+            width: 70%;
+            height: 40px;
+            padding: 0 15px 0 45px;
+            border-radius: 8px;
+            border: 1px solid #7c7c77;
+            background-color: rgba(124, 124, 124, 0.24);
+            color: #000;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #000;
+            opacity: 1;
+        }
+
+        .dropdown-container {
+            position: relative;
+        }
+
+        .dropdown-select {
+            height: 40px;
+            padding: 0 15px;
+            border-radius: 5px;
+            border: 1px solid #7c7c77;
+            background-color: rgba(124, 124, 124, 0.24);
+            color: #000;
+            font-size: 15px;
+            outline: none;
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .tab-container {
+            margin-top: 20px;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid  #0C768A;
+        }
+
+        .nav-link {
+            color: #333;
             font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 5px 5px 0 0;
+            background-color: #e0e0e0;
         }
 
-        p,
-        td,
+        .nav-link.active {
+            background:  #0C768A;
+            color: #333;
+            border-bottom: none;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        thead {
+            background:  #0C768A;
+            color: #333;
+            letter-spacing: 0.5px;
+        }
+
+        th
+     {
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 1rem;
+            color: white;
+            border-bottom: 1px solid #eee;
+        }
+td{
+    padding: 15px 20px;
+            text-align: center;
+            font-size: 1rem;
+            color: black;
+            border-bottom: 1px solid #eee;
+}
         th {
-            font-weight: 400;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        td {
+            vertical-align: middle;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #fafafa;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f5f9;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-button {
+            background-color:  #0C768A;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .action-button:hover {
+            background-color:  #0C768A;
+            transform: translateY(-2px);
+        }
+
+        .approve-btn {
+            background-color: #8BC24A;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-right: 5px;
+        }
+
+        .approve-btn:hover {
+            background-color: #7aa73f;
+            transform: translateY(-2px);
+        }
+
+        .reject-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .reject-btn:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .availability-cell {
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .availability-cell:hover .availability-tooltip {
+            display: block;
+        }
+
+        .availability-tooltip {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            z-index: 10;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: normal;
+            max-width: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        tbody tr {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 3px solid  #0C768A;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .popup-content h3 {
+            margin: 0 0 20px;
+            font-size: 1.5rem;
+            text-align: center;
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+            color: #000;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #7c7c77;
+            background-color: rgba(124, 124, 119, 0.24);
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color:  #0C768A;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+            border: 3px solid #0C768A;
+        }
+
+        .popup-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .popup-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 1rem;
         }
 
-        /* Enhance table header appearance */
-        .table thead th {
-            font-weight: 600;
-            background-color: #f8f9fa;
+        .submit-btn {
+            background-color:  #0C768A;
+            color: #fff;
         }
 
-        /* Adjust buttons for better aesthetics */
-        .btn {
-            font-weight: 500;
-            font-size: 0.9rem;
+        .cancel-btn {
+            background-color: #e0e0e0;
+            color: #000;
         }
 
-        /* Mobile Responsiveness Improvements */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            gap: 5px;
+        }
+
+        .pagination-button {
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #000;
+            line-height: 1;
+        }
+
+        .pagination-button.disabled {
+            background-color: #e0e0e0;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .pagination-info {
+            font-size: 14px;
+            color: #000;
+            margin: 0 10px;
+        }
+
         @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-
-            .main {
-                padding: 10px !important;
-            }
-
-            .container {
-                padding: 0 10px;
-            }
-
-            /* Responsive Table Styling */
-            .table-responsive {
-                overflow-x: auto;
-            }
-
-            .table {
-                width: 100%;
-                margin-bottom: 1rem;
-                background-color: transparent;
-            }
-
-            .table thead {
-                display: table-header-group;
-            }
-
-            .table tbody tr {
-                display: table-row;
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-            }
-
-            .table th,
-            .table td {
-                display: table-cell;
-                padding: 8px;
-                vertical-align: middle;
-                border: 1px solid #ddd;
-            }
-
-            /* Responsive Filter and Search */
-            .d-flex.justify-content-between {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            #roleFilter,
-            .btn-group {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-
-            .btn-group {
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-
-            .btn-group .btn {
-                flex-grow: 1;
-                margin: 2px;
-            }
-
-            /* Pagination Controls */
-            .pagination-controls {
+            .search-filter-container {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 10px;
             }
 
-            #prevBtn,
-            #nextBtn {
+            .search-input {
                 width: 100%;
             }
 
-            #pageNumbers {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px;
-            }
-
-            #pageNumbers .btn {
-                flex-grow: 0;
-            }
-
-            /* Action Column Styling */
-            .table td:last-child {
-                text-align: center;
-            }
-
-            .bi-trash {
-                font-size: 1rem;
-                cursor: pointer;
-            }
-        }
-
-        /* Ensure full width on smaller screens */
-        @media (max-width: 480px) {
-            .container {
+            .dropdown-select {
                 width: 100%;
-                padding: 0 5px;
             }
 
-            .table {
-                font-size: 12px;
+            th,
+            td {
+                font-size: 0.85rem;
+                padding: 12px 10px;
             }
 
-            .table th,
-            .table td {
-                padding: 6px;
-            }
-        }
-
-        /* Mobile Responsiveness Improvements */
-        @media (max-width: 768px) {
-            body {
-                font-size: 14px;
+            .action-button,
+            .approve-btn,
+            .reject-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                min-width: 80px;
             }
 
-            .main {
-                padding: 10px !important;
+            .popup-content {
+                width: 95%;
+                padding: 15px;
             }
 
-            .container {
-                padding: 0 10px;
+            .popup-content h3 {
+                font-size: 1.2rem;
             }
 
-            /* Responsive Table Styling */
-            .table-responsive {
+            .form-group input {
+                font-size: 0.9rem;
+            }
+
+            .popup-buttons button {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+
+            table {
+                display: block;
                 overflow-x: auto;
+                white-space: nowrap;
             }
 
-            .table {
-                width: 100%;
-                margin-bottom: 1rem;
-                background-color: transparent;
+            .availability-cell {
+                max-width: 150px;
             }
 
-            .table thead {
-                display: table-header-group;
-            }
-
-            .table tbody tr {
-                display: table-row;
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-            }
-
-            .table th,
-            .table td {
-                display: table-cell;
-                padding: 8px;
-                vertical-align: middle;
-                border: 1px solid #ddd;
-            }
-
-            /* Responsive Filter and Search */
-            .d-flex.justify-content-between {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            #roleFilter,
-            .btn-group {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-
-            .btn-group {
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-
-            .btn-group .btn {
-                flex-grow: 1;
-                margin: 2px;
-            }
-
-            /* Pagination Controls */
-            .pagination-controls {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 10px;
-            }
-
-            #prevBtn,
-            #nextBtn {
-                width: 100%;
-            }
-
-            #pageNumbers {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px;
-            }
-
-            #pageNumbers .btn {
-                flex-grow: 0;
-            }
-
-            /* Action Column Styling */
-            .table td:last-child {
-                text-align: center;
-            }
-
-            .bi-trash {
-                font-size: 1rem;
-                cursor: pointer;
-            }
-        }
-
-        /* Ensure full width on smaller screens */
-        @media (max-width: 480px) {
-            .container {
-                width: 100%;
-                padding: 0 5px;
-            }
-
-            .table {
-                font-size: 12px;
-            }
-
-            .table th,
-            .table td {
-                padding: 6px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .card-footer .btn {
-                max-width: 250px;
+            .availability-tooltip {
+                top: -120%;
+                left: 0;
+                transform: none;
+                max-width: 200px;
             }
         }
     </style>
 </head>
 
-<body>
+<body style="background-color:rgb(228, 236, 241);">
     <div class="d-flex">
-        <!-- Sidebar -->
-        <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
-        <!-- SIDEBAR END -->
+    <?php $this->load->view('IncludeAdmin/CommanSideBar'); ?>
 
 
-        <!-- Main Component -->
-        <div class="main ">
-            <!-- Navbar -->
-            <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
-            <!-- Navbar End -->
-
-            <main class="p-3">
-                <div class="container mt-3 mb-4">
-                    <h3 id="interviewHeading">Pooja Reschedule Interview</h3>
+        <!-- Main Content -->
+        <div class="main w-100">
+            <!-- Navbar (Placeholder) -->
+            <?php $this->load->view('IncludeAdmin/CommanNavBar'); ?>
 
 
-                    <!-- Filter Dropdown -->
-                    <div class=" d-flex justify-content-between mb-3">
-                        <select id="roleFilter" class="form-select w-auto" onchange="changeRole()">
-                            <option value="Pujari">Pujari</option>
-                            <option value="Astrologer">Astrologer</option>
+            <div class="container">
+                <!-- Search and Dropdown Bar -->
+                <div class="search-filter-container">
+                    <div class="search-input-container">
+                        <img src="<?php echo base_url('assets/images/HRside/search.png')?>" alt="Search" class="search-icon">
+                        <input type="text" class="search-input" placeholder="Search By name" id="searchInput">
+                    </div>
+                    <div class="dropdown-container">
+                        <select class="dropdown-select" id="userTypeFilter">
+                            <option value="all">All</option>
+                            <option value="astrologer">Astrologer</option>
+                            <option value="pujari">Pujari</option>
                         </select>
-
-                        <!-- Status Filter Buttons -->
-                        <div>
-                            <button class="btn btn-success" onclick="filterStatus('Approved')">Approved</button>
-                            <button class="btn btn-danger" onclick="filterStatus('Pending')">Pending</button>
-                            <button class="btn btn-secondary" onclick="filterStatus('All')">All</button>
-                        </div>
-                    </div>
-
-                    <!-- Search Bar -->
-                    <input type="text" id="searchBar" class="form-control mb-3 border-3 shadow-none" placeholder="Search..." onkeyup="filterData()">
-
-                    <!-- Tables -->
-                    <div class="table-responsive">
-                        <table id="pujariTable" class="table table-bordered table-light table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Sr. No.</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Contact No</th>
-                                    <th>Interview</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="pujariTableBody"></tbody>
-                        </table>
-
-                        <table id="astrologerTable" class="table table-bordered table-light table-hover d-none">
-                            <thead>
-                                <tr>
-                                    <th>Sr. No.</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Contact No</th>
-                                    <th>Interview</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="astrologerTableBody"></tbody>
-                        </table>
-                    </div>
-
-                    <!-- Pagination Controls -->
-                    <div class="d-flex justify-content-end gap-2">
-                        <button id="prevBtn" class="btn btn-sm btn text-white" style="background-color: #0c768a;" onclick="previousPage()">Previous</button>
-                        <div id="pageNumbers" class="btn-group"></div>
-                        <button id="nextBtn" class="btn btn-sm btn text-white" style="background-color: #0c768a;" onclick="nextPage()">Next</button>
                     </div>
                 </div>
 
-                <script>
-                    let currentPage = 1;
-                    const rowsPerPage = 8;
-                    let activeRole = "Pujari";
-                    let activeData = [];
-
-                    const pujariData = [{
-                            name: "John Doe",
-                            address: "123 Main St",
-                            contactNo: "1234567890",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Jane Smith",
-                            address: "456 Elm St",
-                            contactNo: "0987654321",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Mark Wilson",
-                            address: "789 Oak Ave",
-                            contactNo: "1122334455",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Jane Smith",
-                            address: "456 Elm St",
-                            contactNo: "0987654321",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Mark Wilson",
-                            address: "789 Oak Ave",
-                            contactNo: "1122334455",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Jane Smith",
-                            address: "456 Elm St",
-                            contactNo: "0987654321",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Mark Wilson",
-                            address: "789 Oak Ave",
-                            contactNo: "1122334455",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Jane Smith",
-                            address: "456 Elm St",
-                            contactNo: "0987654321",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Mark Wilson",
-                            address: "789 Oak Ave",
-                            contactNo: "1122334455",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Jane Smith",
-                            address: "456 Elm St",
-                            contactNo: "0987654321",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Mark Wilson",
-                            address: "789 Oak Ave",
-                            contactNo: "1122334455",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Jane Smith",
-                            address: "456 Elm St",
-                            contactNo: "0987654321",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Mark Wilson",
-                            address: "789 Oak Ave",
-                            contactNo: "1122334455",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                    ];
-
-                    const astrologerData = [{
-                            name: "Astro Raj",
-                            address: "101 Star St",
-                            contactNo: "2223334445",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Astro Meena",
-                            address: "202 Galaxy Rd",
-                            contactNo: "5556667778",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Astro Vikram",
-                            address: "303 Moon Blvd",
-                            contactNo: "9998887776",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Astro Meena",
-                            address: "202 Galaxy Rd",
-                            contactNo: "5556667778",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Astro Vikram",
-                            address: "303 Moon Blvd",
-                            contactNo: "9998887776",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Astro Meena",
-                            address: "202 Galaxy Rd",
-                            contactNo: "5556667778",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Astro Vikram",
-                            address: "303 Moon Blvd",
-                            contactNo: "9998887776",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Astro Meena",
-                            address: "202 Galaxy Rd",
-                            contactNo: "5556667778",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Astro Vikram",
-                            address: "303 Moon Blvd",
-                            contactNo: "9998887776",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Astro Meena",
-                            address: "202 Galaxy Rd",
-                            contactNo: "5556667778",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Astro Vikram",
-                            address: "303 Moon Blvd",
-                            contactNo: "9998887776",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                        {
-                            name: "Astro Meena",
-                            address: "202 Galaxy Rd",
-                            contactNo: "5556667778",
-                            serviceTaken: "Reschedule",
-                            status: "Pending"
-                        },
-                        {
-                            name: "Astro Vikram",
-                            address: "303 Moon Blvd",
-                            contactNo: "9998887776",
-                            serviceTaken: "Reschedule",
-                            status: "Approved"
-                        },
-                    ];
-
-                    function changeRole() {
-                        activeRole = document.getElementById("roleFilter").value;
-                        activeData = activeRole === "Pujari" ? [...pujariData] : [...astrologerData];
-
-                        document.getElementById("pujariTable").classList.toggle("d-none", activeRole !== "Pujari");
-                        document.getElementById("astrologerTable").classList.toggle("d-none", activeRole !== "Astrologer");
-
-                        currentPage = 1;
-                        renderTable();
-                    }
-
-                    function renderTable() {
-                        const tableBody = document.getElementById(activeRole === "Pujari" ? "pujariTableBody" : "astrologerTableBody");
-                        tableBody.innerHTML = "";
-
-                        let filtered = activeData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
-
-                        filtered.forEach((item, index) => {
-                            let row = `
-                <tr ${item.serviceTaken === "Reschedule" ? `onclick="openRescheduleModal('${item.name}', '${item.contactNo}')" style="cursor:pointer;"` : ''}>
-                    <td>${(currentPage - 1) * rowsPerPage + index + 1}</td>
-                    <td>${item.name}</td>
-                    <td>${item.address}</td>
-                    <td>${item.contactNo}</td>
-                    <td>${item.serviceTaken}</td>
-                    <td>${item.status}</td>
-                    <td> 
-                        <button class="btn btn-danger btn-sm" onclick="deleteRow(${index})">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-                            tableBody.innerHTML += row;
-                        });
-                    }
-
-                    function deleteRow(index) {
-                        activeData.splice((currentPage - 1) * rowsPerPage + index, 1);
-                        renderTable();
-                    }
-
-                    function changeRole() {
-                        activeRole = document.getElementById("roleFilter").value;
-                        activeData = activeRole === "Pujari" ? [...pujariData] : [...astrologerData];
-
-                        // Update heading dynamically
-                        document.getElementById("interviewHeading").textContent =
-                            activeRole === "Pujari" ? "Pujari Reschedule Interview" : "Astrologer Reschedule Interview";
-
-                        document.getElementById("pujariTable").classList.toggle("d-none", activeRole !== "Pujari");
-                        document.getElementById("astrologerTable").classList.toggle("d-none", activeRole !== "Astrologer");
-
-                        currentPage = 1;
-                        renderTable();
-                    }
-
-
-                    function updatePaginationButtons() {
-                        let totalPages = Math.ceil(activeData.length / rowsPerPage);
-                        document.getElementById("prevBtn").disabled = currentPage === 1;
-                        document.getElementById("nextBtn").disabled = currentPage === totalPages || totalPages === 0;
-
-                        let pageNumbersContainer = document.getElementById("pageNumbers");
-                        pageNumbersContainer.innerHTML = "";
-                        for (let i = 1; i <= totalPages; i++) {
-                            let pageBtn = `<button class="btn btn-sm ${i === currentPage ? 'btn-dark' : 'btn-outline-dark'}" onclick="goToPage(${i})">${i}</button>`;
-                            pageNumbersContainer.innerHTML += pageBtn;
-                        }
-                    }
-
-                    function previousPage() {
-                        if (currentPage > 1) {
-                            currentPage--;
-                            renderTable();
-                        }
-                    }
-
-                    function nextPage() {
-                        let totalPages = Math.ceil(activeData.length / rowsPerPage);
-                        if (currentPage < totalPages) {
-                            currentPage++;
-                            renderTable();
-                        }
-                    }
-
-                    function goToPage(pageNum) {
-                        currentPage = pageNum;
-                        renderTable();
-                    }
-
-                    function filterStatus(status) {
-                        activeData = (activeRole === "Pujari" ? pujariData : astrologerData).filter(item => status === "All" || item.status === status);
-                        currentPage = 1;
-                        renderTable();
-                    }
-
-                    function filterData() {
-                        let query = document.getElementById("searchBar").value.toLowerCase();
-                        activeData = (activeRole === "Pujari" ? pujariData : astrologerData).filter(item =>
-                            item.name.toLowerCase().includes(query) ||
-                            item.address.toLowerCase().includes(query) ||
-                            item.contactNo.toLowerCase().includes(query) ||
-                            item.status.toLowerCase().includes(query)
-                        );
-                        currentPage = 1;
-                        renderTable();
-                    }
-
-                    // Initialize
-                    changeRole();
-
-                    function renderTable() {
-                        const tableBody = document.getElementById(activeRole === "Pujari" ? "pujariTableBody" : "astrologerTableBody");
-                        tableBody.innerHTML = "";
-
-                        let filtered = activeData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
-
-                        filtered.forEach((item, index) => {
-                            let row = `
-                    <tr>
-                        <td>${(currentPage - 1) * rowsPerPage + index + 1}</td>
-                        <td>${item.name}</td>
-                        <td>${item.address}</td>
-                        <td>${item.contactNo}</td>
-                        <td>
-                            ${item.serviceTaken === "Reschedule" 
-                                ? `<button class="btn btn-warning btn-sm" onclick="openRescheduleModal('${item.name}')">Reschedule</button>` 
-                                : item.serviceTaken}
-                        </td>
-                        <td>${item.status}</td>
-                            
-                        <td class="text-center">
-                        <i class="bi bi-trash text-danger fs-5" onclick="confirmDelete()"></i>
-                        </td>
-                    </tr>`;
-                            tableBody.innerHTML += row;
-                        });
-                    }
-
-
-                    function confirmDelete() {
-                        Swal.fire({
-                            title: "Are you sure?",
-                            text: "Do you want to delete this record?",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#d33",
-                            cancelButtonColor: "#3085d6",
-                            confirmButtonText: "Yes, delete it!"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Swal.fire(
-                                    "Deleted!",
-                                    "Record has been deleted successfully.",
-                                    "success"
-                                );
-                            }
-                        });
-                    }
-
-
-                    function openRescheduleModal(name) {
-                        // Set the modal text dynamically
-                        document.getElementById("pujariMessage").innerHTML = `${name} has requested to add a new Puja (Satyanarayan puja) to his skillset.`;
-
-                        // Show the modal using Bootstrap's modal method
-                        var rescheduleModal = new bootstrap.Modal(document.getElementById('rescheduleModal'));
-                        rescheduleModal.show();
-                    }
-
-                    function submitReschedule() {
-                        // Get form values
-                        let date = document.getElementById("interviewDate").value;
-                        let time = document.getElementById("interviewTime").value;
-                        let venue = document.getElementById("interviewVenue").value;
-
-                        // Check if all fields are filled
-                        if (date === "" || time === "" || venue === "") {
-                            Swal.fire({
-                                icon: "warning",
-                                title: "Missing Information",
-                                text: "Please fill all the fields before rescheduling.",
-                            });
-                            return;
-                        }
-
-                        // Show SweetAlert success message
-                        Swal.fire({
-                            icon: "success",
-                            title: "Interview Scheduled Successfully!",
-                            confirmButtonText: "OK",
-                        }).then(() => {
-                            // Close the Bootstrap modal
-                            let modal = document.getElementById("rescheduleModal");
-                            let bootstrapModal = bootstrap.Modal.getInstance(modal); // Get modal instance
-                            bootstrapModal.hide(); // Hide modal
-
-                            // Optionally reset the form fields
-                            document.getElementById("interviewDate").value = "";
-                            document.getElementById("interviewTime").value = "";
-                            document.getElementById("interviewVenue").value = "";
-                        });
-                    }
-                </script>
-
-
-
-                <!-- Reschedule Modal -->
-                <div class="modal fade" id="rescheduleModal" tabindex="-1" aria-labelledby="rescheduleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="rescheduleModalLabel">Pooja Reschedule Interview</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- Tabs -->
+                <div class="tab-container">
+                    <ul class="nav nav-tabs" id="requestTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="true">Pending Requests</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="scheduled-tab" data-bs-toggle="tab" data-bs-target="#scheduled" type="button" role="tab" aria-controls="scheduled" aria-selected="false">Scheduled Requests</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="requestTabContent">
+                        <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Contact No</th>
+                                            <th>Available Days & Time</th>
+                                            <th>Date</th>
+                                            <th>User Type</th>
+                                            <th>New Service Requested</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pendingTableBody">
+                                        <!-- Static Data -->
+                                        <tr>
+                                            <td>John Doe</td>
+                                            <td>1234567890</td>
+                                            <td>Mon, Tue, Wed</td>
+                                            <td>2023-10-01</td>
+                                            <td>Astrologer</td>
+                                            <td>New Service</td>
+                                            <td>
+                                                <button onclick="rescheduleInterview('1', 'astrologer', '1')" class="btn btn-primary" title="Reschedule">Reschedule</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jane Smith</td>
+                                            <td>0987654321</td>
+                                            <td>Thu, Fri, Sat</td>
+                                            <td>2023-10-02</td>
+                                            <td>Pujari</td>
+                                            <td>New Service</td>
+                                            <td>
+                                                <button onclick="rescheduleInterview('2', 'pujari', '2')" class="btn btn-primary" title="Reschedule">Reschedule</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="modal-body text-center">
-                                <!-- Profile Image -->
-                                <img id="pujariImage" src="<?php echo base_url() . 'assets\images\astrologer.png'; ?>" class="rounded-circle mb-3" width="100" height="100" alt="Profile Picture">
-
-                                <!-- Dynamic Text -->
-                                <p id="pujariMessage" class="fw-bold"></p>
-
-                                <!-- Reschedule Form -->
-                                <div class="mb-3">
-                                    <label for="interviewDate" class="form-label">Interview Date</label>
-                                    <input type="date" class="form-control" id="interviewDate">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="interviewTime" class="form-label">Interview Time</label>
-                                    <input type="time" class="form-control" id="interviewTime">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="interviewVenue" class="form-label">Meeting Link</label>
-                                    <input type="text" class="form-control" id="interviewVenue" placeholder="Enter Link">
-                                </div>
-
-                                <!-- Submit Button -->
-                                <button class="btn btn-primary w-100" onclick="submitReschedule()">Reschedule Interview</button>
+                            <div class="pagination-container">
+                                <button id="prevBtn" class="btn btn-sm" onclick="previousPage()" style="background-color: #0c786a;">Previous</button>
+                                <div id="pageNumbers" class="btn-group"></div>
+                                <button id="nextBtn" class="btn btn-sm" onclick="nextPage()" style="background-color: #0c786a;">Next</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="scheduled" role="tabpanel" aria-labelledby="scheduled-tab">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Contact No</th>
+                                            <th>Date</th>
+                                            <th>User Type</th>
+                                            <th>New Service Requested</th>
+                                            <th>Meeting Link</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="scheduledTableBody">
+                                        <!-- Static Data -->
+                                        <tr>
+                                            <td>John Doe</td>
+                                            <td>1234567890</td>
+                                            <td>2023-10-03</td>
+                                            <td>Astrologer</td>
+                                            <td>New Service</td>
+                                            <td>
+                                                <a href="https://example.com" target="_blank" class="btn btn-info">Join Meeting</a>
+                                            </td>
+                                            <td>
+                                                <button onclick="updateInterviewStatus('1', 'approved', '1', 'astrologer')" class="btn icon-btn" title="Approve">✅</button>
+                                                <button onclick="updateInterviewStatus('1', 'rejected', '1', 'astrologer')" class="btn icon-btn" title="Reject">❌</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jane Smith</td>
+                                            <td>0987654321</td>
+                                            <td>2023-10-04</td>
+                                            <td>Pujari</td>
+                                            <td>New Service</td>
+                                            <td>
+                                                <a href="https://example.com" target="_blank" class="btn btn-info">Join Meeting</a>
+                                            </td>
+                                            <td>
+                                                <button onclick="updateInterviewStatus('2', 'approved', '2', 'pujari')" class="btn icon-btn" title="Approve">✅</button>
+                                                <button onclick="updateInterviewStatus('2', 'rejected', '2', 'pujari')" class="btn icon-btn" title="Reject">❌</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination-container" id="pagination">
+                                <button class="btn btn-sm" id="prevScheduledPage" onclick="previousPage('scheduled')" style="background-color: #0c786a;">
+                                    Previous </button>
+                                <button class="btn btn-sm" id="nextScheduledPage" onclick="nextPage('scheduled')" style="background-color: #0c786a;">Next</button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-
-                <!-- Edit Attendance Modal -->
-                <div class="modal fade" id="editAttendanceModal" tabindex="-1"
-                    aria-labelledby="editAttendanceModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content" style="background-color: var(--form-color);">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editAttendanceModalLabel">Edit Attendance</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close" onclick="resetForm()"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="UpdateAttendanceForm">
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                            <label for="attendanceDate" class="form-label">Date</label>
-                                            <input type="date" class="form-control" name="attendanceDate" id="attendanceDate" autocomplete="off" required>
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <label for="attendanceStatus" class="form-label">Attendance Status</label>
-                                            <select class="form-select" name="attendanceStatus" id="attendanceStatus" autocomplete="off" required>
-                                                <option value="" selected disabled>Select Status</option>
-                                                <option value="Present">Present</option>
-                                                <option value="Absent">Absent</option>
-                                                <option value="HalfDay">Half Day</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal" onclick="resetForm()">Close</button>
-                                <button type="submit" form="UpdateAttendanceForm" class="btn btn-primary">
-                                    Update</button>
-                            </div>
+            <!-- Popup -->
+            <div class="popup-overlay" id="reschedulePopup">
+                <div class="popup-content">
+                    <h3>Schedule Meeting</h3>
+                    <form id="rescheduleForm">
+                        <div class="form-group">
+                            <label for="meetingDate">Date</label>
+                            <input type="date" id="meetingDate" name="meetingDate" required>
+                            <div class="error-message" id="dateError"></div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="meetingTime">Time</label>
+                            <input type="time" id="meetingTime" name="meetingTime" required>
+                            <div class="error-message" id="timeError">Please select a valid time.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="meetingLink">Meeting Link</label>
+                            <input type="url" id="meetingLink" name="meetingLink" placeholder="https://example.com" required>
+                            <div class="error-message" id="linkError">Please enter a valid URL.</div>
+                        </div>
+                        <div class="popup-buttons">
+                            <button type="button" class="cancel-btn" onclick="closePopup()">Cancel</button>
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
-
-                <!-- script to reset form -->
-                <script>
-                    function resetForm() {
-                        document.getElementById('UpdateAttendanceForm').reset();
-                    }
-                </script>
-            </main>
+            </div>
         </div>
-
-    </div>
     </div>
 
-
-    <!-- Script Toggle Sidebar -->
     <script>
+        let pendingPage = 1;
+        let scheduledPage = 1;
+        let rowsPerPage = 5;
+
+        function populatePendingTable() {
+            const tableBody = document.getElementById("pendingTableBody");
+            tableBody.innerHTML = "";
+
+            const staticData = [
+                { name: "John Doe", contact: "1234567890", availability: "Mon, Tue, Wed", date: "2023-10-01", userType: "Astrologer", newServiceRequested: "New Service", id: "1", service_id: "1" },
+                { name: "Jane Smith", contact: "0987654321", availability: "Thu, Fri, Sat", date: "2023-10-02", userType: "Pujari", newServiceRequested: "New Service", id: "2", service_id: "2" }
+            ];
+
+            let start = (pendingPage - 1) * rowsPerPage;
+            let end = start + rowsPerPage;
+            let paginatedData = staticData.slice(start, end);
+
+            paginatedData.forEach((item) => {
+                const row = `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.contact}</td>
+                    <td>${item.availability}</td>
+                    <td>${item.date}</td>
+                    <td>${item.userType}</td>
+                    <td>${item.newServiceRequested}</td>
+                    <td>
+                        <button onclick="rescheduleInterview('${item.id}', '${item.userType}', '${item.service_id}')" class="btn btn-primary" title="Reschedule">Reschedule</button>
+                    </td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+
+            updatePagination('pending', staticData.length);
+        }
+
+        function populateScheduledTable() {
+            const tableBody = document.getElementById("scheduledTableBody");
+            tableBody.innerHTML = "";
+
+            const staticData = [
+                { name: "John Doe", contact: "1234567890", date: "2023-10-03", userType: "Astrologer", newServiceRequested: "New Service", meetingLink: "https://example.com", id: "1", service_id: "1" },
+                { name: "Jane Smith", contact: "0987654321", date: "2023-10-04", userType: "Pujari", newServiceRequested: "New Service", meetingLink: "https://example.com", id: "2", service_id: "2" }
+            ];
+
+            let start = (scheduledPage - 1) * rowsPerPage;
+            let end = start + rowsPerPage;
+            let paginatedData = staticData.slice(start, end);
+
+            paginatedData.forEach((item) => {
+                const row = `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.contact}</td>
+                    <td>${item.date}</td>
+                    <td>${item.userType}</td>
+                    <td>${item.newServiceRequested}</td>
+                    <td>
+                        <a href="${item.meetingLink}" target="_blank" class="btn btn-info">Join Meeting</a>
+                    </td>
+                    <td>
+                        <button onclick="updateInterviewStatus('${item.id}', 'approved', '${item.service_id}', '${item.userType}')" class="btn icon-btn" title="Approve">✅</button>
+                        <button onclick="updateInterviewStatus('${item.id}', 'rejected', '${item.service_id}', '${item.userType}')" class="btn icon-btn" title="Reject">❌</button>
+                    </td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+
+            updatePagination('scheduled', staticData.length);
+        }
+
+        function updatePagination(type, totalRows) {
+            const prevBtn = document.getElementById(type === 'pending' ? "prevBtn" : "prevScheduledPage");
+            const nextBtn = document.getElementById(type === 'pending' ? "nextBtn" : "nextScheduledPage");
+            const paginationInfo = document.getElementById(type === 'pending' ? "pageNumbers" : "scheduledPaginationInfo");
+
+            let totalPages = Math.ceil(totalRows / rowsPerPage);
+            let currentPage = type === 'pending' ? pendingPage : scheduledPage;
+
+            paginationInfo.innerHTML = `Page ${currentPage} of ${totalPages}`;
+
+            prevBtn.disabled = currentPage <= 1;
+            nextBtn.disabled = currentPage >= totalPages || totalPages === 0;
+        }
+
+        function previousPage(type) {
+            if (type === 'pending' && pendingPage > 1) {
+                pendingPage--;
+                populatePendingTable();
+            } else if (type === 'scheduled' && scheduledPage > 1) {
+                scheduledPage--;
+                populateScheduledTable();
+            }
+        }
+
+        function nextPage(type) {
+            let totalPages = Math.ceil((type === 'pending' ? pendingData.length : scheduledData.length) / rowsPerPage);
+
+            if (type === 'pending' && pendingPage < totalPages) {
+                pendingPage++;
+                populatePendingTable();
+            } else if (type === 'scheduled' && scheduledPage < totalPages) {
+                scheduledPage++;
+                populateScheduledTable();
+            }
+        }
+
+        let selectedUserType = null;
+        let selectedUserId = null;
+        let selectedServiceId = null;
+
+        let isModalOpen = false;
+
+        function rescheduleInterview(id, userType, serviceId) {
+            if (isModalOpen) return; // Prevent opening if the modal is already open
+
+            if (!id || !userType || !serviceId) {
+                console.warn("Invalid reschedule data", {
+                    id,
+                    userType,
+                    serviceId
+                });
+                return;
+            }
+
+            selectedUserType = userType;
+            selectedUserId = id;
+            selectedServiceId = serviceId;
+
+            isModalOpen = true;
+            document.getElementById("reschedulePopup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("reschedulePopup").style.display = "none";
+            isModalOpen = false; // Reset modal state
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            populatePendingTable();
+            populateScheduledTable();
+
+            const filterElement = document.getElementById("userTypeFilter");
+            if (filterElement) {
+                filterElement.addEventListener("change", () => {
+                    // Reload and re-filter data
+                    populatePendingTable();
+                    populateScheduledTable();
+                });
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById("rescheduleForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const meetingDate = document.getElementById("meetingDate").value;
+            const meetingTime = document.getElementById("meetingTime").value;
+            const meetingLink = document.getElementById("meetingLink").value;
+
+            const scheduledAt = `${meetingDate} ${meetingTime}`;
+
+            if (!meetingDate || !meetingTime || !meetingLink || !selectedUserId) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Validation Error",
+                    text: "Please fill in all fields!"
+                });
+                return;
+            }
+
+            function isValidURL(str) {
+                return /^(https?:\/\/)[^\s$.?#].[^\s]*$/.test(str);
+            }
+
+            if (!isValidURL(meetingLink)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Invalid URL",
+                    text: "Please enter a valid meeting link!"
+                });
+                return;
+            }
+
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Interview scheduled successfully!"
+            }).then(() => {
+                closePopup();
+                populatePendingTable();
+            });
+        });
+
+        function updateInterviewStatus(interviewId, status, serviceId, userType) {
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Interview status updated successfully!"
+            }).then(() => {
+                populatePendingTable();
+            });
+        }
+    </script>
+<script>
         const toggler = document.querySelector(".toggler-btn");
         const closeBtn = document.querySelector(".close-sidebar");
         const sidebar = document.querySelector("#sidebar");
@@ -874,8 +860,6 @@
             sidebar.classList.remove("collapsed");
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </body>
 
 </html>
