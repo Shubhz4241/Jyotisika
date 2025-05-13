@@ -37,8 +37,6 @@
 
 
     <main>
-       
-
         <div class="container my-5">
             <!-- balance and add money -->
             <div class="row">
@@ -162,7 +160,15 @@
                                     <div class="col-6 text-end"><strong>₹<span id="totalAmount">0</span></strong></div>
                                 </div>
                                 <center>
-                                    <button class="btn btn-success w-fit" id="rzp-button1">Proceed to Pay</button>
+                                    <center>
+                                        <?php if (!$this->session->userdata("user_id")): ?>
+                                            <button onclick="loginuser()" class="btn btn-success w-fit">Proceed toss
+                                                Pay</button>
+                                        <?php else: ?>
+                                            <button class="btn btn-success w-fit" id="rzp-button1">Proceed to Pay</button>
+                                        <?php endif; ?>
+                                    </center>
+
                                 </center>
 
                                 <!-- onclick="proceedToPay()" -->
@@ -176,9 +182,9 @@
                 </div>
             </div>
 
-            <!-- sscipt for the payment calculation and text change. -->
+
             <script>
-                // Initially disable the proceed button
+
                 document.querySelector('.btn-success').disabled = true;
 
                 function showPaymentInfo(amount) {
@@ -189,75 +195,55 @@
                     document.getElementById('gstAmount').textContent = gst.toFixed(2);
                     document.getElementById('totalAmount').textContent = total.toFixed(2);
 
-                    // Reset all buttons to "Add Money"
+
                     const buttons = document.querySelectorAll('.btnAddMoney');
                     buttons.forEach(btn => {
                         btn.textContent = 'Add Money';
-                        // btn.style.backgroundColor = 'var(--green)';
+
                     });
 
 
 
-                    // Change clicked button text to "Added"
+
                     event.target.textContent = 'Added';
 
-                    // Enable the proceed button
+
                     document.querySelector('.btn-success').disabled = false;
                 }
             </script>
 
-
-            <!-- <script>
-                function proceedToPay() {
-                    const totalAmount = parseFloat(document.getElementById('totalAmount').textContent);
-
-                    if (isNaN(totalAmount) || totalAmount <= 0) {
-                        alert("Invalid amount. Please select a valid amount.");
-                        return;
-                    }
-
-                    // Send AJAX request to the controller
-                    fetch("<?php echo base_url('User/processPayment'); ?>", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
-                        },
-                        body: "amount=" + totalAmount
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.status === "success") {
-                                alert("Payment processed successfully!");
-                                window.location.reload(); // Refresh page or redirect
-                            } else {
-                                console.log(data);
-                                alert("Payment failed: " + data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Error:", error);
-                            alert("Something went wrong. Please try again.");
-                        });
+            <script>
+                function loginuser() {
+                    alert("pls login to site");
                 }
-            </script> -->
+            </script>
 
-            <!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> -->
-            <!-- <script>
+            <!-- Razorpay Script -->
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+            <script>
+
                 document.getElementById('rzp-button1').addEventListener('click', function (e) {
 
-                    let amountprice = document.getElementById('selectedAmount').textContent.trim(); // Get text from span
+                    let amountprice = document.getElementById('totalAmount').textContent.trim();
                     let dataamt = parseInt(amountprice);
+                    let getselectedamount = document.getElementById('selectedAmount').textContent.trim();
+                    let dataselected = parseInt(getselectedamount);
 
-                    // console.log(dataamt);
+
                     e.preventDefault();
-                    initiatePayment('full', dataamt); // Example amount (5000 paise = ₹50)
+                    initiatePayment(dataamt ,dataselected);
                 });
 
-                function initiatePayment(paymentType, amount) {
-                    fetch('<?php echo base_url('User/create_razorpay_order'); ?>', {
+                function initiatePayment(amount ,dataselected) {
+                    fetch('<?php echo base_url('User_Api_Controller/create_razorpay_order'); ?>', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ payment_type: paymentType, amount: amount })
+                        body: JSON.stringify({
+                            amount: amount,
+                            
+
+                        })
                     })
                         .then(response => response.json())
                         .then(data => {
@@ -270,17 +256,24 @@
                                 "key": data.key,
                                 "amount": data.amount,
                                 "currency": "INR",
-                                "name": "New Astro",
+                                "name": "Jyotisika",
                                 "description": "Order Payment",
                                 "order_id": data.order_id,
                                 "handler": function (response) {
-                                    fetch('<?php echo base_url('User/processPayment'); ?>', {
+                                    const paymentId = response.razorpay_payment_id;
+                                    const signature = response.razorpay_signature;
+
+                                    console.log("Payment ID:", paymentId);
+                                    console.log("Signature:", signature);
+                                    fetch('<?php echo base_url('User_Api_Controller/processPayment'); ?>', {
                                         method: 'POST',
                                         headers: { 'Content-Type': 'application/json' },
                                         body: JSON.stringify({
                                             payment_id: response.razorpay_payment_id,
                                             razorpay_signature: response.razorpay_signature,
-                                            amount: amount
+                                            amount: dataselected,
+                                            order_id: response.razorpay_order_id,
+
                                         })
                                     })
                                         .then(res => res.json())
@@ -320,7 +313,9 @@
                             rzp.open();
                         });
                 }
-            </script> -->
+
+
+            </script>
 
 
         </div>

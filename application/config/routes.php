@@ -113,7 +113,7 @@ $route['FestivalReadmore/(:num)'] ='User/FestivalReadmore/$1';
 
 //data from admin  Jyotisika mall section
 $route['jyotisikamall'] = 'User/JyotisikaMall';
-$route['ProductDetails'] ='User/ProductDetails';
+$route['ProductDetails/(:num)'] ='User/ProductDetails/$1';
 $route['ProductPayment'] ='User/ProductPayment';
 
 
@@ -130,6 +130,8 @@ $route['MobPooja'] ='User/MobPooja';
 
 //Why us page
 $route['WhyUs'] ='User/WhyUs';
+
+$route['Cart'] = 'User/Cart';
 
 
 

@@ -52,29 +52,31 @@
                     <span id="wallet-amount">₹ 0</span>
                 </a>
 
+
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
-                        console.log("DOM fully loaded, calling fetchWalletBalance()");
-                        fetchWalletBalance();
+                        console.log("DOM fully loaded");
+
+                        <?php if ($this->session->userdata('user_id')): ?>
+                            fetchWalletBalance();
+                        <?php endif; ?>
                     });
 
                     function fetchWalletBalance() {
-                        // Get session ID from PHP
+                        let user_id = <?php echo $this->session->userdata('user_id') ?? 0; ?>;
 
-                        let formData = new URLSearchParams();
-
-                        fetch("<?php echo base_url('User_Api_Controller/getuser_infos'); ?>", {
+                        fetch("<?php echo base_url('User_Api_Controller/getuser_info'); ?>", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/x-www-form-urlencoded"
                             },
-
+                            body: new URLSearchParams({
+                                session_id: user_id
+                            })
                         })
                             .then(response => response.json())
                             .then(data => {
                                 if (data.status === "success") {
-                                    console.log("hello");
-                                    console.log(data);
                                     let val = data.data.amount;
                                     document.getElementById("wallet-amount").textContent = "₹ " + val;
                                 } else {
@@ -85,8 +87,10 @@
                                 console.error("Fetch error:", error);
                             });
                     }
-
                 </script>
+
+
+
                 <div class="position-relative">
                     <i class="bi bi-translate position-absolute ps-2"
                         style="top: 50%; left: 0px; transform: translateY(-50%);"></i>
@@ -172,34 +176,34 @@
                             <li>
                                 <hr class="dropdown-divider mx-3">
                             </li>
-                            <!-- <li>
+                            <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Notification'); ?>">
                                     <i class="bi bi-bell me-2"></i> Notifications
                                     <span class="badge bg-danger rounded-pill float-end me-2">3</span>
                                 </a>
-                            </li> -->
-                            <!-- <li>
+                            </li>
+                            <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Orders'); ?>">
                                     <i class="bi bi-bag me-2"></i> My Orders
                                 </a>
-                            </li> -->
-                            <!-- <li>
+                            </li>
+                            <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Following'); ?>">
                                     <i class="bi bi-heart me-2"></i> Following
                                 </a>
-                            </li> -->
+                            </li>
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('CustomerSupport'); ?>">
                                     <i class="bi bi-gear me-2"></i>
-                                    
+
                                     <?php echo $this->lang->line('Customer_Support') ? $this->lang->line('Customer_Support') : 'Customer_Support'; ?>
                                 </a>
                             </li>
-                            <!-- <li>
+                            <li>
                                 <a class="dropdown-item py-2 ps-4" href="#">
                                     <i class="bi bi-share me-2"></i> Refer to Friends
                                 </a>
-                            </li> -->
+                            </li>
                             <li>
                                 <hr class="dropdown-divider mx-3">
                             </li>
@@ -279,72 +283,61 @@
 
 
 <script>
-    document.getElementById("myOrdersLink").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default redirection
 
-        <?php if (!$this->session->userdata('user_id')): ?>
-            Swal.fire({
-                title: "Login Required",
-                text: "Pls login to view your Orders",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Login",
-                cancelButtonText: "Cancel",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to Signup/Login page
-                }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let myOrdersLink = document.getElementById("myOrdersLink");
+
+        if (myOrdersLink) {
+            myOrdersLink.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                <?php if (!$this->session->userdata('user_id')): ?>
+                    Swal.fire({
+                        title: "Login Required",
+                        text: "Please login to access this service",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Login",
+                        cancelButtonText: "Cancel",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "<?php echo base_url('login'); ?>";
+                        }
+                    });
+                <?php endif; ?>
             });
-        <?php else: ?>
-            window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
-        <?php endif; ?>
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        let myparaLink = document.getElementById("myparaLink");
+
+        if (myparaLink) {
+            myparaLink.addEventListener("click", function (event) {
+                event.preventDefault();
+                <?php if (!$this->session->userdata('user_id')): ?>
+                    Swal.fire({
+                        title: "Login Required",
+                        text: "Please login to access this service",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Login",
+                        cancelButtonText: "Cancel",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "<?php echo base_url('login'); ?>";
+                        }
+                    });
+                <?php else: ?>
+                    window.location.href = "<?php echo base_url('login'); ?>";
+                <?php endif; ?>
+            });
+        }
     });
 
 
-    document.getElementById("myOrdersLink").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default redirection
 
-        <?php if (!$this->session->userdata('user_id')): ?>
-            Swal.fire({
-                title: "Login Required",
-                text: "Pls login to access this servise",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Login",
-                cancelButtonText: "Cancel",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to Signup/Login page
-                }
-            });
-        <?php else: ?>
-            window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
-        <?php endif; ?>
-
-    });
-
-
-    document.getElementById("myparaLink").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default redirection
-
-        <?php if (!$this->session->userdata('user_id')): ?>
-            Swal.fire({
-                title: "Login Required",
-                text: "Pls login to access this servise",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Login",
-                cancelButtonText: "Cancel",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to Signup/Login page
-                }
-            });
-        <?php else: ?>
-            window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
-        <?php endif; ?>
-
-    });
 
 
 

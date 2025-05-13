@@ -67,8 +67,8 @@
             </div>
 
             <!-- cards -->
-            <div class="row my-4" id="cardContainer">
-                <?php for ($i = 0; $i < 16; $i++) { ?>
+            <div class="row my-4" class="cardContainer">
+                <?php for ($i = 0; $i < 5; $i++) { ?>
                     <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
                         <div class="card shadow rounded-3 h-100 position-relative" style="border: 2px solid var(--red); ">
                             <!-- Featured Badge -->
@@ -88,7 +88,7 @@
                                         </div>
                                     </a>
                                     <div class="ms-2">
-                                        <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
+                                        <a href="<?php echo base_url('PoojarViewMore'); ?>" class="text-decoration-none">
                                             <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Acharya Mishra Ji
                                             </h6>
                                         </a>
@@ -126,10 +126,21 @@
 
                                 <!-- Action Buttons -->
                                 <div class="d-flex gap-2">
-                                    <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
-                                        data-bs-toggle="modal" data-bs-target="#bookpooja">
-                                        Book Pooja
-                                    </button>
+                                    <?php if ($this->session->userdata("user_id")): ?>
+                                        <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
+                                            data-bs-toggle="modal" data-bs-target="#bookpooja">
+                                            Book Pooja
+                                        </button>
+                                    <?php else: ?>
+
+                                        <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
+                                            onclick="Showlogin()">
+                                            login Book Pooja
+                                        </button>
+
+                                    <?php endif ?>
+
+
                                 </div>
                             </div>
                         </div>
@@ -162,8 +173,7 @@
                                 <div class="col-12">
                                     <label class="form-label fw-bold">Preferred Date</label>
                                     <input type="date" class="form-control shadow-none"
-                                        min="<?php echo date('Y-m-d'); ?>"
-                                        required>
+                                        min="<?php echo date('Y-m-d'); ?>" required>
                                 </div>
 
                                 <div class="col-12">
@@ -215,6 +225,26 @@
             // Add event listener for search input
             document.getElementById("searchInput").addEventListener("input", filterCards);
             document.getElementById("experienceFilter").addEventListener("change", filterCards);
+        </script>
+
+        <script>
+            function Showlogin(){
+
+            
+            Swal.fire({
+                title: "Login Required",
+                text: "Please login to access this service",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Login",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "<?php echo base_url('Login'); ?>";
+                }
+            });
+        }
+
         </script>
 
     </main>

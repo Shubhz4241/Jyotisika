@@ -167,15 +167,12 @@
                 document.getElementById('mobileError').innerText = 'Please enter a valid 10-digit mobile number';
                 return;
             }
-            document.getElementById('mobileStep').style.display = 'none';
-            document.getElementById('otpStep').style.display = 'block';
-            startOtpTimer();
+            // document.getElementById('mobileStep').style.display = 'none';
+            // document.getElementById('otpStep').style.display = 'block';
+            // startOtpTimer();
         });
 
-        document.getElementById('resendOtpBtn').addEventListener('click', function () {
-            startOtpTimer();
-        });
-
+      
 
     </script>
 
@@ -217,6 +214,17 @@
                             document.getElementById("mobileStep").style.display = "none";
                             document.getElementById("otpStep").style.display = "block";
                             startOtpTimer();
+                        }else if (data.status === "notregistered") {
+                            Swal.fire({
+                                icon: "warning",
+                                title: "User not found",
+                                text: "Please sign up to continue."
+                            })
+
+
+                            // document.getElementById("mobileStep").style.display = "none";
+                            // document.getElementById("otpStep").style.display = "block";
+                            // startOtpTimer();
                         } else {
                             Swal.fire({
                                 icon: "error",
@@ -243,6 +251,13 @@
                     sendOtp();
                 }
             });
+
+            
+        document.getElementById('resendOtpBtn').addEventListener('click', function () {
+            document.getElementById('timerDisplay').style.display = 'block';
+            sendOtp();
+            startOtpTimer();
+        });
         });
     </script>
 

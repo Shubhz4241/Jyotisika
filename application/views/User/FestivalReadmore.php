@@ -86,7 +86,6 @@
 
             <!-- Festival Image + About the Festival -->
             <div class="row g-4 mb-5">
-                <!-- About the Festival -->
                 <div class="col-12">
                     <div class="p-4 border rounded shadow-sm  w-100 d-flex flex-column justify-content-between">
                         <h3 class="text-dark mb-3"><?php echo $festivaldata[0]["festivals_title"] ?></h3>
