@@ -139,8 +139,8 @@ class User extends CI_Controller
 
 		if ($user_id) {
 			$getdata["userinfo"] = $this->get_userdata($user_id);
-			$data["userinfo_data"]  = "";
-			
+			$data["userinfo_data"] = "";
+
 			if (!$getdata["userinfo"]) {
 				show_error("Failed to fetch user profile", 500);
 				redirect("UserLoginSignup/Logout");
@@ -149,9 +149,9 @@ class User extends CI_Controller
 			} else if ($getdata["userinfo"] == "userfound") {
 				redirect("UserLoginSignup/Logout");
 			}
-		
+
 			$data["userinfo_data"] = $getdata["userinfo"];
-			
+
 
 
 		}
@@ -382,14 +382,14 @@ class User extends CI_Controller
 
 		$api_url = base_url("User_Api_Controller/getproduct");
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL , $api_url);
-		curl_setopt($ch , CURLOPT_RETURNTRANSFER , true);
-		$getproduct = curl_exec($ch );
-		$curl_error_ch = curl_error($ch );
-		curl_close($ch );
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$getproduct = curl_exec($ch);
+		$curl_error_ch = curl_error($ch);
+		curl_close($ch);
 
 		if ($getproduct === false) {
-			show_error("cURL Error: " .$curl_error_ch, 500);
+			show_error("cURL Error: " . $curl_error_ch, 500);
 			return;
 		}
 
@@ -406,7 +406,7 @@ class User extends CI_Controller
 
 
 
-		$this->load->view('User/JyotisikaMall' , $data);
+		$this->load->view('User/JyotisikaMall', $data);
 	}
 
 
@@ -416,8 +416,8 @@ class User extends CI_Controller
 		$api_url = base_url("User_Api_Controller/get_specific_product");
 
 		$ch = curl_init();
-		curl_setopt($ch , CURLOPT_URL , $api_url);
-		curl_setopt($ch , CURLOPT_RETURNTRANSFER , true);
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["product_id" => $product_id]));
@@ -434,17 +434,17 @@ class User extends CI_Controller
 			return;
 		}
 
-			$productdetails = json_decode($product_response, true);
+		$productdetails = json_decode($product_response, true);
 
-			$data["product_data"]  = "";
-			if($productdetails["status"]=="success"){
+		$data["product_data"] = "";
+		if ($productdetails["status"] == "success") {
 
-				$data["product_data"] = $productdetails["data"];
-			}
-		
-		
+			$data["product_data"] = $productdetails["data"];
+		}
 
-				// $api_url = "http://localhost/Astrology/User_Api_Controller/VerifyProductInTheCart";
+
+
+		// $api_url = "http://localhost/Astrology/User_Api_Controller/VerifyProductInTheCart";
 
 		$api_urll = base_url("User_Api_Controller/VerifyProductInTheCart");
 
@@ -483,14 +483,18 @@ class User extends CI_Controller
 			}
 		}
 
-	
-			
-		
-		$this->load->view('User/ProductDetails' , $data);
+
+
+
+		$this->load->view('User/ProductDetails', $data);
 	}
 
-	public function Cart(){
+	public function Cart()
+	{
 
+		if (!$this->session->userdata("user_id")) {
+			redirect('home');
+		}
 		// $api_url = "http://localhost/Astrology/User_Api_Controller/GetCartData";
 
 		$api_url = base_url("User_Api_Controller/GetCartData");
@@ -502,7 +506,7 @@ class User extends CI_Controller
 			CURLOPT_URL => $api_url,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_CUSTOMREQUEST => "POST",
-			CURLOPT_POSTFIELDS => http_build_query([ "session_id" => $this->session->userdata("user_id")]),
+			CURLOPT_POSTFIELDS => http_build_query(["session_id" => $this->session->userdata("user_id")]),
 			CURLOPT_HTTPHEADER => ["Content-Type: application/x-www-form-urlencoded"]
 		]);
 
@@ -533,16 +537,20 @@ class User extends CI_Controller
 		// print_r($data["productdata"] );
 
 
-		$this->load->view("User/AddToCart", $data);
+		$this->load->view("User/Cart", $data);
 
 	}
 	public function ProductPayment()
 	{
 
+		if (!$this->session->userdata("user_id")) {
+			redirect('home');
+		}
+
 		$api_url = base_url("User_Api_Controller/get_delivery_address");
 		$ch = curl_init();
-		curl_setopt($ch , CURLOPT_URL , $api_url);
-		curl_setopt($ch , CURLOPT_RETURNTRANSFER , true);
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["session_id" => $this->session->userdata("user_id")]));
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
@@ -558,15 +566,15 @@ class User extends CI_Controller
 			return;
 		}
 
-			$productdetails = json_decode($product_response, true);
+		$productdetails = json_decode($product_response, true);
 
-			$data["userdeliveryaddress"] = " ";
-			if($productdetails["status"]=="success"){
-				$data["userdeliveryaddress"] = $productdetails["data"];
-			}
+		$data["userdeliveryaddress"] = "";
+		if ($productdetails["status"] == "success") {
+			$data["userdeliveryaddress"] = $productdetails["data"];
+		}
 
 
-				// $api_url = "http://localhost/Astrology/User_Api_Controller/GetCartData";
+		// $api_url = "http://localhost/Astrology/User_Api_Controller/GetCartData";
 
 		$api_url = base_url("User_Api_Controller/GetCartData");
 
@@ -577,7 +585,7 @@ class User extends CI_Controller
 			CURLOPT_URL => $api_url,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_CUSTOMREQUEST => "POST",
-			CURLOPT_POSTFIELDS => http_build_query([ "session_id" => $this->session->userdata("user_id")]),
+			CURLOPT_POSTFIELDS => http_build_query(["session_id" => $this->session->userdata("user_id")]),
 			CURLOPT_HTTPHEADER => ["Content-Type: application/x-www-form-urlencoded"]
 		]);
 
@@ -610,10 +618,55 @@ class User extends CI_Controller
 	}
 
 
+	public function save_address()
+	{
 
-	  
+		$formdata = [
+			"user_fullname" => $this->input->post("user_fullname"),
+			"user_phonenumber" => $this->input->post("user_phonenumber"),
+			"user_Address" => $this->input->post("user_Address"),
+			"user_city" => $this->input->post("user_city"),
+			"user_state" => $this->input->post("user_state"),
+			"user_pincode" => $this->input->post("user_pincode"),
+			"session_id" => $this->input->post("session_id") // Ensure it's an integer
+		];
 
-	
+		$api_url = base_url("User_Api_Controller/save_delivery_address");
+		// $api_url = "http://localhost/Astrology/User_Api_Controller/save_delivery_address";
+
+
+
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($formdata));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, [
+			'Content-Type: application/x-www-form-urlencoded'
+		]);
+
+
+		$response = curl_exec($ch);
+
+		if (curl_errno($ch)) {
+			echo json_encode(["status" => "error", "message" => "cURL Error: " . curl_error($ch)]);
+		} else {
+
+			$result = json_decode($response, true);
+
+
+			echo json_encode($result);
+		}
+
+
+		curl_close($ch);
+
+		redirect(base_url("ProductPayment"));
+	}
+
+
+
 
 
 
@@ -831,7 +884,7 @@ class User extends CI_Controller
 			$data["astrologerdata"] = "";
 		}
 
-		
+
 
 		$this->load->view('User/Astrologers', $data);
 
@@ -921,16 +974,15 @@ class User extends CI_Controller
 		$rating_response = curl_exec($rating);
 
 
-		$rating_response_data = json_decode($rating_response ,associative:true);
+		$rating_response_data = json_decode($rating_response, associative: true);
 
 
-		
+
 		$data["feedback"] = "";
 		// print_r($rating_response_data);
 		if ($rating_response_data["status"] == "success") {
 			$data["feedback"] = $rating_response_data["data"];
-		}
-		else{
+		} else {
 			$data["feedback"] = "";
 		}
 
@@ -941,7 +993,7 @@ class User extends CI_Controller
 
 		$api_url_avgrating = base_url("User_Api_Controller/get_avg_rating");
 		$avgrating = curl_init();
-		curl_setopt($avgrating , CURLOPT_URL ,$api_url_avgrating);
+		curl_setopt($avgrating, CURLOPT_URL, $api_url_avgrating);
 		curl_setopt($avgrating, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($avgrating, CURLOPT_POST, 1);
 		curl_setopt($avgrating, CURLOPT_POSTFIELDS, http_build_query(["astrologer_id" => $astrologer_id]));
@@ -950,15 +1002,14 @@ class User extends CI_Controller
 		$rating_response = curl_exec($avgrating);
 
 
-		$rating_response_data = json_decode($rating_response ,associative:true);
+		$rating_response_data = json_decode($rating_response, associative: true);
 
 
 		$data["rating"] = "";
 		// print_r($rating_response_data);
 		if ($rating_response_data["status"] == "success") {
 			$data["rating"] = $rating_response_data["data"];
-		}
-		else{
+		} else {
 			$data["rating"] = "";
 		}
 
@@ -1032,7 +1083,7 @@ class User extends CI_Controller
 		$language = $this->session->userdata('site_language') ?? 'english';
 		$this->lang->load('message', $language);
 
-		$api_url  = base_url("User_Api_Controller/show_online_puja");
+		$api_url = base_url("User_Api_Controller/show_online_puja");
 
 		$ch = curl_init();
 
@@ -1059,7 +1110,7 @@ class User extends CI_Controller
 
 
 
-		$this->load->view('User/BookPooja' , $data);
+		$this->load->view('User/BookPooja', $data);
 	}
 
 	public function PoojaInfo()
@@ -1086,11 +1137,11 @@ class User extends CI_Controller
 	public function OnlinePoojaris()
 	{
 
-		
+
 		$api_url = base_url("User_Api_Controller/show_online_pujari");
 		$ch = curl_init();
-		curl_setopt($ch , CURLOPT_URL  , $api_url );
-		curl_setopt($ch , CURLOPT_RETURNTRANSFER , true );
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["puja_id" => 1]));
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
@@ -1104,20 +1155,20 @@ class User extends CI_Controller
 			return;
 		}
 
-		
+
 
 		$showpujariresponse = json_decode($showpujari, associative: true);
-	
+
 
 		$data["showpujari"] = "";
 
-		if($showpujariresponse["status"] =="success"){
-			$data["showpujari"] =  $showpujariresponse["data"];
+		if ($showpujariresponse["status"] == "success") {
+			$data["showpujari"] = $showpujariresponse["data"];
 		}
 
 
-	
-		
+
+
 		$this->load->view("user/OnlinePoojaris");
 	}
 
@@ -1178,7 +1229,69 @@ class User extends CI_Controller
 
 
 
+		$api_url_showproduct = base_url("User_Api_Controller/showorderedproducts");
+		$ch_ = curl_init();
+		curl_setopt($ch_, CURLOPT_URL, $api_url_showproduct);
+		curl_setopt($ch_, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_, CURLOPT_POST, 1);
+		curl_setopt($ch_, CURLOPT_POSTFIELDS, http_build_query(["user_id" => $this->session->userdata("user_id")]));
+		curl_setopt($ch_, CURLOPT_TIMEOUT, 10);
+		$curl_error_follow = curl_error($ch_);
+		$orderedproduct = curl_exec($ch_);
 
+		curl_close($ch_);
+
+		if ($orderedproduct === false) {
+			show_error("cURL Error: " . $curl_error_follow, 500);
+			return;
+		}
+
+
+
+		$orderedproductresponse = json_decode($orderedproduct, associative: true);
+
+
+		$data["showorderedproduct"] = "";
+
+		if ($orderedproductresponse["status"] == "success") {
+			$data["showorderedproduct"] = $orderedproductresponse["data"];
+		}
+
+
+		$api_url_showproduct_shipped = base_url("User_Api_Controller/showorderedproducts_shipped");
+		$ch_s = curl_init();
+		curl_setopt($ch_s, CURLOPT_URL, $api_url_showproduct_shipped);
+		curl_setopt($ch_s, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_s, CURLOPT_POST, 1);
+		curl_setopt($ch_s, CURLOPT_POSTFIELDS, http_build_query(["user_id" => $this->session->userdata("user_id")]));
+		curl_setopt($ch_s, CURLOPT_TIMEOUT, 10);
+		$curl_error_shipped = curl_error($ch_s);
+		$orderedproduct_shipped = curl_exec($ch_s);
+
+		curl_close($ch_s);
+
+		if ($orderedproduct_shipped === false) {
+			show_error("cURL Error: " . $curl_error_shipped, 500);
+			return;
+		}
+
+
+
+		$orderedproduct_shippedresponse = json_decode($orderedproduct_shipped, associative: true);
+
+
+		$data["showorderedproduct_shipped"] = "";
+
+		if ($orderedproduct_shippedresponse["status"] == "success") {
+			$data["showorderedproduct_shipped"] = $orderedproduct_shippedresponse["data"];
+		}
+
+		// print_r($data["showorderedproduct_shipped"]);
+
+
+
+
+	
 		$this->load->view('User/Orders', $data);
 	}
 
@@ -1304,7 +1417,8 @@ class User extends CI_Controller
 		$this->load->view("User/Terms");
 	}
 
-	public function addtocart(){
+	public function addtocart()
+	{
 
 		$this->load->view("User/AddToCart");
 	}

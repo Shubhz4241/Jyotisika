@@ -557,7 +557,6 @@ class User_Api_Model extends CI_Model
 
 
 
-
     //Pujari section 
 
     public function show_online_puja_model()
@@ -643,12 +642,131 @@ class User_Api_Model extends CI_Model
     {
         $this->db->select("store_cart.* , jotishika_mall.*");
         $this->db->from("store_cart");
-        $this->db->join('jotishika_mall' , 'jotishika_mall.product_id = store_cart.product_id');
+        $this->db->join('jotishika_mall', 'jotishika_mall.product_id = store_cart.product_id');
         $this->db->where("store_cart.user_id", $user_id);
-         $query = $this->db->get();
+        $query = $this->db->get();
         return $query->result();
 
     }
+
+
+    public function getcartdata_razerpay_model_($user_id)
+    {
+
+        $this->db->where("user_id", $user_id);
+        $query = $this->db->get("store_cart");
+        return $query->result();
+    }
+
+
+    public function updatequantity_model($product_id, $user_id, $quantity)
+    {
+
+        $this->db->where("product_id ", $product_id);
+        $this->db->where("user_id ", $user_id);
+
+        return $this->db->update("store_cart", ["product_quantity" => $quantity]);
+    }
+
+
+    public function deleteproductfromcart_model($product_id, $user_id)
+    {
+
+        $this->db->where("product_id ", $product_id);
+        $this->db->where("user_id ", $user_id);
+        $query = $this->db->delete("store_cart");
+        return $query;
+    }
+
+       public function getuserinfo_model($addressid)
+    {
+
+        $this->db->where("user_info_id", $addressid);
+        $query = $this->db->get("deliveryaddress");
+
+        return $query->result();
+
+    }
+
+     public function getcartdata_model_data($user_id)
+    {
+
+        $this->db->where("user_id", $user_id);
+        $query = $this->db->get("store_cart");
+        return $query->result();
+    }
+
+     public function create_order($orderdata)
+    {
+
+        $this->db->insert('jyotisika_mall_orders', $orderdata);
+        return $this->db->insert_id();
+    }
+
+      public function add_order_item($orderdata)
+    {
+        $this->db->insert('order_items', $orderdata);
+        return $this->db->insert_id();
+    }
+
+    public function remove_cart_items($user_id)
+    {
+        $this->db->where('user_id', $user_id);
+        return $this->db->delete('store_cart'); // Deletes all cart items for the user
+    }
+
+
+
+    public function showorderedproducts_model($user_id)
+    {
+        $this->db->select('jyotisika_mall_orders.*, order_items.*, jotishika_mall.*');
+        $this->db->from('jyotisika_mall_orders');
+        $this->db->join('order_items', 'jyotisika_mall_orders.order_id = order_items.order_id', 'inner');
+        $this->db->join('jotishika_mall', 'order_items.product_id = jotishika_mall.product_id', 'inner');
+        $this->db->where('jyotisika_mall_orders.user_id', $user_id);
+        $this->db->where('jyotisika_mall_orders.status !=', 'shipped');
+        $this->db->order_by('jyotisika_mall_orders.order_date', 'DESC');
+
+
+
+        $query = $this->db->get();
+        return $query->result(); // Fetch and return results
+    }
+
+
+     public function showorderedproducts_model_shipped($user_id)
+    {
+        $this->db->select('jyotisika_mall_orders.*, order_items.*, jotishika_mall.*');
+        $this->db->from('jyotisika_mall_orders');
+        $this->db->join('order_items', 'jyotisika_mall_orders.order_id = order_items.order_id', 'inner');
+        $this->db->join('jotishika_mall', 'order_items.product_id = jotishika_mall.product_id', 'inner'); // Joining products table
+        $this->db->where('jyotisika_mall_orders.user_id', $user_id);
+        $this->db->where('jyotisika_mall_orders.status', 'shipped');
+        $this->db->order_by('jyotisika_mall_orders.order_date', 'DESC'); // Order by created_at (most recent first)
+
+
+        $query = $this->db->get();
+        return $query->result(); // Fetch and return results
+    }
+
+
+    public function save_feedback($formdata){
+
+     $query = $this->db->insert("product_feedback",$formdata);
+     return $query;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 

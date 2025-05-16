@@ -1274,16 +1274,20 @@ class User_Api_Controller extends CI_Controller
             return;
         } else {
 
-            $username = $this->input->post("user_name");
-            $useraddress = $this->input->post("user_address");
+
+
+
+            $username = $this->input->post("user_fullname");
+            $useraddress = $this->input->post("user_Address");
             $usercity = $this->input->post("user_city");
+            $userstate = $this->input->post("user_state");
             $userpincode = $this->input->post("user_pincode");
 
             $userphonenumber = $this->input->post("user_phonenumber");
 
             $user_id = $this->input->post("session_id");
 
-            if (empty($username) || empty($useraddress) || empty($usercity) || empty($userpincode) || empty($user_id)) {
+            if (empty($username) || empty($useraddress) || empty($usercity) || empty($userpincode) || empty($user_id) || empty($userstate)) {
 
                 $response = [
                     "status" => "error",
@@ -1300,6 +1304,7 @@ class User_Api_Controller extends CI_Controller
                 "user_city" => $usercity,
                 "user_pincode" => $userpincode,
                 "user_phonenumber" => $userphonenumber,
+                "user_state" => $userstate,
                 "user_id" => $user_id,
 
             ];
@@ -1690,7 +1695,7 @@ class User_Api_Controller extends CI_Controller
         } else {
 
             $user_id = $this->input->post("session_id");
-           
+
             if (empty($user_id)) {
 
                 $response = [
@@ -1703,7 +1708,7 @@ class User_Api_Controller extends CI_Controller
                 return;
             }
 
-           
+
 
 
             $query = $this->User_Api_Model->GetCartData_model($user_id);
@@ -1734,7 +1739,377 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-    
+
+
+
+
+    public function save_razorpay_order()
+    {
+
+        $json_input = file_get_contents("php://input");
+        $data = json_decode($json_input, true);
+
+
+        if (!$data || !isset($data['amount'])) {
+            echo json_encode(["status" => "error", "message" => "Invalid JSON input amount"]);
+            return;
+        }
+
+        $user_id = $this->session->userdata("user_id");
+
+        $getcartdata = $this->User_Api_Model->getcartdata_razerpay_model_($user_id);
+
+
+        $subtotal = array_reduce($getcartdata, function ($sum, $item) {
+            return $sum + ($item->product_price * $item->product_quantity);
+        }, 0);
+
+        $total_price = $subtotal + 40;
+
+        // $session_id = $this->session->userdata('user_id');
+        // if (empty($session_id)) {
+        //     echo json_encode(["status" => "error", "message" => "User not logged in"]);
+        //     return;
+        // }
+
+
+        $amount = $total_price;
+        if (!is_numeric($amount) || $amount <= 0) {
+            echo json_encode(["status" => "error", "message" => "Invalid payment amount"]);
+            return;
+        }
+
+        try {
+            $razorpay_order = $this->razorpay_lib->create_order($total_price, 'ORD_' . rand(1000, 9999));
+            if (!$razorpay_order) {
+                throw new Exception('Failed to create Razorpay order');
+            }
+
+
+            $this->session->set_userdata('razorpay_order_id', $razorpay_order['id']);
+
+
+            echo json_encode([
+                'status' => 'success',
+                'order_id' => $razorpay_order['id'],
+                'amount' => $total_price, // Convert to paisa
+
+                // 'key' => 'rzp_test_cFYTpLVvrC4FFn',   rutuja mam dashboard
+
+                'key' => 'rzp_test_n9TyNiHflMp51H',
+                // jotishvitaran
+
+                // 'key' => 'rzp_live_aKnqCVUpRcVAoS',
+
+
+                // 'name'           => $user->username,
+                // 'email'          => $user->email,
+                // 'payment_type'   => $payment_method,
+                // 'is_direct'      => $is_direct_purchase ? 'yes' : 'no' // Identify purchase type in response
+            ]);
+        } catch (Exception $e) {
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+
+    public function saveorder()
+    {
+
+        $json_input = file_get_contents("php://input");
+        $data = json_decode($json_input, true);
+
+        // Validate JSON data
+        if (!$data || !isset($data['addressid'])) {
+            echo json_encode(["status" => "error", "message" => "Invalid JSON input"]);
+            return;
+        }
+
+        $payment_id = $data['payment_id'];
+        $razorpay_signature = $data['razorpay_signature'];
+        $order_id = $data['order_id'];
+
+        $is_valid = $this->razorpay_lib->verify_payment($payment_id, $order_id, $razorpay_signature);
+        if (!$is_valid) {
+            echo json_encode(["status" => "error", "message" => "Wallet update failed: "]);
+            return;
+        }
+
+
+        $addressid = $data['addressid'];
+
+        $user_id = $this->session->userdata("user_id");
+
+        $getuserinfo = $this->User_Api_Model->getuserinfo_model($addressid);
+
+        $getcartdata = $this->User_Api_Model->getcartdata_model_data($user_id);
+
+
+        $subtotal = array_reduce($getcartdata, function ($sum, $item) {
+            return $sum + ($item->product_price * $item->product_quantity);
+        }, 0);
+
+
+        $total_price = $subtotal + 40;
+
+        $getuserdata = $getuserinfo[0];
+
+        date_default_timezone_set('Asia/Kolkata');
+        $timestamp = date('Y-m-d H:i:s', time());
+
+
+        $order_data = [
+            'user_id' => $user_id,
+            'order_no' => 'ORD_' . date('YmdHis') . rand(1000, 9999),
+            'user_fullname' => $getuserdata->user_name,
+            'user_phonenumber' => $getuserdata->user_phonenumber,
+            'user_address' => $getuserdata->user_address,
+            'user_state' => $getuserdata->user_state,
+            'user_city' => $getuserdata->user_city,
+            'user_pincode' => $getuserdata->user_pincode,
+            'price' => $total_price,
+            'status' => 'pending',
+            'payment_status' => "paid",
+            'order_subtotal' => $subtotal,
+            'order_shipping_charges' => 50,
+            'order_date' => $timestamp,
+            'payment_id' => $payment_id,
+
+        ];
+
+
+        $order_id = $this->User_Api_Model->create_order($order_data);
+
+        if (!$order_id) {
+            $this->db->trans_rollback();
+            echo json_encode(['status' => 'error', 'message' => 'Failed to place order']);
+            return;
+        }
+
+
+
+
+        foreach ($getcartdata as $item) {
+            $order_item_data = [
+                'product_id' => $item->product_id,
+                'quantity' => $item->product_quantity,
+                'total_price' => $item->product_price * $item->product_quantity,
+                'price_per_product' => $item->product_price,
+                'order_id' => $order_id,
+
+                'created_at' => $timestamp
+            ];
+            $this->User_Api_Model->add_order_item($order_item_data);
+
+
+            // $this->User_Api_Model->decrese_stock($order_item_data);
+
+
+        }
+
+
+        $removeitems = $this->User_Api_Model->remove_cart_items($user_id);
+
+
+        echo json_encode(['status' => 'success', 'message' => 'Order placed successfully']);
+
+
+
+
+    }
+
+
+    public function updateQuantity()
+    {
+
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(["status" => "error", "message" => "Invalid request method"]);
+            return;
+        }
+
+        $product_id = trim($this->input->post("product_id"));
+        $session_id = $this->input->post('session_id');
+        $quantity = (int) $this->input->post("quantity"); // Ensure it's an integer
+
+
+        if (empty($product_id) || empty($session_id) || $quantity <= 0) {
+            echo json_encode(["status" => "error", "message" => "Invalid input data"]);
+            return;
+        }
+
+        $result = $this->User_Api_Model->updatequantity_model($product_id, $session_id, $quantity);
+
+        if ($result) {
+            echo json_encode(["status" => "success", "message" => "Quantity updated successfully"]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Failed to update quantity"]);
+        }
+
+        // echo json_encode( $response);
+
+
+
+    }
+
+
+    public function deleteproductfromcart()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(["status" => "error", "message" => "Invalid request method"]);
+            return;
+        }
+
+
+        $product_id = trim($this->input->post("product_id"));
+        $session_id = $this->input->post('session_id');
+
+        if (empty($product_id) || empty($session_id)) {
+            echo json_encode(["status" => "error", "message" => "Invalid input data"]);
+            return;
+        }
+
+        $result = $this->User_Api_Model->deleteproductfromcart_model($product_id, $session_id);
+
+        if ($result) {
+            echo json_encode(["status" => "success", "message" => "Quantity updated successfully"]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Failed to update quantity"]);
+        }
+
+    }
+
+
+    public function showorderedproducts()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+
+        $user_id = $this->input->post('user_id');
+        if (empty($user_id)) {
+            $this->output->set_status_header(400);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid input:User id not passed from function"]));
+            return;
+        }
+
+        $query = $this->User_Api_Model->showorderedproducts_model($user_id);
+
+        if ($query) {
+            echo json_encode([
+                "status" => "success",
+                "message" => "Ordered data featched successfully",
+                "data" => $query
+            ]);
+        } else {
+            echo json_encode([
+                "status" => "error",
+                "message" => "Ordered Data not featched successfully"
+            ]);
+        }
+
+    }
+
+    public function showorderedproducts_shipped()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+
+        $user_id = $this->input->post('user_id');
+        if (empty($user_id)) {
+            $this->output->set_status_header(400);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid input:User id not passed from function"]));
+            return;
+        }
+
+        $query = $this->User_Api_Model->showorderedproducts_model_shipped($user_id);
+
+        if ($query) {
+            echo json_encode([
+                "status" => "success",
+                "message" => "Ordered data featched successfully",
+                "data" => $query
+            ]);
+        } else {
+            echo json_encode([
+                "status" => "error",
+                "message" => "Ordered Data not featched successfully"
+            ]);
+        }
+
+    }
+
+
+    public function productfeedback()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+
+        $session_id = $this->input->post("session_id");
+        $message = $this->input->post("message");
+        $product_id = $this->input->post("product_id");
+        $productrating = $this->input->post("productrating");
+
+
+        if (  !$session_id ||  !$message ||   !$product_id  || !$productrating) {
+
+            $this->output->set_status_header(400);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "id not found"]));
+            return;
+        }
+
+        $formdata = [
+
+            "session_id"=>$session_id ,
+            "message"=> $message ,
+            "product_id"=>  $product_id,
+            "productrating"=>$productrating,
+
+        ];
+
+        $query = $this->User_Api_Model->save_feedback($formdata);
+
+        if($query){
+
+            $response = [
+                "status"=>"success",
+                "message"=>"feedback saved successfully"
+            ];
+        }
+        else{
+             $response = [
+                "status"=>"error",
+                "message"=>"feedback not saved successfully"
+            ];
+
+        }
+
+        echo json_encode( $response);
+
+    }
+
+
+
+
+
+
+
 
 }
 

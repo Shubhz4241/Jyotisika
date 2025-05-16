@@ -360,8 +360,7 @@
                                                         <label class="form-label">Rating</label>
                                                         <div class="rating">
                                                             <?php for ($i = 5; $i >= 1; $i--): ?>
-                                                                <input type="radio"
-                                                                    name="astologerrating"
+                                                                <input type="radio" name="astologerrating"
                                                                     value="<?php echo $i; ?>"
                                                                     id="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>"
                                                                     required>
@@ -687,6 +686,7 @@
                     <!-- mall -->
                     <div class="tab-pane fade" id="pills-mall" role="tabpanel" aria-labelledby="pills-mall-tab">
 
+
                         <!-- Submenu Nav pills -->
                         <ul class="nav nav-pills mb-5  d-flex justify-content-between w-100" id="mall-subtab"
                             role="tablist">
@@ -727,55 +727,60 @@
                                             'delivery_date' => '2024-03-27',
                                             'order_id' => 'ORD123457'
                                         ]
-                                    ];
+                                    ]; ?>
 
-                                    foreach ($orders as $order): ?>
-                                        <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card shadow-sm h-100 rounded-3"
-                                                style="border: 1px solid var(--red);">
-                                                <div class="row g-0">
-                                                    <div class="col-4">
-                                                        <img src="<?php echo base_url('assets/images/' . $order['image']); ?>"
-                                                            class="img-fluid rounded-start h-100"
-                                                            alt="<?php echo $order['name']; ?>" style="object-fit: cover;">
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div class="card-body p-3">
-                                                            <h6 class="card-title text-truncate mb-2"
-                                                                style="color: var(--red);">
-                                                                <?php echo $order['name']; ?>
-                                                            </h6>
+                                    <?php if (!empty($showorderedproduct)): ?>
+                                        <?php foreach ($showorderedproduct as $order): ?>
+                                            <div class="col-md-6 col-lg-4 mb-4">
+                                                <div class="card shadow-sm h-100 rounded-3"
+                                                    style="border: 1px solid var(--red);">
+                                                    <div class="row g-0">
+                                                        <div class="col-4">
+                                                            <img src="<?php echo base_url('assets/images/JyotisikaMall/Rudraksh.png'); ?>"
+                                                                class="img-fluid rounded-start h-100"
+                                                                alt="<?php echo $order['product_name']; ?>"
+                                                                style="object-fit: cover;">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="card-body p-3">
+                                                                <h6 class="card-title text-truncate mb-2"
+                                                                    style="color: var(--red);">
+                                                                    <?php echo $order['product_name']; ?>
+                                                                </h6>
 
-                                                            <div class="mb-2">
-                                                                <span
-                                                                    class="text-decoration-line-through text-muted">₹<?php echo $order['original_price']; ?></span>
-                                                                <span
-                                                                    class="ms-2 fw-bold">₹<?php echo $order['discounted_price']; ?></span>
-                                                            </div>
-
-                                                            <div class="mb-2">
-                                                                <span class="badge rounded-pill"
-                                                                    style="background-color: var(--yellow); color: black;">
-                                                                    <?php echo $order['status']; ?>
-                                                                </span>
-                                                            </div>
-
-                                                            <div style="font-size: 0.9rem;">
-                                                                <div class="text-truncate mb-1">
-                                                                    <i class="bi bi-box-seam"></i> Order ID:
-                                                                    <?php echo $order['order_id']; ?>
+                                                                <div class="mb-2">
+                                                                    <!-- <span
+                                                                    class="text-decoration-line-through text-muted">₹<?php echo $order['original_price']; ?></span> -->
+                                                                    <span
+                                                                        class="ms-2 fw-bold">₹<?php echo $order['total_price']; ?></span>
                                                                 </div>
-                                                                <div class="text-truncate">
+
+                                                                <div class="mb-2">
+                                                                    <span class="badge rounded-pill"
+                                                                        style="background-color: var(--yellow); color: black;">
+                                                                        <?php echo $order['status']; ?>
+                                                                    </span>
+                                                                </div>
+
+                                                                <div style="font-size: 0.9rem;">
+                                                                    <div class="text-truncate mb-1">
+                                                                        <i class="bi bi-box-seam"></i> Order ID:
+                                                                        <?php echo $order['order_no']; ?>
+                                                                    </div>
+                                                                    <!-- <div class="text-truncate">
                                                                     <i class="bi bi-calendar-check"></i> Delivery by:
                                                                     <?php echo date('d M Y', strtotime($order['delivery_date'])); ?>
+                                                                </div> -->
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+
+                                    <?php endif ?>
                                 </div>
                             </div>
 
@@ -793,55 +798,156 @@
                                             'delivery_date' => '2024-02-25',
                                             'order_id' => 'ORD123455'
                                         ]
-                                    ];
+                                    ]; ?>
+                                    <?php print_r($showorderedproduct_shipped); ?>
+                                    <?php if (!empty($showorderedproduct_shipped)): ?>
+                                        <?php foreach ($showorderedproduct_shipped as $order): ?>
+                                            <div class="col-md-6 col-lg-4 mb-4">
+                                                <div class="card shadow-sm h-100 rounded-3"
+                                                    style="border: 1px solid var(--red);">
+                                                    <div class="row g-0">
+                                                        <div class="col-4">
+                                                            <img src="<?php echo base_url('assets/images/JyotisikaMall/Rudraksh.png'); ?>"
+                                                                class="img-fluid rounded-start h-100"
+                                                                alt="<?php echo $order['product_name']; ?>"
+                                                                style="object-fit: cover;">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="card-body p-3">
+                                                                <h6 class="card-title text-truncate mb-2"
+                                                                    style="color: var(--red);">
+                                                                    <?php echo $order['product_name']; ?>
+                                                                </h6>
 
-                                    foreach ($completedOrders as $order): ?>
-                                        <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card shadow-sm h-100 rounded-3"
-                                                style="border: 1px solid var(--red);">
-                                                <div class="row g-0">
-                                                    <div class="col-4">
-                                                        <img src="<?php echo base_url('assets/images/' . $order['image']); ?>"
-                                                            class="img-fluid rounded-start h-100"
-                                                            alt="<?php echo $order['name']; ?>" style="object-fit: cover;">
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div class="card-body p-3">
-                                                            <h6 class="card-title text-truncate mb-2"
-                                                                style="color: var(--red);">
-                                                                <?php echo $order['name']; ?>
-                                                            </h6>
-
-                                                            <div class="mb-2">
-                                                                <span
-                                                                    class="text-decoration-line-through text-muted">₹<?php echo $order['original_price']; ?></span>
-                                                                <span
-                                                                    class="ms-2 fw-bold">₹<?php echo $order['discounted_price']; ?></span>
-                                                            </div>
-
-                                                            <div class="mb-2">
-                                                                <span class="badge rounded-pill"
-                                                                    style="background-color: var(--yellow); color: black;">
-                                                                    <?php echo $order['status']; ?>
-                                                                </span>
-                                                            </div>
-
-                                                            <div style="font-size: 0.9rem;">
-                                                                <div class="text-truncate mb-1">
-                                                                    <i class="bi bi-box-seam"></i> Order ID:
-                                                                    <?php echo $order['order_id']; ?>
+                                                                <div class="mb-2">
+                                                                    <!-- <span
+                                                                        class="text-decoration-line-through text-muted">₹<?php echo $order['price']; ?></span> -->
+                                                                    <span
+                                                                        class="ms-2 fw-bold">₹<?php echo $order['price']; ?></span>
                                                                 </div>
-                                                                <div class="text-truncate">
-                                                                    <i class="bi bi-calendar-check"></i> Delivered on:
-                                                                    <?php echo date('d M Y', strtotime($order['delivery_date'])); ?>
+
+                                                                <div class="mb-2">
+                                                                    <span class="badge rounded-pill"
+                                                                        style="background-color: var(--yellow); color: black;">
+                                                                        <?php echo $order['status']; ?>
+                                                                    </span>
+                                                                </div>
+
+                                                                <div style="font-size: 0.9rem;">
+                                                                    <div class="text-truncate mb-1">
+                                                                        <i class="bi bi-box-seam"></i> Order ID:
+                                                                        <?php echo $order['order_no']; ?>
+                                                                    </div>
+                                                                    <!-- <div class="text-truncate">
+                                                                        <i class="bi bi-calendar-check"></i> Delivered on:
+                                                                        <?php echo date('d M Y', strtotime($order['delivery_date'])); ?>
+                                                                    </div> -->
+                                                                </div>
+
+                                                                <div class="mt-auto">
+                                                                    <button class="btn btn-sm w-80"
+                                                                        style="background-color: var(--yellow);"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#feedbackModal<?php echo $order['order_id']; ?><?php echo $order['product_id']; ?>">
+                                                                        Give Feedback
+                                                                    </button>
                                                                 </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
+
+                                            <div class="modal fade "
+                                                id="feedbackModal<?php echo $order['order_id']; ?><?php echo $order['product_id']; ?>"
+                                                tabindex="-1">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Feedback for</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form class="productfeedback"
+                                                                id="feedbackForm<?php echo $order['order_id']; ?><?php echo $order['product_id']; ?>">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Rating</label>
+                                                                    <div class="rating">
+                                                                        <?php for ($i = 5; $i >= 1; $i--): ?>
+                                                                            <input type="radio" name="productrating"
+                                                                                value="<?php echo $i; ?>"
+                                                                                id="star<?php echo $order['order_id'] . $order['product_id'] . $i; ?>"
+                                                                                required>
+                                                                            <label
+                                                                                for="star<?php echo $order['order_id'] . $order['product_id'] . $i; ?>">★</label>
+                                                                        <?php endfor; ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Message</label>
+                                                                    <input type="hidden" name="product_id"
+                                                                        value="<?php echo $order['product_id']; ?>">
+                                                                    <textarea class="form-control shadow-none" name="message"
+                                                                        rows="3" required></textarea>
+                                                                </div>
+                                                                <button type="submit" class="btn w-100"
+                                                                    style="background-color: var(--yellow);">Submit
+                                                                    Feedback</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- script for that rating astrologer-->
+                                            <!-- <script>
+                                                document.querySelectorAll('.rating input').forEach(input => {
+                                                    input.addEventListener('change', function () {
+                                                        let ratingDiv = this.closest('.rating');
+                                                        let selectedValue = this.value;
+
+                                                       
+                                                        ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
+
+                                                       
+                                                        ratingDiv.querySelectorAll('input').forEach(starInput => {
+                                                            if (starInput.value <= selectedValue) {
+                                                                starInput.nextElementSibling.style.color = 'var(--yellow)';
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                                            </script> -->
+
+                                            <script>
+
+                                                document.querySelectorAll('.rating').forEach(ratingDiv => {
+                                                    ratingDiv.querySelectorAll('input').forEach(input => {
+                                                        input.addEventListener('change', function () {
+                                                            let selectedValue = this.value;
+                                                            console.log(selectedValue);
+
+
+                                                            // Reset all stars
+                                                            ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
+
+                                                            // Highlight selected stars
+                                                            ratingDiv.querySelectorAll('input').forEach(starInput => {
+                                                                if (starInput.value <= selectedValue) {
+                                                                    starInput.nextElementSibling.style.color = 'var(--yellow)';
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                });
+                                            </script>
+                                        <?php endforeach; ?>
+
+                                    <?php else: ?>
+
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
@@ -889,9 +995,48 @@
 
                                 }
                             })
+                    });
+                });
 
 
 
+                document.querySelectorAll("form.productfeedback").forEach(form => {
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault();
+
+                        const formData = new FormData(this); // `this` is the form element
+
+                        formData.append("session_id", "<?php echo $this->session->userdata("user_id") ?>");
+                        // console.log("hello world");
+                        // console.log(formData);
+                        fetch("<?php echo base_url("User_Api_Controller/productfeedback"); ?>", {
+
+                            method: "POST",
+                            body: formData,
+                        }).then(response => response.json())
+                            .then(data => {
+                                if (data.status == "success") {
+                                    let modal = bootstrap.Modal.getInstance(this.closest('.modal'));
+                                    modal.hide();
+                                    Swal.fire({
+                                        title: "success",
+                                        text: "feedback submited successfully",
+                                        icon: "success",
+                                    });
+
+                                }
+                                else {
+
+
+                                    Swal.fire({
+                                        title: "warning",
+                                        text: "feedback not submitted ",
+                                        icon: "warning",
+                                    });
+
+
+                                }
+                            })
                     });
                 });
             });

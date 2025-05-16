@@ -114,7 +114,7 @@
                 <h4 class="fw-bold text-warning">₹  <?php echo $product_data[0]["product_price"] ?></h4>
 
 
-                <div class="mt-4">
+                <!-- <div class="mt-4">
                     <label for="quantity" class="form-label fw-bold">Quantity</label>
                     <div class="input-group w-25">
                         <button class="btn btn-outline-secondary" type="button" onclick="decreaseQty()">−</button>
@@ -135,7 +135,7 @@
                             qty.value = parseInt(qty.value) - 1;
                         }
                     }
-                </script>
+                </script> -->
                 <div class="button-group">
 
                     <?php if ($this->session->userdata("user_id")): ?>
@@ -194,7 +194,7 @@
         async function AddThisToCart() {
 
             let product_id = <?php echo $product_data[0]["product_id"] ?>;
-            let user_id = <?php echo $this->session->userdata("user_id") ?>;
+            let user_id = <?php echo $this->session->userdata("user_id") ??'null' ?>;
             let product_price = <?php echo $product_data[0]["product_price"] ?>;
             let cartButton = document.getElementById("cartbutton"); // Get button element
 
@@ -300,6 +300,8 @@
 
 
         }
+
+        
 
 
 
