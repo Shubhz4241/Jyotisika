@@ -46,7 +46,7 @@
     <?php $is_following = $followstatus ?>
     <!-- <?php print_r($astrologerdata) ?> -->
  
-    <?php print_r($rating); ?>
+    <!-- <?php print_r($rating); ?> -->
      <?php $avgrating =  (int)$rating[0]["average_rating"] ?>
 
 

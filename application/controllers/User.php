@@ -986,7 +986,7 @@ class User extends CI_Controller
 			$data["feedback"] = "";
 		}
 
-		print_r($data["feedback"]);
+		// print_r($data["feedback"]);
 
 
 		//Api To get avg rating of atrologer
@@ -1013,7 +1013,7 @@ class User extends CI_Controller
 			$data["rating"] = "";
 		}
 
-		print_r($data["rating"]);
+		// print_r($data["rating"]);
 
 
 		$astrologer_data = json_decode($response, associative: true);

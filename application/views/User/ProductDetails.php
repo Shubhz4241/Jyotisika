@@ -81,7 +81,92 @@
         .cart-container {
             margin-top: 50px;
         }
+
+
+        .review-card {
+            border: 1px solid var(--red, #d9534f);
+            min-height: 320px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+
+        .review-card .review-body {
+            flex: 1;
+        }
+
+        .review-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        /* Slider buttons (same as yours but remove margin-left/right) */
+        .owl-nav .owl-prev,
+        .owl-nav .owl-next {
+            pointer-events: auto;
+            background-color: yellow;
+            border: 2px solid var(--red);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--red);
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+        }
+
+        /* Hover effect */
+        .owl-nav .owl-prev:hover,
+        .owl-nav .owl-next:hover {
+            background-color: yellow;
+            color: var(--yellow) !important;
+        }
+
+        /* Specific left/right positioning for large screens (default) */
+        .owl-nav .owl-prev {
+            left: -60px;
+        }
+
+        .owl-nav .owl-next {
+            right: -60px;
+        }
+
+        /* For mobile screens — override the absolute positioning */
+        @media (max-width: 767.98px) {
+            .owl-nav {
+                position: relative !important;
+                width: 100%;
+                margin-top: 20px;
+                display: flex !important;
+                justify-content: center;
+                gap: 20px;
+                transform: none !important;
+                top: auto !important;
+            }
+
+            .owl-nav .owl-prev,
+            .owl-nav .owl-next {
+                position: relative !important;
+                left: auto !important;
+                right: auto !important;
+                top: auto !important;
+                transform: none !important;
+            }
+        }
     </style>
+
+
 
 </head>
 
@@ -91,7 +176,7 @@
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
-  
+
     <div class="container my-5">
         <div class="row product-container">
             <!-- Product Image -->
@@ -111,7 +196,7 @@
                     <?php echo ($product_data[0]["product_description"]) ?>
                 </p>
 
-                <h4 class="fw-bold text-warning">₹  <?php echo $product_data[0]["product_price"] ?></h4>
+                <h4 class="fw-bold text-warning">₹ <?php echo $product_data[0]["product_price"] ?></h4>
 
 
                 <!-- <div class="mt-4">
@@ -141,7 +226,7 @@
                     <?php if ($this->session->userdata("user_id")): ?>
 
                         <?php if ($productverify == "exist"): ?>
-                           <a href="<?php echo base_url('Cart'); ?>"> <button class="btn mt-4 add-to-cart-btn">View Cart</button> </a>
+                            <a href="<?php echo base_url('Cart'); ?>"> <button class="btn mt-4 add-to-cart-btn">View Cart</button> </a>
 
 
                         <?php else: ?>
@@ -157,16 +242,151 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
+    <!-- Reviews -->
+    <div class="container my-4 position-relative">
+        <h4>Reviews</h4>
+        <div class="owl-carousel owl1 owl-theme">
+            <!-- Loop Start -->
+            <!-- Card 1 -->
+            <div class="item">
+                <div class="card review-card shadow">
+                    <div class="d-flex justify-content-center mb-3">
+                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
+                    </div>
+                    <div class="text-center review-body">
+                        <h5 class="fw-bold mb-2">John Doe</h5>
+                        <div class="d-flex justify-content-center mb-2">
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star text-muted me-1"></i>
+                        </div>
+                        <p class="card-text">Great service, will return again!</p>
+                    </div>
+                </div>
+            </div>
 
-        document.addEventListener("DOMContentLoaded", function () {
+            <!-- Card 2 -->
+            <div class="item">
+                <div class="card review-card shadow">
+                    <div class="d-flex justify-content-center mb-3">
+                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
+                    </div>
+                    <div class="text-center review-body">
+                        <h5 class="fw-bold mb-2">Jane Smith</h5>
+                        <div class="d-flex justify-content-center mb-2">
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star text-muted me-1"></i>
+                            <i class="bi bi-star text-muted me-1"></i>
+                        </div>
+                        <p class="card-text">Nice, but expected a bit more insight.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="item">
+                <div class="card review-card shadow">
+                    <div class="d-flex justify-content-center mb-3">
+                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
+                    </div>
+                    <div class="text-center review-body">
+                        <h5 class="fw-bold mb-2">Alex Johnson</h5>
+                        <div class="d-flex justify-content-center mb-2">
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                        </div>
+                        <p class="card-text">Absolutely perfect!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="card review-card shadow">
+                    <div class="d-flex justify-content-center mb-3">
+                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
+                    </div>
+                    <div class="text-center review-body">
+                        <h5 class="fw-bold mb-2">Alex Johnson</h5>
+                        <div class="d-flex justify-content-center mb-2">
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                        </div>
+                        <p class="card-text">Absolutely perfect!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="card review-card shadow">
+                    <div class="d-flex justify-content-center mb-3">
+                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
+                    </div>
+                    <div class="text-center review-body">
+                        <h5 class="fw-bold mb-2">Alex Johnson</h5>
+                        <div class="d-flex justify-content-center mb-2">
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                        </div>
+                        <p class="card-text">Absolutely perfect!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="card review-card shadow">
+                    <div class="d-flex justify-content-center mb-3">
+                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
+                    </div>
+                    <div class="text-center review-body">
+                        <h5 class="fw-bold mb-2">Alex Johnson</h5>
+                        <div class="d-flex justify-content-center mb-2">
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                        </div>
+                        <p class="card-text">Absolutely perfect!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Owl Carousel + Bootstrap Icons + jQuery -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
             const showloginbtn = document.querySelectorAll(".showloginbtn");
 
-            Array.from(showloginbtn).forEach(function (showloginbtn) {
-                showloginbtn.addEventListener("click", function (e) {
+            Array.from(showloginbtn).forEach(function(showloginbtn) {
+                showloginbtn.addEventListener("click", function(e) {
                     e.preventDefault(); // Now correctly inside the clic
                     Swal.fire({
                         title: "Login Required",
@@ -194,7 +414,7 @@
         async function AddThisToCart() {
 
             let product_id = <?php echo $product_data[0]["product_id"] ?>;
-            let user_id = <?php echo $this->session->userdata("user_id") ??'null' ?>;
+            let user_id = <?php echo $this->session->userdata("user_id") ?? 'null' ?>;
             let product_price = <?php echo $product_data[0]["product_price"] ?>;
             let cartButton = document.getElementById("cartbutton"); // Get button element
 
@@ -300,12 +520,41 @@
 
 
         }
-
-        
-
-
-
     </script>
+
+    <!-- Owl Carousel Init -->
+    <script>
+    $(document).ready(function () {
+        $('.owl1').owlCarousel({
+            loop: true,
+            margin: 10,
+            responsiveClass: true,
+            dots: false,
+            nav: true,
+            navText: [
+                "<i class='bi bi-chevron-left'></i>",
+                "<i class='bi bi-chevron-right'></i>"
+            ],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                800: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
+    });
+
+    
+</script>
+
 
 
 
