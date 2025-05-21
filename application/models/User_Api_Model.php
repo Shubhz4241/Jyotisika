@@ -678,7 +678,7 @@ class User_Api_Model extends CI_Model
         return $query;
     }
 
-       public function getuserinfo_model($addressid)
+    public function getuserinfo_model($addressid)
     {
 
         $this->db->where("user_info_id", $addressid);
@@ -688,7 +688,7 @@ class User_Api_Model extends CI_Model
 
     }
 
-     public function getcartdata_model_data($user_id)
+    public function getcartdata_model_data($user_id)
     {
 
         $this->db->where("user_id", $user_id);
@@ -696,14 +696,14 @@ class User_Api_Model extends CI_Model
         return $query->result();
     }
 
-     public function create_order($orderdata)
+    public function create_order($orderdata)
     {
 
         $this->db->insert('jyotisika_mall_orders', $orderdata);
         return $this->db->insert_id();
     }
 
-      public function add_order_item($orderdata)
+    public function add_order_item($orderdata)
     {
         $this->db->insert('order_items', $orderdata);
         return $this->db->insert_id();
@@ -734,7 +734,7 @@ class User_Api_Model extends CI_Model
     }
 
 
-     public function showorderedproducts_model_shipped($user_id)
+    public function showorderedproducts_model_shipped($user_id)
     {
         $this->db->select('jyotisika_mall_orders.*, order_items.*, jotishika_mall.*');
         $this->db->from('jyotisika_mall_orders');
@@ -750,20 +750,145 @@ class User_Api_Model extends CI_Model
     }
 
 
-    public function save_feedback($formdata){
+    public function save_feedback($formdata)
+    {
 
-     $query = $this->db->insert("product_feedback",$formdata);
-     return $query;
+        $query = $this->db->insert("product_feedback", $formdata);
+        return $query;
 
 
     }
 
 
 
+    //Pujari section 
+
+
+    public function show_puja_model()
+    {
+
+        $this->db->where("service_type", "pujari");
+        $query = $this->db->get("services");
+        return $query->result();
+    }
+
+
+    public function get_pujari_of_puja_model($puja_id)
+    {
+
+        $this->db->select("pujari_registration.id as pujari_id_, pujari_registration.name as pujariname,pujari_registration.*,  services.* , pujari_services.* , pujari_services.status as puja_status");
+        $this->db->from("pujari_services");
+        $this->db->join('pujari_registration', 'pujari_registration.id = pujari_services.pujari_id', 'Left');
+        $this->db->join('services', 'services.id = pujari_services.service_id', 'Left');
+        $this->db->where("service_id", $puja_id);
+        $this->db->where("pujari_services.status", "approved");
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    
+
+    public function pujari_view_more_model($pujari_id, $puja_id)
+    {
+
+        $this->db->select("pujari_registration.id as pujari_id_, pujari_registration.name as pujariname,pujari_registration.*,  services.* , pujari_services.* , pujari_services.status as puja_status");
+        $this->db->from("pujari_services");
+        $this->db->join('pujari_registration', 'pujari_registration.id = pujari_services.pujari_id', 'Left');
+        $this->db->join('services', 'services.id = pujari_services.service_id', 'Left');
+        $this->db->where("service_id", $puja_id);
+        $this->db->where("pujari_id", $pujari_id);
+        $this->db->where("pujari_services.status", "approved");
+
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
+
+    public function send_request_to_pujari_model($formdata)
+    {
+        $query = $this->db->insert("bookpuja_request_by_user_to_pujari", $formdata);
+        return $query;
+
+    }
+
+    public function get_booked_puja_model($user_id)
+    {
+
+        $this->db->select("bookpuja_request_by_user_to_pujari.* , pujari_registration.name as pujari_name , services.name as name_of_puja,services.image ");
+        $this->db->from("bookpuja_request_by_user_to_pujari");
+        $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id");
+        $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id");
+        $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id");
+        $this->db->where("jyotisika_user_id", $user_id);
+        $this->db->where("bookpuja_request_by_user_to_pujari.status !=", "Completed");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_completed_puja_model($user_id)
+    {
+
+        $this->db->select("bookpuja_request_by_user_to_pujari.* , pujari_registration.name as pujari_name , services.name as name_of_puja,services.image");
+        $this->db->from("bookpuja_request_by_user_to_pujari");
+        $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id");
+        $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id");
+        $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id");
+        $this->db->where("jyotisika_user_id", $user_id);
+        $this->db->where("bookpuja_request_by_user_to_pujari.status", "Completed");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+
+    public function pujarifeedback_model($formdata)
+    {
+
+        $query = $this->db->insert("pujari_feedback", $formdata);
+        return $query;
+
+
+    }
+
+
+    public function getpujarifeedback_model($pujari_id)
+    {
+
+        $this->db->select("pujari_feedback.* , jyotisika_users.user_name ,  jyotisika_users.user_image");
+        $this->db->from("pujari_feedback");
+        $this->db->join("jyotisika_users", "jyotisika_users.user_id = pujari_feedback.user_id");
+        $this->db->where("pujari_id", $pujari_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_avg_rating_pujari_model($pujari_id)
+    {
+        $this->db->select('pujari_feedback.pujari_id, AVG(pujari_feedback.rating) as average_rating');
+        $this->db->from('pujari_feedback');
+        $this->db->where("pujari_id", $pujari_id);
+        $query = $this->db->get();
+
+        return $query->result();
+
+    }
+
+    public function get_no_of_completed_puja_model($pujari_id)
+    {
+
+        $this->db->where("status", "Completed");
+        $query = $this->db->get("bookpuja_request_by_user_to_pujari");
+
+        $count = $query->num_rows();
+        return $count;
 
 
 
 
+
+    }
 
 
 

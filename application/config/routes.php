@@ -96,10 +96,10 @@ $route['privacypolicy'] = 'User/Privacypolicy';
 $route['wallet'] = 'User/Wallet';
 
 //data from pujari side book puja section
-$route['PoojarViewMore'] ='User/PoojarViewMore';
+$route['PoojarViewMore/(:num)/(:num)'] ='User/PoojarViewMore/$1/$2';
 $route['OfflinePoojaris'] ='User/OfflinePoojaris';
 $route['bookpooja'] = 'User/BookPooja';
-$route['OnlinePoojaris'] ='User/OnlinePoojaris';
+$route['OnlinePoojaris/(:num)'] ='User/OnlinePoojaris/$1';
 $route['Poojaris'] ='User/Poojaris';
 $route['PoojaInfo'] ='User/PoojaInfo';
 

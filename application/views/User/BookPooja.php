@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <?php print_r($puja_data) ?>
+        <!-- <?php print_r($puja_data) ?> -->
         <div class="row my-4" id="cardContainer">
 
         
@@ -83,23 +83,25 @@
 
                         <a href="<?php echo base_url('PoojaInfo')?>">
                             <div class="position-relative">
-                                <img src="<?php echo 'assets/images/BookPooja/MahaRudrabhishekpooja.png' ?>" class="card-img-top" alt="<?php echo $card['puja_name']; ?>" style="height: 200px; object-fit: cover;">
+                                <img src="<?php echo 'assets/images/BookPooja/MahaRudrabhishekpooja.png' ?>" class="card-img-top" alt="<?php echo $card['name']; ?>" style="height: 200px; object-fit: cover;">
                                 <div class="position-absolute top-0 end-0 m-2">
-                                    <span class="badge bg-danger"><?php echo $card['puja_name']; ?></span>
+                                    <span class="badge bg-danger"><?php echo $card['name']; ?></span>
                                 </div>
                             </div>
                         </a>
 
+                        
+
                         <div class="card-body text-center">
-                            <h5 class="card-title fw-bold"><?php echo $card['puja_name']; ?></h5>
-                            <p class="card-text text-muted"><?php echo $card['puja_decription']; ?></p>
+                            <h5 class="card-title fw-bold"><?php echo $card['name']; ?></h5>
+                            <p class="card-text text-muted"><?php echo $card['description']; ?></p>
                         </div>
                         <div class="card-footer bg-transparent border-0">
                             <div class="d-flex justify-content-between gap-2 px-2">
                                 <!-- <a href="<?php echo base_url('OfflinePoojaris') ?>" class="btn btn-dark text-dark flex-grow-1" style="background-color:var(--yellow)">
                                     Offline
                                 </a> -->
-                                <a href="<?php echo base_url('OnlinePoojaris') ?>" class="btn btn-outline-dark btnHover flex-grow-1">
+                                <a href="<?php echo base_url('OnlinePoojaris/'.$card['id']) ?>" class="btn btn-outline-dark btnHover flex-grow-1">
                                     Online
                                 </a>
                             </div>

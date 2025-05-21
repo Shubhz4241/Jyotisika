@@ -26,6 +26,8 @@ class User_Api_Controller extends CI_Controller
 
         $this->load->library('Razorpay_lib');
         $this->load->helper(array('form', 'url'));
+
+
     }
 
 
@@ -1519,52 +1521,52 @@ class User_Api_Controller extends CI_Controller
 
     }
 
-    public function show_online_pujari()
-    {
+    // public function show_online_pujari()
+    // {
 
-        if ($_SERVER["REQUEST_METHOD"] != "POST") {
-            $response = [
-                "status" => "error",
-                "message" => "Invalid request method"
-            ];
+    //     if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    //         $response = [
+    //             "status" => "error",
+    //             "message" => "Invalid request method"
+    //         ];
 
-            echo json_encode($response);
-            return;
-        } else {
+    //         echo json_encode($response);
+    //         return;
+    //     } else {
 
-            $puja_id = $this->input->post("puja_id");
+    //         $puja_id = $this->input->post("puja_id");
 
-            if (empty($puja_id)) {
+    //         if (empty($puja_id)) {
 
-                $response = [
-                    "status" => "error",
-                    "message" => "Puja id is missing"
-                ];
+    //             $response = [
+    //                 "status" => "error",
+    //                 "message" => "Puja id is missing"
+    //             ];
 
-            } else {
+    //         } else {
 
-                $query = $this->User_Api_Model->show_online_pujari_model();
+    //             $query = $this->User_Api_Model->show_online_pujari_model();
 
-                if ($query) {
-                    $response = [
-                        "status" => "success",
-                        "message" => "Pujari fetched successfully",
-                        "data" => $query
-                    ];
+    //             if ($query) {
+    //                 $response = [
+    //                     "status" => "success",
+    //                     "message" => "Pujari fetched successfully",
+    //                     "data" => $query
+    //                 ];
 
-                } else {
-                    $response = [
-                        "status" => "error",
-                        "message" => "There is no pujari available"
-                    ];
-                }
-            }
+    //             } else {
+    //                 $response = [
+    //                     "status" => "error",
+    //                     "message" => "There is no pujari available"
+    //                 ];
+    //             }
+    //         }
 
-            $this->output->set_content_type("application/json");
-            $this->output->set_output(json_encode($response));
+    //         $this->output->set_content_type("application/json");
+    //         $this->output->set_output(json_encode($response));
 
-        }
-    }
+    //     }
+    // }
 
 
     public function AddToCart()
@@ -2066,7 +2068,7 @@ class User_Api_Controller extends CI_Controller
         $productrating = $this->input->post("productrating");
 
 
-        if (  !$session_id ||  !$message ||   !$product_id  || !$productrating) {
+        if (!$session_id || !$message || !$product_id || !$productrating) {
 
             $this->output->set_status_header(400);
             $this->output->set_content_type('application/json');
@@ -2076,40 +2078,526 @@ class User_Api_Controller extends CI_Controller
 
         $formdata = [
 
-            "session_id"=>$session_id ,
-            "message"=> $message ,
-            "product_id"=>  $product_id,
-            "productrating"=>$productrating,
+            "session_id" => $session_id,
+            "message" => $message,
+            "product_id" => $product_id,
+            "productrating" => $productrating,
 
         ];
 
         $query = $this->User_Api_Model->save_feedback($formdata);
 
-        if($query){
+        if ($query) {
 
             $response = [
-                "status"=>"success",
-                "message"=>"feedback saved successfully"
+                "status" => "success",
+                "message" => "feedback saved successfully"
             ];
-        }
-        else{
-             $response = [
-                "status"=>"error",
-                "message"=>"feedback not saved successfully"
+        } else {
+            $response = [
+                "status" => "error",
+                "message" => "feedback not saved successfully"
             ];
 
         }
 
-        echo json_encode( $response);
+        echo json_encode($response);
 
     }
 
 
 
+    public function show_puja()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $query = $this->User_Api_Model->show_puja_model();
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "puja feached successfully",
+                    "data" => $query
+                ];
+            } else {
+                $response = [
+                    "status" => "error",
+                    "message" => "There is error in fetching data"
+                ];
+
+            }
+
+        }
+        echo json_encode($response);
+    }
+
+    public function get_pujari_of_puja()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $puja_id = $this->input->post("puja_id");
+
+            if (!$puja_id) {
+                $response = [
+                    "status" => "error",
+                    "message" => "puja id missing in the table",
+
+
+                ];
+                echo json_encode($response);
+                return;
+            }
+
+            $query = $this->User_Api_Model->get_pujari_of_puja_model($puja_id);
+
+            if ($query) {
+
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+
+                ];
+            } else {
+                $response = [
+                    "status" => "error",
+                    "message" => "there is error"
+
+
+                ];
+
+            }
+
+            echo json_encode($response);
+        }
+
+    }
+
+    public function pujari_view_more()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
 
 
 
+            $pujari_id = $this->input->post("pujari_id");
+            $puja_id = $this->input->post("puja_id");
 
+            if (empty($pujari_id) || empty($puja_id)) {
+                $response = [
+                    "status" => "error",
+                    "message" => "pujari id or puja id is missing"
+
+
+                ];
+                echo json_encode($response);
+
+                return;
+            } else {
+
+                $query = $this->User_Api_Model->pujari_view_more_model($pujari_id, $puja_id);
+
+                if ($query) {
+
+                    $response = [
+                        "status" => "success",
+                        "message" => "data fetched successfully",
+                        "data" => $query
+                    ];
+                } else {
+
+                    $response = [
+                        "status" => "error",
+                        "message" => "no data found in the  table"
+                    ];
+
+                }
+
+                echo json_encode($response);
+            }
+        }
+
+
+    }
+
+
+
+    public function send_request_to_pujari()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $pujari_id = $this->input->post("pujari_id");
+            $service_id = $this->input->post("service_id");
+            $user_id = $this->input->post("user_id");
+            $pujari_charge = $this->input->post("pujari_charges");
+            $pujadate = $this->input->post("pujadate");
+            $user_email = $this->input->post("useremail");
+            $puja_mode = $this->input->post("puja_mode");
+            $pujatime = $this->input->post("pujatime");
+
+            date_default_timezone_set('Asia/Kolkata');
+            $timestamp = date('Y-m-d H:i:s', time());
+
+            if (empty($pujari_id) || empty($service_id) || empty($user_id) || empty($pujari_charge) || empty($pujadate) || empty($user_email) || empty($puja_mode) || empty($pujatime)) {
+                $response = [
+                    "status" => "error",
+                    "message" => "no data found in the  table"
+                ];
+                echo json_encode($response);
+                return;
+            }
+
+            $formdata = [
+                "pujari_id" => $pujari_id,
+                "jyotisika_user_id" => $user_id,
+                "service_id" => $service_id,
+                "user_email" => $user_email,
+                "pujari_charge" => $pujari_charge,
+                "puja_mode" => $puja_mode,
+                "puja_date" => $pujadate,
+                "puja_time" => $pujatime,
+                "request_created_at" => $timestamp
+
+            ];
+
+            $query = $this->User_Api_Model->send_request_to_pujari_model($formdata);
+
+            if ($query) {
+
+                $response = [
+                    "status" => "success",
+                    "message" => "data founded in server"
+                ];
+            } else {
+                $response = [
+                    "status" => "error",
+                    "message" => "data not inserted in the table"
+                ];
+            }
+
+
+            echo json_encode($response);
+        }
+
+
+
+    }
+
+
+    public function get_booked_puja()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $user_id = $this->input->post("session_id");
+
+            if (!$user_id) {
+                $response = [
+                    "status" => "error",
+                    "message" => "user id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+            }
+
+            $query = $this->User_Api_Model->get_booked_puja_model($user_id);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+                $response = [
+                    "status" => "error",
+                    "message" => "data not fetched successfully"
+                ];
+
+            }
+
+            echo json_encode($response);
+
+        }
+
+    }
+
+    public function get_completed_puja()
+    {
+
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $user_id = $this->input->post("session_id");
+
+            if (!$user_id) {
+                $response = [
+                    "status" => "error",
+                    "message" => "user id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+            }
+
+            $query = $this->User_Api_Model->get_completed_puja_model($user_id);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+                $response = [
+                    "status" => "error",
+                    "message" => "data not fetched successfully"
+                ];
+
+            }
+
+            echo json_encode($response);
+
+        }
+    }
+
+
+    public function pujarifeedback()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $user_id = $this->input->post("session_id");
+            $message = $this->input->post("message");
+            $pujari_id = $this->input->post("pujari_id");
+            $rating = $this->input->post("rating");
+
+            if (!$user_id || !$message || !$pujari_id || !$rating) {
+                $response = [
+                    "status" => "error",
+                    "message" => "some values are missing"
+                ];
+
+                echo json_encode($response);
+                return;
+            } else {
+
+                $formdata = [
+
+                    "user_id" => $user_id,
+                    "message" => $message,
+                    "pujari_id" => $pujari_id,
+                    "rating" => $rating
+
+                ];
+
+                $query = $this->User_Api_Model->pujarifeedback_model($formdata);
+
+                if ($query) {
+                    $response = [
+                        "status" => "success",
+                        "message" => "feedback and ratings saved successfully"
+                    ];
+                } else {
+                    $response = [
+                        "status" => "error",
+                        "message" => "feedback not saved successfully"
+                    ];
+
+                }
+
+                echo json_encode($response);
+            }
+        }
+
+    }
+
+    public function get_avg_rating_pujari()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $pujari_id = $this->input->post("pujari_id");
+
+            if (!$pujari_id) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "pujari id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            } else {
+
+                $query = $this->User_Api_Model->get_avg_rating_pujari_model($pujari_id);
+
+                if ($query) {
+
+                    $response = [
+                        "status" => "success",
+                        "message" => "data fetched successfully",
+                        "data" => $query
+                    ];
+
+                } else {
+                    $response = [
+                        "status" => "error",
+                        "message" => "data not fetched successfully",
+
+                    ];
+
+                }
+                echo json_encode($response);
+            }
+
+        }
+    }
+
+    public function get_no_of_completed_puja()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+
+        else{
+
+             $pujari_id = $this->input->post("pujari_id");
+
+            if (!$pujari_id) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "pujari id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            } else {
+
+                $query = $this->User_Api_Model->get_no_of_completed_puja_model($pujari_id);
+
+                if ($query) {
+
+                    $response = [
+                        "status" => "success",
+                        "message" => "data fetched successfully",
+                        "data" => $query
+                    ];
+
+                } else {
+                    $response = [
+                        "status" => "error",
+                        "message" => "data not fetched successfully",
+
+                    ];
+
+                }
+                echo json_encode($response);
+            }
+
+
+        }
+    }
+
+
+
+    public function getpujarifeedback()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $pujari_id = $this->input->post("pujari_id");
+
+            if (!$pujari_id) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "pujari id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            } else {
+
+                $query = $this->User_Api_Model->getpujarifeedback_model($pujari_id);
+
+                if ($query) {
+
+                    $response = [
+                        "status" => "success",
+                        "message" => "data fetched successfully",
+                        "data" => $query
+                    ];
+
+                } else {
+                    $response = [
+                        "status" => "error",
+                        "message" => "data not fetched successfully",
+
+                    ];
+
+                }
+                echo json_encode($response);
+            }
+
+        }
+    }
 
 }
 

@@ -1083,7 +1083,7 @@ class User extends CI_Controller
 		$language = $this->session->userdata('site_language') ?? 'english';
 		$this->lang->load('message', $language);
 
-		$api_url = base_url("User_Api_Controller/show_online_puja");
+		$api_url = base_url("User_Api_Controller/show_puja");
 
 		$ch = curl_init();
 
@@ -1128,27 +1128,163 @@ class User extends CI_Controller
 
 
 
-	public function PoojarViewMore()
-	{
-		$this->load->view('User/PoojarViewMore');
-	}
-
-
-	public function OnlinePoojaris()
+	public function PoojarViewMore($pujari_id, $puja_id)
 	{
 
 
-		$api_url = base_url("User_Api_Controller/show_online_pujari");
+		$formdata = [
+			"pujari_id" => $pujari_id,
+			"puja_id" => $puja_id
+		];
+		$api_url = base_url("User_Api_Controller/pujari_view_more");
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $api_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["puja_id" => 1]));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $formdata);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		$curl_error_follow = curl_error($ch);
 		$showpujari = curl_exec($ch);
 
 		curl_close($ch);
+
+
+		if ($showpujari === false) {
+			show_error("cURL Error: " . $curl_error_follow, 500);
+			return;
+		}
+
+
+
+		$showpujariresponse = json_decode($showpujari, associative: true);
+
+
+		$data["showpujari"] = "";
+
+		if ($showpujariresponse["status"] == "success") {
+			$data["showpujari"] = $showpujariresponse["data"];
+		}
+
+		// print_r($data["showpujari"] );
+
+
+		$api_url_get_feedback = base_url("User_Api_Controller/getpujarifeedback");
+		$ch_feedback = curl_init();
+		curl_setopt($ch_feedback, CURLOPT_URL, $api_url_get_feedback);
+		curl_setopt($ch_feedback, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_feedback, CURLOPT_POST, 1);
+		curl_setopt($ch_feedback, CURLOPT_POSTFIELDS, ["pujari_id" => $pujari_id]);
+		curl_setopt($ch_feedback, CURLOPT_TIMEOUT, 10);
+		$curl_error_feedback = curl_error($ch_feedback);
+		$showfeedback = curl_exec($ch_feedback);
+
+		curl_close($ch_feedback);
+
+
+		if ($showfeedback === false) {
+			show_error("cURL Error: " . $curl_error_feedback, 500);
+			return;
+		}
+
+
+
+		$showfeedbackresponse = json_decode($showfeedback, associative: true);
+
+
+		$data["showfeedback"] = "";
+
+		if ($showfeedbackresponse["status"] == "success") {
+			$data["showfeedback"] = $showfeedbackresponse["data"];
+		}
+
+		// print_r($data["showfeedback"] );
+
+		$api_pujari_rating = base_url("User_Api_Controller/get_avg_rating_pujari");
+		$ch_rating = curl_init();
+		curl_setopt($ch_rating, CURLOPT_URL, $api_pujari_rating);
+		curl_setopt($ch_rating, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_rating, CURLOPT_POST, 1);
+		curl_setopt($ch_rating, CURLOPT_POSTFIELDS, ["pujari_id" => $pujari_id]);
+		curl_setopt($ch_rating, CURLOPT_TIMEOUT, 10);
+		$ch_rating_error_= curl_error($ch_rating);
+		$showrating = curl_exec($ch_rating);
+
+		curl_close($ch_rating);
+
+
+		if ($showrating === false) {
+			show_error("cURL Error: " . $ch_rating_error_, 500);
+			return;
+		}
+
+
+
+		$showrating_response = json_decode($showrating, associative: true);
+
+
+		$data["showrating"] = "";
+
+		if ($showrating_response["status"] == "success") {
+			$data["showrating"] = $showrating_response["data"];
+		}
+
+
+		// print_r($data["showrating"]);
+
+
+			$api_pujari_no_of_complted = base_url("User_Api_Controller/get_no_of_completed_puja");
+		$ch_compelted_puja = curl_init();
+		curl_setopt($ch_compelted_puja, CURLOPT_URL, $api_pujari_no_of_complted);
+		curl_setopt($ch_compelted_puja, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_compelted_puja, CURLOPT_POST, 1);
+		curl_setopt($ch_compelted_puja, CURLOPT_POSTFIELDS, ["pujari_id" => $pujari_id]);
+		curl_setopt($ch_compelted_puja, CURLOPT_TIMEOUT, 10);
+		$ch_no_of_completed_puja_error_ = curl_error($ch_compelted_puja);
+		$no_of_complted_puja_response = curl_exec($ch_compelted_puja);
+
+		curl_close($ch_compelted_puja);
+
+
+		if ($no_of_complted_puja_response === false) {
+			show_error("cURL Error: " . $ch_no_of_completed_puja_error_, 500);
+			return;
+		}
+
+
+
+		$no_of_complted_puja_response_data = json_decode($no_of_complted_puja_response, associative: true);
+
+
+		$data["showcompltedpuja"] = "";
+
+		if ($no_of_complted_puja_response_data["status"] == "success") {
+			$data["showcompltedpuja"] = $no_of_complted_puja_response_data["data"];
+		}
+
+		
+
+
+		$this->load->view('User/PoojarViewMore', $data);
+	}
+
+
+	public function OnlinePoojaris($puja_id)
+	{
+
+
+
+		$api_url = base_url("User_Api_Controller/get_pujari_of_puja");
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["puja_id" => $puja_id]));
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		$curl_error_follow = curl_error($ch);
+		$showpujari = curl_exec($ch);
+
+		curl_close($ch);
+
 
 		if ($showpujari === false) {
 			show_error("cURL Error: " . $curl_error_follow, 500);
@@ -1169,7 +1305,7 @@ class User extends CI_Controller
 
 
 
-		$this->load->view("user/OnlinePoojaris");
+		$this->load->view("user/OnlinePoojaris", $data);
 	}
 
 
@@ -1289,9 +1425,71 @@ class User extends CI_Controller
 		// print_r($data["showorderedproduct_shipped"]);
 
 
+		// Get Puja data
 
 
-	
+		$api_url_showbookedpuja = base_url("User_Api_Controller/get_booked_puja");
+		$ch_bookedpuja = curl_init();
+		curl_setopt($ch_bookedpuja, CURLOPT_URL, $api_url_showbookedpuja);
+		curl_setopt($ch_bookedpuja, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_bookedpuja, CURLOPT_POST, 1);
+		curl_setopt($ch_bookedpuja, CURLOPT_POSTFIELDS, http_build_query(["session_id" => $this->session->userdata("user_id")]));
+		curl_setopt($ch_bookedpuja, CURLOPT_TIMEOUT, 10);
+		$curl_error_bookedpuja = curl_error($ch_bookedpuja);
+		$showbookedpuja = curl_exec($ch_bookedpuja);
+
+		curl_close($ch_bookedpuja);
+
+		if ($showbookedpuja === false) {
+			show_error("cURL Error: " . $curl_error_bookedpuja, 500);
+			return;
+		}
+
+
+
+		$showbookedpuja_response = json_decode($showbookedpuja, associative: true);
+
+
+		$data["showbookedpuja_"] = "";
+
+		if ($showbookedpuja_response["status"] == "success") {
+			$data["showbookedpuja_"] = $showbookedpuja_response["data"];
+		}
+
+
+
+		//Get Completed puja 
+
+
+		$api_url_showbookedpuja_completed = base_url("User_Api_Controller/get_completed_puja");
+		$ch_bookedpuja_completed = curl_init();
+		curl_setopt($ch_bookedpuja_completed, CURLOPT_URL, $api_url_showbookedpuja_completed);
+		curl_setopt($ch_bookedpuja_completed, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_bookedpuja_completed, CURLOPT_POST, 1);
+		curl_setopt($ch_bookedpuja_completed, CURLOPT_POSTFIELDS, http_build_query(["session_id" => $this->session->userdata("user_id")]));
+		curl_setopt($ch_bookedpuja_completed, CURLOPT_TIMEOUT, 10);
+		$curl_error_bookedpuja = curl_error($ch_bookedpuja_completed);
+		$showbookedpuja_completed = curl_exec($ch_bookedpuja_completed);
+
+		curl_close($ch_bookedpuja_completed);
+
+		if ($showbookedpuja_completed === false) {
+			show_error("cURL Error: " . $curl_error_bookedpuja, 500);
+			return;
+		}
+
+
+
+		$showbookedpuja_completed_response = json_decode($showbookedpuja_completed, associative: true);
+
+
+		$data["show_completed_puja"] = "";
+
+		if ($showbookedpuja_completed_response["status"] == "success") {
+			$data["show_completed_puja"] = $showbookedpuja_completed_response["data"];
+		}
+
+
 		$this->load->view('User/Orders', $data);
 	}
 
