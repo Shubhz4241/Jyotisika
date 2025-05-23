@@ -103,7 +103,8 @@
                                             </a>
                                             <div class="d-flex align-items-center gap-1 ">
                                                 <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
-                                                <span class="small text-muted mt-1">4.8 (150+ Poojas)</span>
+                                                <span class="small text-muted mt-1"><?php echo $pujaridata["average_rating"] ?>
+                                                    (150+ Poojas)</span>
                                             </div>
                                         </div>
                                     </div>
@@ -145,7 +146,7 @@
 
                                             <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
                                                 onclick="Showlogin()">
-                                                login Book Pooja
+                                                Book Pooja
                                             </button>
 
                                         <?php endif ?>
@@ -313,12 +314,24 @@
                             .then(response => response.json())
                             .then(data => {
 
-                                Swal.fire({
-                                    title: "Success",
-                                    text: "Requested sended successfully",
-                                    icon: "success",
+                                if (data["status"] == "success") {
 
-                                });
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: "Requested sended successfully",
+                                        icon: "success",
+
+                                    });
+                                }
+                                else if (data["status"] == "warning") {
+                                    Swal.fire({
+                                        title: "warning",
+                                        text: "Pujari already booked",
+                                        icon: "warning",
+
+                                    });
+                                }
+
 
 
                             })

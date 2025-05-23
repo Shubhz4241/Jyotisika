@@ -2285,12 +2285,19 @@ class User_Api_Controller extends CI_Controller
 
             $query = $this->User_Api_Model->send_request_to_pujari_model($formdata);
 
-            if ($query) {
+
+            if ($query["status"] == "success") {
 
                 $response = [
                     "status" => "success",
                     "message" => "data founded in server"
                 ];
+            } else if ($query["status"] == "pujarialreadybooked") {
+                $response = [
+                    "status" => "warning",
+                    "message" => "pujari already booked "
+                ];
+
             } else {
                 $response = [
                     "status" => "error",
@@ -2299,11 +2306,11 @@ class User_Api_Controller extends CI_Controller
             }
 
 
+
             echo json_encode($response);
+            return;
+
         }
-
-
-
     }
 
 
@@ -2506,11 +2513,9 @@ class User_Api_Controller extends CI_Controller
             $this->output->set_content_type('application/json');
             $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
             return;
-        }
+        } else {
 
-        else{
-
-             $pujari_id = $this->input->post("pujari_id");
+            $pujari_id = $this->input->post("pujari_id");
 
             if (!$pujari_id) {
 

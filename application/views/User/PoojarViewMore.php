@@ -75,22 +75,22 @@
                                         </h5>
                                         <div class="d-flex align-items-center">
                                             <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
-                                            <span class="small ms-2 mt-1 text-white"><?php echo $showrating[0]["average_rating"] ?>(
-                                                 <?php
-                                                 
-                                                 if(!empty($showcompltedpuja)){
-                                                        echo $showcompltedpuja;
-                                                 }
-                                                 else{
-                                                    echo 0;
-                                                 }
-                                                  
-                                                
+                                            <span
+                                                class="small ms-2 mt-1 text-white"><?php echo $showrating[0]["average_rating"] ?>(
+                                                <?php
 
-                                                
-                                                    
-                                                    
-                                                    ?>+ Poojas)</span>
+                                                if (!empty($showcompltedpuja)) {
+                                                    echo $showcompltedpuja;
+                                                } else {
+                                                    echo 0;
+                                                }
+
+
+
+
+
+
+                                                ?>+ Poojas)</span>
 
                                         </div>
                                     </div>
@@ -203,10 +203,10 @@
                                             </div> -->
 
                                             <div class="col-12">
-                                                    <label class="form-label fw-bold">User Email</label>
-                                                    <input type="user_email" name="useremail" class="form-control shadow-none"
-                                                        required>
-                                                </div>
+                                                <label class="form-label fw-bold">User Email</label>
+                                                <input type="user_email" name="useremail"
+                                                    class="form-control shadow-none" required>
+                                            </div>
 
 
                                             <div class="col-12">
@@ -215,7 +215,7 @@
                                                     min="<?php echo date('Y-m-d'); ?>" required>
                                             </div>
 
-                                            <input type="text" value="<?php echo $showpujari[0]["pujari_id_"]  ?>"
+                                            <input type="text" value="<?php echo $showpujari[0]["pujari_id_"] ?>"
                                                 name="pujari_id" hidden>
                                             <input type="text" value="<?php echo $showpujari[0]["service_id"] ?>"
                                                 name="service_id" hidden>
@@ -226,12 +226,13 @@
                                                 value="<?php echo $this->session->userdata("user_id") ?? null; ?>"
                                                 name="user_id" hidden>
 
-                                            <input type="text" value="<?php echo $showpujari[0]["puja_charges"] ; ?>"
+                                            <input type="text" value="<?php echo $showpujari[0]["puja_charges"]; ?>"
                                                 name="pujari_charges" hidden>
 
                                             <div class="col-12">
                                                 <label class="form-label fw-bold">Preferred Time</label>
-                                                <input type="time" name="pujatime"  class="form-control shadow-none" required>
+                                                <input type="time" name="pujatime" class="form-control shadow-none"
+                                                    required>
                                             </div>
 
                                         </div>
@@ -269,48 +270,48 @@
         </section>
 
         <!-- Review section -->
-  
+
         <section>
             <div class="container mb-5">
                 <h5 class=" mb-4 fw-bold">User Reviews</h5>
                 <div class="owl-carousel owl1 owl-theme">
 
-                <?php if(!empty($showfeedback)): ?>
+                    <?php if (!empty($showfeedback)): ?>
 
-                    <?php foreach($showfeedback as $feedback):?>
-                    <div class="item">
-                        <div class="card shadow" style="border: 1px solid var(--red);">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <?php echo $feedback["message"] ?>
-                                </p>
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
-                                        class="rounded-circle me-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;">
-                                    <div>
-                                        <h5 class="card-title fw-bold mb-1"> <?php echo $feedback["user_name"] ?></h5>
-                                        <div class="d-flex">
-                                            <?php for ($i = 0; $i < $feedback["rating"]; $i++): ?>
-                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                    style="width: 15px; height: 15px;">
-                                            <?php endfor; ?>
+                        <?php foreach ($showfeedback as $feedback): ?>
+                            <div class="item">
+                                <div class="card shadow" style="border: 1px solid var(--red);">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            <?php echo $feedback["message"] ?>
+                                        </p>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
+                                                class="rounded-circle me-3"
+                                                style="width: 60px; height: 60px; object-fit: cover;">
+                                            <div>
+                                                <h5 class="card-title fw-bold mb-1"> <?php echo $feedback["user_name"] ?></h5>
+                                                <div class="d-flex">
+                                                    <?php for ($i = 0; $i < $feedback["rating"]; $i++): ?>
+                                                        <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
+                                                            style="width: 15px; height: 15px;">
+                                                    <?php endfor; ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <?php endforeach?>
+                        <?php endforeach ?>
 
                     <?php else: ?>
 
                     <?php endif ?>
-                 
-                    
-                   
-                    
+
+
+
+
                 </div>
             </div>
         </section>
@@ -334,8 +335,7 @@
                     event.preventDefault();
 
                     let formdata = new FormData(form);
-                    console.log(form);
-
+                   
 
                     fetch("<?php echo base_url('User_Api_Controller/send_request_to_pujari'); ?>", {
                         method: "POST",
@@ -343,8 +343,24 @@
                     })
                         .then(response => response.json())
                         .then(data => {
-                            console.log("Success:", data);
-                            form.reset();
+                            if (data["status"] == "success") {
+                               
+                                 Swal.fire({
+                                        title: "success",
+                                        text: "feedback submited successfully",
+                                        icon: "success",
+                                    });
+
+                               
+                            }
+                            else if (data["status"] == "warning") {
+                                 Swal.fire({
+                                        title: "warning",
+                                        text: "pujari already booked",
+                                        icon: "warning",
+                                    });
+
+                            }
 
                         })
                         .catch(error => {

@@ -1206,7 +1206,7 @@ class User extends CI_Controller
 		curl_setopt($ch_rating, CURLOPT_POST, 1);
 		curl_setopt($ch_rating, CURLOPT_POSTFIELDS, ["pujari_id" => $pujari_id]);
 		curl_setopt($ch_rating, CURLOPT_TIMEOUT, 10);
-		$ch_rating_error_= curl_error($ch_rating);
+		$ch_rating_error_ = curl_error($ch_rating);
 		$showrating = curl_exec($ch_rating);
 
 		curl_close($ch_rating);
@@ -1232,7 +1232,7 @@ class User extends CI_Controller
 		// print_r($data["showrating"]);
 
 
-			$api_pujari_no_of_complted = base_url("User_Api_Controller/get_no_of_completed_puja");
+		$api_pujari_no_of_complted = base_url("User_Api_Controller/get_no_of_completed_puja");
 		$ch_compelted_puja = curl_init();
 		curl_setopt($ch_compelted_puja, CURLOPT_URL, $api_pujari_no_of_complted);
 		curl_setopt($ch_compelted_puja, CURLOPT_RETURNTRANSFER, true);
@@ -1261,7 +1261,7 @@ class User extends CI_Controller
 			$data["showcompltedpuja"] = $no_of_complted_puja_response_data["data"];
 		}
 
-		
+
 
 
 		$this->load->view('User/PoojarViewMore', $data);
@@ -1526,8 +1526,22 @@ class User extends CI_Controller
 		$this->lang->load('message', $language);
 
 
-		$ch = curl_init();
 
+
+		$api_url = base_url("User_Api_Controller/show_top_astrologer");
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		$data = curl_exec($ch);
+
+		// print_r($data);
+
+		$datajson = json_decode($data);
+
+
+
+		print_r($datajson );
 
 
 		$this->load->view('User/WhyUs');
@@ -1611,6 +1625,7 @@ class User extends CI_Controller
 
 	public function Terms()
 	{
+
 
 		$this->load->view("User/Terms");
 	}

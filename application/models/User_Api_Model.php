@@ -776,10 +776,12 @@ class User_Api_Model extends CI_Model
     public function get_pujari_of_puja_model($puja_id)
     {
 
-        $this->db->select("pujari_registration.id as pujari_id_, pujari_registration.name as pujariname,pujari_registration.*,  services.* , pujari_services.* , pujari_services.status as puja_status");
+        $this->db->select("pujari_registration.id as pujari_id_, pujari_registration.name as pujariname,pujari_registration.*,  services.* , pujari_services.* , pujari_services.status as puja_status ,  AVG(pujari_feedback.rating) as average_rating");
         $this->db->from("pujari_services");
         $this->db->join('pujari_registration', 'pujari_registration.id = pujari_services.pujari_id', 'Left');
+        $this->db->join('pujari_feedback', 'pujari_feedback.pujari_id = pujari_registration.id', 'Left');
         $this->db->join('services', 'services.id = pujari_services.service_id', 'Left');
+        $this->db->group_by('pujari_registration.id');
         $this->db->where("service_id", $puja_id);
         $this->db->where("pujari_services.status", "approved");
 
@@ -787,7 +789,14 @@ class User_Api_Model extends CI_Model
         return $query->result();
     }
 
-    
+    //  $this->db->select("astrologer_registration.* , AVG(astrologer_feedback.rating) as average_rating");
+    //     $this->db->from("astrologer_registration");
+    //     $this->db->join('astrologer_feedback', 'astrologer_feedback.astrologer_id = astrologer_registration.id', 'Left');
+    //     $this->db->group_by('astrologer_registration.id');
+    //     $this->db->where("status", "approved");
+    //     $this->db->where("is_online", "1");
+
+
 
     public function pujari_view_more_model($pujari_id, $puja_id)
     {
@@ -808,8 +817,77 @@ class User_Api_Model extends CI_Model
 
     public function send_request_to_pujari_model($formdata)
     {
-        $query = $this->db->insert("bookpuja_request_by_user_to_pujari", $formdata);
-        return $query;
+
+        $pujari_id = $formdata["pujari_id"];
+        $puja_date = $formdata["puja_date"];
+        $puja_time = $formdata["puja_time"];
+        $service_id = $formdata["service_id"];
+        $puja_mode = $formdata["puja_mode"]; // Ensure puja_mode exists
+
+
+     
+        $duration = 2;
+
+
+        $this->db->where("pujari_id", $pujari_id);
+        $this->db->where("puja_date", $puja_date);
+        $query = $this->db->get("bookpuja_request_by_user_to_pujari");
+        $pujari_data = $query->result();
+
+
+
+        if ($puja_mode !== "Mob") {
+            $new_puja_time = strtotime($puja_time);
+            $new_puja_end_time = strtotime("+{$duration} hours", $new_puja_time);
+
+            foreach ($pujari_data as $puja) {
+
+                $existing_puja_time = strtotime($puja->puja_time);
+                $existing_puja_end_time = strtotime("+{$duration} hours", $existing_puja_time);
+
+
+                if (
+                    ($new_puja_time >= $existing_puja_time && $new_puja_time < $existing_puja_end_time) ||
+                    ($new_puja_end_time > $existing_puja_time && $new_puja_end_time <= $existing_puja_end_time)
+                ) {
+                    $response = [
+                        "status" => "pujarialreadybooked",
+                        "message" => "Pujari is already booked for this time. Please select a different time."
+                    ];
+
+                    return $response;
+                }
+
+            }
+
+
+        } 
+
+            $this->db->insert("bookpuja_request_by_user_to_pujari", $formdata);
+
+            if ($this->db->affected_rows() == 1) {
+                $inserted_id = $this->db->insert_id();
+
+
+                $this->db->where("book_puja_id", $inserted_id);
+                $query = $this->db->get("bookpuja_request_by_user_to_pujari");
+
+                $response = [
+                    "status" => "success",
+                    "message" => "Request sent for puja.",
+                    "data" => $query->row_array()
+                ];
+                return $response;
+            } else {
+                $response = [
+                    "status" => "dbqueryfailed",
+                    "message" => "Database error occurred.",
+                    "error" => $this->db->error()['message'],
+                    "query" => $this->db->last_query()
+                ];
+                return $response;
+            }
+
 
     }
 
@@ -880,7 +958,6 @@ class User_Api_Model extends CI_Model
 
         $this->db->where("status", "Completed");
         $query = $this->db->get("bookpuja_request_by_user_to_pujari");
-
         $count = $query->num_rows();
         return $count;
 
