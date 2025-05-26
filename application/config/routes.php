@@ -139,7 +139,7 @@ $route['demo'] = 'User/Demo';
 $route['Recharge'] ='User/Recharge';
 $route['ServiceDetails'] ='User/ServiceDetails';
 
-$route['chat'] = 'User/Chat';
+$route['chat/(:num)'] = 'User/Chat/$1';
 
 
 //user end ---User route end--- 

@@ -884,6 +884,28 @@ class User extends CI_Controller
 			$data["astrologerdata"] = "";
 		}
 
+		$user_id = $this->session->userdata('user_id');
+		if ($user_id) {
+			$getdata["userinfo"] = $this->get_userdata($user_id);
+			$data["userinfo_data"] = "";
+
+			if (!$getdata["userinfo"]) {
+				show_error("Failed to fetch user profile", 500);
+				redirect("UserLoginSignup/Logout");
+			} else if ($getdata["userinfo"] == "usernotfound") {
+				redirect("UserLoginSignup/Logout");
+			} else if ($getdata["userinfo"] == "userfound") {
+				redirect("UserLoginSignup/Logout");
+			}
+
+			$data["userinfo_data"] = $getdata["userinfo"];
+
+
+
+
+
+		}
+
 
 
 		$this->load->view('User/Astrologers', $data);
@@ -1541,7 +1563,7 @@ class User extends CI_Controller
 
 
 
-		print_r($datajson );
+		print_r($datajson);
 
 
 		$this->load->view('User/WhyUs');
@@ -1551,9 +1573,47 @@ class User extends CI_Controller
 
 	//---------------------------------------------Chat--------------------------------------------------------------------
 
-	public function Chat()
+	public function Chat($astrologer_id)
 	{
-		$this->load->view('User/Chat');
+
+		if (!$astrologer_id) {
+			show_error("User ID is required", 400);
+			return;
+		}
+
+		//Get astrolger by id
+		$api_url = base_url("User_Api_Controller/get_astrologer_by_id");
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["astrologer_id" => $astrologer_id]));
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		$curl_error = curl_error($ch);
+		$response = curl_exec($ch);
+
+		curl_close($ch);
+
+		if ($response === false) {
+			show_error("cURL Error: " . $curl_error, 500);
+			return;
+		}
+
+		$astrologer_data = json_decode($response, associative: true);
+		$data["astrologerdata"] = "";
+
+		if ($astrologer_data["status"] == "success") {
+
+			$data["astrologerdata"] = $astrologer_data["data"];
+		} else {
+			$data["astrologerdata"] = "";
+		}
+
+
+	
+
+
+		$this->load->view('User/Chat' , $data);
 	}
 
 

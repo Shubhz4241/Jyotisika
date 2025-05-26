@@ -62,6 +62,9 @@
             </div>
 
 
+            <?php print_r($userinfo_data) ?>
+
+
 
             <!-- <?php
 
@@ -99,9 +102,12 @@
 
             ?> -->
 
+            <?php print_r($astrologerdata) ?>
+
+
             <div class="row my-4" id="cardContainer">
 
-              
+
                 <?php if (!empty($astrologerdata)): ?>
                     <?php foreach ($astrologerdata as $astrologer): ?>
                         <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
@@ -130,7 +136,7 @@
                                             </a>
 
                                             <div class="d-flex align-items-center gap-1">
-                                                <?php for ($i = 0; $i < $astrologer['average_rating'] ; $i++): ?>
+                                                <?php for ($i = 0; $i < $astrologer['average_rating']; $i++): ?>
                                                     <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
                                                         style="width: 15px; height: 15px;">
                                                 <?php endfor; ?>
@@ -170,7 +176,13 @@
                                     <div class="d-flex gap-2 mb-2">
                                         <?php if ($this->session->userdata('user_id')): ?>
                                             <button class="btn btn-sm w-50 rounded-3 border-1"
-                                                style="background-color: var(--yellow);">Chat</button>
+                                                style="background-color: var(--yellow);" onclick="checkBalance(
+                                        
+                                                    <?php echo $userinfo_data['amount']; ?>, 
+                                                    <?php echo $astrologer['price_per_minute']; ?>,  
+                                                    '<?php echo base_url('chat/' . $astrologer['id']); ?>',
+                                                    '<?php echo addslashes($astrologer['name']); ?>' 
+                                                )"> Chat</button>
                                         <?php else: ?>
                                             <button id="chatlink" class="btn btn-sm w-50 rounded-3 border-1 btnlog"
                                                 style="background-color: var(--yellow);">Chat</button>
@@ -185,6 +197,28 @@
                                                 class="btn btnHover btn-sm btn-outline-dark  w-50 rounded-3 call-btn">Call</button>
                                         <?php endif; ?>
                                     </div>
+
+                                    <script>
+                                        function checkBalance(amount, astrologer_charge, chatUrl, name) {
+                                            if (amount < astrologer_charge * 5) {
+                                                Swal.fire({
+                                                    icon: "warning",
+                                                    title: "Insufficient Balance",
+                                                    text: `Minimum balance of 5 minutes (₹ ${astrologer_charge * 5}) is required to start chat with  ${name}.`,
+                                                    confirmButtonText: "Recharge Now",
+                                                    confirmButtonColor: "#ffcc00"
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        window.location.href = "<?php echo base_url('wallet'); ?>";
+                                                    }
+                                                });
+                                            } else {
+                                                window.location.href = chatUrl;
+
+                                            }
+                                        }
+
+                                    </script>
                                     <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
                                 </div>
                             </div>
@@ -244,8 +278,6 @@
                                     window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to login page
                                 }
                             });
-                        <?php else: ?>
-                            window.location.href = "<?php echo base_url('Chat'); ?>"; // Redirect to chat if user is logged in
                         <?php endif; ?>
                     });
                 });
@@ -279,6 +311,10 @@
                     });
                 });
             });
+
+            function chatscreen(id) {
+                window.location.href = "<?php echo base_url('Chat/'); ?>10";
+            }
 
             function handleCallClick() {
                 Swal.fire({
