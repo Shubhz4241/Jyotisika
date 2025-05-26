@@ -2107,6 +2107,92 @@ class User_Api_Controller extends CI_Controller
 
 
 
+    public function show_product_feedback()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+
+        $product_id = $this->input->post("product_id");
+
+        if (!$product_id) {
+            $this->output->set_status_header(400);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "product id not found"]));
+            return;
+        } else {
+
+            $query = $this->User_Api_Model->show_product_feedback_model($product_id);
+
+            if ($query) {
+
+                $response = [
+                    "status" => "success",
+                    "message" => "feedback  data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+                $response = [
+                    "status" => "error",
+                    "message" => "feedback data not fetched successfully"
+                ];
+
+            }
+
+            echo json_encode($response);
+
+        }
+
+
+
+    }
+
+    public function get_avg_rating_of_product()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+        $product_id = $this->input->post("product_id");
+
+        if (!$product_id) {
+            $this->output->set_status_header(400);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "product id not found"]));
+            return;
+        } else {
+            $query = $this->User_Api_Model->get_avg_rating_of_product_model($product_id);
+
+            if ($query) {
+
+                $response = [
+                    "status" => "success",
+                    "message" => "feedback  data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+                $response = [
+                    "status" => "error",
+                    "message" => "feedback data not fetched successfully"
+                ];
+
+            }
+
+            echo json_encode($response);
+
+        }
+    }
+
+
+
+
+
     public function show_puja()
     {
 

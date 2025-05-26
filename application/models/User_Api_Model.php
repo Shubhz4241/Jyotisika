@@ -759,6 +759,28 @@ class User_Api_Model extends CI_Model
 
     }
 
+    public function show_product_feedback_model($product_id)
+    {
+
+        $this->db->select("product_feedback.* , jyotisika_users.* ");
+        $this->db->from("product_feedback");
+        $this->db->join("jyotisika_users", "jyotisika_users.user_id = product_feedback.session_id");
+        $this->db->join("jotishika_mall", "jotishika_mall.product_id = product_feedback.product_id");
+        $this->db->where("product_feedback.product_id", $product_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_avg_rating_of_product_model($product_id)
+    {
+        $this->db->select('product_feedback.product_id, AVG(product_feedback.productrating) as average_product_rating');
+        $this->db->where("product_id", $product_id);
+        $query = $this->db->get("product_feedback");
+
+        return $query->result();
+
+    }
+
 
 
     //Pujari section 
@@ -825,7 +847,7 @@ class User_Api_Model extends CI_Model
         $puja_mode = $formdata["puja_mode"]; // Ensure puja_mode exists
 
 
-     
+
         $duration = 2;
 
 
@@ -861,32 +883,32 @@ class User_Api_Model extends CI_Model
             }
 
 
-        } 
+        }
 
-            $this->db->insert("bookpuja_request_by_user_to_pujari", $formdata);
+        $this->db->insert("bookpuja_request_by_user_to_pujari", $formdata);
 
-            if ($this->db->affected_rows() == 1) {
-                $inserted_id = $this->db->insert_id();
+        if ($this->db->affected_rows() == 1) {
+            $inserted_id = $this->db->insert_id();
 
 
-                $this->db->where("book_puja_id", $inserted_id);
-                $query = $this->db->get("bookpuja_request_by_user_to_pujari");
+            $this->db->where("book_puja_id", $inserted_id);
+            $query = $this->db->get("bookpuja_request_by_user_to_pujari");
 
-                $response = [
-                    "status" => "success",
-                    "message" => "Request sent for puja.",
-                    "data" => $query->row_array()
-                ];
-                return $response;
-            } else {
-                $response = [
-                    "status" => "dbqueryfailed",
-                    "message" => "Database error occurred.",
-                    "error" => $this->db->error()['message'],
-                    "query" => $this->db->last_query()
-                ];
-                return $response;
-            }
+            $response = [
+                "status" => "success",
+                "message" => "Request sent for puja.",
+                "data" => $query->row_array()
+            ];
+            return $response;
+        } else {
+            $response = [
+                "status" => "dbqueryfailed",
+                "message" => "Database error occurred.",
+                "error" => $this->db->error()['message'],
+                "query" => $this->db->last_query()
+            ];
+            return $response;
+        }
 
 
     }

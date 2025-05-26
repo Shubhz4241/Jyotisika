@@ -484,6 +484,70 @@ class User extends CI_Controller
 		}
 
 
+		//Product feedback
+			$api_url_product = base_url("User_Api_Controller/show_product_feedback");
+
+		$ch_product_feedback = curl_init();
+		curl_setopt($ch_product_feedback, CURLOPT_URL, $api_url_product);
+		curl_setopt($ch_product_feedback, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($ch_product_feedback, CURLOPT_POST, 1);
+		curl_setopt($ch_product_feedback, CURLOPT_POSTFIELDS, http_build_query(["product_id" => $product_id]));
+		curl_setopt($ch_product_feedback, CURLOPT_TIMEOUT, 10);
+
+		$product_feedback_response = curl_exec($ch_product_feedback);
+		$http_feedback_code = curl_getinfo($ch_product_feedback, CURLINFO_HTTP_CODE);
+		$curl_feedback_error = curl_error($ch_product_feedback);
+		curl_close($ch_product_feedback);
+
+
+		if ($product_feedback_response === false) {
+			show_error("cURL Error: " . $curl_feedback_error, 500);
+			return;
+		}
+
+		$product_feedback_details = json_decode($product_feedback_response, true);
+
+		$data["product_feedback_data"] = "";
+		if ($product_feedback_details["status"] == "success") {
+
+			$data["product_feedback_data"] = $product_feedback_details["data"];
+		}
+
+
+		// avg Product rating
+			$api_url_product_rating = base_url("User_Api_Controller/get_avg_rating_of_product");
+
+		$ch_product_avg_rating = curl_init();
+		curl_setopt($ch_product_avg_rating, CURLOPT_URL, $api_url_product_rating);
+		curl_setopt($ch_product_avg_rating, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($ch_product_avg_rating, CURLOPT_POST, 1);
+		curl_setopt($ch_product_avg_rating, CURLOPT_POSTFIELDS, http_build_query(["product_id" => $product_id]));
+		curl_setopt($ch_product_avg_rating, CURLOPT_TIMEOUT, 10);
+
+		$ch_product_avg_rating_response = curl_exec($ch_product_avg_rating);
+		$http_product_avg_code = curl_getinfo($ch_product_avg_rating, CURLINFO_HTTP_CODE);
+		$curl_product_avg_error = curl_error($ch_product_avg_rating);
+		curl_close($ch_product_avg_rating);
+
+
+		if ($ch_product_avg_rating_response === false) {
+			show_error("cURL Error: " . $curl_product_avg_error, 500);
+			return;
+		}
+
+		$ch_product_avg_rating_response_data = json_decode($ch_product_avg_rating_response, true);
+
+		$data["product_rating_data"] = "";
+		if ($ch_product_avg_rating_response_data["status"] == "success") {
+
+			$data["product_rating_data"] = $ch_product_avg_rating_response_data["data"];
+		}
+
+
+
+	
 
 
 		$this->load->view('User/ProductDetails', $data);
@@ -1610,10 +1674,34 @@ class User extends CI_Controller
 		}
 
 
-	
+		$user_id = $this->session->userdata('user_id');
+
+		if ($user_id) {
+			$getdata["userinfo"] = $this->get_userdata($user_id);
+			$data["userinfo_data"] = "";
+
+			if (!$getdata["userinfo"]) {
+				show_error("Failed to fetch user profile", 500);
+				redirect("UserLoginSignup/Logout");
+			} else if ($getdata["userinfo"] == "usernotfound") {
+				redirect("UserLoginSignup/Logout");
+			} else if ($getdata["userinfo"] == "userfound") {
+				redirect("UserLoginSignup/Logout");
+			}
+
+			$data["userinfo_data"] = $getdata["userinfo"];
+
+			
 
 
-		$this->load->view('User/Chat' , $data);
+		}
+
+     
+
+
+
+
+		$this->load->view('User/Chat', $data);
 	}
 
 

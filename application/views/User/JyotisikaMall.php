@@ -195,7 +195,7 @@
         </section>
         <!-- End Product Section -->
 
-        <section class="product-section py-5">
+        <!-- <section class="product-section py-5">
             <div class="container">
                 <div class="mb-4">
                     <h2 class="text-start fw-bold mb-0 mb-md-0" style="color: var(--red);">Combo Offers</h2>
@@ -259,7 +259,7 @@
                     ?>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- carousel gallery for products -->
         <section>
