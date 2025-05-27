@@ -1113,6 +1113,30 @@ class User extends CI_Controller
 		}
 
 
+		$user_id = $this->session->userdata('user_id');
+		if ($user_id) {
+			$getdata["userinfo"] = $this->get_userdata($user_id);
+			$data["userinfo_data"] = "";
+
+			if (!$getdata["userinfo"]) {
+				show_error("Failed to fetch user profile", 500);
+				redirect("UserLoginSignup/Logout");
+			} else if ($getdata["userinfo"] == "usernotfound") {
+				redirect("UserLoginSignup/Logout");
+			} else if ($getdata["userinfo"] == "userfound") {
+				redirect("UserLoginSignup/Logout");
+			}
+
+			$data["userinfo_data"] = $getdata["userinfo"];
+
+
+
+
+
+		}
+
+
+
 
 
 		$this->load->view('User/ViewAstrologer', $data);
@@ -1427,11 +1451,13 @@ class User extends CI_Controller
 	public function Orders()
 	{
 
-		$api_url = base_url("User_Api_Controller/show_top_astrologer");
+		$api_url = base_url("User_Api_Controller/get_astrologer_chat_with_user");
 
 		$getastrologer = curl_init();
 		curl_setopt($getastrologer, CURLOPT_URL, $api_url);
 		curl_setopt($getastrologer, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($getastrologer, CURLOPT_POST, 1);
+		curl_setopt($getastrologer, CURLOPT_POSTFIELDS, http_build_query(["session_id" => $this->session->userdata("user_id")]));
 		$astroresponse = curl_exec($getastrologer);
 		$curl_error_astroresponse = curl_error($getastrologer);
 		curl_close($getastrologer);
@@ -1448,6 +1474,7 @@ class User extends CI_Controller
 		if ($astrologer_data["status"] == "success") {
 			$data["astrologer_data"] = $astrologer_data["data"];
 		}
+		
 
 
 

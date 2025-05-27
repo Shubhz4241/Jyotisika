@@ -170,14 +170,52 @@
                                             <small
                                                 class="card-language"><?php echo isset($astrologer['languages']) && !empty($astrologer['languages']) ? $astrologer['languages'] : "Marathi , hindi"; ?></small>
                                         </div>
+
+                                        <div class="d-flex align-items-center">
+
+                                            <?php if ($astrologer['chatstatus'] == "active"): ?>
+                                                <small class="card-language text-danger">Busy , </small>
+
+
+                                                <?php
+                                                if (!empty($astrologer['chat_expire_on'])) {
+                                                    date_default_timezone_set('Asia/Kolkata'); // Ensure you're using IST
+                                                    $now = new DateTime(); // current timestamp
+                                                    $expire = new DateTime($astrologer['chat_expire_on']);
+
+                                                    // Calculate only if expire time is in the future
+                                                    if ($expire > $now) {
+                                                        $interval = $now->diff($expire);
+                                                        $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+                                                        $seconds = $interval->s;
+
+                                                        echo '<div class="d-flex align-items-center">
+                                              <small class="card-language text-danger">Wait for Time: ' . $waitTimeMinutes . ' min ' . $seconds . ' sec</small>
+                                                </div>';
+                                                    } else {
+                                                        echo '<div class="d-flex align-items-center">
+                                                <small class="card-language text-danger">session not ended</small>
+                                            </div>';
+                                                    }
+                                                }
+                                                ?>
+
+                                            <?php else: ?>
+                                                <small class="card-language text-success">Available</small>
+                                            <?php endif ?>
+                                        </div>
                                     </div>
 
                                     <!-- Action Buttons -->
                                     <div class="d-flex gap-2 mb-2">
+
                                         <?php if ($this->session->userdata('user_id')): ?>
+
+
+
                                             <button class="btn btn-sm w-50 rounded-3 border-1"
                                                 style="background-color: var(--yellow);" onclick="checkBalance(
-                                        
+                                                     '<?php echo $astrologer['chatstatus']; ?>',
                                                     <?php echo $userinfo_data['amount']; ?>, 
                                                     <?php echo $astrologer['price_per_minute']; ?>,  
                                                     '<?php echo base_url('chat/' . $astrologer['id']); ?>',
@@ -199,7 +237,7 @@
                                     </div>
 
                                     <script>
-                                        function checkBalance(amount, astrologer_charge, chatUrl, name) {
+                                        function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name) {
                                             if (amount < astrologer_charge * 5) {
                                                 Swal.fire({
                                                     icon: "warning",
@@ -213,8 +251,17 @@
                                                     }
                                                 });
                                             } else {
-                                                window.location.href = chatUrl;
+                                                if (chatstatus == "active") {
+                                                    Swal.fire({
+                                                        icon: "warning",
+                                                        title: "Astrologer is busy",
 
+
+                                                    });
+                                                }
+                                                else {
+                                                    window.location.href = chatUrl;
+                                                }
                                             }
                                         }
 

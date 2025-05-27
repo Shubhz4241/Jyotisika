@@ -272,7 +272,7 @@ class User_Api_Model extends CI_Model
     public function getastrologer_model()
     {
 
-        $this->db->select("astrologer_registration.* , AVG(astrologer_feedback.rating) as average_rating");
+        $this->db->select("astrologer_registration.* , AVG(astrologer_feedback.rating) as average_rating ");
         $this->db->from("astrologer_registration");
         $this->db->join('astrologer_feedback', 'astrologer_feedback.astrologer_id = astrologer_registration.id', 'Left');
         $this->db->group_by('astrologer_registration.id');
@@ -280,7 +280,30 @@ class User_Api_Model extends CI_Model
         $this->db->where("is_online", "1");
 
         $query = $this->db->get();
-        return $query->result();
+        $astrologers = $query->result();
+        foreach ($astrologers as &$astro) {
+            $chatSession = $this->db->select('start_time, expire_on')
+                ->from('chat_sessions')
+                ->where('astrologer_id', $astro->id)
+                ->where('status', 'active')
+                ->order_by('id', 'DESC')
+                ->limit(1)
+                ->get()
+                ->row();
+
+            if ($chatSession) {
+                $astro->chat_start_time = $chatSession->start_time;
+                $astro->chat_expire_on = $chatSession->expire_on;
+                $astro->chatstatus = "active";
+            } else {
+                $astro->chat_start_time = null;
+                $astro->chat_expire_on = null;
+                $astro->chatstatus = "inactive";
+            }
+        }
+
+        return $astrologers;
+
 
     }
 
@@ -288,11 +311,34 @@ class User_Api_Model extends CI_Model
     public function get_astrologer_by_id_model($astrologer_id)
     {
 
+
         $this->db->where("id", $astrologer_id);
         $this->db->where("status", "approved");
         $this->db->where("is_online", "1");
         $query = $this->db->get("astrologer_registration");
-        return $query->result();
+        $astrologer = $query->result();
+
+        $chatSession = $this->db->select('start_time, expire_on')
+            ->from('chat_sessions')
+            ->where('astrologer_id', $astrologer_id) // astrologer_details.id
+            ->where('status', 'active')
+            ->order_by('id', 'DESC')
+            ->limit(1)
+            ->get()
+            ->row();
+
+        if ($chatSession) {
+            $astrologer['chat_start_time'] = $chatSession->start_time;
+            $astrologer['chat_expire_on'] = $chatSession->expire_on;
+            $astrologer['chatstatus'] = "active";
+        } else {
+            $astrologer['chat_start_time'] = null;
+            $astrologer['chat_expire_on'] = null;
+            $astrologer['chatstatus'] = "inactive";
+        }
+
+
+        return $astrologer;
     }
 
     public function followastrologer_model($data)
@@ -410,10 +456,57 @@ class User_Api_Model extends CI_Model
         $this->db->order_by('average_rating', 'DESC');
         $this->db->limit(4);
         $query = $this->db->get();
-        return $query->result();
+        $astrologers = $query->result();
+        foreach ($astrologers as &$astro) {
+            $chatSession = $this->db->select('start_time, expire_on')
+                ->from('chat_sessions')
+                ->where('astrologer_id', $astro->id)
+                ->where('status', 'active')
+                ->order_by('id', 'DESC')
+                ->limit(1)
+                ->get()
+                ->row();
+
+            if ($chatSession) {
+                $astro->chat_start_time = $chatSession->start_time;
+                $astro->chat_expire_on = $chatSession->expire_on;
+                $astro->chatstatus = "active";
+            } else {
+                $astro->chat_start_time = null;
+                $astro->chat_expire_on = null;
+                $astro->chatstatus = "inactive";
+            }
+        }
+
+        return $astrologers;
 
 
 
+    }
+
+
+    public function get_astrologer_chat_with_user_model($session_id)
+    {
+
+        if (!$session_id) {
+
+            $response = [
+                "status" => "error",
+                "message" => "session id is missing "
+            ];
+
+            return $response;
+
+        } else {
+
+            $this->db->select("chat_sessions.astrologer_id , astrologer_registration.*");
+            $this->db->from("chat_sessions");
+            $this->db->join("astrologer_registration", "astrologer_registration.id = chat_sessions.astrologer_id");
+            $this->db->where("user_id", $session_id);
+            $this->db->group_by("chat_sessions.astrologer_id");
+            $query = $this->db->get();
+            return $query->result();
+        }
     }
 
     public function getfollowed_astrologer_by_user_model($session_id)

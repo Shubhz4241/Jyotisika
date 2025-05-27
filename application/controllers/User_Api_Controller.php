@@ -989,6 +989,61 @@ class User_Api_Controller extends CI_Controller
 
     }
 
+
+    public function get_astrologer_chat_with_user()
+    {
+
+        if ($_SERVER["REQUEST_METHOD"] != "POST") {
+
+            $response = [
+                "status" => "error",
+                "message" => "Invalid request method"
+
+            ];
+
+            echo json_encode($response);
+            return;
+        } else {
+            $session_id = $this->input->post("session_id");
+
+            if (empty($session_id)) {
+                $response = [
+                    "status" => "error",
+                    "message" => "pls fill all the filleds"
+
+                ];
+                echo json_encode($response);
+                return;
+
+            }
+
+            $query = $this->User_Api_Model->get_astrologer_chat_with_user_model($session_id);
+
+                if ($query) {
+
+                    $response = [
+                        "status" => "success",
+                        "message" => "feedback  submitted",
+                        "data"=>$query
+                    ];
+                } else {
+
+                    $response = [
+                        "status" => "error",
+                        "message" => "feedback not submitted",
+                    ];
+                }
+
+
+                echo json_encode($response);
+                return;
+
+
+        }
+
+
+    }
+
     public function feedback()
     {
 
@@ -1107,6 +1162,7 @@ class User_Api_Controller extends CI_Controller
 
 
     }
+
 
 
     public function get_avg_rating()
