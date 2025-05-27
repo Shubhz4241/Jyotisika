@@ -431,8 +431,7 @@ background-color:rgb(83, 154, 168)  ;
                         <p><strong>Specialities:</strong> Palm mystery, numerology</p>
                         <p><strong>Experience:</strong> 10 years</p>
                         <div style="margin-top: 10px;">
-      <button class="setprice" onclick="openModal()">Set Price</button>
-      <button class="restrict">Restrict</button>
+    
     </div>
                     </div>
                 </div>
@@ -506,9 +505,7 @@ background-color:rgb(83, 154, 168)  ;
       <label for="priceInput" style="margin-right: 10px;">Price:</label>
     <input type="number" id="priceInput" placeholder="Price" min="1" oninput="validatePositive(this)">
     </div>
-    <div class="modal-footer">
-      <button onclick="closeModal()">Set Price</button>
-    </div>
+    
   </div>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

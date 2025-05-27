@@ -52,12 +52,13 @@
         /* Enhance table header appearance */
         .table thead th {
             font-weight: 600;
-            background-color: rgb(222, 222, 227);
+            background-color:#0c768a;
             padding: 10px;
             height: 60px;
             align-items: center;
             justify-content: center;
             text-align: center;
+            color: white;
         }
         .table td {
             font-weight: 400;

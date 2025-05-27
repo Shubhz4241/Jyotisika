@@ -439,8 +439,7 @@
                         <p><strong>Specialities:</strong> Palm mystery, numerology</p>
                         <p><strong>Experience:</strong> 10 years</p>
                         <div style="margin-top: 10px;">
-                            <button class="setprice" onclick="openModal()">Set Price</button>
-                            <button class="restrict">Restrict</button>
+                           
                         </div>
                     </div>
                 </div>

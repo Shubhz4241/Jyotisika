@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="icon" href="assets/images/admin/logo.png" type="image/png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         * {
@@ -44,7 +45,6 @@
             padding-left: 30px;
             background-color: rgb(235, 229, 229);
             width: 300px;
-            /* Reduced size */
             height: 38px;
         }
 
@@ -107,7 +107,6 @@
             padding: 15px 35px;
             margin-bottom: 20px;
             border-radius: 5px;
-
         }
 
         .search-filter-bar {
@@ -142,7 +141,7 @@
         }
 
         .table-responsive {
-            border-radius: 8px;
+            border-radius: 8px!important;
             overflow: hidden;
         }
 
@@ -167,42 +166,34 @@
 
         .status-completed {
             color: #28a745;
-            /* Green */
         }
 
         .status-processing {
             color: #007bff;
-            /* Blue */
         }
 
         .status-packaging {
             color: #ffc107;
-            /* Yellow */
         }
 
         .status-on-hold {
             color: #fd7e14;
-            /* Orange */
         }
 
         .status-cancelled {
             color: #dc3545;
-            /* Red */
         }
 
         .status-approved {
             color: #198754;
-            /* Dark Green */
         }
 
         .status-pending {
             color: #ff851b;
-            /* Dark Orange */
         }
 
         .status-rejected {
             color: #dc3545;
-            /* Red */
         }
 
         @media (max-width: 768px) {
@@ -226,20 +217,15 @@
             }
         }
     </style>
-
 </head>
 
 <body style="background-color:rgb(228, 236, 241);">
     <div class="d-flex">
-        <!-- Sidebar -->
         <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
 
-        <!-- SIDEBAR END -->
-
-        <!-- Main Component -->
         <div class="main mt-3">
             <!-- Navbar -->
-            <?php $this->load->view('Sales/SalesNavbar'); ?>
+            <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
 
             <div class="container-fluid">
                 <div class="row mt-5">
@@ -250,15 +236,16 @@
                                 <input type="text" class="form-control" id="search-input" placeholder="Search Here">
                             </div>
                             <div class="filter-buttons">
-                                <button type="button" class="btn btn1 active" id="filter-pending">Pending</button>
-                                <button type="button" class="btn btn1 " id="filter-approved">Approved</button>
-                                <button type="button" class="btn btn1" id="filter-all">All</button>
+                                <button type="button" class="btn btn1 active" id="filter-all">All</button>
+                                <button type="button" class="btn btn1" id="filter-pending">Pending</button>
+                                <button type="button" class="btn btn1" id="filter-approved">Approved</button>
                             </div>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
+                                        <th>Sr. No</th>
                                         <th>Orders No</th>
                                         <th>Customer Name</th>
                                         <th>Contact</th>
@@ -274,7 +261,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="dynamic-table-body">
-                                    <!-- Dynamic rows will be inserted here -->
+                                    <!-- Data will be inserted here dynamically -->
                                 </tbody>
                             </table>
                         </div>
@@ -286,264 +273,292 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 
+    <!-- Modal Popup for Approve/Reject -->
+    <div class="modal fade" id="actionModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="actionModalLabel">Confirm Action</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to <span id="actionType"></span> this order?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmAction">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        const base_url = "<?php echo base_url() ?>"
-        let allOrders = [];
-        let approvedOrders = [];
-        let pendingOrders = [];
-        let filteredOrders = [];
-        const rowsPerPage = 8;
-        let currentPage = 1;
-
-        async function fetchOrders(endpoint) {
-            try {
-                const response = await fetch(endpoint);
-                const result = await response.json();
-
-                if (result.status !== 'success' || !Array.isArray(result.data)) {
-                    throw new Error("Invalid response format");
-                }
-
-                return result.data.map(order => ({
-                    orderNo: parseInt(order.order_id),
-                    customerName: order.user_fullname,
-                    contact: order.user_phonenumber,
-                    city: order.user_city,
-                    state: order.user_state,
-                    pincode: order.user_pincode,
-                    price: order.price,
-                    razorpay_payment_type: order.payment_type,
-                    order_date: order.order_date,
-                    product_details: order.items || [],
-                    Stage: order.status.charAt(0).toUpperCase() + order.status.slice(1)
-                }));
-            } catch (error) {
-                console.error(error);
-                return [];
+        // Sample data
+        const sampleData = [
+            {
+                srNo: 1,
+                orderNo: 1,
+                customerName: "John Doe",
+                contact: "1234567890",
+                city: "New York",
+                state: "NY",
+                pincode: "10001",
+                total: "₹1000",
+                paymentType: "Credit Card",
+                orderDate: "2023-10-01",
+                productsIncluded: "Product 1 - ₹500 - units 2",
+                status: "Pending"
+            },
+            {
+                srNo: 2,
+                orderNo: 2,
+                customerName: "Jane Smith",
+                contact: "9876543210",
+                city: "Los Angeles",
+                state: "CA",
+                pincode: "90001",
+                total: "₹1500",
+                paymentType: "Debit Card",
+                orderDate: "2023-10-02",
+                productsIncluded: "Product 3 - ₹700 - units 1",
+                status: "Approved"
+            },
+            {
+                srNo: 3,
+                orderNo: 3,
+                customerName: "Alice Johnson",
+                contact: "5555555555",
+                city: "Chicago",
+                state: "IL",
+                pincode: "60601",
+                total: "₹2000",
+                paymentType: "Credit Card",
+                orderDate: "2023-10-03",
+                productsIncluded: "Product 5 - ₹1000 - units 2",
+                status: "Pending"
+            },
+            {
+                srNo: 4,
+                orderNo: 4,
+                customerName: "Bob Brown",
+                contact: "4444444444",
+                city: "Houston",
+                state: "TX",
+                pincode: "77001",
+                total: "₹2500",
+                paymentType: "Debit Card",
+                orderDate: "2023-10-04",
+                productsIncluded: "Product 6 - ₹1250 - units 2",
+                status: "Approved"
+            },
+            {
+                srNo: 5,
+                orderNo: 5,
+                customerName: "Charlie Davis",
+                contact: "3333333333",
+                city: "Phoenix",
+                state: "AZ",
+                pincode: "85001",
+                total: "₹3000",
+                paymentType: "Credit Card",
+                orderDate: "2023-10-05",
+                productsIncluded: "Product 7 - ₹1500 - units 2",
+                status: "Pending"
+            },
+            {
+                srNo: 6,
+                orderNo: 6,
+                customerName: "Diana Evans",
+                contact: "2222222222",
+                city: "Philadelphia",
+                state: "PA",
+                pincode: "19101",
+                total: "₹3500",
+                paymentType: "Debit Card",
+                orderDate: "2023-10-06",
+                productsIncluded: "Product 8 - ₹1750 - units 2",
+                status: "Approved"
+            },
+            {
+                srNo: 7,
+                orderNo: 7,
+                customerName: "Eve Foster",
+                contact: "1111111111",
+                city: "San Antonio",
+                state: "TX",
+                pincode: "78201",
+                total: "₹4000",
+                paymentType: "Credit Card",
+                orderDate: "2023-10-07",
+                productsIncluded: "Product 9 - ₹2000 - units 2",
+                status: "Pending"
+            },
+            {
+                srNo: 8,
+                orderNo: 8,
+                customerName: "Frank Green",
+                contact: "9999999999",
+                city: "San Diego",
+                state: "CA",
+                pincode: "92101",
+                total: "₹4500",
+                paymentType: "Debit Card",
+                orderDate: "2023-10-08",
+                productsIncluded: "Product 10 - ₹2250 - units 2",
+                status: "Approved"
+            },
+            {
+                srNo: 9,
+                orderNo: 9,
+                customerName: "Grace Harris",
+                contact: "8888888888",
+                city: "Dallas",
+                state: "TX",
+                pincode: "75201",
+                total: "₹5000",
+                paymentType: "Credit Card",
+                orderDate: "2023-10-09",
+                productsIncluded: "Product 11 - ₹2500 - units 2",
+                status: "Pending"
+            },
+            {
+                srNo: 10,
+                orderNo: 10,
+                customerName: "Henry Irving",
+                contact: "7777777777",
+                city: "San Jose",
+                state: "CA",
+                pincode: "95101",
+                total: "₹5500",
+                paymentType: "Debit Card",
+                orderDate: "2023-10-10",
+                productsIncluded: "Product 12 - ₹2750 - units 2",
+                status: "Approved"
+            },
+            {
+                srNo: 11,
+                orderNo: 11,
+                customerName: "Ivy Jackson",
+                contact: "6666666666",
+                city: "Austin",
+                state: "TX",
+                pincode: "73301",
+                total: "₹6000",
+                paymentType: "Credit Card",
+                orderDate: "2023-10-11",
+                productsIncluded: "Product 13 - ₹3000 - units 2",
+                status: "Pending"
+            },
+            {
+                srNo: 12,
+                orderNo: 12,
+                customerName: "Jack King",
+                contact: "5555555555",
+                city: "Jacksonville",
+                state: "FL",
+                pincode: "32201",
+                total: "₹6500",
+                paymentType: "Debit Card",
+                orderDate: "2023-10-12",
+                productsIncluded: "Product 14 - ₹3250 - units 2",
+                status: "Approved"
             }
-        }
+        ];
 
-        async function loadAndDisplayOrders(stage) {
-            let endpoint = 'admin/getAllOrders';
-
-            let orders = await fetchOrders(endpoint);
-
-            if (stage === 'pending') {
-                orders = orders.filter(order => order.Stage === 'Pending');
-                pendingOrders = orders;
-            }
-            if (stage === 'all') {
-                allOrders = orders;
-            }
-            if (stage === 'approved') {
-                orders = orders.filter(order => order.Stage !== 'Pending');
-                approvedOrders = orders;
-            }
-
-            filteredOrders = [...orders];
-            currentPage = 1;
-            populateTableWithPagination(currentPage);
-        }
-
-        function populateTableWithPagination(page = 1, orders = filteredOrders) {
+        // Function to generate table rows
+        function generateTableRows(data, page, rowsPerPage) {
             const tableBody = document.getElementById('dynamic-table-body');
             tableBody.innerHTML = '';
 
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const visible = orders.slice(start, end);
+            const startIndex = (page - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const paginatedData = data.slice(startIndex, endIndex);
 
-            if (visible.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="12" class="text-center">No orders found.</td></tr>`;
-                return;
-            }
-
-            visible.forEach(order => {
+            paginatedData.forEach((item, index) => {
                 const row = document.createElement('tr');
 
-                // Status Dropdown (for Accepted/Confirmed/Shipped orders)
-                const showStatusDropdown = ["Accepted", "Confirmed", "Shipped", "Delivered", "Cancelled"].includes(order.Stage);
-
-                // Dropdown for status change
-                let statusDropdown = "";
-                if (showStatusDropdown) {
-                    statusDropdown = `
-               <select class="form-select form-select-sm status-select" data-order-id="${order.orderNo}">
-                <option value="Processed" ${order.Stage === "processed" ? 'selected' : ''}>Processed</option>
-                <option value="Packaging" ${order.Stage === "packaging" ? 'selected' : ''}>Packaging</option>
-                <option value="Shipped" ${order.Stage === "shipped" ? 'selected' : ''}>Shipped</option>
-                <option value="On the Way" ${order.Stage === "onway" ? 'selected' : ''}>On the Way</option>
-                <option value="Delivered" ${order.Stage === "delivered" ? 'selected' : ''}>Delivered</option>
-                <option value="Cancelled" ${order.Stage === "cancelled" ? 'selected' : ''}>Cancelled</option>
-                <option value="Refunded" ${order.Stage === "refunded" ? 'selected' : ''}>Refunded</option>
-            </select>
-            `;
-                } else if (order.Stage === "Pending") {
-                    statusDropdown = `
-                <div class="d-flex justify-content-center gap-2">
-                    <button class="btn btn-success btn-sm" onclick="acceptOrder(${order.orderNo})">Accept</button>
-                </div>`;
-                } else {
-                    statusDropdown = `<span class="status-${order.Stage.toLowerCase().replace(' ', '-')}">${order.Stage}</span>`;
-                }
-
-                // View/Track actions
-                let actions = `<a href="${base_url}orderdetails/${order.orderNo}" title="View"><i class="fas fa-eye action-icon"></i></a>`;
-                if (["Delivered", "Shipped", "OnWay"].includes(order.Stage)) {
-                    actions += `<i class="fas fa-truck action-icon" onclick="trackorder(${order.orderNo})" title="Track"></i>`;
-                }
-
                 row.innerHTML = `
-            <td>${order.orderNo}</td>
-            <td>${order.customerName}</td>
-            <td>${order.contact}</td>
-            <td>${order.city}</td>
-            <td>${order.state}</td>
-            <td>${order.pincode}</td>
-            <td>₹${order.price}</td>
-            <td>${order.razorpay_payment_type}</td>
-            <td>${getTimeAgo(order.order_date)}</td>
-            <td>
-                <select class="form-select form-select-sm">
-                    ${order.product_details.map((product, index) => `
-                        <option ${index === 0 ? 'selected' : ''}>
-                            ${product.product_name} - ₹${product.price_per_product} - units ${product.quantity}
-                        </option>
-                    `).join('')}
-                </select>
-            </td>
-            <td>${statusDropdown}</td>
-            <td class="text-center">${actions}</td>
-        `;
+                    <td>${startIndex + index + 1}</td>
+                    <td>${item.orderNo}</td>
+                    <td>${item.customerName}</td>
+                    <td>${item.contact}</td>
+                    <td>${item.city}</td>
+                    <td>${item.state}</td>
+                    <td>${item.pincode}</td>
+                    <td>${item.total}</td>
+                    <td>${item.paymentType}</td>
+                    <td>${item.orderDate}</td>
+                    <td>
+                        <select class="form-select form-select-sm">
+                            <option selected>${item.productsIncluded}</option>
+                        </select>
+                    </td>
+                    <td>
+                        ${item.status === 'Pending' ?
+                            `<span class="badge bg-warning text-dark">${item.status}</span>` :
+                            `<select class="form-select form-select-sm">
+                                <option value="Processed" ${item.status === 'Processed' ? 'selected' : ''}>Processed</option>
+                                <option value="Packed" ${item.status === 'Packed' ? 'selected' : ''}>Packed</option>
+                                <option value="Shipped" ${item.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                                <option value="Delivered" ${item.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                                <option value="Completed" ${item.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                            </select>`}
+                    </td>
+                    <td class="text-center">
+                        ${item.status === 'Pending' ?
+                            `<button class="btn btn-success btn-sm approve-btn" data-order-id="${item.orderNo}" data-bs-toggle="modal" data-bs-target="#actionModal">
+    <i class="fas fa-check"></i>
+</button>
+<button  class="btn btn-danger btn-sm reject-btn" data-order-id="${item.orderNo}" data-bs-toggle="modal" data-bs-target="#actionModal">
+    <i class="fas fa-times"></i>
+</button>
+` :
+                            `<a href="trackorderdetails" title="View"><i class="fas fa-eye action-icon"></i></a>`}
+                    </td>
+                `;
 
                 tableBody.appendChild(row);
             });
-
-            attachStatusChangeHandlers();
-            updatePagination(orders);
         }
 
-
-
-
-        function updatePagination(orders) {
+        // Function to generate pagination buttons
+        function generatePaginationButtons(data, rowsPerPage) {
             const paginationContainer = document.getElementById('pagination-container');
             paginationContainer.innerHTML = '';
-            const totalPages = Math.ceil(orders.length / rowsPerPage);
 
-            const prevBtn = `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
-            <a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;">Previous</a>
-        </li>`;
-            const nextBtn = `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
-            <a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">Next</a>
-        </li>`;
+            const pageCount = Math.ceil(data.length / rowsPerPage);
 
-            paginationContainer.innerHTML += prevBtn;
-
-            for (let i = 1; i <= totalPages; i++) {
-                paginationContainer.innerHTML += `
-                <li class="page-item ${i === currentPage ? 'active' : ''}">
-                    <a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a>
-                </li>`;
-            }
-
-            paginationContainer.innerHTML += nextBtn;
-        }
-
-        function changePage(page) {
-            const totalPages = Math.ceil(filteredOrders.length / rowsPerPage);
-            if (page > 0 && page <= totalPages) {
-                currentPage = page;
-                populateTableWithPagination(page);
+            for (let i = 1; i <= pageCount; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = 'page-item';
+                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageItem.addEventListener('click', () => {
+                    generateTableRows(data, i, rowsPerPage);
+                });
+                paginationContainer.appendChild(pageItem);
             }
         }
 
-        function getTimeAgo(orderDate) {
-            const now = new Date();
-            const past = new Date(orderDate);
-            const diff = now - past;
-            const mins = Math.floor(diff / 60000);
-            const hrs = Math.floor(mins / 60);
-            if (mins <= 0) return "Just now";
-            if (mins < 60) return `${mins}min ago`;
-            if (hrs < 24) return `${hrs} hours ago`;
-            return `${past.getFullYear()}-${String(past.getMonth() + 1).padStart(2, '0')}-${String(past.getDate()).padStart(2, '0')}`;
-        }
-
-        function trackorder(orderNo) {
-            Swal.fire(`Tracking order #${orderNo}`);
-        }
-
-        function acceptOrder(orderId) {
-            Swal.fire({
-                title: 'Accept Order',
-                text: "Are you sure you want to accept this order?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Create a new FormData object
-                    const formData = new FormData();
-                    formData.append('order_id', orderId);
-
-                    // Send the request using fetch
-                    fetch('admin/acceptOrder', {
-                            method: 'POST',
-                            body: formData // Attach the FormData object here
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.status === true) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Accepted!',
-                                    text: data.message,
-                                    confirmButtonText: 'OK',
-                                    iconHtml: '<i class="fas fa-check-circle" style="color:green;font-size:40px;"></i>',
-                                    customClass: {
-                                        icon: 'no-default-icon'
-                                    }
-                                });
-                                // Optionally refresh your table here
-                                location.reload()
-                            } else {
-                                Swal.fire('Error', data.message, 'error');
-                            }
-                        }).catch(err => {
-                            Swal.fire('Error', 'Something went wrong.', 'error');
-                            console.error(err);
-                        });
-                }
-            });
-        }
-
-
-
+        // Initialize the table and pagination
+        document.addEventListener('DOMContentLoaded', () => {
+            const rowsPerPage = 6;
+            generateTableRows(sampleData, 1, rowsPerPage);
+            generatePaginationButtons(sampleData, rowsPerPage);
+        });
 
         document.getElementById('search-input').addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
-            filteredOrders = allOrders.filter(order =>
-                order.customerName.toLowerCase().includes(searchTerm) ||
-                order.orderNo.toString().includes(searchTerm) ||
-                order.contact.includes(searchTerm) ||
-                order.city.toLowerCase().includes(searchTerm) ||
-                order.state.toLowerCase().includes(searchTerm) ||
-                order.pincode.includes(searchTerm) ||
-                order.price.toString().includes(searchTerm) ||
-                order.razorpay_payment_type.toLowerCase().includes(searchTerm) ||
-                order.Stage.toLowerCase().includes(searchTerm)
+            const filteredData = sampleData.filter(item =>
+                Object.values(item).some(val =>
+                    val.toString().toLowerCase().includes(searchTerm)
+                )
             );
-            currentPage = 1;
-            populateTableWithPagination(currentPage);
+
+            generateTableRows(filteredData, 1, 6);
+            generatePaginationButtons(filteredData, 6);
         });
 
         document.querySelectorAll('.btn1').forEach(button => {
@@ -551,77 +566,40 @@
                 document.querySelectorAll('.btn1').forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 const filter = button.id.replace('filter-', '');
-                loadAndDisplayOrders(filter);
+
+                let filteredData = sampleData;
+                if (filter !== 'all') {
+                    filteredData = sampleData.filter(item => item.status.toLowerCase() === filter);
+                }
+
+                generateTableRows(filteredData, 1, 6);
+                generatePaginationButtons(filteredData, 6);
             });
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            loadAndDisplayOrders('pending'); // Default view
-        });
-    </script>
-
-
-    <!-- SCRIPT FOR UPADTING THE STATUS (WHEN APPROVED) -->
-    <script>
-        function attachStatusChangeHandlers() {
-            document.querySelectorAll('.status-select').forEach(select => {
-                select.addEventListener('change', function() {
-                    const newStatus = this.value;
-                    const orderId = this.dataset.orderId;
-                    const previousValue = this.querySelector('option[selected]')?.value || "";
-
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: `Change status to "${newStatus}"?`,
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, update it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const formData = new FormData();
-                            formData.append('order_id', orderId);
-                            formData.append('status', newStatus);
-
-                            fetch(`${base_url}admin/updateGeneralOrderStatus`, {
-                                    method: 'POST',
-                                    body: formData
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    Swal.fire({
-                                        icon: data.status === "success" ? 'success' : 'error',
-                                        title: data.status === "success" ? 'Success' : 'Error',
-                                        text: data.message,
-                                        confirmButtonColor: '#3085d6',
-                                        confirmButtonText: 'OK'
-                                    }).then((result) => {
-                                        if (data.status === "success" && result.isConfirmed) {
-                                            location.reload(); // refresh page on success
-                                        }
-                                    });
-                                })
-                                .catch(error => {
-                                    console.error("Error updating order:", error);
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        text: 'Something went wrong while updating order status!',
-                                        confirmButtonColor: '#d33',
-                                        confirmButtonText: 'Close'
-                                    });
-                                    this.value = previousValue; // revert dropdown on error
-                                });
-                        } else {
-                            this.value = previousValue; // revert dropdown on cancel
-                        }
-                    });
-                });
+        document.querySelectorAll('.approve-btn, .reject-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const actionType = this.classList.contains('approve-btn') ? 'approve' : 'reject';
+                document.getElementById('actionType').textContent = actionType;
+                document.getElementById('confirmAction').dataset.action = actionType;
+                document.getElementById('confirmAction').dataset.orderId = this.dataset.orderId;
             });
+        });
+
+        document.getElementById('confirmAction').addEventListener('click', function() {
+            const actionType = this.dataset.action;
+            const orderId = this.dataset.orderId;
+            alert(`Order ${orderId} ${actionType}d`);
+            // Here you can add logic to update the status in the backend
+            const modal = bootstrap.Modal.getInstance(document.getElementById('actionModal'));
+            modal.hide();
+        });
+
+        function trackOrder(orderId) {
+            alert(`Tracking order ${orderId}`);
+            // Here you can add logic to track the order
         }
     </script>
-
 
     <!-- Script Toggle Sidebar -->
     <script>
