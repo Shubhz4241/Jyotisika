@@ -132,181 +132,163 @@
             width: 120px;
         }
 
-        /* Enhanced Document View UI */
-        .document-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            justify-content: center;
+        /* New Accordion Document Viewing Styles */
+        .document-accordion {
             margin-top: 20px;
         }
 
-        .doc-card {
-            position: relative;
-            width: 300px;
-            height: 420px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        .accordion-item {
+            background: white;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
             overflow: hidden;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .accordion-header {
+            background: #0C768A;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .accordion-button {
+            background: #0C768A;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 15px;
+            border: none;
+            transition: background 0.3s ease;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: #095D6E;
+            color: white;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+
+        .accordion-body {
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .doc-card {
+            max-width: 350px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
         }
 
         .doc-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-        }
-
-        @keyframes fadeInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            transform: translateY(-3px);
         }
 
         .doc-image {
             width: 100%;
-            height: 65%;
-            object-fit: cover;
-            border-bottom: 4px solid #8BC24A;
-            transition: transform 0.3s ease;
-        }
-
-        .doc-card:hover .doc-image {
-            transform: scale(1.1);
+            height: 250px;
+            object-fit: contain;
+            background: #e0e7ff;
         }
 
         .doc-info {
-            padding: 20px;
+            padding: 10px;
             text-align: center;
         }
 
         .doc-info p {
-            margin: 0;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             color: #1a1a1a;
+            margin: 0;
         }
 
         .doc-actions {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 12px;
+            padding: 10px;
+            text-align: center;
         }
 
         .doc-btn {
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 14px;
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(45deg, #8BC24A, #2ecc71);
+            color: white;
+            border-radius: 20px;
             text-decoration: none;
+            font-size: 14px;
             transition: background 0.3s ease, transform 0.2s ease;
         }
 
-        .doc-btn.view {
-            background: linear-gradient(45deg, #8BC24A, #2ecc71);
-            color: white;
-        }
-
-        .doc-btn.view:hover {
+        .doc-btn:hover {
             background: linear-gradient(45deg, #76a832, #27ae60);
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
-        .doc-certifications {
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            justify-items: center;
+        }
+
+        .certification-link {
+            display: block;
             width: 100%;
-            padding: 25px;
-            background: rgba(248, 249, 250, 0.9);
-            border-radius: 15px;
-            margin-top: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .doc-certifications h6 {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 20px;
-        }
-
-        .certification-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .certification-links a {
-            padding: 12px 25px;
+            max-width: 200px;
+            padding: 10px;
             background: linear-gradient(45deg, #F6CE57, #f1c40f);
             color: #1a1a1a;
-            border-radius: 30px;
+            border-radius: 20px;
+            text-align: center;
             text-decoration: none;
-            font-size: 16px;
-            position: relative;
-            overflow: hidden;
+            font-size: 14px;
             transition: transform 0.2s ease;
         }
 
-        .certification-links a:hover {
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .certification-links a::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, height 0.4s ease;
-        }
-
-        .certification-links a:active::after {
-            width: 200px;
-            height: 200px;
-            transition: none;
+        .certification-link:hover {
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
-            .row {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .details {
-                text-align: center;
-            }
-
             .doc-card {
-                width: 100%;
-                max-width: 320px;
-                height: 380px;
+                max-width: 100%;
             }
 
             .doc-image {
-                height: 60%;
+                height: 200px;
+            }
+
+            .doc-info p {
+                font-size: 14px;
+            }
+
+            .doc-btn {
+                padding: 6px 15px;
+                font-size: 12px;
+            }
+
+            .certification-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certification-link {
+                max-width: 100%;
             }
         }
 
         @media (max-width: 480px) {
-            .doc-card {
-                height: 350px;
+            .doc-image {
+                height: 150px;
             }
 
-            .doc-info p {
+            .accordion-button {
                 font-size: 16px;
-            }
-
-            .doc-btn {
-                padding: 8px 15px;
-                font-size: 13px;
+                padding: 10px;
             }
         }
 
@@ -506,7 +488,7 @@
         }
 
         .success-popup .circle::before {
-            content: "\f019";
+            content: "\f00c"; /* Changed to checkmark icon */
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
             color: white;
@@ -515,19 +497,6 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-        }
-
-        .success-popup .circle::after {
-            content: "";
-            width: 60px;
-            height: 60px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="orange"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>') no-repeat center;
-            background-size: contain;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
         }
 
         .success-popup h3 {
@@ -553,7 +522,6 @@
             transition: background 0.3s ease;
             font-family: 'Rokkitt';
             width: 120px;
-
         }
 
         .success-popup .close-btn:hover {
@@ -584,16 +552,16 @@
 <body>
     <div class="d-flex">
         <!-- Sidebar -->
-        <?php $this->load->view('IncludeHR/SideBarHR'); ?>
+        <?php $this->load->view('IncludeHR/SidebarHR'); ?>
 
         <!-- Main Component -->
         <div class="main">
             <!-- Navbar -->
-            <?php $this->load->view('IncludeAdmin/CommanNavBar'); ?>
+            <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
 
             <div class="container">
                 <i class="fas fa-arrow-left"></i>
-                <a href="#" class="back-arrow" style="margin-left: 10px;">Recent Astrologer Requests</a>
+                <a href="astrologerrequests" class="back-arrow" style="margin-left: 10px;">Recent Astrologer Requests</a>
                 <div class="row mt-3 d-flex align-items-center">
                     <div class="col-md-4 text-center">
                         <img src="<?php echo base_url('assets/images/HRside/profile1.png') ?>" alt="Profile" class="profile-img">
@@ -611,39 +579,78 @@
                         </div>
                     </div>
 
-                    <h5 class="mt-4 text-center">Documents Attached</h5>
-                    <div class="document-container">
-                        <div class="doc-card">
-                            <img src="Uploads/Astologer/aadhaar_card.jpg" alt="Aadhaar Card" class="doc-image">
-                            <div class="doc-info">
-                                <p>Aadhaar Card</p>
+                    <div class="document-section">
+                        <h5 class="text-center mb-4">Documents Attached</h5>
+                        <div class="document-accordion accordion" id="documentAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="aadhaarHeading">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#aadhaarCollapse" aria-expanded="true" aria-controls="aadhaarCollapse">
+                                        Aadhaar Card
+                                    </button>
+                                </h2>
+                                <div id="aadhaarCollapse" class="accordion-collapse collapse show" aria-labelledby="aadhaarHeading" data-bs-parent="#documentAccordion">
+                                    <div class="accordion-body">
+                                        <div class="doc-card">
+                                            <img src="<?php echo base_url('Uploads/documents/aadharcard.jpg') ?>" alt="Aadhaar Card" class="doc-image" onerror="this.src='<?php echo base_url('assets/images/fallback.jpg') ?>'">
+                                            <div class="doc-info">
+                                                <p>Aadhaar Card</p>
+                                            </div>
+                                            <div class="doc-actions">
+                                                <a href="<?php echo base_url('Uploads/documents/aadharcard.jpg') ?>" target="_blank" class="doc-btn">View</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="doc-actions">
-                                <a href="Uploads/Astologer/aadhaar_card.jpg" target="_blank" class="doc-btn view">View</a>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="certificateHeading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#certificateCollapse" aria-expanded="false" aria-controls="certificateCollapse">
+                                        Certificate
+                                    </button>
+                                </h2>
+                                <div id="certificateCollapse" class="accordion-collapse collapse" aria-labelledby="certificateHeading" data-bs-parent="#documentAccordion">
+                                    <div class="accordion-body">
+                                        <div class="doc-card">
+                                            <img src="<?php echo base_url('Uploads/Astologer/aadharcard.png') ?>" alt="Certificate" class="doc-image" onerror="this.src='<?php echo base_url('assets/images/fallback.jpg') ?>'">
+                                            <div class="doc-info">
+                                                <p>Certificate</p>
+                                            </div>
+                                            <div class="doc-actions">
+                                                <a href="<?php echo base_url('Uploads/Astologer/certificate.png') ?>" target="_blank" class="doc-btn">View</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="doc-card">
-                            <img src="Uploads/Astologer/certificate.jpg" alt="Certificate" class="doc-image">
-                            <div class="doc-info">
-                                <p>Certificate</p>
-                            </div>
-                            <div class="doc-actions">
-                                <a href="Uploads/Astologer/certificate.jpg" target="_blank" class="doc-btn view">View</a>
-                            </div>
-                        </div>
-                        <div class="doc-certifications">
-                            <h6>Other Certifications</h6>
-                            <div class="certification-links">
-                                <a href="Uploads/Astologer/cert1.pdf" target="_blank">Certification 1</a>
-                                <a href="Uploads/Astologer/cert2.pdf" target="_blank">Certification 2</a>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="certificationsHeading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#certificationsCollapse" aria-expanded="false" aria-controls="certificationsCollapse">
+                                        Other Certifications
+                                    </button>
+                                </h2>
+                                <div id="certificationsCollapse" class="accordion-collapse collapse" aria-labelledby="certificationsHeading" data-bs-parent="#documentAccordion">
+                                    <div class="accordion-body">
+                                        <div class="certification-grid" id="certificationGrid">
+                                            <!-- Certifications will be populated dynamically -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="btn-container">
-                        <button class="btns btn-schedule" data-status="schedule" data-id="1" onclick="showPopup(this)">Schedule</button>
-                        <button class="btns btn-direct-reject" id="reject-without-interview" data-id="1">Reject</button>
-                        <button class="btns btn-accepted" id="reject-without-interview" data-id="1">Accept</button>
+                        <!-- if it is new request -->
+                        <button class="btns btn-schedule" data-status="schedule" onclick="showPopup(this)">Schedule</button>
+                        <button class="btns btn-direct-reject" id="reject-without-interview">Reject</button>
+                        <!-- if interview is scheduled -->
+                        <button class="btns btn-approve" id="approve">Approve</button>
+                        <button class="btns btn-reject" id="reject">Reject</button>
+                        <button class="btns btn-update-interview" onclick="showUpdateInterviewPopup()">Update Interview</button>
+                        <!-- for approved status -->
+                        <button class="btns btn-reject-approved_astrologer" id="reject-approved_astrologer">Reject</button>
+                        <!-- if status is rejected -->
+                        <button class="btns btn-assign-charges" data-status="assign-charges" onclick="showChargesPopup(this)">Assign Charges</button>
                     </div>
                 </div>
             </div>
@@ -680,6 +687,24 @@
         </div>
     </div>
 
+    <!-- Assign Charges Popup -->
+    <div class="popup-overlay" id="charges-popup">
+        <div class="popup">
+            <h5>Assign Charges</h5>
+            <div class="popup-content">
+                <input type="hidden" id="charges-astrologer-id" value="1">
+                <div class="popup-field">
+                    <label for="charges-per-minute">Charges Per Minute (IN ₹)</label>
+                    <input type="number" id="charges-per-minute" placeholder="Enter charges per minute" required min="1" max="100" step="0.01" title="Charges must be between 1 and 100 INR">
+                </div>
+            </div>
+            <div class="submitbtn">
+                <button onclick="assignCharges()">Submit</button>
+                <button onclick="hideChargesPopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Update Interview Popup -->
     <div class="popup-overlay" id="update-interview-popup">
         <div class="popup">
@@ -708,19 +733,45 @@
 
     <!-- Success Popup -->
     <div class="success-overlay" id="successPopup">
-    <div class="success-popup">
-        <img src="<?php echo base_url('assets/images/newlogo.png.png') ?>" alt="Success" style="width: 200px; height: auto;">
-        <h1>Great Job</h1>
-            <p style="font-size: 28px; font-weight: 400;">Interview Scheduled Successfully!!</p>
+        <div class="success-popup">
+            <img src="<?php echo base_url('assets/images/newlogo.png.png') ?>" alt="Success" style="width: 200px; height: auto;">
+            <h1>Great Job</h1>
+            <p style="font-size: 28px; font-weight: 400;">Action Completed Successfully!!</p>
             <button class="close-btn" onclick="hideSuccessPopup()">Close</button>
+        </div>
     </div>
-</div>
-
 
     <!-- Frontend JavaScript -->
     <script>
+        // Simulate backend data for certifications (replace with actual backend data)
+        const certifications = [
+            { name: "Certification 1", url: "<?php echo base_url('Uploads/Astologer/cert1.pdf') ?>" },
+            { name: "Certification 2", url: "<?php echo base_url('Uploads/Astologer/cert2.pdf') ?>" }
+        ];
+
+        // Dynamically populate certifications
+        function populateCertifications() {
+            const grid = document.getElementById('certificationGrid');
+            grid.innerHTML = '';
+            if (certifications.length === 0) {
+                grid.innerHTML = '<p class="text-center text-muted">No certifications available.</p>';
+                return;
+            }
+            certifications.forEach(cert => {
+                const link = document.createElement('a');
+                link.href = cert.url;
+                link.target = '_blank';
+                link.className = 'certification-link';
+                link.textContent = cert.name;
+                grid.appendChild(link);
+            });
+        }
+
+        // Initialize certifications on page load
+        document.addEventListener('DOMContentLoaded', populateCertifications);
+
         function showPopup(button) {
-            let astrologerId = button.getAttribute("data-id");
+            let astrologerId = button.getAttribute("data-id") || "1";
             let actionStatus = button.getAttribute("data-status");
             let popup = document.getElementById("popup");
             popup.classList.add("show");
@@ -733,6 +784,32 @@
             popup.classList.remove("show");
         }
 
+        function showChargesPopup(button) {
+            try {
+                let astrologerId = button.getAttribute("data-id") || "1";
+                let popup = document.getElementById("charges-popup");
+                if (!popup) {
+                    console.error("Charges popup element not found");
+                    Swal.fire("Error!", "Charges popup not found.", "error");
+                    return;
+                }
+                popup.classList.add("show");
+                document.getElementById("charges-astrologer-id").value = astrologerId;
+            } catch (error) {
+                console.error("Error in showChargesPopup:", error);
+                Swal.fire("Error!", "Failed to open charges popup.", "error");
+            }
+        }
+
+        function hideChargesPopup() {
+            let popup = document.getElementById("charges-popup");
+            if (popup) {
+                popup.classList.remove("show");
+            } else {
+                console.error("Charges popup element not found");
+            }
+        }
+
         function scheduleInterview() {
             let astrologerId = document.getElementById("astrologer-id").value;
             let date = document.getElementById("date").value;
@@ -741,10 +818,12 @@
             let actionStatus = document.getElementById("popup").getAttribute("data-status");
 
             if (!astrologerId) {
+                Swal.fire("Error!", "Astrologer ID is missing.", "error");
                 return;
             }
 
             if (!date || !time || !meetingLink) {
+                Swal.fire("Error!", "Please fill all required fields.", "error");
                 return;
             }
 
@@ -755,6 +834,29 @@
                 console.error("Success popup element with id 'successPopup' not found");
             }
             hidePopup();
+        }
+
+        function assignCharges() {
+            let astrologerId = document.getElementById("charges-astrologer-id").value;
+            let charges = document.getElementById("charges-per-minute").value;
+
+            if (!astrologerId) {
+                Swal.fire("Error!", "Astrologer ID is missing.", "error");
+                return;
+            }
+
+            if (!charges || charges < 1 || charges > 100) {
+                Swal.fire("Error!", "Charges must be between 1 and 100 INR.", "error");
+                return;
+            }
+
+            let successPopup = document.getElementById("successPopup");
+            if (successPopup) {
+                successPopup.classList.add("show");
+            } else {
+                console.error("Success popup element with id 'successPopup' not found");
+            }
+            hideChargesPopup();
         }
 
         function showUpdateInterviewPopup() {
@@ -774,10 +876,12 @@
             let meetingLink = document.getElementById("update-meeting-link").value;
 
             if (!astrologerId) {
+                Swal.fire("Error!", "Astrologer ID is missing.", "error");
                 return;
             }
 
             if (!date || !time || !meetingLink) {
+                Swal.fire("Error!", "Please fill all required fields.", "error");
                 return;
             }
 
@@ -833,7 +937,5 @@
             });
         }
     </script>
-
 </body>
-
 </html>
