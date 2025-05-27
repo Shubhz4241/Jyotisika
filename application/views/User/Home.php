@@ -104,7 +104,9 @@
 
     <!-- astro signs -->
 
-    <!-- <?php print_r($astrologersdata) ?> -->
+    <!-- <?php print_r($userinfo_data) ?> -->
+
+
 
     <?php
 
@@ -331,6 +333,7 @@
     </section>
 
     <!-- Astrologer on call or chat -->
+
     <section>
         <div class="container my-4">
             <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
@@ -340,8 +343,8 @@
 
 
                 <div class="row my-4" id="cardContainer">
-                    <?php if (!empty($astrologersdata)): ?>
-                        <?php foreach ($astrologersdata as $astrologer): ?>
+                    <?php if (!empty($astrologer_data)): ?>
+                        <?php foreach ($astrologer_data as $astrologer): ?>
                             <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
                                 <div class="card shadow-sm rounded-3 h-100"
                                     style="border: 1px solid var(--red); background-color: #fff;">
@@ -362,7 +365,7 @@
                                                 </a>
 
                                                 <div class="d-flex align-items-center gap-1">
-                                                    <?php for ($j = 0; $j < 4; $j++): ?>
+                                                    <?php for ($j = 0; $j < $astrologer['average_rating']; $j++): ?>
                                                         <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
                                                             style="width: 15px; height: 15px;">
                                                     <?php endfor; ?>
@@ -380,17 +383,20 @@
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/experience.png'); ?>"
                                                     alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                                <small><?php echo $astrologer['experience']; ?>+ Years</small>
+                                                <small><?php echo isset($astrologer['experience']) && !empty($astrologer['experience']) ? $astrologer['experience'] : '0'; ?>+
+                                                    Years</small>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
                                                     style="width: 15px; height: 15px; margin-right: 5px;">
-                                                <small>Rs.<?php echo $astrologer['price_per_minute']; ?>/min</small>
+                                                <small>Rs.<?php echo isset($astrologer['price_per_minute']) && !empty($astrologer['price_per_minute']) ? $astrologer['price_per_minute'] : 'N/A'; ?>/min</small>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
                                                     style="width: 15px; height: 15px; margin-right: 5px;">
-                                                <small class="card-language"><?php echo $astrologer['languages']; ?></small>
+                                                <small class="card-language">
+                                                    <?php echo isset($astrologer['languages']) && !empty($astrologer['languages']) ? $astrologer['languages'] : 'N/A'; ?>
+                                                </small>
                                             </div>
                                         </div>
 
@@ -400,7 +406,7 @@
                                                 <button class="btn btn-sm w-50 rounded-3 border-1"
                                                     style="background-color: var(--yellow);" onclick="chatscreen()">Chat</button>
                                             <?php else: ?>
-                                                <button id="chatlink" class="btn btn-sm w-50 rounded-3 border-1"
+                                                <button class="btn btn-sm w-50 rounded-3 border-1 chatlink"
                                                     style="background-color: var(--yellow);">Chat</button>
                                             <?php endif ?>
 
@@ -426,7 +432,7 @@
     </section>
 
     <!-- Astrological Services For Accurate Answers And Better Future -->
-    <!-- <section>
+    <section>
         <div class="container">
             <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"> Astrological Services For Accurate Answers
                 And Better Future</h2>
@@ -773,7 +779,29 @@
 
     <script>
         function chatscreen() {
-            window.location.href = "<?php echo base_url("chat") ?>"; // Change this to your actual chat page URL
+
+            let amount = <?php echo isset($userinfo_data["amount"]) && (!empty($userinfo_data["amount"])) ? $userinfo_data["amount"] : 0; ?>
+
+            console.log(amount);
+
+            if (amount == 0) {
+
+                Swal.fire({
+                    title: "warning",
+                    text: "you have  not much money",
+                    icon: "warning",
+                });
+
+            }
+            else {
+
+                window.location.href = "<?php echo base_url("chat") ?>";
+
+            }
+
+
+
+            // window.location.href = "<?php echo base_url("chat") ?>"; // Change this to your actual chat page URL
         }
 
         $(document).ready(function () {
@@ -864,26 +892,38 @@
 
 
 
-        document.getElementById("chatlink").addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent default redirection
 
-            <?php if (!$this->session->userdata('user_id')): ?>
-                Swal.fire({
-                    title: "Login Required",
-                    text: "Pls login to access this servise",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Login",
-                    cancelButtonText: "Cancel",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to Signup/Login page
-                    }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const chatlinks = document.querySelectorAll(".chatlink");
+
+            let data = Array.from(chatlinks);
+            console.log(chatlinks);
+            console.log(data);
+            Array.from(chatlinks).forEach(function (chatlink) {
+                chatlink.addEventListener("click", function (e) {
+                    e.preventDefault(); // Now correctly inside the click event
+
+                    <?php if (!$this->session->userdata('user_id')): ?>
+                        Swal.fire({
+                            title: "Login Required",
+                            text: "Please login to access this service",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "Login",
+                            cancelButtonText: "Cancel",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "<?php echo base_url('Login'); ?>";
+                            }
+                        });
+                    <?php else: ?>
+                        window.location.href = "<?php echo base_url('Chat'); ?>"; // Change to actual chat page
+                    <?php endif; ?>
                 });
-            <?php else: ?>
-                window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
-            <?php endif; ?>
+            });
         });
+
 
 
 

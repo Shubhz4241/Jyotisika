@@ -97,6 +97,8 @@
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
+    <?php print_r($show_completed_puja) ?>
+
 
     <main>
         <div class="container my-5">
@@ -110,17 +112,20 @@
                     </li>
                     <li class="nav-item flex-grow-1 mx-1">
                         <a class="nav-link text-center w-100" id="pills-profile-tab" data-bs-toggle="pill"
-                            href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Chat</a>
+                            href="#pills-profile" role="tab" aria-controls="pills-profile"
+                            aria-selected="false">Chat</a>
                     </li>
 
                     <li class="nav-item flex-grow-1 mx-1">
                         <a class="nav-link text-center w-100" id="pills-pooja-tab" data-bs-toggle="pill"
-                            href="#pills-pooja" role="tab" aria-controls="pills-pooja" aria-selected="false">Booked Poojas</a>
+                            href="#pills-pooja" role="tab" aria-controls="pills-pooja" aria-selected="false">Booked
+                            Poojas</a>
                     </li>
 
                     <li class="nav-item flex-grow-1 mx-1">
                         <a class="nav-link text-center w-100" id="pills-mall-tab" data-bs-toggle="pill"
-                            href="#pills-mall" role="tab" aria-controls="pills-mall" aria-selected="false">Jyotisika Mall</a>
+                            href="#pills-mall" role="tab" aria-controls="pills-mall" aria-selected="false">Jyotisika
+                            Mall</a>
                     </li>
 
                 </ul>
@@ -128,7 +133,8 @@
                 <div class="tab-content p-3" id="pills-tabContent">
 
                     <!-- call -->
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                        aria-labelledby="pills-home-tab">
                         <div class="row my-4" id="cardContainer">
                             <?php
                             $astrologers = [
@@ -170,20 +176,22 @@
                                             <!-- Profile Section -->
                                             <div class="d-flex align-items-center mb-2">
                                                 <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                                                    <img src="<?php echo base_url('assets/images/' . $astrologer['image']); ?>" alt="image"
-                                                        class="rounded-circle"
+                                                    <img src="<?php echo base_url('assets/images/' . $astrologer['image']); ?>"
+                                                        alt="image" class="rounded-circle"
                                                         style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                                 </a>
                                                 <div class="ms-2">
-                                                    <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
-                                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);"><?php echo $astrologer['name']; ?>
+                                                    <a href="<?php echo base_url('ViewAstrologer'); ?>"
+                                                        class="text-decoration-none">
+                                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                            <?php echo $astrologer['name']; ?>
                                                         </h6>
                                                     </a>
 
                                                     <div class="d-flex align-items-center gap-1">
                                                         <?php for ($i = 0; $i < $astrologer['rating']; $i++): ?>
-                                                            <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                                style="width: 15px; height: 15px;">
+                                                            <img src="<?php echo base_url('assets/images/rating.png'); ?>"
+                                                                alt="star" style="width: 15px; height: 15px;">
                                                         <?php endfor; ?>
                                                     </div>
                                                 </div>
@@ -194,28 +202,33 @@
                                                 <div class="d-flex align-items-center">
                                                     <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
                                                         style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small class="card-expertise"><?php echo $astrologer['expertise']; ?></small>
+                                                    <small
+                                                        class="card-expertise"><?php echo $astrologer['expertise']; ?></small>
                                                 </div>
                                                 <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
+                                                    <img src="<?php echo base_url('assets/images/experience.png'); ?>"
+                                                        alt="experience"
                                                         style="width: 15px; height: 15px; margin-right: 5px;">
                                                     <small><?php echo $astrologer['experience']; ?></small>
                                                 </div>
                                                 <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
-                                                        style="width: 15px; height: 15px; margin-right: 5px;">
+                                                    <img src="<?php echo base_url('assets/images/money.png'); ?>"
+                                                        alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
                                                     <small><?php echo $astrologer['price']; ?></small>
                                                 </div>
                                                 <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
+                                                    <img src="<?php echo base_url('assets/images/language.png'); ?>"
+                                                        alt="language"
                                                         style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small class="card-language"><?php echo $astrologer['languages']; ?></small>
+                                                    <small
+                                                        class="card-language"><?php echo $astrologer['languages']; ?></small>
                                                 </div>
                                             </div>
 
                                             <!-- Action Buttons -->
                                             <div class="d-flex gap-2 mb-2">
-                                                <button class="btn text-dark btn-sm btn-outline-dark w-100 rounded-3" style="background-color: var(--yellow);">Call</button>
+                                                <button class="btn text-dark btn-sm btn-outline-dark w-100 rounded-3"
+                                                    style="background-color: var(--yellow);">Call</button>
                                             </div>
                                             <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
                                         </div>
@@ -261,27 +274,30 @@
 
                             ];
 
-                            foreach ($astrologers as $astrologer): ?>
+                            foreach ($astrologer_data as $astrologer): ?>
                                 <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
-                                    <div class="card shadow rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
+                                    <div class="card shadow rounded-3 h-100"
+                                        style="border: 1px solid var(--red); background-color: #fff;">
                                         <div class="card-body p-3">
                                             <!-- Profile Section -->
                                             <div class="d-flex align-items-center mb-2">
                                                 <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                                                    <img src="<?php echo base_url('assets/images/' . $astrologer['image']); ?>" alt="image"
-                                                        class="rounded-circle"
+                                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>"
+                                                        alt="image" class="rounded-circle"
                                                         style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                                 </a>
                                                 <div class="ms-2">
-                                                    <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
-                                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);"><?php echo $astrologer['name']; ?>
+                                                    <a href="<?php echo base_url('ViewAstrologer'); ?>"
+                                                        class="text-decoration-none">
+                                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                            <?php echo $astrologer['name']; ?>
                                                         </h6>
                                                     </a>
 
                                                     <div class="d-flex align-items-center gap-1">
-                                                        <?php for ($i = 0; $i < $astrologer['rating']; $i++): ?>
-                                                            <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                                style="width: 15px; height: 15px;">
+                                                        <?php for ($i = 0; $i < 3; $i++): ?>
+                                                            <img src="<?php echo base_url('assets/images/rating.png'); ?>"
+                                                                alt="star" style="width: 15px; height: 15px;">
                                                         <?php endfor; ?>
                                                     </div>
                                                 </div>
@@ -292,22 +308,26 @@
                                                 <div class="d-flex align-items-center">
                                                     <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
                                                         style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small class="card-expertise"><?php echo $astrologer['expertise']; ?></small>
+                                                    <small
+                                                        class="card-expertise"><?php echo $astrologer['experience']; ?></small>
                                                 </div>
                                                 <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
+                                                    <img src="<?php echo base_url('assets/images/experience.png'); ?>"
+                                                        alt="experience"
                                                         style="width: 15px; height: 15px; margin-right: 5px;">
                                                     <small><?php echo $astrologer['experience']; ?></small>
                                                 </div>
                                                 <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
-                                                        style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small><?php echo $astrologer['price']; ?></small>
+                                                    <img src="<?php echo base_url('assets/images/money.png'); ?>"
+                                                        alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
+                                                    <small><?php echo $astrologer['price_per_minute']; ?></small>
                                                 </div>
                                                 <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
+                                                    <img src="<?php echo base_url('assets/images/language.png'); ?>"
+                                                        alt="language"
                                                         style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small class="card-language"><?php echo $astrologer['languages']; ?></small>
+                                                    <small
+                                                        class="card-language"><?php echo $astrologer['languages']; ?></small>
                                                 </div>
                                             </div>
 
@@ -315,14 +335,18 @@
                                             <div class="d-flex gap-2 my-1">
                                                 <button class="btn btn-sm w-50 rounded-3 border-1"
                                                     style="background-color: var(--yellow);">Chat</button>
-                                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3" data-bs-toggle="modal" data-bs-target="#feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>">Feedback</button>
+                                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>">Feedback</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- modal for review astrologer -->
-                                <div class="modal fade" id="feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>" tabindex="-1">
+                                <div class="modal fade "
+                                    id="feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>"
+                                    tabindex="-1">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -330,21 +354,30 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form id="feedbackForm<?php echo str_replace(' ', '', $astrologer['name']); ?>">
+                                                <form class="astrologerfeedback"
+                                                    id="feedbackForm<?php echo str_replace(' ', '', $astrologer['name']); ?>">
                                                     <div class="mb-3">
                                                         <label class="form-label">Rating</label>
                                                         <div class="rating">
                                                             <?php for ($i = 5; $i >= 1; $i--): ?>
-                                                                <input type="radio" name="rating<?php echo str_replace(' ', '', $astrologer['name']); ?>" value="<?php echo $i; ?>" id="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>" required>
-                                                                <label for="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>">★</label>
+                                                                <input type="radio" name="astologerrating"
+                                                                    value="<?php echo $i; ?>"
+                                                                    id="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>"
+                                                                    required>
+                                                                <label
+                                                                    for="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>">★</label>
                                                             <?php endfor; ?>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label">Message</label>
-                                                        <textarea class="form-control shadow-none" name="message" rows="3" required></textarea>
+                                                        <input type="hidden" name="astrologer_id"
+                                                            value="<?php echo $astrologer['id'] ?>">
+                                                        <textarea class="form-control shadow-none" name="message" rows="3"
+                                                            required></textarea>
                                                     </div>
-                                                    <button type="submit" class="btn w-100" style="background-color: var(--yellow);">Submit Feedback</button>
+                                                    <button type="submit" class="btn w-100"
+                                                        style="background-color: var(--yellow);">Submit Feedback</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -354,7 +387,7 @@
                                 <!-- script for that rating astrologer-->
                                 <script>
                                     document.querySelectorAll('.rating input').forEach(input => {
-                                        input.addEventListener('change', function() {
+                                        input.addEventListener('change', function () {
                                             let ratingDiv = this.closest('.rating');
                                             let selectedValue = this.value;
 
@@ -380,12 +413,15 @@
                     <div class="tab-pane fade" id="pills-pooja" role="tabpanel" aria-labelledby="pills-pooja-tab">
 
                         <!-- Submenu Nav pills -->
-                        <ul class="nav nav-pills mb-5  d-flex justify-content-between w-100" id="mall-subtab" role="tablist">
+                        <ul class="nav nav-pills mb-5  d-flex justify-content-between w-100" id="mall-subtab"
+                            role="tablist">
                             <li class="nav-item flex-grow-1 mx-1">
-                                <a class="nav-link active text-center w-100" id="orders-tab" data-bs-toggle="pill" href="#orders" role="tab">Ongoing</a>
+                                <a class="nav-link active text-center w-100" id="orders-tab" data-bs-toggle="pill"
+                                    href="#orders" role="tab">Ongoing</a>
                             </li>
                             <li class="nav-item flex-grow-1 mx-1">
-                                <a class="nav-link text-center w-100" id="purchased-tab" data-bs-toggle="pill" href="#purchased" role="tab">Completed</a>
+                                <a class="nav-link text-center w-100" id="purchased-tab" data-bs-toggle="pill"
+                                    href="#purchased" role="tab">Completed</a>
                             </li>
                         </ul>
 
@@ -415,63 +451,76 @@
                                             'status' => 'Scheduled',
                                             'pandit' => 'Pandit Sharma Ji'
                                         ]
-                                    ];
+                                    ]; ?>
 
-                                    foreach ($poojas as $pooja): ?>
-                                        <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card shadow-sm h-100 rounded-3" style="border: 1px solid var(--red);">
-                                                <div class="row g-0">
-                                                    <div class="col-4">
-                                                        <img src="<?php echo base_url('assets/images/' . $pooja['image']); ?>"
-                                                            class="img-fluid rounded-start h-100"
-                                                            alt="<?php echo $pooja['name']; ?>"
-                                                            style="object-fit: cover;">
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div class="card-body p-3">
-                                                            <!-- Title -->
-                                                            <h6 class="card-title text-truncate mb-2" style="color: var(--red); font-size: 1.2rem;">
-                                                                <?php echo $pooja['name']; ?>
-                                                            </h6>
+                                    <?php if ($showbookedpuja_): ?>
 
-                                                            <!-- Pandit Name -->
-                                                            <p class="mb-2 text-truncate" style="font-size: 1rem;">
-                                                                <i class="bi bi-person"></i> <?php echo $pooja['pandit']; ?>
-                                                            </p>
 
-                                                            <!-- Badges -->
-                                                            <div class="d-flex gap-2 mb-2">
-                                                                <span class="badge rounded-pill"
-                                                                    style="background-color: var(--yellow); 
+
+                                        <?php foreach ($showbookedpuja_ as $pooja): ?>
+                                            <div class="col-md-6 col-lg-4 mb-4">
+                                                <div class="card shadow-sm h-100 rounded-3"
+                                                    style="border: 1px solid var(--red);">
+                                                    <div class="row g-0">
+                                                        <div class="col-4">
+                                                            <img src="<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>"
+                                                                class="img-fluid rounded-start h-100"
+                                                                alt="<?php echo $pooja['name_of_puja']; ?>"
+                                                                style="object-fit: cover;">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="card-body p-3">
+                                                                <!-- Title -->
+                                                                <h6 class="card-title text-truncate mb-2"
+                                                                    style="color: var(--red); font-size: 1.2rem;">
+                                                                    <?php echo $pooja['name_of_puja']; ?>
+                                                                </h6>
+
+                                                                <!-- Pandit Name -->
+                                                                <p class="mb-2 text-truncate" style="font-size: 1rem;">
+                                                                    <i class="bi bi-person"></i>
+                                                                    <?php echo $pooja['pujari_name']; ?>
+                                                                </p>
+
+                                                                <!-- Badges -->
+                                                                <div class="d-flex gap-2 mb-2">
+                                                                    <span class="badge rounded-pill"
+                                                                        style="background-color: var(--yellow); 
                                                                          color: black; font-size: 0.85rem; padding: 6px 12px;">
-                                                                    <?php echo $pooja['type']; ?>
-                                                                </span>
-                                                                <span class="badge rounded-pill"
-                                                                    style="background-color: var(--yellow); color: black; font-size: 0.85rem; padding: 6px 12px;">
-                                                                    <?php echo $pooja['status']; ?>
-                                                                </span>
-                                                            </div>
+                                                                        <?php echo $pooja['puja_mode']; ?>
+                                                                    </span>
+                                                                    <span class="badge rounded-pill"
+                                                                        style="background-color: var(--yellow); color: black; font-size: 0.85rem; padding: 6px 12px;">
+                                                                        <?php echo $pooja['puja_status']; ?>
+                                                                    </span>
+                                                                </div>
 
-                                                            <!-- Details -->
-                                                            <div style="font-size: 0.9rem;">
-                                                                <div class="text-truncate mb-1">
-                                                                    <i class="bi bi-calendar-check"></i> <?php echo date('d M Y', strtotime($pooja['date'])); ?>
-                                                                </div>
-                                                                <div class="text-truncate mb-1">
-                                                                    <i class="bi bi-clock"></i> <?php echo $pooja['time']; ?>
-                                                                </div>
-                                                                <?php if ($pooja['type'] == 'Offline'): ?>
-                                                                    <div class="text-truncate">
-                                                                        <i class="bi bi-geo-alt"></i> <?php echo $pooja['address']; ?>
+                                                                <!-- Details -->
+                                                                <div style="font-size: 0.9rem;">
+                                                                    <div class="text-truncate mb-1">
+                                                                        <i class="bi bi-calendar-check"></i>
+                                                                        <?php echo date('d M Y', strtotime($pooja['puja_date'])); ?>
                                                                     </div>
-                                                                <?php endif; ?>
+                                                                    <div class="text-truncate mb-1">
+                                                                        <i class="bi bi-clock"></i>
+                                                                        <?php echo $pooja['puja_time']; ?>
+                                                                    </div>
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
+
+
+
+                                    <?php else: ?>
+
+                                    <?php endif ?>
+
+
                                 </div>
 
                             </div>
@@ -502,120 +551,149 @@
                                             'pandit' => 'Pandit Sharma Ji',
                                             'id' => 2
                                         ]
-                                    ];
+                                    ]; ?>
 
-                                    foreach ($completedPoojas as $pooja): ?>
-                                        <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card shadow-sm h-100 rounded-3" style="border: 1px solid var(--red);">
-                                                <div class="row g-0 h-100">
-                                                    <div class="col-4">
-                                                        <img src="<?php echo base_url('assets/images/' . $pooja['image']); ?>"
-                                                            class="img-fluid rounded-start h-100 w-100"
-                                                            alt="<?php echo $pooja['name']; ?>"
-                                                            style="object-fit: cover;">
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div class="card-body p-3 d-flex flex-column h-100">
-                                                            <!-- Content Section -->
-                                                            <div>
-                                                                <h6 class="card-title text-truncate mb-2" style="color: var(--red); font-size: 1.2rem;">
-                                                                    <?php echo $pooja['name']; ?>
-                                                                </h6>
+                                    <?php if ($show_completed_puja): ?>
 
-                                                                <p class="mb-2 text-truncate" style="font-size: 1rem;">
-                                                                    <i class="bi bi-person"></i> <?php echo $pooja['pandit']; ?>
-                                                                </p>
+                                        <?php foreach ($show_completed_puja as $pooja): ?>
+                                            <div class="col-md-6 col-lg-4 mb-4">
+                                                <div class="card shadow-sm h-100 rounded-3"
+                                                    style="border: 1px solid var(--red);">
+                                                    <div class="row g-0 h-100">
+                                                        <div class="col-4">
+                                                            <img src="<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>"
+                                                                class="img-fluid rounded-start h-100 w-100"
+                                                                alt="<?php echo $pooja['name_of_puja']; ?>"
+                                                                style="object-fit: cover;">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="card-body p-3 d-flex flex-column h-100">
+                                                                <!-- Content Section -->
+                                                                <div>
+                                                                    <h6 class="card-title text-truncate mb-2"
+                                                                        style="color: var(--red); font-size: 1.2rem;">
+                                                                        <?php echo $pooja['name_of_puja']; ?>
+                                                                    </h6>
 
-                                                                <div class="d-flex gap-2 mb-2">
-                                                                    <span class="badge rounded-pill" style="background-color: var(--yellow); color: black; font-size: 0.85rem; padding: 6px 12px;">
-                                                                        <?php echo $pooja['type']; ?>
-                                                                    </span>
-                                                                    <span class="badge rounded-pill text-dark" style="background-color: var(--yellow); font-size: 0.85rem; padding: 6px 12px;">
-                                                                        <?php echo $pooja['status']; ?>
-                                                                    </span>
-                                                                </div>
+                                                                    <p class="mb-2 text-truncate" style="font-size: 1rem;">
+                                                                        <i class="bi bi-person"></i>
+                                                                        <?php echo $pooja['pujari_name']; ?>
+                                                                    </p>
 
-                                                                <div style="font-size: 0.9rem;">
-                                                                    <div class="text-truncate mb-1">
-                                                                        <i class="bi bi-calendar-check"></i> <?php echo date('d M Y', strtotime($pooja['date'])); ?>
+                                                                    <div class="d-flex gap-2 mb-2">
+                                                                        <span class="badge rounded-pill"
+                                                                            style="background-color: var(--yellow); color: black; font-size: 0.85rem; padding: 6px 12px;">
+                                                                            <?php echo $pooja['puja_mode']; ?>
+                                                                        </span>
+                                                                        <span class="badge rounded-pill text-dark"
+                                                                            style="background-color: var(--yellow); font-size: 0.85rem; padding: 6px 12px;">
+                                                                            <?php echo $pooja['status']; ?>
+                                                                        </span>
                                                                     </div>
-                                                                    <div class="text-truncate mb-1">
-                                                                        <i class="bi bi-clock"></i> <?php echo $pooja['time']; ?>
-                                                                    </div>
-                                                                    <?php if ($pooja['type'] == 'Offline'): ?>
-                                                                        <div class="text-truncate mb-2">
-                                                                            <i class="bi bi-geo-alt"></i> <?php echo $pooja['address']; ?>
+
+                                                                    <div style="font-size: 0.9rem;">
+                                                                        <div class="text-truncate mb-1">
+                                                                            <i class="bi bi-calendar-check"></i>
+                                                                            <?php echo date('d M Y', strtotime($pooja['puja_date'])); ?>
                                                                         </div>
-                                                                    <?php endif; ?>
-                                                                </div>
-                                                            </div>
+                                                                        <div class="text-truncate mb-1">
+                                                                            <i class="bi bi-clock"></i>
+                                                                            <?php echo $pooja['puja_time']; ?>
+                                                                        </div>
 
-                                                            <!-- Button Section - pushed to bottom -->
-                                                            <div class="mt-auto">
-                                                                <button class="btn btn-sm w-100" style="background-color: var(--yellow);"
-                                                                    data-bs-toggle="modal" data-bs-target="#feedbackModal<?php echo $pooja['id']; ?>">
-                                                                    Give Feedback
-                                                                </button>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Button Section - pushed to bottom -->
+                                                                <div class="mt-auto">
+                                                                    <button class="btn btn-sm w-100"
+                                                                        style="background-color: var(--yellow);"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#feedbackModal<?php echo $pooja['book_puja_id']; ?>">
+                                                                        Give Feedback
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
 
 
-                                        <!-- modal for review pooja -->
-                                        <div class="modal fade" id="feedbackModal<?php echo $pooja['id']; ?>" tabindex="-1">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Feedback for <?php echo $pooja['name']; ?></h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form id="feedbackForm<?php echo $pooja['id']; ?>">
-                                                            <div class="mb-3">
-                                                                <label class="form-label">Rating</label>
-                                                                <div class="rating">
-                                                                    <?php for ($i = 5; $i >= 1; $i--): ?>
-                                                                        <input type="radio" name="rating<?php echo $pooja['id']; ?>" value="<?php echo $i; ?>" id="star<?php echo $i; ?>_<?php echo $pooja['id']; ?>" required>
-                                                                        <label for="star<?php echo $i; ?>_<?php echo $pooja['id']; ?>">★</label>
-                                                                    <?php endfor; ?>
+                                            <!-- modal for review pooja -->
+                                            <div class="modal fade" id="feedbackModal<?php echo $pooja['book_puja_id']; ?>"
+                                                tabindex="-1">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Feedback for
+                                                                <?php echo $pooja['name_of_puja']; ?>
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- <form id="feedbackForm<?php echo $pooja['book_puja_id']; ?>"> -->
+                                                            <form class="pujarifeedback">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Rating</label>
+                                                                    <div class="rating">
+                                                                        <?php for ($i = 5; $i >= 1; $i--): ?>
+                                                                            <input type="radio"
+                                                                                name="rating"
+                                                                                value="<?php echo $i; ?>"
+                                                                                id="star<?php echo $i; ?>_<?php echo $pooja['book_puja_id']; ?>"
+                                                                                required>
+                                                                            <label
+                                                                                for="star<?php echo $i; ?>_<?php echo $pooja['book_puja_id']; ?>">★</label>
+                                                                        <?php endfor; ?>
+                                                                    </div>
+
+                                                                    <input type="text" value="<?php echo $pooja['pujari_id']; ?>" name="pujari_id" hidden >
+
+
                                                                 </div>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label">Message</label>
-                                                                <textarea class="form-control shadow-none" name="message" rows="3" required></textarea>
-                                                            </div>
-                                                            <button type="submit" class="btn w-100" style="background-color: var(--yellow);">Submit Feedback</button>
-                                                        </form>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Message</label>
+                                                                    <textarea class="form-control shadow-none" name="message"
+                                                                        rows="3" required></textarea>
+                                                                </div>
+                                                                <button type="submit" class="btn w-100"
+                                                                    style="background-color: var(--yellow);">Submit
+                                                                    Feedback</button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <!-- script for that rating pooja-->
-                                        <script>
-                                            document.querySelectorAll('.rating input').forEach(input => {
-                                                input.addEventListener('change', function() {
-                                                    let ratingDiv = this.closest('.rating');
-                                                    let selectedValue = this.value;
+                                            <!-- script for that rating pooja-->
+                                            <script>
+                                                document.querySelectorAll('.rating input').forEach(input => {
+                                                    input.addEventListener('change', function () {
+                                                        let ratingDiv = this.closest('.rating');
+                                                        let selectedValue = this.value;
 
-                                                    // Reset all stars
-                                                    ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
+                                                        // Reset all stars
+                                                        ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
 
-                                                    // Highlight selected stars
-                                                    ratingDiv.querySelectorAll('input').forEach(starInput => {
-                                                        if (starInput.value <= selectedValue) {
-                                                            starInput.nextElementSibling.style.color = 'var(--yellow)';
-                                                        }
+                                                        // Highlight selected stars
+                                                        ratingDiv.querySelectorAll('input').forEach(starInput => {
+                                                            if (starInput.value <= selectedValue) {
+                                                                starInput.nextElementSibling.style.color = 'var(--yellow)';
+                                                            }
+                                                        });
                                                     });
                                                 });
-                                            });
-                                        </script>
+                                            </script>
 
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
+
+                                    <?php else: ?>
+
+                                    <?php endif ?>
+
                                 </div>
 
 
@@ -627,13 +705,17 @@
                     <!-- mall -->
                     <div class="tab-pane fade" id="pills-mall" role="tabpanel" aria-labelledby="pills-mall-tab">
 
+
                         <!-- Submenu Nav pills -->
-                        <ul class="nav nav-pills mb-5  d-flex justify-content-between w-100" id="mall-subtab" role="tablist">
+                        <ul class="nav nav-pills mb-5  d-flex justify-content-between w-100" id="mall-subtab"
+                            role="tablist">
                             <li class="nav-item flex-grow-1 mx-1">
-                                <a class="nav-link active text-center w-100" id="mall-orders-tab" data-bs-toggle="pill" href="#mall-orders" role="tab">Orders</a>
+                                <a class="nav-link active text-center w-100" id="mall-orders-tab" data-bs-toggle="pill"
+                                    href="#mall-orders" role="tab">Orders</a>
                             </li>
                             <li class="nav-item flex-grow-1 mx-1">
-                                <a class="nav-link text-center w-100" id="mall-purchased-tab" data-bs-toggle="pill" href="#mall-purchased" role="tab">Purchased</a>
+                                <a class="nav-link text-center w-100" id="mall-purchased-tab" data-bs-toggle="pill"
+                                    href="#mall-purchased" role="tab">Purchased</a>
                             </li>
                         </ul>
 
@@ -664,49 +746,60 @@
                                             'delivery_date' => '2024-03-27',
                                             'order_id' => 'ORD123457'
                                         ]
-                                    ];
+                                    ]; ?>
 
-                                    foreach ($orders as $order): ?>
-                                        <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card shadow-sm h-100 rounded-3" style="border: 1px solid var(--red);">
-                                                <div class="row g-0">
-                                                    <div class="col-4">
-                                                        <img src="<?php echo base_url('assets/images/' . $order['image']); ?>"
-                                                            class="img-fluid rounded-start h-100"
-                                                            alt="<?php echo $order['name']; ?>"
-                                                            style="object-fit: cover;">
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div class="card-body p-3">
-                                                            <h6 class="card-title text-truncate mb-2" style="color: var(--red);">
-                                                                <?php echo $order['name']; ?>
-                                                            </h6>
+                                    <?php if (!empty($showorderedproduct)): ?>
+                                        <?php foreach ($showorderedproduct as $order): ?>
+                                            <div class="col-md-6 col-lg-4 mb-4">
+                                                <div class="card shadow-sm h-100 rounded-3"
+                                                    style="border: 1px solid var(--red);">
+                                                    <div class="row g-0">
+                                                        <div class="col-4">
+                                                            <img src="<?php echo base_url('assets/images/JyotisikaMall/Rudraksh.png'); ?>"
+                                                                class="img-fluid rounded-start h-100"
+                                                                alt="<?php echo $order['product_name']; ?>"
+                                                                style="object-fit: cover;">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="card-body p-3">
+                                                                <h6 class="card-title text-truncate mb-2"
+                                                                    style="color: var(--red);">
+                                                                    <?php echo $order['product_name']; ?>
+                                                                </h6>
 
-                                                            <div class="mb-2">
-                                                                <span class="text-decoration-line-through text-muted">₹<?php echo $order['original_price']; ?></span>
-                                                                <span class="ms-2 fw-bold">₹<?php echo $order['discounted_price']; ?></span>
-                                                            </div>
-
-                                                            <div class="mb-2">
-                                                                <span class="badge rounded-pill" style="background-color: var(--yellow); color: black;">
-                                                                    <?php echo $order['status']; ?>
-                                                                </span>
-                                                            </div>
-
-                                                            <div style="font-size: 0.9rem;">
-                                                                <div class="text-truncate mb-1">
-                                                                    <i class="bi bi-box-seam"></i> Order ID: <?php echo $order['order_id']; ?>
+                                                                <div class="mb-2">
+                                                                    <!-- <span
+                                                                    class="text-decoration-line-through text-muted">₹<?php echo $order['original_price']; ?></span> -->
+                                                                    <span
+                                                                        class="ms-2 fw-bold">₹<?php echo $order['total_price']; ?></span>
                                                                 </div>
-                                                                <div class="text-truncate">
-                                                                    <i class="bi bi-calendar-check"></i> Delivery by: <?php echo date('d M Y', strtotime($order['delivery_date'])); ?>
+
+                                                                <div class="mb-2">
+                                                                    <span class="badge rounded-pill"
+                                                                        style="background-color: var(--yellow); color: black;">
+                                                                        <?php echo $order['status']; ?>
+                                                                    </span>
+                                                                </div>
+
+                                                                <div style="font-size: 0.9rem;">
+                                                                    <div class="text-truncate mb-1">
+                                                                        <i class="bi bi-box-seam"></i> Order ID:
+                                                                        <?php echo $order['order_no']; ?>
+                                                                    </div>
+                                                                    <!-- <div class="text-truncate">
+                                                                    <i class="bi bi-calendar-check"></i> Delivery by:
+                                                                    <?php echo date('d M Y', strtotime($order['delivery_date'])); ?>
+                                                                </div> -->
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+
+                                    <?php endif ?>
                                 </div>
                             </div>
 
@@ -724,49 +817,156 @@
                                             'delivery_date' => '2024-02-25',
                                             'order_id' => 'ORD123455'
                                         ]
-                                    ];
+                                    ]; ?>
+                                    <?php print_r($showorderedproduct_shipped); ?>
+                                    <?php if (!empty($showorderedproduct_shipped)): ?>
+                                        <?php foreach ($showorderedproduct_shipped as $order): ?>
+                                            <div class="col-md-6 col-lg-4 mb-4">
+                                                <div class="card shadow-sm h-100 rounded-3"
+                                                    style="border: 1px solid var(--red);">
+                                                    <div class="row g-0">
+                                                        <div class="col-4">
+                                                            <img src="<?php echo base_url('assets/images/JyotisikaMall/Rudraksh.png'); ?>"
+                                                                class="img-fluid rounded-start h-100"
+                                                                alt="<?php echo $order['product_name']; ?>"
+                                                                style="object-fit: cover;">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="card-body p-3">
+                                                                <h6 class="card-title text-truncate mb-2"
+                                                                    style="color: var(--red);">
+                                                                    <?php echo $order['product_name']; ?>
+                                                                </h6>
 
-                                    foreach ($completedOrders as $order): ?>
-                                        <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card shadow-sm h-100 rounded-3" style="border: 1px solid var(--red);">
-                                                <div class="row g-0">
-                                                    <div class="col-4">
-                                                        <img src="<?php echo base_url('assets/images/' . $order['image']); ?>"
-                                                            class="img-fluid rounded-start h-100"
-                                                            alt="<?php echo $order['name']; ?>"
-                                                            style="object-fit: cover;">
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div class="card-body p-3">
-                                                            <h6 class="card-title text-truncate mb-2" style="color: var(--red);">
-                                                                <?php echo $order['name']; ?>
-                                                            </h6>
-
-                                                            <div class="mb-2">
-                                                                <span class="text-decoration-line-through text-muted">₹<?php echo $order['original_price']; ?></span>
-                                                                <span class="ms-2 fw-bold">₹<?php echo $order['discounted_price']; ?></span>
-                                                            </div>
-
-                                                            <div class="mb-2">
-                                                                <span class="badge rounded-pill" style="background-color: var(--yellow); color: black;">
-                                                                    <?php echo $order['status']; ?>
-                                                                </span>
-                                                            </div>
-
-                                                            <div style="font-size: 0.9rem;">
-                                                                <div class="text-truncate mb-1">
-                                                                    <i class="bi bi-box-seam"></i> Order ID: <?php echo $order['order_id']; ?>
+                                                                <div class="mb-2">
+                                                                    <!-- <span
+                                                                        class="text-decoration-line-through text-muted">₹<?php echo $order['price']; ?></span> -->
+                                                                    <span
+                                                                        class="ms-2 fw-bold">₹<?php echo $order['price']; ?></span>
                                                                 </div>
-                                                                <div class="text-truncate">
-                                                                    <i class="bi bi-calendar-check"></i> Delivered on: <?php echo date('d M Y', strtotime($order['delivery_date'])); ?>
+
+                                                                <div class="mb-2">
+                                                                    <span class="badge rounded-pill"
+                                                                        style="background-color: var(--yellow); color: black;">
+                                                                        <?php echo $order['status']; ?>
+                                                                    </span>
+                                                                </div>
+
+                                                                <div style="font-size: 0.9rem;">
+                                                                    <div class="text-truncate mb-1">
+                                                                        <i class="bi bi-box-seam"></i> Order ID:
+                                                                        <?php echo $order['order_no']; ?>
+                                                                    </div>
+                                                                    <!-- <div class="text-truncate">
+                                                                        <i class="bi bi-calendar-check"></i> Delivered on:
+                                                                        <?php echo date('d M Y', strtotime($order['delivery_date'])); ?>
+                                                                    </div> -->
+                                                                </div>
+
+                                                                <div class="mt-auto">
+                                                                    <button class="btn btn-sm w-80"
+                                                                        style="background-color: var(--yellow);"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#feedbackModal<?php echo $order['order_id']; ?><?php echo $order['product_id']; ?>">
+                                                                        Give Feedback
+                                                                    </button>
                                                                 </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
+
+                                            <div class="modal fade "
+                                                id="feedbackModal<?php echo $order['order_id']; ?><?php echo $order['product_id']; ?>"
+                                                tabindex="-1">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Feedback for</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form class="productfeedback"
+                                                                id="feedbackForm<?php echo $order['order_id']; ?><?php echo $order['product_id']; ?>">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Rating</label>
+                                                                    <div class="rating">
+                                                                        <?php for ($i = 5; $i >= 1; $i--): ?>
+                                                                            <input type="radio" name="productrating"
+                                                                                value="<?php echo $i; ?>"
+                                                                                id="star<?php echo $order['order_id'] . $order['product_id'] . $i; ?>"
+                                                                                required>
+                                                                            <label
+                                                                                for="star<?php echo $order['order_id'] . $order['product_id'] . $i; ?>">★</label>
+                                                                        <?php endfor; ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Message</label>
+                                                                    <input type="hidden" name="product_id"
+                                                                        value="<?php echo $order['product_id']; ?>">
+                                                                    <textarea class="form-control shadow-none" name="message"
+                                                                        rows="3" required></textarea>
+                                                                </div>
+                                                                <button type="submit" class="btn w-100"
+                                                                    style="background-color: var(--yellow);">Submit
+                                                                    Feedback</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- script for that rating astrologer-->
+                                            <!-- <script>
+                                                document.querySelectorAll('.rating input').forEach(input => {
+                                                    input.addEventListener('change', function () {
+                                                        let ratingDiv = this.closest('.rating');
+                                                        let selectedValue = this.value;
+
+                                                       
+                                                        ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
+
+                                                       
+                                                        ratingDiv.querySelectorAll('input').forEach(starInput => {
+                                                            if (starInput.value <= selectedValue) {
+                                                                starInput.nextElementSibling.style.color = 'var(--yellow)';
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                                            </script> -->
+
+                                            <script>
+
+                                                document.querySelectorAll('.rating').forEach(ratingDiv => {
+                                                    ratingDiv.querySelectorAll('input').forEach(input => {
+                                                        input.addEventListener('change', function () {
+                                                            let selectedValue = this.value;
+                                                            console.log(selectedValue);
+
+
+                                                            // Reset all stars
+                                                            ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
+
+                                                            // Highlight selected stars
+                                                            ratingDiv.querySelectorAll('input').forEach(starInput => {
+                                                                if (starInput.value <= selectedValue) {
+                                                                    starInput.nextElementSibling.style.color = 'var(--yellow)';
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                });
+                                            </script>
+                                        <?php endforeach; ?>
+
+                                    <?php else: ?>
+
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
@@ -775,6 +975,133 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll("form.astrologerfeedback").forEach(form => {
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault();
+
+                        const formData = new FormData(this); // `this` is the form element
+
+                        formData.append("session_id", "<?php echo $this->session->userdata("user_id") ?>");
+
+                        fetch("<?php echo base_url("User_Api_Controller/feedback"); ?>", {
+
+                            method: "POST",
+                            body: formData,
+                        }).then(response => response.json())
+                            .then(data => {
+                                if (data.status == "success") {
+                                    let modal = bootstrap.Modal.getInstance(this.closest('.modal'));
+                                    modal.hide();
+                                    Swal.fire({
+                                        title: "success",
+                                        text: "feedback submited successfully",
+                                        icon: "success",
+                                    });
+
+                                }
+                                else {
+
+
+                                    Swal.fire({
+                                        title: "warning",
+                                        text: "feedback not submitted ",
+                                        icon: "warning",
+                                    });
+
+
+                                }
+                            })
+                    });
+                });
+
+
+                document.querySelectorAll("form.pujarifeedback").forEach(form => {
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault();
+
+                        const formData = new FormData(this); // `this` is the form element
+
+                        formData.append("session_id", "<?php echo $this->session->userdata("user_id") ?>");
+
+                        fetch("<?php echo base_url("User_Api_Controller/pujarifeedback"); ?>", {
+
+                            method: "POST",
+                            body: formData,
+                        }).then(response => response.json())
+                            .then(data => {
+                                if (data.status == "success") {
+                                    let modal = bootstrap.Modal.getInstance(this.closest('.modal'));
+                                    modal.hide();
+                                    Swal.fire({
+                                        title: "success",
+                                        text: "feedback submited successfully",
+                                        icon: "success",
+                                    });
+
+                                }
+                                else {
+
+
+                                    Swal.fire({
+                                        title: "warning",
+                                        text: "feedback not submitted ",
+                                        icon: "warning",
+                                    });
+
+
+                                }
+                            })
+                    });
+                });
+
+
+
+                document.querySelectorAll("form.productfeedback").forEach(form => {
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault();
+
+                        const formData = new FormData(this); // `this` is the form element
+
+                        formData.append("session_id", "<?php echo $this->session->userdata("user_id") ?>");
+                        // console.log("hello world");
+                        // console.log(formData);
+                        fetch("<?php echo base_url("User_Api_Controller/productfeedback"); ?>", {
+
+                            method: "POST",
+                            body: formData,
+                        }).then(response => response.json())
+                            .then(data => {
+                                if (data.status == "success") {
+                                    let modal = bootstrap.Modal.getInstance(this.closest('.modal'));
+                                    modal.hide();
+                                    Swal.fire({
+                                        title: "success",
+                                        text: "feedback submited successfully",
+                                        icon: "success",
+                                    });
+
+                                }
+                                else {
+
+
+                                    Swal.fire({
+                                        title: "warning",
+                                        text: "feedback not submitted ",
+                                        icon: "warning",
+                                    });
+
+
+                                }
+                            })
+                    });
+                });
+            });
+
+        </script>
+
 
     </main>
 

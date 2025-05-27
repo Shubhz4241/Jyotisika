@@ -297,10 +297,7 @@
         });
 
 
-        document.getElementById('resendOtpBtn').addEventListener('click', function () {
-            document.getElementById('timerDisplay').style.display = 'block';
-            startOtpTimer();
-        });
+       
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -308,7 +305,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+
+
         document.addEventListener("DOMContentLoaded", function () {
+
+          
             const getOtpBtn = document.getElementById("getOtpBtn");
             const mobileNumberInput = document.getElementById("mobileNumber");
 
@@ -347,7 +348,7 @@
                 fetch("<?php echo base_url('User_Api_Controller/sendOtpmobile'); ?>", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ mobile_number: phoneNumber })
+                    body: JSON.stringify({ mobile_number: phoneNumber , action:"signin"})
                 })
                     .then(response => response.json())
                     .then(data => {
@@ -365,7 +366,18 @@
                                 document.getElementById("otpStep").style.display = "block";
                                 startOtpTimer(); // Start OTP timer
                             });
-                        } else {
+                        }else if (data.status === "notregistered") {
+                            Swal.fire({
+                                icon: "warning",
+                                title: "User not found",
+                                text: "Please sign up to continue."
+                            })
+
+
+                            // document.getElementById("mobileStep").style.display = "none";
+                            // document.getElementById("otpStep").style.display = "block";
+                            // startOtpTimer();
+                        }  else {
                             Swal.fire({
                                 icon: "error",
                                 title: "Failed to Send OTP",
@@ -393,6 +405,12 @@
                     sendOtp();
                 }
             });
+
+            document.getElementById('resendOtpBtn').addEventListener('click', function () {
+            document.getElementById('timerDisplay').style.display = 'block';
+            sendOtp();
+            startOtpTimer();
+        });
         });
     </script>
 
@@ -566,52 +584,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            <?php if ($this->session->flashdata('usermobilenumberexit')): ?>
-            Swal.fire({
-                icon: 'warning',
-
-                text: '<?php echo $this->session->flashdata('usermobilenumberexit'); ?>',
-                confirmButtonText: 'OK'
-            });
-
-            <?php endif; ?>
-
-            <?php if ($this->session->flashdata('error')): ?>
-            Swal.fire({
-                icon: 'warning',
-
-                text: '<?php echo $this->session->flashdata('error'); ?>',
-                confirmButtonText: 'OK'
-            });
-
-            <?php endif; ?>
-
-            <?php if ($this->session->flashdata('dbqueryerror')): ?>
-            Swal.fire({
-                icon: 'warning',
-
-                text: '<?php echo $this->session->flashdata('dbqueryerror'); ?>',
-                confirmButtonText: 'OK'
-            });
-
-            <?php endif; ?>
-
-
-            <?php if ($this->session->flashdata('sessionnotset')): ?>
-            Swal.fire({
-                icon: 'warning',
-
-                text: '<?php echo $this->session->flashdata('sessionnotset'); ?>',
-                confirmButtonText: 'OK'
-            });
-
-            <?php endif; ?>
-
-        });
-    </script> -->
 
 
 

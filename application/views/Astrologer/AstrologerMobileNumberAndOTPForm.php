@@ -221,7 +221,7 @@
 
             if (mobileInput.length === 10) {
                 const formData = new FormData();
-                formData.append('phone', mobileInput);
+                formData.append('phone', `+91${mobileInput}`);
 
                 fetch('<?php echo base_url() . 'astrologer/send_otp_login' ?>', {
                         method: 'POST',
@@ -244,9 +244,7 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success',
-                                text: data.message,
-                                timer: 2000,
-                                showConfirmButton: false
+                                text: data.message
                             });
                         } else {
                             Swal.fire({
@@ -294,44 +292,7 @@
             resendOtpBtn.style.display = 'none';
             document.getElementById('resendTimer').style.display = 'block';
             startCountdown();
-
-            const mobileNumber = document.getElementById('mobile').value.trim();
-            const formData = new FormData();
-            formData.append('phone', mobileNumber);
-            fetch('<?php echo base_url() . 'astrologer/resend_Otp_Login' ?>', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: data.message,
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-
-                      
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: data.message || 'OTP verification failed.'
-                        });
-                    }
-                })
-                .catch(error => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Something went wrong. Please try again.'
-                    });
-                    console.error('Error:', error);
-                });
         });
-  
 
         verifyOtpBtn.addEventListener('click', () => {
             if (!validateOtpForm()) {
@@ -343,10 +304,10 @@
                 .map(input => input.value).join('');
 
             const formData = new FormData();
-            formData.append('phone', mobileNumber);
+            formData.append('phone', `+91${mobileNumber}`);
             formData.append('otp', otpInputs);
 
-            fetch('<?php echo base_url() . 'astrologer/verify_otp_login' ?>', {
+            fetch('<?php echo base_url() . 'astrologer/verify_otp_login'?>', {
                     method: 'POST',
                     body: formData
                 })
@@ -356,14 +317,10 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
-                            text: data.message,
-                            timer: 2000,
-                            showConfirmButton: false
+                            text: data.message
+                        }).then(() => {
+                            window.location.href = '<?php echo base_url("AstrologerAnalyticsAndEarning2"); ?>';
                         });
-
-                        setTimeout(() => {
-                            window.location.href = '<?= base_url("AstrologerAnalyticsAndEarning2"); ?>';
-                        }, 2000); // Delay matches Swal timer
                     } else {
                         Swal.fire({
                             icon: 'error',

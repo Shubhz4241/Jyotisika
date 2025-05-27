@@ -72,8 +72,6 @@
 
 <body>
 
-
-<!-- <?php print_r($product) ?> -->
     <header>
 
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
@@ -84,6 +82,7 @@
     <main>
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
+        <!-- <?php print_r($product_data) ?> -->
 
         <!-- Product Section -->
         <section class="product-section py-5">
@@ -160,21 +159,22 @@
                             'price' => '2499',
                             'original_price' => '2999'
                         ],
-                    ];
-                    foreach ($products as $product) {
-                        ?>
+                    ];?>
+                
+                   <?php if(!empty($product_data)):?>
+                     <?php  foreach ($product_data as $product) : ?>
                         <div class="col d-flex justify-content-center">
                             <div class="card product-card h-100 shadow-sm m-0 p-0" style="border: 1px solid #f0f0f0;">
-                                <img src="<?php echo $product['image']; ?>" class="card-img-top" alt="<?php echo $product['title']; ?>"
+                                <img src="assets/images/JyotisikaMall/Rudraksh.png" class="card-img-top" alt="<?php echo $product['product_name']; ?>"
                                     style=" object-fit: contain;">
                                 <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title text-center fw-bold mb-2" style="color: var(--text-color);"><?php echo $product['title']; ?></h5>
+                                    <h5 class="card-title text-center fw-bold mb-2" style="color: var(--text-color);"><?php echo $product['product_name']; ?></h5>
                                     <div class="d-flex justify-content-center align-items-center mb-3">
-                                        <!-- <span class="text-decoration-line-through text-muted me-2">Rs.<?php echo $product['original_price']; ?></span> -->
-                                        <span class="fw-bold" style="color: var(--red);">Rs.<?php echo $product['original_price']; ?></span>
+                                        <!-- <span class="text-decoration-line-through text-muted me-2">Rs.<?php echo $product['product_price']; ?></span> -->
+                                        <span class="fw-bold" style="color: var(--red);">Rs.<?php echo $product['product_price']; ?></span>
                                     </div>
                                     <div class="mt-auto text-center">
-                                        <a href="ProductDetails" class="btn btn-sm  mt-2"
+                                        <a href="ProductDetails/<?php echo $product['product_id'] ?>" class="btn btn-sm  mt-2"
                                             style="background-color: var(--yellow); color: var(--text-color);">
                                             View Details
                                         </a>
@@ -182,9 +182,10 @@
                                 </div>
                             </div>
                         </div>
-                        <?php
-                    }
-                    ?>
+                        <?php endforeach?>
+                        <?php else :?>
+                            <p>There is no product </p>
+                            <?php endif ?>
                 </div>
             </div>
 
@@ -194,7 +195,7 @@
         </section>
         <!-- End Product Section -->
 
-        <section class="product-section py-5">
+        <!-- <section class="product-section py-5">
             <div class="container">
                 <div class="mb-4">
                     <h2 class="text-start fw-bold mb-0 mb-md-0" style="color: var(--red);">Combo Offers</h2>
@@ -258,7 +259,7 @@
                     ?>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- carousel gallery for products -->
         <section>

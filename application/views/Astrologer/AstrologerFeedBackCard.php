@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
@@ -78,8 +81,10 @@
             font-size: 18px;
             width: 20px;
             height: 20px;
-            background-color: #f0f0f0; /* Subtle highlight background */
-            border-radius: 50%; /* Circular highlight */
+            background-color: #f0f0f0;
+            /* Subtle highlight background */
+            border-radius: 50%;
+            /* Circular highlight */
             padding: 2px;
             display: flex;
             align-items: center;
@@ -89,7 +94,8 @@
 
         .delete-icon:hover {
             color: red;
-            background-color: #e0e0e0; /* Darker highlight on hover */
+            background-color: #e0e0e0;
+            /* Darker highlight on hover */
         }
 
         .delete-icon svg {
@@ -110,7 +116,7 @@
         }
 
         @media (max-width: 768px) {
-    
+
             .feedback-card {
                 padding: 15px;
             }
@@ -120,7 +126,8 @@
                 align-items: flex-start;
             }
 
-            .user-details, .stars {
+            .user-details,
+            .stars {
                 margin: 5px 0;
             }
 
@@ -164,164 +171,42 @@
     <header>
         <?php $this->load->view('Astrologer/Include/AstrologerNav') ?>
     </header>
-        <div class="container">
+    <div style="min-height: 100vh;">
+        <div class="container mt-5">
             <h2>Feedbacks</h2>
             <div class="row">
-                <!-- Card 1 -->
-                <div class="col-md-4">
-                    <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
-                        <div class="user-info">
-                            <div class="user-details">
-                                <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
-                                <div>
-                                    <strong>Jane Doe</strong><br>
-                                    <small>3 days ago</small>
-                                </div>
-                            </div>
-                            <div class="stars">
-                                ★ ★ ★ ★ ★
-                            </div>
-                        </div>
-                        <span class="delete-icon" data-id="1">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M3 6h18M8 6V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v2M10 11v6M14 11v6M4 6l1 16h14l1-16M9 6h6"/>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
 
-                <!-- Card 2 -->
-                <div class="col-md-4">
-                    <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
-                        <div class="user-info">
-                            <div class="user-details">
-                                <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
-                                <div>
-                                    <strong>Jane Doe</strong><br>
-                                    <small>3 days ago</small>
-                                </div>
-                            </div>
-                            <div class="stars">
-                                ★ ★ ★ ★ ★
-                            </div>
-                        </div>
-                        <span class="delete-icon" data-id="2">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M3 6h18M8 6V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v2M10 11v6M14 11v6M4 6l1 16h14l1-16M9 6h6"/>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
 
-                <!-- Card 3 -->
-                <div class="col-md-4">
-                    <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
-                        <div class="user-info">
-                            <div class="user-details">
-                                <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
-                                <div>
-                                    <strong>Jane Doe</strong><br>
-                                    <small>3 days ago</small>
-                                </div>
-                            </div>
-                            <div class="stars">
-                                ★ ★ ★ ★ ★
-                            </div>
-                        </div>
-                        <span class="delete-icon" data-id="3">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M3 6h18M8 6V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v2M10 11v6M14 11v6M4 6l1 16h14l1-16M9 6h6"/>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
 
-                <!-- Card 4 -->
-                <div class="col-md-4">
-                    <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
-                        <div class="user-info">
-                            <div class="user-details">
-                                <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
-                                <div>
-                                    <strong>Jane Doe</strong><br>
-                                    <small>3 days ago</small>
-                                </div>
-                            </div>
-                            <div class="stars">
-                                ★ ★ ★ ★ ★
-                            </div>
-                        </div>
-                        <span class="delete-icon" data-id="4">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M3 6h18M8 6V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v2M10 11v6M14 11v6M4 6l1 16h14l1-16M9 6h6"/>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
 
-                <!-- Card 5 -->
-                <div class="col-md-4">
-                    <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
-                        <div class="user-info">
-                            <div class="user-details">
-                                <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
-                                <div>
-                                    <strong>Jane Doe</strong><br>
-                                    <small>3 days ago</small>
-                                </div>
-                            </div>
-                            <div class="stars">
-                                ★ ★ ★ ★ ★
-                            </div>
-                        </div>
-                        <span class="delete-icon" data-id="5">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M3 6h18M8 6V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v2M10 11v6M14 11v6M4 6l1 16h14l1-16M9 6h6"/>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="col-md-4">
-                    <div class="feedback-card">
-                        <p>"This Astrologer provided incredible insights into my life and personality. Their predictions about my career path were spot-on, and their guidance helped me make better decisions. Highly recommend for anyone seeking clarity!"</p>
-                        <div class="user-info">
-                            <div class="user-details">
-                                <img src="<?php echo base_url('assets/images/Pujari/Rectangle 5160 (1).png'); ?>" alt="User">
-                                <div>
-                                    <strong>Jane Doe</strong><br>
-                                    <small>3 days ago</small>
-                                </div>
-                            </div>
-                            <div class="stars">
-                                ★ ★ ★ ★ ★
-                            </div>
-                        </div>
-                        <span class="delete-icon" data-id="6">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M3 6h18M8 6V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v2M10 11v6M14 11v6M4 6l1 16h14l1-16M9 6h6"/>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
             </div>
         </div>
-    
+    </div>
+
     <footer>
         <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
 
+
     <script>
-        // Delete functionality with SweetAlert2
-        document.querySelectorAll('.delete-icon').forEach(icon => {
-            icon.addEventListener('click', function() {
-                const feedbackId = this.getAttribute('data-id');
+        window.addEventListener('load', () => {
+            fetch('<?php echo base_url('astrologer/get_logged_in_user'); ?>')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status !== 'success') {
+                        window.location.href = '<?php echo base_url("AstrologerMobileNumberAndOTPForm"); ?>';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        document.querySelector('.row').addEventListener('click', function(e) {
+            if (e.target.closest('.delete-icon')) {
+                const deleteIcon = e.target.closest('.delete-icon');
+                const feedbackId = deleteIcon.getAttribute('data-id');
+                const formData = new FormData();
+                formData.append('feedback_id', feedbackId);
+
+                //  console.log(feedbackId);
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -336,22 +221,129 @@
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Validation and deletion logic (replace with your backend call)
-                        Swal.fire({
-                            title: 'Deleted!',
-                            text: `Feedback ID ${feedbackId} has been deleted.`,
-                            icon: 'success',
-                            confirmButtonColor: '#E90505',
-                            customClass: {
-                                popup: 'animated fadeInDown'
-                            }
-                        }).then(() => {
-                            // Remove the card from the DOM (for demo purposes)
-                            this.closest('.feedback-card').remove();
-                        });
+                        fetch(`<?php echo base_url('astrologer/delete_feedback/'); ?>`, {
+                                method: 'POST',
+                                body: formData
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.status == 'success') {
+                                    Swal.fire({
+                                        title: 'Deleted!',
+                                        text: `Feedback ID ${feedbackId} has been deleted successfully.`,
+                                        icon: 'success',
+                                        confirmButtonColor: '#E90505',
+                                        customClass: {
+                                            popup: 'animated fadeInDown'
+                                        }
+                                    }).then(() => {
+                                        deleteIcon.closest('.col-md-4').remove();
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: 'There was an error deleting the feedback.',
+                                        icon: 'error',
+                                        confirmButtonColor: '#E90505',
+                                        customClass: {
+                                            popup: 'animated fadeInDown'
+                                        }
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Something went wrong. Please try again later.',
+                                    icon: 'error',
+                                    confirmButtonColor: '#E90505',
+                                    customClass: {
+                                        popup: 'animated fadeInDown'
+                                    }
+                                });
+                            });
                     }
                 });
-            });
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch(`<?php echo base_url() . 'astrologer/get_feedbacks_related_to_astrologer' ?>`)
+                .then(response => response.json())
+                .then(data => {
+                    const feedbackContainer = document.querySelector('.row');
+                    feedbackContainer.innerHTML = ''; // Clear previous content
+
+
+                    if (data.status === 'success' && data.data.length > 0) {
+                        data.data.forEach(feedback => {
+                            const rating = parseFloat(feedback.rating);
+                            const filled = Math.floor(rating);
+                            const hasHalf = rating % 1 >= 0.25 && rating % 1 < 0.75;
+                            const empty = 5 - filled - (hasHalf ? 1 : 0);
+
+                            let starsHtml = '';
+                            for (let i = 0; i < filled; i++) {
+                                starsHtml += '<i class="fas fa-star text-warning"></i>';
+                            }
+                            if (hasHalf) {
+                                starsHtml += '<i class="fas fa-star-half-alt text-warning"></i>';
+                            }
+                            for (let i = 0; i < empty; i++) {
+                                starsHtml += '<i class="far fa-star text-warning"></i>';
+                            }
+
+                            const feedbackCard = `
+                        <div class="col-md-4 mt-4">
+                            <div class="feedback-card h-100 p-3 d-flex flex-column justify-content-between">
+                                <p class="mb-3" style="min-height: 50%;">${feedback.feedback}</p>
+
+                                <div class="user-info d-flex align-items-center justify-content-between">
+                                    <div class="user-details d-flex align-items-center">
+                                        <img src="${feedback.user_image ? '<?php echo base_url(); ?>' + feedback.user_image : '<?php echo base_url(); ?>assets/images/Pujari/User.png'}"
+                                            alt="User"
+                                            class="rounded-circle"
+                                            style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;"
+                                            onerror="this.onerror=null; this.src='<?php echo base_url(); ?>assets/images/Pujari/User.png';">
+
+                                        <div>
+                                            <strong>${feedback.user_name}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="stars text-warning">
+                                        ${starsHtml}
+                                    </div>
+                                </div>
+
+                                <div class="text-end mt-3">
+                                    <span class="delete-icon text-danger" data-id="${feedback.id}" style="cursor: pointer;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                                            <path d="M3 6h18M8 6V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v2M10 11v6M14 11v6M4 6l1 16h14l1-16M9 6h6"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                            feedbackContainer.innerHTML += feedbackCard;
+                        });
+
+                    } else {
+                        feedbackContainer.innerHTML = `
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        No feedbacks found.
+                                    </div>
+                                </div>
+                            `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         });
     </script>
 </body>

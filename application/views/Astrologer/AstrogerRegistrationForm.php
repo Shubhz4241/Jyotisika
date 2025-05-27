@@ -229,64 +229,53 @@
                         <button class="btn btn-outline-secondary dropdown-toggle form-control" type="button" id="specialtiesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             Select Specialties
                         </button>
-                        <ul class="dropdown-menu" id="specialtiesList" aria-labelledby="specialtiesDropdown">
-                            <li><label><input type="checkbox" name="specialties" value="Vedic Astrology"> Vedic Astrology</label></li>
-                            <li><label><input type="checkbox" name="specialties" value="Numerology"> Numerology</label></li>
-                            <li><label><input type="checkbox" name="specialties" value="Palmistry"> Palmistry</label></li>
-                            <li><label><input type="checkbox" name="specialties" value="Tarot Reading"> Tarot Reading</label></li>
-                            <li><label><input type="checkbox" name="specialties" value="Face Reading"> Face Reading</label></li>
-                            <li><label><input type="checkbox" name="specialties" value="Kundli Matching"> Kundli Matching</label></li>
-                            <li><label><input type="checkbox" name="specialties" value="Lal Kitab"> Lal Kitab</label></li>
-                            <li><label><input type="checkbox" name="specialties" value="Gemstone Consultation"> Gemstone Consultation</label></li>
-                            <li><label><input type="checkbox" name="specialties" value="Western Astrology"> Western Astrology</label></li>
-                            <li><label><input type="checkbox" name="specialties" value="Horary Astrology"> Horary Astrology</label></li>
-                        </ul>
+                        <ul class="dropdown-menu" id="specialtiesList" aria-labelledby="specialtiesDropdown"></ul>
                         <input type="hidden" id="specialtiesHidden" name="specialtiesHidden" required>
                     </div>
 
                     <script>
-                        //             async function fetchSpecialties() {
-                        //                 try {
-                        //                     const response = await fetch('<?php echo base_url('astrologer/get_services'); ?>');
-                        //                     const data = await response.json();
+                        async function fetchSpecialties() {
+                            try {
+                                const response = await fetch('<?php echo base_url('astrologer/get_services'); ?>');
+                                const data = await response.json();
 
-                        //                     const specialties = data?.services || [];
-                        //                     if (!specialties.length) throw new Error('Invalid data format');
+                                const specialties = data?.services || [];
+                                if (!specialties.length) throw new Error('Invalid data format');
 
-                        //                     const specialtiesList = document.getElementById('specialtiesList');
-                        //                     specialtiesList.innerHTML = '';
+                                const specialtiesList = document.getElementById('specialtiesList');
+                                specialtiesList.innerHTML = '';
 
-                        //                     specialties.forEach(service => {
-                        //                         const listItem = document.createElement('li');
-                        //                         listItem.innerHTML = `
-                        //     <label class="dropdown-item">
-                        //         <input type="checkbox" name="specialties" value="${service.id}"> 
-                        //         ${service.name}
-                        //     </label>
-                        // `;
-                        //                         specialtiesList.appendChild(listItem);
-                        //                     });
+                                specialties.forEach(service => {
+                                    const listItem = document.createElement('li');
+                                    listItem.innerHTML = `
+                                <label class="dropdown-item">
+                                    <input type="checkbox" name="specialties" value="${service.name}"> 
+                                    ${service.name}
+                                </label>
+                            `;
+                                    specialtiesList.appendChild(listItem);
+                                });
 
-                        //                     const button = document.getElementById('specialtiesDropdown');
-                        //                     document.querySelectorAll('input[name="specialties"]').forEach(checkbox => {
-                        //                         checkbox.addEventListener('change', () => {
-                        //                             const selectedValues = Array.from(document.querySelectorAll('input[name="specialties"]:checked'))
-                        //                                  .map(checkbox => checkbox.value);
-                        //                             document.getElementById('specialtiesHidden').value = selectedValues.join(',');
+                                const button = document.getElementById('specialtiesDropdown');
+                                document.querySelectorAll('input[name="specialties"]').forEach(checkbox => {
+                                    checkbox.addEventListener('change', () => {
+                                        const selectedValues = Array.from(document.querySelectorAll('input[name="specialties"]:checked'))
+                                            .map(checkbox => checkbox.value);
+                                        document.getElementById('specialtiesHidden').value = selectedValues.join(',');
 
-                        //                             const selectedNames = Array.from(document.querySelectorAll('input[name="specialties"]:checked'))
-                        //                                 .map(checkbox => checkbox.parentElement.textContent.trim());
-                        //                             button.textContent = selectedNames.length ?
-                        //                                 selectedNames.join(', ') :
-                        //                                 'Select Specialties';
-                        //                         });
-                        //                     });
-                        //                 } catch (error) {
-                        //                     console.error('Error fetching specialties:', error);
-                        //                 }
-                        //             }
+                                        const selectedNames = Array.from(document.querySelectorAll('input[name="specialties"]:checked'))
+                                            .map(checkbox => checkbox.parentElement.textContent.trim());
+                                        button.textContent = selectedNames.length ?
+                                            selectedNames.join(', ') :
+                                            'Select Specialties';
+                                    });
+                                });
+                            } catch (error) {
+                                console.error('Error fetching specialties:', error);
+                            }
+                        }
 
-                        //             document.addEventListener('DOMContentLoaded', fetchSpecialties);
+                        document.addEventListener('DOMContentLoaded', fetchSpecialties);
                     </script>
 
                     <div class="error" id="specialtiesError"></div>
@@ -349,7 +338,6 @@
             <small>Note: You will receive an update within 48 hours. If you have any queries, feel free to contact our support team.</small>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -358,41 +346,6 @@
             this.value = this.value.replace(/\D/g, '');
         });
 
-        // Fetch specialties dynamically
-        // async function fetchSpecialties() {
-        //     try {
-        //         const response = await fetch('<?php echo base_url('astrologer/get_services'); ?>');
-        //         const data = await response.json();
-        //         const specialties = data?.services || [];
-        //         if (!specialties.length) throw new Error('Invalid data format');
-
-        //         const specialtiesList = document.getElementById('specialtiesList');
-        //         specialtiesList.innerHTML = '';
-        //         specialties.forEach(service => {
-        //             const listItem = document.createElement('li');
-        //             listItem.innerHTML = `
-        //                 <label class="dropdown-item">
-        //                     <input type="checkbox" name="specialties" value="${service.id}"> 
-        //                     ${service.name}
-        //                 </label>
-        //             `;
-        //             specialtiesList.appendChild(listItem);
-        //         });
-
-        //         const button = document.getElementById('specialtiesDropdown');
-        //         document.querySelectorAll('input[name="specialties"]').forEach(checkbox => {
-        //             checkbox.addEventListener('change', () => {
-        //                 const selectedValues = Array.from(document.querySelectorAll('input[name="specialties"]:checked')).map(checkbox => checkbox.value);
-        //                 document.getElementById('specialtiesHidden').value = selectedValues.join(',');
-        //                 const selectedNames = Array.from(document.querySelectorAll('input[name="specialties"]:checked')).map(checkbox => checkbox.parentElement.textContent.trim());
-        //                 button.textContent = selectedNames.length ? selectedNames.join(', ') : 'Select Specialties';
-        //             });
-        //         });
-        //     } catch (error) {
-        //         console.error('Error fetching specialties:', error);
-        //     }
-        // }
-        // document.addEventListener('DOMContentLoaded', fetchSpecialties);
 
         // Form validation and submission
         const pujariForm = document.getElementById("pujariForm");
@@ -492,7 +445,7 @@
             if (isValid) {
                 const formData = new FormData();
                 formData.append("name", name);
-                formData.append("contact",  contact);
+                formData.append("contact", '+91' + contact);
                 formData.append("email", email);
                 languages.forEach(lang => formData.append("languages[]", lang));
                 formData.append("gender", gender);
@@ -501,11 +454,7 @@
                 if (aadhaarCard) formData.append("aadhaar_card", aadhaarCard);
                 formData.append("experience", experience);
                 Array.from(certificates).forEach((file, index) => formData.append(`certificates[${index}]`, file));
-                for (let [key, value] of formData.entries()) {
-                    console.log(key, value);
-                }
 
-                // Send the form data to the serverr
 
                 fetch("<?php echo base_url('astrologer/register'); ?>", {
                         method: "POST",
@@ -513,22 +462,23 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        if (data.status === "success") {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Registration Successful',
-                                text: 'Redirecting...',
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
+                        console.log("Success:", data);
+                        if (data.status == 'success' && data.try == true) {
+                            pujariForm.style.display = "none";
+                            mobileForm.style.display = "none";
+                            otpForm.style.display = "block";
 
-                            setTimeout(function() {
-                                window.location.href = "<?php echo base_url('AstrologerMobileNumberAndOTPForm'); ?>";
-                            }, 2000);
+                            let firstTwo = contact.substring(0, 2);
+                            let lastTwo = contact.substring(8, 10);
+                            otpMessage.innerHTML = `We have sent the code to +91 ${firstTwo}******${lastTwo}`;
+                            document.getElementById('otpSentMessage').innerHTML = `An OTP has been sent to +91 ${firstTwo}******${lastTwo}. Please enter the OTP below to verify your phone.`;
+
+                            startCountdown();
                         } else {
                             alert("Form submission failed: " + (data.message || "Unknown error"));
                         }
                     })
+
                     .catch(error => {
                         console.error("Error:", error);
                         alert("There was an error submitting the form.");

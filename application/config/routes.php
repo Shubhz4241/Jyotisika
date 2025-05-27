@@ -96,10 +96,10 @@ $route['privacypolicy'] = 'User/Privacypolicy';
 $route['wallet'] = 'User/Wallet';
 
 //data from pujari side book puja section
-$route['PoojarViewMore'] ='User/PoojarViewMore';
+$route['PoojarViewMore/(:num)/(:num)'] ='User/PoojarViewMore/$1/$2';
 $route['OfflinePoojaris'] ='User/OfflinePoojaris';
 $route['bookpooja'] = 'User/BookPooja';
-$route['OnlinePoojaris'] ='User/OnlinePoojaris';
+$route['OnlinePoojaris/(:num)'] ='User/OnlinePoojaris/$1';
 $route['Poojaris'] ='User/Poojaris';
 $route['PoojaInfo'] ='User/PoojaInfo';
 
@@ -113,7 +113,7 @@ $route['FestivalReadmore/(:num)'] ='User/FestivalReadmore/$1';
 
 //data from admin  Jyotisika mall section
 $route['jyotisikamall'] = 'User/JyotisikaMall';
-$route['ProductDetails'] ='User/ProductDetails';
+$route['ProductDetails/(:num)'] ='User/ProductDetails/$1';
 $route['ProductPayment'] ='User/ProductPayment';
 
 
@@ -131,13 +131,15 @@ $route['MobPooja'] ='User/MobPooja';
 //Why us page
 $route['WhyUs'] ='User/WhyUs';
 
+$route['Cart'] = 'User/Cart';
+
 
 
 $route['demo'] = 'User/Demo';
 $route['Recharge'] ='User/Recharge';
 $route['ServiceDetails'] ='User/ServiceDetails';
 
-$route['chat'] = 'User/Chat';
+$route['chat/(:num)'] = 'User/Chat/$1';
 
 
 //user end ---User route end--- 

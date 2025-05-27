@@ -48,6 +48,10 @@
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
+    <!-- <?php print_r($showpujari) ?> -->
+
+    <!-- <?php print_r($showrating) ?> -->
+
     <main>
 
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
@@ -66,10 +70,27 @@
                                         <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
                                             class="rounded-circle border border-3 border-white mb-2"
                                             style="width: 100px; height: 100px; object-fit: cover;">
-                                        <h5 class="text-white fw-bold mb-1 text-center">Acharya Mishra Ji</h5>
+                                        <h5 class="text-white fw-bold mb-1 text-center">
+                                            <?php print_r($showpujari[0]["pujariname"]) ?>
+                                        </h5>
                                         <div class="d-flex align-items-center">
                                             <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
-                                            <span class="small ms-2 mt-1 text-white">4.8 (150+ Poojas)</span>
+                                            <span
+                                                class="small ms-2 mt-1 text-white"><?php echo $showrating[0]["average_rating"] ?>(
+                                                <?php
+
+                                                if (!empty($showcompltedpuja)) {
+                                                    echo $showcompltedpuja;
+                                                } else {
+                                                    echo 0;
+                                                }
+
+
+
+
+
+
+                                                ?>+ Poojas)</span>
 
                                         </div>
                                     </div>
@@ -96,11 +117,14 @@
                                                             <i class="bi bi-clock-history text-danger me-2"></i>
                                                             <div>
                                                                 <p class="fw-bold mb-0">Experience</p>
-                                                                <p class="card-expertise mb-0">4+ Years</p>
+                                                                <p class="card-expertise mb-0">
+                                                                    <?php print_r($showpujari[0]["experience"]) ?>+
+                                                                    Years
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col">
+                                                    <!-- <div class="col">
                                                         <div class="d-flex align-items-center">
                                                             <i class="bi bi-geo-alt-fill text-danger me-2"></i>
                                                             <div>
@@ -108,14 +132,15 @@
                                                                 <p class="card-expertise mb-0">2.5 km away</p>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="col">
                                                         <div class="d-flex align-items-center">
                                                             <i class="bi bi-translate text-danger me-2"></i>
                                                             <div>
                                                                 <p class="fw-bold mb-0">Languages</p>
-                                                                <p class="card-expertise mb-0">English, Hindi,
-                                                                    Marathi</p>
+                                                                <p class="card-expertise mb-0">
+                                                                    <?php print_r($showpujari[0]["languages"]) ?>
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -127,13 +152,24 @@
                                                 class="col-md-4 d-flex flex-column justify-content-center align-items-center mt-3 mt-md-0">
                                                 <div class="text-center mb-2">
                                                     <h5 class="fw-bold text-danger mb-0">Pooja Fee</h5>
-                                                    <h4 class="fw-bold mb-2">₹501</h4>
+                                                    <h4 class="fw-bold mb-2">₹
+                                                        <?php print_r($showpujari[0]["puja_charges"]) ?>
+                                                    </h4>
                                                 </div>
-                                                <button class="btn  w-fit rounded-3 text-dark fw-bold"
-                                                    style="background-color: var(--yellow);" data-bs-toggle="modal"
-                                                    data-bs-target="#bookpooja">
-                                                    Book Pooja
-                                                </button>
+                                                <?php if (empty($this->session->userdata("user_id"))): ?>
+                                                    <button class="btn  w-fit rounded-3 text-dark fw-bold"
+                                                        style="background-color: var(--yellow);"
+                                                        onclick="alert('pls login')">
+                                                        Book Pooja
+                                                    </button>
+                                                <?php else: ?>
+                                                    <button class="btn  w-fit rounded-3 text-dark fw-bold"
+                                                        style="background-color: var(--yellow);" data-bs-toggle="modal"
+                                                        data-bs-target="#bookpooja">
+                                                        Book Pooja
+                                                    </button>
+
+                                                <?php endif ?>
                                             </div>
                                         </div>
                                     </div>
@@ -147,34 +183,56 @@
                     <div class="modal fade" id="bookpooja" tabindex="-1" aria-labelledby="bookpoojaLabel"
                         aria-hidden="true">
                         <div class="modal-dialog ">
-                            <form>
+                            <form class="pujadata">
                                 <div class="modal-content">
                                     <div class="d-flex justify-content-between align-items-center p-3">
                                         <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
 
                                         <div class="row g-3">
-                                            <div class="col-12">
+                                            <!-- <div class="col-12">
                                                 <label class="form-label fw-bold">Address</label>
                                                 <textarea class="form-control shadow-none" rows="3"
                                                     placeholder="Enter your complete address" required
                                                     oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s]/g, ''); })(this)"
                                                     pattern="^[A-Za-z0-9À-ž\s]+$"
                                                     title="Enter Alphabets and Numbers Only"></textarea>
-                                            </div>
+                                            </div> -->
 
                                             <div class="col-12">
-                                                <label class="form-label fw-bold">Preferred Date</label>
-                                                <input type="date" class="form-control shadow-none"
-                                                    min="<?php echo date('Y-m-d'); ?>"
-                                                    required>
+                                                <label class="form-label fw-bold">User Email</label>
+                                                <input type="user_email" name="useremail"
+                                                    class="form-control shadow-none" required>
                                             </div>
+
+
+                                            <div class="col-12">
+                                                <label class="form-label fw-bold">Preferred Datse</label>
+                                                <input type="date" name="pujadate" class="form-control shadow-none"
+                                                    min="<?php echo date('Y-m-d'); ?>" required>
+                                            </div>
+
+                                            <input type="text" value="<?php echo $showpujari[0]["pujari_id_"] ?>"
+                                                name="pujari_id" hidden>
+                                            <input type="text" value="<?php echo $showpujari[0]["service_id"] ?>"
+                                                name="service_id" hidden>
+
+                                            <input type="text" value="<?php echo "Online" ?>" name="puja_mode" hidden>
+
+                                            <input type="text"
+                                                value="<?php echo $this->session->userdata("user_id") ?? null; ?>"
+                                                name="user_id" hidden>
+
+                                            <input type="text" value="<?php echo $showpujari[0]["puja_charges"]; ?>"
+                                                name="pujari_charges" hidden>
 
                                             <div class="col-12">
                                                 <label class="form-label fw-bold">Preferred Time</label>
-                                                <input type="time" class="form-control shadow-none" required>
+                                                <input type="time" name="pujatime" class="form-control shadow-none"
+                                                    required>
                                             </div>
 
                                         </div>
@@ -182,7 +240,8 @@
                                     </div>
                                     <div class="p-3 d-flex justify-content-center align-items-center gap-3">
 
-                                        <button type="submit" class="btn text-dark" style="background-color: var(--yellow);">
+                                        <button type="submit" class="btn text-dark"
+                                            style="background-color: var(--yellow);">
                                             Confirm Booking
                                         </button>
                                     </div>
@@ -190,6 +249,9 @@
                             </form>
                         </div>
                     </div>
+
+
+
 
                     <!-- about section -->
                     <div class="col-12">
@@ -208,130 +270,48 @@
         </section>
 
         <!-- Review section -->
+
         <section>
             <div class="container mb-5">
                 <h5 class=" mb-4 fw-bold">User Reviews</h5>
                 <div class="owl-carousel owl1 owl-theme">
-                    <div class="item">
-                        <div class="card shadow" style="border: 1px solid var(--red);">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    "The consultation was very insightful and helpful. The astrologer was knowledgeable
-                                    and provided clear guidance. I would definitely recommend their services to others."
-                                </p>
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
-                                        class="rounded-circle me-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;">
-                                    <div>
-                                        <h5 class="card-title fw-bold mb-1">John Smith</h5>
-                                        <div class="d-flex">
-                                            <?php for ($i = 0; $i < 5; $i++): ?>
-                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                    style="width: 15px; height: 15px;">
-                                            <?php endfor; ?>
+
+                    <?php if (!empty($showfeedback)): ?>
+
+                        <?php foreach ($showfeedback as $feedback): ?>
+                            <div class="item">
+                                <div class="card shadow" style="border: 1px solid var(--red);">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            <?php echo $feedback["message"] ?>
+                                        </p>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
+                                                class="rounded-circle me-3"
+                                                style="width: 60px; height: 60px; object-fit: cover;">
+                                            <div>
+                                                <h5 class="card-title fw-bold mb-1"> <?php echo $feedback["user_name"] ?></h5>
+                                                <div class="d-flex">
+                                                    <?php for ($i = 0; $i < $feedback["rating"]; $i++): ?>
+                                                        <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
+                                                            style="width: 15px; height: 15px;">
+                                                    <?php endfor; ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="card shadow" style="border: 1px solid var(--red);">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    "The consultation was very insightful and helpful. The astrologer was knowledgeable
-                                    and provided clear guidance. I would definitely recommend their services to others."
-                                </p>
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
-                                        class="rounded-circle me-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;">
-                                    <div>
-                                        <h5 class="card-title fw-bold mb-1">John Smith</h5>
-                                        <div class="d-flex">
-                                            <?php for ($i = 0; $i < 5; $i++): ?>
-                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                    style="width: 15px; height: 15px;">
-                                            <?php endfor; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="card shadow" style="border: 1px solid var(--red);">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    "The consultation was very insightful and helpful. The astrologer was knowledgeable
-                                    and provided clear guidance. I would definitely recommend their services to others."
-                                </p>
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
-                                        class="rounded-circle me-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;">
-                                    <div>
-                                        <h5 class="card-title fw-bold mb-1">John Smith</h5>
-                                        <div class="d-flex">
-                                            <?php for ($i = 0; $i < 5; $i++): ?>
-                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                    style="width: 15px; height: 15px;">
-                                            <?php endfor; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="card shadow" style="border: 1px solid var(--red);">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    "The consultation was very insightful and helpful. The astrologer was knowledgeable
-                                    and provided clear guidance. I would definitely recommend their services to others."
-                                </p>
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
-                                        class="rounded-circle me-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;">
-                                    <div>
-                                        <h5 class="card-title fw-bold mb-1">John Smith</h5>
-                                        <div class="d-flex">
-                                            <?php for ($i = 0; $i < 5; $i++): ?>
-                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                    style="width: 15px; height: 15px;">
-                                            <?php endfor; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="card shadow" style="border: 1px solid var(--red);">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    "The consultation was very insightful and helpful. The astrologer was knowledgeable
-                                    and provided clear guidance. I would definitely recommend their services to others."
-                                </p>
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
-                                        class="rounded-circle me-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;">
-                                    <div>
-                                        <h5 class="card-title fw-bold mb-1">John Smith</h5>
-                                        <div class="d-flex">
-                                            <?php for ($i = 0; $i < 5; $i++): ?>
-                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                    style="width: 15px; height: 15px;">
-                                            <?php endfor; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                        <?php endforeach ?>
+
+                    <?php else: ?>
+
+                    <?php endif ?>
+
+
+
+
                 </div>
             </div>
         </section>
@@ -344,8 +324,60 @@
     </footer>
 
     <!-- Code for carousel  -->
+
     <script>
-        $(document).ready(function() {
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("form.pujadata").forEach(form => {
+
+
+
+                form.addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    let formdata = new FormData(form);
+                   
+
+                    fetch("<?php echo base_url('User_Api_Controller/send_request_to_pujari'); ?>", {
+                        method: "POST",
+                        body: formdata,
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data["status"] == "success") {
+                               
+                                 Swal.fire({
+                                        title: "success",
+                                        text: "feedback submited successfully",
+                                        icon: "success",
+                                    });
+
+                               
+                            }
+                            else if (data["status"] == "warning") {
+                                 Swal.fire({
+                                        title: "warning",
+                                        text: "pujari already booked",
+                                        icon: "warning",
+                                    });
+
+                            }
+
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+
+                        });
+                });
+            });
+        });
+    </script>
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
             $('.owl1').owlCarousel({
                 loop: true,
                 margin: 10,
@@ -419,12 +451,12 @@
             positionNavButtons();
 
             // Reposition on window resize
-            $(window).resize(function() {
+            $(window).resize(function () {
                 positionNavButtons();
             });
 
             // Prevent hover color change
-            $('.owl-nav button').hover(function() {
+            $('.owl-nav button').hover(function () {
                 $(this).css('background', 'transparent');
             });
         });

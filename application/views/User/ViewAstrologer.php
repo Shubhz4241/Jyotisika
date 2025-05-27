@@ -43,38 +43,12 @@
 
 <body>
 
-<?php
-    // Initialize variables with empty values to prevent undefined variable errors
-    $id = '';
-    $name = '';
-    $email = '';
-    $phone = '';
-    // $profile_image = base_url('assets/images/default-profile.png'); // Default profile image
-    $experience = '';
-    $specialties = '';
-    $languages = '';
-    $address = '';
-    $status = "<span class='text-danger'>Offline</span>"; // Default status
-    
-    $is_following = '';
+    <?php $is_following = $followstatus ?>
+    <!-- <?php print_r($astrologerdata) ?> -->
+ 
+    <!-- <?php print_r($rating); ?> -->
+     <?php $avgrating =  (int)$rating[0]["average_rating"] ?>
 
-    // If astrologer data is available, set the variables
-    
-    // print_r($astrologer);
-    if (isset($astrologer) && !empty($astrologer)) {
-
-        $ast = $astrologer[0];
-        $id = $ast['id'];
-        $name = $ast['name'];
-        $email = $ast['email'];
-        $languages = $ast['languages'];
-        $specialties =  $ast['specialties'];
-        $experience = $ast['experience'];
-        $price_per_minute = $ast['price_per_minute'];
-        // $profile_image = !empty($astrologers['profile_image']) ? base_url($astrologers['profile_image']) : base_url('assets/images/astrologer.png');
-    
-    }
-    ?>
 
     <header>
         <!-- Navbar -->
@@ -82,8 +56,10 @@
     </header>
 
     <main>
-        
+
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
+
+      
 
         <section>
             <div class="container">
@@ -91,12 +67,54 @@
                 <!-- recharge and seach section  -->
                 <div class="row my-4">
                     <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
-                        <h4 class="fw-bold">Available Balance : Rs.000</h4>
-                        <button class="btn rounded-4 btn-outline-success">
+                        <h4 id="balance" class="fw-bold">Available Balance : Rs.000</h4>
+                        <button onclick="func()" class="btn rounded-4 btn-outline-success">
                             Recharge
                         </button>
                     </div>
                 </div>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        console.log("DOM fully loaded");
+
+                        <?php if ($this->session->userdata('user_id')): ?>
+                            fetchWalletBalances();
+                        <?php endif; ?>
+                    });
+
+                    function fetchWalletBalances() {
+                        let user_id = <?php echo $this->session->userdata('user_id') ?? 0; ?>;
+
+                        fetch("<?php echo base_url('User_Api_Controller/getuser_info'); ?>", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            },
+                            body: new URLSearchParams({
+                                session_id: user_id
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.status === "success") {
+                                    let val = data.data.amount;
+                                    document.getElementById("balance").textContent = "Available Balance :  Rs." + val;
+                                } else {
+                                    console.error("Error fetching wallet balance:", data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Fetch error:", error);
+                            });
+                    }
+
+                    function func() {
+
+                        console.log("hello world");
+                    }
+                </script>
+
 
                 <div class="row">
                     <div class="col-12 mb-3 card-item">
@@ -110,15 +128,38 @@
                                             class="rounded-circle border border-3 border-white me-3"
                                             style="width: 120px; height: 120px; object-fit: cover;">
                                         <div>
-                                            <h5 class="text-white fw-bold mb-1"><?php echo  $name ?></h5>
+                                            <h5 class="text-white fw-bold mb-1">
+                                                <?php echo isset($astrologerdata[0]["name"]) && !empty($astrologerdata[0]["name"]) ? $astrologerdata[0]["name"] : "N/A" ?>
+                                            </h5>
+                                            
                                             <div class="d-flex align-items-center mb-2">
-                                                <?php for ($i = 0; $i < 3; $i++): ?>
+                                                <?php for ($i = 0; $i < $avgrating; $i++): ?>
                                                     <i class="bi bi-star-fill text-warning me-1"></i>
                                                 <?php endfor; ?>
                                             </div>
-                                            <!-- <button class="btn btn-light btn-sm rounded-4 px-3">
-                                                <i class="bi bi-person-plus-fill me-1"></i>Follow
-                                            </button> -->
+
+                                            <?php if (!($this->session->userdata("user_id"))): ?>
+                                                <button class="btn btn-light btn-sm rounded-4 px-3 showlogin">
+                                                    <i class="bi bi-person-plus-fill me-1"></i>Follow
+                                                </button>
+
+                                            <?php else: ?>
+
+                                                <?php if ($is_following == "followed"): ?>
+
+                                                    <button disabled="true" class="btn btn-light btn-sm rounded-4 px-3">
+                                                        <i class="bi bi-person me-1"></i>Following
+                                                    </button>
+                                                <?php else: ?>
+                                                    <button id="followastrologer" class="btn btn-light btn-sm rounded-4 px-3">
+                                                        <i class="bi bi-person-plus-fill me-1"></i>Follow
+                                                    </button>
+
+
+                                                <?php endif ?>
+
+
+                                            <?php endif ?>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +178,8 @@
                                                         </div>
                                                         <div>
                                                             <h6 class="mb-0 fw-bold">specialties</h6>
-                                                            <span class="card-expertise"><?php echo $specialties ?></span>
+                                                            <span
+                                                                class="card-expertise"><?php echo isset($astrologerdata[0]["specialties"]) && !empty($astrologerdata[0]["specialties"]) ? $astrologerdata[0]["specialties"] : "N/A" ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center">
@@ -147,7 +189,8 @@
                                                         </div>
                                                         <div>
                                                             <h6 class="mb-0 fw-bold">Experience</h6>
-                                                            <span><?php echo $experience ?>+ Years</span>
+                                                            <span><?php echo isset($astrologerdata[0]["experience"]) && !empty($astrologerdata[0]["experience"]) ? $astrologerdata[0]["experience"] : "N/A" ?>+
+                                                                Years</span>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center">
@@ -157,26 +200,50 @@
                                                         </div>
                                                         <div>
                                                             <h6 class="mb-0 fw-bold">Languages</h6>
-                                                            <span class="card-language"><?php echo  $languages ?></span>
+                                                            <span
+                                                                class="card-language"><?php echo isset($astrologerdata[0]["languages"]) && !empty($astrologerdata[0]["languages"]) ? $astrologerdata[0]["languages"] : "N/A" ?>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!-- Action Buttons Section -->
-                                            <div class="col-md-4 d-flex flex-column justify-content-between mt-3 mt-md-0">
+                                            <div
+                                                class="col-md-4 d-flex flex-column justify-content-between mt-3 mt-md-0">
                                                 <div class="text-center mb-3">
                                                     <h5 class="fw-bold text-danger mb-1">Consultation Fee</h5>
-                                                    <h4 class="fw-bold">₹<?php echo $price_per_minute ?>/min</h4>
+                                                    <h4 class="fw-bold">
+                                                        ₹<?php echo isset($astrologerdata[0]["price_per_minute"]) && !empty($astrologerdata[0]["price_per_minute"]) ? $astrologerdata[0]["price_per_minute"] : "N/A" ?>/min
+                                                    </h4>
                                                 </div>
                                                 <div class="d-grid gap-2">
-                                                    <button class="btn  rounded-3 text-dark"
-                                                        style="background-color: var(--yellow);">
-                                                        <i class="bi bi-chat-dots-fill me-1"></i> Chat
-                                                    </button>
-                                                    <button class="btn btnHover btn-outline-dark f rounded-3">
-                                                        <i class="bi bi-telephone-fill me-1"></i> Call
-                                                    </button>
+
+                                                    <?php if ($this->session->userdata("user_id")): ?>
+                                                        <button class="btn  rounded-3 text-dark"
+                                                            style="background-color: var(--yellow);">
+                                                            <i class="bi bi-chat-dots-fill me-1"></i> Chat
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <button class="btn showlogin rounded-3 text-dark"
+                                                            style="background-color: var(--yellow);">
+                                                            <i class="bi bi-chat-dots-fill me-1"></i> Chat
+                                                        </button>
+                                                    <?php endif ?>
+
+
+                                                    <?php if ($this->session->userdata("user_id")): ?>
+                                                        <button class="btn btnHover btn-outline-dark f rounded-3">
+                                                            <i class="bi bi-telephone-fill me-1"></i> Call
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <button class="btn showlogin btnHover btn-outline-dark f rounded-3">
+                                                            <i class="bi bi-telephone-fill me-1"></i> Call
+                                                        </button>
+                                                    <?php endif ?>
+
+
+
 
                                                 </div>
                                             </div>
@@ -188,25 +255,96 @@
                     </div>
                     <div class="col-12">
                         <h6 class="fs-5 fw-bold">About</h6>
-                        <!-- <p style="text-align:justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-                            sapiente omnis, quidem, rerum voluptas quis voluptate natus dolorum velit, iure modi nihil
-                            maxime harum vel fuga commodi nisi! Eum, quae! Lorem ipsum dolor sit amet, consectetur
-                            adipisicing elit. Animi nam consequatur, accusantium vitae nobis ea ab totam labore, sed qui
-                            velit dicta earum omnis, eaque cum quidem odio. Dolorem, iste. Lorem, ipsum dolor sit amet
-                            consectetur adipisicing elit. Placeat aspernatur itaque mollitia nisi, et deserunt in
-                            perspiciatis rerum asperiores exercitationem!
-                        </p> -->
+                        <p style="text-align:justify;">
+                            <?php echo isset($astrologerdata[0]["specialties"]) && !empty($astrologerdata[0]["specialties"]) ? $astrologerdata[0]["specialties"] : "N/A" ?>
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Review section -->
+
         <!-- <section>
+            <div class="container mb-5">
+                <h5 class="mb-4 fw-bold">User Reviews</h5>
+
+                <?php if (!empty($rating)): ?>
+                    <div class="owl-carousel owl1 owl-theme">
+                        <?php foreach ($rating as $r): ?>
+                            <div class="item">
+                                <div class="card shadow" style="border: 1px solid var(--red);">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            "<?php echo htmlspecialchars($r['message']); ?>"
+                                        </p>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
+                                                class="rounded-circle me-3"
+                                                style="width: 60px; height: 60px; object-fit: cover;">
+                                            <div>
+                                                <h5 class="card-title fw-bold mb-1">
+                                                    <?php echo htmlspecialchars($r['user_name']); ?>
+                                                </h5>
+                                                <div class="d-flex">
+                                                    <?php for ($i = 0; $i < 5; $i++): ?>
+                                                        <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
+                                                            style="width: 15px; height: 15px; opacity: <?php echo ($i < $r['rating']) ? '1' : '0.3'; ?>;">
+                                                    <?php endfor; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <div class="alert alert-warning">
+                        No reviews available at the moment.
+                    </div>
+                <?php endif; ?>
+            </div>
+        </section> -->
+
+
+        <section>
             <div class="container mb-5">
                 <h5 class=" mb-4 fw-bold">User Reviews</h5>
                 <div class="owl-carousel owl1 owl-theme">
-                    <div class="item">
+
+                    <?php if (!empty($feedback)): ?>
+                        <?php foreach ($feedback as $userratingfeedback): ?>
+                            <div class="item">
+                                <div class="card shadow" style="border: 1px solid var(--red);">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            <?php echo $userratingfeedback["feedback"]; ?>
+                                        </p>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
+                                                class="rounded-circle me-3"
+                                                style="width: 60px; height: 60px; object-fit: cover;">
+                                            <div>
+                                                <h5 class="card-title fw-bold mb-1">
+                                                    <?php echo isset($userratingfeedback["username"]) && empty(!$userratingfeedback["username"]) ? $userratingfeedback["username"] : "Not Available"; ?>
+                                                </h5>
+                                                <div class="d-flex">
+                                                    <?php for ($i = 0; $i < $userratingfeedback["rating"]; $i++): ?>
+                                                        <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
+                                                            style="width: 15px; height: 15px;">
+                                                    <?php endfor; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php endforeach; ?>
+
+                    <?php endif ?>
+                    <!-- <div class="item">
                         <div class="card shadow" style="border: 1px solid var(--red);">
                             <div class="card-body">
                                 <p class="card-text">
@@ -301,34 +439,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="card shadow" style="border: 1px solid var(--red);">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    "The consultation was very insightful and helpful. The astrologer was knowledgeable
-                                    and provided clear guidance. I would definitely recommend their services to others."
-                                </p>
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
-                                        class="rounded-circle me-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;">
-                                    <div>
-                                        <h5 class="card-title fw-bold mb-1">John Smith</h5>
-                                        <div class="d-flex">
-                                            <?php for ($i = 0; $i < 5; $i++): ?>
-                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                                                    style="width: 15px; height: 15px;">
-                                            <?php endfor; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-        </section> -->
+        </section>
 
     </main>
 
@@ -423,6 +537,97 @@
             });
         });
     </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+
+        let showlogin = document.getElementsByClassName("showlogin");
+
+        Array.from(showlogin).forEach(function (e) {
+            e.addEventListener("click", function () {
+                Swal.fire({
+                    title: "Login Required",
+                    text: "Please login to access this service",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Login",
+                    cancelButtonText: "Cancel",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "<?php echo base_url('Login'); ?>";
+                    }
+                });
+
+            });
+        });
+
+
+
+        let followastrologer = document.getElementById("followastrologer");
+
+        if (followastrologer) {
+
+            followastrologer.addEventListener("click", (e) => {
+
+                let astrolger_id = <?php echo $astrologerdata[0]["id"]; ?>;
+                let user_id = <?php echo $this->session->userdata("user_id") ? $this->session->userdata("user_id") : 'null'; ?>;
+
+
+                let formdata = new FormData();
+                formdata.append("astrologer_id", astrolger_id);
+                formdata.append("session_id", user_id)
+
+                fetch("<?php echo base_url("User_Api_Controller/followastrologer") ?>", {
+                    body: formdata,
+                    method: "POST"
+                })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        if (data.status == "success") {
+                            Swal.fire({
+                                title: "success",
+                                text: "astrloger followed successfully",
+                                icon: "success",
+
+                            });
+                        }
+                        else {
+
+                            Swal.fire({
+                                title: "warning",
+                                text: "you already followed this astrolger",
+                                icon: "warning",
+
+                            });
+                        }
+
+
+                        let followastrologerbutton = document.getElementById("followastrologer");
+
+                        followastrologerbutton.innerText = "Following";
+                        followastrologerbutton.disabled = true;
+
+
+
+
+                    })
+
+            })
+        }
+
+
+
+
+
+
+
+
+    </script>
+
+
 
 </body>
 

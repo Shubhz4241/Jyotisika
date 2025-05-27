@@ -199,18 +199,19 @@
     <div style="min-height: 100vh;">
         <div class="container">
             <div class="stat-box-container">
-                <a href="<?php echo base_url('AstrologerUser/AstrologerEarningsBreakdown'); ?>" class="stat-box bg-success text-white text-decoration-none">
-                    <h3>2.5L</h3>
-                    <p class="fw-normal">Total Earnings</p>
-                </a>
-                <a href="<?php echo base_url('AstrologerUser/AstrologerMonthlyEarningsBreakdown'); ?>" class="stat-box bg-primary text-white text-decoration-none">
-                    <h3>5K</h3>
+                <a class="stat-box bg-primary text-white text-decoration-none">
+                    <h3 id="show-month-earn">5K</h3>
                     <p class="fw-normal">Monthly Earnings</p>
                 </a>
                 <div class="stat-box bg-warning text-dark">
-                    <h3>1K</h3>
+                    <h3 id="show-pen">1K</h3>
                     <p class="fw-normal">Pending Payments</p>
                 </div>
+                <a class="stat-box bg-success text-white text-decoration-none">
+                    <h3 id="show-tot">2.5L</h3>
+                    <p class="fw-normal">Total Earnings</p>
+                </a>
+
             </div>
 
             <div class="chart-container">
@@ -234,112 +235,285 @@
     </footer>
 
     <script>
-        const ctx1 = document.getElementById('overallEarningsChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['2022', '2023', '2024'],
-                datasets: [{
-                        label: '2022',
-                        data: [50, 80, 100],
-                        backgroundColor: '#6C63FF'
-                    },
-                    {
-                        label: '2023',
-                        data: [35, 97, 150],
-                        backgroundColor: '#FF6384'
-                    },
-                    {
-                        label: '2024',
-                        data: [58, 93, 163],
-                        backgroundColor: '#36A2EB'
+        window.addEventListener('load', () => {
+            fetch('<?php echo base_url('astrologer/get_logged_in_user'); ?>')
+                .then(response => response.json())
+                .then(data => {
+                  
+                    if (data.status !== 'success') {
+                        window.location.href = '<?php echo base_url("AstrologerMobileNumberAndOTPForm"); ?>';
                     }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        suggestedMin: 0,
-                        suggestedMax: 200,
-                        ticks: {
-                            stepSize: 50
-                        }
-                    }
-                }
-            }
-        });
+                })
+                .catch(error => console.error('Error:', error));
 
-        const ctx2 = document.getElementById('monthlyEarningsChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Vastu', 'Vedic', 'Kundli'],
-                datasets: [{
-                        label: 'Vastu',
-                        data: [8, 9, 12],
-                        backgroundColor: '#6C63FF'
-                    },
-                    {
-                        label: 'Vedic',
-                        data: [6, 12, 13],
-                        backgroundColor: '#FF6384'
-                    },
-                    {
-                        label: 'Kundli',
-                        data: [3, 13, 14],
-                        backgroundColor: '#36A2EB'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        suggestedMin: 0,
-                        suggestedMax: 20,
-                        ticks: {
-                            stepSize: 5
-                        }
-                    }
-                }
-            }
-        });
+            fetch("<?= base_url('astrologer/yearlychart') ?>")
+                .then(res => res.json())
+                .then(response => {
+                    if (response.status) {
 
-        const ctx3 = document.getElementById('pendingPaymentsChart').getContext('2d');
-        new Chart(ctx3, {
-            type: 'doughnut',
-            data: {
-                labels: ['Home Shanti', 'Wealth', 'Rahu-Ketu'],
-                datasets: [{
-                    data: [39, 23, 38],
-                    backgroundColor: ['#6C63FF', '#36A2EB', '#FF6384']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right'
+                        const labels = ['paid', 'pending'];
+                        const datasets = response.data.map(row => ({
+                            label: row.year,
+                            data: [
+                                parseFloat(row.paid || 0),
+                                parseFloat(row.pending || 0)
+                            ],
+                            backgroundColor: row.year === '2025' ? '#6C63FF' : row.year === '2026' ? '#FF6384' : '#36A2EB'
+                        }));
+
+                        const ctx1 = document.getElementById('overallEarningsChart').getContext('2d');
+                        new Chart(ctx1, {
+                            type: 'bar',
+                            data: {
+                                labels,
+                                datasets
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        suggestedMin: 0,
+                                        suggestedMax: 200,
+                                        ticks: {
+                                            stepSize: 50
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        alert("Failed to fetch chart data: " + response.message);
                     }
-                },
-                layout: {
-                    padding: 20
-                },
-                elements: {
-                    arc: {
-                        borderWidth: 2, // Light gray border
-                        borderColor: '#D3D3D3' // Light gray color
-                        
+                });
+
+
+            // data by month
+
+            fetch("<?= base_url('astrologer/monthlychart') ?>")
+                .then(res => res.json())
+                .then(response => {
+                    if (response.status) {
+
+                        console.log(response.data)
+                        const labels = response.data.map(row => row.month);
+                        const paidData = response.data.map(row => row.paid);
+                        const pendingData = response.data.map(row => row.pending);
+
+                        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                        const currentMonthName = monthNames[new Date().getMonth()];
+
+                        const currentMonthData = response.data.find(row => row.month === currentMonthName);
+
+                        if (currentMonthData) {
+                            const total = parseFloat(currentMonthData.paid) + parseFloat(currentMonthData.pending);
+                            const formatted = (total / 1000).toFixed(2) + 'k';
+
+                            document.getElementById('show-month-earn').innerText = formatted;
+                        }
+
+
+                        const ctx2 = document.getElementById('monthlyEarningsChart').getContext('2d');
+                        new Chart(ctx2, {
+                            type: 'bar',
+                            data: {
+                                labels,
+                                datasets: [{
+                                        label: 'Paid',
+                                        data: paidData,
+                                        backgroundColor: '#6C63FF'
+                                    },
+                                    {
+                                        label: 'Pending',
+                                        data: pendingData,
+                                        backgroundColor: '#FF6384'
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        suggestedMin: 0,
+                                        suggestedMax: 200,
+                                        ticks: {
+                                            stepSize: 50
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        alert("Failed to load monthly data");
                     }
-                }
-            }
+                });
+
+
+            fetch("<?= base_url('astrologer/statuschart') ?>")
+                .then(res => res.json())
+                .then(response => {
+                    if (response.status) {
+                        const {
+                            paid,
+                            pending
+                        } = response.data;
+
+                        const formatted = (pending / 1000).toFixed(2) + 'k';
+                        document.getElementById('show-pen').innerText = formatted;
+                        console.log(formatted, pending)
+
+                        const total = paid + pending;
+                        const formattedTotal = (total / 1000).toFixed(2) + 'k';
+                        document.getElementById('show-tot').innerText = formattedTotal;
+
+                        const ctx3 = document.getElementById('pendingPaymentsChart').getContext('2d');
+                        new Chart(ctx3, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Paid', 'Pending'],
+                                datasets: [{
+                                    data: [paid, pending],
+                                    backgroundColor: ['#6C63FF', '#FF6384']
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        position: 'right'
+                                    }
+                                },
+                                layout: {
+                                    padding: 20
+                                },
+                                elements: {
+                                    arc: {
+                                        borderWidth: 2,
+                                        borderColor: '#D3D3D3'
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        alert("Unable to fetch payment status data");
+                    }
+                });
+
+
+
+
+
         });
+        // const ctx1 = document.getElementById('overallEarningsChart').getContext('2d');
+        // new Chart(ctx1, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: ['paid', 'pending',],
+        //         datasets: [{
+        //                 label: '2022',
+        //                 data: [50, 80],
+        //                 backgroundColor: '#6C63FF'
+        //             },
+        //             {
+        //                 label: '2023',
+        //                 data: [35, 97],
+        //                 backgroundColor: '#FF6384'
+        //             },
+        //             {
+        //                 label: '2024',
+        //                 data: [58, 93],
+        //                 backgroundColor: '#36A2EB'
+        //             }
+        //         ]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         maintainAspectRatio: false,
+        //         scales: {
+        //             y: {
+        //                 beginAtZero: true,
+        //                 suggestedMin: 0,
+        //                 suggestedMax: 200,
+        //                 ticks: {
+        //                     stepSize: 50
+        //                 }
+        //             }
+        //         }
+        //     }
+        // });
+
+        // const ctx2 = document.getElementById('monthlyEarningsChart').getContext('2d');
+        // new Chart(ctx2, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: ['Kundli Matching', 'Horoscope Reading', 'Numerology Consultation'],
+        //         datasets: [{
+        //                 label: 'Kundli Matching',
+        //                 data: [8, 9, 12],
+        //                 backgroundColor: '#6C63FF'
+        //             },
+        //             {
+        //                 label: 'Horoscope Reading',
+        //                 data: [6, 12, 13],
+        //                 backgroundColor: '#FF6384'
+        //             },
+        //             {
+        //                 label: 'Numerology Consultation',
+        //                 data: [3, 13, 14],
+        //                 backgroundColor: '#36A2EB'
+        //             }
+        //         ]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         maintainAspectRatio: false,
+        //         scales: {
+        //             y: {
+        //                 beginAtZero: true,
+        //                 suggestedMin: 0,
+        //                 suggestedMax: 20,
+        //                 ticks: {
+        //                     stepSize: 5
+        //                 }
+        //             }
+        //         }
+        //     }
+        // });
+
+        // const ctx3 = document.getElementById('pendingPaymentsChart').getContext('2d');
+        // new Chart(ctx3, {
+        //     type: 'doughnut',
+        //     data: {
+        //         labels: ['Kundli Matching', 'Horoscope Reading', 'Numerology Consultation'],
+        //         datasets: [{
+        //             data: [39, 23, 38],
+        //             backgroundColor: ['#6C63FF', '#36A2EB', '#FF6384']
+        //         }]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         maintainAspectRatio: false,
+        //         plugins: {
+        //             legend: {
+        //                 position: 'right'
+        //             }
+        //         },
+        //         layout: {
+        //             padding: 20
+        //         },
+        //         elements: {
+        //             arc: {
+        //                 borderWidth: 2, // Light gray border
+        //                 borderColor: '#D3D3D3' // Light gray color
+
+        //             }
+        //         }
+        //     }
+        // });
     </script>
 
 </body>

@@ -453,6 +453,7 @@
     </div>
 </nav>
 
+
 <script>
     document.getElementById('menuToggle').addEventListener('click', function() {
         document.getElementById('menuItems').classList.toggle('show');
@@ -467,47 +468,47 @@
     });
 
     // Notification Toggle
-    const notificationIcon = document.getElementById('notificationIcon');
-    const notificationDropdown = document.getElementById('notificationDropdown');
-    const closeNotification = document.getElementById('closeNotification');
+    // const notificationIcon = document.getElementById('notificationIcon');
+    // const notificationDropdown = document.getElementById('notificationDropdown');
+    // const closeNotification = document.getElementById('closeNotification');
 
-    notificationIcon.addEventListener('click', (event) => {
-        event.stopPropagation();
-        notificationDropdown.style.display =
-            notificationDropdown.style.display === 'block' ? 'none' : 'block';
-    });
+    // notificationIcon.addEventListener('click', (event) => {
+    //     event.stopPropagation();
+    //     notificationDropdown.style.display =
+    //         notificationDropdown.style.display === 'block' ? 'none' : 'block';
+    // });
 
-    closeNotification.addEventListener('click', () => {
-        notificationDropdown.style.display = 'none';
-    });
+    // closeNotification.addEventListener('click', () => {
+    //     notificationDropdown.style.display = 'none';
+    // });
 
-    window.addEventListener('click', (event) => {
-        if (!notificationIcon.contains(event.target) && !notificationDropdown.contains(event.target)) {
-            notificationDropdown.style.display = 'none';
-        }
-    });
+    // window.addEventListener('click', (event) => {
+    //     if (!notificationIcon.contains(event.target) && !notificationDropdown.contains(event.target)) {
+    //         notificationDropdown.style.display = 'none';
+    //     }
+    // });
 
     // Live Button SweetAlert with PlayStore Image
     document.getElementById('liveButton').addEventListener('click', function(e) {
         e.preventDefault();
         Swal.fire({
-            title: 'Download the App now',
-            html: `
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="width: 120px; margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">
-            `,
-            icon: 'info',
-            confirmButtonText: 'OK',
-            customClass: {
-                popup: 'live-swal-popup',
-                title: 'live-swal-title',
-                htmlContainer: 'live-swal-content',
-                confirmButton: 'live-swal-confirm'
-            },
-            buttonsStyling: false
+            title: 'Are you sure?',
+            text: "You will be logged out!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#FF0000', // Red confirm button
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, Logout!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "<?php echo base_url('Astrologer_Api_Controller/Logout'); ?>"; // Logout request
+
+            }
         });
     });
 
-    // Online/Offline Status Toggle with SweetAlert
+
+
     document.addEventListener('DOMContentLoaded', () => {
         let isOnline = false;
         let activityTimer;
@@ -565,14 +566,19 @@
         function resetActivityTimer() {
             clearTimeout(activityTimer);
 
-            if (!document.hidden && !isOnline) {
+            const inChatUI = window.location.href.includes("AstrologerChatUI");
+
+            if (!document.hidden && inChatUI && !isOnline) {
                 updateStatus("online");
             }
 
             activityTimer = setTimeout(() => {
-                updateStatus("offline");
+                if (isOnline && !inChatUI) {
+                    updateStatus("offline");
+                }
             }, inactivityTimeout);
         }
+
 
         // ⌨️ Detect user activity
         ["mousemove", "keydown", "click", "touchstart"].forEach(event => {
@@ -581,13 +587,16 @@
 
         // 👁️ Detect tab hide/show
         document.addEventListener("visibilitychange", () => {
-            if (document.hidden) {
+            const inChatUI = window.location.href.includes("AstrologerChatUI");
+
+            if (document.hidden || !inChatUI) {
                 updateStatus("offline");
                 clearTimeout(activityTimer);
             } else {
                 resetActivityTimer();
             }
         });
+
 
         // 🚪 Detect tab close
         window.addEventListener("beforeunload", () => {
@@ -598,10 +607,11 @@
 
         // 🔁 Heartbeat every 30s (only if online and tab visible)
         setInterval(() => {
-            if (isOnline && !document.hidden) {
-                updateStatus("online");
-            }
-        }, 30000);
+        const inChatUI = window.location.href.includes("AstrologerChatUI");
+        if (isOnline && !document.hidden && inChatUI) {
+            updateStatus("online");
+        }
+    }, 30000);
 
         // 🎚️ Manual toggle
         statusToggle.addEventListener('click', () => {
@@ -612,6 +622,8 @@
         // Start
         resetActivityTimer();
     });
+
+    
 
 
     // Custom CSS for SweetAlert (injected via JavaScript)
