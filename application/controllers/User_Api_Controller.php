@@ -1889,7 +1889,7 @@ class User_Api_Controller extends CI_Controller
 
         $is_valid = $this->razorpay_lib->verify_payment($payment_id, $order_id, $razorpay_signature);
         if (!$is_valid) {
-            echo json_encode(["status" => "error", "message" => "Wallet update failed: "]);
+            echo json_encode(["status" => "error", "message" => "order processing  failed: "]);
             return;
         }
 
