@@ -106,10 +106,10 @@
 
                 <!-- Nav pills - switches to vertical on small screens -->
                 <ul class="nav nav-pills mb-2 d-flex justify-content-between w-100" id="pills-tab" role="tablist">
-                    <li class="nav-item flex-grow-1 mx-1">
+                    <!-- <li class="nav-item flex-grow-1 mx-1">
                         <a class="nav-link active text-center w-100" id="pills-home-tab" data-bs-toggle="pill"
                             href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Call</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item flex-grow-1 mx-1">
                         <a class="nav-link text-center w-100" id="pills-profile-tab" data-bs-toggle="pill"
                             href="#pills-profile" role="tab" aria-controls="pills-profile"
@@ -133,7 +133,7 @@
                 <div class="tab-content p-3" id="pills-tabContent">
 
                     <!-- call -->
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                    <!-- <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                         aria-labelledby="pills-home-tab">
                         <div class="row my-4" id="cardContainer">
                             <?php
@@ -173,7 +173,7 @@
                                     <div class="card shadow rounded-3 h-100"
                                         style="border: 1px solid var(--red); background-color: #fff;">
                                         <div class="card-body p-3">
-                                            <!-- Profile Section -->
+                                            
                                             <div class="d-flex align-items-center mb-2">
                                                 <a href="<?php echo base_url('ViewAstrologer'); ?>">
                                                     <img src="<?php echo base_url('assets/images/' . $astrologer['image']); ?>"
@@ -197,7 +197,7 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Details Section -->
+                                          
                                             <div class="d-flex flex-column gap-1 mb-2">
                                                 <div class="d-flex align-items-center">
                                                     <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
@@ -225,18 +225,18 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Action Buttons -->
+                                         
                                             <div class="d-flex gap-2 mb-2">
                                                 <button class="btn text-dark btn-sm btn-outline-dark w-100 rounded-3"
                                                     style="background-color: var(--yellow);">Call</button>
                                             </div>
-                                            <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
+                                          
                                         </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- chat -->
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -273,138 +273,144 @@
                                 ],
 
                             ];
+                            ?>
 
-                            foreach ($astrologer_data as $astrologer): ?>
-                                <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
-                                    <div class="card shadow rounded-3 h-100"
-                                        style="border: 1px solid var(--red); background-color: #fff;">
-                                        <div class="card-body p-3">
-                                            <!-- Profile Section -->
-                                            <div class="d-flex align-items-center mb-2">
-                                                <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>"
-                                                        alt="image" class="rounded-circle"
-                                                        style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                                </a>
-                                                <div class="ms-2">
-                                                    <a href="<?php echo base_url('ViewAstrologer'); ?>"
-                                                        class="text-decoration-none">
-                                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
-                                                            <?php echo $astrologer['name']; ?>
-                                                        </h6>
+                            <?php
+                            if ($astrologer_data): ?>
+                                <?php foreach ($astrologer_data as $astrologer): ?>
+                                    <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
+                                        <div class="card shadow rounded-3 h-100"
+                                            style="border: 1px solid var(--red); background-color: #fff;">
+                                            <div class="card-body p-3">
+                                                <!-- Profile Section -->
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <a href="<?php echo base_url('ViewAstrologer'); ?>">
+                                                        <img src="<?php echo base_url('assets/images/astrologer.png'); ?>"
+                                                            alt="image" class="rounded-circle"
+                                                            style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                                     </a>
+                                                    <div class="ms-2">
+                                                        <a href="<?php echo base_url('ViewAstrologer'); ?>"
+                                                            class="text-decoration-none">
+                                                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                                <?php echo $astrologer['name']; ?>
+                                                            </h6>
+                                                        </a>
 
-                                                    <div class="d-flex align-items-center gap-1">
-                                                        <?php for ($i = 0; $i < 3; $i++): ?>
-                                                            <img src="<?php echo base_url('assets/images/rating.png'); ?>"
-                                                                alt="star" style="width: 15px; height: 15px;">
-                                                        <?php endfor; ?>
+                                                        <div class="d-flex align-items-center gap-1">
+                                                            <?php for ($i = 0; $i < 3; $i++): ?>
+                                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>"
+                                                                    alt="star" style="width: 15px; height: 15px;">
+                                                            <?php endfor; ?>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <!-- Details Section -->
-                                            <div class="d-flex flex-column gap-1 mb-2">
-                                                <div class="d-flex align-items-center">
+                                                <!-- Details Section -->
+                                                <div class="d-flex flex-column gap-1 mb-2">
+                                                    <!-- <div class="d-flex align-items-center">
                                                     <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
                                                         style="width: 15px; height: 15px; margin-right: 5px;">
                                                     <small
                                                         class="card-expertise"><?php echo $astrologer['experience']; ?></small>
+                                                </div> -->
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="<?php echo base_url('assets/images/experience.png'); ?>"
+                                                            alt="experience"
+                                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                                        <small><?php echo $astrologer['experience']; ?>+ Years</small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="<?php echo base_url('assets/images/money.png'); ?>"
+                                                            alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
+                                                        <small><?php echo $astrologer['price_per_minute']; ?> + per
+                                                            minite</small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="<?php echo base_url('assets/images/language.png'); ?>"
+                                                            alt="language"
+                                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                                        <small
+                                                            class="card-language"><?php echo $astrologer['languages']; ?></small>
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/experience.png'); ?>"
-                                                        alt="experience"
-                                                        style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small><?php echo $astrologer['experience']; ?></small>
-                                                </div>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/money.png'); ?>"
-                                                        alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small><?php echo $astrologer['price_per_minute']; ?></small>
-                                                </div>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/language.png'); ?>"
-                                                        alt="language"
-                                                        style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small
-                                                        class="card-language"><?php echo $astrologer['languages']; ?></small>
-                                                </div>
-                                            </div>
 
-                                            <!-- Action Buttons -->
-                                            <div class="d-flex gap-2 my-1">
-                                                <button class="btn btn-sm w-50 rounded-3 border-1"
-                                                    style="background-color: var(--yellow);">Chat</button>
-                                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>">Feedback</button>
+                                                <!-- Action Buttons -->
+                                                <div class="d-flex gap-2 my-1">
+                                                    <!-- <button class="btn btn-sm w-50 rounded-3 border-1"
+                                                    style="background-color: var(--yellow);">Chat</button> -->
+                                                    <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>">Feedback</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- modal for review astrologer -->
-                                <div class="modal fade "
-                                    id="feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>"
-                                    tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Feedback for <?php echo $astrologer['name']; ?></h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="astrologerfeedback"
-                                                    id="feedbackForm<?php echo str_replace(' ', '', $astrologer['name']); ?>">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Rating</label>
-                                                        <div class="rating">
-                                                            <?php for ($i = 5; $i >= 1; $i--): ?>
-                                                                <input type="radio" name="astologerrating"
-                                                                    value="<?php echo $i; ?>"
-                                                                    id="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>"
-                                                                    required>
-                                                                <label
-                                                                    for="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>">★</label>
-                                                            <?php endfor; ?>
+                                    <!-- modal for review astrologer -->
+                                    <div class="modal fade "
+                                        id="feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>"
+                                        tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Feedback for <?php echo $astrologer['name']; ?></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="astrologerfeedback"
+                                                        id="feedbackForm<?php echo str_replace(' ', '', $astrologer['name']); ?>">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Rating</label>
+                                                            <div class="rating">
+                                                                <?php for ($i = 5; $i >= 1; $i--): ?>
+                                                                    <input type="radio" name="astologerrating"
+                                                                        value="<?php echo $i; ?>"
+                                                                        id="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>"
+                                                                        required>
+                                                                    <label
+                                                                        for="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>">★</label>
+                                                                <?php endfor; ?>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Message</label>
-                                                        <input type="hidden" name="astrologer_id"
-                                                            value="<?php echo $astrologer['id'] ?>">
-                                                        <textarea class="form-control shadow-none" name="message" rows="3"
-                                                            required></textarea>
-                                                    </div>
-                                                    <button type="submit" class="btn w-100"
-                                                        style="background-color: var(--yellow);">Submit Feedback</button>
-                                                </form>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Message</label>
+                                                            <input type="hidden" name="astrologer_id"
+                                                                value="<?php echo $astrologer['id'] ?>">
+                                                            <textarea class="form-control shadow-none" name="message" rows="3"
+                                                                required></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn w-100"
+                                                            style="background-color: var(--yellow);">Submit Feedback</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- script for that rating astrologer-->
-                                <script>
-                                    document.querySelectorAll('.rating input').forEach(input => {
-                                        input.addEventListener('change', function () {
-                                            let ratingDiv = this.closest('.rating');
-                                            let selectedValue = this.value;
+                                    <!-- script for that rating astrologer-->
+                                    <script>
+                                        document.querySelectorAll('.rating input').forEach(input => {
+                                            input.addEventListener('change', function () {
+                                                let ratingDiv = this.closest('.rating');
+                                                let selectedValue = this.value;
 
-                                            // Reset all stars
-                                            ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
+                                                // Reset all stars
+                                                ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
 
-                                            // Highlight selected stars
-                                            ratingDiv.querySelectorAll('input').forEach(starInput => {
-                                                if (starInput.value <= selectedValue) {
-                                                    starInput.nextElementSibling.style.color = 'var(--yellow)';
-                                                }
+                                                // Highlight selected stars
+                                                ratingDiv.querySelectorAll('input').forEach(starInput => {
+                                                    if (starInput.value <= selectedValue) {
+                                                        starInput.nextElementSibling.style.color = 'var(--yellow)';
+                                                    }
+                                                });
                                             });
                                         });
-                                    });
-                                </script>
+                                    </script>
 
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
+
+                            <?php endif ?>
                         </div>
 
                     </div>
@@ -640,8 +646,7 @@
                                                                     <label class="form-label">Rating</label>
                                                                     <div class="rating">
                                                                         <?php for ($i = 5; $i >= 1; $i--): ?>
-                                                                            <input type="radio"
-                                                                                name="rating"
+                                                                            <input type="radio" name="rating"
                                                                                 value="<?php echo $i; ?>"
                                                                                 id="star<?php echo $i; ?>_<?php echo $pooja['book_puja_id']; ?>"
                                                                                 required>
@@ -650,7 +655,9 @@
                                                                         <?php endfor; ?>
                                                                     </div>
 
-                                                                    <input type="text" value="<?php echo $pooja['pujari_id']; ?>" name="pujari_id" hidden >
+                                                                    <input type="text"
+                                                                        value="<?php echo $pooja['pujari_id']; ?>"
+                                                                        name="pujari_id" hidden>
 
 
                                                                 </div>

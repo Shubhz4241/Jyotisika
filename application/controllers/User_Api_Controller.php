@@ -989,6 +989,61 @@ class User_Api_Controller extends CI_Controller
 
     }
 
+
+    public function get_astrologer_chat_with_user()
+    {
+
+        if ($_SERVER["REQUEST_METHOD"] != "POST") {
+
+            $response = [
+                "status" => "error",
+                "message" => "Invalid request method"
+
+            ];
+
+            echo json_encode($response);
+            return;
+        } else {
+            $session_id = $this->input->post("session_id");
+
+            if (empty($session_id)) {
+                $response = [
+                    "status" => "error",
+                    "message" => "pls fill all the filleds"
+
+                ];
+                echo json_encode($response);
+                return;
+
+            }
+
+            $query = $this->User_Api_Model->get_astrologer_chat_with_user_model($session_id);
+
+                if ($query) {
+
+                    $response = [
+                        "status" => "success",
+                        "message" => "feedback  submitted",
+                        "data"=>$query
+                    ];
+                } else {
+
+                    $response = [
+                        "status" => "error",
+                        "message" => "feedback not submitted",
+                    ];
+                }
+
+
+                echo json_encode($response);
+                return;
+
+
+        }
+
+
+    }
+
     public function feedback()
     {
 
@@ -1107,6 +1162,7 @@ class User_Api_Controller extends CI_Controller
 
 
     }
+
 
 
     public function get_avg_rating()
@@ -1833,7 +1889,7 @@ class User_Api_Controller extends CI_Controller
 
         $is_valid = $this->razorpay_lib->verify_payment($payment_id, $order_id, $razorpay_signature);
         if (!$is_valid) {
-            echo json_encode(["status" => "error", "message" => "Wallet update failed: "]);
+            echo json_encode(["status" => "error", "message" => "order processing  failed: "]);
             return;
         }
 
@@ -2104,6 +2160,92 @@ class User_Api_Controller extends CI_Controller
         echo json_encode($response);
 
     }
+
+
+
+    public function show_product_feedback()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+
+        $product_id = $this->input->post("product_id");
+
+        if (!$product_id) {
+            $this->output->set_status_header(400);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "product id not found"]));
+            return;
+        } else {
+
+            $query = $this->User_Api_Model->show_product_feedback_model($product_id);
+
+            if ($query) {
+
+                $response = [
+                    "status" => "success",
+                    "message" => "feedback  data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+                $response = [
+                    "status" => "error",
+                    "message" => "feedback data not fetched successfully"
+                ];
+
+            }
+
+            echo json_encode($response);
+
+        }
+
+
+
+    }
+
+    public function get_avg_rating_of_product()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+        $product_id = $this->input->post("product_id");
+
+        if (!$product_id) {
+            $this->output->set_status_header(400);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "product id not found"]));
+            return;
+        } else {
+            $query = $this->User_Api_Model->get_avg_rating_of_product_model($product_id);
+
+            if ($query) {
+
+                $response = [
+                    "status" => "success",
+                    "message" => "feedback  data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+                $response = [
+                    "status" => "error",
+                    "message" => "feedback data not fetched successfully"
+                ];
+
+            }
+
+            echo json_encode($response);
+
+        }
+    }
+
+
 
 
 

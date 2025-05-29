@@ -215,6 +215,7 @@
                                         <th scope="col">Sr. No.</th>
                                         <th scope="col">Title</th>
                                         <th scope="col">Description</th>
+                                        <th scope="col">Price</th>
                                         <th scope="col">Image</th>
                                         <th scope="col" class="text-center">Action</th>
                                     </tr>
@@ -239,48 +240,63 @@
                         id: 1,
                         title: "Rudraksha",
                         description: "The Seed of Shiva",
+                        price:"2000",
                         image: "https://picsum.photos/32"
                     },
                     {
                         id: 2,
                         title: "Shri Yantra",
                         description: "The Devi's diagram",
+                                                price:"2000",
+
                         image: "https://picsum.photos/33"
                     },
                     {
                         id: 3,
                         title: "Kamal Gatta",
                         description: "The Lotus Beads",
+                                                price:"2000",
+
                         image: "https://picsum.photos/34"
                     },
                     {
                         id: 4,
                         title: "Kavach",
                         description: "The Spiritual Shield",
+                                                price:"2000",
+
                         image: "https://picsum.photos/35"
                     },
                     {
                         id: 5,
                         title: "Puja Samagri",
                         description: "The Puja Material",
+                                                price:"2000",
+
                         image: "https://picsum.photos/36"
                     },
                     {
                         id: 6,
                         title: "Vastu Items",
                         description: "The Vastu Products",
+                                                price:"2000",
+
                         image: "https://picsum.photos/37"
                     },
                     {
                         id: 7,
                         title: "Yantras",
                         description: "The Magical Figures",
+                                                price:"2000",
+
                         image: "https://picsum.photos/38"
                     },
                     {
                         id: 8,
                         title: "Rosaries",
                         description: "The Beads of Spiritual Growth",
+                                                price:"2000",
+
                         image: "https://picsum.photos/39"
                     }
                 ];
@@ -307,6 +323,8 @@
                         <th scope="row">${startIndex + index + 1}</th>
                         <td>${festival.title}</td>
                         <td>${truncateText(festival.description, 50)}</td>
+                                                <td>${festival.price}</td>
+
                         <td><img src="${festival.image}" class="img-fluid rounded" alt="${festival.title}"></td>
                         <td class="text-center d-flex justify-content-center">
                             <a href="#" class="text-primary me-2" data-bs-toggle="modal" data-bs-target="#editModal">

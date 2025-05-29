@@ -512,6 +512,7 @@ td{
                                 <table>
                                     <thead>
                                         <tr>
+                                            <th>Sr. no.</th>
                                             <th>Name</th>
                                             <th>Contact No</th>
                                             <th>Available Days & Time</th>
@@ -522,36 +523,14 @@ td{
                                         </tr>
                                     </thead>
                                     <tbody id="pendingTableBody">
-                                        <!-- Static Data -->
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>1234567890</td>
-                                            <td>Mon, Tue, Wed</td>
-                                            <td>2023-10-01</td>
-                                            <td>Astrologer</td>
-                                            <td>New Service</td>
-                                            <td>
-                                                <button onclick="rescheduleInterview('1', 'astrologer', '1')" class="btn btn-primary" title="Reschedule">Reschedule</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jane Smith</td>
-                                            <td>0987654321</td>
-                                            <td>Thu, Fri, Sat</td>
-                                            <td>2023-10-02</td>
-                                            <td>Pujari</td>
-                                            <td>New Service</td>
-                                            <td>
-                                                <button onclick="rescheduleInterview('2', 'pujari', '2')" class="btn btn-primary" title="Reschedule">Reschedule</button>
-                                            </td>
-                                        </tr>
+                                        <!-- Data will be populated by JavaScript -->
                                     </tbody>
                                 </table>
                             </div>
                             <div class="pagination-container">
-                                <button id="prevBtn" class="btn btn-sm" onclick="previousPage()" style="background-color: #0c786a;">Previous</button>
+                                <button id="prevBtn" class="btn btn-sm" onclick="previousPage('pending')" style="background-color: #0c786a;">Previous</button>
                                 <div id="pageNumbers" class="btn-group"></div>
-                                <button id="nextBtn" class="btn btn-sm" onclick="nextPage()" style="background-color: #0c786a;">Next</button>
+                                <button id="nextBtn" class="btn btn-sm" onclick="nextPage('pending')" style="background-color: #0c786a;">Next</button>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="scheduled" role="tabpanel" aria-labelledby="scheduled-tab">
@@ -559,6 +538,7 @@ td{
                                 <table>
                                     <thead>
                                         <tr>
+                                            <th>Sr. no.</th>
                                             <th>Name</th>
                                             <th>Contact No</th>
                                             <th>Date</th>
@@ -569,35 +549,7 @@ td{
                                         </tr>
                                     </thead>
                                     <tbody id="scheduledTableBody">
-                                        <!-- Static Data -->
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>1234567890</td>
-                                            <td>2023-10-03</td>
-                                            <td>Astrologer</td>
-                                            <td>New Service</td>
-                                            <td>
-                                                <a href="https://example.com" target="_blank" class="btn btn-info">Join Meeting</a>
-                                            </td>
-                                            <td>
-                                                <button onclick="updateInterviewStatus('1', 'approved', '1', 'astrologer')" class="btn icon-btn" title="Approve">✅</button>
-                                                <button onclick="updateInterviewStatus('1', 'rejected', '1', 'astrologer')" class="btn icon-btn" title="Reject">❌</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jane Smith</td>
-                                            <td>0987654321</td>
-                                            <td>2023-10-04</td>
-                                            <td>Pujari</td>
-                                            <td>New Service</td>
-                                            <td>
-                                                <a href="https://example.com" target="_blank" class="btn btn-info">Join Meeting</a>
-                                            </td>
-                                            <td>
-                                                <button onclick="updateInterviewStatus('2', 'approved', '2', 'pujari')" class="btn icon-btn" title="Approve">✅</button>
-                                                <button onclick="updateInterviewStatus('2', 'rejected', '2', 'pujari')" class="btn icon-btn" title="Reject">❌</button>
-                                            </td>
-                                        </tr>
+                                        <!-- Data will be populated by JavaScript -->
                                     </tbody>
                                 </table>
                             </div>
@@ -646,22 +598,33 @@ td{
         let scheduledPage = 1;
         let rowsPerPage = 5;
 
+        const pendingData = [
+            { name: "John Doe", contact: "1234567890", availability: "Mon, Tue, Wed", date: "2023-10-01", userType: "Astrologer", newServiceRequested: "New Service", id: "1", service_id: "1" },
+            { name: "Jane Smith", contact: "0987654321", availability: "Thu, Fri, Sat", date: "2023-10-02", userType: "Pujari", newServiceRequested: "New Service", id: "2", service_id: "2" },
+            // Add more data as needed
+        ];
+
+        const scheduledData = [
+            { name: "John Doe", contact: "1234567890", date: "2023-10-03", userType: "Astrologer", newServiceRequested: "New Service", meetingLink: "https://example.com", id: "1", service_id: "1" },
+            { name: "Jane Smith", contact: "0987654321", date: "2023-10-04", userType: "Pujari", newServiceRequested: "New Service", meetingLink: "https://example.com", id: "2", service_id: "2" },
+            // Add more data as needed
+        ];
+
         function populatePendingTable() {
             const tableBody = document.getElementById("pendingTableBody");
             tableBody.innerHTML = "";
 
-            const staticData = [
-                { name: "John Doe", contact: "1234567890", availability: "Mon, Tue, Wed", date: "2023-10-01", userType: "Astrologer", newServiceRequested: "New Service", id: "1", service_id: "1" },
-                { name: "Jane Smith", contact: "0987654321", availability: "Thu, Fri, Sat", date: "2023-10-02", userType: "Pujari", newServiceRequested: "New Service", id: "2", service_id: "2" }
-            ];
+            const filter = document.getElementById("userTypeFilter").value;
+            const filteredData = filter === "all" ? pendingData : pendingData.filter(item => item.userType.toLowerCase() === filter);
 
             let start = (pendingPage - 1) * rowsPerPage;
             let end = start + rowsPerPage;
-            let paginatedData = staticData.slice(start, end);
+            let paginatedData = filteredData.slice(start, end);
 
-            paginatedData.forEach((item) => {
+            paginatedData.forEach((item, index) => {
                 const row = `
                 <tr>
+                    <td>${start + index + 1}</td>
                     <td>${item.name}</td>
                     <td>${item.contact}</td>
                     <td>${item.availability}</td>
@@ -675,25 +638,24 @@ td{
                 tableBody.innerHTML += row;
             });
 
-            updatePagination('pending', staticData.length);
+            updatePagination('pending', filteredData.length);
         }
 
         function populateScheduledTable() {
             const tableBody = document.getElementById("scheduledTableBody");
             tableBody.innerHTML = "";
 
-            const staticData = [
-                { name: "John Doe", contact: "1234567890", date: "2023-10-03", userType: "Astrologer", newServiceRequested: "New Service", meetingLink: "https://example.com", id: "1", service_id: "1" },
-                { name: "Jane Smith", contact: "0987654321", date: "2023-10-04", userType: "Pujari", newServiceRequested: "New Service", meetingLink: "https://example.com", id: "2", service_id: "2" }
-            ];
+            const filter = document.getElementById("userTypeFilter").value;
+            const filteredData = filter === "all" ? scheduledData : scheduledData.filter(item => item.userType.toLowerCase() === filter);
 
             let start = (scheduledPage - 1) * rowsPerPage;
             let end = start + rowsPerPage;
-            let paginatedData = staticData.slice(start, end);
+            let paginatedData = filteredData.slice(start, end);
 
-            paginatedData.forEach((item) => {
+            paginatedData.forEach((item, index) => {
                 const row = `
                 <tr>
+                    <td>${start + index + 1}</td>
                     <td>${item.name}</td>
                     <td>${item.contact}</td>
                     <td>${item.date}</td>
@@ -710,7 +672,7 @@ td{
                 tableBody.innerHTML += row;
             });
 
-            updatePagination('scheduled', staticData.length);
+            updatePagination('scheduled', filteredData.length);
         }
 
         function updatePagination(type, totalRows) {
@@ -738,7 +700,8 @@ td{
         }
 
         function nextPage(type) {
-            let totalPages = Math.ceil((type === 'pending' ? pendingData.length : scheduledData.length) / rowsPerPage);
+            const totalRows = type === 'pending' ? pendingData.length : scheduledData.length;
+            let totalPages = Math.ceil(totalRows / rowsPerPage);
 
             if (type === 'pending' && pendingPage < totalPages) {
                 pendingPage++;
@@ -787,7 +750,8 @@ td{
             const filterElement = document.getElementById("userTypeFilter");
             if (filterElement) {
                 filterElement.addEventListener("change", () => {
-                    // Reload and re-filter data
+                    pendingPage = 1;
+                    scheduledPage = 1;
                     populatePendingTable();
                     populateScheduledTable();
                 });

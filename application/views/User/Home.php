@@ -334,6 +334,7 @@
 
     <!-- Astrologer on call or chat -->
 
+    <!-- <?php print_r($astrologer_data); ?> -->
     <section>
         <div class="container my-4">
             <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
@@ -398,13 +399,54 @@
                                                     <?php echo isset($astrologer['languages']) && !empty($astrologer['languages']) ? $astrologer['languages'] : 'N/A'; ?>
                                                 </small>
                                             </div>
+
+                                             <div class="d-flex align-items-center">
+
+                                            <?php if ($astrologer['chatstatus'] == "active"): ?>
+                                                <small class="card-language text-danger">Busy , </small>
+
+
+                                                <?php
+                                                if (!empty($astrologer['chat_expire_on'])) {
+                                                    date_default_timezone_set('Asia/Kolkata'); // Ensure you're using IST
+                                                    $now = new DateTime(); // current timestamp
+                                                    $expire = new DateTime($astrologer['chat_expire_on']);
+
+                                                    // Calculate only if expire time is in the future
+                                                    if ($expire > $now) {
+                                                        $interval = $now->diff($expire);
+                                                        $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+                                                        $seconds = $interval->s;
+
+                                                        echo '<div class="d-flex align-items-center">
+                                              <small class="card-language text-danger">Wait for Time: ' . $waitTimeMinutes . ' min ' . $seconds . ' sec</small>
+                                                </div>';
+                                                    } else {
+                                                        echo '<div class="d-flex align-items-center">
+                                                <small class="card-language text-danger">session not ended</small>
+                                            </div>';
+                                                    }
+                                                }
+                                                ?>
+
+                                            <?php else: ?>
+                                                <small class="card-language text-success">Available</small>
+                                            <?php endif ?>
+                                        </div>
+
                                         </div>
 
                                         <!-- Action Buttons -->
                                         <div class="d-flex gap-2 mb-2">
                                             <?php if ($this->session->userdata('user_id')): ?>
                                                 <button class="btn btn-sm w-50 rounded-3 border-1"
-                                                    style="background-color: var(--yellow);" onclick="chatscreen()">Chat</button>
+                                                    style="background-color: var(--yellow);" onclick="checkBalance(
+                                                     '<?php echo $astrologer['chatstatus']; ?>',
+                                                    <?php echo $userinfo_data['amount']; ?>, 
+                                                    <?php echo $astrologer['price_per_minute']; ?>,  
+                                                    '<?php echo base_url('chat/' . $astrologer['id']); ?>',
+                                                    '<?php echo addslashes($astrologer['name']); ?>' 
+                                                )">Chat</button>
                                             <?php else: ?>
                                                 <button class="btn btn-sm w-50 rounded-3 border-1 chatlink"
                                                     style="background-color: var(--yellow);">Chat</button>
@@ -415,6 +457,9 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="col-12 text-center">
@@ -430,6 +475,37 @@
 
             </div>
     </section>
+
+    <script>
+        function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name) {
+            if (amount < astrologer_charge * 5) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Insufficient Balance",
+                    text: `Minimum balance of 5 minutes (₹ ${astrologer_charge * 5}) is required to start chat with  ${name}.`,
+                    confirmButtonText: "Recharge Now",
+                    confirmButtonColor: "#ffcc00"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "<?php echo base_url('wallet'); ?>";
+                    }
+                });
+            } else {
+                if (chatstatus == "active") {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Astrologer is busy",
+
+
+                    });
+                }
+                else {
+                    window.location.href = chatUrl;
+                }
+            }
+        }
+
+    </script>
 
     <!-- Astrological Services For Accurate Answers And Better Future -->
     <section>

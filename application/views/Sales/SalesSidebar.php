@@ -192,7 +192,7 @@
 
         <!-- HOME -->
         <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'dashboard'; ?>" class="sidebar-link " id="ManasviHome-link" style="font-size: 16px;">
+            <a href="<?php echo base_url() . 'salesdashboard'; ?>" class="sidebar-link " id="ManasviHome-link" style="font-size: 16px;">
                 <i class="bi bi-house-fill" style="color: white;"></i>
                 <span class="ms-1" style="color: white;">Dashboard</span>
             </a>

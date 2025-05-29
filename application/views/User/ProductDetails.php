@@ -27,7 +27,7 @@
 
     <!-- EXTERNAL CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- Custom Inline CSS for Styling -->
     <style>
@@ -178,6 +178,7 @@
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
 
+
     <div class="container my-5">
         <div class="row product-container">
             <!-- Product Image -->
@@ -189,15 +190,26 @@
 
 
             <!-- Product Info -->
+
+             
             <div class="col-md-5 product-info">
                 <h2 class="fw-bold mb-3" style="font-family: 'Kaisei Decol', serif;">
                     <?php echo $product_data[0]["product_name"] ?>
+                  
+                    <?php if ($product_rating_data[0]["average_product_rating"]): ?>
+                          <br>
+                        <?php for ($number = 0; $number < round($product_rating_data[0]["average_product_rating"]); $number++): ?>
+                           <i class="bi bi-star-fill text-warning me-1"></i>
+                        <?php endfor ?>
+                    <?php endif ?>
+
                 </h2>
                 <p class="text-muted">
                     <?php echo ($product_data[0]["product_description"]) ?>
                 </p>
 
                 <h4 class="fw-bold text-warning">₹ <?php echo $product_data[0]["product_price"] ?></h4>
+
 
 
                 <!-- <div class="mt-4">
@@ -222,12 +234,15 @@
                         }
                     }
                 </script> -->
+
+
                 <div class="button-group">
 
                     <?php if ($this->session->userdata("user_id")): ?>
 
                         <?php if ($productverify == "exist"): ?>
-                            <a href="<?php echo base_url('Cart'); ?>"> <button class="btn mt-4 add-to-cart-btn">View Cart</button> </a>
+                            <a href="<?php echo base_url('Cart'); ?>"> <button class="btn mt-4 add-to-cart-btn">View
+                                    Cart</button> </a>
 
 
                         <?php else: ?>
@@ -255,139 +270,69 @@
         <div class="owl-carousel owl1 owl-theme">
             <!-- Loop Start -->
             <!-- Card 1 -->
-            <div class="item">
-                <div class="card review-card shadow">
-                    <div class="d-flex justify-content-center mb-3">
-                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
-                    </div>
-                    <div class="text-center review-body">
-                        <h5 class="fw-bold mb-2">John Doe</h5>
-                        <div class="d-flex justify-content-center mb-2">
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star text-muted me-1"></i>
+            <?php if ($product_feedback_data): ?>
+                <?php foreach ($product_feedback_data as $product_feedback_data_details): ?>
+                    <div class="item">
+
+                        <div class="card review-card shadow">
+                            <div class="d-flex justify-content-center mb-3">
+                                <img src="<?php echo base_url("assets/images/aboutImage.png"); ?>" class="rounded-circle"
+                                    alt="User" />
+                            </div>
+                            <div class="text-center review-body">
+                                <h5 class="fw-bold mb-2"><?php echo $product_feedback_data_details["user_name"] ?></h5>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <!-- <i class="bi bi-star-fill text-warning me-1"></i>
+                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                <i class="bi bi-star text-muted me-1"></i> -->
+
+                                    <?php
+                                    for ($number = 0; $number <= $product_feedback_data_details["productrating"]; $number++) { ?>
+                                        <i class="bi bi-star-fill text-warning me-1"></i>
+                                    <?php } ?>
+
+
+                                </div>
+                                <p class="card-text"><?php echo $product_feedback_data_details["message"] ?></p>
+                            </div>
                         </div>
-                        <p class="card-text">Great service, will return again!</p>
                     </div>
-                </div>
-            </div>
+                <?php endforeach ?>
+            <?php else: ?>
+
+            <?php endif ?>
 
             <!-- Card 2 -->
-            <div class="item">
-                <div class="card review-card shadow">
-                    <div class="d-flex justify-content-center mb-3">
-                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
-                    </div>
-                    <div class="text-center review-body">
-                        <h5 class="fw-bold mb-2">Jane Smith</h5>
-                        <div class="d-flex justify-content-center mb-2">
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star text-muted me-1"></i>
-                            <i class="bi bi-star text-muted me-1"></i>
-                        </div>
-                        <p class="card-text">Nice, but expected a bit more insight.</p>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- Card 3 -->
-            <div class="item">
-                <div class="card review-card shadow">
-                    <div class="d-flex justify-content-center mb-3">
-                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
-                    </div>
-                    <div class="text-center review-body">
-                        <h5 class="fw-bold mb-2">Alex Johnson</h5>
-                        <div class="d-flex justify-content-center mb-2">
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                        </div>
-                        <p class="card-text">Absolutely perfect!</p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="item">
-                <div class="card review-card shadow">
-                    <div class="d-flex justify-content-center mb-3">
-                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
-                    </div>
-                    <div class="text-center review-body">
-                        <h5 class="fw-bold mb-2">Alex Johnson</h5>
-                        <div class="d-flex justify-content-center mb-2">
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                        </div>
-                        <p class="card-text">Absolutely perfect!</p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="item">
-                <div class="card review-card shadow">
-                    <div class="d-flex justify-content-center mb-3">
-                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
-                    </div>
-                    <div class="text-center review-body">
-                        <h5 class="fw-bold mb-2">Alex Johnson</h5>
-                        <div class="d-flex justify-content-center mb-2">
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                        </div>
-                        <p class="card-text">Absolutely perfect!</p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="item">
-                <div class="card review-card shadow">
-                    <div class="d-flex justify-content-center mb-3">
-                        <img src="assets/images/astrologer.png" class="rounded-circle" alt="User" />
-                    </div>
-                    <div class="text-center review-body">
-                        <h5 class="fw-bold mb-2">Alex Johnson</h5>
-                        <div class="d-flex justify-content-center mb-2">
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                            <i class="bi bi-star-fill text-warning me-1"></i>
-                        </div>
-                        <p class="card-text">Absolutely perfect!</p>
-                    </div>
-                </div>
-            </div>
+
+
         </div>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Owl Carousel + Bootstrap Icons + jQuery -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const showloginbtn = document.querySelectorAll(".showloginbtn");
 
-            Array.from(showloginbtn).forEach(function(showloginbtn) {
-                showloginbtn.addEventListener("click", function(e) {
+            Array.from(showloginbtn).forEach(function (showloginbtn) {
+                showloginbtn.addEventListener("click", function (e) {
                     e.preventDefault(); // Now correctly inside the clic
                     Swal.fire({
                         title: "Login Required",
@@ -525,36 +470,36 @@
 
     <!-- Owl Carousel Init -->
     <script>
-    $(document).ready(function () {
-        $('.owl1').owlCarousel({
-            loop: true,
-            margin: 10,
-            responsiveClass: true,
-            dots: false,
-            nav: true,
-            navText: [
-                "<i class='bi bi-chevron-left'></i>",
-                "<i class='bi bi-chevron-right'></i>"
-            ],
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 2
-                },
-                800: {
-                    items: 3
-                },
-                1000: {
-                    items: 4
+        $(document).ready(function () {
+            $('.owl1').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                dots: false,
+                nav: true,
+                navText: [
+                    "<i class='bi bi-chevron-left'></i>",
+                    "<i class='bi bi-chevron-right'></i>"
+                ],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    800: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
                 }
-            }
+            });
         });
-    });
 
-    
-</script>
+
+    </script>
 
 
 

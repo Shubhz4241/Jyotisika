@@ -272,7 +272,7 @@ class User_Api_Model extends CI_Model
     public function getastrologer_model()
     {
 
-        $this->db->select("astrologer_registration.* , AVG(astrologer_feedback.rating) as average_rating");
+        $this->db->select("astrologer_registration.* , AVG(astrologer_feedback.rating) as average_rating ");
         $this->db->from("astrologer_registration");
         $this->db->join('astrologer_feedback', 'astrologer_feedback.astrologer_id = astrologer_registration.id', 'Left');
         $this->db->group_by('astrologer_registration.id');
@@ -280,7 +280,30 @@ class User_Api_Model extends CI_Model
         $this->db->where("is_online", "1");
 
         $query = $this->db->get();
-        return $query->result();
+        $astrologers = $query->result();
+        foreach ($astrologers as &$astro) {
+            $chatSession = $this->db->select('start_time, expire_on')
+                ->from('chat_sessions')
+                ->where('astrologer_id', $astro->id)
+                ->where('status', 'active')
+                ->order_by('id', 'DESC')
+                ->limit(1)
+                ->get()
+                ->row();
+
+            if ($chatSession) {
+                $astro->chat_start_time = $chatSession->start_time;
+                $astro->chat_expire_on = $chatSession->expire_on;
+                $astro->chatstatus = "active";
+            } else {
+                $astro->chat_start_time = null;
+                $astro->chat_expire_on = null;
+                $astro->chatstatus = "inactive";
+            }
+        }
+
+        return $astrologers;
+
 
     }
 
@@ -288,11 +311,34 @@ class User_Api_Model extends CI_Model
     public function get_astrologer_by_id_model($astrologer_id)
     {
 
+
         $this->db->where("id", $astrologer_id);
         $this->db->where("status", "approved");
         $this->db->where("is_online", "1");
         $query = $this->db->get("astrologer_registration");
-        return $query->result();
+        $astrologer = $query->result();
+
+        $chatSession = $this->db->select('start_time, expire_on')
+            ->from('chat_sessions')
+            ->where('astrologer_id', $astrologer_id) // astrologer_details.id
+            ->where('status', 'active')
+            ->order_by('id', 'DESC')
+            ->limit(1)
+            ->get()
+            ->row();
+
+        if ($chatSession) {
+            $astrologer['chat_start_time'] = $chatSession->start_time;
+            $astrologer['chat_expire_on'] = $chatSession->expire_on;
+            $astrologer['chatstatus'] = "active";
+        } else {
+            $astrologer['chat_start_time'] = null;
+            $astrologer['chat_expire_on'] = null;
+            $astrologer['chatstatus'] = "inactive";
+        }
+
+
+        return $astrologer;
     }
 
     public function followastrologer_model($data)
@@ -410,10 +456,57 @@ class User_Api_Model extends CI_Model
         $this->db->order_by('average_rating', 'DESC');
         $this->db->limit(4);
         $query = $this->db->get();
-        return $query->result();
+        $astrologers = $query->result();
+        foreach ($astrologers as &$astro) {
+            $chatSession = $this->db->select('start_time, expire_on')
+                ->from('chat_sessions')
+                ->where('astrologer_id', $astro->id)
+                ->where('status', 'active')
+                ->order_by('id', 'DESC')
+                ->limit(1)
+                ->get()
+                ->row();
+
+            if ($chatSession) {
+                $astro->chat_start_time = $chatSession->start_time;
+                $astro->chat_expire_on = $chatSession->expire_on;
+                $astro->chatstatus = "active";
+            } else {
+                $astro->chat_start_time = null;
+                $astro->chat_expire_on = null;
+                $astro->chatstatus = "inactive";
+            }
+        }
+
+        return $astrologers;
 
 
 
+    }
+
+
+    public function get_astrologer_chat_with_user_model($session_id)
+    {
+
+        if (!$session_id) {
+
+            $response = [
+                "status" => "error",
+                "message" => "session id is missing "
+            ];
+
+            return $response;
+
+        } else {
+
+            $this->db->select("chat_sessions.astrologer_id , astrologer_registration.*");
+            $this->db->from("chat_sessions");
+            $this->db->join("astrologer_registration", "astrologer_registration.id = chat_sessions.astrologer_id");
+            $this->db->where("user_id", $session_id);
+            $this->db->group_by("chat_sessions.astrologer_id");
+            $query = $this->db->get();
+            return $query->result();
+        }
     }
 
     public function getfollowed_astrologer_by_user_model($session_id)
@@ -759,6 +852,28 @@ class User_Api_Model extends CI_Model
 
     }
 
+    public function show_product_feedback_model($product_id)
+    {
+
+        $this->db->select("product_feedback.* , jyotisika_users.* ");
+        $this->db->from("product_feedback");
+        $this->db->join("jyotisika_users", "jyotisika_users.user_id = product_feedback.session_id");
+        $this->db->join("jotishika_mall", "jotishika_mall.product_id = product_feedback.product_id");
+        $this->db->where("product_feedback.product_id", $product_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_avg_rating_of_product_model($product_id)
+    {
+        $this->db->select('product_feedback.product_id, AVG(product_feedback.productrating) as average_product_rating');
+        $this->db->where("product_id", $product_id);
+        $query = $this->db->get("product_feedback");
+
+        return $query->result();
+
+    }
+
 
 
     //Pujari section 
@@ -825,7 +940,7 @@ class User_Api_Model extends CI_Model
         $puja_mode = $formdata["puja_mode"]; // Ensure puja_mode exists
 
 
-     
+
         $duration = 2;
 
 
@@ -861,32 +976,32 @@ class User_Api_Model extends CI_Model
             }
 
 
-        } 
+        }
 
-            $this->db->insert("bookpuja_request_by_user_to_pujari", $formdata);
+        $this->db->insert("bookpuja_request_by_user_to_pujari", $formdata);
 
-            if ($this->db->affected_rows() == 1) {
-                $inserted_id = $this->db->insert_id();
+        if ($this->db->affected_rows() == 1) {
+            $inserted_id = $this->db->insert_id();
 
 
-                $this->db->where("book_puja_id", $inserted_id);
-                $query = $this->db->get("bookpuja_request_by_user_to_pujari");
+            $this->db->where("book_puja_id", $inserted_id);
+            $query = $this->db->get("bookpuja_request_by_user_to_pujari");
 
-                $response = [
-                    "status" => "success",
-                    "message" => "Request sent for puja.",
-                    "data" => $query->row_array()
-                ];
-                return $response;
-            } else {
-                $response = [
-                    "status" => "dbqueryfailed",
-                    "message" => "Database error occurred.",
-                    "error" => $this->db->error()['message'],
-                    "query" => $this->db->last_query()
-                ];
-                return $response;
-            }
+            $response = [
+                "status" => "success",
+                "message" => "Request sent for puja.",
+                "data" => $query->row_array()
+            ];
+            return $response;
+        } else {
+            $response = [
+                "status" => "dbqueryfailed",
+                "message" => "Database error occurred.",
+                "error" => $this->db->error()['message'],
+                "query" => $this->db->last_query()
+            ];
+            return $response;
+        }
 
 
     }

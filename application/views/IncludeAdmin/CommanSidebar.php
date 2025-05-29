@@ -235,13 +235,7 @@
             </a>
         </li>
 
-        <!-- Track and Ship -->
-        <li class="sidebar-item">
-            <a href="<?php echo base_url() . 'trackandship'; ?>" class="sidebar-link" id="ManasviSalaryManagement-link" style="font-size: 20px;">
-                <i class="bi bi-truck" style="color: white;"></i>
-                <span class="ms-1" style="color: white;font-weight: 400;">Track/Ship</span>
-            </a>
-        </li>
+        
 
         <!-- Service Management -->
         <li class="sidebar-item">
