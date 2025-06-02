@@ -92,20 +92,7 @@ class Astrologer_Api_Controller extends CI_Controller
             return;
         }
 
-        // ✅ Clean contact number at the very beginning
-        $data['contact'] = preg_replace('/^\+91/', '', $data['contact']); // Remove +91
-        $data['contact'] = preg_replace('/\D/', '', $data['contact']);    // Remove non-digits
-
-        // ✅ Validate length early
-        if (strlen($data['contact']) != 10) {
-            http_response_code(400);
-            echo json_encode(['status' => 'error', 'message' => 'Invalid Mobile Number (Must be 10 Digit Mobile Number)']);
-            return;
-        }
-
         $user_exist = $this->Astrologer_Api_Model->user_check($data['contact'], $data['email']);
-
-
         if ($user_exist) {
             http_response_code(409);
             echo json_encode(['status' => 'error', 'message' => 'User already exists']);
@@ -114,11 +101,10 @@ class Astrologer_Api_Controller extends CI_Controller
 
         $this->Astrologer_Api_Model->delete_existing_user($data['contact']);
 
-
         // Handle file uploads
         if (!empty($_FILES['aadhaar_card']['name'])) {
             $fileName = time() . '_' . $_FILES['aadhaar_card']['name'];
-            $uploadPath = './uploads/Astologer/' . $fileName;
+            $uploadPath = '/uploads/Astologer/' . $fileName;
 
             if (!move_uploaded_file($_FILES['aadhaar_card']['tmp_name'], $uploadPath)) {
                 http_response_code(500);
@@ -134,22 +120,22 @@ class Astrologer_Api_Controller extends CI_Controller
         }
 
         // Handle Profile Image uploads
-        // if (!empty($_FILES['profile_image']['name'])) {
-        //     $fileName = time() . '_' . $_FILES['profile_image']['name'];
-        //     $uploadPath = './uploads/Astologer/' . $fileName;
+        if (!empty($_FILES['profile_image']['name'])) {
+            $fileName = time() . '_' . $_FILES['profile_image']['name'];
+            $uploadPath = '/uploads/Astologer/' . $fileName;
 
-        //     if (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $uploadPath)) {
-        //         http_response_code(500);
-        //         echo json_encode(['status' => 'error', 'message' => 'Failed to upload Aadhaar card.']);
-        //         return;
-        //     }
+            if (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $uploadPath)) {
+                http_response_code(500);
+                echo json_encode(['status' => 'error', 'message' => 'Failed to upload Aadhaar card.']);
+                return;
+            }
 
-        //     $data['profile_image'] = $uploadPath;
-        // } else {
-        //     http_response_code(400);
-        //     echo json_encode(['status' => 'error', 'message' => 'Profile Image is required.']);
-        //     return;
-        // }
+            $data['profile_image'] = $uploadPath;
+        } else {
+            http_response_code(400);
+            echo json_encode(['status' => 'error', 'message' => 'Profile Image is required.']);
+            return;
+        }
 
         // Handle multiple certificates
         if (!empty($_FILES['certificates']['name'][0])) {
@@ -218,19 +204,34 @@ class Astrologer_Api_Controller extends CI_Controller
 
         // Store data in temp table
         $this->Astrologer_Api_Model->insertTempData($data);
+
+        // Send OTP via Twilio
+
+        // if( $this->sendSms($message, $data['contact'])){
+        //     http_response_code(200);
+        //     echo json_encode(['status' => 'success', 'message' => 'OTP sent successfully.']);
+        // } else {
+        //     http_response_code(500);
+        //     echo json_encode(['status' => 'error', 'message' => 'Failed to send OTP.']);
+        // }
+        // $this->Send_otp($data['contact'],$otp);
+
         $try = $this->Send_otp_latest($otp, $data['contact']);
         if ($try) {
             http_response_code(200);
             echo json_encode(['status' => 'success', 'message' => 'OTP sent successfully.', 'try' => $try]);
         } else {
-
             http_response_code(500);
             echo json_encode(['status' => 'error', 'message' => 'Failed to send OTP.', 'try' => $try]);
         }
     }
 
+
+
     public function Send_otp_latest($otp, $phone)
     {
+
+
 
         $data = [
             'username'    => $this->username,
@@ -239,9 +240,9 @@ class Astrologer_Api_Controller extends CI_Controller
             'sender'      => $this->sender_id,
             'mobile'      => $phone,
             'message'     => "Dear User, Your App. Login Secret OTP is {$otp} Valid for 20 Minutes 
-                DO NOT SHARE ANYBODY Joytisika
+DO NOT SHARE ANYBODY NewAstro
 
-                MOBDIG",
+MOBDIG",
             'route'       => $this->route_name,
             'TemplateID'  => $this->template_id,
 
@@ -249,13 +250,13 @@ class Astrologer_Api_Controller extends CI_Controller
 
         $response = $this->Send_request($data);
 
-
         if ($response && $response['status'] == 'success') {
             return true;
         } else {
             return false;
         }
     }
+
 
     private function Send_request($data)
     {
@@ -268,6 +269,22 @@ class Astrologer_Api_Controller extends CI_Controller
 
         return json_decode($response, true);
     }
+    // OTP Sending via Twilio
+    // private function Send_otp($phone, $otp)
+
+
+    // {
+    //     $sid = $this->config->item('twilio_sid');
+    //     $token = $this->config->item('twilio_auth_token');
+    //     $twilio_number = $this->config->item('twilio_phone_number');
+
+    //     $client = new Client($sid, $token);
+    //     $client->messages->create(
+    //         $phone,
+    //         ['from' => $twilio_number, 'body' => "Your OTP is: $otp"]
+    //     );
+    // }
+
 
     // Verify OTP and Shift Data
     public function Verify_otp()
@@ -281,7 +298,6 @@ class Astrologer_Api_Controller extends CI_Controller
         $otp = $this->input->post('otp');
         $phone = $this->input->post('phone');
 
-
         if (empty($otp) || empty($phone)) {
             http_response_code(400);
             echo json_encode(['status' => 'error', 'message' => 'OTP and phone number are required.']);
@@ -294,7 +310,7 @@ class Astrologer_Api_Controller extends CI_Controller
             $created_at = strtotime($user_data['created_at']);
             $current_time = time();
 
-            if (($current_time - $created_at) > (20 * 60)) {
+            if (($current_time - $created_at) > 120) {
                 http_response_code(400);
                 echo json_encode(['status' => 'error', 'message' => 'OTP expired.']);
                 return;
@@ -315,6 +331,7 @@ class Astrologer_Api_Controller extends CI_Controller
             echo json_encode(['status' => 'error', 'message' => 'User data not found.', 'phone' => $phone, 'otp' => $otp]);
         }
     }
+
 
     public function Resend_Otp()
     {
@@ -351,6 +368,7 @@ class Astrologer_Api_Controller extends CI_Controller
             echo json_encode(['status' => 'error', 'message' => 'User data not found.']);
         }
     }
+
 
     public function Resend_Otp_Login()
     {
@@ -397,6 +415,7 @@ class Astrologer_Api_Controller extends CI_Controller
 
 
 
+
     public function Send_Otp_Login()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -406,17 +425,6 @@ class Astrologer_Api_Controller extends CI_Controller
         }
 
         $mobile = $this->input->post('phone');
-
-        // Normalize the mobile number to 10 digits without +91 prefix
-        $mobile = preg_replace('/^(\+91|91)/', '', $mobile);
-        $mobile = preg_replace('/\D/', '', $mobile);
-
-
-        if (strlen($mobile) !== 10) {
-            http_response_code(400);
-            echo json_encode(['status' => 'error', 'message' => 'Invalid phone number format.']);
-            return;
-        }
 
         if (empty($mobile)) {
             http_response_code(400);
@@ -451,7 +459,6 @@ class Astrologer_Api_Controller extends CI_Controller
         $this->Astrologer_Api_Model->insert_otp($mobile, $otp, $expiry);
         $message = "Your OTP is: $otp";
         $try = $this->Send_otp_latest($otp, $mobile);
-        // $try = true;
 
         if ($try) {
             http_response_code(200);
@@ -473,12 +480,6 @@ class Astrologer_Api_Controller extends CI_Controller
         $mobile = $this->input->post('phone');
         $otp = $this->input->post('otp');
 
-
-        // Normalize the mobile number to 10 digits without +91 prefix
-        $mobile = preg_replace('/^(\+91|91)/', '', $mobile);
-        $mobile = preg_replace('/\D/', '', $mobile);
-
-      
         if (empty($mobile) || empty($otp)) {
             http_response_code(400);
             echo json_encode(['status' => 'error', 'message' => 'Phone number and OTP are required.']);
@@ -486,8 +487,6 @@ class Astrologer_Api_Controller extends CI_Controller
         }
 
         $otpData = $this->Astrologer_Api_Model->get_otp($mobile, $otp);
-        
-
 
         if (!$otpData || time() > $otpData->expiry) {
             http_response_code(401);
@@ -498,15 +497,14 @@ class Astrologer_Api_Controller extends CI_Controller
         $user = $this->Astrologer_Api_Model->getAstrologerByPhone($mobile);
 
         if ($user) {
-
             $this->session->set_userdata([
                 'astrologer_id' => $user->id,
+                'id' => $user->user_id,
                 'is_logged_in' => true,
                 'name' => $user->name,
-                'contact' => $user->contact,  // Fixed from phone_number
-                'status' => $user->status,
-                'role' => 'Astrologer',
-
+                'role' => $user->role,
+                'contact' => $user->phone_number,
+                'status' => $user->status
             ]);
 
             http_response_code(200);
@@ -525,18 +523,19 @@ class Astrologer_Api_Controller extends CI_Controller
             echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
             return;
         }
-       
+
         if ($this->session->userdata('is_logged_in')) {
             $user_data = [
-                'astrologer_id' => $this->session->userdata('astrologer_id'),
+                'astrologer_id' => $this->input->get('astrologer_id')
+                    ? $this->input->get('astrologer_id')
+                    : $this->session->userdata('astrologer_id'),
                 'is_logged_in' => true,
-                // 'id' => $this->session->userdata('id'),
+                'id' => $this->session->userdata('id'),
                 'name' => $this->session->userdata('name'),
                 'role' => $this->session->userdata('role'),
                 'contact' => $this->session->userdata('contact'),
                 'status' => $this->session->userdata('status')
             ];
-           
 
             http_response_code(200);
             echo json_encode(['status' => 'success', 'user_data' => $user_data]);
@@ -580,8 +579,11 @@ class Astrologer_Api_Controller extends CI_Controller
             echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
             return;
         }
+        $user_id = !empty($data['id'])
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('id');
 
-        $user_id = $this->session->userdata('astrologer_id') ?? $this->input->get("astrologer_id");
+        $user_id = $this->session->userdata('id');
         $user_details = $this->Astrologer_Api_Model->getAstrologerDetailsById($user_id);
 
         if ($user_details) {
@@ -606,7 +608,7 @@ class Astrologer_Api_Controller extends CI_Controller
             return;
         }
 
-        $user_id = $this->session->userdata('astrologer_id') ?? $this->input->get("astrologer_id");
+        $user_id = $this->session->userdata('id');
         $user_details = $this->Astrologer_Api_Model->getAstrologerDetailsById($user_id);
 
         if ($user_details) {
@@ -634,7 +636,9 @@ class Astrologer_Api_Controller extends CI_Controller
 
         $input_data = json_decode(file_get_contents('php://input'), true);
 
-        $astrologer_id = $this->session->userdata('astrologer_id');
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');;
         $service_ids = $input_data['service_ids'] ?? [];
         $availability_days = $input_data['availability_days'] ?? [];
         $start_time = $input_data['start_time'] ?? null;
@@ -676,8 +680,6 @@ class Astrologer_Api_Controller extends CI_Controller
     }
 
 
-
-
     public function GetAstrologerServicesofLoggedinAstologer()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -692,7 +694,9 @@ class Astrologer_Api_Controller extends CI_Controller
             return;
         }
 
-        $astrologer_id = $this->session->userdata('astrologer_id');
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');;
 
         if (empty($astrologer_id)) {
             http_response_code(400);
@@ -732,7 +736,9 @@ class Astrologer_Api_Controller extends CI_Controller
             return;
         }
 
-        $astrologer_id = $this->session->userdata('astrologer_id');
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');;
 
         if (empty($astrologer_id)) {
             http_response_code(400);
@@ -800,7 +806,9 @@ class Astrologer_Api_Controller extends CI_Controller
             return;
         }
 
-        $astrologer_id = $this->session->userdata('astrologer_id');
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');;
         $status = $this->input->post('status');
 
         if (empty($status)) {
@@ -831,7 +839,9 @@ class Astrologer_Api_Controller extends CI_Controller
             return;
         }
 
-        $astrologer_id = $this->session->userdata('astrologer_id');
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');;
 
         if (empty($astrologer_id)) {
             http_response_code(400);
@@ -860,8 +870,10 @@ class Astrologer_Api_Controller extends CI_Controller
                 ->set_output(json_encode(['status' => 'error', 'message' => 'Invalid request method']));
         }
 
-        $user_id = $this->session->userdata('astrologer_id') ?? $this->input->post("astrologer_id");
-        $astrologer_id = $this->session->userdata('astrologer_id');
+        $user_id = $this->session->userdata('id');
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');;
 
         if (!$user_id || !$astrologer_id) {
             return $this->output
@@ -927,7 +939,9 @@ class Astrologer_Api_Controller extends CI_Controller
 
 
 
-        $astrologer_id = $this->session->userdata('astrologer_id');
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');;
         $service_id = $this->input->post('service_id');
         $available_days = $this->input->post('available_days');
         $start_time = $this->input->post('start_time');
@@ -1130,15 +1144,14 @@ class Astrologer_Api_Controller extends CI_Controller
     public function Update_profile_image()
     {
 
-        
-
-        $user_id = $this->session->userdata('astrologer_id') ?? $this->input->post("astrologer_id");
-        if (!$user_id) {
+        if (!$this->session->userdata('id')) {
             return $this->output
                 ->set_content_type('application/json')
                 ->set_status_header(401)
                 ->set_output(json_encode(['success' => false, 'message' => 'User not logged in']));
         }
+
+        $user_id = $this->session->userdata('id');
 
         if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == 0) {
             $config['upload_path']   = './uploads/Astologer/';
@@ -1185,7 +1198,9 @@ class Astrologer_Api_Controller extends CI_Controller
     {
         // Destroy the session
 
-        $astrologer_id = $this->session->userdata('astrologer_id');
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');;
         $status = "offline";
         $this->Astrologer_Api_Model->setAstrologerStatus($astrologer_id, $status);
         $this->session->sess_destroy();
@@ -1210,98 +1225,122 @@ class Astrologer_Api_Controller extends CI_Controller
     }
 
 
-    //<------------- Anyalitcs ----------------->
     // char for the yearly data 
     public function Chart_data_yearly()
     {
-        $astrologer_id = $this->session->userdata('astrologer_id') ?? $this->input->get('astrologer_id', TRUE);
+        $response = [];
 
-        if (!$astrologer_id) {
-            echo json_encode([
-                'status' => false,
-                'message' => 'Astrologer not logged in',
-                'data' => []
-            ]);
-            return;
-        }
-
-        $result = $this->Astrologer_Api_Model->get_earnings_grouped_by_year_status($astrologer_id);
-
-        $years = ['2027', '2026', '2025'];
-        $statuses = ['paid', 'pending'];
-        $formatted = [];
-
-        foreach ($years as $year) {
-            $row = ['year' => $year, 'paid' => 0, 'pending' => 0];
-            foreach ($result as $r) {
-                if ($r->year == $year) {
-                    $row[$r->status] = (float)$r->total_income;
-                }
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $astrologer_id = $this->input->get('astrologer_id');
+            if (!$astrologer_id) {
+                $astrologer_id = $this->input->get('astrologer_id')
+                    ? $this->input->get('astrologer_id')
+                    : $this->session->userdata('astrologer_id');;
             }
-            $formatted[] = $row;
+
+            if (!$astrologer_id) {
+                $this->output->set_status_header(401);
+                $response = ["status" => "error", "message" => "Astrologer not logged in"];
+            } else {
+                $result = $this->Astrologer_Api_Model->get_earnings_grouped_by_year_status($astrologer_id);
+
+                // Dynamically build years based on current year (last 5 years)
+                $current_year = date('Y');
+                $years = [];
+                for ($i = 0; $i < 4; $i++) {
+                    $years[] = (string)($current_year - $i);
+                }
+
+                $formatted = [];
+                foreach ($years as $year) {
+                    $row = ['year' => $year, 'paid' => 0, 'pending' => 0];
+                    foreach ($result as $r) {
+                        if ($r->year == $year) {
+                            $row[$r->status] = (float)$r->total_income;
+                        }
+                    }
+                    $formatted[] = $row;
+                }
+
+
+                $this->output->set_status_header(200);
+                $response = ["status" => "success", "message" => "Earnings fetched successfully", "data" => $formatted];
+            }
+        } else {
+            $this->output->set_status_header(405);
+            $response = ["status" => "error", "message" => "Method Not Allowed"];
         }
 
-        echo json_encode([
-            'status' => true,
-            'message' => 'Earnings fetched successfully',
-            'data' => $formatted
-        ]);
+        $this->output->set_content_type("application/json")->set_output(json_encode($response));
     }
+
 
 
     // get the data by the months
 
     public function Chart_data_monthly()
     {
-        $astrologer_id = $this->session->userdata('astrologer_id') ?? $this->input->get('astrologer_id', TRUE);
-        $result = $this->Astrologer_Api_Model->get_monthly_income_grouped_by_status($astrologer_id);
+        $response = [];
 
-        $months = range(1, 12);
-        $statuses = ['paid', 'pending'];
-        $formatted = [];
-
-        foreach ($months as $month) {
-            $row = ['month' => date('M', mktime(0, 0, 0, $month, 10)), 'paid' => 0, 'pending' => 0];
-            foreach ($result as $r) {
-                if ((int)$r->month === $month) {
-                    $row[$r->status] = (float)$r->total_income;
-                }
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $astrologer_id = $this->input->get('astrologer_id');
+            if (!$astrologer_id) {
+                $astrologer_id = $this->input->get('astrologer_id')
+                    ? $this->input->get('astrologer_id')
+                    : $this->session->userdata('astrologer_id');;
             }
-            $formatted[] = $row;
+
+            if (!$astrologer_id) {
+                $this->output->set_status_header(401);
+                $response = ["status" => "error", "message" => "Astrologer not logged in"];
+            } else {
+                $result = $this->Astrologer_Api_Model->get_monthly_income_grouped_by_status($astrologer_id);
+
+                $months = range(1, 12);
+                $formatted = [];
+
+                foreach ($months as $month) {
+                    $row = ['month' => date('M', mktime(0, 0, 0, $month, 10)), 'paid' => 0, 'pending' => 0];
+                    foreach ($result as $r) {
+                        if ((int)$r->month === $month) {
+                            $row[$r->status] = (float)$r->total_income;
+                        }
+                    }
+                    $formatted[] = $row;
+                }
+
+                $this->output->set_status_header(200);
+                $response = ["status" => "success", "message" => "Monthly earnings fetched successfully", "data" => $formatted];
+            }
+        } else {
+            $this->output->set_status_header(405);
+            $response = ["status" => "error", "message" => "Method Not Allowed"];
         }
 
-        echo json_encode([
-            'status' => true,
-            'data' => $formatted
-        ]);
+        $this->output->set_content_type("application/json")->set_output(json_encode($response));
     }
 
     // get the income statewise
 
     public function Chart_data_pending_paid()
     {
-        $astrologer_id = $this->session->userdata('astrologer_id') ?? $this->input->get('astrologer_id', TRUE);
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');
 
-        if (empty($astrologer_id)) {
-            echo json_encode([
-                'status' => false,
-                'message' => 'Astrologer ID is required'
-            ]);
+        if (!$astrologer_id) {
+            echo json_encode(['status' => false, 'message' => 'Astrologer ID missing', 'data' => []]);
             return;
         }
 
         $result = $this->Astrologer_Api_Model->get_total_income_statuswise($astrologer_id);
 
         $data = ['paid' => 0, 'pending' => 0];
-
         foreach ($result as $row) {
             $data[$row->status] = (float)$row->total_income;
         }
 
-        echo json_encode([
-            'status' => true,
-            'data' => $data
-        ]);
+        echo json_encode(['status' => true, 'data' => $data]);
     }
 
 
@@ -1309,95 +1348,61 @@ class Astrologer_Api_Controller extends CI_Controller
 
     public function Get_total_stats()
     {
-        header('Content-Type: application/json');
 
-        // Allow only GET method
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-            http_response_code(405); // Method Not Allowed
-            echo json_encode([
-                'status' => "error",
-                'message' => 'Method not allowed. Please use GET.'
-            ]);
+            http_response_code(405);
+            echo json_encode(['status' => "error", 'message' => 'Method not allowed. Please use GET.']);
             return;
         }
 
-        // Get astrologer ID from session
-        $astrologer_id = $this->session->userdata('astrologer_id') ?? $this->input->get('astrologer_id', TRUE);
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');
         if (!$astrologer_id) {
-            http_response_code(401); // Unauthorized
-            echo json_encode([
-                'status' => "error",
-                'message' => 'Unauthorized. Astrologer not logged in.'
-            ]);
+            http_response_code(401);
+            echo json_encode(['status' => "error", 'message' => 'Unauthorized. Astrologer ID missing.']);
             return;
         }
-
-        // Load model and fetch data
 
         $data = $this->Astrologer_Api_Model->get_all_bookings($astrologer_id);
 
         if (!empty($data)) {
-            http_response_code(200); // OK
-            echo json_encode([
-                'status' => "success",
-                'message' => 'Bookings fetched successfully.',
-                'data' => $data
-            ]);
+            http_response_code(200);
+            echo json_encode(['status' => "success", 'message' => 'Bookings fetched successfully.', 'data' => $data]);
         } else {
-            http_response_code(204); // No Content
-            echo json_encode([
-                'status' => "error",
-                'message' => 'No bookings found.',
-                'data' => []
-            ]);
+            http_response_code(204);
+            echo json_encode(['status' => "error", 'message' => 'No bookings found.', 'data' => []]);
         }
     }
+
 
     // get total stats for month
     public function Get_offline_bookings_monthly()
     {
-        // Allow only GET request
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-            http_response_code(405); // Method Not Allowed
+            http_response_code(405);
             echo json_encode(['status' => false, 'message' => 'Method Not Allowed']);
             return;
         }
 
-        // Set headers
-        header('Content-Type: application/json');
-        header("Access-Control-Allow-Origin: *");
 
-        // Check session for astrologer ID
-        $astrologer_id = $this->session->userdata('astrologer_id') ?? $this->input->get('astrologer_id', TRUE);
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');
         if (!$astrologer_id) {
-            http_response_code(401); // Unauthorized
-            echo json_encode(['status' => "success", 'message' => 'Unauthorized']);
+            http_response_code(401);
+            echo json_encode(['status' => "error", 'message' => 'Unauthorized. Astrologer ID missing.']);
             return;
         }
-        // var_dump($astrologer_id);
 
-        // Load model and fetch data
-        $this->load->model('Astrologer_Api_Model');
         $data = $this->Astrologer_Api_Model->get_monthly_bookings($astrologer_id);
-        // var_dump($data);die;
 
-        // Return result
         if (!empty($data)) {
-            http_response_code(200); // OK
+            http_response_code(200);
             echo json_encode(['status' => "success", 'message' => 'Data fetched successfully', 'data' => $data]);
         } else {
-            http_response_code(204); // No Content
-            echo json_encode(['status' => "error", 'message' => 'No data found']);
+            http_response_code(204);
+            echo json_encode(['status' => "error", 'message' => 'No data found', 'data' => []]);
         }
     }
-
-    //<------------- Anyalitcs Ends Here ----------------->
-
-
-
-
-
-
-
-
 }
