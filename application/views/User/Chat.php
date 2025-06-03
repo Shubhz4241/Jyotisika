@@ -444,7 +444,7 @@
         function endsession(firebaseChatId) {
             if (!sessionActive || !firebaseChatId) return; // Ensure session is active before ending it
 
-            let chargeofastro = <?php echo $price_per_minute  ?>;
+            let chargeofastro = <?php echo $price_per_minute ?>;
             let user_id = <?php echo $this->session->userdata("user_id") ?>;
 
             fetch("<?php echo base_url('Api_ChatUser_Controller/End_session'); ?>", {

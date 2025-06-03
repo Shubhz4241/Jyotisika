@@ -1562,6 +1562,7 @@ class User extends CI_Controller
 
 		$showbookedpuja_response = json_decode($showbookedpuja, associative: true);
 
+		
 
 		$data["showbookedpuja_"] = "";
 
@@ -1590,7 +1591,9 @@ class User extends CI_Controller
 			show_error("cURL Error: " . $curl_error_bookedpuja, 500);
 			return;
 		}
+            
 
+		
 
 
 		$showbookedpuja_completed_response = json_decode($showbookedpuja_completed, associative: true);
@@ -1601,6 +1604,8 @@ class User extends CI_Controller
 		if ($showbookedpuja_completed_response["status"] == "success") {
 			$data["show_completed_puja"] = $showbookedpuja_completed_response["data"];
 		}
+
+	
 
 
 		$this->load->view('User/Orders', $data);
@@ -1622,10 +1627,40 @@ class User extends CI_Controller
 
 	//----------------------------------------USER MOB PUJA --------------------------------------------------
 
+	
 	public function MobPooja()
-	{
-		$this->load->view('User/MobPooja');
-	}
+{
+    $api_url = base_url("User_Api_Controller/show_mob_puja");
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $api_url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+    $dataval = curl_exec($ch);
+
+    if ($dataval === false) {
+        $curl_error = curl_error($ch);
+        curl_close($ch);
+        show_error("cURL Error: " . $curl_error, 500);
+        return;
+    }
+
+    curl_close($ch);
+
+    $show_mob_puja = json_decode($dataval, true); // use true for associative array
+
+   
+    $data["showmobpuja"] = [];
+
+ 
+    if (isset($show_mob_puja["status"]) && $show_mob_puja["status"] === "success") {
+        $data["showmobpuja"] = $show_mob_puja["data"];
+    }
+
+    $this->load->view('User/MobPooja', $data);
+}
+
 
 
 
