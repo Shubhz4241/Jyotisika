@@ -221,6 +221,41 @@ $route['AstrologerTodaysSchedule']='AstrologerUser/AstrologerTodaysSchedule';
 $route['AstrologerFeedBackCard']='AstrologerUser/AstrologerFeedBackCard';
 $route['ConsultationCards']='AstrologerUser/ConsultationCards';
 
+//<------------------------ Astrologer Api Routes start here ------------------------------------>
+
+$route['astrologer/register'] = 'Astrologer_Api_Controller/Register';//register the user
+$route['astrologer/verify_otp'] = 'Astrologer_Api_Controller/Verify_otp';//verify the otp for registration
+$route['astrologer/resend_Otp'] = 'Astrologer_Api_Controller/Resend_Otp';//resend the otp 
+$route['astrologer/send_otp_login'] = 'Astrologer_Api_Controller/Send_Otp_Login';//send otp for login
+$route['astrologer/verify_otp_login'] = 'Astrologer_Api_Controller/Verify_otp_Login';//verify otp for login
+$route['astrologer/get_logged_in_user'] = 'Astrologer_Api_Controller/GetUserDataOfLoggedUser';//check that user is looged in and it's status
+$route['astrologer/get_services'] = 'Astrologer_Api_Controller/GetAstrologerServices';//get the services of the astrologer can access
+$route['astrologer/profile_astrologer'] = 'Astrologer_Api_Controller/GetAstrologerDetails';//get the details of the astrologer which is logged in 
+$route['astrologer/add_service'] = 'Astrologer_Api_Controller/StorePendingServices';//add the service to the astrologer
+$route['astrologer/get_approved_services'] = 'Astrologer_Api_Controller/GetAstrologerServicesofLoggedinAstologer';//get the approved services of the astrologer
+$route['astrologer/get_feedbacks_related_to_astrologer'] = 'Astrologer_Api_Controller/GetAstrologerFeedback';//get the feedbacks related to the astrologer
+$route['astrologer/delete_feedback'] = 'Astrologer_Api_Controller/DeleteFeedback';//delete the feedback
+$route['astrologer/set_online_offline_status'] = 'Astrologer_Api_Controller/SetAstrologerStatus';//set the online offline status of the astrologer
+$route['astrologer/check_astrologer_status'] = 'Astrologer_Api_Controller/Check_online';//check the status of the astrologer is he online or offline
+$route['astrologer/update_profile'] = 'Astrologer_Api_Controller/UpdateProfile';//update the profile of the astrologer
+$route['astrologer/update_avaliability'] = 'Astrologer_Api_Controller/Save_availability';//get the feedback by id
+$route['astrologer/profile_image'] = 'Astrologer_Api_Controller/Update_profile_image';
+
+$route['astrologer/yearlychart'] = 'Astrologer_Api_Controller/Chart_data_yearly';
+$route['astrologer/monthlychart'] = 'Astrologer_Api_Controller/Chart_data_monthly';
+$route['astrologer/statuschart'] = 'Astrologer_Api_Controller/Chart_data_pending_paid';
+$route['astrologer/gettotalearnings'] = 'Astrologer_Api_Controller/Get_total_stats';
+$route['astrologer/getmontlyearnings'] = 'Astrologer_Api_Controller/Get_offline_bookings_monthly';
+
+
+//<------------------------ Astrologer Api Routes Ends here ------------------------------------>
+
+// urls for the caht 
+$route['api/chat/start-session'] = 'Api_Chat_Controller/Start_session';
+$route['api/chat/send-message'] = 'Api_Chat_Controller/Send_message';
+$route['api/chat/history/(:num)'] = 'Api_Chat_Controller/Get_chat_history/$1';
+$route['api/chat/end-session'] = 'Api_Chat_Controller/End_session';
+$route['api/chat/users'] = 'Api_Chat_Controller/Get_users';
 
 
 
