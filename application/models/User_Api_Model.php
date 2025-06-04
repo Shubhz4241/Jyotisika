@@ -976,6 +976,48 @@ class User_Api_Model extends CI_Model
             }
 
 
+        } else {
+            $this->db->from("bookpuja_request_by_user_to_pujari");
+            $this->db->where([
+                "jyotisika_user_id" => $formdata["jyotisika_user_id"],
+                "pujari_id" => $formdata["pujari_id"],
+                "mob_puja_id" => $formdata["mob_puja_id"]
+            ]);
+
+
+            $numrows = $this->db->count_all_results();
+
+
+
+
+
+
+            if ($numrows > 0) {
+                return [
+                    "status" => "requestgetalready",
+                    "message" => "You already sent request to book this puja"
+                ];
+            }
+
+            $this->db->from("bookpuja_request_by_user_to_pujari");
+            $this->db->where([
+                "mob_puja_id" => $formdata["mob_puja_id"]
+            ]);
+            $nummobrows = $this->db->count_all_results();
+
+            $this->db->where("id", $formdata["mob_puja_id"]);
+            $query = $this->db->get("mob_puja");
+            $pujaData = $query->row_array();
+
+                if ((int)$nummobrows >= (int)$pujaData["totalAttendee"]) {
+                    return [
+                        "status" => "userfull",
+                        "message" => "User full"
+                    ];
+                }
+           
+
+
         }
 
         $this->db->insert("bookpuja_request_by_user_to_pujari", $formdata);
@@ -1007,29 +1049,43 @@ class User_Api_Model extends CI_Model
     }
 
     public function get_booked_puja_model($user_id)
-    {
+{
+    $this->db->select("
+        bookpuja_request_by_user_to_pujari.*, 
+        pujari_registration.name as pujari_name,
+        services.name as service_name,
+        mob_puja.name as mobpujaname,
+        jyotisika_users.user_name 
+    ");
+    $this->db->from("bookpuja_request_by_user_to_pujari");
+    $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id", "left");
+    $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id", "left");
+    $this->db->join("mob_puja", "mob_puja.id = bookpuja_request_by_user_to_pujari.mob_puja_id", "left");
+    $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id", "left");
+    $this->db->where("bookpuja_request_by_user_to_pujari.jyotisika_user_id", $user_id);
+    $this->db->where("bookpuja_request_by_user_to_pujari.puja_status !=", "Completed");
 
-        $this->db->select("bookpuja_request_by_user_to_pujari.* , pujari_registration.name as pujari_name , services.name as name_of_puja,services.image ");
-        $this->db->from("bookpuja_request_by_user_to_pujari");
-        $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id");
-        $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id");
-        $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id");
-        $this->db->where("jyotisika_user_id", $user_id);
-        $this->db->where("bookpuja_request_by_user_to_pujari.status !=", "Completed");
-        $query = $this->db->get();
-        return $query->result();
-    }
+    $query = $this->db->get();
+    return $query->result();
+}
 
     public function get_completed_puja_model($user_id)
     {
 
-        $this->db->select("bookpuja_request_by_user_to_pujari.* , pujari_registration.name as pujari_name , services.name as name_of_puja,services.image");
-        $this->db->from("bookpuja_request_by_user_to_pujari");
-        $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id");
-        $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id");
-        $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id");
-        $this->db->where("jyotisika_user_id", $user_id);
-        $this->db->where("bookpuja_request_by_user_to_pujari.status", "Completed");
+       $this->db->select("
+        bookpuja_request_by_user_to_pujari.*, 
+        pujari_registration.name as pujari_name,
+        services.name as service_name,
+        mob_puja.name as mobpujaname,
+        jyotisika_users.user_name 
+    ");
+    $this->db->from("bookpuja_request_by_user_to_pujari");
+    $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id", "left");
+    $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id", "left");
+    $this->db->join("mob_puja", "mob_puja.id = bookpuja_request_by_user_to_pujari.mob_puja_id", "left");
+    $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id", "left");
+    $this->db->where("bookpuja_request_by_user_to_pujari.jyotisika_user_id", $user_id);
+    $this->db->where("bookpuja_request_by_user_to_pujari.puja_status", "Completed");
         $query = $this->db->get();
         return $query->result();
     }
@@ -1076,9 +1132,40 @@ class User_Api_Model extends CI_Model
         $count = $query->num_rows();
         return $count;
 
+    }
 
 
 
+
+    public function update_payment_status_model($book_puja_id, $amount, $payment_id)
+    {
+        // Prepare data to update
+        $data = [
+            'amount_paid_by_user' => $amount,
+            'payment_status' => 'Paid',  // Assuming you want to mark it as paid
+            'payment_id' => $payment_id
+        ];
+
+        // Update the database
+        $this->db->where("book_puja_id", $book_puja_id);
+        $this->db->update("bookpuja_request_by_user_to_pujari", $data);
+
+        // Check if update was successful
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false; // No rows updated
+        }
+    }
+
+    public function show_mob_puja_model(){
+
+        $this->db->select('services.* ,services.name as puja_name ,  mob_puja.* ,mob_puja.id as mobid,   pujari_registration.*');
+        $this->db->from("mob_puja");
+        $this->db->join("services" , "services.id = mob_puja.service_id");
+        $this->db->join("pujari_registration", "pujari_registration.id = mob_puja.pujari_id");
+        $query =  $this->db->get();  
+        return  $query->result();
 
     }
 
