@@ -445,7 +445,7 @@
             if (isValid) {
                 const formData = new FormData();
                 formData.append("name", name);
-                formData.append("contact", '+91' + contact);
+                formData.append("contact",contact);
                 formData.append("email", email);
                 languages.forEach(lang => formData.append("languages[]", lang));
                 formData.append("gender", gender);

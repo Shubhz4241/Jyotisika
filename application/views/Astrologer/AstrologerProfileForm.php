@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astrologer Profile Form</title>
+    <title>Astrologer Profile</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -15,7 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <!-- <script src="<?php echo base_url() . 'assets/js/main.js' ?>"></script> -->
+    <link rel="icon" type="image/png" href="<?php echo base_url() . 'assets/images/PNG image.png' ?>">
     <style>
         body {
             background-color: #f8f8f8;
@@ -302,10 +303,11 @@
                 padding: 6px 16px;
             }
         }
+
         .mb-3 {
-    margin-bottom: 1rem !important;
-    margin-top: 16px;
-}
+            margin-bottom: 1rem !important;
+            margin-top: 16px;
+        }
     </style>
 </head>
 
@@ -316,7 +318,14 @@
     <div style="min-height: 100vh;" class="py-3">
         <div style="width: 100%; display: flex; justify-content: center;">
             <div class="profile-container">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png' ?>" class="profilei" alt="Profile" alt="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>">
+                <img src=""
+                    class="profilei"
+                    id="profile1"
+                   
+                    alt="profile"
+                    onclick="document.getElementById('imageInput').click()">
+
+                <input type="file" id="imageInput" style="display: none;" accept="image/*" onchange="uploadImage()">
                 <div class="tabs">
                     <div class="tab active" data-target="#personal">Personal</div>
                     <div class="tab" data-target="#professional">Professional</div>
@@ -331,7 +340,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Contact</label>
-                        <input type="number" class="form-control" id="contactInput" placeholder="Enter your Contact Number" required oninput="this.value = this.value.slice(0, 10); if (this.value < 0) this.value = '';">
+                        <input type="number" class="form-control" id="contactInput" placeholder="Enter your Contact Number" required oninput="this.value = this.value.slice(0, 10); if (this.value < 0) this.value = '';" disabled>
                         <div class="invalid-feedback">Please enter a valid 10-digit contact number (no negative values).</div>
                     </div>
                     <div class="mb-3">
@@ -351,49 +360,129 @@
                     </div>
                     <div class="mb-3" style="position: relative;">
                         <label class="form-label">Languages</label>
-                        <input type="text" class="form-control" id="languageInput" value="Hindi" placeholder="Select a language" required readonly>
+                        <div class="form-control" id="languageInput" style="cursor: pointer;">Select languages</div>
                         <div id="languageDropdown" style="position: absolute; top: 100%; left: 0; width: 100%; background: #fff; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); max-height: 150px; overflow-y: auto; display: none; z-index: 1000;">
-                            <div class="language-option" style="padding: 8px; cursor: pointer;" data-value="Hindi">Hindi</div>
-                            <div class="language-option" style="padding: 8px; cursor: pointer;" data-value="English">English</div>
-                            <div class="language-option" style="padding: 8px; cursor: pointer;" data-value="Marathi">Marathi</div>
+                            <div style="padding: 8px;">
+                                <input type="checkbox" id="hindi" value="Hindi"> <label for="hindi">Hindi</label>
+                            </div>
+                            <div style="padding: 8px;">
+                                <input type="checkbox" id="english" value="English"> <label for="english">English</label>
+                            </div>
+                            <div style="padding: 8px;">
+                                <input type="checkbox" id="marathi" value="Marathi"> <label for="marathi">Marathi</label>
+                            </div>
+                            <div style="padding: 8px;">
+                                <input type="checkbox" id="sanskrit" value="Sanskrit"> <label for="sanskrit">Sanskrit</label>
+                            </div>
                         </div>
                         <div class="invalid-feedback">Please select a language.</div>
                     </div>
+
+                    <script>
+                        const languageInput = document.getElementById('languageInput');
+                        const languageDropdown = document.getElementById('languageDropdown');
+                        const checkboxes = document.querySelectorAll('#languageDropdown input[type="checkbox"]');
+
+                        languageInput.addEventListener('click', () => {
+                            languageDropdown.style.display = languageDropdown.style.display === 'none' ? 'block' : 'none';
+                        });
+
+                        checkboxes.forEach(checkbox => {
+                            checkbox.addEventListener('change', () => {
+                                const selectedLanguages = Array.from(checkboxes)
+                                    .filter(checkbox => checkbox.checked)
+                                    .map(checkbox => checkbox.value);
+                                languageInput.textContent = selectedLanguages.length ? selectedLanguages.join(', ') : 'Select languages';
+                            });
+                        });
+
+                        document.addEventListener('click', (e) => {
+                            if (!languageInput.contains(e.target) && !languageDropdown.contains(e.target)) {
+                                languageDropdown.style.display = 'none';
+                            }
+                        });
+                    </script>
+
                     <div class="mb-3">
                         <label class="form-label">Experience</label>
                         <input type="text" class="form-control" id="experienceInput" value="23 yrs" placeholder="e.g., 23 yrs" required>
                         <div class="invalid-feedback">Please enter a valid experience (e.g., '23 yrs', between 0 and 100 years).</div>
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label class="form-label">Place of Birth</label>
                         <input type="text" class="form-control" id="placeOfBirth" placeholder="Enter your Place of Birth" required>
                         <div class="invalid-feedback">Please enter your place of birth (letters and spaces only).</div>
-                    </div>
+                    </div> -->
                     <div class="mb-3">
                         <label class="form-label">Current Address</label>
                         <input type="text" class="form-control" id="currentAddress" placeholder="Enter your current address" required>
                         <div class="invalid-feedback">Please enter your current address.</div>
                     </div>
-                    <button type="submit" class="save-btn">Save Changes</button>
+                    <button type="submit" class="save-btn" id="submitpersonal">Save Changes</button>
                 </form>
 
                 <form id="professional" class="form-container">
-                    <div class="mb-3" style="position: relative;">
+                    <div class="mb-3">
                         <label class="form-label">Astrology Services</label>
-                        <input type="text" class="form-control" id="serviceInput" value="Vastu, Vedic" placeholder="Select astrology services" required readonly>
-                        <div id="serviceDropdown" style="position: absolute; top: 100%; left: 0; width: 100%; background: #fff; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); max-height: 150px; overflow-y: auto; display: none; z-index: 1000;">
-                            <div class="service-option" style="padding: 8px; cursor: pointer;" data-value="Vastu">Vastu</div>
-                            <div class="service-option" style="padding: 8px; cursor: pointer;" data-value="Vedic">Vedic</div>
-                        </div>
-                        <div class="invalid-feedback">Please select at least one astrology service.</div>
+                        <select class="form-control" id="serviceDropdown" required onchange="updateFields()"></select>
+                        <div class="invalid-feedback">Please select a service.</div>
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Available Days</label>
+                        <div id="availableDaysInput">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="monday" value="Monday">
+                                <label class="form-check-label" for="monday">Monday</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="tuesday" value="Tuesday">
+                                <label class="form-check-label" for="tuesday">Tuesday</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="wednesday" value="Wednesday">
+                                <label class="form-check-label" for="wednesday">Wednesday</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="thursday" value="Thursday">
+                                <label class="form-check-label" for="thursday">Thursday</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="friday" value="Friday">
+                                <label class="form-check-label" for="friday">Friday</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="saturday" value="Saturday">
+                                <label class="form-check-label" for="saturday">Saturday</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="sunday" value="Sunday">
+                                <label class="form-check-label" for="sunday">Sunday</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Start Time</label>
+                        <input type="text" class="form-control timepicker" id="startTimeInput">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">End Time</label>
+                        <input type="text" class="form-control timepicker" id="endTimeInput">
+                    </div>
+
                     <div class="mb-3">
                         <label class="form-label">Rs Per Minute</label>
-                        <input type="text" class="form-control" id="rsPerMinuteInput" value="50 Rs" placeholder="e.g., 50 Rs" required>
-                        <div class="invalid-feedback">Please enter a valid rate (e.g., '50 Rs', no negative values).</div>
+                        <input type="text" class="form-control" id="rsPerMinuteInput" readonly>
                     </div>
-                    <button type="submit" class="save-btn">Save Changes</button>
+
+                    <button type="submit" class="save-btn" id="submitprofessional">Save Changes</button>
                 </form>
+
+
+
+
 
                 <form id="advanced" class="form-container p-3">
                     <div class="container p-0 m-0">
@@ -404,7 +493,7 @@
                                 <span>▼</span>
                             </div>
                             <div class="dropdown-content" id="radioOptions">
-                                <div class="form-check">
+                                <!-- <div class="form-check">
                                     <input class="form-check-input" type="radio" name="service" id="vastu">
                                     <label class="form-check-label" for="vastu">Vastu Consultation</label>
                                 </div>
@@ -415,7 +504,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="service" id="vedic">
                                     <label class="form-check-label" for="vedic">Vedic Astrology</label>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="invalid-feedback" id="astrologyServiceError">Please select an astrology service.</div>
                         </div>
@@ -488,6 +577,19 @@
     </footer>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const formper = document.getElementById("personal"); // Change to your form's ID
+            const submitButton = document.getElementById("submitpersonal");
+
+            // Initially disable the button
+            submitButton.disabled = true;
+
+            // Detect changes in the form
+            formper.addEventListener("input", function() {
+                submitButton.disabled = false; // Enable button when form changes
+            });
+        });
+
         $(document).ready(function() {
             $('.tab').click(function() {
                 $('.tab').removeClass('active');
@@ -495,10 +597,7 @@
                 $('.form-container').removeClass('active');
                 $($(this).data('target')).addClass('active');
             });
-            // $('form').submit(function(e) {
-            //     e.preventDefault();
-            //     alert('Details saved successfully!');
-            // });
+           
 
             // Initialize time picker for Availability Time
             $('.timepicker').timepicker({
@@ -511,6 +610,16 @@
     </script>
 
     <script>
+        window.addEventListener('load', () => {
+            fetch('<?php echo base_url('astrologer/get_logged_in_user'); ?>')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status !== 'success') {
+                        window.location.href = '<?php echo base_url("AstrologerMobileNumberAndOTPForm"); ?>';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
         $(document).ready(function() {
             $("#toggleDropdown").click(function() {
                 $("#radioOptions").slideToggle();
@@ -551,60 +660,56 @@
     </script>
 
     <script>
-       document.getElementById('advanced').addEventListener('submit', async (e) => {
-    e.preventDefault();
+        document.getElementById('advanced').addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-    const selectedService = document.querySelector('input[name="service"]:checked')?.value || null;
-    const selectedDays = Array.from(document.querySelectorAll('#availabilityCheckboxes .form-check-input:checked'))
-        .map(checkbox => checkbox.value);
-    const startTime = document.getElementById('startTime').value;
-    const endTime = document.getElementById('endTime').value;
+            const selectedService = document.querySelector('input[name="service"]:checked')?.value || null;
+            const selectedDays = Array.from(document.querySelectorAll('#availabilityCheckboxes .form-check-input:checked'))
+                .map(checkbox => checkbox.value);
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
 
-    if (!selectedService || selectedDays.length === 0) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Please select a service and at least one availability day.'
+            if (!selectedService || selectedDays.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Please select a service and at least one availability day.'
+                });
+                return;
+            }
+
+            const requestData = {
+                service_ids: [selectedService],
+                availability_days: available_days,
+                start_time: startTime,
+                end_time: endTime
+            };
+            console.log('requestdata',requestData)
+
+            try {
+                const response = await fetch('<?php echo base_url() . 'astrologer/add_service' ?>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                const result = await response.json();
+
+                Swal.fire({
+                    icon: result.status === 'success' ? 'success' : 'info',
+                    title: result.status.charAt(0).toUpperCase() + result.status.slice(1),
+                    text: result.message
+                });
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Something went wrong. Please try again.'
+                });
+            }
         });
-        return;
-    }
-
-    const requestData = {
-        service_ids: [selectedService],
-        availability_days: selectedDays,
-        start_time: startTime,
-        end_time: endTime
-    };
-
-    try {
-        const response = await fetch('<?php echo base_url() . 'astrologer/add_service'?>', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestData)
-        });
-
-        const result = await response.json();
-
-        Swal.fire({
-            icon: result.status === 'success' ? 'success' : 'info',
-            title: result.status.charAt(0).toUpperCase() + result.status.slice(1),
-            text: result.message
-        });
-    } catch (error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Something went wrong. Please try again.'
-        });
-    }
-});
-
-
-
-
-
     </script>
 
     <script>
@@ -619,240 +724,111 @@
             const languageDropdown = document.getElementById("languageDropdown");
             const languageOptions = document.querySelectorAll("#languageDropdown .language-option");
             const experienceInput = document.getElementById("experienceInput");
-            const placeOfBirthInput = document.getElementById("placeOfBirth");
+            //const placeOfBirthInput = document.getElementById("placeOfBirth");
             const currentAddressInput = document.getElementById("currentAddress");
-
-            // Track the selected language (single selection) for Personal form
-            let selectedLanguage = languageInput.value || "";
-
-            // Show dropdown when language input is clicked (Personal form)
-            languageInput.addEventListener("click", function() {
-                languageDropdown.style.display = "block";
-            });
-
-            // Handle language selection (single selection) for Personal form
-            languageOptions.forEach(option => {
-                option.addEventListener("click", function() {
-                    const value = this.getAttribute("data-value");
-                    selectedLanguage = value;
-                    languageInput.value = selectedLanguage;
-                    languageOptions.forEach(opt => {
-                        if (opt.getAttribute("data-value") === selectedLanguage) {
-                            opt.style.backgroundColor = "#e9ecef";
-                        } else {
-                            opt.style.backgroundColor = "#fff";
-                        }
-                    });
-                    languageDropdown.style.display = "none";
-                });
-
-                if (option.getAttribute("data-value") === selectedLanguage) {
-                    option.style.backgroundColor = "#e9ecef";
-                }
-            });
-
-            // Hide dropdown when clicking outside (Personal form)
-            document.addEventListener("click", function(event) {
-                if (!languageInput.contains(event.target) && !languageDropdown.contains(event.target)) {
-                    languageDropdown.style.display = "none";
-                }
-            });
-
-            // Personal form submission validation
-            formPersonal.addEventListener("submit", function(event) {
-                let isValid = true;
-
-                // Validate Name (letters and spaces only, 2-50 characters)
-                const nameRegex = /^[A-Za-z\s]{2,50}$/;
-                if (!nameRegex.test(nameInput.value.trim())) {
-                    nameInput.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    nameInput.classList.remove("is-invalid");
-                }
-
-                // Validate Contact (10 digits, no negative values)
-                const contactRegex = /^\d{10}$/;
-                if (!contactRegex.test(contactInput.value) || contactInput.value < 0) {
-                    contactInput.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    contactInput.classList.remove("is-invalid");
-                }
-
-                // Validate Email
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(emailInput.value)) {
-                    emailInput.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    emailInput.classList.remove("is-invalid");
-                }
-
-                // Validate Gender
-                if (!genderInput.value) {
-                    genderInput.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    genderInput.classList.remove("is-invalid");
-                }
-
-                // Validate Language
-                if (!selectedLanguage) {
-                    languageInput.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    languageInput.classList.remove("is-invalid");
-                }
-
-                // Validate Experience (e.g., "23 yrs", between 0 and 100 years)
-                const experienceRegex = /^\d+\s*yrs$/;
-                const experienceValue = experienceInput.value.trim();
-                const experienceNumber = parseInt(experienceValue);
-                if (!experienceRegex.test(experienceValue) || experienceNumber < 0 || experienceNumber > 100 || isNaN(experienceNumber)) {
-                    experienceInput.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    experienceInput.classList.remove("is-invalid");
-                }
-
-                // Validate Place of Birth (letters and spaces only)
-                const placeRegex = /^[A-Za-z\s]{2,100}$/;
-                if (!placeRegex.test(placeOfBirthInput.value.trim())) {
-                    placeOfBirthInput.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    placeOfBirthInput.classList.remove("is-invalid");
-                }
-
-                // Validate Current Address (non-empty, allow letters, numbers, and basic punctuation)
-                const addressRegex = /^[\w\s,.-]{5,200}$/;
-                if (!addressRegex.test(currentAddressInput.value.trim())) {
-                    currentAddressInput.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    currentAddressInput.classList.remove("is-invalid");
-                }
-
-                if (!isValid) {
-                    event.preventDefault();
-                }
-            });
-
-            // Real-time validation for Experience field (Personal form)
-            experienceInput.addEventListener("input", function() {
-                const value = this.value.trim();
-                const numberPart = parseInt(value);
-                if (value && (isNaN(numberPart) || numberPart < 0 || numberPart > 100)) {
-                    this.value = "";
-                }
-            });
-
-            // Real-time validation for Contact field (Personal form)
-            contactInput.addEventListener("input", function() {
-                if (this.value < 0) {
-                    this.value = "";
-                }
-            });
 
             // Professional Form Validation
             const formProfessional = document.getElementById("professional");
-            const serviceInput = document.getElementById("serviceInput");
+            //const serviceInput = document.getElementById("serviceInput");
             const serviceDropdown = document.getElementById("serviceDropdown");
             const serviceOptions = document.querySelectorAll("#serviceDropdown .service-option");
             const rsPerMinuteInput = document.getElementById("rsPerMinuteInput");
 
-            // Track selected services (multiple selection)
-            let selectedServices = serviceInput.value.split(", ").filter(service => service.trim() !== "");
-
-            // Show service dropdown when input is clicked
-            serviceInput.addEventListener("click", function() {
-                serviceDropdown.style.display = "block";
-            });
-
-            // Handle service selection (multiple selection)
-            serviceOptions.forEach(option => {
-                option.addEventListener("click", function() {
-                    const value = this.getAttribute("data-value");
-
-                    // Toggle selection
-                    if (selectedServices.includes(value)) {
-                        selectedServices = selectedServices.filter(service => service !== value);
-                    } else {
-                        selectedServices.push(value);
-                    }
-
-                    // Update input field with selected services
-                    serviceInput.value = selectedServices.join(", ");
-                    if (selectedServices.length === 0) {
-                        serviceInput.value = "";
-                    }
-
-                    // Update visual feedback (highlight selected options)
-                    serviceOptions.forEach(opt => {
-                        if (selectedServices.includes(opt.getAttribute("data-value"))) {
-                            opt.style.backgroundColor = "#e9ecef";
-                        } else {
-                            opt.style.backgroundColor = "#fff";
-                        }
-                    });
-                });
-
-                // Initial visual feedback for pre-selected services
-                if (selectedServices.includes(option.getAttribute("data-value"))) {
-                    option.style.backgroundColor = "#e9ecef";
-                }
-            });
-
-            // Hide dropdown when clicking outside (Professional form)
-            document.addEventListener("click", function(event) {
-                if (!serviceInput.contains(event.target) && !serviceDropdown.contains(event.target)) {
-                    serviceDropdown.style.display = "none";
-                }
-            });
-
             // Professional form submission validation
-            formProfessional.addEventListener("submit", function(event) {
-                let isValid = true;
+            document.getElementById('professional').addEventListener('submit', function(e) {
+                e.preventDefault();
 
-                // Validate Astrology Services
-                if (selectedServices.length === 0) {
-                    serviceInput.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    serviceInput.classList.remove("is-invalid");
+                const selectedServiceId = document.getElementById('serviceDropdown').value;
+                const availableDays = Array.from(document.querySelectorAll('#availableDaysInput .form-check-input:checked'))
+                    .map(checkbox => checkbox.value);
+
+                const startTime = document.getElementById('startTimeInput').value.trim();
+                const endTime = document.getElementById('endTimeInput').value.trim();
+
+                // Validation
+                if (!selectedServiceId) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Please select a service.',
+                    });
+                    return;
                 }
 
-                // Validate Rs Per Minute (e.g., "50 Rs", no negative values)
-                const rsPerMinuteRegex = /^\d+\s*Rs$/;
-                const rsPerMinuteValue = rsPerMinuteInput.value.trim();
-                const rsPerMinuteNumber = parseInt(rsPerMinuteValue);
-                if (!rsPerMinuteRegex.test(rsPerMinuteValue) || rsPerMinuteNumber < 0 || isNaN(rsPerMinuteNumber)) {
-                    rsPerMinuteInput.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    rsPerMinuteInput.classList.remove("is-invalid");
+                if (availableDays.length === 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Please select at least one available day.',
+                    });
+                    return;
                 }
 
-                // Prevent form submission if any field is invalid
-                if (!isValid) {
-                    event.preventDefault();
-                }
-            });
+                const timeFormat = /^(0?[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/;
 
-            // Real-time validation for Rs Per Minute field to prevent negative values
-            rsPerMinuteInput.addEventListener("input", function() {
-                const value = this.value.trim();
-                const numberPart = parseInt(value);
-                if (value && (isNaN(numberPart) || numberPart < 0)) {
-                    this.value = "";
+                if (!timeFormat.test(startTime)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Please enter a valid start time in the format HH:MM AM/PM.',
+                    });
+                    return;
                 }
+
+                if (!timeFormat.test(endTime)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Please enter a valid end time in the format HH:MM AM/PM.',
+                    });
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('service_id', selectedServiceId);
+                formData.append('available_days', availableDays.join(','));
+                formData.append('start_time', startTime);
+                formData.append('end_time', endTime);
+
+
+                fetch('<?= base_url('astrologer/update_avaliability') ?>', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: data.message,
+                            }).then(() => {
+                                location.reload(); // Reloads only after the user clicks "OK"
+                            });
+
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: data.message,
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Something went wrong. Please try again later.',
+                        });
+                    });
             });
 
             // Advanced Form Validation
             const formAdvanced = document.getElementById("advanced");
             const astrologyServiceInputs = document.querySelectorAll("#radioOptions input[type='radio']");
-            const availabilityDayInput = document.getElementById("availabilityDay");
+            const availabilityDayInput = document.getElementById("availabilityDayText");
             const startTimeInput = document.getElementById("startTime");
             const endTimeInput = document.getElementById("endTime");
 
@@ -862,7 +838,7 @@
                 // Validate Astrology Service (at least one must be selected)
                 const isServiceSelected = Array.from(astrologyServiceInputs).some(input => input.checked);
                 if (!isServiceSelected) {
-                    document.getElementById("astrologyServiceError").style.display = "block";
+                    //  document.getElementById("astrologyServiceError").style.display = "block";
                     isValid = false;
                 } else {
                     document.getElementById("astrologyServiceError").style.display = "none";
@@ -927,43 +903,264 @@
 
             radioOptions.addEventListener('change', (e) => {
                 if (e.target.classList.contains('form-check-input')) {
-                    astrologyServiceText.textContent = e.target.value;
-                    radioOptions.style.display = 'none';
-                    astrologyServiceError.style.display = 'none';
+                 const selectedLabel = document.querySelector(`label[for="${e.target.id}"]`);
+                  astrologyServiceText.textContent = selectedLabel.textContent; // show name
+                  radioOptions.style.display = 'none';
+                 astrologyServiceError.style.display = 'none';
                 }
             });
+
         });
 
 
-        // submit the form for the service 
-//         document.getElementById('advanced').addEventListener('submit', (e) => {
-//             e.preventDefault();
 
-//             // Extract selected astrology service
-//             const selectedService = document.querySelector('input[name="service"]:checked')?.nextElementSibling.textContent.trim() || 'Not selected';
+        window.onload = function() {
+            fetch('<?php echo base_url() . 'astrologer/profile_astrologer' ?>')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        userdetails = data.user_details;
+                        document.getElementById('nameInput').value = userdetails.name;
+                        document.getElementById('contactInput').value = userdetails.contact;
+                        document.getElementById('emailInput').value = userdetails.email;
+                        document.getElementById('genderInput').value = userdetails.gender;
+                        document.getElementById('profile1').src = "<?php echo base_url(); ?>" + userdetails.profile_data;
 
-//             // Extract selected availability days
-//             const selectedDays = Array.from(document.querySelectorAll('#availabilityCheckboxes .form-check-input:checked'))
-//                 .map(checkbox => checkbox.value);
 
-//             // Extract availability times
-//             const startTime = document.getElementById('startTime').value;
-//             const endTime = document.getElementById('endTime').value;
+                     //   console.log(userdetails)
+                        const userLanguages = userdetails.languages.split(',');
 
-//             // Display extracted data
-//             console.log({
-//                 astrologyService: selectedService,
-//                 availabilityDays: selectedDays.length ? selectedDays : 'Not selected',
-//                 startTime,
-//                 endTime
-//             });
+                        checkboxes.forEach(checkbox => {
+                            if (userLanguages.includes(checkbox.value)) {
+                                checkbox.checked = true;
+                            }
+                        });
 
-//             alert(`Astrology Service: ${selectedService}
-// Availability Days: ${selectedDays.join(', ') || 'None'}
-// Start Time: ${startTime}
-// End Time: ${endTime}`);
-//         });
+                        languageInput.textContent = userLanguages.join(', ') || 'Select languages';
+
+                        document.getElementById('currentAddress').value = userdetails.address;
+                        document.getElementById('experienceInput').value = userdetails.experience;
+                        document.getElementById('rsPerMinuteInput').value = userdetails.price_per_minute;
+                      //  console.log(userdetails)
+                    } else {
+                        console.log('Request failed');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        };
     </script>
-</body> 
+
+    <!-- get the approved services  -->
+
+    <script>
+        let servicesData = [];
+        let astrologerServices = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('<?php echo base_url() . 'astrologer/get_approved_services' ?>')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        servicesData = data.data;
+                        astrologerServices = data.astrologer_services;
+
+                        const serviceDropdown = document.getElementById('serviceDropdown');
+                        servicesData.forEach(service => {
+                            const option = document.createElement('option');
+                            option.value = service.id;
+                            option.textContent = service.name;
+                            serviceDropdown.appendChild(option);
+                        });
+
+                        updateFields()
+                    } else {
+                       // console.log('Request failed');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+
+        function updateFields() {
+            const selectedServiceId = document.getElementById('serviceDropdown').value;
+            const selectedService = servicesData.find(service => service.id === selectedServiceId);
+            const selectedAstroService = astrologerServices.find(service => service.service_id === selectedServiceId);
+
+            if (selectedService && selectedAstroService) {
+                const availableDays = selectedAstroService.day.split(',');
+
+                // Manage checkboxes for available days
+                document.querySelectorAll('#availableDaysInput .form-check-input').forEach(checkbox => {
+                    checkbox.checked = availableDays.includes(checkbox.value);
+                });
+
+                document.getElementById('startTimeInput').value = selectedAstroService.start_time;
+                document.getElementById('endTimeInput').value = selectedAstroService.end_time;
+            }
+        }
+
+
+
+        // submit the form for the updation
+
+
+        const formPersonal = document.getElementById("personal");
+        const nameInput = document.getElementById("nameInput");
+        const contactInput = document.getElementById("contactInput");
+        const emailInput = document.getElementById("emailInput");
+        const genderInput = document.getElementById("genderInput");
+        const languageOptions = document.querySelectorAll("#languageDropdown .language-option");
+        const experienceInput = document.getElementById("experienceInput");
+        const currentAddressInput = document.getElementById("currentAddress");
+        formPersonal.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form refresh
+            let isValid = true;
+
+            // Name Validation
+            const nameRegex = /^[A-Za-z\s]{2,50}$/;
+            if (!nameRegex.test(nameInput.value.trim())) {
+                nameInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                nameInput.classList.remove("is-invalid");
+            }
+
+            // Contact Validation
+            const contactRegex = /^\d{10}$/;
+            if (!contactRegex.test(contactInput.value.trim())) {
+                contactInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                contactInput.classList.remove("is-invalid");
+            }
+
+            // Email Validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value.trim())) {
+                emailInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                emailInput.classList.remove("is-invalid");
+            }
+
+            // Gender Validation
+            if (!genderInput.value) {
+                genderInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                genderInput.classList.remove("is-invalid");
+            }
+
+            // Language Validation
+            const selectedLanguages = Array.from(checkboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+            if (selectedLanguages.length === 0) {
+                languageInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                languageInput.classList.remove("is-invalid");
+            }
+
+            // Experience Validation
+            const experienceValue = experienceInput.value.trim();
+            const experienceNumber = parseInt(experienceValue);
+            if (experienceNumber < 0 || experienceNumber > 100 || isNaN(experienceNumber)) {
+                experienceInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                experienceInput.classList.remove("is-invalid");
+            }
+
+            // Address Validation
+            const addressRegex = /^[\w\s,.-]{5,200}$/;
+            if (!addressRegex.test(currentAddressInput.value.trim())) {
+                currentAddressInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                currentAddressInput.classList.remove("is-invalid");
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            } else {
+                const formData = {
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    gender: genderInput.value,
+                    languages: selectedLanguages,
+                    experience: experienceInput.value.trim(),
+                    address: currentAddressInput.value.trim()
+                };
+
+                fetch("<?php echo base_url() . 'astrologer/update_profile' ?>", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "success") {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Success!",
+                                text: data.message
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error!",
+                                text: data.message
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error!",
+                            text: "Error submitting form. Please try again."
+                        });
+                    });
+            }
+        });
+
+
+        // api call to change the user image of the user 
+        function uploadImage() {
+            const fileInput = document.getElementById('imageInput');
+            const imageElement = document.getElementById('profile1');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const formData = new FormData();
+                formData.append('profile_image', fileInput.files[0]);
+
+                fetch('<?php echo base_url() . 'astrologer/profile_image' ?>', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            imageElement.src = URL.createObjectURL(fileInput.files[0]);
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Profile image updated successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        } else {
+                            alert('Failed to update image.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error uploading image.');
+                    });
+            }
+        }
+    </script>
+</body>
 
 </html>
