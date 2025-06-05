@@ -297,7 +297,7 @@
 
                             const feedbackCard = `
                         <div class="col-md-4 mt-4">
-                            <div class="feedback-card h-100 p-3 d-flex flex-column justify-content-between">
+                            <div class="feedback-card h-100 p-4 d-flex flex-column justify-content-between">
                                 <p class="mb-3" style="min-height: 50%;">${feedback.feedback}</p>
 
                                 <div class="user-info d-flex align-items-center justify-content-between">
