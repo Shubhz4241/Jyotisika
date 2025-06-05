@@ -426,6 +426,8 @@ MOBDIG",
 
         $mobile = $this->input->post('phone');
 
+
+
         if (empty($mobile)) {
             http_response_code(400);
             echo json_encode(['status' => 'error', 'message' => 'Phone number is required.']);
@@ -507,6 +509,7 @@ MOBDIG",
                 'status' => $user->status
             ]);
 
+
             http_response_code(200);
             echo json_encode(['status' => 'success', 'message' => 'Login successful.', 'user' => $user]);
         } else {
@@ -581,9 +584,9 @@ MOBDIG",
         }
         $user_id = !empty($data['id'])
             ? $this->input->get('astrologer_id')
-            : $this->session->userdata('id');
+            : $this->session->userdata('astrologer_id');
 
-        $user_id = $this->session->userdata('id');
+        $user_id = $this->session->userdata('astrologer_id');
         $user_details = $this->Astrologer_Api_Model->getAstrologerDetailsById($user_id);
 
         if ($user_details) {
@@ -608,7 +611,7 @@ MOBDIG",
             return;
         }
 
-        $user_id = $this->session->userdata('id');
+        $user_id = $this->session->userdata('astrologer_id');
         $user_details = $this->Astrologer_Api_Model->getAstrologerDetailsById($user_id);
 
         if ($user_details) {
@@ -638,7 +641,8 @@ MOBDIG",
 
         $astrologer_id = $this->input->get('astrologer_id')
             ? $this->input->get('astrologer_id')
-            : $this->session->userdata('astrologer_id');;
+            : $this->session->userdata('astrologer_id');
+
         $service_ids = $input_data['service_ids'] ?? [];
         $availability_days = $input_data['availability_days'] ?? [];
         $start_time = $input_data['start_time'] ?? null;
@@ -661,13 +665,17 @@ MOBDIG",
 
         if (!empty($new_pending_services)) {
             foreach ($new_pending_services as $service_id) {
-                $days = implode(',', $availability_days); // Combine days into a string
+                $days = implode(',', $availability_days);
+
+                $service_name = $this->Astrologer_Api_Model->getServiceNameById($service_id);
+
                 $this->Astrologer_Api_Model->insertPendingService([
-                    'astrologer_id' => (int)$astrologer_id,
-                    'service_id' => (int)$service_id,
-                    'day' => $days, // Store days as comma-separated values
-                    'start_time' => $start_time,
-                    'end_time' => $end_time
+                    'astrologer_id'  => (int)$astrologer_id,
+                    'service_id'     => (int)$service_id,
+                    'specialities'   => $service_name,
+                    'available_days' => $days,
+                    'start_time'     => $start_time,
+                    'end_time'       => $end_time,
                 ]);
             }
 
@@ -678,6 +686,7 @@ MOBDIG",
             echo json_encode(['status' => 'info', 'message' => 'All services are either approved or already pending.']);
         }
     }
+
 
 
     public function GetAstrologerServicesofLoggedinAstologer()
@@ -870,7 +879,7 @@ MOBDIG",
                 ->set_output(json_encode(['status' => 'error', 'message' => 'Invalid request method']));
         }
 
-        $user_id = $this->session->userdata('id');
+        $user_id = $this->session->userdata('astrologer_id');
         $astrologer_id = $this->input->get('astrologer_id')
             ? $this->input->get('astrologer_id')
             : $this->session->userdata('astrologer_id');;
@@ -910,7 +919,7 @@ MOBDIG",
             'experience' => $data['experience']
         ];
 
-        if ($this->Astrologer_Api_Model->save_data($user_id, $astrologer_id, $saveData)) {
+        if ($this->Astrologer_Api_Model->save_data($user_id, $saveData)) {
             return $this->output
                 ->set_status_header(200)
                 ->set_content_type('application/json')
@@ -941,7 +950,8 @@ MOBDIG",
 
         $astrologer_id = $this->input->get('astrologer_id')
             ? $this->input->get('astrologer_id')
-            : $this->session->userdata('astrologer_id');;
+            : $this->session->userdata('astrologer_id');
+            
         $service_id = $this->input->post('service_id');
         $available_days = $this->input->post('available_days');
         $start_time = $this->input->post('start_time');
@@ -956,7 +966,7 @@ MOBDIG",
         }
 
         $data = [
-            'day' => $available_days,
+            'available_days' => $available_days,
             'start_time' => $start_time,
             'end_time' => $end_time
         ];
@@ -1121,16 +1131,6 @@ MOBDIG",
         // Store data in temp table
         $this->Astrologer_Api_Model->insertTempData($data);
 
-        // Send OTP via Twilio
-
-        // if( $this->sendSms($message, $data['contact'])){
-        //     http_response_code(200);
-        //     echo json_encode(['status' => 'success', 'message' => 'OTP sent successfully.']);
-        // } else {
-        //     http_response_code(500);
-        //     echo json_encode(['status' => 'error', 'message' => 'Failed to send OTP.']);
-        // }
-        // $this->Send_otp($data['contact'],$otp);
 
         $user_data = $this->Astrologer_Api_Model->getTempDataByPhone($data['contact']);
         $this->Astrologer_Api_Model->registerUser($user_data);
@@ -1144,17 +1144,17 @@ MOBDIG",
     public function Update_profile_image()
     {
 
-        if (!$this->session->userdata('id')) {
+        if (!$this->session->userdata('astrologer_id')) {
             return $this->output
                 ->set_content_type('application/json')
                 ->set_status_header(401)
                 ->set_output(json_encode(['success' => false, 'message' => 'User not logged in']));
         }
 
-        $user_id = $this->session->userdata('id');
+        $user_id = $this->session->userdata('astrologer_id');
 
         if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == 0) {
-            $config['upload_path']   = './uploads/Astologer/';
+            $config['upload_path']   = 'uploads/Astologer/';
             $config['allowed_types'] = 'jpg|jpeg|png';
             $config['max_size']      = 2048; // 2MB
             $config['file_name']     = 'profile_' . $user_id . '_' . time();
