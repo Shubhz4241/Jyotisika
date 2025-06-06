@@ -217,6 +217,7 @@ class Astrologer_Api_Controller extends CI_Controller
         // $this->Send_otp($data['contact'],$otp);
 
         $try = $this->Send_otp_latest($otp, $data['contact']);
+      
         if ($try) {
             http_response_code(200);
             echo json_encode(['status' => 'success', 'message' => 'OTP sent successfully.', 'try' => $try]);
@@ -501,11 +502,10 @@ MOBDIG",
         if ($user) {
             $this->session->set_userdata([
                 'astrologer_id' => $user->id,
-                'id' => $user->user_id,
                 'is_logged_in' => true,
                 'name' => $user->name,
-                'role' => $user->role,
-                'contact' => $user->phone_number,
+                'role' => 'astrologer',
+                'contact' => $user->contact,
                 'status' => $user->status
             ]);
 

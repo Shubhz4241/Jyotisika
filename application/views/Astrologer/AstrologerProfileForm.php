@@ -321,7 +321,7 @@
                 <img src=""
                     class="profilei"
                     id="profile1"
-                   
+
                     alt="profile"
                     onclick="document.getElementById('imageInput').click()">
 
@@ -597,7 +597,7 @@
                 $('.form-container').removeClass('active');
                 $($(this).data('target')).addClass('active');
             });
-           
+
 
             // Initialize time picker for Availability Time
             $('.timepicker').timepicker({
@@ -684,7 +684,7 @@
                 start_time: startTime,
                 end_time: endTime
             };
-            console.log('requestdata',requestData)
+            console.log('requestdata', requestData)
 
             try {
                 const response = await fetch('<?php echo base_url() . 'astrologer/add_service' ?>', {
@@ -903,10 +903,10 @@
 
             radioOptions.addEventListener('change', (e) => {
                 if (e.target.classList.contains('form-check-input')) {
-                 const selectedLabel = document.querySelector(`label[for="${e.target.id}"]`);
-                  astrologyServiceText.textContent = selectedLabel.textContent; // show name
-                  radioOptions.style.display = 'none';
-                 astrologyServiceError.style.display = 'none';
+                    const selectedLabel = document.querySelector(`label[for="${e.target.id}"]`);
+                    astrologyServiceText.textContent = selectedLabel.textContent; // show name
+                    radioOptions.style.display = 'none';
+                    astrologyServiceError.style.display = 'none';
                 }
             });
 
@@ -920,15 +920,19 @@
                 .then(data => {
                     if (data.status === 'success') {
                         userdetails = data.user_details;
+
                         document.getElementById('nameInput').value = userdetails.name;
                         document.getElementById('contactInput').value = userdetails.contact;
                         document.getElementById('emailInput').value = userdetails.email;
                         document.getElementById('genderInput').value = userdetails.gender;
-                        document.getElementById('profile1').src = "<?php echo base_url(); ?>" + userdetails.profile_data;
+                        document.getElementById('profile1').src = "<?php echo base_url(); ?>" + userdetails.profile_image;
 
 
-                     //   console.log(userdetails)
-                        const userLanguages = userdetails.languages.split(',');
+                        //   console.log(userdetails)
+                        const userLanguages = typeof userdetails.languages === 'string' ?
+                            userdetails.languages.split(',') :
+                            [];
+
 
                         checkboxes.forEach(checkbox => {
                             if (userLanguages.includes(checkbox.value)) {
@@ -941,7 +945,7 @@
                         document.getElementById('currentAddress').value = userdetails.address;
                         document.getElementById('experienceInput').value = userdetails.experience;
                         document.getElementById('rsPerMinuteInput').value = userdetails.price_per_minute;
-                      //  console.log(userdetails)
+                        //  console.log(userdetails)
                     } else {
                         console.log('Request failed');
                     }
@@ -974,7 +978,7 @@
 
                         updateFields()
                     } else {
-                       // console.log('Request failed');
+                        // console.log('Request failed');
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -987,7 +991,8 @@
             const selectedAstroService = astrologerServices.find(service => service.service_id === selectedServiceId);
 
             if (selectedService && selectedAstroService) {
-                const availableDays = selectedAstroService.day.split(',');
+                const availableDays = (selectedAstroService.available_days || '').split(',');
+
 
                 // Manage checkboxes for available days
                 document.querySelectorAll('#availableDaysInput .form-check-input').forEach(checkbox => {
