@@ -44,7 +44,7 @@
 <body>
 
     <?php $is_following = $followstatus ?>
-    <?php print_r($astrologerdata) ?>
+    <!-- <?php print_r($astrologerdata) ?> -->
 
     <!-- <?php print_r($rating); ?> -->
     <?php $avgrating = (int) $rating[0]["average_rating"] ?>
@@ -124,7 +124,9 @@
                                 <div class="col-lg-4 position-relative  rounded-start-3  "
                                     style="background: linear-gradient(45deg, var(--red), var(--yellow));">
                                     <div class="d-flex align-items-center justify-content-start h-100  p-3">
-                                        <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
+
+                                     
+                                        <img src="<?php echo  !empty($astrologerdata[0]['profile_pic']) ? base_url($astrologerdata[0]['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
                                             class="rounded-circle border border-3 border-white me-3"
                                             style="width: 120px; height: 120px; object-fit: cover;">
                                         <div>
@@ -394,7 +396,11 @@
                                             <?php echo $userratingfeedback["feedback"]; ?>
                                         </p>
                                         <div class="d-flex align-items-center mb-3">
-                                            <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
+
+                                        
+
+
+                                            <img src="<?php echo  !empty($userratingfeedback['user_images']) ? base_url($userratingfeedback['user_images']) :base_url('assets/images/astrologerimg.png')?>" alt="User"
                                                 class="rounded-circle me-3"
                                                 style="width: 60px; height: 60px; object-fit: cover;">
                                             <div>

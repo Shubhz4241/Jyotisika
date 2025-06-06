@@ -43,7 +43,7 @@
 
         <div class="container">
 
-            <!-- <?php print_r($showmobpuja) ?> -->
+          
             <!-- cards -->
             <div class="row my-4" id="cardContainer">
 
@@ -57,21 +57,22 @@
 
                                     <!-- Profile Section (Poojari Name) -->
                                     <div class="d-flex align-items-center mb-3">
-                                        <a href="<?php echo base_url('PoojarViewMore'); ?>">
+                                       
                                             <div class="position-relative">
-                                                <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
+                                                  
+                                                <img src="<?php echo  !empty($showmobpujadata['profile_pic']) ? base_url('uploads/pujari/profile/image/'.$pujaridata['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
                                                     class="rounded-circle"
                                                     style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                             </div>
-                                        </a>
+                                       
                                         <div class="ms-2">
-                                            <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
+                                           
                                                 <h6 class="fw-bold" style="color: var(--red);">
                                                     <?php print_r($showmobpujadata["puja_name"]) ?>
                                                 </h6>
                                                 <h6 class="small text-muted mb-0"><?php print_r($showmobpujadata["name"]) ?>
                                                 </h6>
-                                            </a>
+                                           
                                         </div>
                                     </div>
 

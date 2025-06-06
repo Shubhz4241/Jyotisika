@@ -345,9 +345,30 @@ class User extends CI_Controller
 		$language = $this->session->userdata('site_language') ?? 'english';
 		$this->lang->load('message', $language);
 
+		$ch_url = base_url("User_Api_Controller/show_festivals");
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $ch_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$festivals_response = curl_exec($ch);
+		$curl_error_festivals = curl_error($ch);
+		curl_close($ch);
+
+		if ($festivals_response === false) {
+			show_error("cURL Error: " . $curl_error_festivals, 500);
+			return;
+		}
+
+		$festivals_data = json_decode($festivals_response, associative: true);
 
 
-		$this->load->view('User/Festival');
+		$data["festivals_data"] = "";
+		if ($festivals_data["status"] == "success") {
+			$data["festivals_data"] = $festivals_data["data"];
+		}
+
+
+		$this->load->view('User/Festival', $data);
 	}
 
 
@@ -362,12 +383,34 @@ class User extends CI_Controller
 			return;
 		}
 
+		$ch_url = base_url("User_Api_Controller/show_specific_festival");
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $ch_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["festival_id" => $festival_id]));
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		$festivals_response = curl_exec($ch);
+		$curl_error_festivals = curl_error($ch);
+		curl_close($ch);
+
+		if ($festivals_response === false) {
+			show_error("cURL Error: " . $curl_error_festivals, 500);
+			return;
+		}
+
+		$festivals_data = json_decode($festivals_response, associative: true);
+
+     
+		$data["festivals_data"] = "";
+		if ($festivals_data["status"] == "success") {
+			$data["festivals_data"] = $festivals_data["data"];
+		}
 
 
-
-
-
-		$this->load->view('User/FestivalReadmore');
+		
+		$this->load->view('User/FestivalReadmore', $data);
 	}
 
 
@@ -485,7 +528,7 @@ class User extends CI_Controller
 
 
 		//Product feedback
-			$api_url_product = base_url("User_Api_Controller/show_product_feedback");
+		$api_url_product = base_url("User_Api_Controller/show_product_feedback");
 
 		$ch_product_feedback = curl_init();
 		curl_setopt($ch_product_feedback, CURLOPT_URL, $api_url_product);
@@ -516,7 +559,7 @@ class User extends CI_Controller
 
 
 		// avg Product rating
-			$api_url_product_rating = base_url("User_Api_Controller/get_avg_rating_of_product");
+		$api_url_product_rating = base_url("User_Api_Controller/get_avg_rating_of_product");
 
 		$ch_product_avg_rating = curl_init();
 		curl_setopt($ch_product_avg_rating, CURLOPT_URL, $api_url_product_rating);
@@ -547,7 +590,7 @@ class User extends CI_Controller
 
 
 
-	
+
 
 
 		$this->load->view('User/ProductDetails', $data);
@@ -1307,6 +1350,8 @@ class User extends CI_Controller
 			$data["showfeedback"] = $showfeedbackresponse["data"];
 		}
 
+		// print_r($data["showfeedback"]);
+
 		// print_r($data["showfeedback"] );
 
 		$api_pujari_rating = base_url("User_Api_Controller/get_avg_rating_pujari");
@@ -1381,8 +1426,6 @@ class User extends CI_Controller
 	public function OnlinePoojaris($puja_id)
 	{
 
-
-
 		$api_url = base_url("User_Api_Controller/get_pujari_of_puja");
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $api_url);
@@ -1411,7 +1454,6 @@ class User extends CI_Controller
 		if ($showpujariresponse["status"] == "success") {
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
-
 
 
 
@@ -1474,7 +1516,7 @@ class User extends CI_Controller
 		if ($astrologer_data["status"] == "success") {
 			$data["astrologer_data"] = $astrologer_data["data"];
 		}
-		
+
 
 
 
@@ -1562,7 +1604,7 @@ class User extends CI_Controller
 
 		$showbookedpuja_response = json_decode($showbookedpuja, associative: true);
 
-		
+
 
 		$data["showbookedpuja_"] = "";
 
@@ -1591,9 +1633,9 @@ class User extends CI_Controller
 			show_error("cURL Error: " . $curl_error_bookedpuja, 500);
 			return;
 		}
-            
 
-		
+
+
 
 
 		$showbookedpuja_completed_response = json_decode($showbookedpuja_completed, associative: true);
@@ -1605,7 +1647,7 @@ class User extends CI_Controller
 			$data["show_completed_puja"] = $showbookedpuja_completed_response["data"];
 		}
 
-	
+
 
 
 		$this->load->view('User/Orders', $data);
@@ -1627,39 +1669,39 @@ class User extends CI_Controller
 
 	//----------------------------------------USER MOB PUJA --------------------------------------------------
 
-	
+
 	public function MobPooja()
-{
-    $api_url = base_url("User_Api_Controller/show_mob_puja");
+	{
+		$api_url = base_url("User_Api_Controller/show_mob_puja");
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $api_url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
-    $dataval = curl_exec($ch);
+		$dataval = curl_exec($ch);
 
-    if ($dataval === false) {
-        $curl_error = curl_error($ch);
-        curl_close($ch);
-        show_error("cURL Error: " . $curl_error, 500);
-        return;
-    }
+		if ($dataval === false) {
+			$curl_error = curl_error($ch);
+			curl_close($ch);
+			show_error("cURL Error: " . $curl_error, 500);
+			return;
+		}
 
-    curl_close($ch);
+		curl_close($ch);
 
-    $show_mob_puja = json_decode($dataval, true); // use true for associative array
+		$show_mob_puja = json_decode($dataval, true); // use true for associative array
 
-   
-    $data["showmobpuja"] = [];
 
- 
-    if (isset($show_mob_puja["status"]) && $show_mob_puja["status"] === "success") {
-        $data["showmobpuja"] = $show_mob_puja["data"];
-    }
+		$data["showmobpuja"] = [];
 
-    $this->load->view('User/MobPooja', $data);
-}
+
+		if (isset($show_mob_puja["status"]) && $show_mob_puja["status"] === "success") {
+			$data["showmobpuja"] = $show_mob_puja["data"];
+		}
+
+		$this->load->view('User/MobPooja', $data);
+	}
 
 
 
@@ -1753,12 +1795,12 @@ class User extends CI_Controller
 
 			$data["userinfo_data"] = $getdata["userinfo"];
 
-			
+
 
 
 		}
 
-     
+
 
 
 

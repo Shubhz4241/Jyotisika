@@ -1170,6 +1170,20 @@ class User_Api_Model extends CI_Model
     }
 
 
+    public function show_festivals_model(){
+
+       $query =  $this->db->get("festivals");
+        return $query->result();
+    }
+
+    public function show_specific_festival_model($festival_id){
+
+        $this->db->where("festivals_id" ,$festival_id);
+        $query =  $this->db->get("festivals");
+        return $query->result();
+    }
+
+
 
 
 

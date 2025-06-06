@@ -41,6 +41,7 @@
     <main>
 
    
+     
         <div class="container ">
          
             <!-- <div class="row g-4 mb-4">
@@ -85,12 +86,14 @@
             </div> -->
 
             <!-- Festival Image + About the Festival -->
+
+         
             <div class="row g-4 mb-5">
                 <div class="col-12">
                     <div class="p-4 border rounded shadow-sm  w-100 d-flex flex-column justify-content-between">
-                        <h3 class="text-dark mb-3"><?php echo $festivaldata[0]["festivals_title"] ?></h3>
+                        <h3 class="text-dark mb-3"><?php echo $festivals_data[0]["festivals_title"] ?></h3>
                         <p>
-                           <?php echo $festivaldata[0]["festivals_decription"]; ?>
+                           <?php echo $festivals_data[0]["festivals_decription"]; ?>
                         </p>
                        
                     </div>

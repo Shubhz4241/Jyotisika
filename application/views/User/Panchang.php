@@ -74,7 +74,7 @@
                     </tr>
                     <tr>
                         <td class="bg-color">Today's Tithi </td>
-                        <td class="bg-color"><?php print_r($tithi_data["name"]); ?></td>
+                        <td class="bg-color">Today's Tithi</td>
 
                     </tr>
                     <tr>

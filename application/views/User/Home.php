@@ -115,7 +115,6 @@
     // }
     ?>
 
-    <p>hello sir</p>
     <section>
         <div class="container mt-3">
             <div class="row gx-6 gy-3 justify-content-center">
@@ -355,7 +354,9 @@
                                         <!-- Profile Section -->
                                         <div class="d-flex align-items-center mb-2">
                                             <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>">
-                                                <img src="<?php echo base_url('assets/images/astrologer.png'); ?> " alt="image"
+
+                                           
+                                                <img src="<?php echo  !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
                                                     class="rounded-circle"
                                                     style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                             </a>

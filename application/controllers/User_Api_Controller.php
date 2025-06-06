@@ -2393,7 +2393,7 @@ class User_Api_Controller extends CI_Controller
 
             $pujari_id = $this->input->post("pujari_id");
             $service_id = $this->input->post("service_id");
-            
+
             $user_id = $this->input->post("user_id");
             $pujari_charge = $this->input->post("pujari_charges");
             $pujadate = $this->input->post("pujadate");
@@ -2422,7 +2422,7 @@ class User_Api_Controller extends CI_Controller
                 "pujari_charge" => $pujari_charge,
                 "puja_mode" => $puja_mode,
                 "puja_date" => $pujadate,
-                "mob_puja_id"=>$mob_puja_id,
+                "mob_puja_id" => $mob_puja_id,
                 "puja_time" => $pujatime,
                 "request_created_at" => $timestamp
 
@@ -2443,21 +2443,19 @@ class User_Api_Controller extends CI_Controller
                     "message" => "pujari already booked "
                 ];
 
-            }   else if ($query["status"] == "requestgetalready") {
+            } else if ($query["status"] == "requestgetalready") {
                 $response = [
                     "status" => "warning",
                     "message" => "you already send requested to book this mob puja"
                 ];
 
-            }   else if ($query["status"] == "userfull") {
+            } else if ($query["status"] == "userfull") {
                 $response = [
                     "status" => "userfull",
                     "message" => "user full "
                 ];
 
-            }  
-            
-            else {
+            } else {
                 $response = [
                     "status" => "error",
                     "message" => "data not inserted in the table"
@@ -2882,6 +2880,83 @@ class User_Api_Controller extends CI_Controller
 
         }
 
+    }
+
+
+    //Festivals
+
+    public function show_festivals()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $query = $this->User_Api_Model->show_festivals_model();
+
+            if ($query) {
+
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+                ];
+
+
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no festivals in the table"
+
+                ];
+
+            }
+
+            echo json_encode($response);
+
+            return;
+        }
+
+    }
+
+
+    public function show_specific_festival()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $festival_id = $this->input->post("festival_id");
+
+            $query = $this->User_Api_Model->show_specific_festival_model($festival_id);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no festivals in the table"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+        }
     }
 
 

@@ -238,6 +238,7 @@
                     </div> -->
 
                     <!-- chat -->
+                    
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 
                         <div class="row my-4" id="cardContainer">
@@ -283,11 +284,14 @@
                                             <div class="card-body p-3">
                                                 <!-- Profile Section -->
                                                 <div class="d-flex align-items-center mb-2">
-                                                    <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                                                        <img src="<?php echo base_url('assets/images/astrologer.png'); ?>"
-                                                            alt="image" class="rounded-circle"
-                                                            style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                                    </a>
+
+
+
+                                                    <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                        alt="image" class="rounded-circle"
+                                                        style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+
+
                                                     <div class="ms-2">
                                                         <a href="<?php echo base_url('ViewAstrologer'); ?>"
                                                             class="text-decoration-none">
@@ -460,7 +464,7 @@
                                         ]
                                     ]; ?>
 
-                                   
+
 
                                     <?php if ($showbookedpuja_): ?>
 
@@ -474,7 +478,6 @@
                                                         <div class="col-4">
                                                             <img src="<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>"
                                                                 class="img-fluid rounded-start h-100"
-                                                                
                                                                 style="object-fit: cover;">
                                                         </div>
                                                         <div class="col-8">
@@ -482,12 +485,12 @@
                                                                 <!-- Title -->
                                                                 <h6 class="card-title text-truncate mb-2"
                                                                     style="color: var(--red); font-size: 1.2rem;">
-                                                                    <?php if( $pooja["puja_mode"] == "Mob"): ?>
+                                                                    <?php if ($pooja["puja_mode"] == "Mob"): ?>
 
-                                                                    <?php echo $pooja['mobpujaname']; ?>
+                                                                        <?php echo $pooja['mobpujaname']; ?>
                                                                     <?php else: ?>
-                                                                         <?php echo $pooja['service_name']; ?>
-                                                                    <?php endif?>
+                                                                        <?php echo $pooja['service_name']; ?>
+                                                                    <?php endif ?>
                                                                 </h6>
 
                                                                 <!-- Pandit Name -->
@@ -553,79 +556,81 @@
                                                             
                                                                     ?>
 
-                                                                       <?php if ($pooja['payment_status'] === "Paid") { ?>
-                                                                    <span class="badge rounded-1"
-                                                                        style="background-color: gray; color: white; font-size: 0.85rem; padding: 6px 12px;">
-                                                                        Paid
-                                                                    </span>
-                                                                <?php } elseif ($pooja['status'] === "Approved") {    ?>
+                                                                    <?php if ($pooja['payment_status'] === "Paid") { ?>
+                                                                        <span class="badge rounded-1"
+                                                                            style="background-color: gray; color: white; font-size: 0.85rem; padding: 6px 12px;">
+                                                                            Paid
+                                                                        </span>
+                                                                    <?php } elseif ($pooja['status'] === "Approved") { ?>
 
 
-                                                                    <?php if ($days > 1) { ?>
-                                                                        <?php if ($daysRemaining >= 2) { ?>
-                                                                            <span id="payment-button-<?php echo $pooja['book_puja_id']; ?>"
-                                                                                class="badge rounded-1 payment-button"
-                                                                                data-id="<?php echo $pooja['book_puja_id']; ?>"
-                                                                                data-amount="<?php echo $pooja['pujari_charge']; ?>"
-                                                                                style="background-color: green; color: white; font-size: 0.85rem; padding: 6px 12px; cursor: pointer;">
-                                                                                Do Payment
-                                                                            </span>
-                                                                        <?php } else { ?>
+                                                                        <?php if ($days > 1) { ?>
+                                                                            <?php if ($daysRemaining >= 2) { ?>
+                                                                                <span
+                                                                                    id="payment-button-<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    class="badge rounded-1 payment-button"
+                                                                                    data-id="<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    data-amount="<?php echo $pooja['pujari_charge']; ?>"
+                                                                                    style="background-color: green; color: white; font-size: 0.85rem; padding: 6px 12px; cursor: pointer;">
+                                                                                    Do Payment
+                                                                                </span>
+                                                                            <?php } else { ?>
 
-                                                                           <span class="badge rounded-1"
-                                                                        style="background-color: red; color: white; font-size: 0.85rem; padding: 6px 12px;">
-                                                                       Puja Cancelled
-                                                                    </span>
+                                                                                <span class="badge rounded-1"
+                                                                                    style="background-color: red; color: white; font-size: 0.85rem; padding: 6px 12px;">
+                                                                                    Puja Cancelled
+                                                                                </span>
 
-                                                                       <?php } ?>
+                                                                            <?php } ?>
 
-                                                                    <?php } elseif ($days >= 0 && $days <= 1) { ?>
-                                                                        <?php if ($daysRemaining >= 1 || $hoursRemaining >= 4) { ?>
-
-
-                                                                            <span id="payment-button-<?php echo $pooja['book_puja_id']; ?>"
-                                                                                class="badge rounded-1 payment-button"
-                                                                                data-id="<?php echo $pooja['book_puja_id']; ?>"
-                                                                                data-amount="<?php echo $pooja['pujari_charge']; ?>"
-                                                                                style="background-color: green; color: white; font-size: 0.85rem; padding: 6px 12px; cursor: pointer;">
-                                                                                Payment
-                                                                            </span>
+                                                                        <?php } elseif ($days >= 0 && $days <= 1) { ?>
+                                                                            <?php if ($daysRemaining >= 1 || $hoursRemaining >= 4) { ?>
 
 
-                                                                        <?php }else{?>
+                                                                                <span
+                                                                                    id="payment-button-<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    class="badge rounded-1 payment-button"
+                                                                                    data-id="<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    data-amount="<?php echo $pooja['pujari_charge']; ?>"
+                                                                                    style="background-color: green; color: white; font-size: 0.85rem; padding: 6px 12px; cursor: pointer;">
+                                                                                    Payment
+                                                                                </span>
 
-                                                                              <span class="badge rounded-1"
-                                                                        style="background-color: red; color: white; font-size: 0.85rem; padding: 6px 12px;">
-                                                                       Puja Cancelled
-                                                                    </span>
 
-                                                                            
-                                                                     <?php   } ?>
-                                                                    <?php } ?>
-                                                                <?php } ?>
+                                                                            <?php } else { ?>
 
-                                                                  <div style="font-size: 0.9rem;">
-                                                                    <div class="text-truncate mb-1">
+                                                                                <span class="badge rounded-1"
+                                                                                    style="background-color: red; color: white; font-size: 0.85rem; padding: 6px 12px;">
+                                                                                    Puja Cancelled
+                                                                                </span>
 
-                                                                        <?php if ($pooja['status'] === "Approved") { ?>
-                                                                            <?php if ($pooja['payment_status'] != "Paid") { ?>
-                                                                                <?php
-                                                                                if ($days > 1) {
-                                                                                    echo "$days days, $hours hours, $minutes minutes remaining<br>";
-                                                                                    echo "<span style='color: red; font-weight: bold;'>pay before 2 days of of starting .</span>";
-                                                                                    echo "<p style='color: red; font-weight: bold;'> Puja otherwise, it will be cancelled.</p>";
-                                                                                } elseif ($days >= 0 && $days <= 1) {
-                                                                                    echo "$days days, $hours hours, $minutes minutes remaining<br>";
-                                                                                    echo "<span style='color: red; font-weight: bold;'>pay before 4 hours of starting Puja.</span>";
-                                                                                    echo "<p style='color: red; font-weight: bold;'>otherwise, it will be cancelled.</p>";
-                                                                                } else {
-                                                                                    echo "$hours hours, $minutes minutes remaining";
-                                                                                }
-                                                                                ?>
+
                                                                             <?php } ?>
                                                                         <?php } ?>
+                                                                    <?php } ?>
+
+                                                                    <div style="font-size: 0.9rem;">
+                                                                        <div class="text-truncate mb-1">
+
+                                                                            <?php if ($pooja['status'] === "Approved") { ?>
+                                                                                <?php if ($pooja['payment_status'] != "Paid") { ?>
+                                                                                    <?php
+                                                                                    if ($days > 1) {
+                                                                                        echo "$days days, $hours hours, $minutes minutes remaining<br>";
+                                                                                        echo "<span style='color: red; font-weight: bold;'>pay before 2 days of of starting .</span>";
+                                                                                        echo "<p style='color: red; font-weight: bold;'> Puja otherwise, it will be cancelled.</p>";
+                                                                                    } elseif ($days >= 0 && $days <= 1) {
+                                                                                        echo "$days days, $hours hours, $minutes minutes remaining<br>";
+                                                                                        echo "<span style='color: red; font-weight: bold;'>pay before 4 hours of starting Puja.</span>";
+                                                                                        echo "<p style='color: red; font-weight: bold;'>otherwise, it will be cancelled.</p>";
+                                                                                    } else {
+                                                                                        echo "$hours hours, $minutes minutes remaining";
+                                                                                    }
+                                                                                    ?>
+                                                                                <?php } ?>
+                                                                            <?php } ?>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
 
 
 
@@ -649,88 +654,88 @@
                                 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 
-                                 <script>
+                                <script>
 
-                                document.querySelectorAll(".payment-button").forEach(button => {
-                                    button.addEventListener("click", function () {
+                                    document.querySelectorAll(".payment-button").forEach(button => {
+                                        button.addEventListener("click", function () {
                                             let bookPujaId = this.getAttribute("data-id");
-                                        let chargeAmount = this.getAttribute("data-amount");
-                                        
+                                            let chargeAmount = this.getAttribute("data-amount");
 
-                                        fetch('<?php echo base_url('User_Api_Controller/save_book_puja_payment'); ?>', {
-                                            method: 'POST',
-                                            headers: { 'Content-Type': 'application/json' },
-                                            body: JSON.stringify({ amount: chargeAmount, getbookpujaid: bookPujaId })
-                                        })
-                                        .then(response => response.json())
-                                         .then(data => {
-                                                if (data.status === 'error') {
-                                                    alert(data.message);
-                                                    return;
-                                                }
 
-                                                var options = {
-                                                    "key": data.key,
-                                                    "amount": data.amount,
-                                                    "currency": "INR",
-                                                    "name": "New Astro",
-                                                    "description": "Order Payment",
-                                                    "order_id": data.order_id,
-                                                    "handler": function (response) {
-                                                        fetch('<?php echo base_url('User_Api_Controller/update_book_puja_payment'); ?>', {
-                                                            method: 'POST',
-                                                            headers: { 'Content-Type': 'application/json' },
-                                                            body: JSON.stringify({
-                                                                payment_id: response.razorpay_payment_id,
-                                                                razorpay_signature: response.razorpay_signature,
-                                                                amount: chargeAmount,
-                                                                getbookpujaidfunc: bookPujaId,
-                                                                order_id: response.razorpay_order_id,
+                                            fetch('<?php echo base_url('User_Api_Controller/save_book_puja_payment'); ?>', {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ amount: chargeAmount, getbookpujaid: bookPujaId })
+                                            })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    if (data.status === 'error') {
+                                                        alert(data.message);
+                                                        return;
+                                                    }
 
+                                                    var options = {
+                                                        "key": data.key,
+                                                        "amount": data.amount,
+                                                        "currency": "INR",
+                                                        "name": "New Astro",
+                                                        "description": "Order Payment",
+                                                        "order_id": data.order_id,
+                                                        "handler": function (response) {
+                                                            fetch('<?php echo base_url('User_Api_Controller/update_book_puja_payment'); ?>', {
+                                                                method: 'POST',
+                                                                headers: { 'Content-Type': 'application/json' },
+                                                                body: JSON.stringify({
+                                                                    payment_id: response.razorpay_payment_id,
+                                                                    razorpay_signature: response.razorpay_signature,
+                                                                    amount: chargeAmount,
+                                                                    getbookpujaidfunc: bookPujaId,
+                                                                    order_id: response.razorpay_order_id,
+
+                                                                })
                                                             })
-                                                        })
-                                                            .then(res => res.json())
-                                                            .then(result => {
-                                                                if (result.status === 'success') {
+                                                                .then(res => res.json())
+                                                                .then(result => {
+                                                                    if (result.status === 'success') {
 
-                                                                    Swal.fire({
-                                                                        icon: 'success',
-                                                                        title: 'Payment Successful!',
-                                                                        text: 'Your payment was successful and your wallet has been updated.',
-                                                                        timer: 3000,
-                                                                        showConfirmButton: false
-                                                                    }).then(() => {
-                                                                        window.location.href = "<?php echo base_url('Orders'); ?>";
-                                                                    });
+                                                                        Swal.fire({
+                                                                            icon: 'success',
+                                                                            title: 'Payment Successful!',
+                                                                            text: 'Your payment was successful and your wallet has been updated.',
+                                                                            timer: 3000,
+                                                                            showConfirmButton: false
+                                                                        }).then(() => {
+                                                                            window.location.href = "<?php echo base_url('Orders'); ?>";
+                                                                        });
 
-                                                                } else {
-                                                                    Swal.fire({
-                                                                        icon: 'error',
-                                                                        title: 'Payment Failed!',
-                                                                        text: result.message
-                                                                    }).then(() => {
-                                                                        window.location.href = "<?php echo base_url('Orders'); ?>";
-                                                                    });
-                                                                }
-                                                            });
-                                                    },
-                                                    // "prefill": { "name": data.name, "email": data.email },
-                                                    "theme": { "color": "#3399cc" }
-                                                };
+                                                                    } else {
+                                                                        Swal.fire({
+                                                                            icon: 'error',
+                                                                            title: 'Payment Failed!',
+                                                                            text: result.message
+                                                                        }).then(() => {
+                                                                            window.location.href = "<?php echo base_url('Orders'); ?>";
+                                                                        });
+                                                                    }
+                                                                });
+                                                        },
+                                                        // "prefill": { "name": data.name, "email": data.email },
+                                                        "theme": { "color": "#3399cc" }
+                                                    };
 
-                                                var rzp = new Razorpay(options);
-                                                rzp.on('payment.failed', function (response) {
-                                                    window.location.href = "<?php echo base_url('User/paymentFailure'); ?>?error=" +
-                                                        encodeURIComponent(response.error.description);
+                                                    var rzp = new Razorpay(options);
+                                                    rzp.on('payment.failed', function (response) {
+                                                        window.location.href = "<?php echo base_url('User/paymentFailure'); ?>?error=" +
+                                                            encodeURIComponent(response.error.description);
+                                                    });
+                                                    rzp.open();
                                                 });
-                                                rzp.open();
-                                            });
+                                        });
+
                                     });
-                                
-                                });
 
 
-                                    </script>
+                                </script>
 
                             </div>
 
@@ -766,7 +771,7 @@
                                         ]
                                     ]; ?>
 
-                                    <?php print_r($show_completed_puja); ?>
+                                  
 
                                     <?php if ($show_completed_puja): ?>
 
@@ -778,27 +783,26 @@
                                                         <div class="col-4">
                                                             <img src="<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>"
                                                                 class="img-fluid rounded-start h-100 w-100"
-                                                               
                                                                 style="object-fit: cover;">
                                                         </div>
                                                         <div class="col-8">
                                                             <div class="card-body p-3 d-flex flex-column h-100">
                                                                 <!-- Content Section -->
                                                                 <div>
-                                                                     <h6 class="card-title text-truncate mb-2"
-                                                                    style="color: var(--red); font-size: 1.2rem;">
-                                                                    <?php if( $pooja["puja_mode"] == "Mob"): ?>
+                                                                    <h6 class="card-title text-truncate mb-2"
+                                                                        style="color: var(--red); font-size: 1.2rem;">
+                                                                        <?php if ($pooja["puja_mode"] == "Mob"): ?>
 
-                                                                    <?php echo $pooja['mobpujaname']; ?>
-                                                                    <?php else: ?>
-                                                                         <?php echo $pooja['service_name']; ?>
-                                                                    <?php endif?>
-                                                                </h6>
-                                                                   
-                                                                     <p class="mb-2 text-truncate" style="font-size: 1rem;">
-                                                                    <i class="bi bi-person"></i>
-                                                                    <?php echo $pooja['pujari_name']; ?>
-                                                                </p>
+                                                                            <?php echo $pooja['mobpujaname']; ?>
+                                                                        <?php else: ?>
+                                                                            <?php echo $pooja['service_name']; ?>
+                                                                        <?php endif ?>
+                                                                    </h6>
+
+                                                                    <p class="mb-2 text-truncate" style="font-size: 1rem;">
+                                                                        <i class="bi bi-person"></i>
+                                                                        <?php echo $pooja['pujari_name']; ?>
+                                                                    </p>
 
                                                                     <div class="d-flex gap-2 mb-2">
                                                                         <span class="badge rounded-pill"
@@ -848,13 +852,13 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title">Feedback for
-                                                                 <?php if( $pooja["puja_mode"] == "Mob"): ?>
+                                                                <?php if ($pooja["puja_mode"] == "Mob"): ?>
 
                                                                     <?php echo $pooja['mobpujaname']; ?>
-                                                                    <?php else: ?>
-                                                                         <?php echo $pooja['service_name']; ?>
-                                                                    <?php endif?>
-                                                                
+                                                                <?php else: ?>
+                                                                    <?php echo $pooja['service_name']; ?>
+                                                                <?php endif ?>
+
                                                             </h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal"></button>
@@ -975,7 +979,7 @@
                                         ]
                                     ]; ?>
 
-                                     
+
 
                                     <?php if (!empty($showorderedproduct)): ?>
                                         <?php foreach ($showorderedproduct as $order): ?>
@@ -1048,8 +1052,8 @@
                                         ]
                                     ]; ?>
 
-                                   
-                               
+
+
                                     <?php if (!empty($showorderedproduct_shipped)): ?>
                                         <?php foreach ($showorderedproduct_shipped as $order): ?>
                                             <div class="col-md-6 col-lg-4 mb-4">

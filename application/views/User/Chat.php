@@ -158,10 +158,12 @@
 
     <!-- NAVBAR -->
 
+   
     <?php
 
     if ($astrologerdata[0]) {
 
+        $astoologer_image = $astrologerdata[0]["name"];
         $astrolger_name = $astrologerdata[0]["name"];
         $astrologer_id = $astrologerdata[0]["id"];
         $price_per_minute = $astrologerdata[0]["price_per_minute"];
@@ -176,8 +178,8 @@
 
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
 
-    <?php print_r($astrologerdata); ?>
-        <?php print_r($userinfo_data); ?>
+    <!-- <?php print_r($astrologerdata); ?> -->
+        <!-- <?php print_r($userinfo_data); ?> -->
     <main>
 
      <div class="container d-flex justify-content-center align-items-center">
@@ -197,7 +199,10 @@
             <div class="chat-window">
                 <div class="chat-header">
                     <div class="d-flex align-items-center">
-                        <img src="<?php echo base_url("assets/images/users.png") ?>" alt="Profile Image" class="profile-img rounded-circle" width="30px" height="30px">
+
+                   
+
+                        <img src="<?php echo  !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="Profile Image" class="profile-img rounded-circle" width="30px" height="30px">
                         <h5 class="mb-0"><?php echo $astrolger_name ?></h5>
                     </div>
 
