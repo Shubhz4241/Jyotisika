@@ -16,18 +16,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="icon" href="<?= base_url('assets/images/admin/logo.png.png'); ?>" type="image/png">
+    <link rel="icon" href="assets/images/admin/logo.png" type="image/png">
 
     <style>
-        /* Apply Inter font to the entire page */
-        * {
-            font-family: 'rokkitt', sans-serif;
-        }
-
-        /* Apply Rokkitt font to the body */
-
+        /* Keep all your existing styles here */
         .main {
-           
             min-height: 100vh;
             padding: 20px;
             transition: margin-left 0.3s;
@@ -39,16 +32,6 @@
             margin-bottom: 20px;
         }
 
-        /* Sidebar */
-
-
-
-
-        .close-sidebar {
-            display: none;
-        }
-
-        /* Navbar */
         .navbar {
             background-color: #F6CE57;
             padding: 10px;
@@ -84,27 +67,21 @@
             width: 10%;
         }
 
-        /* Sr. No. */
         .table th:nth-child(2) {
             width: 30%;
         }
 
-        /* Astrologer Name */
         .table th:nth-child(3) {
             width: 20%;
         }
 
-        /* Total Users */
         .table th:nth-child(4) {
             width: 25%;
         }
 
-        /* Last Active */
         .table th:nth-child(5) {
             width: 15%;
         }
-
-        /* Details */
 
         .table tbody tr {
             text-align: center;
@@ -124,8 +101,7 @@
             background-color: #e9ecef;
         }
 
-        .table td,
-        .table th {
+        .table td, .table th {
             vertical-align: middle;
             padding: 12px 15px;
             word-wrap: break-word;
@@ -185,12 +161,10 @@
 
         .status-select.paid {
             background-color: #0C768A;
-            /* Green for Paid */
         }
 
         .status-select.pending {
             background-color: #fd7e14;
-            /* Orange for Pending */
         }
 
         .status-select:focus {
@@ -263,8 +237,7 @@
                 overflow-x: auto;
             }
 
-            .table td,
-            .table th {
+            .table td, .table th {
                 padding: 0.5rem;
             }
 
@@ -321,8 +294,7 @@
                 font-size: 16px;
             }
 
-            .table th,
-            .table td {
+            .table th, .table td {
                 padding: 0.4rem;
             }
 
@@ -335,17 +307,10 @@
 
 <body style="background-color:rgb(228, 236, 241);">
     <div class="d-flex">
-        <!-- Sidebar -->
-        <?php $this->load->view('Finance/FinanceSidebar'); ?>
-
+            <?php $this->load->view('Finance/FinanceSidebar'); ?>
 
         <!-- Main Content -->
         <div class="main mt-3">
-
-            <!-- Navbar -->
-            <?php $this->load->view('Finance/FinanceNavbar'); ?>
-
-
             <div class="container-fluid">
                 <div class="row mt-2">
                     <div class="col-12">
@@ -387,22 +352,37 @@
         const recordsPerPage = 8;
         let currentPage = 1;
 
-        fetchAstrologerSessions();
+        // Dummy data
+        function getDummyData() {
+            return [
+                {
+                    id: 1,
+                    name: "Astrologer A",
+                    lastActive: "2023-10-01",
+                    users: [
+                        { userName: "User 1", chargesPerMin: 10, duration: 30, status: "paid", incomeId: 101 },
+                        { userName: "User 2", chargesPerMin: 15, duration: 45, status: "pending", incomeId: 102 }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "Astrologer B",
+                    lastActive: "2023-10-02",
+                    users: [
+                        { userName: "User 3", chargesPerMin: 20, duration: 60, status: "paid", incomeId: 103 },
+                        { userName: "User 4", chargesPerMin: 25, duration: 30, status: "pending", incomeId: 104 }
+                    ]
+                },
+                // Add more dummy data as needed
+            ];
+        }
 
+        // Initialize with dummy data
         function fetchAstrologerSessions() {
-            fetch("<?= base_url('admin/getAstrologerSessions') ?>")
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === "success" && Array.isArray(data.data)) {
-                        astrologers = data.data;
-                        filteredAstrologers = [...astrologers];
-                        renderTable(currentPage);
-                        renderPagination();
-                    } else {
-                        console.error("Unexpected API response format:", data);
-                    }
-                })
-                .catch(error => console.error("Error fetching astrologer sessions:", error));
+            astrologers = getDummyData();
+            filteredAstrologers = [...astrologers];
+            renderTable(currentPage);
+            renderPagination();
         }
 
         function calculateTotalAmount(chat) {
@@ -412,9 +392,7 @@
         }
 
         function calculateAstrologerTotals(users) {
-            let totalAmount = 0,
-                paidAmount = 0,
-                paidCount = 0;
+            let totalAmount = 0, paidAmount = 0, paidCount = 0;
             users.forEach(user => {
                 const amount = calculateTotalAmount(user);
                 totalAmount += amount;
@@ -423,11 +401,7 @@
                     paidCount++;
                 }
             });
-            return {
-                totalAmount,
-                paidAmount,
-                paidCount
-            };
+            return { totalAmount, paidAmount, paidCount };
         }
 
         function renderTable(page) {
@@ -441,55 +415,54 @@
             visibleAstrologers.forEach((astrologer, index) => {
                 const totals = calculateAstrologerTotals(astrologer.users);
                 const row = `
-            <tr>
-                <th scope="row">${startIndex + index + 1}</th>
-                <td>${astrologer.name}</td>
-                <td>${astrologer.users.length}</td>
-                <td>${astrologer.lastActive}</td>
-                <td>
-                    <button class="toggle-btn" data-id="${astrologer.id}">
-                        <i class="bi bi-caret-down-fill"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr class="chat-details-row" id="details-${astrologer.id}" style="display: none;">
-                <td colspan="5" class="chat-details">
-                    <p><strong>Total Amount:</strong> ₹${totals.totalAmount.toFixed(2)}</p>
-                    <p><strong>Paid Amount:</strong> ₹${totals.paidAmount.toFixed(2)}</p>
-                    <p>
-                        <strong>Paid Chats:</strong> ${totals.paidCount}
-                        <button class="btn btn-sm btn-success float-end mark-astrologer-paid-btn" 
-                             
-                            data-astrologer-id="${astrologer.id}"
-                            data-name="${astrologer.name}">
-                            <i class="bi bi-cash-coin"></i> Mark All as Paid
-                        </button>
-                    </p>
-                    <hr>
-                    ${astrologer.users.map(user => `
-                        <div class="chat-entry">
-                            <div class="chat-info">
-                                <p><strong>${user.userName}</strong></p>
-                                <p>Charges: ₹${user.chargesPerMin}/min</p>
-                                <p>Duration: ${user.duration} min</p>
-                            </div>
-                            <div class="chat-amount-status">
-                                <p>Total Amount: ₹${calculateTotalAmount(user).toFixed(2)}</p>
-                                <p>Status: ${
-                                    user.status === "paid"
-                                        ? `<span class="badge bg-success">Paid</span>`
-                                        : `<button class="btn btn-sm btn-primary mark-paid-btn" 
-                                            data-income-id="${user.incomeId}"
-                                            data-username="${user.userName}">
-                                            Mark as Paid
-                                        </button>`
-                                }</p>
-                            </div>
-                        </div>
-                    `).join('<hr>')}
-                </td>
-            </tr>
-        `;
+                    <tr>
+                        <th scope="row">${startIndex + index + 1}</th>
+                        <td>${astrologer.name}</td>
+                        <td>${astrologer.users.length}</td>
+                        <td>${astrologer.lastActive}</td>
+                        <td>
+                            <button class="toggle-btn" data-id="${astrologer.id}">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="chat-details-row" id="details-${astrologer.id}" style="display: none;">
+                        <td colspan="5" class="chat-details">
+                            <p><strong>Total Amount:</strong> ₹${totals.totalAmount.toFixed(2)}</p>
+                            <p><strong>Paid Amount:</strong> ₹${totals.paidAmount.toFixed(2)}</p>
+                            <p>
+                                <strong>Paid Chats:</strong> ${totals.paidCount}
+                                <button class="btn btn-sm btn-success float-end mark-astrologer-paid-btn"
+                                    data-astrologer-id="${astrologer.id}"
+                                    data-name="${astrologer.name}">
+                                    <i class="bi bi-cash-coin"></i> Mark All as Paid
+                                </button>
+                            </p>
+                            <hr>
+                            ${astrologer.users.map(user => `
+                                <div class="chat-entry">
+                                    <div class="chat-info">
+                                        <p><strong>${user.userName}</strong></p>
+                                        <p>Charges: ₹${user.chargesPerMin}/min</p>
+                                        <p>Duration: ${user.duration} min</p>
+                                    </div>
+                                    <div class="chat-amount-status">
+                                        <p>Total Amount: ₹${calculateTotalAmount(user).toFixed(2)}</p>
+                                        <p>Status: ${
+                                            user.status === "paid"
+                                                ? `<span class="badge bg-success">Paid</span>`
+                                                : `<button class="btn btn-sm btn-primary mark-paid-btn"
+                                                    data-income-id="${user.incomeId}"
+                                                    data-username="${user.userName}">
+                                                    Mark as Paid
+                                                </button>`
+                                        }</p>
+                                    </div>
+                                </div>
+                            `).join('<hr>')}
+                        </td>
+                    </tr>
+                `;
                 tableBody.innerHTML += row;
             });
 
@@ -510,10 +483,10 @@
 
             for (let i = 1; i <= totalPages; i++) {
                 pagination.innerHTML += `
-            <li class="page-item ${i === currentPage ? 'active' : ''}">
-                <a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a>
-            </li>
-        `;
+                    <li class="page-item ${i === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a>
+                    </li>
+                `;
             }
         }
 
@@ -532,18 +505,17 @@
             renderTable(currentPage);
             renderPagination();
         });
+
+        // Initial render
+        fetchAstrologerSessions();
     </script>
 
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- SCRIPT FOR MARKING CHAT AS PAID -->
     <script>
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('mark-paid-btn')) {
                 const button = event.target;
-                const incomeId = button.getAttribute('data-income-id'); // From astrologer_income
+                const incomeId = button.getAttribute('data-income-id');
                 const username = button.getAttribute('data-username');
 
                 if (incomeId) {
@@ -554,43 +526,23 @@
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, mark as paid',
-                        showLoaderOnConfirm: true,
-                        preConfirm: () => {
-                            return fetch(`<?php echo base_url() ?>admin/markChatAsPaid/${incomeId}/`, {
-                                    method: 'POST'
-                                })
-                                .then(response => {
-                                    if (!response.ok) throw new Error(response.statusText);
-                                    return response.json();
-                                })
-                                .catch(error => {
-                                    Swal.showValidationMessage(`Request failed: ${error}`);
-                                });
-                        },
-                        allowOutsideClick: () => !Swal.isLoading()
+                        confirmButtonText: 'Yes, mark as paid'
                     }).then((result) => {
-                        if (result.isConfirmed && result.value?.status === "success") {
+                        if (result.isConfirmed) {
                             Swal.fire('Marked!', 'The session has been marked as paid.', 'success');
                             fetchAstrologerSessions(); // Refresh the table
-                        } else if (result.isConfirmed) {
-                            Swal.fire('Failed!', result.value?.message || 'Something went wrong.', 'error');
                         }
                     });
                 }
             }
         });
-    </script>
 
-    <!-- SCRIPT FOR MARKING ASTROLOGER AS PAID -->
-    <script>
         document.addEventListener('click', function(event) {
             if (event.target.closest('.mark-astrologer-paid-btn')) {
                 const button = event.target.closest('.mark-astrologer-paid-btn');
                 const astrologerId = button.getAttribute('data-astrologer-id');
                 const astrologerName = button.getAttribute('data-name');
 
-                // SweetAlert confirmation dialog
                 Swal.fire({
                     title: 'Are you sure?',
                     text: `Mark all sessions for ${astrologerName} as paid?`,
@@ -598,56 +550,16 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, mark all as paid!',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return fetch(`<?= base_url('admin/markAstrologerIncomeAsPaid/') ?>${astrologerId}`, {
-                                method: 'POST'
-                            })
-                            .then(response => {
-                                if (!response.ok) throw new Error(response.statusText);
-                                return response.json();
-                            })
-                            .catch(error => {
-                                Swal.showValidationMessage(`Request failed: ${error}`);
-                            });
-                    },
-                    allowOutsideClick: () => !Swal.isLoading()
+                    confirmButtonText: 'Yes, mark all as paid!'
                 }).then((result) => {
-                    if (result.isConfirmed && result.value?.status === "success") {
-                        Swal.fire('Marked!', result.value.message, 'success');
+                    if (result.isConfirmed) {
+                        Swal.fire('Marked!', 'All sessions have been marked as paid.', 'success');
                         fetchAstrologerSessions(); // Refresh table
-                    } else if (result.isConfirmed) {
-                        Swal.fire('Failed!', result.value?.message || 'Something went wrong.', 'error');
                     }
                 });
             }
         });
     </script>
-
-
-
-    <script>
-        // Sidebar toggle
-        const toggler = document.querySelector(".toggler-btn");
-        const closeBtn = document.querySelector(".close-sidebar");
-        const sidebar = document.querySelector("#sidebar");
-
-        toggler?.addEventListener("click", function() {
-            sidebar.classList.toggle("collapsed");
-            this.style.left = sidebar.classList.contains("collapsed") ? "10px" : "260px";
-        });
-
-        closeBtn?.addEventListener("click", function() {
-            sidebar.classList.remove("collapsed");
-        });
-
-        // Initial render
-        renderTable(currentPage);
-        renderPagination();
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
