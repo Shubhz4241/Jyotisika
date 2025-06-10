@@ -272,7 +272,7 @@ class User_Api_Model extends CI_Model
     public function getastrologer_model()
     {
 
-        $this->db->select("astrologer_registration.* , AVG(astrologer_feedback.rating) as average_rating");
+        $this->db->select("astrologer_registration.* , AVG(astrologer_feedback.rating) as average_rating ");
         $this->db->from("astrologer_registration");
         $this->db->join('astrologer_feedback', 'astrologer_feedback.astrologer_id = astrologer_registration.id', 'Left');
         $this->db->group_by('astrologer_registration.id');
@@ -280,7 +280,30 @@ class User_Api_Model extends CI_Model
         $this->db->where("is_online", "1");
 
         $query = $this->db->get();
-        return $query->result();
+        $astrologers = $query->result();
+        foreach ($astrologers as &$astro) {
+            $chatSession = $this->db->select('start_time, expire_on')
+                ->from('chat_sessions')
+                ->where('astrologer_id', $astro->id)
+                ->where('status', 'active')
+                ->order_by('id', 'DESC')
+                ->limit(1)
+                ->get()
+                ->row();
+
+            if ($chatSession) {
+                $astro->chat_start_time = $chatSession->start_time;
+                $astro->chat_expire_on = $chatSession->expire_on;
+                $astro->chatstatus = "active";
+            } else {
+                $astro->chat_start_time = null;
+                $astro->chat_expire_on = null;
+                $astro->chatstatus = "inactive";
+            }
+        }
+
+        return $astrologers;
+
 
     }
 
@@ -288,11 +311,34 @@ class User_Api_Model extends CI_Model
     public function get_astrologer_by_id_model($astrologer_id)
     {
 
+
         $this->db->where("id", $astrologer_id);
         $this->db->where("status", "approved");
         $this->db->where("is_online", "1");
         $query = $this->db->get("astrologer_registration");
-        return $query->result();
+        $astrologer = $query->result();
+
+        $chatSession = $this->db->select('start_time, expire_on')
+            ->from('chat_sessions')
+            ->where('astrologer_id', $astrologer_id) // astrologer_details.id
+            ->where('status', 'active')
+            ->order_by('id', 'DESC')
+            ->limit(1)
+            ->get()
+            ->row();
+
+        if ($chatSession) {
+            $astrologer['chat_start_time'] = $chatSession->start_time;
+            $astrologer['chat_expire_on'] = $chatSession->expire_on;
+            $astrologer['chatstatus'] = "active";
+        } else {
+            $astrologer['chat_start_time'] = null;
+            $astrologer['chat_expire_on'] = null;
+            $astrologer['chatstatus'] = "inactive";
+        }
+
+
+        return $astrologer;
     }
 
     public function followastrologer_model($data)
@@ -410,10 +456,57 @@ class User_Api_Model extends CI_Model
         $this->db->order_by('average_rating', 'DESC');
         $this->db->limit(4);
         $query = $this->db->get();
-        return $query->result();
+        $astrologers = $query->result();
+        foreach ($astrologers as &$astro) {
+            $chatSession = $this->db->select('start_time, expire_on')
+                ->from('chat_sessions')
+                ->where('astrologer_id', $astro->id)
+                ->where('status', 'active')
+                ->order_by('id', 'DESC')
+                ->limit(1)
+                ->get()
+                ->row();
+
+            if ($chatSession) {
+                $astro->chat_start_time = $chatSession->start_time;
+                $astro->chat_expire_on = $chatSession->expire_on;
+                $astro->chatstatus = "active";
+            } else {
+                $astro->chat_start_time = null;
+                $astro->chat_expire_on = null;
+                $astro->chatstatus = "inactive";
+            }
+        }
+
+        return $astrologers;
 
 
 
+    }
+
+
+    public function get_astrologer_chat_with_user_model($session_id)
+    {
+
+        if (!$session_id) {
+
+            $response = [
+                "status" => "error",
+                "message" => "session id is missing "
+            ];
+
+            return $response;
+
+        } else {
+
+            $this->db->select("chat_sessions.astrologer_id , astrologer_registration.*");
+            $this->db->from("chat_sessions");
+            $this->db->join("astrologer_registration", "astrologer_registration.id = chat_sessions.astrologer_id");
+            $this->db->where("user_id", $session_id);
+            $this->db->group_by("chat_sessions.astrologer_id");
+            $query = $this->db->get();
+            return $query->result();
+        }
     }
 
     public function getfollowed_astrologer_by_user_model($session_id)
@@ -883,6 +976,48 @@ class User_Api_Model extends CI_Model
             }
 
 
+        } else {
+            $this->db->from("bookpuja_request_by_user_to_pujari");
+            $this->db->where([
+                "jyotisika_user_id" => $formdata["jyotisika_user_id"],
+                "pujari_id" => $formdata["pujari_id"],
+                "mob_puja_id" => $formdata["mob_puja_id"]
+            ]);
+
+
+            $numrows = $this->db->count_all_results();
+
+
+
+
+
+
+            if ($numrows > 0) {
+                return [
+                    "status" => "requestgetalready",
+                    "message" => "You already sent request to book this puja"
+                ];
+            }
+
+            $this->db->from("bookpuja_request_by_user_to_pujari");
+            $this->db->where([
+                "mob_puja_id" => $formdata["mob_puja_id"]
+            ]);
+            $nummobrows = $this->db->count_all_results();
+
+            $this->db->where("id", $formdata["mob_puja_id"]);
+            $query = $this->db->get("mob_puja");
+            $pujaData = $query->row_array();
+
+                if ((int)$nummobrows >= (int)$pujaData["totalAttendee"]) {
+                    return [
+                        "status" => "userfull",
+                        "message" => "User full"
+                    ];
+                }
+           
+
+
         }
 
         $this->db->insert("bookpuja_request_by_user_to_pujari", $formdata);
@@ -914,29 +1049,43 @@ class User_Api_Model extends CI_Model
     }
 
     public function get_booked_puja_model($user_id)
-    {
+{
+    $this->db->select("
+        bookpuja_request_by_user_to_pujari.*, 
+        pujari_registration.name as pujari_name,
+        services.name as service_name,
+        mob_puja.name as mobpujaname,
+        jyotisika_users.user_name 
+    ");
+    $this->db->from("bookpuja_request_by_user_to_pujari");
+    $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id", "left");
+    $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id", "left");
+    $this->db->join("mob_puja", "mob_puja.id = bookpuja_request_by_user_to_pujari.mob_puja_id", "left");
+    $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id", "left");
+    $this->db->where("bookpuja_request_by_user_to_pujari.jyotisika_user_id", $user_id);
+    $this->db->where("bookpuja_request_by_user_to_pujari.puja_status !=", "Completed");
 
-        $this->db->select("bookpuja_request_by_user_to_pujari.* , pujari_registration.name as pujari_name , services.name as name_of_puja,services.image ");
-        $this->db->from("bookpuja_request_by_user_to_pujari");
-        $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id");
-        $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id");
-        $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id");
-        $this->db->where("jyotisika_user_id", $user_id);
-        $this->db->where("bookpuja_request_by_user_to_pujari.status !=", "Completed");
-        $query = $this->db->get();
-        return $query->result();
-    }
+    $query = $this->db->get();
+    return $query->result();
+}
 
     public function get_completed_puja_model($user_id)
     {
 
-        $this->db->select("bookpuja_request_by_user_to_pujari.* , pujari_registration.name as pujari_name , services.name as name_of_puja,services.image");
-        $this->db->from("bookpuja_request_by_user_to_pujari");
-        $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id");
-        $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id");
-        $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id");
-        $this->db->where("jyotisika_user_id", $user_id);
-        $this->db->where("bookpuja_request_by_user_to_pujari.status", "Completed");
+       $this->db->select("
+        bookpuja_request_by_user_to_pujari.*, 
+        pujari_registration.name as pujari_name,
+        services.name as service_name,
+        mob_puja.name as mobpujaname,
+        jyotisika_users.user_name 
+    ");
+    $this->db->from("bookpuja_request_by_user_to_pujari");
+    $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id", "left");
+    $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id", "left");
+    $this->db->join("mob_puja", "mob_puja.id = bookpuja_request_by_user_to_pujari.mob_puja_id", "left");
+    $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id", "left");
+    $this->db->where("bookpuja_request_by_user_to_pujari.jyotisika_user_id", $user_id);
+    $this->db->where("bookpuja_request_by_user_to_pujari.puja_status", "Completed");
         $query = $this->db->get();
         return $query->result();
     }
@@ -983,10 +1132,55 @@ class User_Api_Model extends CI_Model
         $count = $query->num_rows();
         return $count;
 
+    }
 
 
 
 
+    public function update_payment_status_model($book_puja_id, $amount, $payment_id)
+    {
+        // Prepare data to update
+        $data = [
+            'amount_paid_by_user' => $amount,
+            'payment_status' => 'Paid',  // Assuming you want to mark it as paid
+            'payment_id' => $payment_id
+        ];
+
+        // Update the database
+        $this->db->where("book_puja_id", $book_puja_id);
+        $this->db->update("bookpuja_request_by_user_to_pujari", $data);
+
+        // Check if update was successful
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false; // No rows updated
+        }
+    }
+
+    public function show_mob_puja_model(){
+
+        $this->db->select('services.* ,services.name as puja_name ,  mob_puja.* ,mob_puja.id as mobid,   pujari_registration.*');
+        $this->db->from("mob_puja");
+        $this->db->join("services" , "services.id = mob_puja.service_id");
+        $this->db->join("pujari_registration", "pujari_registration.id = mob_puja.pujari_id");
+        $query =  $this->db->get();  
+        return  $query->result();
+
+    }
+
+
+    public function show_festivals_model(){
+
+       $query =  $this->db->get("festivals");
+        return $query->result();
+    }
+
+    public function show_specific_festival_model($festival_id){
+
+        $this->db->where("festivals_id" ,$festival_id);
+        $query =  $this->db->get("festivals");
+        return $query->result();
     }
 
 

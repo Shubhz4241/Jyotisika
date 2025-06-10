@@ -45,9 +45,9 @@
 
     <?php $is_following = $followstatus ?>
     <!-- <?php print_r($astrologerdata) ?> -->
- 
+
     <!-- <?php print_r($rating); ?> -->
-     <?php $avgrating =  (int)$rating[0]["average_rating"] ?>
+    <?php $avgrating = (int) $rating[0]["average_rating"] ?>
 
 
     <header>
@@ -59,7 +59,7 @@
 
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
-      
+
 
         <section>
             <div class="container">
@@ -124,14 +124,16 @@
                                 <div class="col-lg-4 position-relative  rounded-start-3  "
                                     style="background: linear-gradient(45deg, var(--red), var(--yellow));">
                                     <div class="d-flex align-items-center justify-content-start h-100  p-3">
-                                        <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
+
+                                     
+                                        <img src="<?php echo  !empty($astrologerdata[0]['profile_pic']) ? base_url($astrologerdata[0]['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
                                             class="rounded-circle border border-3 border-white me-3"
                                             style="width: 120px; height: 120px; object-fit: cover;">
                                         <div>
                                             <h5 class="text-white fw-bold mb-1">
                                                 <?php echo isset($astrologerdata[0]["name"]) && !empty($astrologerdata[0]["name"]) ? $astrologerdata[0]["name"] : "N/A" ?>
                                             </h5>
-                                            
+
                                             <div class="d-flex align-items-center mb-2">
                                                 <?php for ($i = 0; $i < $avgrating; $i++): ?>
                                                     <i class="bi bi-star-fill text-warning me-1"></i>
@@ -209,19 +211,59 @@
                                             </div>
 
                                             <!-- Action Buttons Section -->
-                                            <div
-                                                class="col-md-4 d-flex flex-column justify-content-between mt-3 mt-md-0">
+
+                                           
+
+                                          
+                                            <div class="col-md-4 d-flex flex-column justify-content-between mt-3 mt-md-0">
                                                 <div class="text-center mb-3">
                                                     <h5 class="fw-bold text-danger mb-1">Consultation Fee</h5>
+                                                    
                                                     <h4 class="fw-bold">
                                                         ₹<?php echo isset($astrologerdata[0]["price_per_minute"]) && !empty($astrologerdata[0]["price_per_minute"]) ? $astrologerdata[0]["price_per_minute"] : "N/A" ?>/min
                                                     </h4>
+
+                                                  
+
+                                                       <?php if ($astrologerdata['chatstatus'] !== 'inactive'): ?>
+                                                    <div class="text-center mb-3">
+                                                      
+
+                                                        <?php
+                                                        date_default_timezone_set('Asia/Kolkata'); // Set your desired timezone
+                                                    
+                                                        if (!empty($astrologerdata['chat_expire_on'])) {
+                                                            $now = new DateTime(); // Current time
+                                                            $expire = new DateTime($astrologerdata['chat_expire_on']);
+
+                                                            if ($expire > $now) {
+                                                                $interval = $now->diff($expire);
+                                                                $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+                                                                $seconds = $interval->s;
+
+                                                                echo  '<p class="fw-bold text-danger">' . "wait for ". $waitTimeMinutes . ' min ' . $seconds . ' sec</p>';
+                                                            } else {
+                                                                echo '<p class="fw-bold text-danger">Not Available ,  wait some time</p>';
+                                                            }
+                                                        } else {
+                                                            echo '<p class="fw-bold text-success">Available</p>';
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                <?php endif; ?>
                                                 </div>
+
+                                             
                                                 <div class="d-grid gap-2">
 
                                                     <?php if ($this->session->userdata("user_id")): ?>
                                                         <button class="btn  rounded-3 text-dark"
-                                                            style="background-color: var(--yellow);">
+                                                            style="background-color: var(--yellow);" onclick="checkBalance(
+                                                   '<?php echo $astrologerdata['chatstatus']; ?>',
+                                                    <?php echo $userinfo_data['amount']; ?>, 
+                                                    <?php echo $astrologerdata[0]['price_per_minute']; ?>,  
+                                                    '<?php echo base_url('chat/' . $astrologerdata[0]['id']); ?>',
+                                                    '<?php echo addslashes($astrologerdata[0]['name']); ?>')">
                                                             <i class="bi bi-chat-dots-fill me-1"></i> Chat
                                                         </button>
                                                     <?php else: ?>
@@ -308,6 +350,38 @@
         </section> -->
 
 
+        <script>
+            function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name) {
+                if (amount < astrologer_charge * 5) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Insufficient Balance",
+                        text: `Minimum balance of 5 minutes (₹ ${astrologer_charge * 5}) is required to start chat with  ${name}.`,
+                        confirmButtonText: "Recharge Now",
+                        confirmButtonColor: "#ffcc00"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "<?php echo base_url('wallet'); ?>";
+                        }
+                    });
+                } else {
+                    if (chatstatus == "active") {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Astrologer is busy",
+
+
+                        });
+                    }
+                    else {
+                        window.location.href = chatUrl;
+                    }
+                }
+            }
+
+        </script>
+
+
         <section>
             <div class="container mb-5">
                 <h5 class=" mb-4 fw-bold">User Reviews</h5>
@@ -322,7 +396,11 @@
                                             <?php echo $userratingfeedback["feedback"]; ?>
                                         </p>
                                         <div class="d-flex align-items-center mb-3">
-                                            <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
+
+                                        
+
+
+                                            <img src="<?php echo  !empty($userratingfeedback['user_images']) ? base_url($userratingfeedback['user_images']) :base_url('assets/images/astrologerimg.png')?>" alt="User"
                                                 class="rounded-circle me-3"
                                                 style="width: 60px; height: 60px; object-fit: cover;">
                                             <div>

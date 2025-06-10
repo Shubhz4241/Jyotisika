@@ -48,9 +48,7 @@
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
-    <!-- <?php print_r($showpujari) ?> -->
-
-    <!-- <?php print_r($showrating) ?> -->
+  
 
     <main>
 
@@ -67,7 +65,8 @@
                                 <div class="col-lg-3 position-relative rounded-start-3"
                                     style="background: linear-gradient(45deg, var(--red), var(--yellow));">
                                     <div class="d-flex flex-column align-items-center justify-content-center h-100 p-3">
-                                        <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
+                                       
+                                        <img src= "<?php echo  !empty($showpujari[0]['profile_pic']) ? base_url('uploads/pujari/profile/image/'.$showpujari[0]['profile_pic']) :base_url('assets/images/astrologerimg.png')?>"  alt="image"
                                             class="rounded-circle border border-3 border-white mb-2"
                                             style="width: 100px; height: 100px; object-fit: cover;">
                                         <h5 class="text-white fw-bold mb-1 text-center">
@@ -84,11 +83,6 @@
                                                 } else {
                                                     echo 0;
                                                 }
-
-
-
-
-
 
                                                 ?>+ Poojas)</span>
 
@@ -254,7 +248,7 @@
 
 
                     <!-- about section -->
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <h6 class="fs-5 fw-bold">About</h6>
                         <p style="text-align:justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
                             sapiente omnis, quidem, rerum voluptas quis voluptate natus dolorum velit, iure modi nihil
@@ -264,7 +258,7 @@
                             consectetur adipisicing elit. Placeat aspernatur itaque mollitia nisi, et deserunt in
                             perspiciatis rerum asperiores exercitationem!
                         </p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
@@ -286,7 +280,9 @@
                                             <?php echo $feedback["message"] ?>
                                         </p>
                                         <div class="d-flex align-items-center mb-3">
-                                            <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="User"
+
+                                            
+                                            <img src="<?php echo !empty($feedback['user_image']) ? base_url($feedback["user_image"]) : base_url('assets/images/astrologerimg.png') ; ?>" alt="User"
                                                 class="rounded-circle me-3"
                                                 style="width: 60px; height: 60px; object-fit: cover;">
                                             <div>

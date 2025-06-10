@@ -38,8 +38,7 @@
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
-    <?php print_r($showpujari) ?>
-
+     <?php print_r($showpujari ) ?>
     <main>
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
@@ -85,7 +84,11 @@
                                         <a
                                             href="<?php echo base_url('PoojarViewMore/' . $pujaridata["pujari_id_"] . "/" . $pujaridata["service_id"]); ?>">
                                             <div class="position-relative">
-                                                <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
+                                                <!-- echo base_url('assets/images/astrologer.png'); -->
+                                               
+                                                
+
+                                                <img src="<?php echo  !empty($pujaridata['profile_pic']) ? base_url('uploads/pujari/profile/image/'.$pujaridata['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
                                                     class="rounded-circle"
                                                     style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                                 <span class="position-absolute bottom-0 end-0 badge rounded-circle p-1"

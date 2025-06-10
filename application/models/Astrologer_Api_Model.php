@@ -67,7 +67,7 @@ class Astrologer_Api_Model extends CI_Model
             'experience'       => $data['experience'],
             'aadharcard'       => $data['aadhaar_card'],
             'certificates'     => $data['certificates'],
-            'profile_pic'      => $data['profile_image'],
+            'profile_image'      => $data['profile_image'],
             'status'           => 'new request',
             'price_per_minute' => $data['price_per_minute'] ?? '0',
             'is_online'        => 0,
@@ -90,12 +90,25 @@ class Astrologer_Api_Model extends CI_Model
                 $service = $this->db->get('services')->row();
 
                 if ($service) {
+                    // Extract start_time and end_time from available_time or directly
+                    $start_time = $specialty['start_time'] ?? null;
+                    $end_time = $specialty['end_time'] ?? null;
+
+                    // Fallback: if available_time is a string like "9:00 AM - 5:00 PM"
+                    if ((!$start_time || !$end_time) && isset($specialty['available_time'])) {
+                        $time_parts = explode('-', $specialty['available_time']);
+                        $start_time = trim($time_parts[0] ?? '');
+                        $end_time = trim($time_parts[1] ?? '');
+                    }
+
                     $this->db->insert('astrologer_services', [
                         'astrologer_id'  => $astrologer_id,
                         'service_id'     => $service->id,
                         'specialities'   => $specialty['name'],
                         'available_days' => implode(',', $specialty['available_days']),
-                        'available_time' => $specialty['available_time']
+                        'start_time'     => $start_time,
+                        'end_time'       => $end_time,
+                        'status'         => 'pending'
                     ]);
                 }
             }
@@ -153,36 +166,56 @@ class Astrologer_Api_Model extends CI_Model
     // get the details of the logged in astrologer
     public function getAstrologerDetailsById($id)
     {
-        return $this->db->where('id', $id)->get('astrologer_registration')->row();
+        return $this->db->select('id, profile_image, name, contact, email, gender, address, languages, experience, aadharcard, certificates, status, price_per_minute, is_online, created_at')
+            ->where('id', $id)
+            ->get('astrologer_registration')
+            ->row();
     }
 
+
+    public function getServiceNameById($service_id)
+    {
+        $query = $this->db->get_where('services', ['id' => $service_id]);
+        $row = $query->row_array();
+        return $row['name'] ?? '';
+    }
 
 
     // Fetch approved services for the logged-in astrologer
     public function getApprovedServices($astrologer_id)
     {
-        return $this->db->get_where('astrologer_services', ['astrologer_id' => $astrologer_id])->result_array();
+        return $this->db->get_where('astrologer_services', [
+            'astrologer_id' => $astrologer_id,
+            'status' => 'approved'
+        ])->result_array();
     }
 
     // Fetch pending services for the logged-in astrologer
     public function getPendingServices($astrologer_id)
     {
-        return $this->db->get_where('pending_services', ['astrologer_id' => $astrologer_id])->result_array();
+        return $this->db->get_where('astrologer_services', [
+            'astrologer_id' => $astrologer_id,
+            'status' => 'pending'
+        ])->result_array();
     }
 
-    // Insert new pending service
+    // Insert new service as pending
     public function insertPendingService($data)
     {
-        return $this->db->insert('pending_services', $data);
+        $data['status'] = 'pending';  // Ensure status is set to pending
+        return $this->db->insert('astrologer_services', $data);
     }
-
 
 
     //to get services of the logged in user
     public function getAstrologerServices($astrologer_id)
     {
-        return $this->db->get_where('astrologer_services', ['astrologer_id' => $astrologer_id])->result_array();
+        return $this->db->get_where('astrologer_services', [
+            'astrologer_id' => $astrologer_id,
+            'status' => 'approved'
+        ])->result_array();
     }
+
 
     public function getServicesData($service_ids)
     {
@@ -249,7 +282,7 @@ class Astrologer_Api_Model extends CI_Model
             'name'             => $data['name'],
             'email'            => $data['email'],
             'address'          => $data['address'],
-            'languages_known'  => $data['languages'],
+            'languages'  => $data['languages'],
             'gender'           => $data['gender'],
             'experience'       => $data['experience']
         ];

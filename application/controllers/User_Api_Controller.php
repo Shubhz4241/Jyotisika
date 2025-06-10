@@ -989,6 +989,61 @@ class User_Api_Controller extends CI_Controller
 
     }
 
+
+    public function get_astrologer_chat_with_user()
+    {
+
+        if ($_SERVER["REQUEST_METHOD"] != "POST") {
+
+            $response = [
+                "status" => "error",
+                "message" => "Invalid request method"
+
+            ];
+
+            echo json_encode($response);
+            return;
+        } else {
+            $session_id = $this->input->post("session_id");
+
+            if (empty($session_id)) {
+                $response = [
+                    "status" => "error",
+                    "message" => "pls fill all the filleds"
+
+                ];
+                echo json_encode($response);
+                return;
+
+            }
+
+            $query = $this->User_Api_Model->get_astrologer_chat_with_user_model($session_id);
+
+            if ($query) {
+
+                $response = [
+                    "status" => "success",
+                    "message" => "feedback  submitted",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "feedback not submitted",
+                ];
+            }
+
+
+            echo json_encode($response);
+            return;
+
+
+        }
+
+
+    }
+
     public function feedback()
     {
 
@@ -1107,6 +1162,7 @@ class User_Api_Controller extends CI_Controller
 
 
     }
+
 
 
     public function get_avg_rating()
@@ -1833,7 +1889,7 @@ class User_Api_Controller extends CI_Controller
 
         $is_valid = $this->razorpay_lib->verify_payment($payment_id, $order_id, $razorpay_signature);
         if (!$is_valid) {
-            echo json_encode(["status" => "error", "message" => "Wallet update failed: "]);
+            echo json_encode(["status" => "error", "message" => "order processing  failed: "]);
             return;
         }
 
@@ -2337,17 +2393,19 @@ class User_Api_Controller extends CI_Controller
 
             $pujari_id = $this->input->post("pujari_id");
             $service_id = $this->input->post("service_id");
+
             $user_id = $this->input->post("user_id");
             $pujari_charge = $this->input->post("pujari_charges");
             $pujadate = $this->input->post("pujadate");
             $user_email = $this->input->post("useremail");
             $puja_mode = $this->input->post("puja_mode");
             $pujatime = $this->input->post("pujatime");
+            $mob_puja_id = $this->input->post("mob_puja_id");
 
             date_default_timezone_set('Asia/Kolkata');
             $timestamp = date('Y-m-d H:i:s', time());
 
-            if (empty($pujari_id) || empty($service_id) || empty($user_id) || empty($pujari_charge) || empty($pujadate) || empty($user_email) || empty($puja_mode) || empty($pujatime)) {
+            if (empty($pujari_id) || empty($user_id) || empty($pujari_charge) || empty($pujadate) || empty($user_email) || empty($puja_mode) || empty($pujatime)) {
                 $response = [
                     "status" => "error",
                     "message" => "no data found in the  table"
@@ -2364,6 +2422,7 @@ class User_Api_Controller extends CI_Controller
                 "pujari_charge" => $pujari_charge,
                 "puja_mode" => $puja_mode,
                 "puja_date" => $pujadate,
+                "mob_puja_id" => $mob_puja_id,
                 "puja_time" => $pujatime,
                 "request_created_at" => $timestamp
 
@@ -2382,6 +2441,18 @@ class User_Api_Controller extends CI_Controller
                 $response = [
                     "status" => "warning",
                     "message" => "pujari already booked "
+                ];
+
+            } else if ($query["status"] == "requestgetalready") {
+                $response = [
+                    "status" => "warning",
+                    "message" => "you already send requested to book this mob puja"
+                ];
+
+            } else if ($query["status"] == "userfull") {
+                $response = [
+                    "status" => "userfull",
+                    "message" => "user full "
                 ];
 
             } else {
@@ -2441,6 +2512,40 @@ class User_Api_Controller extends CI_Controller
 
         }
 
+    }
+
+
+    public function show_mob_puja()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->output->set_status_header(405);
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    "status" => "error",
+                    "message" => "Invalid request method"
+                ]));
+            return;
+        }
+
+        $query = $this->User_Api_Model->show_mob_puja_model();
+
+        if ($query) {
+            $response = [
+                "status" => "success",
+                "message" => "Mob puja fetched successfully",
+                "data" => $query
+            ];
+        } else {
+            $response = [
+                "status" => "error",
+                "message" => "No mob puja data found"
+            ];
+        }
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response));
     }
 
     public function get_completed_puja()
@@ -2689,6 +2794,171 @@ class User_Api_Controller extends CI_Controller
 
         }
     }
+
+
+    public function save_book_puja_payment()
+    {
+        $json_input = file_get_contents("php://input");
+        $data = json_decode($json_input, true);
+
+
+        if (!$data || !isset($data['amount']) || !isset($data['getbookpujaid'])) {
+            echo json_encode(["status" => "error", "message" => "Invalid JSON input"]);
+            return;
+        }
+
+        try {
+            $razorpay_order = $this->razorpay_lib->create_order($data['amount'], 'ORD_' . rand(1000, 9999));
+            if (!$razorpay_order) {
+                throw new Exception('Failed to create Razorpay order');
+            }
+
+
+            $this->session->set_userdata('razorpay_order_id', $razorpay_order['id']);
+
+
+            echo json_encode([
+                'status' => 'success',
+                'order_id' => $razorpay_order['id'],
+                'amount' => $data['amount'], // Convert to paisa
+                'bookpujaid' => $data['getbookpujaid'],
+
+                // 'key' => 'rzp_test_cFYTpLVvrC4FFn',
+
+                'key' => 'rzp_test_n9TyNiHflMp51H',
+
+
+                // 'key' => 'rzp_live_aKnqCVUpRcVAoS',
+
+
+
+                // 'name'           => $user->username,
+                // 'email'          => $user->email,
+                // 'payment_type'   => $payment_method,
+                // 'is_direct'      => $is_direct_purchase ? 'yes' : 'no' // Identify purchase type in response
+            ]);
+        } catch (Exception $e) {
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function update_book_puja_payment()
+    {
+
+
+        $json_input = file_get_contents("php://input");
+        $data = json_decode($json_input, true);
+
+
+        if (!$data || !isset($data['amount']) || !isset($data['getbookpujaidfunc'])) {
+            echo json_encode(["status" => "error", "message" => "Invalid JSON input"]);
+            return;
+        }
+
+        $payment_id = $data['payment_id'];
+        $razorpay_signature = $data['razorpay_signature'];
+        $order_id = $data['order_id'];
+
+        $is_valid = $this->razorpay_lib->verify_payment($payment_id, $order_id, $razorpay_signature);
+        if (!$is_valid) {
+            echo json_encode(["status" => "error", "message" => "Wallet update failed: "]);
+            return;
+        }
+
+
+        $book_puja_id = $data['getbookpujaidfunc'];
+        $amount = $data['amount'];
+
+        $update_payment_status = $this->User_Api_Model->update_payment_status_model($book_puja_id, $amount, $payment_id);
+
+        if ($update_payment_status) {
+            echo json_encode(['status' => 'success', 'message' => 'puja payment done successfully']);
+            return;
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Failed to place order']);
+            return;
+
+        }
+
+    }
+
+
+    //Festivals
+
+    public function show_festivals()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $query = $this->User_Api_Model->show_festivals_model();
+
+            if ($query) {
+
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+                ];
+
+
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no festivals in the table"
+
+                ];
+
+            }
+
+            echo json_encode($response);
+
+            return;
+        }
+
+    }
+
+
+    public function show_specific_festival()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $festival_id = $this->input->post("festival_id");
+
+            $query = $this->User_Api_Model->show_specific_festival_model($festival_id);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no festivals in the table"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+        }
+    }
+
 
 }
 

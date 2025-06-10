@@ -97,7 +97,6 @@
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
-    <?php print_r($show_completed_puja) ?>
 
 
     <main>
@@ -106,10 +105,10 @@
 
                 <!-- Nav pills - switches to vertical on small screens -->
                 <ul class="nav nav-pills mb-2 d-flex justify-content-between w-100" id="pills-tab" role="tablist">
-                    <li class="nav-item flex-grow-1 mx-1">
+                    <!-- <li class="nav-item flex-grow-1 mx-1">
                         <a class="nav-link active text-center w-100" id="pills-home-tab" data-bs-toggle="pill"
                             href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Call</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item flex-grow-1 mx-1">
                         <a class="nav-link text-center w-100" id="pills-profile-tab" data-bs-toggle="pill"
                             href="#pills-profile" role="tab" aria-controls="pills-profile"
@@ -133,7 +132,7 @@
                 <div class="tab-content p-3" id="pills-tabContent">
 
                     <!-- call -->
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                    <!-- <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                         aria-labelledby="pills-home-tab">
                         <div class="row my-4" id="cardContainer">
                             <?php
@@ -173,7 +172,7 @@
                                     <div class="card shadow rounded-3 h-100"
                                         style="border: 1px solid var(--red); background-color: #fff;">
                                         <div class="card-body p-3">
-                                            <!-- Profile Section -->
+                                            
                                             <div class="d-flex align-items-center mb-2">
                                                 <a href="<?php echo base_url('ViewAstrologer'); ?>">
                                                     <img src="<?php echo base_url('assets/images/' . $astrologer['image']); ?>"
@@ -197,7 +196,7 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Details Section -->
+                                          
                                             <div class="d-flex flex-column gap-1 mb-2">
                                                 <div class="d-flex align-items-center">
                                                     <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
@@ -225,20 +224,21 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Action Buttons -->
+                                         
                                             <div class="d-flex gap-2 mb-2">
                                                 <button class="btn text-dark btn-sm btn-outline-dark w-100 rounded-3"
                                                     style="background-color: var(--yellow);">Call</button>
                                             </div>
-                                            <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
+                                          
                                         </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- chat -->
+                    
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 
                         <div class="row my-4" id="cardContainer">
@@ -273,138 +273,147 @@
                                 ],
 
                             ];
+                            ?>
 
-                            foreach ($astrologer_data as $astrologer): ?>
-                                <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
-                                    <div class="card shadow rounded-3 h-100"
-                                        style="border: 1px solid var(--red); background-color: #fff;">
-                                        <div class="card-body p-3">
-                                            <!-- Profile Section -->
-                                            <div class="d-flex align-items-center mb-2">
-                                                <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                                                    <img src="<?php echo base_url('assets/images/astrologer.png'); ?>"
+                            <?php
+                            if ($astrologer_data): ?>
+                                <?php foreach ($astrologer_data as $astrologer): ?>
+                                    <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
+                                        <div class="card shadow rounded-3 h-100"
+                                            style="border: 1px solid var(--red); background-color: #fff;">
+                                            <div class="card-body p-3">
+                                                <!-- Profile Section -->
+                                                <div class="d-flex align-items-center mb-2">
+
+
+
+                                                    <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
                                                         alt="image" class="rounded-circle"
                                                         style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                                </a>
-                                                <div class="ms-2">
-                                                    <a href="<?php echo base_url('ViewAstrologer'); ?>"
-                                                        class="text-decoration-none">
-                                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
-                                                            <?php echo $astrologer['name']; ?>
-                                                        </h6>
-                                                    </a>
 
-                                                    <div class="d-flex align-items-center gap-1">
-                                                        <?php for ($i = 0; $i < 3; $i++): ?>
-                                                            <img src="<?php echo base_url('assets/images/rating.png'); ?>"
-                                                                alt="star" style="width: 15px; height: 15px;">
-                                                        <?php endfor; ?>
+
+                                                    <div class="ms-2">
+                                                        <a href="<?php echo base_url('ViewAstrologer'); ?>"
+                                                            class="text-decoration-none">
+                                                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                                <?php echo $astrologer['name']; ?>
+                                                            </h6>
+                                                        </a>
+
+                                                        <div class="d-flex align-items-center gap-1">
+                                                            <?php for ($i = 0; $i < 3; $i++): ?>
+                                                                <img src="<?php echo base_url('assets/images/rating.png'); ?>"
+                                                                    alt="star" style="width: 15px; height: 15px;">
+                                                            <?php endfor; ?>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <!-- Details Section -->
-                                            <div class="d-flex flex-column gap-1 mb-2">
-                                                <div class="d-flex align-items-center">
+                                                <!-- Details Section -->
+                                                <div class="d-flex flex-column gap-1 mb-2">
+                                                    <!-- <div class="d-flex align-items-center">
                                                     <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
                                                         style="width: 15px; height: 15px; margin-right: 5px;">
                                                     <small
                                                         class="card-expertise"><?php echo $astrologer['experience']; ?></small>
+                                                </div> -->
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="<?php echo base_url('assets/images/experience.png'); ?>"
+                                                            alt="experience"
+                                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                                        <small><?php echo $astrologer['experience']; ?>+ Years</small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="<?php echo base_url('assets/images/money.png'); ?>"
+                                                            alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
+                                                        <small><?php echo $astrologer['price_per_minute']; ?> + per
+                                                            minite</small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="<?php echo base_url('assets/images/language.png'); ?>"
+                                                            alt="language"
+                                                            style="width: 15px; height: 15px; margin-right: 5px;">
+                                                        <small
+                                                            class="card-language"><?php echo $astrologer['languages']; ?></small>
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/experience.png'); ?>"
-                                                        alt="experience"
-                                                        style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small><?php echo $astrologer['experience']; ?></small>
-                                                </div>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/money.png'); ?>"
-                                                        alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small><?php echo $astrologer['price_per_minute']; ?></small>
-                                                </div>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="<?php echo base_url('assets/images/language.png'); ?>"
-                                                        alt="language"
-                                                        style="width: 15px; height: 15px; margin-right: 5px;">
-                                                    <small
-                                                        class="card-language"><?php echo $astrologer['languages']; ?></small>
-                                                </div>
-                                            </div>
 
-                                            <!-- Action Buttons -->
-                                            <div class="d-flex gap-2 my-1">
-                                                <button class="btn btn-sm w-50 rounded-3 border-1"
-                                                    style="background-color: var(--yellow);">Chat</button>
-                                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>">Feedback</button>
+                                                <!-- Action Buttons -->
+                                                <div class="d-flex gap-2 my-1">
+                                                    <!-- <button class="btn btn-sm w-50 rounded-3 border-1"
+                                                    style="background-color: var(--yellow);">Chat</button> -->
+                                                    <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>">Feedback</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- modal for review astrologer -->
-                                <div class="modal fade "
-                                    id="feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>"
-                                    tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Feedback for <?php echo $astrologer['name']; ?></h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="astrologerfeedback"
-                                                    id="feedbackForm<?php echo str_replace(' ', '', $astrologer['name']); ?>">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Rating</label>
-                                                        <div class="rating">
-                                                            <?php for ($i = 5; $i >= 1; $i--): ?>
-                                                                <input type="radio" name="astologerrating"
-                                                                    value="<?php echo $i; ?>"
-                                                                    id="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>"
-                                                                    required>
-                                                                <label
-                                                                    for="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>">★</label>
-                                                            <?php endfor; ?>
+                                    <!-- modal for review astrologer -->
+                                    <div class="modal fade "
+                                        id="feedbackModal<?php echo str_replace(' ', '', $astrologer['name']); ?>"
+                                        tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Feedback for <?php echo $astrologer['name']; ?></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="astrologerfeedback"
+                                                        id="feedbackForm<?php echo str_replace(' ', '', $astrologer['name']); ?>">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Rating</label>
+                                                            <div class="rating">
+                                                                <?php for ($i = 5; $i >= 1; $i--): ?>
+                                                                    <input type="radio" name="astologerrating"
+                                                                        value="<?php echo $i; ?>"
+                                                                        id="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>"
+                                                                        required>
+                                                                    <label
+                                                                        for="star<?php echo $i; ?>_<?php echo str_replace(' ', '', $astrologer['name']); ?>">★</label>
+                                                                <?php endfor; ?>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Message</label>
-                                                        <input type="hidden" name="astrologer_id"
-                                                            value="<?php echo $astrologer['id'] ?>">
-                                                        <textarea class="form-control shadow-none" name="message" rows="3"
-                                                            required></textarea>
-                                                    </div>
-                                                    <button type="submit" class="btn w-100"
-                                                        style="background-color: var(--yellow);">Submit Feedback</button>
-                                                </form>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Message</label>
+                                                            <input type="hidden" name="astrologer_id"
+                                                                value="<?php echo $astrologer['id'] ?>">
+                                                            <textarea class="form-control shadow-none" name="message" rows="3"
+                                                                required></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn w-100"
+                                                            style="background-color: var(--yellow);">Submit Feedback</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- script for that rating astrologer-->
-                                <script>
-                                    document.querySelectorAll('.rating input').forEach(input => {
-                                        input.addEventListener('change', function () {
-                                            let ratingDiv = this.closest('.rating');
-                                            let selectedValue = this.value;
+                                    <!-- script for that rating astrologer-->
+                                    <script>
+                                        document.querySelectorAll('.rating input').forEach(input => {
+                                            input.addEventListener('change', function () {
+                                                let ratingDiv = this.closest('.rating');
+                                                let selectedValue = this.value;
 
-                                            // Reset all stars
-                                            ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
+                                                // Reset all stars
+                                                ratingDiv.querySelectorAll('label').forEach(label => label.style.color = '#ccc');
 
-                                            // Highlight selected stars
-                                            ratingDiv.querySelectorAll('input').forEach(starInput => {
-                                                if (starInput.value <= selectedValue) {
-                                                    starInput.nextElementSibling.style.color = 'var(--yellow)';
-                                                }
+                                                // Highlight selected stars
+                                                ratingDiv.querySelectorAll('input').forEach(starInput => {
+                                                    if (starInput.value <= selectedValue) {
+                                                        starInput.nextElementSibling.style.color = 'var(--yellow)';
+                                                    }
+                                                });
                                             });
                                         });
-                                    });
-                                </script>
+                                    </script>
 
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
+
+                            <?php endif ?>
                         </div>
 
                     </div>
@@ -425,11 +434,13 @@
                             </li>
                         </ul>
 
+
                         <!-- Submenu Tab content -->
                         <div class="tab-content" id="mall-subTabContent">
                             <!-- ongoing -->
                             <div class="tab-pane fade show active" id="orders" role="tabpanel">
                                 <div class="row">
+
                                     <?php
                                     $poojas = [
                                         [
@@ -453,6 +464,8 @@
                                         ]
                                     ]; ?>
 
+
+
                                     <?php if ($showbookedpuja_): ?>
 
 
@@ -465,7 +478,6 @@
                                                         <div class="col-4">
                                                             <img src="<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>"
                                                                 class="img-fluid rounded-start h-100"
-                                                                alt="<?php echo $pooja['name_of_puja']; ?>"
                                                                 style="object-fit: cover;">
                                                         </div>
                                                         <div class="col-8">
@@ -473,7 +485,12 @@
                                                                 <!-- Title -->
                                                                 <h6 class="card-title text-truncate mb-2"
                                                                     style="color: var(--red); font-size: 1.2rem;">
-                                                                    <?php echo $pooja['name_of_puja']; ?>
+                                                                    <?php if ($pooja["puja_mode"] == "Mob"): ?>
+
+                                                                        <?php echo $pooja['mobpujaname']; ?>
+                                                                    <?php else: ?>
+                                                                        <?php echo $pooja['service_name']; ?>
+                                                                    <?php endif ?>
                                                                 </h6>
 
                                                                 <!-- Pandit Name -->
@@ -495,6 +512,8 @@
                                                                     </span>
                                                                 </div>
 
+
+
                                                                 <!-- Details -->
                                                                 <div style="font-size: 0.9rem;">
                                                                     <div class="text-truncate mb-1">
@@ -505,6 +524,115 @@
                                                                         <i class="bi bi-clock"></i>
                                                                         <?php echo $pooja['puja_time']; ?>
                                                                     </div>
+
+                                                                    <span>Request accepted by pujari :-</span>
+                                                                    <span class="badge rounded-1"
+                                                                        style="background-color: var(--yellow); color: black; font-size: 0.85rem; padding: 6px 12px;">
+                                                                        <?php echo $pooja['status']; ?>
+                                                                    </span>
+
+
+                                                                    <?php
+                                                                    $requestCreated = strtotime($pooja['request_created_at']);
+                                                                    $pujaDateTime = strtotime($pooja['puja_date'] . ' ' . $pooja['puja_time']);
+                                                                    // Get current time
+                                                            
+                                                                    date_default_timezone_set('Asia/Kolkata');
+                                                                    $timestamp = date('Y-m-d H:i:s', time());
+                                                                    $currentTime = time();
+
+                                                                    $timeDiff = $pujaDateTime - $requestCreated; // Difference in seconds
+                                                                    $remainingTime = $pujaDateTime - $currentTime; // Time left until puja
+                                                            
+
+                                                                    // $remainingTime = $pujaDateTime - $currentTime; // Time left until puja in seconds
+                                                                    $daysRemaining = floor($remainingTime / (60 * 60 * 24)); // Days left
+                                                                    $hoursRemaining = floor(($remainingTime % (60 * 60 * 24)) / (60 * 60)); // Hours left
+                                                                    $minutesRemaining = floor(($remainingTime % (60 * 60)) / 60); // Minutes left
+                                                            
+                                                                    $days = floor($timeDiff / (60 * 60 * 24)); // Days difference
+                                                                    $hours = floor(($timeDiff % (60 * 60 * 24)) / (60 * 60)); // Remaining hours
+                                                                    $minutes = floor(($timeDiff % (60 * 60)) / 60); // Remaining minutes
+                                                            
+                                                                    ?>
+
+                                                                    <?php if ($pooja['payment_status'] === "Paid") { ?>
+                                                                        <span class="badge rounded-1"
+                                                                            style="background-color: gray; color: white; font-size: 0.85rem; padding: 6px 12px;">
+                                                                            Paid
+                                                                        </span>
+                                                                    <?php } elseif ($pooja['status'] === "Approved") { ?>
+
+
+                                                                        <?php if ($days > 1) { ?>
+                                                                            <?php if ($daysRemaining >= 2) { ?>
+                                                                                <span
+                                                                                    id="payment-button-<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    class="badge rounded-1 payment-button"
+                                                                                    data-id="<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    data-amount="<?php echo $pooja['pujari_charge']; ?>"
+                                                                                    style="background-color: green; color: white; font-size: 0.85rem; padding: 6px 12px; cursor: pointer;">
+                                                                                    Do Payment
+                                                                                </span>
+                                                                            <?php } else { ?>
+
+                                                                                <span class="badge rounded-1"
+                                                                                    style="background-color: red; color: white; font-size: 0.85rem; padding: 6px 12px;">
+                                                                                    Puja Cancelled
+                                                                                </span>
+
+                                                                            <?php } ?>
+
+                                                                        <?php } elseif ($days >= 0 && $days <= 1) { ?>
+                                                                            <?php if ($daysRemaining >= 1 || $hoursRemaining >= 4) { ?>
+
+
+                                                                                <span
+                                                                                    id="payment-button-<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    class="badge rounded-1 payment-button"
+                                                                                    data-id="<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    data-amount="<?php echo $pooja['pujari_charge']; ?>"
+                                                                                    style="background-color: green; color: white; font-size: 0.85rem; padding: 6px 12px; cursor: pointer;">
+                                                                                    Payment
+                                                                                </span>
+
+
+                                                                            <?php } else { ?>
+
+                                                                                <span class="badge rounded-1"
+                                                                                    style="background-color: red; color: white; font-size: 0.85rem; padding: 6px 12px;">
+                                                                                    Puja Cancelled
+                                                                                </span>
+
+
+                                                                            <?php } ?>
+                                                                        <?php } ?>
+                                                                    <?php } ?>
+
+                                                                    <div style="font-size: 0.9rem;">
+                                                                        <div class="text-truncate mb-1">
+
+                                                                            <?php if ($pooja['status'] === "Approved") { ?>
+                                                                                <?php if ($pooja['payment_status'] != "Paid") { ?>
+                                                                                    <?php
+                                                                                    if ($days > 1) {
+                                                                                        echo "$days days, $hours hours, $minutes minutes remaining<br>";
+                                                                                        echo "<span style='color: red; font-weight: bold;'>pay before 2 days of of starting .</span>";
+                                                                                        echo "<p style='color: red; font-weight: bold;'> Puja otherwise, it will be cancelled.</p>";
+                                                                                    } elseif ($days >= 0 && $days <= 1) {
+                                                                                        echo "$days days, $hours hours, $minutes minutes remaining<br>";
+                                                                                        echo "<span style='color: red; font-weight: bold;'>pay before 4 hours of starting Puja.</span>";
+                                                                                        echo "<p style='color: red; font-weight: bold;'>otherwise, it will be cancelled.</p>";
+                                                                                    } else {
+                                                                                        echo "$hours hours, $minutes minutes remaining";
+                                                                                    }
+                                                                                    ?>
+                                                                                <?php } ?>
+                                                                            <?php } ?>
+                                                                        </div>
+                                                                    </div>
+
+
 
                                                                 </div>
                                                             </div>
@@ -523,11 +651,101 @@
 
                                 </div>
 
+                                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+                                <script>
+
+                                    document.querySelectorAll(".payment-button").forEach(button => {
+                                        button.addEventListener("click", function () {
+                                            let bookPujaId = this.getAttribute("data-id");
+                                            let chargeAmount = this.getAttribute("data-amount");
+
+
+                                            fetch('<?php echo base_url('User_Api_Controller/save_book_puja_payment'); ?>', {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ amount: chargeAmount, getbookpujaid: bookPujaId })
+                                            })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    if (data.status === 'error') {
+                                                        alert(data.message);
+                                                        return;
+                                                    }
+
+                                                    var options = {
+                                                        "key": data.key,
+                                                        "amount": data.amount,
+                                                        "currency": "INR",
+                                                        "name": "New Astro",
+                                                        "description": "Order Payment",
+                                                        "order_id": data.order_id,
+                                                        "handler": function (response) {
+                                                            fetch('<?php echo base_url('User_Api_Controller/update_book_puja_payment'); ?>', {
+                                                                method: 'POST',
+                                                                headers: { 'Content-Type': 'application/json' },
+                                                                body: JSON.stringify({
+                                                                    payment_id: response.razorpay_payment_id,
+                                                                    razorpay_signature: response.razorpay_signature,
+                                                                    amount: chargeAmount,
+                                                                    getbookpujaidfunc: bookPujaId,
+                                                                    order_id: response.razorpay_order_id,
+
+                                                                })
+                                                            })
+                                                                .then(res => res.json())
+                                                                .then(result => {
+                                                                    if (result.status === 'success') {
+
+                                                                        Swal.fire({
+                                                                            icon: 'success',
+                                                                            title: 'Payment Successful!',
+                                                                            text: 'Your payment was successful and your wallet has been updated.',
+                                                                            timer: 3000,
+                                                                            showConfirmButton: false
+                                                                        }).then(() => {
+                                                                            window.location.href = "<?php echo base_url('Orders'); ?>";
+                                                                        });
+
+                                                                    } else {
+                                                                        Swal.fire({
+                                                                            icon: 'error',
+                                                                            title: 'Payment Failed!',
+                                                                            text: result.message
+                                                                        }).then(() => {
+                                                                            window.location.href = "<?php echo base_url('Orders'); ?>";
+                                                                        });
+                                                                    }
+                                                                });
+                                                        },
+                                                        // "prefill": { "name": data.name, "email": data.email },
+                                                        "theme": { "color": "#3399cc" }
+                                                    };
+
+                                                    var rzp = new Razorpay(options);
+                                                    rzp.on('payment.failed', function (response) {
+                                                        window.location.href = "<?php echo base_url('User/paymentFailure'); ?>?error=" +
+                                                            encodeURIComponent(response.error.description);
+                                                    });
+                                                    rzp.open();
+                                                });
+                                        });
+
+                                    });
+
+
+                                </script>
+
                             </div>
+
+
 
                             <!-- completed pooja -->
                             <div class="tab-pane fade" id="purchased" role="tabpanel">
                                 <div class="row">
+
+
                                     <?php
                                     $completedPoojas = [
                                         [
@@ -553,6 +771,8 @@
                                         ]
                                     ]; ?>
 
+                                  
+
                                     <?php if ($show_completed_puja): ?>
 
                                         <?php foreach ($show_completed_puja as $pooja): ?>
@@ -563,7 +783,6 @@
                                                         <div class="col-4">
                                                             <img src="<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>"
                                                                 class="img-fluid rounded-start h-100 w-100"
-                                                                alt="<?php echo $pooja['name_of_puja']; ?>"
                                                                 style="object-fit: cover;">
                                                         </div>
                                                         <div class="col-8">
@@ -572,7 +791,12 @@
                                                                 <div>
                                                                     <h6 class="card-title text-truncate mb-2"
                                                                         style="color: var(--red); font-size: 1.2rem;">
-                                                                        <?php echo $pooja['name_of_puja']; ?>
+                                                                        <?php if ($pooja["puja_mode"] == "Mob"): ?>
+
+                                                                            <?php echo $pooja['mobpujaname']; ?>
+                                                                        <?php else: ?>
+                                                                            <?php echo $pooja['service_name']; ?>
+                                                                        <?php endif ?>
                                                                     </h6>
 
                                                                     <p class="mb-2 text-truncate" style="font-size: 1rem;">
@@ -628,7 +852,13 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title">Feedback for
-                                                                <?php echo $pooja['name_of_puja']; ?>
+                                                                <?php if ($pooja["puja_mode"] == "Mob"): ?>
+
+                                                                    <?php echo $pooja['mobpujaname']; ?>
+                                                                <?php else: ?>
+                                                                    <?php echo $pooja['service_name']; ?>
+                                                                <?php endif ?>
+
                                                             </h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal"></button>
@@ -640,8 +870,7 @@
                                                                     <label class="form-label">Rating</label>
                                                                     <div class="rating">
                                                                         <?php for ($i = 5; $i >= 1; $i--): ?>
-                                                                            <input type="radio"
-                                                                                name="rating"
+                                                                            <input type="radio" name="rating"
                                                                                 value="<?php echo $i; ?>"
                                                                                 id="star<?php echo $i; ?>_<?php echo $pooja['book_puja_id']; ?>"
                                                                                 required>
@@ -650,7 +879,9 @@
                                                                         <?php endfor; ?>
                                                                     </div>
 
-                                                                    <input type="text" value="<?php echo $pooja['pujari_id']; ?>" name="pujari_id" hidden >
+                                                                    <input type="text"
+                                                                        value="<?php echo $pooja['pujari_id']; ?>"
+                                                                        name="pujari_id" hidden>
 
 
                                                                 </div>
@@ -748,6 +979,8 @@
                                         ]
                                     ]; ?>
 
+
+
                                     <?php if (!empty($showorderedproduct)): ?>
                                         <?php foreach ($showorderedproduct as $order): ?>
                                             <div class="col-md-6 col-lg-4 mb-4">
@@ -818,7 +1051,9 @@
                                             'order_id' => 'ORD123455'
                                         ]
                                     ]; ?>
-                                    <?php print_r($showorderedproduct_shipped); ?>
+
+
+
                                     <?php if (!empty($showorderedproduct_shipped)): ?>
                                         <?php foreach ($showorderedproduct_shipped as $order): ?>
                                             <div class="col-md-6 col-lg-4 mb-4">

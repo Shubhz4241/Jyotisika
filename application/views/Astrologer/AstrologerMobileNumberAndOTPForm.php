@@ -221,7 +221,7 @@
 
             if (mobileInput.length === 10) {
                 const formData = new FormData();
-                formData.append('phone', `+91${mobileInput}`);
+                formData.append('phone', `${mobileInput}`);
 
                 fetch('<?php echo base_url() . 'astrologer/send_otp_login' ?>', {
                         method: 'POST',
@@ -304,7 +304,7 @@
                 .map(input => input.value).join('');
 
             const formData = new FormData();
-            formData.append('phone', `+91${mobileNumber}`);
+            formData.append('phone', `${mobileNumber}`);
             formData.append('otp', otpInputs);
 
             fetch('<?php echo base_url() . 'astrologer/verify_otp_login'?>', {
