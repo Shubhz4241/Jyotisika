@@ -16,12 +16,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="icon" href="<?= base_url('assets/images/admin/logo.png.png'); ?>" type="image/png">
+    <link rel="icon" href="assets/images/admin/logo.png" type="image/png">
 
     <style>
         /* Apply Inter font to the entire page */
-        * {
-            font-family: 'rokkitt', sans-serif;
+        body {
+            font-family: 'Inter', sans-serif;
         }
 
         .main {
@@ -75,27 +75,21 @@
             width: 10%;
         }
 
-        /* Sr. No. */
         .table th:nth-child(2) {
             width: 25%;
         }
 
-        /* Pujari Name */
         .table th:nth-child(3) {
             width: 20%;
         }
 
-        /* Total Users */
         .table th:nth-child(4) {
             width: 20%;
         }
 
-        /* Last Active */
         .table th:nth-child(5) {
             width: 25%;
         }
-
-        /* Details */
 
         .table tbody tr {
             text-align: center;
@@ -324,16 +318,10 @@
 
 <body style="background-color:rgb(228, 236, 241);">
     <div class="d-flex">
-    <?php $this->load->view('Finance/FinanceSidebar'); ?>
-
-
-
+                    <?php $this->load->view('Finance/FinanceSidebar'); ?>
 
         <!-- Main Content -->
         <div class="main mt-3">
-            <!-- Navbar -->
-            <?php $this->load->view('Finance/FinanceNavbar'); ?>
-
             <div class="container-fluid">
                 <div class="row mt-2">
                     <div class="col-12">
@@ -368,77 +356,58 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-
     <script>
         let pujaris = [];
         let filteredPujaris = [];
         const recordsPerPage = 8;
         let currentPage = 1;
 
-        document.addEventListener("DOMContentLoaded", function() {
-            fetchPujariSessions();
+        // Dummy data
+        function getDummyData() {
+            return [
+                {
+                    id: 1,
+                    name: "Pujari A",
+                    pujas: [
+                        { userName: "User 1", charges: 100, status: "paid", pujaId: 101, pujaName: "Puja 1" },
+                        { userName: "User 2", charges: 150, status: "pending", pujaId: 102, pujaName: "Puja 2" }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "Pujari B",
+                    pujas: [
+                        { userName: "User 3", charges: 200, status: "paid", pujaId: 103, pujaName: "Puja 3" },
+                        { userName: "User 4", charges: 250, status: "pending", pujaId: 104, pujaName: "Puja 4" }
+                    ]
+                }
+            ];
+        }
 
-            document.getElementById("searchInput").addEventListener("input", function() {
-                const searchTerm = this.value.trim().toLowerCase();
-                filteredPujaris = pujaris.filter(p => p.name.toLowerCase().includes(searchTerm));
-                currentPage = 1;
-                renderTable(currentPage);
-                renderPagination();
-            });
-        });
+        // Initialize with dummy data
+        function fetchPujariSessions() {
+            pujaris = getDummyData();
+            filteredPujaris = [...pujaris];
+            renderTable(currentPage);
+            renderPagination();
+        }
 
-        function calculateTotalAmount(chat) {
-            const charge = parseFloat(chat.charges);
+        function calculateTotalAmount(puja) {
+            const charge = parseFloat(puja.charges);
             return isNaN(charge) ? 0 : charge;
         }
 
         function calculatePujariTotals(pujas) {
-            let totalAmount = 0,
-                paidAmount = 0,
-                paidCount = 0;
-            pujas.forEach(user => {
-                const amount = calculateTotalAmount(user);
+            let totalAmount = 0, paidAmount = 0, paidCount = 0;
+            pujas.forEach(puja => {
+                const amount = calculateTotalAmount(puja);
                 totalAmount += amount;
-                if (user.status === "paid") {
+                if (puja.status === "paid") {
                     paidAmount += amount;
                     paidCount++;
                 }
             });
-            return {
-                totalAmount,
-                paidAmount,
-                paidCount
-            };
-        }
-
-        async function fetchPujariSessions() {
-            try {
-                const response = await fetch('<?= base_url("admin/getPujariSessions") ?>');
-                const data = await response.json();
-
-                if (data.status === "success") {
-                    pujaris = data.data.map(p => ({
-                        id: p.id,
-                        name: p.name,
-                        pujas: p.pujas.map(puja => ({
-                            userName: puja.userName, // ✅ Correct field
-                            charges: parseFloat(puja.charge),
-                            status: puja.paymentStatus.toLowerCase(),
-                            pujaId: puja.pujaId,
-                            pujaName: puja.pujaName // ✅ Include puja name
-                        }))
-                    }));
-
-                    filteredPujaris = [...pujaris];
-                    renderTable(currentPage);
-                    renderPagination();
-                } else {
-                    console.error("Invalid response");
-                }
-            } catch (error) {
-                console.error("Error fetching Pujari sessions:", error);
-            }
+            return { totalAmount, paidAmount, paidCount };
         }
 
         function renderTable(page) {
@@ -451,54 +420,53 @@
             pagePujaris.forEach((p, index) => {
                 const totals = calculatePujariTotals(p.pujas);
                 const mainRow = `
-        <tr>
-            <td>${startIndex + index + 1}</td>
-            <td>${p.name}</td>
-            <td>${p.pujas.length}</td>
-            <td>
-                <button class="toggle-btn" data-id="${p.id}">
-                    <i class="bi bi-caret-down-fill"></i>
-                </button>
-            </td>
-        </tr>
-        <tr class="chat-details-row" id="details-${p.id}" style="display: none;">
-            <td colspan="4" class="chat-details">
-                <p><strong>Total Amount:</strong> ₹${totals.totalAmount.toFixed(2)}</p>
-                <p><strong>Paid Amount:</strong> ₹${totals.paidAmount.toFixed(2)}</p>
-                <p>
-                    <strong>Paid Pujas:</strong> ${totals.paidCount}
-                    <button class="btn btn-sm btn-success float-end mark-pujari-paid-btn" 
-                        data-pujari-id="${p.id}"
-                        data-name="${p.name}">
-                        <i class="bi bi-cash-coin"></i> Mark All as Paid
-                    </button>
-                </p>
-                <hr>
-                ${p.pujas.map(puja => `
-                    <div class="chat-entry">
-                        <div class="chat-info">
-                            <p><strong>${puja.userName}</strong></p>
-                            <p><strong>Puja:</strong> ${puja.pujaName}</p>
-                            <p>Charges: ₹${parseFloat(puja.charges).toFixed(2)}</p>
-                        </div>
-
-                        <div class="chat-amount-status">
-                            <p>Total Amount: ₹${parseFloat(puja.charges).toFixed(2)}</p>
-                            <p>Status: ${
-                                puja.paymentStatus === "paid"
-                                    ? `<span class="badge bg-success">Paid</span>`
-                                    : `<button class="btn btn-sm btn-primary mark-paid-btn" 
-                                        data-puja-id="${puja.pujaId}"
-                                        data-username="${puja.userName}">
-                                        Mark as Paid
-                                    </button>`
-                            }</p>
-                        </div>
-                    </div>
-                `).join("<hr>")}
-            </td>
-        </tr>
-        `;
+                    <tr>
+                        <td>${startIndex + index + 1}</td>
+                        <td>${p.name}</td>
+                        <td>${p.pujas.length}</td>
+                        <td>
+                            <button class="toggle-btn" data-id="${p.id}">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="chat-details-row" id="details-${p.id}" style="display: none;">
+                        <td colspan="4" class="chat-details">
+                            <p><strong>Total Amount:</strong> ₹${totals.totalAmount.toFixed(2)}</p>
+                            <p><strong>Paid Amount:</strong> ₹${totals.paidAmount.toFixed(2)}</p>
+                            <p>
+                                <strong>Paid Pujas:</strong> ${totals.paidCount}
+                                <button class="btn btn-sm btn-success float-end mark-pujari-paid-btn"
+                                    data-pujari-id="${p.id}"
+                                    data-name="${p.name}">
+                                    <i class="bi bi-cash-coin"></i> Mark All as Paid
+                                </button>
+                            </p>
+                            <hr>
+                            ${p.pujas.map(puja => `
+                                <div class="chat-entry">
+                                    <div class="chat-info">
+                                        <p><strong>${puja.userName}</strong></p>
+                                        <p><strong>Puja:</strong> ${puja.pujaName}</p>
+                                        <p>Charges: ₹${parseFloat(puja.charges).toFixed(2)}</p>
+                                    </div>
+                                    <div class="chat-amount-status">
+                                        <p>Total Amount: ₹${parseFloat(puja.charges).toFixed(2)}</p>
+                                        <p>Status: ${
+                                            puja.status === "paid"
+                                                ? `<span class="badge bg-success">Paid</span>`
+                                                : `<button class="btn btn-sm btn-primary mark-paid-btn"
+                                                    data-puja-id="${puja.pujaId}"
+                                                    data-username="${puja.userName}">
+                                                    Mark as Paid
+                                                </button>`
+                                        }</p>
+                                    </div>
+                                </div>
+                            `).join("<hr>")}
+                        </td>
+                    </tr>
+                `;
                 tbody.innerHTML += mainRow;
             });
 
@@ -509,10 +477,7 @@
                     detailsRow.style.display = detailsRow.style.display === "table-row" ? "none" : "table-row";
                 });
             });
-
-
         }
-
 
         function renderPagination() {
             const totalPages = Math.ceil(filteredPujaris.length / recordsPerPage);
@@ -521,10 +486,10 @@
 
             for (let i = 1; i <= totalPages; i++) {
                 pagination.innerHTML += `
-                <li class="page-item ${i === currentPage ? "active" : ""}">
-                    <a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a>
-                </li>
-            `;
+                    <li class="page-item ${i === currentPage ? "active" : ""}">
+                        <a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a>
+                    </li>
+                `;
             }
         }
 
@@ -533,13 +498,20 @@
             renderTable(page);
             renderPagination();
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            fetchPujariSessions();
+
+            document.getElementById("searchInput").addEventListener("input", function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                filteredPujaris = pujaris.filter(p => p.name.toLowerCase().includes(searchTerm));
+                currentPage = 1;
+                renderTable(currentPage);
+                renderPagination();
+            });
+        });
     </script>
 
-
-
-
-
-    <!-- Script for Marking Puja as Paid -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('click', function(event) {
@@ -556,37 +528,17 @@
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, mark as paid',
-                        showLoaderOnConfirm: true,
-                        preConfirm: () => {
-                            return fetch(`<?= base_url('admin/markSinglePujaAsPaid/') ?>${pujaId}`, {
-                                    method: 'POST'
-                                })
-                                .then(response => {
-                                    if (!response.ok) throw new Error(response.statusText);
-                                    return response.json();
-                                })
-                                .catch(error => {
-                                    Swal.showValidationMessage(`Request failed: ${error}`);
-                                });
-                        },
-                        allowOutsideClick: () => !Swal.isLoading()
+                        confirmButtonText: 'Yes, mark as paid'
                     }).then((result) => {
-                        if (result.isConfirmed && result.value?.status === "success") {
+                        if (result.isConfirmed) {
                             Swal.fire('Marked!', 'The puja has been marked as paid.', 'success');
                             fetchPujariSessions(); // Refresh the table
-                        } else if (result.isConfirmed) {
-                            Swal.fire('Failed!', result.value?.message || 'Something went wrong.', 'error');
                         }
                     });
                 }
             }
         });
-    </script>
 
-
-    <!-- Script for Marking Pujari as Paid -->
-    <script>
         document.addEventListener('click', function(event) {
             if (event.target.closest('.mark-pujari-paid-btn')) {
                 const button = event.target.closest('.mark-pujari-paid-btn');
@@ -600,47 +552,14 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, mark all as paid!',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return fetch(`<?= base_url('admin/markPujariIncomeAsPaid/') ?>${pujariId}`, {
-                                method: 'POST'
-                            })
-                            .then(response => {
-                                if (!response.ok) throw new Error(response.statusText);
-                                return response.json();
-                            })
-                            .catch(error => {
-                                Swal.showValidationMessage(`Request failed: ${error}`);
-                            });
-                    },
-                    allowOutsideClick: () => !Swal.isLoading()
+                    confirmButtonText: 'Yes, mark all as paid!'
                 }).then((result) => {
-                    if (result.isConfirmed && result.value?.status === "success") {
-                        Swal.fire('Marked!', result.value.message, 'success');
+                    if (result.isConfirmed) {
+                        Swal.fire('Marked!', 'All pujas have been marked as paid.', 'success');
                         fetchPujariSessions(); // Refresh table
-                    } else if (result.isConfirmed) {
-                        Swal.fire('Failed!', result.value?.message || 'Something went wrong.', 'error');
                     }
                 });
             }
-        });
-    </script>
-
-
-    <!-- Sidebar Toggle Script -->
-    <script>
-        const toggler = document.querySelector(".toggler-btn");
-        const closeBtn = document.querySelector(".close-sidebar");
-        const sidebar = document.querySelector("#sidebar");
-
-        toggler?.addEventListener("click", function() {
-            sidebar.classList.toggle("collapsed");
-            this.style.left = sidebar.classList.contains("collapsed") ? "10px" : "260px";
-        });
-
-        closeBtn?.addEventListener("click", function() {
-            sidebar.classList.remove("collapsed");
         });
     </script>
 </body>
