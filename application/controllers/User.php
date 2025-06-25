@@ -402,14 +402,14 @@ class User extends CI_Controller
 
 		$festivals_data = json_decode($festivals_response, associative: true);
 
-     
+
 		$data["festivals_data"] = "";
 		if ($festivals_data["status"] == "success") {
 			$data["festivals_data"] = $festivals_data["data"];
 		}
 
 
-		
+
 		$this->load->view('User/FestivalReadmore', $data);
 	}
 
@@ -421,6 +421,9 @@ class User extends CI_Controller
 	public function JyotisikaMall()
 	{
 
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 
 
 		$api_url = base_url("User_Api_Controller/getproduct");
@@ -1266,9 +1269,40 @@ class User extends CI_Controller
 		$this->load->view('User/BookPooja', $data);
 	}
 
-	public function PoojaInfo()
+	public function PoojaInfo($puja_id)
 	{
-		$this->load->view('User/PoojaInfo');
+
+		$api_url = base_url("User_Api_Controller/show_puja_info");
+
+
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["puja_id" => $puja_id]));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		$curl_error_follow = curl_error($ch);
+		$showpuja = curl_exec($ch);
+
+		curl_close($ch);
+
+		if ($showpuja === false) {
+			show_error("cURL Error: " . $curl_error_follow, 500);
+			return;
+		}
+
+		$puja_data = json_decode($showpuja, associative: true);
+
+		$data["puja_data"] = "";
+		if ($puja_data["status"] == "success") {
+
+			$data["puja_data"] = $puja_data["data"];
+		}
+
+
+
+		$this->load->view('User/PoojaInfo', $data);
 	}
 
 
@@ -1457,7 +1491,7 @@ class User extends CI_Controller
 
 
 
-		$this->load->view("user/OnlinePoojaris", $data);
+		$this->load->view("User/OnlinePoojaris", $data);
 	}
 
 
@@ -1672,6 +1706,10 @@ class User extends CI_Controller
 
 	public function MobPooja()
 	{
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
 		$api_url = base_url("User_Api_Controller/show_mob_puja");
 
 		$ch = curl_init();
@@ -1731,7 +1769,7 @@ class User extends CI_Controller
 
 
 
-		print_r($datajson);
+		// print_r($datajson);
 
 
 		$this->load->view('User/WhyUs');
@@ -1878,7 +1916,8 @@ class User extends CI_Controller
 	public function Terms()
 	{
 
-
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 		$this->load->view("User/Terms");
 	}
 

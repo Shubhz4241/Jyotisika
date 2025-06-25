@@ -179,4 +179,11 @@ $lang['Terms_Conditions_Exclusivity_Desc'] = "हमारे साथ का�
 
 $lang['Accept_Terms_Button'] = "नियम स्वीकार करें";
 
+
+
+//Profile page
+
+
+$lang['profile_page'] = "प्रोफाइल पेज ";
+
 ?>

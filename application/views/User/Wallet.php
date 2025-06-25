@@ -229,18 +229,20 @@
                     let dataamt = parseInt(amountprice);
                     let getselectedamount = document.getElementById('selectedAmount').textContent.trim();
                     let dataselected = parseInt(getselectedamount);
+                    let user_id = <?php echo $this->session->userdata("user_id")?>
 
 
                     e.preventDefault();
-                    initiatePayment(dataamt ,dataselected);
+                    initiatePayment(dataamt ,dataselected , user_id);
                 });
 
-                function initiatePayment(amount ,dataselected) {
+                function initiatePayment(amount ,dataselected , user_id) {
                     fetch('<?php echo base_url('User_Api_Controller/create_razorpay_order'); ?>', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             amount: amount,
+                            user_id: user_id,
                             
 
                         })
@@ -273,6 +275,7 @@
                                             razorpay_signature: response.razorpay_signature,
                                             amount: dataselected,
                                             order_id: response.razorpay_order_id,
+                                            user_id: user_id,
 
                                         })
                                     })

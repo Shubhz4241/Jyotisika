@@ -669,6 +669,14 @@ class User_Api_Model extends CI_Model
 
     }
 
+    public function show_puja_info_model($puja_id)
+    {
+
+        $this->db->where("id", $puja_id);
+        $query = $this->db->get("services");
+        return $query->result();
+    }
+
     public function show_online_pujari_model()
     {
 
@@ -891,7 +899,18 @@ class User_Api_Model extends CI_Model
     public function get_pujari_of_puja_model($puja_id)
     {
 
-        $this->db->select("pujari_registration.id as pujari_id_, pujari_registration.name as pujariname,pujari_registration.*,  services.* , pujari_services.* , pujari_services.status as puja_status ,  AVG(pujari_feedback.rating) as average_rating");
+        $this->db->select("pujari_registration.id as pujari_id_, 
+                  pujari_registration.name as pujariname,
+                  pujari_registration.*,  
+                  services.* , 
+                  pujari_services.* , 
+                  pujari_services.status as puja_status,  
+                  AVG(pujari_feedback.rating) as average_rating,
+                  (SELECT COUNT(*) 
+                   FROM bookpuja_request_by_user_to_pujari 
+                   WHERE puja_status = 'Completed' 
+                     AND pujari_id = pujari_registration.id
+                  ) as completed_puja_count");
         $this->db->from("pujari_services");
         $this->db->join('pujari_registration', 'pujari_registration.id = pujari_services.pujari_id', 'Left');
         $this->db->join('pujari_feedback', 'pujari_feedback.pujari_id = pujari_registration.id', 'Left');
@@ -1009,13 +1028,13 @@ class User_Api_Model extends CI_Model
             $query = $this->db->get("mob_puja");
             $pujaData = $query->row_array();
 
-                if ((int)$nummobrows >= (int)$pujaData["totalAttendee"]) {
-                    return [
-                        "status" => "userfull",
-                        "message" => "User full"
-                    ];
-                }
-           
+            if ((int) $nummobrows >= (int) $pujaData["totalAttendee"]) {
+                return [
+                    "status" => "userfull",
+                    "message" => "User full"
+                ];
+            }
+
 
 
         }
@@ -1049,43 +1068,43 @@ class User_Api_Model extends CI_Model
     }
 
     public function get_booked_puja_model($user_id)
-{
-    $this->db->select("
+    {
+        $this->db->select("
         bookpuja_request_by_user_to_pujari.*, 
         pujari_registration.name as pujari_name,
         services.name as service_name,
         mob_puja.name as mobpujaname,
         jyotisika_users.user_name 
     ");
-    $this->db->from("bookpuja_request_by_user_to_pujari");
-    $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id", "left");
-    $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id", "left");
-    $this->db->join("mob_puja", "mob_puja.id = bookpuja_request_by_user_to_pujari.mob_puja_id", "left");
-    $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id", "left");
-    $this->db->where("bookpuja_request_by_user_to_pujari.jyotisika_user_id", $user_id);
-    $this->db->where("bookpuja_request_by_user_to_pujari.puja_status !=", "Completed");
+        $this->db->from("bookpuja_request_by_user_to_pujari");
+        $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id", "left");
+        $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id", "left");
+        $this->db->join("mob_puja", "mob_puja.id = bookpuja_request_by_user_to_pujari.mob_puja_id", "left");
+        $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id", "left");
+        $this->db->where("bookpuja_request_by_user_to_pujari.jyotisika_user_id", $user_id);
+        $this->db->where("bookpuja_request_by_user_to_pujari.puja_status !=", "Completed");
 
-    $query = $this->db->get();
-    return $query->result();
-}
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     public function get_completed_puja_model($user_id)
     {
 
-       $this->db->select("
+        $this->db->select("
         bookpuja_request_by_user_to_pujari.*, 
         pujari_registration.name as pujari_name,
         services.name as service_name,
         mob_puja.name as mobpujaname,
         jyotisika_users.user_name 
     ");
-    $this->db->from("bookpuja_request_by_user_to_pujari");
-    $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id", "left");
-    $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id", "left");
-    $this->db->join("mob_puja", "mob_puja.id = bookpuja_request_by_user_to_pujari.mob_puja_id", "left");
-    $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id", "left");
-    $this->db->where("bookpuja_request_by_user_to_pujari.jyotisika_user_id", $user_id);
-    $this->db->where("bookpuja_request_by_user_to_pujari.puja_status", "Completed");
+        $this->db->from("bookpuja_request_by_user_to_pujari");
+        $this->db->join("pujari_registration", "pujari_registration.id = bookpuja_request_by_user_to_pujari.pujari_id", "left");
+        $this->db->join("services", "services.id = bookpuja_request_by_user_to_pujari.service_id", "left");
+        $this->db->join("mob_puja", "mob_puja.id = bookpuja_request_by_user_to_pujari.mob_puja_id", "left");
+        $this->db->join("jyotisika_users", "jyotisika_users.user_id = bookpuja_request_by_user_to_pujari.jyotisika_user_id", "left");
+        $this->db->where("bookpuja_request_by_user_to_pujari.jyotisika_user_id", $user_id);
+        $this->db->where("bookpuja_request_by_user_to_pujari.puja_status", "Completed");
         $query = $this->db->get();
         return $query->result();
     }
@@ -1158,32 +1177,81 @@ class User_Api_Model extends CI_Model
         }
     }
 
-    public function show_mob_puja_model(){
+    public function show_mob_puja_model()
+    {
 
-        $this->db->select('services.* ,services.name as puja_name ,  mob_puja.* ,mob_puja.id as mobid,   pujari_registration.*');
+        $this->db->select("services.* ,services.name as puja_name , mob_puja.original_price as original_price  ,mob_puja.totalAttendee as totalAttendee,  mob_puja.discount_price as discount_price , mob_puja.pujari_id as pujari_id , mob_puja.time as puja_time ,mob_puja.id as mobid, pujari_registration.* ,  mob_puja.date as mobpujadate,
+       
+         (SELECT COUNT(*) FROM bookpuja_request_by_user_to_pujari  WHERE puja_status = 'Completed'  AND pujari_id = pujari_registration.id ) as completed_puja_count");
         $this->db->from("mob_puja");
-        $this->db->join("services" , "services.id = mob_puja.service_id");
-        $this->db->join("pujari_registration", "pujari_registration.id = mob_puja.pujari_id");
-        $query =  $this->db->get();  
-        return  $query->result();
+        $this->db->join("services", "services.id = mob_puja.service_id" , 'Left');
+        $this->db->join("pujari_registration", "pujari_registration.id =  mob_puja.pujari_id");
+    
+        $query = $this->db->get();
+        return $query->result();
 
     }
 
+    //  public function show_mob_puja_model()
+    // {
 
-    public function show_festivals_model(){
+    //    $query = $this->db->get("mob_puja");
+    //    return $query->result();
 
-       $query =  $this->db->get("festivals");
+    // }
+
+
+     
+
+   
+
+    // public function show_mob_puja_model()
+    // {
+    //     $this->db->select("services.*, 
+    //                    services.name as puja_name, 
+    //                    mob_puja.*, 
+    //                    mob_puja.id as mobid, 
+    //                    pujari_registration.*,  
+    //                    AVG(pujari_feedback.rating) as average_rating,
+    //                    (SELECT COUNT(*) 
+    //                     FROM bookpuja_request_by_user_to_pujari  
+    //                     WHERE puja_status = 'Completed'  
+    //                     AND pujari_id = pujari_registration.id
+    //                    ) as completed_puja_count");
+
+    //     $this->db->from("mob_puja");
+    //     $this->db->join("services", "services.id = mob_puja.service_id", "left");
+    //     $this->db->join("pujari_registration", "pujari_registration.id = mob_puja.pujari_id", "left");
+    //     $this->db->join("pujari_feedback", "pujari_feedback.pujari_id = pujari_registration.id", "left");
+    //     // $this->db->group_by("pujari_registration.id");
+
+    //     $query = $this->db->get();
+    //     return $query->result();
+    // }
+
+
+
+    public function show_festivals_model()
+    {
+
+        $query = $this->db->get("festivals");
         return $query->result();
     }
 
-    public function show_specific_festival_model($festival_id){
+    public function show_specific_festival_model($festival_id)
+    {
 
-        $this->db->where("festivals_id" ,$festival_id);
-        $query =  $this->db->get("festivals");
+        $this->db->where("festivals_id", $festival_id);
+        $query = $this->db->get("festivals");
         return $query->result();
     }
 
 
+    public function show_user_model()
+    {
+        $query = $this->db->get("festivals");
+        return $query->result();
+    }
 
 
 

@@ -19,7 +19,7 @@
 
         </a>
 
-        <a href="<?php echo base_url('todayhoroscope'); ?>" id="festival-link"
+        <a href="<?php echo base_url('todayhoroscope'); ?>" id="horo-link"
             class="btnHover btn btn-outline-dark rounded-4 shadow-sm" style="width: fit-content;">
             <?php echo $this->lang->line('Horoscope') ? $this->lang->line('Horoscope') : 'Horoscope'; ?>
         </a>
@@ -70,6 +70,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const currentPath = window.location.pathname;
         const links = {
+             'horo': document.getElementById('horo-link'),
             'bookpooja': document.getElementById('bookpooja-link'),
             'freekundli': document.getElementById('freekundli-link'),
             'kundlimatching': document.getElementById('kundlimatching-link'),

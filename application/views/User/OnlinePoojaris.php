@@ -38,7 +38,7 @@
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
-     <?php print_r($showpujari ) ?>
+
     <main>
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
@@ -107,7 +107,7 @@
                                             <div class="d-flex align-items-center gap-1 ">
                                                 <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
                                                 <span class="small text-muted mt-1"><?php echo $pujaridata["average_rating"] ?>
-                                                    (150+ Poojas)</span>
+                                                    (<?php echo $pujaridata["completed_puja_count"]  ?>+ Poojas)</span>
                                             </div>
                                         </div>
                                     </div>

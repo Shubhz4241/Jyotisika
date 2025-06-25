@@ -42,8 +42,8 @@
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
         <div class="container">
-
-          
+            <!-- completed_puja_count -->
+            <!-- <?php print_r($showmobpuja) ?> -->
             <!-- cards -->
             <div class="row my-4" id="cardContainer">
 
@@ -57,30 +57,32 @@
 
                                     <!-- Profile Section (Poojari Name) -->
                                     <div class="d-flex align-items-center mb-3">
-                                       
-                                            <div class="position-relative">
-                                                  
-                                                <img src="<?php echo  !empty($showmobpujadata['profile_pic']) ? base_url('uploads/pujari/profile/image/'.$pujaridata['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
-                                                    class="rounded-circle"
-                                                    style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                            </div>
-                                       
+
+                                        <div class="position-relative">
+
+                                            <img src="<?php echo !empty($showmobpujadata['profile_pic']) ? base_url('uploads/pujari/profile/image/' . $pujaridata['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                alt="image" class="rounded-circle"
+                                                style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+                                        </div>
+
                                         <div class="ms-2">
-                                           
-                                                <h6 class="fw-bold" style="color: var(--red);">
-                                                    <?php print_r($showmobpujadata["puja_name"]) ?>
-                                                </h6>
-                                                <h6 class="small text-muted mb-0"><?php print_r($showmobpujadata["name"]) ?>
-                                                </h6>
-                                           
+
+                                            <h6 class="fw-bold" style="color: var(--red);">
+                                                <?php print_r($showmobpujadata["puja_name"]) ?>
+                                            </h6>
+                                            <h6 class="small text-muted mb-0"><?php print_r($showmobpujadata["name"]) ?>
+                                            </h6>
+
                                         </div>
                                     </div>
 
                                     <!-- Details Section -->
                                     <div class="d-flex flex-column gap-2 mb-3">
                                         <div class="d-flex align-items-center gap-1">
-                                            <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
-                                            <span class="small text-muted">4.8 (150+ Poojas)</span>
+                                            <!-- <i class="bi bi-star-fill small" style="color: #ffd700;"></i> -->
+                                            <span
+                                                class="small text-muted">(<?php echo $showmobpujadata["completed_puja_count"] ?>+
+                                                Poojas)</span>
                                         </div>
                                         <!-- <div class="d-flex align-items-center small">
                                         <i class="bi bi-bookmark-star-fill me-2" style="color: var(--red);"></i>
@@ -95,12 +97,23 @@
                                             <i class="bi bi-translate me-2 text-dark"></i>
                                             <span class="card-language"><?php print_r($showmobpujadata["languages"]) ?></span>
                                         </div>
+
+                                           <div class="d-flex align-items-center small fw-bold">
+                                            <i class="bi bi-person me-1"></i>
+                                            <span >
+                                                 <?php echo $showmobpujadata["totalAttendee"]; ?> 
+                                            </span>
+                                        </div>
                                         <div class="d-flex align-items-center small fw-bold">
                                             <i class="bi bi-currency-rupee me-1"></i>
                                             <span class="text-decoration-line-through fs-6">
                                                 <?php echo $showmobpujadata["original_price"]; ?> Price
                                             </span>
                                         </div>
+
+                                     
+
+
 
                                         <div class="d-flex align-items-center small fw-bold">
                                             <i class="bi bi-currency-rupee me-1"></i>
@@ -109,7 +122,12 @@
                                         <!-- Time Section -->
                                         <div class="d-flex align-items-center small fw-bold text-danger">
                                             <i class="bi bi-clock me-2"></i>
-                                            <span class="fs-6">Pooja Starts at: <?php echo $showmobpujadata["time"]; ?></span>
+                                            <span class="fs-6"> Pooja Start in:-</span>
+                                        </div>
+                                        <div class="d-flex align-items-center small fw-bold text-danger">
+                                            <i class="bi  me-2"></i>
+                                            <span class="fs-6">
+                                                <?php echo $showmobpujadata["mobpujadate"] . " " . $showmobpujadata["puja_time"]; ?></span>
                                         </div>
                                     </div>
 
@@ -174,7 +192,8 @@
                                                 <div class="col-12">
                                                     <label class="form-label fw-bold">Preferred Date</label>
                                                     <input type="date" name="pujadate" class="form-control shadow-none"
-                                                        min="<?php echo date('Y-m-d'); ?>" required>
+                                                        value="<?php echo $showmobpujadata["mobpujadate"] ?>"
+                                                        min="<?php echo date('Y-m-d'); ?>" required readonly>
                                                 </div>
 
 
@@ -195,8 +214,8 @@
                                                     name="pujari_charges" hidden>
                                                 <div class="col-12">
                                                     <label class="form-label fw-bold">Preferred Time</label>
-                                                    <input type="time" name="pujatime" class="form-control shadow-none"
-                                                        required>
+                                                    <input type="time" value="<?php echo $showmobpujadata["puja_time"] ?>"
+                                                        name="pujatime" class="form-control shadow-none" required readonly>
                                                 </div>
 
                                             </div>
@@ -320,14 +339,14 @@
                                     icon: "success",
 
                                 }).then(() => {
-                            // Close the modal
-                            const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
-                            modal.hide();
+                                    // Close the modal
+                                    const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
+                                    modal.hide();
 
-                            // Reset the form
-                            form.reset();
-                        });;
-                            
+                                    // Reset the form
+                                    form.reset();
+                                });;
+
                             }
                             else if (data["status"] == "requestgetalready") {
                                 Swal.fire({
@@ -336,13 +355,13 @@
                                     icon: "warning",
 
                                 }).then(() => {
-                            // Close the modal
-                            const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
-                            modal.hide();
+                                    // Close the modal
+                                    const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
+                                    modal.hide();
 
-                            // Reset the form
-                            form.reset();
-                        });;
+                                    // Reset the form
+                                    form.reset();
+                                });;
                             }
                             else if (data["status"] == "userfull") {
                                 Swal.fire({

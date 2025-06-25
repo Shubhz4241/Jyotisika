@@ -114,7 +114,7 @@
     //     print_r($userinfo);
     // }
     ?>
-   <p>hello</p>
+  
 
     <section>
         <div class="container mt-3">
@@ -318,15 +318,15 @@
 
                 <div class="carousel-inner rounded-4">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png') ?>"
+                        <img class="d-block w-100" src="<?php echo base_url('assets/images/homelogo.png') ?>"
                             alt="slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png') ?>"
+                        <img class="d-block w-100" src="<?php echo base_url('assets/images/homelogo.png') ?>"
                             alt="slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="<?php echo base_url('assets/images/bannerImage.png') ?>"
+                        <img class="d-block w-100" src="<?php echo base_url('assets/images/homelogo.png') ?>"
                             alt="slide">
                     </div>
                 </div>

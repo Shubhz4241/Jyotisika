@@ -108,6 +108,19 @@ class UserChatModel extends CI_Model
     }
 
 
+    public function getactiveusers(){
+
+        date_default_timezone_set('Asia/Kolkata');
+        $timestamp = date('Y-m-d H:i:s', time());
+ 
+        $this->db->where("expire_on" >"", $timestamp  );
+        $this->db->where("status", "active");
+      
+       $query = $this->db->get("chat_sessions");
+
+       return $query->result();
+    }
+
 
 
 }

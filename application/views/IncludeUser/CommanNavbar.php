@@ -2,8 +2,8 @@
     style="background-color: var(--yellow) !important;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="<?php echo base_url('assets/images/web-logo.jpg'); ?>" alt="logo image"
-                style="width: 60px; height: 50px; mix-blend-mode: multiply;">
+            <img src="<?php echo base_url('assets/images/weblo.jpg'); ?>" alt="logo image"
+                style="width: 70px; height: 60px; mix-blend-mode: multiply;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

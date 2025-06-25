@@ -94,6 +94,7 @@
             </div>
 
         </div>
+        <?php if(!empty($festivals_data)): ?>
         <div class="row my-4 d-flex justify-content-center" id="festivalCards">
             <?php
             $cards = [
@@ -145,6 +146,8 @@
             }
             ?>
         </div>
+        <?php endif ?>
+           
     </div>
 
     <script>

@@ -470,13 +470,13 @@ class User_Api_Controller extends CI_Controller
         $data = json_decode($json_input, true);
 
 
-        if (!$data || !isset($data['amount'])) {
+        if (!$data || !isset($data['amount']) || !isset($data['user_id'])) {
             echo json_encode(["status" => "error", "message" => "Invalid JSON input"]);
             return;
         }
 
 
-        $session_id = $this->session->userdata('user_id');
+        $session_id = $data['user_id'];
         if (empty($session_id)) {
             echo json_encode(["status" => "error", "message" => "User not logged in"]);
             return;
@@ -532,7 +532,7 @@ class User_Api_Controller extends CI_Controller
         $data = json_decode($json_input, true);
 
 
-        if (!$data || !isset($data['amount'])) {
+        if (!$data || !isset($data['amount'])|| !isset($data['user_id'])) {
             echo json_encode(["status" => "error", "message" => "Invalid JSON input"]);
             return;
         }
@@ -549,7 +549,7 @@ class User_Api_Controller extends CI_Controller
 
 
 
-        $session_id = $this->session->userdata('user_id');
+        $session_id = $data['user_id'];
         if (empty($session_id)) {
             echo json_encode(["status" => "error", "message" => "User not logged in"]);
             return;
@@ -1577,6 +1577,57 @@ class User_Api_Controller extends CI_Controller
 
     }
 
+
+    public function show_puja_info()
+    {
+
+        if ($_SERVER["REQUEST_METHOD"] != "POST") {
+            $response = [
+                "status" => "error",
+                "message" => "Invalid request method"
+            ];
+
+            echo json_encode($response);
+            return;
+        } else {
+
+            $puja_id = $this->input->post("puja_id");
+
+            if (empty($puja_id)) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "pls fill all the fileds"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            }
+            $query = $this->User_Api_Model->show_puja_info_model($puja_id);
+
+            if ($query) {
+
+                $response = [
+                    "status" => "success",
+                    "message" => "Puja fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "puja fetched successfully"
+                ];
+
+            }
+            $this->output->set_content_type("application/json");
+            $this->output->set_output(json_encode($response));
+
+        }
+    }
+
+
     // public function show_online_pujari()
     // {
 
@@ -2445,7 +2496,7 @@ class User_Api_Controller extends CI_Controller
 
             } else if ($query["status"] == "requestgetalready") {
                 $response = [
-                    "status" => "warning",
+                    "status" => "requestgetalready",
                     "message" => "you already send requested to book this mob puja"
                 ];
 
@@ -2957,6 +3008,26 @@ class User_Api_Controller extends CI_Controller
 
             return;
         }
+    }
+
+
+    public function showuser(){
+
+       if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+        else{
+
+             $query = $this->User_Api_Model->show_user_model();
+            
+          echo json_encode($query);
+
+        return;
+        }  
+         
     }
 
 

@@ -68,7 +68,7 @@ $lang['Baby_Name'] = "Baby Name";
 
 
 
-$lang['bookpuja'] = "bookpuja";
+$lang['bookpuja'] = "Bookpuja";
 
 
 $lang['freekundali'] = "Free Kundli";
@@ -200,6 +200,10 @@ $lang['Terms_Conditions_Exclusivity_Desc'] = "While working with us, you cannot 
 
 $lang['Accept_Terms_Button'] = "Accept Terms";
 
+
+//Profile page
+
+$lang['profile_page'] = "Profile Image";
 
 
 ?>

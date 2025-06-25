@@ -101,7 +101,7 @@ $route['OfflinePoojaris'] ='User/OfflinePoojaris';
 $route['bookpooja'] = 'User/BookPooja';
 $route['OnlinePoojaris/(:num)'] ='User/OnlinePoojaris/$1';
 $route['Poojaris'] ='User/Poojaris';
-$route['PoojaInfo'] ='User/PoojaInfo';
+$route['PoojaInfo/(:num)'] ='User/PoojaInfo/$1';
 
 
 
