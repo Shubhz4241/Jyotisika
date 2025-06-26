@@ -1864,7 +1864,7 @@ class User_Api_Controller extends CI_Controller
             return;
         }
 
-        $user_id = $this->session->userdata("user_id");
+        $user_id =$data['user_id'];
 
         $getcartdata = $this->User_Api_Model->getcartdata_razerpay_model_($user_id);
 
@@ -1947,7 +1947,7 @@ class User_Api_Controller extends CI_Controller
 
         $addressid = $data['addressid'];
 
-        $user_id = $this->session->userdata("user_id");
+        $user_id = $data['user_id'];
 
         $getuserinfo = $this->User_Api_Model->getuserinfo_model($addressid);
 

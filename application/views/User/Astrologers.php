@@ -221,7 +221,8 @@
                                                     <?php echo $userinfo_data['amount']; ?>, 
                                                     <?php echo $astrologer['price_per_minute']; ?>,  
                                                     '<?php echo base_url('chat/' . $astrologer['id']); ?>',
-                                                    '<?php echo addslashes($astrologer['name']); ?>' 
+                                                    '<?php echo addslashes($astrologer['name']); ?>' ,
+                                                    '<?php echo $astrologer['chatvalue'] ?>' 
                                                 )"> Chat</button>
                                         <?php else: ?>
                                             <button id="chatlink" class="btn btn-sm w-50 rounded-3 border-1 btnlog"
@@ -239,7 +240,7 @@
                                     </div>
 
                                     <script>
-                                        function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name) {
+                                        function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name, statusastro) {
                                             if (amount < astrologer_charge * 5) {
                                                 Swal.fire({
                                                     icon: "warning",
@@ -254,12 +255,17 @@
                                                 });
                                             } else {
                                                 if (chatstatus == "active") {
-                                                    Swal.fire({
-                                                        icon: "warning",
-                                                        title: "Astrologer is busy",
 
+                                                    if (statusastro == "sessionnotend") {
+                                                        window.location.href = chatUrl;
+                                                    }
+                                                    else {
 
-                                                    });
+                                                        Swal.fire({
+                                                            icon: "warning",
+                                                            title: "Astrologer is busy",
+                                                        });
+                                                    }
                                                 }
                                                 else {
                                                     window.location.href = chatUrl;

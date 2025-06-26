@@ -11,14 +11,14 @@ class UserChatModel extends CI_Model
         $this->load->helper('firebase_helper');
     }
 
-      public function createSession($sessionData)
+    public function createSession($sessionData)
     {
         $this->db->insert('chat_sessions', $sessionData);
         return $this->db->insert_id();
     }
 
 
-      public function getSessiondata($session_id)
+    public function getSessiondata($session_id)
     {
 
         $this->db->where("id", $session_id);
@@ -26,12 +26,12 @@ class UserChatModel extends CI_Model
         return $query->result();
     }
 
-     public function getSessionByChat($session_id)
+    public function getSessionByChat($session_id)
     {
         return $this->db->get_where('chat_sessions', ['firebase_chat_id' => $session_id])->row_array();
     }
 
-     public function updateuser($user_id, $amount)
+    public function updateuser($user_id, $amount)
     {
 
 
@@ -40,7 +40,7 @@ class UserChatModel extends CI_Model
             ->update('jyotisika_users');
     }
 
-     public function endSessioncheck($session_id, $end_time, $duration)
+    public function endSessioncheck($session_id, $end_time, $duration)
     {
         $this->db->where('firebase_chat_id', $session_id)
             ->update('chat_sessions', [
@@ -51,21 +51,23 @@ class UserChatModel extends CI_Model
     }
 
 
-     public function checkbalance($user_id) {
+    public function checkbalance($user_id)
+    {
         $this->db->where("user_id", $user_id);
         $querygetdata = $this->db->get("jyotisika_users");
-    
-        return $querygetdata->row(); 
+
+        return $querygetdata->row();
     }
 
-    public function astrolger_charge($astrologer_id) {
-        $this->db->where("id", $astrologer_id); 
+    public function astrolger_charge($astrologer_id)
+    {
+        $this->db->where("id", $astrologer_id);
         $querygetdata = $this->db->get("astrologer_registration");
-    
-        return $querygetdata->row(); 
+
+        return $querygetdata->row();
     }
 
-      public function checkonline($astrologer_id)
+    public function checkonline($astrologer_id)
     {
         $this->db->where("is_online", 1);
         $this->db->where("id", $astrologer_id);
@@ -80,7 +82,7 @@ class UserChatModel extends CI_Model
     }
 
 
-     public function checkactive($astrologer_id)
+    public function checkactive($astrologer_id)
     {
 
         $this->db->where("astrologer_id", $astrologer_id);
@@ -108,18 +110,51 @@ class UserChatModel extends CI_Model
     }
 
 
-    public function getactiveusers(){
+    public function getactiveusers()
+    {
 
         date_default_timezone_set('Asia/Kolkata');
         $timestamp = date('Y-m-d H:i:s', time());
- 
-        $this->db->where("expire_on" >"", $timestamp  );
-        $this->db->where("status", "active");
-      
-       $query = $this->db->get("chat_sessions");
 
-       return $query->result();
+        $this->db->where("expire_on" > "", $timestamp);
+        $this->db->where("status", "active");
+
+        $query = $this->db->get("chat_sessions");
+
+        return $query->result();
     }
+
+
+    public function endastrologerdata($astrologer_id)
+    {
+        date_default_timezone_set('Asia/Kolkata');
+        $timestamp = date('Y-m-d H:i:s');
+
+
+        $this->db->where('status', 'active');
+        $this->db->where('astrologer_id', $astrologer_id);
+        $query = $this->db->get('chat_sessions');
+        $sessions = $query->result();
+
+        $activeSessions = [];
+
+        foreach ($sessions as $session) {
+            if ($session->expire_on < $timestamp) {
+
+
+                $this->db->where('id', $session->id);
+                $this->db->update('chat_sessions', ['status' => 'inactive']);
+            } else {
+
+                $activeSessions[] = $session;
+            }
+        }
+
+
+        return true;
+    }
+
+
 
 
 

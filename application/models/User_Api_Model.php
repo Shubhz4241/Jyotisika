@@ -292,12 +292,29 @@ class User_Api_Model extends CI_Model
                 ->row();
 
             if ($chatSession) {
+
+                date_default_timezone_set('Asia/Kolkata');
+                $timestamp = date('Y-m-d H:i:s', time());
+
                 $astro->chat_start_time = $chatSession->start_time;
                 $astro->chat_expire_on = $chatSession->expire_on;
                 $astro->chatstatus = "active";
+
+                if ($chatSession->expire_on < $timestamp) {
+                    $astro->chatvalue = "sessionnotend";
+                } else {
+                    $astro->chatvalue = null;
+                }
+
+
             } else {
+                // $astro->chat_start_time = null;
+                // $astro->chat_expire_on = null;
+                // $astro->chatstatus = "inactive";
+
                 $astro->chat_start_time = null;
                 $astro->chat_expire_on = null;
+                $astro->chatvalue = null;
                 $astro->chatstatus = "inactive";
             }
         }
@@ -327,14 +344,36 @@ class User_Api_Model extends CI_Model
             ->get()
             ->row();
 
+        // if ($chatSession) {
+        //     $astrologer['chat_start_time'] = $chatSession->start_time;
+        //     $astrologer['chat_expire_on'] = $chatSession->expire_on;
+        //     $astrologer['chatstatus'] = "active";
+        // } else {
+        //     $astrologer['chat_start_time'] = null;
+        //     $astrologer['chat_expire_on'] = null;
+        //     $astrologer['chatstatus'] = "inactive";
+        // }
+
+        date_default_timezone_set('Asia/Kolkata');
+        $timestamp = date('Y-m-d H:i:s', time());
+
+
         if ($chatSession) {
+
             $astrologer['chat_start_time'] = $chatSession->start_time;
             $astrologer['chat_expire_on'] = $chatSession->expire_on;
             $astrologer['chatstatus'] = "active";
+
+            if ($astrologer['chat_expire_on'] < $timestamp) {
+                $astrologer['chatvalue'] = "sessionnotend";
+            } else {
+                $astrologer['chatvalue'] = null;
+            }
         } else {
             $astrologer['chat_start_time'] = null;
             $astrologer['chat_expire_on'] = null;
             $astrologer['chatstatus'] = "inactive";
+            $astrologer['chatvalue'] = null;
         }
 
 
@@ -1184,9 +1223,9 @@ class User_Api_Model extends CI_Model
        
          (SELECT COUNT(*) FROM bookpuja_request_by_user_to_pujari  WHERE puja_status = 'Completed'  AND pujari_id = pujari_registration.id ) as completed_puja_count");
         $this->db->from("mob_puja");
-        $this->db->join("services", "services.id = mob_puja.service_id" , 'Left');
+        $this->db->join("services", "services.id = mob_puja.service_id", 'Left');
         $this->db->join("pujari_registration", "pujari_registration.id =  mob_puja.pujari_id");
-    
+
         $query = $this->db->get();
         return $query->result();
 
@@ -1201,9 +1240,9 @@ class User_Api_Model extends CI_Model
     // }
 
 
-     
 
-   
+
+
 
     // public function show_mob_puja_model()
     // {
