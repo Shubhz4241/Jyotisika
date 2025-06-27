@@ -389,7 +389,7 @@
                                                 <img src="<?php echo base_url('assets/images/experience.png'); ?>"
                                                     alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
                                                 <small><?php echo isset($astrologer['experience']) && !empty($astrologer['experience']) ? $astrologer['experience'] : '0'; ?>+
-                                                    Years</small>
+                                                    Year</small>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
