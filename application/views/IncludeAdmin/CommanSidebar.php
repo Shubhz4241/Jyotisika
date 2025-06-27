@@ -194,7 +194,7 @@
 
 <aside id="sidebar" class="sidebar-toggle">
     <div class="sidebar-logo ">
-        <i class="bi bi-x-lg close-sidebar mt-3"></i>
+        <i class="bi bi-x-lg close-sidebar mt-3" style="color: white;"></i>
     </div>
     <!-- Sidebar Navigation -->
     <ul class="sidebar-nav p-0">

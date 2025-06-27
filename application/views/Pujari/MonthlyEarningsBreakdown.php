@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="<?php echo base_url('assets/images/Pujari/jyotishvitaran.png');?>" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         body {
@@ -144,34 +145,7 @@
                 </a>
             </h5>
 
-            <div class="table-section" id="offlinePuja">
-                <h5>Offline puja Breakdown <button class="btn btn-light filter-btn" onclick="toggleFilter('offline', event)"> Filter</button></h5>
-                <div class="filter-dropdown" id="offlineFilterDropdown">
-                    <select id="offlineFilter" onchange="filterTable('offline')">
-                        <option value="">All</option>
-                        <option value="Rahu-ketu">Rahu-ketu</option>
-                        <option value="Ghar shanti">Ghar shanti</option>
-                        <option value="Satyanarayan">Satyanarayan</option>
-                        <option value="Navgrah Puja">Navgrah Puja</option>
-                        <option value="Mahadev Abhishek">Mahadev Abhishek</option>
-                        <option value="Durga Saptashati">Durga Saptashati</option>
-                        <option value="Ganesh Puja">Ganesh Puja</option>
-                        <option value="Kali Puja">Kali Puja</option>
-                        <option value="Navratri Puja">Navratri Puja</option>
-                        <option value="Shani Shanti">Shani Shanti</option>
-                    </select>
-                </div>
-                <table class="table table-bordered table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Pooja</th>
-                            <th>Fees</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
+           
 
             <div class="table-section" id="onlinePuja">
                 <h5>Online puja Breakdown <button class="btn btn-light filter-btn" onclick="toggleFilter('online', event)"> Filter</button></h5>
@@ -198,7 +172,25 @@
                             <th>Fees</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+
+                    </thead>
+                    <tbody>
+                        <?php if(!empty($earnings)) : ?>
+                            <?php foreach ($earnings as $earning) : ?>
+                                <tr>
+                                    <td><?php echo $earning['user_name']; ?></td>
+                                    <td><?php echo $earning['service_name']; ?></td>
+                                    <td><?php echo $earning['price']; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="3">No data available</td>
+                            </tr>
+                        <?php endif; ?>
+
+                    </tbody>
                 </table>
             </div>
 
@@ -220,14 +212,29 @@
                     </select>
                 </div>
                 <table class="table table-bordered table table-striped">
-                    <thead>
+                <thead>
                         <tr>
                             <th>Name</th>
                             <th>Pooja</th>
                             <th>Fees</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                        <?php if(!empty($earningMob)) : ?>
+                            <?php foreach ($earningMob as $earning) : ?>
+                                <tr>
+                                    <td><?php echo $earning['user_name']; ?></td>
+                                    <td><?php echo $earning['service_name']; ?></td>
+                                    <td><?php echo $earning['discount_price']; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="3">No data available</td>
+                            </tr>
+                        <?php endif; ?>
+                       
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -236,49 +243,8 @@
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
     <script>
-        const data = {
-            "December": [
-                ["Aman Tiwari", "Rahu-ketu", "500"],
-                ["Ganesh Godse", "Rahu-ketu", "500"],
-                ["Athrva chandwadkar", "Rahu-ketu", "500"],
-                ["Amay Wagh", "Rahu-ketu", "500"],
-                ["Rohan Gaidhani", "Ghar shanti", "1200"],
-                ["Rahul Gaigawale", "Rahu-ketu", "500"],
-                ["Rohit Sharma", "Rahu-ketu", "500"],
-                ["Hardik Pandya", "Rahu-ketu", "500"],
-                ["Gautam gambhir", "Rahu-ketu", "500"],
-                ["Virendra Sevag", "Ghar shanti", "1200"],
-                ["Jane Doe", "Rahu-ketu", "500"],
-                ["Jane Doe", "Rahu-ketu", "500"],
-                ["Jane Doe", "Rahu-ketu", "500"],
-                ["Jane Doe", "Rahu-ketu", "500"],
-                ["John Doe", "Ghar shanti", "1200"]
-            ],
-            "November": [
-                ["Alice", "Satyanarayan", "700"],
-                ["Alice", "Navgrah Puja", "900"],
-                ["Bob", "Mahadev Abhishek", "1100"],
-                ["Charlie", "Durga Saptashati", "1500"],
-                ["John Doe", "Ghar shanti", "1200"],
-                ["Alice", "Satyanarayan", "700"],
-                ["Alice", "Navgrah Puja", "900"],
-                ["Bob", "Mahadev Abhishek", "1100"],
-                ["Charlie", "Durga Saptashati", "1500"],
-                ["John Doe", "Ghar shanti", "1200"]
-            ],
-            "October": [
-                ["Eve", "Ganesh Puja", "800"],
-                ["Eve", "Kali Puja", "1000"],
-                ["Mallory", "Navratri Puja", "1200"],
-                ["Trudy", "Shani Shanti", "1300"],
-                ["John Doe", "Ghar shanti", "1200"],
-                ["Eve", "Ganesh Puja", "800"],
-                ["Eve", "Kali Puja", "1000"],
-                ["Mallory", "Navratri Puja", "1200"],
-                ["Trudy", "Shani Shanti", "1300"],
-                ["John Doe", "Ghar shanti", "1200"]
-            ]
-        };
+        
+       
 
         function updateTableContent() {
             let selectedMonth = "December"; // Default to December since month filter is removed
@@ -311,7 +277,7 @@
             ['offline', 'online', 'mob'].forEach(cat => {
                 if (cat !== category) {
                     let otherDropdown = document.getElementById(cat + 'FilterDropdown');
-                    let otherBtn = document.querySelector(`#${cat}Puja .filter-btn`);
+                    let otherBtn = document.querySelector(`${cat}Puja .filter-btn`);
                     otherDropdown.style.display = "none";
                     otherBtn.innerHTML = " Filter";
                 }
@@ -321,7 +287,7 @@
         function filterTable(category) {
             let filterValue = document.getElementById(category + 'Filter').value;
             let selectedMonth = "December"; // Default to December since month filter is removed
-            let tableBody = document.querySelector(`#${category}Puja tbody`);
+            let tableBody = document.querySelector(`${category}Puja tbody`);
 
             // Validation: Check if filter value is valid
             const validFilters = ['', 'Rahu-ketu', 'Ghar shanti', 'Satyanarayan', 'Navgrah Puja', 'Mahadev Abhishek', 'Durga Saptashati', 'Ganesh Puja', 'Kali Puja', 'Navratri Puja', 'Shani Shanti'];
@@ -353,7 +319,7 @@
                     dropdown.style.display = "none";
                     // Reset the button text for the corresponding category
                     let category = dropdown.id.replace('FilterDropdown', '');
-                    let filterBtn = document.querySelector(`#${category}Puja .filter-btn`);
+                    let filterBtn = document.querySelector(`${category}Puja .filter-btn`);
                     if (filterBtn) {
                         filterBtn.innerHTML = "Filter";
                     }
@@ -366,5 +332,4 @@
         });
     </script>
 </body>
-
 </html>

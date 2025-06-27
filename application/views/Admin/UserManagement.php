@@ -154,6 +154,38 @@
                 max-width: 250px;
             }
         }
+      /* Ensure table remains responsive */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Adjust column widths */
+th, td {
+    white-space: nowrap;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Ensure Contact No. field is wide enough for 10 digits */
+th:nth-child(3), td:nth-child(3) { /* Contact No */
+    min-width: 140px; /* Adjust width */
+}
+
+/* Adjust Place of Birth column width and allow wrapping */
+th:nth-child(7), td:nth-child(7){
+    min-width: 150px; /* Set a reasonable width */
+    max-width: 400px; /* Prevent excessive width */
+    word-wrap: break-word;
+    white-space: normal;
+} /* Place of Birth */
+th:nth-child(8), td:nth-child(8) { /* Address */
+    min-width: 250px; /* Set a reasonable width */
+    max-width: 400px; /* Prevent excessive width */
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+
     </style>
 </head>
 
@@ -220,8 +252,8 @@
                             address: "123 Main Street",
                             serviceTaken: 2,
                             action: `<button class="btn btn-danger delete-btn" data-id="1">
-                    <i class="bi bi-trash-fill"></i>
-                 </button>`
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>`
                         },
                         {
                             name: "Jane Smith",
@@ -232,8 +264,8 @@
                             address: "456 Elm Street",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="2">
-                    <i class="bi bi-trash-fill"></i>
-                 </button>`
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>`
                         },
                         {
                             name: "Alice Brown",
@@ -244,8 +276,8 @@
                             address: "789 Pine Avenue",
                             serviceTaken: 3,
                             action: `<button class="btn btn-danger delete-btn" data-id="3">
-                    <i class="bi bi-trash-fill"></i>
-                 </button>`
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>`
                         },
                         {
                             name: "Michael Johnson",
@@ -256,8 +288,8 @@
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
-                    <i class="bi bi-trash-fill"></i>
-                 </button>`
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>`
                         },
                         {
                             name: "Michael Johnson",
@@ -268,8 +300,8 @@
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
-                    <i class="bi bi-trash-fill"></i>
-                 </button>`
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>`
                         },
                         {
                             name: "Michael Johnson",
@@ -280,8 +312,8 @@
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
-                    <i class="bi bi-trash-fill"></i>
-                 </button>`
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>`
                         },
                         {
                             name: "Michael Johnson",
@@ -291,20 +323,8 @@
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
-                    <i class="bi bi-trash-fill"></i>
-                 </button>`
-                        },
-                        {
-                            name: "Michael Johnson",
-                            contactNo: "6677889900",
-                            email: "michaelj@example.com",
-                            gender: "Male",
-                          
-                            address: "101 Maple Lane",
-                            serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="4">
-                    <i class="bi bi-trash-fill"></i>
-                 </button>`
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>`
                         },
                         {
                             name: "Michael Johnson",
@@ -315,8 +335,20 @@
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
-                    <i class="bi bi-trash-fill"></i>
-                 </button>`
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>`
+                        },
+                        {
+                            name: "Michael Johnson",
+                            contactNo: "6677889900",
+                            email: "michaelj@example.com",
+                            gender: "Male",
+                          
+                            address: "101 Maple Lane",
+                            serviceTaken: 1,
+                            action: `<button class="btn btn-danger delete-btn" data-id="4">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>`
                         },
                         {
                             name: "Michael Johnson",
@@ -327,8 +359,8 @@
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
-                    <i class="bi bi-trash-fill"></i>
-                 </button>`
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>`
                         },
                         // Add more entries as needed
                     ];

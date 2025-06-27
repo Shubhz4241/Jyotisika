@@ -252,6 +252,21 @@
                 max-width: 250px;
             }
         }
+
+        .nav-pills .nav-link {
+            color: #333;
+            /* Default text color */
+            /* background-color: #e0e0e0; Default background */
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #0c768a !important;
+            /* Active color */
+            color: #fff !important;
+            /* White text for better contrast */
+            font-weight: bold;
+        }
     </style>
 </head>
 
