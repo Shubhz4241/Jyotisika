@@ -386,6 +386,100 @@
                 width: 95%;
             }
         }
+
+                /* General Styling */
+                .documents {
+            text-align: center;
+            margin: 30px auto;
+            font-family: 'Poppins', sans-serif;
+            max-width: 100%;
+        }
+
+        /* Document Container - Ensures All 4 Cards Fit in One Row */
+        .document-container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 15px;
+            max-width: 1000px;
+            /* Ensures proper fit */
+            margin: 0 auto;
+        }
+
+        /* Document Cards */
+        .document-card {
+            background: #fff;
+            padding: 15px;
+            width: 220px;
+            /* Ensures 4 cards fit in a row */
+            height: 130px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .document-card p {
+            font-size: 16px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* View Button */
+        .view-btn {
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .view-btn:hover {
+            background: #0056b3;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 1024px) {
+            .document-container {
+                max-width: 800px;
+            }
+
+            .document-card {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .document-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .document-card {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .document-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .document-card {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 
@@ -428,17 +522,38 @@
                     <!-- Documents Section -->
                     <div class="documents">
                         <h3>Documents Attached</h3>
-                        <div class="document-preview">
-                            <div class="document">
-                                <p><strong>Aadhar Card:</strong></p>
-                                <iframe src="assets/images/CC UNIT II.pdf" class="doc-frame"></iframe>
+                        <div class="document-container">
+                            <!-- Aadhar Card -->
+                            <div class="document-card">
+                                <p><strong>Aadhar Card</strong></p>
+                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
                             </div>
-                            <div class="document">
-                                <p><strong>Certification:</strong></p>
-                                <iframe src="assets/images/CC UNIT II.pdf" class="doc-frame"></iframe>
+
+                            <!-- Certification 1 -->
+                            <div class="document-card">
+                                <p><strong>Certification 1</strong></p>
+                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
+                            </div>
+
+                            <!-- Certification 2 -->
+                            <div class="document-card">
+                                <p><strong>Certification 2</strong></p>
+                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
+                            </div>
+
+                            <!-- Certification 3 -->
+                            <div class="document-card">
+                                <p><strong>Certification 3</strong></p>
+                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        function openPDF(pdfPath) {
+                            window.open(pdfPath, '_blank');
+                        }
+                    </script>
 
                     <!-- Approve & Reject Buttons -->
                     <div class="buttons">

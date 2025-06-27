@@ -313,79 +313,206 @@
         }
 
         /* MODAL STYLES */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    justify-content: center;
-    align-items: center;
-}
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
 
-.modal-content {
-    background: white;
-    padding: 20px;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    position: relative;
-}
+        .modal-content {
+            background: white;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
 
-/* Close Button (Top-Right Corner) */
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-}
+        /* Close Button (Top-Right Corner) */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
 
-.close-btn:hover {
-    color: red;
-}
+        .close-btn:hover {
+            color: red;
+        }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-label {
-    text-align: left;
-    font-weight: bold;
-}
+        label {
+            text-align: left;
+            font-weight: bold;
+        }
 
-input, select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+        input,
+        select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-.submit-btn {
-    background: #28a745;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        .submit-btn {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-.submit-btn:hover {
-    background: #218838;
-}
+        .submit-btn:hover {
+            background: #218838;
+        }
 
-/* RESPONSIVENESS */
-@media (max-width: 768px) {
-    .modal-content {
-        width: 95%;
-    }
-}
+        /* RESPONSIVENESS */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+            }
+        }
 
+        /* General Styling */
+        .documents {
+            text-align: center;
+            margin: 30px auto;
+            font-family: 'Poppins', sans-serif;
+            max-width: 100%;
+        }
+
+        /* Document Container - Ensures All 4 Cards Fit in One Row */
+        .document-container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 15px;
+            max-width: 1000px;
+            /* Ensures proper fit */
+            margin: 0 auto;
+        }
+
+        /* Document Cards */
+        .document-card {
+            background: #fff;
+            padding: 15px;
+            width: 220px;
+            /* Ensures 4 cards fit in a row */
+            height: 130px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .document-card p {
+            font-size: 16px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* View Button */
+        .view-btn {
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .view-btn:hover {
+            background: #0056b3;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 1024px) {
+            .document-container {
+                max-width: 800px;
+            }
+
+            .document-card {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .document-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .document-card {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .document-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .document-card {
+                width: 90%;
+            }
+        }
+
+        .time-picker {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .time-picker select {
+            padding: 6px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
@@ -403,121 +530,175 @@ input, select {
             <!-- Navbar End -->
 
             <main class="p-3">
-    <div class="profile-container">
-        <!-- Image & Details Section -->
-        <div class="profile-top">
-            <!-- Profile Image -->
-            <div class="profile-image">
-                <img src="assets/images/BookPooja/GauriShankarPooja.png" alt="Profile Image">
-            </div>
+                <div class="profile-container">
+                    <!-- Image & Details Section -->
+                    <div class="profile-top">
+                        <!-- Profile Image -->
+                        <div class="profile-image">
+                            <img src="assets/images/BookPooja/GauriShankarPooja.png" alt="Profile Image">
+                        </div>
+                        <!-- Profile Details -->
+                        <div class="profile-content">
+                            <ul>
+                                <li><strong>Name:</strong> John Doe</li>
+                                <li><strong>Contact No:</strong> +1234567890</li>
+                                <li><strong>Email:</strong> john.doe@example.com</li>
+                                <li><strong>Gender:</strong> Male</li>
+                                <li><strong>Address:</strong> 123 Main St, City, Country</li>
+                                <li><strong>Language Known:</strong> English, Spanish</li>
+                                <li><strong>Specialities:</strong> Web Development, UI/UX Design</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <!-- Profile Details -->
-            <div class="profile-content">
-                <ul>
-                    <li><strong>Name:</strong> John Doe</li>
-                    <li><strong>Contact No:</strong> +1234567890</li>
-                    <li><strong>Email:</strong> john.doe@example.com</li>
-                    <li><strong>Gender:</strong> Male</li>
-                    <li><strong>Address:</strong> 123 Main St, City, Country</li>
-                    <li><strong>Language Known:</strong> English, Spanish</li>
-                    <li><strong>Specialities:</strong> Web Development, UI/UX Design</li>
-                </ul>
-            </div>
-        </div>
+                    <!-- Documents Section -->
+                    <div class="documents">
+                        <h3>Documents Attached</h3>
+                        <div class="document-container">
+                            <!-- Aadhar Card -->
+                            <div class="document-card">
+                                <p><strong>Aadhar Card</strong></p>
+                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
+                            </div>
 
-        <!-- Documents Section -->
-        <div class="documents">
-            <h3>Documents Attached</h3>
-            <div class="document-preview">
-                <div class="document">
-                    <p><strong>Aadhar Card:</strong></p>
-                    <iframe src="assets/images/CC UNIT II.pdf" class="doc-frame"></iframe>
+                            <!-- Certification 1 -->
+                            <div class="document-card">
+                                <p><strong>Certification 1</strong></p>
+                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
+                            </div>
+
+                            <!-- Certification 2 -->
+                            <div class="document-card">
+                                <p><strong>Certification 2</strong></p>
+                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
+                            </div>
+
+                            <!-- Certification 3 -->
+                            <div class="document-card">
+                                <p><strong>Certification 3</strong></p>
+                                <button onclick="openPDF('assets/documents/cert3.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        function openPDF(pdfPath) {
+                            window.open(pdfPath, '_blank');
+                        }
+                    </script>
+
+                    <!-- Approve & Reject Buttons -->
+                    <div class="buttons">
+                        <button class="approve-btn" onclick="openModal()">Approve</button>
+                        <button class="reject-btn">Reject</button>
+                    </div>
                 </div>
-                <div class="document">
-                    <p><strong>Certification:</strong></p>
-                    <iframe src="assets/images/CC UNIT II.pdf" class="doc-frame"></iframe>
+            </main>
+
+            <!-- Modal Structure -->
+            <div id="approveModal" class="modal" onclick="closeModal(event)">
+                <div class="modal-content" onclick="event.stopPropagation();">
+                    <span class="close-btn" onclick="closeModal(event)">&times;</span>
+                    <h2>Approval Details</h2>
+                    <form onsubmit="handleSubmit(event)">
+                        <label for="mode">Mode:</label>
+                        <select id="mode">
+                            <option value="Online">Online</option>
+                            <option value="Offline">Offline</option>
+                        </select>
+
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" required>
+
+                        <label for="time">Time:</label>
+                        <div class="time-picker">
+                            <select id="hour"></select> :
+                            <select id="minute"></select> :
+                            <select id="second"></select>
+                            <select id="ampm">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+
+                        <label for="venue">Venue:</label>
+                        <input type="text" id="venue" placeholder="Enter Venue" required>
+
+                        <button type="submit" class="submit-btn">Submit</button>
+                    </form>
                 </div>
             </div>
-        </div>
 
-        <!-- Approve & Reject Buttons -->
-        <div class="buttons">
-            <button class="approve-btn" onclick="openModal()">Approve</button>
-            <button class="reject-btn">Reject</button>
-        </div>
-    </div>
-</main>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                function openModal() {
+                    document.getElementById("approveModal").style.display = "flex";
+                }
 
-<!-- Modal Structure -->
-<div id="approveModal" class="modal" onclick="closeModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation();">
-        <span class="close-btn" onclick="closeModal(event)">&times;</span>
-        <h2>Approval Details</h2>
-        <form onsubmit="handleSubmit(event)">
-    <label for="mode">Mode:</label>
-    <select id="mode">
-        <option value="Online">Online</option>
-        <option value="Offline">Offline</option>
-    </select>
+                function closeModal(event) {
+                    const modal = document.getElementById("approveModal");
+                    if (event.target === modal || event.target.classList.contains("close-btn")) {
+                        modal.style.display = "none";
+                    }
+                }
 
-    <label for="date">Date:</label>
-    <input type="date" id="date" required>
+                function handleSubmit(event) {
+                    event.preventDefault(); // Prevent default form submission
 
-    <label for="time">Time:</label>
-    <input type="time" id="time" required>
+                    // Close the modal
+                    document.getElementById("approveModal").style.display = "none";
 
-    <label for="venue">Venue:</label>
-    <input type="text" id="venue" placeholder="Enter Venue" required>
+                    // Show SweetAlert success message
+                    Swal.fire({
+                        title: "Great Job",
+                        text: "Your interview is scheduled successfully.",
+                        imageUrl: "assets/images/Admin logo.png", // Your custom image
+                        imageWidth: 100,
+                        imageHeight: 100,
+                        imageAlt: "Success Image",
+                        confirmButtonText: "Close",
+                        confirmButtonColor: "#3085d6",
+                        customClass: {
+                            popup: 'custom-swal-popup',
+                            image: 'custom-swal-image' // Apply custom styling for round image
+                        }
+                    });
+                }
 
-    <button type="submit" class="submit-btn">Submit</button>
-</form>
+                function populateTimeDropdowns() {
+                    const hourDropdown = document.getElementById("hour");
+                    const minuteDropdown = document.getElementById("minute");
+                    const secondDropdown = document.getElementById("second");
 
-    </div>
-</div>
+                    // Populate hours (1-12)
+                    for (let hour = 1; hour <= 12; hour++) {
+                        let option = document.createElement("option");
+                        option.value = hour;
+                        option.textContent = hour;
+                        hourDropdown.appendChild(option);
+                    }
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    function openModal() {
-        document.getElementById("approveModal").style.display = "flex";
-    }
+                    // Populate minutes (00-59)
+                    for (let min = 0; min < 60; min++) {
+                        let formattedMin = min < 10 ? "0" + min : min;
+                        let option = document.createElement("option");
+                        option.value = formattedMin;
+                        option.textContent = formattedMin;
+                        minuteDropdown.appendChild(option);
+                    }
 
-    function closeModal(event) {
-        const modal = document.getElementById("approveModal");
-        if (event.target === modal || event.target.classList.contains("close-btn")) {
-            modal.style.display = "none";
-        }
-    }
+                    // Populate seconds (00-59)
+                    for (let sec = 0; sec < 60; sec++) {
+                        let formattedSec = sec < 10 ? "0" + sec : sec;
+                        let option = document.createElement("option");
+                        option.value = formattedSec;
+                        option.textContent = formattedSec;
+                        secondDropdown.appendChild(option);
+                    }
+                }
 
-    function handleSubmit(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        // Close the modal
-        document.getElementById("approveModal").style.display = "none";
-
-        // Show SweetAlert success message
-        Swal.fire({
-            title: "Great Job",
-            text: "Your interview is scheduled successfully.",
-            imageUrl: "assets/images/Admin logo.png", // Your custom image
-            imageWidth: 100,
-            imageHeight: 100,
-            imageAlt: "Success Image",
-            confirmButtonText: "Close",
-            confirmButtonColor: "#3085d6",
-            customClass: {
-                popup: 'custom-swal-popup',
-                image: 'custom-swal-image' // Apply custom styling for round image
-            }
-        });
-    }
-</script>
-
-
-
-
-
-
-
+                // Call function on page load
+                window.onload = populateTimeDropdowns;
+            </script>
 
         </div>
 

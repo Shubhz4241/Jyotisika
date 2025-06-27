@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics and Earnings</title>
+    <title>Analytics</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="<?php echo base_url('assets/images/Pujari/jyotishvitaran.png'); ?>" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         body {
@@ -223,43 +224,21 @@
     <div style="min-height: 100vh;">
         <div class="container">
             <div class="stat-box-container">
-                <a href="<?php echo base_url('PujariUser/OfflinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
+                <!-- <a href="<?php echo base_url('PujariUser/OfflinePuja'); ?>" class="stat-box bg-success text-white text-decoration-none">
                     <p class="fw-normal">Offline Puja</p>
                     <h3>40</h3>
-                </a>
+                </a> -->
                 <a href="<?php echo base_url('PujariUser/OnlinePuja'); ?>" class="stat-box bg-primary text-white text-decoration-none">
                     <p class="fw-normal">Online Puja</p>
-                    <h3>40</h3>
+                    <h3 id="pujaCount"></h3>
                 </a>
                 <div class="stat-box bg-warning text-dark">
                     <p class="fw-normal">Mob Puja</p>
-                    <h3>40</h3>
+                    <h3 id="pujaMobCount"></h3>
                 </div>
             </div>
 
-            <!-- Offline Puja Table -->
-            <div class="table-section">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5>Offline Puja</h5>
-                    <button class="btn btn-outline-secondary filter-btn" data-table="offline-puja-table">
-                        <i class="bi bi-funnel"></i> Filter
-                    </button>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table table-striped" id="offline-puja-table" >
-                        <thead>
-                            <tr>
-                                <th>Poojas</th>
-                                <th>December</th>
-                                <th>November</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dummy data will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
 
             <!-- Online Puja Table -->
             <div class="table-section">
@@ -279,7 +258,9 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             <!-- Dummy data will be populated by JavaScript -->
+
                         </tbody>
                     </table>
                 </div>
@@ -317,31 +298,70 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Expanded dummy data for all tables
-            const pujaData = [
-                { pooja: "Rahu-ketu", december: 5, november: 5 },
-                { pooja: "Wealth", december: 5, november: 5 },
-                { pooja: "Char-Shanti", december: 5, november: 5 },
-                { pooja: "Satyanarayan puja", december: 5, november: 5 },
-                { pooja: "Lakshmi Puja", december: 4, november: 4 },
-                { pooja: "Ganesh Puja", december: 6, november: 6 },
-                { pooja: "Navgrah Puja", december: 3, november: 3 },
-                { pooja: "Rudrabhishek", december: 7, november: 7 },
-                { pooja: "Kaal Sarp Dosh", december: 2, november: 2 },
-                { pooja: "Durga Saptashati", december: 8, november: 8 }
+            const pujaData = [{
+                    pooja: "Rahu-ketu",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Wealth",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Char-Shanti",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Satyanarayan puja",
+                    december: 5,
+                    november: 5
+                },
+                {
+                    pooja: "Lakshmi Puja",
+                    december: 4,
+                    november: 4
+                },
+                {
+                    pooja: "Ganesh Puja",
+                    december: 6,
+                    november: 6
+                },
+                {
+                    pooja: "Navgrah Puja",
+                    december: 3,
+                    november: 3
+                },
+                {
+                    pooja: "Rudrabhishek",
+                    december: 7,
+                    november: 7
+                },
+                {
+                    pooja: "Kaal Sarp Dosh",
+                    december: 2,
+                    november: 2
+                },
+                {
+                    pooja: "Durga Saptashati",
+                    december: 8,
+                    november: 8
+                }
             ];
 
             // Validation function
             function validateData(data) {
                 return data.every(item => {
-                    return typeof item.pooja === 'string' && 
-                           !isNaN(item.december) && item.december >= 0 && 
-                           !isNaN(item.november) && item.november >= 0;
+                    return typeof item.pooja === 'string' &&
+                        !isNaN(item.december) && item.december >= 0 &&
+                        !isNaN(item.november) && item.november >= 0;
                 });
             }
 
             // Initialize tables with data
             if (validateData(pujaData)) {
-                ['offline-puja-table', 'online-puja-table', 'mob-puja-table'].forEach(tableId => {
+                ['online-puja-table', 'mob-puja-table'].forEach(tableId => {
                     const table = document.querySelector(`#${tableId}`);
                     const tableBody = table.querySelector("tbody");
                     tableBody.innerHTML = ''; // Clear existing rows
@@ -479,6 +499,74 @@
                 });
             });
         });
+
+        async function fetchPujaCount() {
+            try {
+
+                const pujariId = <?php echo json_encode($pujari_id); ?>;
+
+                console.log(pujariId);
+
+                const response = await fetch("<?php echo base_url('PujariController/countPuja'); ?>/" + pujariId);
+                console.log(response);
+
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+
+                if (result.status) {
+                    document.getElementById('pujaCount').innerText = result.data;
+                } else {
+                    console.error('No poojas found');
+                }
+            } catch (error) {
+                console.error('Error fetching puja count:', error);
+            }
+        }
+
+        // Fetch puja count every 5 seconds (optional for auto update)
+        //setInterval(fetchPujaCount, 5000);
+
+        // Initial fetch
+        fetchPujaCount();
+
+
+
+        async function fetchPujaCountMob() {
+            try {
+
+                const pujariId = <?php echo json_encode($pujari_id); ?>;
+
+                console.log(pujariId);
+
+                const response = await fetch("<?php echo base_url('PujariController/countMobPuja'); ?>/" + pujariId);
+                // console.log("Responce for mob"+response);
+
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+
+                if (result.status) {
+                    document.getElementById('pujaMobCount').innerText = result.data;
+                } else {
+                    console.error('No poojas found');
+                }
+            } catch (error) {
+                console.error('Error fetching puja count:', error);
+            }
+        }
+
+        // Fetch puja count every 5 seconds (optional for auto update)
+      //  setInterval(fetchPujaCountMob, 5000);
+
+        // Initial fetch
+        fetchPujaCountMob();
     </script>
 </body>
 

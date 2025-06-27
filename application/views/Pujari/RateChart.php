@@ -6,24 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rate Chart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url('assets/images/Pujari/jyotishvitaran.png');?>" type="image/png">
 
     <style>
         body {
             background-color: #f8f9fa;
             font-family: 'Montserrat', serif;
             overflow-x: hidden;
-            /* Prevents unwanted horizontal scrolling */
         }
 
         .container {
             max-width: 1200px;
             overflow-x: hidden;
-            /* Ensures no extra horizontal scroll */
         }
 
         .row {
@@ -41,7 +39,7 @@
             width: 100%;
             max-width: 280px;
             margin: 29px;
-            /* Prevents stretching */
+            overflow: hidden;
         }
 
         .search-container {
@@ -62,7 +60,6 @@
         .search-bar,
         .filter-select {
             width: 100%;
-            background-color: #ECE6F0;
             border: none;
             border-radius: 25px;
             padding: 10px 40px 10px 20px;
@@ -79,15 +76,6 @@
             color: #7D7689;
         }
 
-        .rate-card {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-        }
-
         .btn-change {
             background-color: #6fcf97;
             border: none;
@@ -99,16 +87,27 @@
 
         .filter-select {
             appearance: none;
-            /* Hides default dropdown arrow */
             -webkit-appearance: none;
             -moz-appearance: none;
             background-image: url("https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/chevron-down.svg");
-            /* Custom dropdown icon */
             background-repeat: no-repeat;
             background-position: right 15px center;
             background-size: 16px;
             padding-right: 40px;
-            /* Space for the icon */
+        }
+
+        .SetRate {
+            background-color: #6fcf97;
+            border: none;
+            padding: 5px 15px;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .SetRate:hover {
+            background-color: #5cb85c;
         }
 
         @media (max-width: 576px) {
@@ -120,9 +119,7 @@
 
             .rate-card {
                 width: 90%;
-                /* Adjust width to fit better */
                 margin: 15px auto;
-                /* Center align */
             }
         }
 
@@ -136,10 +133,19 @@
             .rate-card {
                 width: 100%;
                 max-width: 320px;
-                /* Adjust width for better alignment */
                 margin: 15px auto;
-                /* Center align */
             }
+        }
+
+        .text-center {
+            margin-top: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .py-3 {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -159,156 +165,190 @@
                 <div class="filter-wrapper">
                     <select class="filter-select" id="filter">
                         <option value="">Filter</option>
-                        <option value="Ghar Shanti">Ganesh Puja</option>
-                        <option value="Rahu-Ketu">Lakshmi Puja</option>
                     </select>
                 </div>
-
+                <!-- <div class="d-flex justify-content-end mb-3">
+                    <button class="SetRate" id="SetRate">SetRate</button>
+                </div> -->
             </div>
 
             <div id="rateCardsContainer" class="row">
                 <!-- Cards will be dynamically inserted -->
             </div>
-            
         </div>
-<!-- Change Form Modal -->
-<div class="modal fade" id="changeModal" tabindex="-1" aria-labelledby="changeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="changeModalLabel">Edit Puja Price</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="changeForm">
-                    <div class="mb-3">
-                        <label for="editOriginalPrice" class="form-label">Original Price</label>
-                        <input type="number" class="form-control" id="editOriginalPrice" required>
-                        <div class="invalid-feedback">Please enter a valid original price.</div>
+
+        <!-- Change Form Modal -->
+        <div class="modal fade" id="changeModal" tabindex="-1" aria-labelledby="changeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changeModalLabel">Edit Puja Price</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="mb-3">
-                        <label for="editDiscountPrice" class="form-label">Discount Price</label>
-                        <input type="number" class="form-control" id="editDiscountPrice" required>
-                        <div class="invalid-feedback">Please enter a valid discount price.</div>
+                    <div class="modal-body">
+                        <form id="changeForm">
+                            <div class="mb-3">
+                                <label for="editPrice" class="form-label">Price</label>
+                                <input type="number" class="form-control" id="editPrice" required>
+                                <div class="invalid-feedback">Please enter a valid price.</div>
+                            </div>
+                            <button type="button" class="btn btn-success" id="saveChangesBtn">Save Changes</button>
+                        </form>
                     </div>
-                    <button type="button" class="btn btn-success" id="saveChangesBtn">Save Changes</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-        <script>
-            const pujas = [{
-                    name: "Ghar Shanti",
-                    originalPrice: 610,
-                    discountPrice: 500
-                },
-                {
-                    name: "Rahu-Ketu",
-                    originalPrice: 610,
-                    discountPrice: 500
-                },
-                {
-                    name: "Ganesh Puja",
-                    originalPrice: 700,
-                    discountPrice: 600
-                },
-                {
-                    name: "Lakshmi Puja",
-                    originalPrice: 800,
-                    discountPrice: 700
-                },
-                {
-                    name: "Navagraha Puja",
-                    originalPrice: 900,
-                    discountPrice: 800
-                },
-                {
-                    name: "Saraswati Puja",
-                    originalPrice: 1000,
-                    discountPrice: 900
-                }
-            ];
-
-            function renderPujas(searchQuery = "", filter = "") {
-                const container = document.getElementById("rateCardsContainer");
-                container.innerHTML = "";
-                searchQuery = searchQuery.toLowerCase();
-                filter = filter.toLowerCase();
-
-                let filteredPujas = pujas.filter(puja => {
-                    let nameMatch = puja.name.toLowerCase().includes(searchQuery);
-                    let filterMatch = !filter || puja.name.toLowerCase() === filter;
-                    return nameMatch && filterMatch;
-                });
-
-                if (filteredPujas.length === 0) {
-                    container.innerHTML = `<p class="text-center mt-3">No matching pujas found.</p>`;
-                    return;
-                }
-
-                filteredPujas.forEach((puja) => {
-                    const card = document.createElement("div");
-                    card.classList.add("col-md-6", "col-lg-4", "col-xl-3", "mb-4");
-                    card.innerHTML = `
-                <div class="rate-card">
-                    <h5>${puja.name}</h5>
-                    <p style="font-size: 12px; color: gray;">Original Price: ₹${puja.originalPrice}</p>
-                    <p>Discount Price: <strong>₹${puja.discountPrice}</strong></p>
-                    <button class="btn btn-change">Change</button>
                 </div>
-            `;
-                    container.appendChild(card);
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let allPujas = []; // Global variable to store pujas
+                const pujariId = <?php echo json_encode($pujari_id); ?>;
+
+                // Fetch data from API
+                fetch('<?php echo base_url() . 'PujariController/getLoggedInPujariServices/'; ?>' +pujariId, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('API Response:', data);
+                    if (data.status === 'success') {
+                        allPujas = data.pujari_services.map(service => ({
+                            name: service.specialties,
+                            price: service.puja_charges
+                        }));
+                        console.log('Mapped Pujas:', allPujas);
+                        renderPujas(allPujas);
+                        populateFilter(data.pujari_services);
+                    } else {
+                        console.error('API Error:', data.message);
+                        renderPujas([]);
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    renderPujas([]);
                 });
-            }
 
-            document.getElementById("search").addEventListener("input", function() {
-                renderPujas(this.value, document.getElementById("filter").value);
-            });
+                function renderPujas(pujas, searchQuery = "", filter = "") {
+                    const container = document.getElementById("rateCardsContainer");
+                    container.innerHTML = "";
+                    searchQuery = searchQuery.toLowerCase();
+                    filter = filter.toLowerCase();
 
-            document.getElementById("filter").addEventListener("change", function() {
-                renderPujas(document.getElementById("search").value, this.value);
-            });
+                    let filteredPujas = pujas.filter((puja) => {
+                        let nameMatch = puja.name.toLowerCase().includes(searchQuery);
+                        let filterMatch = !filter || puja.name.toLowerCase() === filter;
+                        return nameMatch && filterMatch;
+                    });
 
-            renderPujas();
+                    console.log('Filtered Pujas:', filteredPujas);
 
+                    if (filteredPujas.length === 0) {
+                        container.innerHTML = `<p class="text-center mt-3">No matching pujas found.</p>`;
+                        return;
+                    }
 
-
-
-            function renderPujas(searchQuery = "", filter = "") {
-                const container = document.getElementById("rateCardsContainer");
-                container.innerHTML = "";
-                searchQuery = searchQuery.toLowerCase();
-                filter = filter.toLowerCase();
-
-                let storedPujas = JSON.parse(localStorage.getItem("pujas")) || [];
-
-                let filteredPujas = storedPujas.filter(puja => {
-                    let nameMatch = puja.name.toLowerCase().includes(searchQuery);
-                    let filterMatch = !filter || puja.name.toLowerCase() === filter;
-                    return nameMatch && filterMatch;
-                });
-
-                if (filteredPujas.length === 0) {
-                    container.innerHTML = `<p class="text-center mt-3">No matching pujas found.</p>`;
-                    return;
+                    filteredPujas.forEach((puja, index) => {
+                        const priceDisplay = puja.price !== null ? puja.price : "Not Set";
+                        const card = document.createElement("div");
+                        card.classList.add("col-md-6", "col-lg-4", "col-xl-3");
+                        card.innerHTML = `
+                            <div class="rate-card">
+                                <h5>${puja.name}</h5>
+                                <p>Price: <strong>₹<span id="price-${index}">${priceDisplay}</span></strong></p>
+                                <button class="btn btn-change" onclick="openEditModal(${index}, '${puja.name}')">Change</button>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
                 }
 
-                filteredPujas.forEach((puja) => {
-                    const card = document.createElement("div");
-                    card.classList.add("col-12", "col-sm-6", "col-md-4", "col-lg-3", "d-flex", "justify-content-center", "mb-4");
-                    card.innerHTML = `
-            <div class="rate-card">
-                <h5>${puja.name}</h5>
-                <p style="font-size: 12px; color: gray;">Original Price: ₹${puja.originalPrice}</p>
-                <p>Discount Price: <strong>₹${puja.discountPrice}</strong></p>
-                <button class="btn btn-change">Change</button>
-            </div>
-        `;
-                    container.appendChild(card);
+                function populateFilter(services) {
+                    const filterSelect = document.getElementById("filter");
+                    filterSelect.innerHTML = '<option value="">Filter</option>';
+                    services.forEach(service => {
+                        const option = document.createElement("option");
+                        option.value = service.specialties;
+                        option.textContent = service.specialties;
+                        filterSelect.appendChild(option);
+                    });
+                }
+
+                window.openEditModal = function(index, name) {
+                    const price = document.getElementById(`price-${index}`).textContent;
+                    document.getElementById("editPrice").value = price === "Not Set" ? "" : price;
+                    document.getElementById("saveChangesBtn").setAttribute("data-index", index);
+                    document.getElementById("saveChangesBtn").setAttribute("data-name", name);
+
+                    let changeModal = new bootstrap.Modal(document.getElementById("changeModal"));
+                    changeModal.show();
+                };
+
+                document.getElementById("saveChangesBtn").addEventListener("click", function() {
+                    let index = this.getAttribute("data-index");
+                    let name = this.getAttribute("data-name");
+                    let price = document.getElementById("editPrice").value.trim();
+
+                    let priceValue = parseFloat(price);
+                    if (isNaN(priceValue) || priceValue < 1) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Invalid Input",
+                            text: "Price must be a positive number and at least 1!",
+                        });
+                        return;
+                    }
+
+                     const pujariId = <?php echo json_encode($pujari_id); ?>;
+
+                    fetch('<?php echo base_url() . 'PujariController/updatePujariServicePrice/'; ?>'+pujariId, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, price: parseInt(price) })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            document.getElementById(`price-${index}`).textContent = price;
+                            allPujas[index].price = parseInt(price); // Update the global array
+                            let changeModal = bootstrap.Modal.getInstance(document.getElementById("changeModal"));
+                            changeModal.hide();
+                            Swal.fire({
+                                icon: "success",
+                                title: "Success",
+                                text: "Puja price updated successfully!",
+                            });
+                            renderPujas(allPujas); // Re-render with updated data
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: data.message || "Failed to update price!",
+                            });
+                        }
+                    });
                 });
-            }
+
+                document.getElementById("search").addEventListener("input", function() {
+                    console.log('Search Query:', this.value);
+                    renderPujas(allPujas, this.value, document.getElementById("filter").value);
+                });
+
+                document.getElementById("filter").addEventListener("change", function() {
+                    console.log('Filter Value:', this.value);
+                    renderPujas(allPujas, document.getElementById("search").value, this.value);
+                });
+
+                document.getElementById("SetRate").addEventListener("click", function() {
+                    window.location.href = "<?php echo base_url() . 'PujariUser/SetRate'; ?>";
+                });
+            });
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -316,112 +356,6 @@
     <footer>
         <?php $this->load->view('Pujari/Include/PujariFooter') ?>
     </footer>
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let pujas = JSON.parse(localStorage.getItem("pujas")) || [
-            { name: "Ghar Shanti", originalPrice: 610, discountPrice: 500 },
-            { name: "Rahu-Ketu", originalPrice: 610, discountPrice: 500 },
-            { name: "Ganesh Puja", originalPrice: 700, discountPrice: 600 },
-            { name: "Lakshmi Puja", originalPrice: 800, discountPrice: 700 },
-            { name: "Navagraha Puja", originalPrice: 900, discountPrice: 800 },
-            { name: "Saraswati Puja", originalPrice: 1000, discountPrice: 900 }
-        ];
-
-        if (!localStorage.getItem("pujas")) {
-            localStorage.setItem("pujas", JSON.stringify(pujas));
-        }
-
-        function renderPujas(searchQuery = "", filter = "") {
-            const container = document.getElementById("rateCardsContainer");
-            container.innerHTML = "";
-            searchQuery = searchQuery.toLowerCase();
-            filter = filter.toLowerCase();
-
-            let storedPujas = JSON.parse(localStorage.getItem("pujas")) || [];
-            let filteredPujas = storedPujas.filter((puja, index) => {
-                let nameMatch = puja.name.toLowerCase().includes(searchQuery);
-                let filterMatch = !filter || puja.name.toLowerCase() === filter;
-                return nameMatch && filterMatch;
-            });
-
-            if (filteredPujas.length === 0) {
-                container.innerHTML = `<p class="text-center mt-3">No matching pujas found.</p>`;
-                return;
-            }
-
-            filteredPujas.forEach((puja, index) => {
-                const card = document.createElement("div");
-                card.classList.add("col-md-6", "col-lg-4", "col-xl-3", "mb-4");
-                card.innerHTML = `
-                    <div class="rate-card">
-                        <h5>${puja.name}</h5>
-                        <p style="font-size: 12px; color: gray;">Original Price: ₹<span id="originalPrice-${index}">${puja.originalPrice}</span></p>
-                        <p>Discount Price: <strong>₹<span id="discountPrice-${index}">${puja.discountPrice}</span></strong></p>
-                        <button class="btn btn-change" onclick="openEditModal(${index})">Change</button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        window.openEditModal = function (index) {
-            let storedPujas = JSON.parse(localStorage.getItem("pujas")) || [];
-            let puja = storedPujas[index];
-
-            document.getElementById("editOriginalPrice").value = puja.originalPrice;
-            document.getElementById("editDiscountPrice").value = puja.discountPrice;
-            document.getElementById("saveChangesBtn").setAttribute("data-index", index);
-
-            let changeModal = new bootstrap.Modal(document.getElementById("changeModal"));
-            changeModal.show();
-        };
-
-        document.getElementById("saveChangesBtn").addEventListener("click", function () {
-            let index = this.getAttribute("data-index");
-            let storedPujas = JSON.parse(localStorage.getItem("pujas")) || [];
-            let originalPrice = document.getElementById("editOriginalPrice").value.trim();
-            let discountPrice = document.getElementById("editDiscountPrice").value.trim();
-
-            if (originalPrice === "" || discountPrice === "" || isNaN(originalPrice) || isNaN(discountPrice)) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Invalid Input",
-                    text: "Please enter valid numeric prices!",
-                });
-                return;
-            }
-
-            storedPujas[index].originalPrice = parseInt(originalPrice);
-            storedPujas[index].discountPrice = parseInt(discountPrice);
-            localStorage.setItem("pujas", JSON.stringify(storedPujas));
-
-            document.getElementById(`originalPrice-${index}`).textContent = originalPrice;
-            document.getElementById(`discountPrice-${index}`).textContent = discountPrice;
-
-            let changeModal = bootstrap.Modal.getInstance(document.getElementById("changeModal"));
-            changeModal.hide();
-
-            Swal.fire({
-                icon: "success",
-                title: "Success",
-                text: "Puja prices updated successfully!",
-            });
-
-            renderPujas();
-        });
-
-        document.getElementById("search").addEventListener("input", function () {
-            renderPujas(this.value, document.getElementById("filter").value);
-        });
-
-        document.getElementById("filter").addEventListener("change", function () {
-            renderPujas(document.getElementById("search").value, this.value);
-        });
-
-        renderPujas();
-    });
-</script>
-
 </body>
 
 </html>

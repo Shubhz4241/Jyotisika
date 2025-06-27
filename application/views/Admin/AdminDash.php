@@ -159,6 +159,43 @@
             object-fit: cover;
             border-radius: 50%;
         }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Ensures the contact column does not wrap */
+        .contact-column {
+            white-space: nowrap;
+            min-width: 150px;
+        }
+
+        /* Makes long lists of languages and specialities appear in 2 columns */
+        .multi-column {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .multi-column span {
+            flex: 1 1 45%;
+            /* Adjust width to keep 2 per line */
+            text-align: center;
+        }
+
+
+        .btn-view {
+            color: white;
+            background-color: #0c768a;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
     </style>
 
 </head>
@@ -248,14 +285,14 @@
                                                 <tr>
                                                     <th>Profile</th>
                                                     <th>Name</th>
-                                                    <th>Contact</th>
+                                                    <th class="contact-column">Contact</th>
                                                     <th>Email</th>
                                                     <th>Gender</th>
                                                     <th>Languages</th>
                                                     <th>Specialities</th>
                                                     <th>Aadhar Card</th>
                                                     <th>Certifications</th>
-                                                    <th>Action</th>
+                                                    <!-- <th>Action</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody class="text-center">
@@ -267,22 +304,34 @@
                                                         </div>
                                                     </td>
                                                     <td>John Doe</td>
-                                                    <td>+1 123-456-7890</td>
+                                                    <td class="contact-column">+1 123-456-7890</td>
                                                     <td>john.doe@example.com</td>
                                                     <td>Male</td>
-                                                    <td>English, Spanish</td>
-                                                    <td>Web Development</td>
                                                     <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-center">
-                                                            <a href="#" style="color: white; background-color: #0c768a;" class="btn btn-sm btn-primary">View</a>
+                                                        <div class="multi-column">
+                                                            <span>English</span>
+                                                            <span>Spanish</span>
+                                                            <span>French</span>
+                                                            <span>German</span>
                                                         </div>
                                                     </td>
+                                                    <td>
+                                                        <div class="multi-column">
+                                                            <span>Web Development</span>
+                                                            <span>SEO Optimization</span>
+                                                            <span>Graphic Design</span>
+                                                            <span>Data Analysis</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <!-- <td>
+                                                            <a href="#" class="btn-view">View</a>
+                                                        </td> -->
                                                 </tr>
                                                 <!-- Row 2 -->
                                                 <tr>
@@ -292,22 +341,34 @@
                                                         </div>
                                                     </td>
                                                     <td>Jane Smith</td>
-                                                    <td>+1 987-654-3210</td>
+                                                    <td class="contact-column">+1 987-654-3210</td>
                                                     <td>jane.smith@example.com</td>
                                                     <td>Female</td>
-                                                    <td>English, French</td>
-                                                    <td>Graphic Design</td>
                                                     <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-center">
-                                                            <a href="#" style="color: white; background-color: #0c768a;" class="btn btn-sm btn-primary">View</a>
+                                                        <div class="multi-column">
+                                                            <span>English</span>
+                                                            <span>Spanish</span>
+                                                            <span>French</span>
+                                                            <span>German</span>
                                                         </div>
                                                     </td>
+                                                    <td>
+                                                        <div class="multi-column">
+                                                            <span>Web Development</span>
+                                                            <span>SEO Optimization</span>
+                                                            <span>Graphic Design</span>
+                                                            <span>Data Analysis</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <!-- <td>
+                                                        <a href="#" class="btn-view">View</a>
+                                                    </td> -->
                                                 </tr>
                                                 <!-- Row 3 -->
                                                 <tr>
@@ -317,22 +378,34 @@
                                                         </div>
                                                     </td>
                                                     <td>Michael Brown</td>
-                                                    <td>+1 555-123-4567</td>
+                                                    <td class="contact-column">+1 555-123-4567</td>
                                                     <td>michael.brown@example.com</td>
                                                     <td>Male</td>
-                                                    <td>English, German</td>
-                                                    <td>SEO Optimization</td>
                                                     <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-center">
-                                                            <a href="#" style="color: white; background-color: #0c768a;" class="btn">View</a>
+                                                        <div class="multi-column">
+                                                            <span>English</span>
+                                                            <span>Spanish</span>
+                                                            <span>French</span>
+                                                            <span>German</span>
                                                         </div>
                                                     </td>
+                                                    <td>
+                                                        <div class="multi-column">
+                                                            <span>Web Development</span>
+                                                            <span>SEO Optimization</span>
+                                                            <span>Graphic Design</span>
+                                                            <span>Data Analysis</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <!-- <td>
+                                                            <a href="#" class="btn-view">View</a>
+                                                        </td> -->
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -363,7 +436,7 @@
                                                     <th>Specialities</th>
                                                     <th>Aadhar Card</th>
                                                     <th>Certifications</th>
-                                                    <th>Action</th>
+                                                    <!-- <th>Action</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody class="text-center">
@@ -378,19 +451,33 @@
                                                     <td>+1 123-456-7890</td>
                                                     <td>john.doe@example.com</td>
                                                     <td>Male</td>
-                                                    <td>English, Spanish</td>
-                                                    <td>Web Development</td>
                                                     <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
+                                                        <div class="multi-column">
+                                                            <span>English</span>
+                                                            <span>Spanish</span>
+                                                            <span>French</span>
+                                                            <span>German</span>
+                                                        </div>
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
+                                                        <div class="multi-column">
+                                                            <span>Web Development</span>
+                                                            <span>SEO Optimization</span>
+                                                            <span>Graphic Design</span>
+                                                            <span>Data Analysis</span>
+                                                        </div>
                                                     </td>
                                                     <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <!-- <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="#" style="color: white; background-color: #0c768a;" class="btn btn-sm btn-primary">View</a>
                                                         </div>
-                                                    </td>
+                                                    </td> -->
                                                 </tr>
                                                 <!-- Row 2 -->
                                                 <tr>
@@ -403,19 +490,33 @@
                                                     <td>+1 987-654-3210</td>
                                                     <td>jane.smith@example.com</td>
                                                     <td>Female</td>
-                                                    <td>English, French</td>
-                                                    <td>Graphic Design</td>
                                                     <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
+                                                        <div class="multi-column">
+                                                            <span>English</span>
+                                                            <span>Spanish</span>
+                                                            <span>French</span>
+                                                            <span>German</span>
+                                                        </div>
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
+                                                        <div class="multi-column">
+                                                            <span>Web Development</span>
+                                                            <span>SEO Optimization</span>
+                                                            <span>Graphic Design</span>
+                                                            <span>Data Analysis</span>
+                                                        </div>
                                                     </td>
                                                     <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <!-- <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="#" style="color: white; background-color: #0c768a;" class="btn btn-sm btn-primary">View</a>
                                                         </div>
-                                                    </td>
+                                                    </td> -->
                                                 </tr>
                                                 <!-- Row 3 -->
                                                 <tr>
@@ -428,19 +529,34 @@
                                                     <td>+1 555-123-4567</td>
                                                     <td>michael.brown@example.com</td>
                                                     <td>Male</td>
-                                                    <td>English, German</td>
-                                                    <td>SEO Optimization</td>
                                                     <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">doc.pdf</a>
+                                                        <div class="multi-column">
+                                                            <span>English</span>
+                                                            <span>Spanish</span>
+                                                            <span>French</span>
+                                                            <span>German</span>
+                                                        </div>
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="pdfmodal text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#pdfModal">certificate.pdf</a>
+                                                        <div class="multi-column">
+                                                            <span>Web Development</span>
+                                                            <span>SEO Optimization</span>
+                                                            <span>Graphic Design</span>
+                                                            <span>Data Analysis</span>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
                                                     </td>
                                                     <td>
+                                                        <a href="#" style="color: #0c768a;" class="pdfmodal" data-bs-toggle="modal" data-bs-target="#pdfModal">View</a>
+                                                    </td>
+                                                    <!-- <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="#" style="color: white; background-color: #0c768a;" class="btn btn-sm btn-primary">View</a>
                                                         </div>
-                                                    </td>
+                                                    </td> -->
                                                 </tr>
                                             </tbody>
                                         </table>

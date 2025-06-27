@@ -291,6 +291,14 @@
                 max-width: 250px;
             }
         }
+
+        .reschedule-label {
+            display: block;
+            /* Ensures labels take full width */
+            text-align: left;
+            /* Aligns text to the start */
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -788,15 +796,15 @@
 
                                 <!-- Reschedule Form -->
                                 <div class="mb-3">
-                                    <label for="interviewDate" class="form-label">Interview Date</label>
-                                    <input type="date" class="form-control" id="interviewDate">
+                                    <label for="interviewDate" class="form-label reschedule-label">Interview Date</label>
+                                    <input type="date" class="form-control " id="interviewDate">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="interviewTime" class="form-label">Interview Time</label>
+                                    <label for="interviewTime" class="form-label reschedule-label">Interview Time</label>
                                     <input type="time" class="form-control" id="interviewTime">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="interviewVenue" class="form-label">Meeting Link</label>
+                                    <label for="interviewVenue" class="form-label reschedule-label">Meeting Link</label>
                                     <input type="text" class="form-control" id="interviewVenue" placeholder="Enter Link">
                                 </div>
 
@@ -808,51 +816,7 @@
                 </div>
 
 
-                <!-- Edit Attendance Modal -->
-                <div class="modal fade" id="editAttendanceModal" tabindex="-1"
-                    aria-labelledby="editAttendanceModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content" style="background-color: var(--form-color);">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editAttendanceModalLabel">Edit Attendance</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close" onclick="resetForm()"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="UpdateAttendanceForm">
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                            <label for="attendanceDate" class="form-label">Date</label>
-                                            <input type="date" class="form-control" name="attendanceDate" id="attendanceDate" autocomplete="off" required>
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <label for="attendanceStatus" class="form-label">Attendance Status</label>
-                                            <select class="form-select" name="attendanceStatus" id="attendanceStatus" autocomplete="off" required>
-                                                <option value="" selected disabled>Select Status</option>
-                                                <option value="Present">Present</option>
-                                                <option value="Absent">Absent</option>
-                                                <option value="HalfDay">Half Day</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal" onclick="resetForm()">Close</button>
-                                <button type="submit" form="UpdateAttendanceForm" class="btn btn-primary">
-                                    Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- script to reset form -->
-                <script>
-                    function resetForm() {
-                        document.getElementById('UpdateAttendanceForm').reset();
-                    }
-                </script>
             </main>
         </div>
 

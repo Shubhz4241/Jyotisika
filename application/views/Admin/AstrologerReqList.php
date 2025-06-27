@@ -122,6 +122,21 @@
                 max-width: 250px;
             }
         }
+
+        .nav-pills .nav-link {
+            color: #333;
+            /* Default text color */
+            /* background-color: #e0e0e0; Default background */
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #0c768a !important;
+            /* Active color */
+            color: #fff !important;
+            /* White text for better contrast */
+            font-weight: bold;
+        }
     </style>
 
 </head>
@@ -197,9 +212,9 @@
 
                                 <!-- Pagination Buttons -->
                                 <div class="d-flex justify-content-end gap-2">
-                                    <button id="prevBtn" class="btn btn-sm btn-primary" onclick="previousPage()">Previous</button>
+                                    <button id="prevBtn" style="background-color: #0c768a;" class="btn text-white" onclick="previousPage()">Previous</button>
                                     <div id="pageNumbers" class="btn-group"></div>
-                                    <button id="nextBtn" class="btn btn-sm btn-primary" onclick="nextPage()">Next</button>
+                                    <button id="nextBtn" style="background-color: #0c768a;" class="btn text-white" onclick="nextPage()">Next</button>
                                 </div>
 
                                 <!-- PDF Modal -->
@@ -231,7 +246,7 @@
                                     contact: "123-456-7890",
                                     email: "johndoe@example.com",
                                     gender: "Male",
-                                    language: "English, Spanish",
+                                    language: "English, Spanish, French, German",
                                     specialities: "Web Development, UI/UX",
                                     aadhar: "Aadhar_Document.pdf",
                                     certifications: "FullStack_Certificate.pdf"
@@ -243,7 +258,7 @@
                                     contact: "987-654-3210",
                                     email: "janesmith@example.com",
                                     gender: "Female",
-                                    language: "English, French",
+                                    language: "English, French, English, Spanish, French, German",
                                     specialities: "Graphic Design, Branding",
                                     aadhar: "Aadhar_Jane.pdf",
                                     certifications: "Adobe_Design_Certificate.pdf"
@@ -379,10 +394,10 @@
                                             <td>${item.gender}</td>
                                             <td>${item.language}</td>
                                             <td>${item.specialities}</td>
-                                            <td><a href="#" onclick="openPdfModal('${item.aadhar}')">${item.aadhar}</a></td>
-                                            <td><a href="#" onclick="openPdfModal('${item.certifications}')">${item.certifications}</a></td>
+                                            <td><a href="#"  style="color: #0c768a;" onclick="openPdfModal('${item.aadhar}')">View</a></td>
+                                            <td><a href="#"  style="color: #0c768a;" onclick="openPdfModal('${item.certifications}')">View</a></td>
                                             <td class="text-center">
-                                                <button class="btn btn-sm btn-primary" onclick="window.location.href='viewastrologer?srNo=${item.srNo}'">View</button>
+                                                <button class="btn btn-sm btn-primary"  style="background-color: #0c768a;" onclick="window.location.href='viewastrologer?srNo=${item.srNo}'">View</button>
                                             </td>
                                         </tr>
                                     `;
@@ -453,9 +468,9 @@
 
                                 <!-- Pagination Buttons -->
                                 <div class="d-flex justify-content-end gap-2">
-                                    <button id="prevBtn2" class="btn btn-sm btn-primary" onclick="previousPage2()">Previous</button>
+                                    <button id="prevBtn2" style="background-color: #0c768a;" class="btn text-white" onclick="previousPage2()">Previous</button>
                                     <div id="pageNumbers2" class="btn-group"></div>
-                                    <button id="nextBtn2" class="btn btn-sm btn-primary" onclick="nextPage2()">Next</button>
+                                    <button id="nextBtn2" style="background-color: #0c768a;" class="btn text-white" onclick="nextPage2()">Next</button>
                                 </div>
                                 <!-- PDF Modal -->
                                 <div class="modal fade" id="approvedPdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
@@ -626,8 +641,8 @@
                                             <td>${item.gender}</td>
                                             <td>${item.language}</td>
                                             <td>${item.specialities}</td>
-                                            <td><a href="#" onclick="openPdfModal2('${item.aadhar}')">${item.aadhar}</a></td>
-                                            <td><a href="#" onclick="openPdfModal2('${item.certifications}')">${item.certifications}</a></td>
+                                            <td><a href="#"  style="color: #0c768a;" onclick="openPdfModal2('${item.aadhar}')">View</a></td>
+                                            <td><a href="#"  style="color: #0c768a;" onclick="openPdfModal2('${item.certifications}')">View</a></td>
                                             <td class="text-center">
                                                 <span class="badge bg-success">Approved</span>
                                             </td>
@@ -647,18 +662,25 @@
                                     const totalPages = Math.ceil(filteredData2.length / rowsPerPage2);
                                     for (let i = 1; i <= totalPages; i++) {
                                         const btn = document.createElement('button');
-                                        btn.className = `btn btn-sm ${currentPage2 === i ? 'btn-primary' : 'btn-secondary'}`;
+                                        btn.className = 'btn btn-sm text-white';
                                         btn.textContent = i;
+                                        btn.style.backgroundColor = currentPage2 === i ? '#0c768a' : '#6ea9b3'; // Active vs Faint color
+                                        btn.style.border = currentPage2 === i ? '2px solid white' : 'none'; // Highlight active page
+                                        btn.style.margin = '0 3px'; // Small spacing
+
                                         btn.onclick = () => {
                                             currentPage2 = i;
                                             displayData2(currentPage2);
+                                            updatePagination2(); // Refresh pagination
                                         };
+
                                         pageNumbers.appendChild(btn);
                                     }
 
                                     document.getElementById('prevBtn2').disabled = currentPage2 === 1;
                                     document.getElementById('nextBtn2').disabled = currentPage2 === totalPages;
                                 }
+
 
                                 // Update entries showing info
                                 function updateShowingEntries2(start, end, total) {
@@ -742,9 +764,9 @@
 
                                 <!-- Pagination Buttons -->
                                 <div class="d-flex justify-content-end gap-2">
-                                    <button id="prevBtn3" class="btn btn-sm btn-primary" onclick="previousPage3()">Previous</button>
+                                    <button id="prevBtn3" style="background-color: #0c768a;" class="btn btn-sm btn-primary" onclick="previousPage3()">Previous</button>
                                     <div id="pageNumbers3" class="btn-group"></div>
-                                    <button id="nextBtn3" class="btn btn-sm btn-primary" onclick="nextPage3()">Next</button>
+                                    <button id="nextBtn3" style="background-color: #0c768a;" class="btn btn-sm btn-primary" onclick="nextPage3()">Next</button>
                                 </div>
                                 <!-- PDF Modal -->
                                 <div class="modal fade" id="rejectedPdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
@@ -807,8 +829,8 @@
                                         <td>${item.gender}</td>
                                         <td>${item.language}</td>
                                         <td>${item.specialities}</td>
-                                        <td><a href="#" onclick="openPdfModal3('${item.aadhar}')">${item.aadhar}</a></td>
-                                        <td><a href="#" onclick="openPdfModal3('${item.certifications}')">${item.certifications}</a></td>
+                                        <td><a href="#" style="color: #0c768a;" onclick="openPdfModal3('${item.aadhar}')">View</a></td>
+                                        <td><a href="#" style="color: #0c768a;" onclick="openPdfModal3('${item.certifications}')">View</a></td>
                                         <td class="text-center">
                                             <span class="badge bg-danger">Rejected</span>
                                         </td>
@@ -828,18 +850,25 @@
                                     const totalPages = Math.ceil(filteredData3.length / rowsPerPage3);
                                     for (let i = 1; i <= totalPages; i++) {
                                         const btn = document.createElement('button');
-                                        btn.className = `btn btn-sm ${currentPage3 === i ? 'btn-primary' : 'btn-secondary'}`;
+                                        btn.className = 'btn btn-sm text-white';
                                         btn.textContent = i;
+                                        btn.style.backgroundColor = currentPage3 === i ? '#0c768a' : '#6ea9b3'; // Active vs Faint color
+                                        btn.style.border = currentPage3 === i ? '2px solid white' : 'none'; // Highlight active page
+                                        btn.style.margin = '0 3px'; // Small spacing
+
                                         btn.onclick = () => {
                                             currentPage3 = i;
                                             displayData3(currentPage3);
+                                            updatePagination3(); // Refresh pagination
                                         };
+
                                         pageNumbers.appendChild(btn);
                                     }
 
                                     document.getElementById('prevBtn3').disabled = currentPage3 === 1;
                                     document.getElementById('nextBtn3').disabled = currentPage3 === totalPages;
                                 }
+
 
                                 // Update entries showing info
                                 function updateShowingEntries3(start, end, total) {

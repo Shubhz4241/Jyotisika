@@ -317,7 +317,143 @@
             }
         }
 
-        
+        .reviews-section {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            padding: 15px;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        #no-reviews-message {
+            font-size: 0.9rem;
+        }
+
+        .review-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .review-image img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        .review-name h6 {
+            font-size: 1rem;
+        }
+
+        .review-name small {
+            font-size: 0.8rem;
+        }
+
+        .text-warning {
+            font-size: 1rem;
+        }
+
+        .delete-review {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #ff5a5f;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .review-card {
+                padding: 12px;
+            }
+
+            .d-flex {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .review-image {
+                margin-bottom: 5px;
+            }
+
+            .review-name h6 {
+                font-size: 0.9rem;
+            }
+
+            .review-name small {
+                font-size: 0.75rem;
+            }
+
+            .text-warning {
+                font-size: 0.9rem;
+            }
+
+            .delete-review {
+                font-size: 1rem;
+                top: 8px;
+                right: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .review-card {
+                padding: 10px;
+            }
+
+            .review-image img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .review-name h6 {
+                font-size: 0.85rem;
+            }
+
+            .review-name small {
+                font-size: 0.7rem;
+            }
+
+            .text-warning {
+                font-size: 0.85rem;
+            }
+
+            .delete-review {
+                font-size: 0.9rem;
+                top: 6px;
+                right: 6px;
+            }
+        }
+
+        .review-text {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #6c757d;
+            text-align: justify;
+            /* Justify text for even alignment */
+            line-height: 1.6;
+            /* Improve spacing between lines */
+            word-spacing: 2px;
+            /* Slightly increase spacing for better readability */
+        }
+
+        /* Ensure text justification on all devices */
+        @media (max-width: 768px) {
+            .review-text {
+                text-align: justify;
+                word-break: break-word;
+                /* Prevents overflow issues */
+            }
+        }
     </style>
 </head>
 
@@ -393,15 +529,17 @@
                                 </div>
 
                                 <!-- Review Paragraph (Separate Below) -->
+                                <!-- Review Paragraph (Properly Justified) -->
                                 <div class="mt-2">
-                                    <p class="text-muted small mb-0">
-                                        "Great experience working with John! Great experience working with John! Great experience working with John!"
-                                        "Great experience working with John! Great experience working with John! Great experience working with John!"
-                                        "Great experience working with John! Great experience working with John! Great experience working with John!"
-                                        "Great experience working with John! Great experience working with John! Great experience working with John!"
-                                        "Great experience working with John! Great experience working with John! Great experience working with John!"
+                                    <p class="review-text">
+                                        "Great experience working with John! Great experience working with John! Great experience working with John!
+                                        Great experience working with John! Great experience working with John! Great experience working with John!
+                                        Great experience working with John! Great experience working with John! Great experience working with John!
+                                        Great experience working with John! Great experience working with John! Great experience working with John!
+                                        Great experience working with John! Great experience working with John! Great experience working with John!"
                                     </p>
                                 </div>
+
                             </div>
 
                             <div class="review-card p-3 shadow-sm rounded mt-3">
@@ -432,7 +570,7 @@
 
                                 <!-- Review Paragraph (Separate Below) -->
                                 <div class="mt-2">
-                                    <p class="text-muted small mb-0">
+                                    <p class="review-text">
                                         "Excellent service! Highly recommended. Will definitely come back again!"
                                         "Excellent service! Highly recommended. Will definitely come back again!"
                                         "Excellent service! Highly recommended. Will definitely come back again!"

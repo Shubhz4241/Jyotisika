@@ -31,106 +31,155 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
-      /* Apply Inter font globally */
-* {
-    font-family: 'Inter', sans-serif !important;
-}
+        /* Apply Inter font globally */
+        * {
+            font-family: 'Inter', sans-serif !important;
+        }
 
-/* Ensure smooth layout */
-html, body {
-    overflow-x: hidden;
-}
+        /* Ensure smooth layout */
+        html,
+        body {
+            overflow-x: hidden;
+        }
 
-/* Table responsiveness */
-.table-responsive {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-}
+        /* Table responsiveness */
+        .table-responsive {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
 
-/* Grid layout for cards */
-.cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Auto-fit for responsiveness */
-    gap: 20px;
-    justify-content: center;
-}
+        /* Grid layout for cards */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            /* Auto-fit for responsiveness */
+            gap: 20px;
+            justify-content: center;
+        }
 
-/* Card styling */
-.card {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 250px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
+        /* Card styling */
+        .card {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
 
-.card img {
-    width: 100%;
-    height: 80%;
-    object-fit: cover;
-}
+        .card img {
+            width: 100%;
+            height: 80%;
+            object-fit: cover;
+        }
 
-.card-name {
-    height: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    background: #f8f9fa;
-}
+        .card-name {
+            height: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background: #f8f9fa;
+        }
 
-/* Sidebar adjustments for mobile */
-@media (max-width: 768px) {
-    .side-nav {
-        width: 80px;
-        padding: 15px 10px;
-    }
+        /* Sidebar adjustments for mobile */
+        @media (max-width: 768px) {
+            .side-nav {
+                width: 80px;
+                padding: 15px 10px;
+            }
 
-    .side-nav:hover {
-        width: 180px;
-    }
+            .side-nav:hover {
+                width: 180px;
+            }
 
-    .side-nav img {
-        width: 25px;
-    }
+            .side-nav img {
+                width: 25px;
+            }
 
-    .side-nav .user h2 {
-        font-size: 12px;
-    }
-}
+            .side-nav .user h2 {
+                font-size: 12px;
+            }
+        }
 
-/* Mobile adjustments */
-@media (max-width: 576px) {
-    .main {
-        padding: 10px;
-    }
+        /* Mobile adjustments */
+        @media (max-width: 576px) {
+            .main {
+                padding: 10px;
+            }
 
-    .table-responsive {
-        font-size: 0.85rem;
-    }
+            .table-responsive {
+                font-size: 0.85rem;
+            }
 
-    .btn {
-        font-size: 0.8rem;
-        padding: 8px;
-    }
+            .btn {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
 
-    .cards-container {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
+            .cards-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
 
-    .card {
-        height: 220px;
-    }
+            .card {
+                height: 220px;
+            }
 
-    .card img {
-        height: 75%;
-    }
-}
+            .card img {
+                height: 75%;
+            }
+        }
 
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            /* Adjust space between cards */
+            justify-content: center;
+        }
+
+        .card {
+            width: 220px;
+            /* Keep the original card size */
+            height: 280px;
+            /* Maintain height */
+            overflow: hidden;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            /* Maintain consistent image size */
+            object-fit: cover;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .card-name {
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            /* Slight hover effect without expanding too much */
+        }
+
+        .card:focus {
+            outline: none;
+            transform: none;
+            /* Prevents search focus from changing size */
+        }
     </style>
 </head>
 
