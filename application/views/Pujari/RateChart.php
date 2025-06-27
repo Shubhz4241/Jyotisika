@@ -110,6 +110,23 @@
             background-color: #5cb85c;
         }
 
+        /* Styling for the SetRate button (renamed from btn-setrate) */
+        .SetRate {
+            background-color: #6fcf97;
+            /* Same green as btn-change */
+            border: none;
+            padding: 5px 15px;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .SetRate:hover {
+            background-color: #5cb85c;
+            /* Slightly darker green on hover */
+        }
+
         @media (max-width: 576px) {
             #rateCardsContainer {
                 display: flex;
@@ -156,6 +173,7 @@
     </header>
     <div style="min-height: 100vh;">
         <div class="container mt-5">
+
             <h2 class="text-center">Rate Chart</h2>
             <div class="search-container">
                 <div class="search-wrapper">
@@ -176,7 +194,6 @@
                 <!-- Cards will be dynamically inserted -->
             </div>
         </div>
-
         <!-- Change Form Modal -->
         <div class="modal fade" id="changeModal" tabindex="-1" aria-labelledby="changeModalLabel" aria-hidden="true">
             <div class="modal-dialog">

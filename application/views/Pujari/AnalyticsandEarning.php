@@ -32,7 +32,7 @@
 
         .stat-box {
             border-radius: 10px;
-            padding: 20px;
+            padding: 16px;
             text-align: center;
             font-weight: bold;
             height: 150px;

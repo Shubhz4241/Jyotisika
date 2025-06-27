@@ -1,63 +1,104 @@
-<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary px-md-2 sticky-top"
     style="background-color: var(--yellow) !important;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="<?php echo base_url('assets/images/web-logo.jpg'); ?>" alt="logo image"
-                style="width: 60px; height: 50px; mix-blend-mode: multiply;">
+            <img src="<?php echo base_url('assets/images/weblo.jpg'); ?>" alt="logo image"
+                style="width: 70px; height: 60px; mix-blend-mode: multiply;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+
+        <?php
+        $user_image = $this->session->userdata('user_image');
+        $profile_image_path = !empty($user_image)
+            ? base_url($user_image)
+            : base_url('assets/images/profileimage.png');
+        ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>"> <?php echo $this->lang->line('home'); ?></a>
+                    <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>">
+                        <?php echo $this->lang->line('home') ? $this->lang->line('home') : 'Home'; ?>
+                    </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link text-black" href="<?php echo base_url('todayhoroscope'); ?>"> <?php echo $this->lang->line('Horoscope'); ?></a>
+                    <a class="nav-link text-black" href="<?php echo base_url('todayhoroscope'); ?>">
+                        <?php echo $this->lang->line('Horoscope') ? $this->lang->line('Horoscope') : 'Horoscope'; ?>
+                    </a>
                 </li>
-
-
                 <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>"><?php echo $this->lang->line('Astrologers'); ?></a>
+                    <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>">
+                        <?php echo $this->lang->line('Astrologers') ? $this->lang->line('Astrologers') : 'Astrologers'; ?>
+                    </a>
                 </li>
-               
                 <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>"><?php echo $this->lang->line('WhyUs'); ?></a>
-                </li>
-            </ul> -->
-
-             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?php echo base_url('home'); ?>"> Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link text-black" href="<?php echo base_url('todayhoroscope'); ?>">Horoscope</a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('astrologers'); ?>"> Astrologers</a>
-                </li>
-               
-                <li class="nav-item">
-                    <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">WhyUs</a>
+                    <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">
+                        <?php echo $this->lang->line('WhyUs') ? $this->lang->line('WhyUs') : 'Why Us'; ?>
+                    </a>
                 </li>
             </ul>
 
 
 
+
             <div class="d-flex gap-2">
+
+                <a href="<?php echo base_url('wallet'); ?>"
+                    class="btn border-1 btn-sm rounded-1 d-flex align-items-center gap-2 mb-2 mb-xl-0">
+                    <i class="bi bi-wallet2"></i>
+                    <span id="wallet-amount">₹ 0</span>
+                </a>
+
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        console.log("DOM fully loaded");
+
+                        <?php if ($this->session->userdata('user_id')): ?>
+                            fetchWalletBalance();
+                        <?php endif; ?>
+                    });
+
+                    function fetchWalletBalance() {
+                        let user_id = <?php echo $this->session->userdata('user_id') ?? 0; ?>;
+
+                        fetch("<?php echo base_url('User_Api_Controller/getuser_info'); ?>", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            },
+                            body: new URLSearchParams({
+                                session_id: user_id
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.status === "success") {
+                                    let val = data.data.amount;
+                                    document.getElementById("wallet-amount").textContent = "₹ " + val;
+                                } else {
+                                    console.error("Error fetching wallet balance:", data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Fetch error:", error);
+                            });
+                    }
+                </script>
+
+
+
                 <div class="position-relative">
                     <i class="bi bi-translate position-absolute ps-2"
                         style="top: 50%; left: 0px; transform: translateY(-50%);"></i>
 
                     <select id="languageSwitcher" class="p-1 px-4 rounded-2">
                         <option value="english" <?php echo ($this->session->userdata('site_language') == 'english') ? 'selected' : ''; ?>>English</option>
-                        <option value="marathi" <?php echo ($this->session->userdata('site_language') == 'marathi') ? 'selected' : ''; ?>>Marathi</option>
-                        <option value="hindi" <?php echo ($this->session->userdata('site_language') == 'hindi') ? 'selected' : ''; ?>>Hindi</option>
+                        <option value="marathi" <?php echo ($this->session->userdata('site_language') == 'marathi') ? 'selected' : ''; ?>>मराठी</option>
+                        <option value="hindi" <?php echo ($this->session->userdata('site_language') == 'hindi') ? 'selected' : ''; ?>>हिन्दी</option>
                     </select>
                 </div>
 
@@ -68,33 +109,40 @@
                     });
                 </script>
 
-                <!-- <div class="position-relative">
-                    <i class="bi bi-translate position-absolute"
-                        style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
-                    <select class=" shadow-none" aria-label="Default select example"
-                        style="width: 150px; padding-left: 30px;">
-                        <option selected>English</option>
-                        <option value="1">Marathi</option>
-                        <option value="2">Hindi</option>
-                        <option value="3">Tamil</option>
-                    </select>
-                </div> -->
 
 
 
                 <?php if (!$this->session->userdata('user_id')): ?>
                     <a class="btn btn-primary border-0" href="<?php echo base_url('Login'); ?>"
                         style="background-color: var(--red);">
-                        Login
+                        <?php echo $this->lang->line('Login_Button') ?: "Login"; ?>
                     </a>
                 <?php endif; ?>
 
+
                 <div class="dropdown">
-                    <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="User Profile"
-                            style="width: 40px; height: 40px; border-radius: 50%;">
-                    </a>
+                    <?php if ($this->session->userdata('user_id')): ?>
+
+                        <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img id="dropdown-profile-image" src="<?php echo $profile_image_path; ?>" alt="User Profile"
+                                style="width: 40px; height: 40px; border-radius: 50%;">
+
+
+
+                        </a>
+
+                    <?php else: ?>
+                        <a class="nav-link" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img id="dropdown-profile-image" src="<?php echo base_url('assets/images/userProfile.png') ?>"
+                                alt="User Profile" style="width: 40px; height: 40px; border-radius: 50%;">
+                        </a>
+
+                    <?php endif ?>
+
+
+
 
                     <?php if ($this->session->userdata('user_id')): ?>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown"
@@ -102,16 +150,24 @@
                             <li class="text-center p-4">
                                 <a href="<?php echo base_url('UserProfile') ?>" class="text-decoration-none">
                                     <div class="position-relative d-inline-block">
-                                        <img src="<?php echo base_url('assets/images/userProfile.png') ?>"
+                                        <!-- Profile Image with ID for JS to update -->
+
+                                        <img id="sidebar-profile-image" src=" <?php echo $profile_image_path; ?>"
                                             alt="Profile Image"
                                             style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--yellow); padding: 3px; transition: transform 0.3s;">
+
+
                                         <div class="position-absolute bottom-0 right-0 bg-success rounded-circle"
-                                            style="width: 15px; height: 15px; right: 5px; border: 2px solid white;"></div>
+                                            style="width: 15px; height: 15px; right: 5px; border: 2px solid white;">
+                                        </div>
                                     </div>
 
-
                                     <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;">
-                                        <?php echo $this->session->userdata('user_name') ?>
+                                        <?php
+                                        echo !empty($this->session->userdata('user_name'))
+                                            ? $this->session->userdata('user_name')
+                                            : "Guest User";
+                                        ?>
                                     </p>
 
 
@@ -138,11 +194,13 @@
                             </li>
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('CustomerSupport'); ?>">
-                                    <i class="bi bi-gear me-2"></i> Customer Support
+                                    <i class="bi bi-gear me-2"></i>
+
+                                    <?php echo $this->lang->line('Customer_Support') ? $this->lang->line('Customer_Support') : 'Customer_Support'; ?>
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item py-2 ps-4" href="<?php echo base_url(''); ?>">
+                                <a class="dropdown-item py-2 ps-4" href="#">
                                     <i class="bi bi-share me-2"></i> Refer to Friends
                                 </a>
                             </li>
@@ -161,45 +219,42 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown"
                             style="border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); border: none; min-width: 250px;">
                             <li class="text-center p-4" id="myprofilelink">
-                                <a href="<?php echo base_url('UserProfile') ?>" class="text-decoration-none">
-                                    <div class="position-relative d-inline-block">
-                                        <img src="<?php echo base_url('assets/images/userProfile.png') ?>"
-                                            alt="Profile Image"
-                                            style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--yellow); padding: 3px; transition: transform 0.3s;">
-                                        <div class="position-absolute bottom-0 right-0 bg-success rounded-circle"
-                                            style="width: 15px; height: 15px; right: 5px; border: 2px solid white;"></div>
-                                    </div>
+                                <div class="position-relative d-inline-block">
+                                    <img src="<?php echo base_url('assets/images/userProfile.png') ?>" alt="Profile Image"
+                                        style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--yellow); padding: 3px; transition: transform 0.3s;">
+                                    <div class="position-absolute bottom-0 right-0 bg-success rounded-circle"
+                                        style="width: 15px; height: 15px; right: 5px; border: 2px solid white;"></div>
+                                </div>
 
-
-                                    <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;"> Hello User
-                                    </p>
-                                    <p class="mt-1 mb-0 text-dark" style="font-weight: 400; font-size: 1rem;"> To access
-                                        your jyotisika account ,pls log in
-                                    </p>
-                                </a>
+                                <p class="mt-3 mb-0 text-dark" style="font-weight: 600; font-size: 1.1rem;">
+                                    <?php echo $this->lang->line('Hello_User') ?: "Hello User"; ?>
+                                </p>
+                                <p id="myparaLink" class="mt-1 mb-0 text-dark" style="font-weight: 400; font-size: 1rem;">
+                                    <?php echo $this->lang->line('Access_Account') ?: "To access your Jyotishika account, please log in."; ?>
+                                </p>
                             </li>
                             <li>
                                 <hr class="dropdown-divider mx-1">
                             </li>
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="#" id="myOrdersLink">
-                                    <i class="bi bi-bag me-2"></i> My Orders
+                                    <i class="bi bi-bag me-2"></i>
+                                    <?php echo $this->lang->line('My_Orders') ?: "My Orders"; ?>
                                 </a>
                             </li>
-
 
                             <li>
                                 <hr class="dropdown-divider mx-3">
                             </li>
 
-
                             <li>
                                 <a class="dropdown-item py-2 ps-4 text-danger" href="<?php echo base_url('Login'); ?>">
-                                    <i class="bi bi-box-arrow-right me-2"></i> Log in
+                                    <i class="bi bi-box-arrow-right me-2"></i>
+                                    <?php echo $this->lang->line('Login') ?: "Log in"; ?>
                                 </a>
                             </li>
-
                         </ul>
+
 
                     <?php endif ?>
 
@@ -228,26 +283,63 @@
 
 
 <script>
-    document.getElementById("myOrdersLink").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default redirection
 
-        <?php if (!$this->session->userdata('user_id')): ?>
-            Swal.fire({
-                title: "Login Required",
-                text: "Pls login to view your Orders",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Login",
-                cancelButtonText: "Cancel",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect to Signup/Login page
-                }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let myOrdersLink = document.getElementById("myOrdersLink");
+
+        if (myOrdersLink) {
+            myOrdersLink.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                <?php if (!$this->session->userdata('user_id')): ?>
+                    Swal.fire({
+                        title: "Login Required",
+                        text: "Please login to access this service",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Login",
+                        cancelButtonText: "Cancel",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "<?php echo base_url('login'); ?>";
+                        }
+                    });
+                <?php endif; ?>
             });
-        <?php else: ?>
-            window.location.href = "<?php echo base_url('Login'); ?>"; // Redirect if user is logged in
-        <?php endif; ?>
+        }
     });
+    document.addEventListener("DOMContentLoaded", function () {
+        let myparaLink = document.getElementById("myparaLink");
+
+        if (myparaLink) {
+            myparaLink.addEventListener("click", function (event) {
+                event.preventDefault();
+                <?php if (!$this->session->userdata('user_id')): ?>
+                    Swal.fire({
+                        title: "Login Required",
+                        text: "Please login to access this service",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Login",
+                        cancelButtonText: "Cancel",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "<?php echo base_url('login'); ?>";
+                        }
+                    });
+                <?php else: ?>
+                    window.location.href = "<?php echo base_url('login'); ?>";
+                <?php endif; ?>
+            });
+        }
+    });
+
+
+
+
+
 
 
 </script>

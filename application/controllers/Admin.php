@@ -79,5 +79,12 @@ class Admin extends CI_Controller {
 		
 		$this->load->view('Admin/Track_Order_Details');
 	}
+	public function login(){
+		
+		$this->load->view('Admin/login');
+	}
     
 }
+
+
+

@@ -16,7 +16,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <style>
         body {
             background-color: #f8f8f8;
@@ -442,6 +441,7 @@
                         </select>
                         <div class="invalid-feedback" id="astrologyServiceError">Please select a Pujari service.</div>
                     </div>
+                </div>
 
                     <div class="mb-3" style="position: relative;">
                         <label class="form-label fw-bold">Availability Day</label>
@@ -550,6 +550,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
                     <div class="text-center">
                         <button type="submit" class="save-btn" id="submitAdvanced">Submit</button>
@@ -1498,4 +1499,316 @@
     </script>
 </body>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Personal Form Validation
+        const formPersonal = document.getElementById("personal");
+        const nameInput = document.getElementById("nameInput");
+        const contactInput = document.getElementById("contactInput");
+        const emailInput = document.getElementById("emailInput");
+        const genderInput = document.getElementById("genderInput");
+        const languageInput = document.getElementById("languageInput");
+        const languageDropdown = document.getElementById("languageDropdown");
+        const languageOptions = document.querySelectorAll("#languageDropdown .language-option");
+        const experienceInput = document.getElementById("experienceInput");
+        const placeOfBirthInput = document.getElementById("placeOfBirth");
+        const currentAddressInput = document.getElementById("currentAddress");
+
+        // Track the selected language (single selection) for Personal form
+        let selectedLanguage = languageInput.value || "";
+
+        // Show dropdown when language input is clicked (Personal form)
+        languageInput.addEventListener("click", function () {
+            languageDropdown.style.display = "block";
+        });
+
+        // Handle language selection (single selection) for Personal form
+        languageOptions.forEach(option => {
+            option.addEventListener("click", function () {
+                const value = this.getAttribute("data-value");
+                selectedLanguage = value;
+                languageInput.value = selectedLanguage;
+                languageOptions.forEach(opt => {
+                    if (opt.getAttribute("data-value") === selectedLanguage) {
+                        opt.style.backgroundColor = "#e9ecef";
+                    } else {
+                        opt.style.backgroundColor = "#fff";
+                    }
+                });
+                languageDropdown.style.display = "none";
+            });
+
+            if (option.getAttribute("data-value") === selectedLanguage) {
+                option.style.backgroundColor = "#e9ecef";
+            }
+        });
+
+        // Hide dropdown when clicking outside (Personal form)
+        document.addEventListener("click", function (event) {
+            if (!languageInput.contains(event.target) && !languageDropdown.contains(event.target)) {
+                languageDropdown.style.display = "none";
+            }
+        });
+
+        // Personal form submission validation
+        formPersonal.addEventListener("submit", function (event) {
+            let isValid = true;
+
+            // Validate Name (letters and spaces only, 2-50 characters)
+            const nameRegex = /^[A-Za-z\s]{2,50}$/;
+            if (!nameRegex.test(nameInput.value.trim())) {
+                nameInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                nameInput.classList.remove("is-invalid");
+            }
+
+            // Validate Contact (10 digits, no negative values)
+            const contactRegex = /^\d{10}$/;
+            if (!contactRegex.test(contactInput.value) || contactInput.value < 0) {
+                contactInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                contactInput.classList.remove("is-invalid");
+            }
+
+            // Validate Email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value)) {
+                emailInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                emailInput.classList.remove("is-invalid");
+            }
+
+            // Validate Gender
+            if (!genderInput.value) {
+                genderInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                genderInput.classList.remove("is-invalid");
+            }
+
+            // Validate Language
+            if (!selectedLanguage) {
+                languageInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                languageInput.classList.remove("is-invalid");
+            }
+
+            // Validate Experience (e.g., "23 yrs", between 0 and 100 years)
+            const experienceRegex = /^\d+\s*yrs$/;
+            const experienceValue = experienceInput.value.trim();
+            const experienceNumber = parseInt(experienceValue);
+            if (!experienceRegex.test(experienceValue) || experienceNumber < 0 || experienceNumber > 100 || isNaN(experienceNumber)) {
+                experienceInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                experienceInput.classList.remove("is-invalid");
+            }
+
+            // Validate Place of Birth (letters and spaces only)
+            const placeRegex = /^[A-Za-z\s]{2,100}$/;
+            if (!placeRegex.test(placeOfBirthInput.value.trim())) {
+                placeOfBirthInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                placeOfBirthInput.classList.remove("is-invalid");
+            }
+
+            // Validate Current Address (non-empty, allow letters, numbers, and basic punctuation)
+            const addressRegex = /^[\w\s,.-]{5,200}$/;
+            if (!addressRegex.test(currentAddressInput.value.trim())) {
+                currentAddressInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                currentAddressInput.classList.remove("is-invalid");
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        // Real-time validation for Experience field (Personal form)
+        experienceInput.addEventListener("input", function () {
+            const value = this.value.trim();
+            const numberPart = parseInt(value);
+            if (value && (isNaN(numberPart) || numberPart < 0 || numberPart > 100)) {
+                this.value = "";
+            }
+        });
+
+        // Real-time validation for Contact field (Personal form)
+        contactInput.addEventListener("input", function () {
+            if (this.value < 0) {
+                this.value = "";
+            }
+        });
+
+        // Professional Form Validation
+        const formProfessional = document.getElementById("professional");
+        const serviceInput = document.getElementById("serviceInput");
+        const serviceDropdown = document.getElementById("serviceDropdown");
+        const serviceOptions = document.querySelectorAll("#serviceDropdown .service-option");
+        const rsPerMinuteInput = document.getElementById("rsPerMinuteInput");
+
+        // Track selected services (multiple selection)
+        let selectedServices = serviceInput.value.split(", ").filter(service => service.trim() !== "");
+
+        // Show service dropdown when input is clicked
+        serviceInput.addEventListener("click", function () {
+            serviceDropdown.style.display = "block";
+        });
+
+        // Handle service selection (multiple selection)
+        serviceOptions.forEach(option => {
+            option.addEventListener("click", function () {
+                const value = this.getAttribute("data-value");
+
+                // Toggle selection
+                if (selectedServices.includes(value)) {
+                    selectedServices = selectedServices.filter(service => service !== value);
+                } else {
+                    selectedServices.push(value);
+                }
+
+                // Update input field with selected services
+                serviceInput.value = selectedServices.join(", ");
+                if (selectedServices.length === 0) {
+                    serviceInput.value = "";
+                }
+
+                // Update visual feedback (highlight selected options)
+                serviceOptions.forEach(opt => {
+                    if (selectedServices.includes(opt.getAttribute("data-value"))) {
+                        opt.style.backgroundColor = "#e9ecef";
+                    } else {
+                        opt.style.backgroundColor = "#fff";
+                    }
+                });
+            });
+
+            // Initial visual feedback for pre-selected services
+            if (selectedServices.includes(option.getAttribute("data-value"))) {
+                option.style.backgroundColor = "#e9ecef";
+            }
+        });
+
+        // Hide dropdown when clicking outside (Professional form)
+        document.addEventListener("click", function (event) {
+            if (!serviceInput.contains(event.target) && !serviceDropdown.contains(event.target)) {
+                serviceDropdown.style.display = "none";
+            }
+        });
+
+        // Professional form submission validation
+        formProfessional.addEventListener("submit", function (event) {
+            let isValid = true;
+
+            // Validate Astrology Services
+            if (selectedServices.length === 0) {
+                serviceInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                serviceInput.classList.remove("is-invalid");
+            }
+
+            // Validate Rs Per Minute (e.g., "50 Rs", no negative values)
+            const rsPerMinuteRegex = /^\d+\s*Rs$/;
+            const rsPerMinuteValue = rsPerMinuteInput.value.trim();
+            const rsPerMinuteNumber = parseInt(rsPerMinuteValue);
+            if (!rsPerMinuteRegex.test(rsPerMinuteValue) || rsPerMinuteNumber < 0 || isNaN(rsPerMinuteNumber)) {
+                rsPerMinuteInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                rsPerMinuteInput.classList.remove("is-invalid");
+            }
+
+            // Prevent form submission if any field is invalid
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        // Real-time validation for Rs Per Minute field to prevent negative values
+        rsPerMinuteInput.addEventListener("input", function () {
+            const value = this.value.trim();
+            const numberPart = parseInt(value);
+            if (value && (isNaN(numberPart) || numberPart < 0)) {
+                this.value = "";
+            }
+        });
+
+        // Advanced Form Validation
+        const formAdvanced = document.getElementById("advanced");
+        const astrologyServiceInputs = document.querySelectorAll("#radioOptions input[type='radio']");
+        const availabilityDayInput = document.getElementById("availabilityDay");
+        const startTimeInput = document.getElementById("startTime");
+        const endTimeInput = document.getElementById("endTime");
+
+        formAdvanced.addEventListener("submit", function (event) {
+            let isValid = true;
+
+            // Validate Astrology Service (at least one must be selected)
+            const isServiceSelected = Array.from(astrologyServiceInputs).some(input => input.checked);
+            if (!isServiceSelected) {
+                document.getElementById("astrologyServiceError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("astrologyServiceError").style.display = "none";
+            }
+
+            // Validate Availability Day
+            if (!availabilityDayInput.value) {
+                availabilityDayInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                availabilityDayInput.classList.remove("is-invalid");
+            }
+
+            // Validate Start Time
+            const timeRegex = /^(1[0-2]|[1-9]):[0-5][0-9]\s*(AM|PM)$/i;
+            if (!timeRegex.test(startTimeInput.value.trim())) {
+                startTimeInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                startTimeInput.classList.remove("is-invalid");
+            }
+
+            // Validate End Time
+            if (!timeRegex.test(endTimeInput.value.trim())) {
+                endTimeInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                endTimeInput.classList.remove("is-invalid");
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+<script>
+    (function() {
+        // Run when the page is fully loaded
+        window.addEventListener('load', function() {
+            // Check URL for tab parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const tab = urlParams.get('tab');
+
+            // If tab is 'advanced', switch to the Advanced tab
+            if (tab === 'advanced') {
+                // Use jQuery to update the active tab
+                jQuery('.tab').removeClass('active');
+                jQuery('.form-container').removeClass('active');
+                jQuery('.tab[data-target="#advanced"]').addClass('active');
+                jQuery('#advanced').addClass('active');
+            }
+        });
+    })();
+</script>
+</body>
 </html>

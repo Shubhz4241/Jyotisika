@@ -11,18 +11,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
+        /* Your existing styles remain unchanged */
         body {
-
             font-family: 'Montserrat', serif;
             background-image: url('<?php echo base_url("assets/images/Pujari/OTPVarificationForm.png"); ?>');
             background-position: center bottom;
-            /* Position image at the bottom */
             background-size: 100% auto;
-            /* Full width, auto height */
             background-repeat: no-repeat;
-            /* Prevent repeating */
             background-attachment: fixed;
-            /* Keeps the image fixed */
             min-height: 100vh;
             margin: 0;
             padding: 20px;
@@ -38,9 +34,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 800px;
-            /* margin-top: 50px; */
             margin-bottom: 50px;
-
         }
 
         .form-group {
@@ -83,11 +77,10 @@
             height: 6px;
             background-color: #ddd;
             margin-bottom: 20px;
-            color:#99AFCD;
+            color: #99AFCD;
             width: 90px;
             border-radius: 14px;
         }
-
 
         #fileList {
             display: flex;
@@ -95,7 +88,6 @@
             gap: 5px;
         }
 
-        /* File item styling */
         .file-item {
             background: #f8f9fa;
             border-radius: 5px;
@@ -111,8 +103,6 @@
             border: 1px solid #ddd;
         }
 
-
-        /* Remove (Cross) Button Styling */
         .remove-file {
             background: none;
             border: none;
@@ -192,7 +182,7 @@
 <body>
     <div class="container">
         <div class="logo-container">
-            <img src="assets/images/Pujari/logo.png" alt="Jyotisika Logo">
+        <img src="assets/images/Pujari/logo.png" alt="Jyotisika Logo">
         </div>
         <h4 class="text-center">Apply for Pujari Role</h4>
         <hr>
@@ -530,7 +520,6 @@
         function displayFiles() {
             const fileList = document.getElementById("fileList");
             fileList.innerHTML = "";
-
             const row = document.createElement("div");
             row.classList.add("row", "gx-2");
 

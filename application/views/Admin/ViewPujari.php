@@ -5,385 +5,545 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin:View Pujari</title>
-    <!-- Bootstrap CSS for styling and layout -->
+    <title>Admin: User Management</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS file -->
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets\css\style.css' ?>">
-    <!-- bootstrap icon -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- GOOGLE FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
-    <!-- bootstrap icon -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- GOOGLE FONTS -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
-        /* Apply Inter font to the entire page */
-        * {
-            font-family: 'Inter', sans-serif !important;
+        body {
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #f3f4f6);
+            animation: fadeIn 1s ease-in;
         }
 
-        /* Customize headers and table fonts for better readability */
-        h1,
-        h4 {
-            font-weight: 700;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        p,
-        td,
-        th {
-            font-weight: 400;
-            font-size: 1rem;
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 15px;
+            animation: slideUp 0.8s ease-out;
         }
 
-        /* Enhance table header appearance */
-        .table thead th {
-            font-weight: 600;
-            background-color: #f8f9fa;
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Adjust buttons for better aesthetics */
-        .btn {
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        /* Mobile Responsiveness Improvements */
-        @media (max-width: 768px) {
-            .main {
-                margin-top: 0 !important;
-            }
-
-            .card-dashboard {
-                margin-bottom: 1rem;
-            }
-
-            .table-responsive {
-                font-size: 0.8rem;
-            }
-
-            .table td,
-            .table th {
-                padding: 0.5rem;
-            }
-
-            .btn-sm {
-                padding: 0.25rem 0.5rem;
-                font-size: 0.75rem;
-            }
-
-            /* Responsive table */
-            .table-responsive-stack tr {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-orient: vertical;
-                -webkit-box-direction: normal;
-                -ms-flex-direction: column;
-                flex-direction: column;
-                margin-bottom: 1rem;
-                border-bottom: 1px solid #eee;
-            }
-
-            .table-responsive-stack td {
-                display: block;
-                text-align: right;
-            }
-
-            .table-responsive-stack td:before {
-                content: attr(data-label);
-                float: left;
-                font-weight: bold;
-            }
-        }
-
-        /* Mobile-friendly See All button */
-        @media (max-width: 768px) {
-            .card-footer .btn {
-                margin-top: 10px;
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .card-footer .btn {
-                max-width: 250px;
-            }
-        }
-
-        /* Main Profile Container (Single Border) */
-        .profile-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 3px solid #444;
-            padding: 30px;
-            border-radius: 12px;
-            background: #fff;
-            max-width: 800px;
-            margin: 10vh auto;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            width: 90%;
-        }
-
-        /* Profile Top Section (Image & Content Side by Side) */
-        .profile-top {
-            display: flex;
-            align-items: stretch;
-            width: 100%;
+        .back-arrow {
+            font-size: 24px;
+            text-decoration: none;
+            color: #1a1a1a;
             margin-bottom: 20px;
-            gap: 20px;
-        }
-
-        /* Profile Image */
-        .profile-image {
-            flex: 1;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding-right: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
+            animation: slideInLeft 0.5s ease-out;
         }
 
-        .profile-image img {
+        @keyframes slideInLeft {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .profile-img {
             width: 100%;
             max-width: 250px;
-            height: auto;
-            border-radius: 12px;
-            border: 2px solid #666;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
 
-        /* Profile Details */
-        .profile-content {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: left;
-            /* Ensures text starts from left */
+        .profile-img:hover {
+            transform: scale(1.05);
         }
 
-        .profile-content h2 {
-            font-size: 24px;
-            margin-bottom: 12px;
-            color: #222;
-            font-weight: 600;
-        }
-
-        .profile-content ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .profile-content ul li {
-            font-size: 16px;
-            margin-bottom: 8px;
+        .details p {
+            font-size: 20px;
+            margin: 8px 0;
             color: #333;
         }
 
-        /* Documents Section */
-        .documents {
-            width: 100%;
-            text-align: left;
-            /* Left-align title */
-            margin-bottom: 20px;
-        }
-
-        .documents h3 {
+        .details b {
             font-size: 20px;
-            margin-bottom: 10px;
-            color: #222;
+            font-weight: 500;
+            color: #1a1a1a;
         }
 
-        /* Document Previews */
-        .document-preview {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
+        .document-section {
+            margin-top: 30px;
         }
 
-        .document {
-            flex: 1;
-            text-align: left;
-            /* Left-align document names */
+        .btn-container {
+            margin-top: 40px;
+            text-align: center;
         }
 
-        .doc-frame {
-            width: 100%;
-            height: 150px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-
-        /* Buttons */
-        .buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: left;
-            /* Align buttons to the left */
-            flex-wrap: wrap;
-            /* Allow buttons to wrap if needed */
-        }
-
-        .approve-btn,
-        .reject-btn {
-            padding: 12px 20px;
-            font-size: 16px;
+        .btns {
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 30px;
             border: none;
-            border-radius: 6px;
+            margin: 8px;
             cursor: pointer;
-            transition: 0.3s ease-in-out;
-            flex: 1;
-            /* Ensures equal width */
-            max-width: 150px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            animation: bounceIn 0.5s ease-out;
         }
 
-        .approve-btn {
-            background: #28a745;
+        .btns:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .btn-approve {
+            background: #0C768A;
             color: white;
         }
 
-        .approve-btn:hover {
-            background: #218838;
+        .btn-reject,
+        .btn-direct-reject,
+        .btn-reject-approved_Pujari {
+            background: linear-gradient(45deg, #A10000, #e74c3c);
+            color: white;
+            width: 120px;
         }
 
-        .reject-btn {
-            background: #dc3545;
+        /* New Accordion Document Viewing Styles */
+        .document-accordion {
+            margin-top: 20px;
+        }
+
+        .accordion-item {
+            background: white;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #0C768A;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .accordion-button {
+            background: #0C768A;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 15px;
+            border: none;
+            transition: background 0.3s ease;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: #095D6E;
             color: white;
         }
 
-        .reject-btn:hover {
-            background: #c82333;
+        .accordion-button:focus {
+            box-shadow: none;
         }
 
-        /* 📌 RESPONSIVE FIXES */
+        .accordion-body {
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .doc-card {
+            max-width: 350px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .doc-image {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            background: #e0e7ff;
+        }
+
+        .doc-info {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .doc-info p {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        .doc-actions {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .doc-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(45deg, #8BC24A, #2ecc71);
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .doc-btn:hover {
+            background: linear-gradient(45deg, #76a832, #27ae60);
+            transform: scale(1.05);
+        }
+
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            justify-items: center;
+        }
+
+        .certification-link {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            padding: 10px;
+            background: linear-gradient(45deg, #F6CE57, #f1c40f);
+            color: #1a1a1a;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            transition: transform 0.2s ease;
+        }
+
+        .certification-link:hover {
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 768px) {
-            .profile-top {
-                flex-direction: column;
-                /* Stack image and content */
+            .doc-card {
+                max-width: 100%;
             }
 
-            .profile-image {
-                padding-right: 0;
-                margin-bottom: 20px;
+            .doc-image {
+                height: 200px;
             }
 
-            .profile-content {
-                text-align: left;
-                /* Ensure text starts from left */
+            .doc-info p {
+                font-size: 14px;
             }
 
-            .documents {
-                text-align: left;
-                /* Keep documents title aligned */
+            .doc-btn {
+                padding: 6px 15px;
+                font-size: 12px;
             }
 
-            .document-preview {
-                flex-direction: column;
-                /* Stack Documents */
+            .certification-grid {
+                grid-template-columns: 1fr;
             }
 
-            .buttons {
-                justify-content: center;
-                /* Center buttons on small screens */
-            }
-
-            .approve-btn,
-            .reject-btn {
-                flex: none;
-                /* Prevent buttons from stretching */
-                width: 45%;
-                /* Keep them side by side */
-                max-width: none;
-                text-align: center;
+            .certification-link {
+                max-width: 100%;
             }
         }
 
-        /* MODAL STYLES */
-        .modal {
-            display: none;
+        @media (max-width: 480px) {
+            .doc-image {
+                height: 150px;
+            }
+
+            .accordion-button {
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+
+        .popup-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
+            display: flex;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            padding: 10px;
+            overflow: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        .modal-content {
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup {
+            position: relative;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.8);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .popup.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .popup h5 {
+            background: #0c768a;
+            padding: 12px;
+            margin: -25px -25px 20px -25px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            text-align: center;
+            font-size: clamp(24px, 5vw, 34px);
+            color: white;
+        }
+
+        .popup-content {
+            padding-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .popup-field {
+            flex: 1 1 45%;
+            border-radius: 10px;
+        }
+
+        .popup-field label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: clamp(18px, 4vw, 22px);
+            color: #1a1a1a;
+        }
+
+        .popup input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            background: #f0f4f8;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .popup input:focus {
+            border-color: #8BC24A;
+            box-shadow: 0 0 8px rgba(139, 194, 74, 0.3);
+            outline: none;
+        }
+
+        .popup button {
+            width: 100%;
+            max-width: 200px;
+            padding: 14px;
+            margin-top: 25px;
+            background: #0C768A;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 19px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .popup button:hover {
+            background: #095D6E;
+            transform: translateY(-3px);
+        }
+
+        .submitbtn {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .submitbtn button:nth-child(2) {
+            background: linear-gradient(45deg, #A10000, #e74c3c);
+        }
+
+        .submitbtn button:nth-child(2):hover {
+            background: linear-gradient(45deg, #8e0000, #c0392b);
+        }
+
+        @media (max-width: 768px) {
+            .popup-content {
+                flex-direction: column;
+            }
+
+            .popup-field {
+                flex: 1 1 100%;
+            }
+
+            .popup button {
+                max-width: none;
+            }
+        }
+
+        /* Success Popup Styles */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            padding: 10px;
+            overflow: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .success-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-popup {
             background: white;
             padding: 20px;
-            width: 90%;
-            max-width: 400px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
             text-align: center;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 500px;
+            flex-direction: column;
+        }
+
+        .success-popup.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .success-popup .circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #d2691e, #f4a460);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
         }
 
-        /* Close Button (Top-Right Corner) */
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .close-btn:hover {
-            color: red;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        label {
-            text-align: left;
-            font-weight: bold;
-        }
-
-        input,
-        select {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .submit-btn {
-            background: #28a745;
+        .success-popup .circle::before {
+            content: "\f00c"; /* Changed to checkmark icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
             color: white;
-            padding: 10px;
+            font-size: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .success-popup h3 {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .success-popup p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .success-popup .close-btn {
+            padding: 10px 20px;
+            background: #0C768A;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 28px;
+            transition: background 0.3s ease;
+            font-family: 'Rokkitt';
+            width: 120px;
         }
 
-        .submit-btn:hover {
-            background: #218838;
+        .success-popup .close-btn:hover {
+            background: #095D6E;
         }
 
-        /* RESPONSIVENESS */
-        @media (max-width: 768px) {
-            .modal-content {
-                width: 95%;
+        @media (max-width: 480px) {
+            .success-popup {
+                padding: 15px;
+            }
+
+            .success-popup h3 {
+                font-size: 20px;
+            }
+
+            .success-popup p {
+                font-size: 16px;
+            }
+
+            .success-popup .close-btn {
+                padding: 8px 15px;
+                font-size: 14px;
             }
         }
 
@@ -487,175 +647,350 @@
     <div class="d-flex">
         <!-- Sidebar -->
         <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
-        <!-- SIDEBAR END -->
-
 
         <!-- Main Component -->
-        <div class="main ">
+        <div class="main">
             <!-- Navbar -->
             <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
-            <!-- Navbar End -->
 
-            <main class="p-3">
-                <div class="profile-container">
-                    <!-- Image & Details Section -->
-                    <div class="profile-top">
-                        <!-- Profile Image -->
-                        <div class="profile-image">
-                            <img src="assets/images/BookPooja/SuryaAarti.png" alt="Profile Image">
-                        </div>
-
-                        <!-- Profile Details -->
-                        <div class="profile-content">
-                            <ul>
-                                <li><strong>Name:</strong> John Doe</li>
-                                <li><strong>Contact No:</strong> +1234567890</li>
-                                <li><strong>Email:</strong> john.doe@example.com</li>
-                                <li><strong>Gender:</strong> Male</li>
-                                <li><strong>Address:</strong> 123 Main St, City, Country</li>
-                                <li><strong>Language Known:</strong> English, Spanish</li>
-                                <li><strong>Specialities:</strong> Web Development, UI/UX Design</li>
-                            </ul>
+            <div class="container">
+                <i class="fas fa-arrow-left"></i>
+                <a href="Pujarirequests" class="back-arrow" style="margin-left: 10px;">Recent Pujari Requests</a>
+                <div class="row mt-3 d-flex align-items-center">
+                    <div class="col-md-4 text-center">
+                        <img src="<?php echo base_url('assets/images/HRside/profile1.png') ?>" alt="Profile" class="profile-img">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="details">
+                            <p><b>Name:</b> John Doe</p>
+                            <p><b>Contact No:</b> +1 234 567 890</p>
+                            <p><b>Email:</b> johndoe@example.com</p>
+                            <p><b>Gender:</b> Male</p>
+                            <p><b>Address:</b> 123 Main St, City, Country</p>
+                            <p><b>Languages Known:</b> English, Spanish</p>
+                            <p><b>Specialties:</b> Vedic Astrology, Tarot Reading</p>
+                            <p><b>Experience:</b> 5 years</p>
                         </div>
                     </div>
 
-                    <!-- Documents Section -->
-                    <div class="documents">
-                        <h3>Documents Attached</h3>
-                        <div class="document-container">
-                            <!-- Aadhar Card -->
-                            <div class="document-card">
-                                <p><strong>Aadhar Card</strong></p>
-                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
+                    <div class="document-section">
+                        <h5 class="text-center mb-4">Documents Attached</h5>
+                        <div class="document-accordion accordion" id="documentAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="aadhaarHeading">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#aadhaarCollapse" aria-expanded="true" aria-controls="aadhaarCollapse">
+                                        Aadhaar Card
+                                    </button>
+                                </h2>
+                                <div id="aadhaarCollapse" class="accordion-collapse collapse show" aria-labelledby="aadhaarHeading" data-bs-parent="#documentAccordion">
+                                    <div class="accordion-body">
+                                        <div class="doc-card">
+                                            <img src="<?php echo base_url('Uploads/documents/aadharcard.jpg') ?>" alt="Aadhaar Card" class="doc-image" onerror="this.src='<?php echo base_url('assets/images/fallback.jpg') ?>'">
+                                            <div class="doc-info">
+                                                <p>Aadhaar Card</p>
+                                            </div>
+                                            <div class="doc-actions">
+                                                <a href="<?php echo base_url('Uploads/documents/aadharcard.jpg') ?>" target="_blank" class="doc-btn">View</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <!-- Certification 1 -->
-                            <div class="document-card">
-                                <p><strong>Certification 1</strong></p>
-                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="certificateHeading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#certificateCollapse" aria-expanded="false" aria-controls="certificateCollapse">
+                                        Certificate
+                                    </button>
+                                </h2>
+                                <div id="certificateCollapse" class="accordion-collapse collapse" aria-labelledby="certificateHeading" data-bs-parent="#documentAccordion">
+                                    <div class="accordion-body">
+                                        <div class="doc-card">
+                                            <img src="<?php echo base_url('Uploads/Astologer/aadharcard.png') ?>" alt="Certificate" class="doc-image" onerror="this.src='<?php echo base_url('assets/images/fallback.jpg') ?>'">
+                                            <div class="doc-info">
+                                                <p>Certificate</p>
+                                            </div>
+                                            <div class="doc-actions">
+                                                <a href="<?php echo base_url('Uploads/Astologer/certificate.png') ?>" target="_blank" class="doc-btn">View</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <!-- Certification 2 -->
-                            <div class="document-card">
-                                <p><strong>Certification 2</strong></p>
-                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
-                            </div>
-
-                            <!-- Certification 3 -->
-                            <div class="document-card">
-                                <p><strong>Certification 3</strong></p>
-                                <button onclick="openPDF('assets/images/CC UNIT II.pdf')" style="background-color: #0c768a" class="view-btn">View</button>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="certificationsHeading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#certificationsCollapse" aria-expanded="false" aria-controls="certificationsCollapse">
+                                        Other Certifications
+                                    </button>
+                                </h2>
+                                <div id="certificationsCollapse" class="accordion-collapse collapse" aria-labelledby="certificationsHeading" data-bs-parent="#documentAccordion">
+                                    <div class="accordion-body">
+                                        <div class="certification-grid" id="certificationGrid">
+                                            <!-- Certifications will be populated dynamically -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <script>
-                        function openPDF(pdfPath) {
-                            window.open(pdfPath, '_blank');
-                        }
-                    </script>
-
-                    <!-- Approve & Reject Buttons -->
-                    <div class="buttons">
-                        <button class="approve-btn" onclick="openModal()">Approve</button>
-                        <button class="reject-btn">Reject</button>
+                    <div class="btn-container">
+                        <!-- if it is new request -->
+                        <button class="btns btn-schedule" data-status="schedule" onclick="showPopup(this)">Schedule</button>
+                        <button class="btns btn-direct-reject" id="reject-without-interview">Reject</button>
+                        <!-- if interview is scheduled -->
+                        <button class="btns btn-approve" id="approve">Approve</button>
+                        <button class="btns btn-reject" id="reject">Reject</button>
+                        <button class="btns btn-update-interview" onclick="showUpdateInterviewPopup()">Update Interview</button>
+                        <!-- for approved status -->
+                        <button class="btns btn-reject-approved_Pujari" id="reject-approved_Pujari">Reject</button>
+                        <!-- if status is rejected -->
+                      
                     </div>
-                </div>
-            </main>
-
-            <!-- Modal Structure -->
-            <div id="approveModal" class="modal" onclick="closeModal(event)">
-                <div class="modal-content" onclick="event.stopPropagation();">
-                    <span class="close-btn" onclick="closeModal(event)">&times;</span>
-                    <h2>Approval Details</h2>
-                    <form onsubmit="handleSubmit(event)">
-                        <label for="mode">Mode:</label>
-                        <select id="mode">
-                            <option value="Online">Online</option>
-                            <option value="Offline">Offline</option>
-                        </select>
-
-                        <label for="date">Date:</label>
-                        <input type="date" id="date" required>
-
-                        <label for="time">Time:</label>
-                        <input type="time" id="time" required>
-
-                        <label for="venue">Venue:</label>
-                        <input type="text" id="venue" placeholder="Enter Venue" required>
-
-                        <button type="submit" class="submit-btn">Submit</button>
-                    </form>
-
                 </div>
             </div>
-
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script>
-                function openModal() {
-                    document.getElementById("approveModal").style.display = "flex";
-                }
-
-                function closeModal(event) {
-                    const modal = document.getElementById("approveModal");
-                    if (event.target === modal || event.target.classList.contains("close-btn")) {
-                        modal.style.display = "none";
-                    }
-                }
-
-                function handleSubmit(event) {
-                    event.preventDefault(); // Prevent default form submission
-
-                    // Close the modal
-                    document.getElementById("approveModal").style.display = "none";
-
-                    // Show SweetAlert success message
-                    Swal.fire({
-                        title: "Great Job",
-                        text: "Your interview is scheduled successfully.",
-                        imageUrl: "assets/images/Admin logo.png", // Your custom image
-                        imageWidth: 100,
-                        imageHeight: 100,
-                        imageAlt: "Success Image",
-                        confirmButtonText: "Close",
-                        confirmButtonColor: "#3085d6",
-                        customClass: {
-                            popup: 'custom-swal-popup',
-                            image: 'custom-swal-image' // Apply custom styling for round image
-                        }
-                    });
-                }
-            </script>
-
-
-
-
-
-
-
-
         </div>
-
-    </div>
     </div>
 
+    <!-- Schedule Interview Popup -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup">
+            <h5>Schedule Interview</h5>
+            <div class="popup-content">
+                <input type="hidden" id="Pujari-id" value="1">
+                <div class="popup-field">
+                    <label for="mode">Mode</label>
+                    <input type="text" id="mode" placeholder="Mode" value="Online" readonly required pattern="[A-Za-z\s]+" title="Mode should only contain letters and spaces">
+                </div>
+                <div class="popup-field">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" required min="2025-04-22" title="Date must be today or later">
+                </div>
+                <div class="popup-field">
+                    <label for="time">Time</label>
+                    <input type="time" id="time" required title="Please select a time">
+                </div>
+                <div class="popup-field">
+                    <label for="meeting-link">Meeting Link</label>
+                    <input type="url" id="meeting-link" placeholder="Meeting link" required title="Please enter a valid URL (e.g., https://example.com)">
+                </div>
+            </div>
+            <div class="submitbtn">
+                <button onclick="scheduleInterview()">Submit</button>
+                <button onclick="hidePopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
 
-    <!-- Script Toggle Sidebar -->
+    
+
+    <!-- Update Interview Popup -->
+    <div class="popup-overlay" id="update-interview-popup">
+        <div class="popup">
+            <h5>Update Interview Timing</h5>
+            <div class="popup-content">
+                <input type="hidden" id="update-Pujari-id" value="1">
+                <div class="popup-field">
+                    <label for="update-date">Date</label>
+                    <input type="date" id="update-date" required min="2025-04-22" title="Date must be today or later">
+                </div>
+                <div class="popup-field">
+                    <label for="update-time">Time</label>
+                    <input type="time" id="update-time" required title="Please select a time">
+                </div>
+                <div class="popup-field">
+                    <label for="update-meeting-link">Meeting Link</label>
+                    <input type="url" id="update-meeting-link" placeholder="Meeting link" required title="Please enter a valid URL (e.g., https://example.com)">
+                </div>
+            </div>
+            <div class="submitbtn">
+                <button onclick="updateInterviewTiming()">Update</button>
+                <button onclick="hideUpdateInterviewPopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Popup -->
+    <div class="success-overlay" id="successPopup">
+        <div class="success-popup">
+            <img src="<?php echo base_url('assets/images/newlogo.png.png') ?>" alt="Success" style="width: 200px; height: auto;">
+            <h1>Great Job</h1>
+            <p style="font-size: 28px; font-weight: 400;">Action Completed Successfully!!</p>
+            <button class="close-btn" onclick="hideSuccessPopup()">Close</button>
+        </div>
+    </div>
+
+    <!-- Frontend JavaScript -->
     <script>
+        // Simulate backend data for certifications (replace with actual backend data)
+        const certifications = [
+            { name: "Certification 1", url: "<?php echo base_url('Uploads/Astologer/cert1.pdf') ?>" },
+            { name: "Certification 2", url: "<?php echo base_url('Uploads/Astologer/cert2.pdf') ?>" }
+        ];
+
+        // Dynamically populate certifications
+        function populateCertifications() {
+            const grid = document.getElementById('certificationGrid');
+            grid.innerHTML = '';
+            if (certifications.length === 0) {
+                grid.innerHTML = '<p class="text-center text-muted">No certifications available.</p>';
+                return;
+            }
+            certifications.forEach(cert => {
+                const link = document.createElement('a');
+                link.href = cert.url;
+                link.target = '_blank';
+                link.className = 'certification-link';
+                link.textContent = cert.name;
+                grid.appendChild(link);
+            });
+        }
+
+        // Initialize certifications on page load
+        document.addEventListener('DOMContentLoaded', populateCertifications);
+
+        function showPopup(button) {
+            let PujariId = button.getAttribute("data-id") || "1";
+            let actionStatus = button.getAttribute("data-status");
+            let popup = document.getElementById("popup");
+            popup.classList.add("show");
+            document.getElementById("Pujari-id").value = PujariId;
+            popup.setAttribute("data-status", actionStatus);
+        }
+
+        function hidePopup() {
+            let popup = document.getElementById("popup");
+            popup.classList.remove("show");
+        }
+
+        function showChargesPopup(button) {
+            try {
+                let PujariId = button.getAttribute("data-id") || "1";
+                let popup = document.getElementById("charges-popup");
+                if (!popup) {
+                    console.error("Charges popup element not found");
+                    Swal.fire("Error!", "Charges popup not found.", "error");
+                    return;
+                }
+                popup.classList.add("show");
+                document.getElementById("charges-Pujari-id").value = PujariId;
+            } catch (error) {
+                console.error("Error in showChargesPopup:", error);
+                Swal.fire("Error!", "Failed to open charges popup.", "error");
+            }
+        }
+
+        function hideChargesPopup() {
+            let popup = document.getElementById("charges-popup");
+            if (popup) {
+                popup.classList.remove("show");
+            } else {
+                console.error("Charges popup element not found");
+            }
+        }
+
+        function scheduleInterview() {
+            let PujariId = document.getElementById("Pujari-id").value;
+            let date = document.getElementById("date").value;
+            let time = document.getElementById("time").value;
+            let meetingLink = document.getElementById("meeting-link").value;
+            let actionStatus = document.getElementById("popup").getAttribute("data-status");
+
+            if (!PujariId) {
+                Swal.fire("Error!", "Pujari ID is missing.", "error");
+                return;
+            }
+
+            if (!date || !time || !meetingLink) {
+                Swal.fire("Error!", "Please fill all required fields.", "error");
+                return;
+            }
+
+            let successPopup = document.getElementById("successPopup");
+            if (successPopup) {
+                successPopup.classList.add("show");
+            } else {
+                console.error("Success popup element with id 'successPopup' not found");
+            }
+            hidePopup();
+        }
+
+       function showUpdateInterviewPopup() {
+            let popup = document.getElementById("update-interview-popup");
+            popup.classList.add("show");
+        }
+
+        function hideUpdateInterviewPopup() {
+            let popup = document.getElementById("update-interview-popup");
+            popup.classList.remove("show");
+        }
+
+        function updateInterviewTiming() {
+            let PujariId = document.getElementById("update-Pujari-id").value;
+            let date = document.getElementById("update-date").value;
+            let time = document.getElementById("update-time").value;
+            let meetingLink = document.getElementById("update-meeting-link").value;
+
+            if (!PujariId) {
+                Swal.fire("Error!", "Pujari ID is missing.", "error");
+                return;
+            }
+
+            if (!date || !time || !meetingLink) {
+                Swal.fire("Error!", "Please fill all required fields.", "error");
+                return;
+            }
+
+            let successPopup = document.getElementById("successPopup");
+            if (successPopup) {
+                successPopup.classList.add("show");
+            } else {
+                console.error("Success popup element with id 'successPopup' not found");
+            }
+            hideUpdateInterviewPopup();
+        }
+
+        function hideSuccessPopup() {
+            let successPopup = document.getElementById("successPopup");
+            if (successPopup) {
+                successPopup.classList.remove("show");
+            } else {
+                console.error("Success popup element with id 'successPopup' not found");
+            }
+        }
+
+        document.addEventListener("click", function(event) {
+            if (event.target && event.target.id === "reject-without-interview") {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You are about to reject this Pujari without an interview.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, Reject",
+                    cancelButtonText: "Cancel",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire("Success!", "Pujari rejected successfully!", "success");
+                    }
+                });
+            }
+        });
+
+        // Sidebar Toggle
         const toggler = document.querySelector(".toggler-btn");
         const closeBtn = document.querySelector(".close-sidebar");
         const sidebar = document.querySelector("#sidebar");
 
-        toggler.addEventListener("click", function() {
-            sidebar.classList.toggle("collapsed");
-        });
+        if (toggler && sidebar) {
+            toggler.addEventListener("click", function() {
+                sidebar.classList.toggle("collapsed");
+            });
+        }
 
-        closeBtn.addEventListener("click", function() {
-            sidebar.classList.remove("collapsed");
-        });
+        if (closeBtn && sidebar) {
+            closeBtn.addEventListener("click", function() {
+                sidebar.classList.remove("collapsed");
+            });
+        }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </body>
-
 </html>

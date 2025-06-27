@@ -231,7 +231,7 @@
                     <table class="table rounded">
                         <thead>
                             <tr>
-                                <th>Order No</th>
+                                <th>Orders NO</th>
                                 <th>Customer Name</th>
                                 <th>Contact</th>
                                 <th>City</th>

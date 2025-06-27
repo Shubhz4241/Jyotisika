@@ -79,12 +79,12 @@
 <body>
     <div class="container">
         <div class="logo-container">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo" class="logo">
+            <img src="<?php echo base_url() . 'assets/images/weblo.jpg' ?>" alt="Logo" class="logo">
         </div>
         <h4 style="text-align: start;"><strong>Select <span style="color: black;">User Type</span></strong></h4>
         <hr>
         <div class="user-selection mt-4">
-            <div class="user-card">
+            <div class="user-card" onclick="redirectuserscreen()">
                 <img src="<?php echo base_url('assets/images/Pujari/User.png'); ?>" alt="User">
                 <h5>User</h5>
             </div>
@@ -106,6 +106,11 @@
         }
         function redirectToOTPForm1() {
             window.location.href = "<?php echo base_url('AstrologerMobileNumberAndOTPForm'); ?>";
+        }
+
+        function redirectuserscreen() {
+
+             window.location.href = "<?php echo base_url('home'); ?>";
         }
     </script>
 </body>

@@ -63,6 +63,8 @@
 
     <?php
 
+    // print_r($userinfo);
+
     if (!empty($userinfo)) {
 
 
@@ -80,21 +82,14 @@
         $user_City = isset($userinfo["user_City"]) ? $userinfo["user_City"] : '';
         $user_Pincode = isset($userinfo["user_Pincode"]) ? $userinfo["user_Pincode"] : '';
 
+        $profile_image_path = isset($userinfo["user_image"]) && !empty($userinfo["user_image"]) 
+        ? base_url($userinfo["user_image"]) 
+        : base_url('assets/images/profileimage.png');
 
+        $current_image =  isset($userinfo["user_image"]) && !empty($userinfo["user_image"])  ? ($userinfo["user_image"])  : ('assets/images/profileimage.png');
 
+       
 
-        $default_image_path = "assets/images/profileImage.png"; // Relative default image path
-        $default_image_url = "http://localhost/Jyotisika/" . $default_image_path; // Full default image URL
-    
-        if (!empty($userinfo["user_image"])) {
-            // Store relative path for form submission
-            $profile_image_path = $userinfo["user_image"];
-            $profile_image_url = "http://localhost/jyotisika_api/" . ltrim($profile_image_path, '/');
-        } else {
-            // Use default image (relative path for form, full URL for display)
-            $profile_image_path = $default_image_path;
-            $profile_image_url = $default_image_url;
-        }
 
     }
 
@@ -102,8 +97,7 @@
     <main>
         <div class="container my-5">
             <div class="row">
-                <form action=<?php echo base_url("UserAction/Updateprofile"); ?> method="POST" id="userProfileForm"
-                    enctype="multipart/form-data">
+                <form id="userProfileForm" enctype="multipart/form-data">
                     <div class="row shadow p-4 rounded bg-light">
                         <div class="col-md-12 d-flex justify-content-center">
                             <div class="mb-3 text-center">
@@ -112,7 +106,7 @@
 
 
                                     <label for="profileImage">
-                                        <img src="<?php echo $profile_image_url; ?>" alt="Profile Image"
+                                        <img src="<?php echo $profile_image_path; ?>" alt="Profile Image"
                                             id="profileImagePreview" class="rounded-circle"
                                             style="width: 150px; height: 150px; cursor: pointer;">
                                     </label>
@@ -146,15 +140,9 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Mobile Number</label>
-                                <input type="hidden" class="form-control" value="<?php echo $profile_image_path; ?>"
-                                    name="current_image_name" oninput="(function(element) { 
-                                        element.value = element.value.replace(/[^\d]/g, '').substring(0, 10); 
-                                        if (!/^\d{10}$/.test(element.value)) {
-                                            element.setCustomValidity('Please enter a 10-digit number.');
-                                        } else {
-                                            element.setCustomValidity('');
-                                        }
-                            })(this)">
+                                <input type="hidden" class="form-control"
+                                            value="<?php echo  $current_image; ?>" name="current_image_name">
+
 
 
                                 <input type="text" disabled class="form-control" id="lastName" name="lastName"
@@ -232,6 +220,67 @@
 
 
             <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const userProfileForm = document.getElementById("userProfileForm");
+
+                    userProfileForm.addEventListener("submit", async function (event) {
+                        event.preventDefault(); // Prevent default form submission
+
+                        const formData = new FormData(userProfileForm); // Collect form data
+
+                        // Manually append session_id from PHP
+                        formData.append("session_id", "<?php echo $this->session->userdata('user_id'); ?>");
+
+                        // Show a processing alert using SweetAlert2
+                        Swal.fire({
+                            title: "Processing...",
+                            text: "Please wait while we update your profile.",
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+
+                        try {
+                            const response = await fetch("<?php echo base_url('User_Api_Controller/update_userprofile'); ?>", {
+                                method: "POST",
+                                body: formData
+                            });
+
+                            const data = await response.json();
+                            console.log("API Response:", data);
+
+                            if (data.status === "success") {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Profile Updated!",
+                                    text: "Your changes have been saved successfully.",
+                                    confirmButtonText: "OK"
+                                }).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Update Failed",
+                                    text: data.message || "Something went wrong, please try again.",
+                                });
+                            }
+                        } catch (error) {
+                            console.error("Error:", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops!",
+                                text: "Something went wrong! Please try again later.",
+                            });
+                        }
+                    });
+                });
+
+
+            </script>
+
+            <!-- <script>
                 function 
                 (fieldId) {
                     var field = document.getElementById(fieldId);
@@ -243,6 +292,8 @@
                 }
 
 
+
+
                 document.getElementById("userProfileForm").addEventListener("submit", function (event) {
                     let isValid = true;
 
@@ -252,7 +303,7 @@
                         event.preventDefault(); // Prevent form submission if validation fails
                     }
                 });
-            </script>
+            </script> -->
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     <?php if ($this->session->flashdata('success')): ?>

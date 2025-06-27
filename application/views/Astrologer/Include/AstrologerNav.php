@@ -6,9 +6,9 @@
 
     /* Navbar Styling */
     .navbar {
-        background-color: #F6CE57;
+        background-color: #0C768A;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        padding: 10px 40px;
+        padding: 1px 40px;
         position: fixed;
         width: 100%;
         top: 0;
@@ -18,12 +18,18 @@
     .logo-container img {
         width: 70px;
         height: auto;
+        margin: 2px;
+    }
+
+    .menu-items {
+        display: flex;
+        align-items: center;
     }
 
     .menu-items a {
         text-decoration: none;
-        color: #000;
-        margin: 0 45px;
+        color: white;
+        margin: 0 23px;
         font-weight: 500;
     }
 
@@ -34,7 +40,7 @@
     .navbar-right {
         display: flex;
         align-items: center;
-        gap: 20px;
+        /* gap: 20px; */
     }
 
     /* Notification Icon */
@@ -45,7 +51,7 @@
     }
 
     .notification-icon i {
-        color: black;
+        color: white;
         transition: color 0.3s ease;
     }
 
@@ -58,13 +64,13 @@
         display: none;
         position: absolute;
         top: 65px;
-        right: 200px;
+        right: 179px;
         background: #fff;
         width: 350px;
         max-width: 90vw; /* Added for responsiveness */
         border-radius: 10px;
         padding: 15px;
-        border: 2px solid #333;
+        /* border: 2px solid #333; */
         box-shadow: 0px 4px 10px rgba(252, 251, 251, 0.1);
         z-index: 1001;
     }
@@ -72,14 +78,12 @@
     .notification-container::before {
         content: "";
         position: absolute;
-        top: -10px;
         right: 20px;
         width: 15px;
         height: 15px;
-        background: #fff;
+       
         transform: rotate(45deg);
-        border-left: 2px solid #333;
-        border-top: 2px solid #333;
+       
     }
 
     .notification-header {
@@ -90,7 +94,7 @@
 
     .title {
         font-size: 18px;
-        font-weight: bold;
+        /* font-weight: bold; */
     }
 
     .close-btn {
@@ -147,7 +151,7 @@
     .vertical-line {
         width: 3px;
         height: 35px;
-        background: black;
+        background: gray;
         margin-right: 10px;
     }
 
@@ -179,31 +183,101 @@
 
     .live-btn {
         text-decoration: none;
-        background-color: #E90505;
-        color: white;
+        background-color: white; /* Changed to white background */
+        color: red; /* Changed text color to red */
         padding: 5px 15px;
+        border: 1px solid red; /* Added red border */
         border-radius: 4px;
         margin: 0 23px;
         font-weight: 500;
-        cursor: pointer; /* Added for better UX */
+        cursor: pointer;
+        display: flex; /* Added to align dot and text */
+        align-items: center; /* Center vertically */
+        gap: 5px; /* Space between dot and text */
+    }
+
+    /* Adding the red dot before the LIVE text using ::before pseudo-element */
+    .live-btn::before {
+        content: '';
+        width: 8px; /* Size of the dot */
+        height: 8px;
+        background-color: red; /* Red dot */
+        border-radius: 50%; /* Make it circular */
     }
 
     .live-btn:hover {
-        background-color: darkred;
-        color: white;
+        background-color: white; /* Keep white background on hover */
+        color: darkred; /* Slightly darker red text on hover */
+        border-color: darkred; /* Slightly darker red border on hover */
+    }
+
+    .live-btn:hover::before {
+        background-color: darkred; /* Slightly darker red dot on hover */
+    }
+
+    /* Toggle Switch Styling */
+    .status-toggle {
+        display: flex;
+        align-items: center;
+        margin-left: 15px; /* Gap between Chat and toggle switch */
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 24px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
     }
 
     /* Responsive Notification */
     @media (max-width: 768px) {
         .navbar {
-            padding: 10px 20px; /* Added for better mobile padding */
+            padding: 3px 20px; /* Added for better mobile padding */
         }
 
         .notification-container {
-            width: 90vw; /* Updated from 80% */
-            right: 5vw; /* Updated positioning */
+            width: 58vw; /* Updated from 80% */
+            right: 18vw; /* Updated positioning */
             left: auto; /* Added for proper alignment */
-            top: 60px; /* Adjusted to match navbar */
+            top: 66px; /* Adjusted to match navbar */
             margin-top: 0; /* Removed margin-top: 2px */
         }
 
@@ -223,7 +297,7 @@
         .menu-items {
             display: none;
             flex-direction: column;
-            background-color: white;
+            background-color: #0C768A;
             position: absolute;
             top: 60px;
             left: 0;
@@ -238,7 +312,7 @@
         }
 
         .menu-items a {
-            display: block;
+            display: white;
             padding: 10px;
             margin: 10px 0; /* Updated for better spacing */
         }
@@ -249,6 +323,12 @@
 
         .live-btn {
             margin: 0 10px; /* Adjusted for mobile */
+        }
+
+        /* Adjust toggle switch for mobile */
+        .status-toggle {
+            margin: 10px 0;
+            margin-left: 0; /* Reset margin-left for mobile */
         }
     }
 
@@ -269,6 +349,9 @@
             align-self: flex-end;
         }
     }
+    div:where(.swal2-container) div:where(.swal2-popup) {
+        width: 303px;
+    }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -277,7 +360,7 @@
 <nav class="navbar d-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center">
         <div class="logo-container">
-            <!-- <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo"> -->
+            <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
         </div>
         <div class="menu-toggle" id="menuToggle">
             <i class="bi bi-list"></i>
@@ -285,11 +368,16 @@
     </div>
 
     <div class="menu-items" id="menuItems">
-        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerAnalyticsAndEarning2'; ?>">Earnings</a>
-        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerFeedBackCard'; ?>">Feedback</a>
-        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerChatUI'; ?>">Chat</a>
-        <!-- <a href="<?php echo base_url() . 'AstrologerUser/ProductList'; ?>">Products</a> -->
-        <!-- <a href="#" class="live-btn">Live</a> -->
+        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerAnalyticsAndEarning2'; ?>" class="menu-link">Earnings</a>
+        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerFeedBackCard'; ?>" class="menu-link">Feedback</a>
+        <a href="<?php echo base_url() . 'AstrologerUser/AstrologerChatUI'; ?>" class="menu-link">Chat</a>
+        <!-- Toggle Switch for Online/Offline Status -->
+        <div class="status-toggle">
+            <label class="switch">
+                <input type="checkbox" id="statusToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
     </div>
 
     <div class="navbar-right">
@@ -353,6 +441,8 @@
             </div>
         </div>
 
+       
+        <button class="live-btn" id="liveButton">Live</button> <!-- Updated to button with ID -->
         <a href="<?php echo base_url() . 'AstrologerUser/AstrologerProfileForm'; ?>">
             <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
                 alt="Profile Image"
@@ -360,55 +450,268 @@
                 width="30px"
                 height="30px">
         </a>
-        <button class="live-btn" id="liveButton">Live</button> <!-- Updated to button with ID -->
     </div>
 </nav>
+
 
 <script>
     document.getElementById('menuToggle').addEventListener('click', function() {
         document.getElementById('menuItems').classList.toggle('show');
     });
 
+    // Prevent navbar movement on menu item click
+    document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = this.getAttribute('href'); // Navigate without jumping
+        });
+    });
+
     // Notification Toggle
-    const notificationIcon = document.getElementById('notificationIcon');
-    const notificationDropdown = document.getElementById('notificationDropdown');
-    const closeNotification = document.getElementById('closeNotification');
+    // const notificationIcon = document.getElementById('notificationIcon');
+    // const notificationDropdown = document.getElementById('notificationDropdown');
+    // const closeNotification = document.getElementById('closeNotification');
 
-    notificationIcon.addEventListener('click', (event) => {
-        event.stopPropagation();
-        notificationDropdown.style.display =
-            notificationDropdown.style.display === 'block' ? 'none' : 'block';
-    });
+    // notificationIcon.addEventListener('click', (event) => {
+    //     event.stopPropagation();
+    //     notificationDropdown.style.display =
+    //         notificationDropdown.style.display === 'block' ? 'none' : 'block';
+    // });
 
-    closeNotification.addEventListener('click', () => {
-        notificationDropdown.style.display = 'none';
-    });
+    // closeNotification.addEventListener('click', () => {
+    //     notificationDropdown.style.display = 'none';
+    // });
 
-    window.addEventListener('click', (event) => {
-        if (!notificationIcon.contains(event.target) && !notificationDropdown.contains(event.target)) {
-            notificationDropdown.style.display = 'none';
-        }
-    });
+    // window.addEventListener('click', (event) => {
+    //     if (!notificationIcon.contains(event.target) && !notificationDropdown.contains(event.target)) {
+    //         notificationDropdown.style.display = 'none';
+    //     }
+    // });
 
-    // Live Button SweetAlert
+    // Live Button SweetAlert with PlayStore Image
     document.getElementById('liveButton').addEventListener('click', function(e) {
         e.preventDefault();
         Swal.fire({
-            title: 'Download The App Now',
-            text: 'Would you like to download our app to go live?',
-            icon: 'info',
+            title: 'Are you sure?',
+            text: "You will be logged out!",
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#E90505',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Yes, Download',
-            cancelButtonText: 'No, Thanks'
+            confirmButtonColor: '#FF0000', // Red confirm button
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, Logout!'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Add your download link or redirect here
-                window.location.href = 'your-app-download-link';
+                window.location.href = "<?php echo base_url('Astrologer_Api_Controller/Logout'); ?>"; // Logout request
+
             }
         });
     });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        let isOnline = false;
+        let activityTimer;
+        const inactivityTimeout = 60000; // 1 minute
+        const statusToggle = document.getElementById('statusToggle');
+
+        // Fetch initial status from API
+        fetch('<?php echo base_url() . 'astrologer/check_astrologer_status' ?>')
+            .then(response => response.json())
+            .then(data => {
+                if (data.data.is_online == 1) {
+                    isOnline = true;
+                    statusToggle.checked = true;
+                }
+            })
+            .catch(error => console.error('Error fetching status:', error));
+
+        // 🔄 Update status function
+        function updateStatus(status, showPopup = false) {
+            const formData = new FormData();
+            formData.append('status', status);
+
+            fetch('<?php echo base_url() . 'astrologer/set_online_offline_status' ?>', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(() => {
+                    isOnline = (status === 'online');
+                    statusToggle.checked = isOnline;
+
+                    if (showPopup) {
+                        Swal.fire({
+                            title: `You are now ${isOnline ? 'Online' : 'Offline'}!`,
+                            text: isOnline ? 'You are now available for users.' : 'You are now unavailable for users.',
+                            icon: isOnline ? 'success' : 'info',
+                            confirmButtonText: 'OK',
+                            customClass: {
+                                popup: 'custom-swal-popup',
+                                title: 'custom-swal-title',
+                                content: 'custom-swal-content',
+                                confirmButton: 'custom-swal-confirm'
+                            },
+                            buttonsStyling: false
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating status:', error);
+                    statusToggle.checked = isOnline; // Revert toggle
+                });
+        }
+
+        // 🧠 Reset activity timer
+        function resetActivityTimer() {
+            clearTimeout(activityTimer);
+
+            const inChatUI = window.location.href.includes("AstrologerChatUI");
+
+            if (!document.hidden && inChatUI && !isOnline) {
+                updateStatus("online");
+            }
+
+            activityTimer = setTimeout(() => {
+                if (isOnline && !inChatUI) {
+                    updateStatus("offline");
+                }
+            }, inactivityTimeout);
+        }
+
+
+        // ⌨️ Detect user activity
+        ["mousemove", "keydown", "click", "touchstart"].forEach(event => {
+            document.addEventListener(event, resetActivityTimer);
+        });
+
+        // 👁️ Detect tab hide/show
+        document.addEventListener("visibilitychange", () => {
+            const inChatUI = window.location.href.includes("AstrologerChatUI");
+
+            if (document.hidden || !inChatUI) {
+                updateStatus("offline");
+                clearTimeout(activityTimer);
+            } else {
+                resetActivityTimer();
+            }
+        });
+
+
+        // 🚪 Detect tab close
+        window.addEventListener("beforeunload", () => {
+            const formData = new URLSearchParams();
+            formData.append("status", "offline");
+            navigator.sendBeacon('<?php echo base_url() . 'astrologer/set_online_offline_status' ?>', formData);
+        });
+
+        // 🔁 Heartbeat every 30s (only if online and tab visible)
+        setInterval(() => {
+        const inChatUI = window.location.href.includes("AstrologerChatUI");
+        if (isOnline && !document.hidden && inChatUI) {
+            updateStatus("online");
+        }
+    }, 30000);
+
+        // 🎚️ Manual toggle
+        statusToggle.addEventListener('click', () => {
+            const newStatus = statusToggle.checked ? 'online' : 'offline';
+            updateStatus(newStatus, true);
+        });
+
+        // Start
+        resetActivityTimer();
+    });
+
+    
+
+
+    // Custom CSS for SweetAlert (injected via JavaScript)
+    const style = document.createElement('style');
+    style.innerHTML = `
+        /* Styles for Online/Offline SweetAlert */
+        .custom-swal-popup {
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            
+        }
+        .custom-swal-title {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .custom-swal-content {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.5;
+        }
+        .custom-swal-confirm {
+            background-color: #E90505;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .custom-swal-confirm:hover {
+            background-color: darkreds;
+        }
+        .custom-swal-cancel {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+        .custom-swal-cancel:hover {
+            background-color: #5a6268;
+        }
+
+        /* Styles for Live Button SweetAlert */
+        .live-swal-popup {
+            width: 280px; /* Small size */
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .live-swal-title {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .live-swal-content {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+        }
+        .live-swal-confirm {
+            background-color: #E90505;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .live-swal-confirm:hover {
+            background-color: darkred;
+        }
+    `;
+    document.head.appendChild(style);
 </script>
 
 <!-- Bootstrap Scripts -->

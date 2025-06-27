@@ -61,7 +61,7 @@ $route['Signup'] = 'UserLoginSignup/Signup';
 $route['Login'] = 'UserLoginSignup/Login';
 $route['Logout'] = 'UserLoginSignup/Logout';
 
-
+$route['terms'] = 'User/Terms';
 
 //User self page
 $route['home'] = 'User/Home';
@@ -73,40 +73,47 @@ $route['UserProfile'] ='User/UserProfile';
 $route['freekundli'] = 'User/FreeKundli';
 $route['kundlimatching'] = 'User/KundliMatching';
 $route['panchang'] = 'User/Panchang';
-$route['todayhoroscope'] = 'User/TodayHoroscope';
-$route['horoscopereadmore'] = 'User/HoroscopeReadmore';
+
 $route['kp'] = 'User/KP';
 $route['ShowFreeKundli'] ='User/ShowFreeKundli';
 
 
+$route['todayhoroscope'] = 'User/TodayHoroscope';
+$route['horoscopereadmore/(:any)'] = 'User/HoroscopeReadmore/$1';
+// $route['horoscopereadmore/(:any)'] = 'YourController/HoroscopeReadmore/$1';
+
 
 //Data from astroller 
 $route['astrologers'] = 'User/Astrologers';
-$route['ViewAstrologer'] = 'User/ViewAstrologer';
+$route['ViewAstrologer/(:num)'] = 'User/ViewAstrologer/$1';
+
 $route['AstrologyServices'] ='User/AstrologyServices';
 $route['Following'] ='User/Following';
 
 
+$route['privacypolicy'] = 'User/Privacypolicy';
+
+$route['wallet'] = 'User/Wallet';
 
 //data from pujari side book puja section
-$route['PoojarViewMore'] ='User/PoojarViewMore';
+$route['PoojarViewMore/(:num)/(:num)'] ='User/PoojarViewMore/$1/$2';
 $route['OfflinePoojaris'] ='User/OfflinePoojaris';
 $route['bookpooja'] = 'User/BookPooja';
-$route['OnlinePoojaris'] ='User/OnlinePoojaris';
+$route['OnlinePoojaris/(:num)'] ='User/OnlinePoojaris/$1';
 $route['Poojaris'] ='User/Poojaris';
-$route['PoojaInfo'] ='User/PoojaInfo';
+$route['PoojaInfo/(:num)'] ='User/PoojaInfo/$1';
 
 
 
 //data from admin side  Festivals
 $route['festival'] = 'User/Festival';
-$route['FestivalReadmore'] ='User/FestivalReadmore';
+$route['FestivalReadmore/(:num)'] ='User/FestivalReadmore/$1';
 
 
 
 //data from admin  Jyotisika mall section
 $route['jyotisikamall'] = 'User/JyotisikaMall';
-$route['ProductDetails'] ='User/ProductDetails';
+$route['ProductDetails/(:num)'] ='User/ProductDetails/$1';
 $route['ProductPayment'] ='User/ProductPayment';
 
 
@@ -124,12 +131,15 @@ $route['MobPooja'] ='User/MobPooja';
 //Why us page
 $route['WhyUs'] ='User/WhyUs';
 
+$route['Cart'] = 'User/Cart';
+
 
 
 $route['demo'] = 'User/Demo';
 $route['Recharge'] ='User/Recharge';
 $route['ServiceDetails'] ='User/ServiceDetails';
 
+$route['chat/(:num)'] = 'User/Chat/$1';
 
 
 //user end ---User route end--- 
@@ -210,3 +220,89 @@ $route['AstrologyAndSpiritualServices']='AstrologerUser/AstrologyAndSpiritualSer
 $route['AstrologerTodaysSchedule']='AstrologerUser/AstrologerTodaysSchedule';
 $route['AstrologerFeedBackCard']='AstrologerUser/AstrologerFeedBackCard';
 $route['ConsultationCards']='AstrologerUser/ConsultationCards';
+
+//<------------------------ Astrologer Api Routes start here ------------------------------------>
+
+$route['astrologer/register'] = 'Astrologer_Api_Controller/Register';//register the user
+$route['astrologer/verify_otp'] = 'Astrologer_Api_Controller/Verify_otp';//verify the otp for registration
+$route['astrologer/resend_Otp'] = 'Astrologer_Api_Controller/Resend_Otp';//resend the otp 
+$route['astrologer/send_otp_login'] = 'Astrologer_Api_Controller/Send_Otp_Login';//send otp for login
+$route['astrologer/verify_otp_login'] = 'Astrologer_Api_Controller/Verify_otp_Login';//verify otp for login
+$route['astrologer/get_logged_in_user'] = 'Astrologer_Api_Controller/GetUserDataOfLoggedUser';//check that user is looged in and it's status
+$route['astrologer/get_services'] = 'Astrologer_Api_Controller/GetAstrologerServices';//get the services of the astrologer can access
+$route['astrologer/profile_astrologer'] = 'Astrologer_Api_Controller/GetAstrologerDetails';//get the details of the astrologer which is logged in 
+$route['astrologer/add_service'] = 'Astrologer_Api_Controller/StorePendingServices';//add the service to the astrologer
+$route['astrologer/get_approved_services'] = 'Astrologer_Api_Controller/GetAstrologerServicesofLoggedinAstologer';//get the approved services of the astrologer
+$route['astrologer/get_feedbacks_related_to_astrologer'] = 'Astrologer_Api_Controller/GetAstrologerFeedback';//get the feedbacks related to the astrologer
+$route['astrologer/delete_feedback'] = 'Astrologer_Api_Controller/DeleteFeedback';//delete the feedback
+$route['astrologer/set_online_offline_status'] = 'Astrologer_Api_Controller/SetAstrologerStatus';//set the online offline status of the astrologer
+$route['astrologer/check_astrologer_status'] = 'Astrologer_Api_Controller/Check_online';//check the status of the astrologer is he online or offline
+$route['astrologer/update_profile'] = 'Astrologer_Api_Controller/UpdateProfile';//update the profile of the astrologer
+$route['astrologer/update_avaliability'] = 'Astrologer_Api_Controller/Save_availability';//get the feedback by id
+$route['astrologer/profile_image'] = 'Astrologer_Api_Controller/Update_profile_image';
+
+$route['astrologer/yearlychart'] = 'Astrologer_Api_Controller/Chart_data_yearly';
+$route['astrologer/monthlychart'] = 'Astrologer_Api_Controller/Chart_data_monthly';
+$route['astrologer/statuschart'] = 'Astrologer_Api_Controller/Chart_data_pending_paid';
+$route['astrologer/gettotalearnings'] = 'Astrologer_Api_Controller/Get_total_stats';
+$route['astrologer/getmontlyearnings'] = 'Astrologer_Api_Controller/Get_offline_bookings_monthly';
+
+
+//<------------------------ Astrologer Api Routes Ends here ------------------------------------>
+
+// urls for the caht 
+$route['api/chat/start-session'] = 'Api_Chat_Controller/Start_session';
+$route['api/chat/send-message'] = 'Api_Chat_Controller/Send_message';
+$route['api/chat/history/(:num)'] = 'Api_Chat_Controller/Get_chat_history/$1';
+$route['api/chat/end-session'] = 'Api_Chat_Controller/End_session';
+$route['api/chat/users'] = 'Api_Chat_Controller/Get_users';
+
+
+
+// routes for the astrologer controllger 
+$route['astrologer/register']='Astrologer_api_controller/Register_post';
+$route['astrologer/send_otp_login']='Astrologer_api_controller/Send_Otp_Login';
+$route['astrologer/verify_otp_login']='Astrologer_api_controller/Verify_otp_Login';
+$route['astrologer/resend_Otp_Login']='Astrologer_api_controller/Resend_Otp_Login';
+$route['astrologer/set_online_offline_status'] = 'Astrologer_api_controller/SetAstrologerStatus';//set the online offline status of the astrologer
+$route['astrologer/check_astrologer_status'] = 'Astrologer_api_controller/Check_online';//check the status of the astrologer is he online or offline
+
+// routes for the HR Admin
+$route['HRAdmin'] = 'HRAdminController/home';
+$route['HRAdmin/login'] = 'Admin/login';
+$route['HRAdmin/Astrolger']='HrAdminController/astrologer';
+$route['HRAdmin/Pujari'] = 'HrAdminController/pujari';
+$route['HRAdmin/Profile'] = 'HrAdminController/profile';
+$route['HRAdmin/AstrologerRequest'] = 'HrAdminController/astrorequest';
+$route['HRAdmin/PujariRequest'] = 'HrAdminController/pujarirequest';
+$route['HRAdmin/ViewallAstrologers'] = 'HrAdminController/viewallAstrologers';
+$route['HRAdmin/ViewallPujaris'] = 'HrAdminController/viewallPujari';
+$route['HRAdmin/ViewAstrologerProfile'] = 'HrAdminController/viewastrologerprofile';
+$route['HRAdmin/ViewpujariProfile'] = 'HrAdminController/viewpujariprofile';
+$route['HRAdmin/Reinterviews'] = 'HrAdminController/reinterviews';
+
+
+
+
+// routes for sales
+$route['salesdashboard'] = 'Sales/Dashboard';
+$route['allastrologer'] = 'Sales/AllAstrologer';
+$route['viewastrologerprofile'] = 'Sales/ViewAstrologerProfile';
+$route['allpoojaris'] = 'Sales/Allpoojaris';
+$route['viewpoojariprofile'] = 'Sales/ViewPoojariProfile';
+$route['products'] = 'Sales/Products';
+$route['profile'] = 'Sales/Profile';
+$route['orders'] = 'Sales/Orders';
+$route['ordersdetails'] = 'Sales/OrdersDetails';
+
+
+//routes for inverntory
+
+$route['dashboard'] = 'Inventory/Dashboard';
+$route['profile'] = 'Inventory/Profile';
+
+
+//routes for finance
+$route['financeastrologer'] = 'Finance/FinanceAstrologer';
+$route['FinancePoojari'] = 'Finance/FinancePoojari';
+$route['financeprofile'] = 'Finance/FinanceProfile';

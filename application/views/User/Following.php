@@ -37,6 +37,7 @@
         <!-- Navbar -->
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
+   
 
     <main>
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
@@ -56,135 +57,182 @@
 
             <!-- cards -->
             <div class="row my-4" id="cardContainer">
-            <?php 
-            $astrologers = [
-                [
-                'name' => 'Acharya Mishra Ji',
-                'image' => 'astrologer.png',
-                'expertise' => 'Vastu, Vedic',
-                'experience' => '4+ Years',
-                'price' => 'Rs.25/min',
-                'languages' => 'English, Hindi, Marathi',
-                'rating' => 3
-                ],
-                [
-                'name' => 'Pandit Ji',
-                'image' => 'astrologer.png',
-                'expertise' => 'Vastu, Vedic',
-                'experience' => '10+ Years',
-                'price' => 'Rs.50/min',
-                'languages' => 'English, Hindi, Marathi',
-                'rating' => 5
-                ],
-                [
-                'name' => 'Karan Ji',
-                'image' => 'astrologer.png',
-                'expertise' => 'Vastu, Vedic',
-                'experience' => '7+ Years',
-                'price' => 'Rs.40/min',
-                'languages' => 'English, Hindi, Marathi',
-                'rating' => 4
-                ],
-                
-            ];
+                <?php
+                $astrologers = [
+                    [
+                        'name' => 'Acharya Mishra Ji',
+                        'image' => 'astrologer.png',
+                        'expertise' => 'Vastu, Vedic',
+                        'experience' => '4+ Years',
+                        'price' => 'Rs.25/min',
+                        'languages' => 'English, Hindi, Marathi',
+                        'rating' => 3
+                    ],
+                    [
+                        'name' => 'Pandit Ji',
+                        'image' => 'astrologer.png',
+                        'expertise' => 'Vastu, Vedic',
+                        'experience' => '10+ Years',
+                        'price' => 'Rs.50/min',
+                        'languages' => 'English, Hindi, Marathi',
+                        'rating' => 5
+                    ],
+                    [
+                        'name' => 'Karan Ji',
+                        'image' => 'astrologer.png',
+                        'expertise' => 'Vastu, Vedic',
+                        'experience' => '7+ Years',
+                        'price' => 'Rs.40/min',
+                        'languages' => 'English, Hindi, Marathi',
+                        'rating' => 4
+                    ],
 
-            foreach ($astrologers as $astrologer): ?>
-            <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
-                <div class="card shadow rounded-3 h-100"
-                style="border: 1px solid var(--red); background-color: #fff;">
-                <div class="card-body p-3">
-                    <!-- Profile Section -->
-                    <div class="d-flex align-items-center mb-2">
-                    <a href="<?php echo base_url('ViewAstrologer'); ?>">
-                        <img src="<?php echo base_url('assets/images/' . $astrologer['image']); ?>" alt="image"
-                        class="rounded-circle"
-                        style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                    </a>
-                    <div class="ms-2">
-                        <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
-                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);"><?php echo $astrologer['name']; ?>
-                        </h6>
-                        </a>
+                ]; ?>
 
-                        <div class="d-flex align-items-center gap-1">
-                        <?php for ($i = 0; $i < $astrologer['rating']; $i++): ?>
-                            <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
-                            style="width: 15px; height: 15px;">
-                        <?php endfor; ?>
+
+
+                <?php if (!empty($astrologer_data)): ?>
+                    <?php foreach ($astrologer_data as $astrologer): ?>
+                        <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
+                            <div class="card shadow rounded-3 h-100"
+                                style="border: 1px solid var(--red); background-color: #fff;">
+                                <div class="card-body p-3">
+                                    <!-- Profile Section -->
+                                    <div class="d-flex align-items-center mb-2">
+                                       
+                                            <img src="<?php echo  !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
+                                                class="rounded-circle"
+                                                style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+
+                                       
+                                       
+                                        <div class="ms-2">
+                                          
+                                                <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                    <?php echo $astrologer['name']; ?>
+                                                </h6>
+                                           
+
+                                            <div class="d-flex align-items-center gap-1">
+                                                <?php for ($i = 0; $i < 3; $i++): ?>
+                                                    <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
+                                                        style="width: 15px; height: 15px;">
+                                                <?php endfor; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Details Section -->
+                                    <div class="d-flex flex-column gap-1 mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small class="card-expertise"><?php echo $astrologer['specialties']; ?></small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small><?php echo $astrologer['experience']; ?></small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small><?php echo $astrologer['price_per_minute']; ?> RS per min</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small class="card-language"><?php echo $astrologer['languages']; ?></small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="d-flex gap-2 mb-2">
+                                        <button class="btn btn-sm w-100 rounded-3 border-1 unfollow-btn"
+                                            style="background-color: var(--yellow);"
+                                            id="<?php echo $astrologer['astrologer_id']; ?>"
+                                            data-name="<?php echo $astrologer['name']; ?>">UnFollow</button>
+
+                                    </div>
+                                    <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="col-12 text-center">
+                    <p class="fw-bold text-danger">You’re not following anyone yet. Discover an astrologer to get started!</p>
 
-                    <!-- Details Section -->
-                    <div class="d-flex flex-column gap-1 mb-2">
-                    <div class="d-flex align-items-center">
-                        <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
-                        style="width: 15px; height: 15px; margin-right: 5px;">
-                        <small class="card-expertise"><?php echo $astrologer['expertise']; ?></small>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
-                        style="width: 15px; height: 15px; margin-right: 5px;">
-                        <small><?php echo $astrologer['experience']; ?></small>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
-                        style="width: 15px; height: 15px; margin-right: 5px;">
-                        <small><?php echo $astrologer['price']; ?></small>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
-                        style="width: 15px; height: 15px; margin-right: 5px;">
-                        <small class="card-language"><?php echo $astrologer['languages']; ?></small>
-                    </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="d-flex gap-2 mb-2">
-                    <button class="btn btn-sm w-100 rounded-3 border-1 unfollow-btn"
-                        style="background-color: var(--yellow);" data-name="<?php echo $astrologer['name']; ?>">UnFollow</button>
-                       
-                    </div>
-                    <!-- <a href="" class="btn btn-sm btn-outline-dark w-100 rounded-3">View</a> -->
-                </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-            const unfollowButtons = document.querySelectorAll('.unfollow-btn');
+            document.addEventListener('DOMContentLoaded', function () {
+                const buttons = document.querySelectorAll('.unfollow-btn');
 
-            unfollowButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const astrologerName = this.dataset.name;
+                buttons.forEach(button => {
+                    button.addEventListener('click', function (e) {
+                        e.preventDefault();
 
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: `Do you want to unfollow ${astrologerName}?`,
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, unfollow!',
-                    cancelButtonText: 'No, cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                    // Perform the unfollow action here, e.g., AJAX request
-                    // For now, let's just show a success message
-                    Swal.fire(
-                        'Unfollowed!',
-                        `${astrologerName} has been unfollowed.`,
-                        'success'
-                    )
-                    }
-                })
+                        let astrologer_id = this.id;
+                        let user_id = <?php echo $this->session->userdata("user_id"); ?>;
+                        let formdata = new FormData();
+                        formdata.append("astrologer_id", astrologer_id);
+                        formdata.append("session_id", user_id);
+
+                        // Check the current action based on button text
+                        if (this.innerText.trim().toLowerCase() === "unfollow") {
+                            // Unfollow flow
+                            fetch("<?php echo base_url("User_Api_Controller/unfollowastrologer") ?>", {
+                                method: "POST",
+                                body: formdata,
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.status === "success") {
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: "You have unfollowed this astrologer.",
+                                            icon: "success",
+                                        });
+                                        this.innerText = "Follow";
+                                    } else {
+                                        Swal.fire({
+                                            title: "Warning",
+                                            text: "Unable to unfollow at this time.",
+                                            icon: "warning",
+                                        });
+                                    }
+                                });
+                        } else {
+                            // Follow flow
+                            fetch("<?php echo base_url("User_Api_Controller/followastrologer") ?>", {
+                                method: "POST",
+                                body: formdata,
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.status === "success") {
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: "You are now following this astrologer.",
+                                            icon: "success",
+                                        });
+                                        this.innerText = "Unfollow";
+                                    } else {
+                                        Swal.fire({
+                                            title: "Warning",
+                                            text: "Unable to follow at this time.",
+                                            icon: "warning",
+                                        });
+                                    }
+                                });
+                        }
+                    });
                 });
-            });
             });
         </script>
 

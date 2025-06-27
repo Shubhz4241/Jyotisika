@@ -46,13 +46,43 @@
         td,
         th {
             font-weight: 400;
-            font-size: 1rem;
+            font-size: 18px;
         }
 
         /* Enhance table header appearance */
         .table thead th {
             font-weight: 600;
-            background-color: #f8f9fa;
+            background-color:#0c768a;
+            padding: 10px;
+            height: 60px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .table td {
+            font-weight: 400;
+            padding: 10px;
+            height: 60px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .table-responsive {
+            border-radius: 8px;
+            overflow: auto;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table tr {
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            vertical-align: middle;
         }
 
         /* Adjust buttons for better aesthetics */
@@ -179,7 +209,7 @@ th:nth-child(8), td:nth-child(8) { /* Address */
 
                         <!-- Table -->
                     <div class="table-responsive">
-                        <table class="table table-bordered table-light table-hover table-responsive ">
+                        <table class="table table table-hover table-responsive ">
                             <thead>
                                 <tr>
                                     <th>Sr. No.</th>
@@ -187,8 +217,7 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                                     <th>Contact No</th>
                                     <th>Email</th>
                                     <th>Gender</th>
-                                    <th>Date of Birth</th>
-                                    <th>Place of Birth</th>
+                                   
                                     <th>Address</th>
                                     <th>Service Taken</th>
                                     <th>Action</th>
@@ -220,8 +249,6 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                             contactNo: "1234567890",
                             email: "johndoe@example.com",
                             gender: "Male",
-                            dateOfBirth: "1990-05-14",
-                            placeOfBirth: "New York",
                             address: "123 Main Street",
                             serviceTaken: 2,
                             action: `<button class="btn btn-danger delete-btn" data-id="1">
@@ -233,9 +260,8 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                             contactNo: "0987654321",
                             email: "janesmith@example.com",
                             gender: "Female",
-                            dateOfBirth: "1995-08-21",
-                            placeOfBirth: "Los Angeles",
-                            address: "456 Elm Street, Los Angeles, Los Angeles, Los Angeles, Los Angeles",
+                         
+                            address: "456 Elm Street",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="2">
                                         <i class="bi bi-trash-fill"></i>
@@ -246,8 +272,7 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                             contactNo: "1122334455",
                             email: "alicebrown@example.com",
                             gender: "Female",
-                            dateOfBirth: "1988-11-02",
-                            placeOfBirth: "Chicago",
+                           
                             address: "789 Pine Avenue",
                             serviceTaken: 3,
                             action: `<button class="btn btn-danger delete-btn" data-id="3">
@@ -259,8 +284,7 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                             contactNo: "6677889900",
                             email: "michaelj@example.com",
                             gender: "Male",
-                            dateOfBirth: "1992-06-10",
-                            placeOfBirth: "San Francisco",
+                          
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
@@ -272,8 +296,7 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                             contactNo: "6677889900",
                             email: "michaelj@example.com",
                             gender: "Male",
-                            dateOfBirth: "1992-06-10",
-                            placeOfBirth: "San Francisco",
+                           
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
@@ -285,8 +308,7 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                             contactNo: "6677889900",
                             email: "michaelj@example.com",
                             gender: "Male",
-                            dateOfBirth: "1992-06-10",
-                            placeOfBirth: "San Francisco",
+                         
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
@@ -298,8 +320,6 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                             contactNo: "6677889900",
                             email: "michaelj@example.com",
                             gender: "Male",
-                            dateOfBirth: "1992-06-10",
-                            placeOfBirth: "San Francisco",
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
@@ -311,8 +331,7 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                             contactNo: "6677889900",
                             email: "michaelj@example.com",
                             gender: "Male",
-                            dateOfBirth: "1992-06-10",
-                            placeOfBirth: "San Francisco",
+                          
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
@@ -324,8 +343,7 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                             contactNo: "6677889900",
                             email: "michaelj@example.com",
                             gender: "Male",
-                            dateOfBirth: "1992-06-10",
-                            placeOfBirth: "San Francisco",
+                          
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
@@ -337,8 +355,7 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                             contactNo: "6677889900",
                             email: "michaelj@example.com",
                             gender: "Male",
-                            dateOfBirth: "1992-06-10",
-                            placeOfBirth: "San Francisco",
+                       
                             address: "101 Maple Lane",
                             serviceTaken: 1,
                             action: `<button class="btn btn-danger delete-btn" data-id="4">
@@ -368,8 +385,7 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                                 <td>${item.contactNo}</td>
                                 <td>${item.email}</td>
                                 <td>${item.gender}</td>
-                                <td>${item.dateOfBirth}</td>
-                                <td>${item.placeOfBirth}</td>
+                              
                                 <td>${item.address}</td>
                                 <td>${item.serviceTaken}</td>
                                 <td class="text-center">${item.action}</td>

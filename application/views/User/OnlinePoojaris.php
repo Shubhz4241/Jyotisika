@@ -38,6 +38,7 @@
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
+
     <main>
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
@@ -67,122 +68,180 @@
             </div>
 
             <!-- cards -->
-            <div class="row my-4" id="cardContainer">
-                <?php for ($i = 0; $i < 16; $i++) { ?>
-                    <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
-                        <div class="card shadow rounded-3 h-100 position-relative" style="border: 2px solid var(--red); ">
-                            <!-- Featured Badge -->
+            <div class="row my-4" class="cardContainer">
 
-                            <div class="card-body p-3">
-                                <!-- Profile Section -->
-                                <div class="d-flex align-items-center mb-2">
-                                    <a href="<?php echo base_url('PoojarViewMore'); ?>">
-                                        <div class="position-relative">
-                                            <img src="<?php echo base_url('assets/images/astrologer.png'); ?>" alt="image"
-                                                class="rounded-circle"
-                                                style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                            <span class="position-absolute bottom-0 end-0 badge rounded-circle p-1"
-                                                style="background-color: #28a745;">
-                                                <i class="bi bi-check-circle-fill small"></i>
-                                            </span>
-                                        </div>
-                                    </a>
-                                    <div class="ms-2">
-                                        <a href="<?php echo base_url('ViewAstrologer'); ?>" class="text-decoration-none">
-                                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Acharya Mishra Ji
-                                            </h6>
+                <?php if ($showpujari): ?>
+
+                    <?php foreach ($showpujari as $pujaridata): ?>
+
+                        <div class="col-12 col-md-6 col-lg-3 card-item mb-3">
+                            <div class="card shadow rounded-3 h-100 position-relative" style="border: 2px solid var(--red); ">
+                                <!-- Featured Badge -->
+
+                                <div class="card-body p-3">
+                                    <!-- Profile Section -->
+                                    <div class="d-flex align-items-center mb-2">
+                                        <a
+                                            href="<?php echo base_url('PoojarViewMore/' . $pujaridata["pujari_id_"] . "/" . $pujaridata["service_id"]); ?>">
+                                            <div class="position-relative">
+                                                <!-- echo base_url('assets/images/astrologer.png'); -->
+                                               
+                                                
+
+                                                <img src="<?php echo  !empty($pujaridata['profile_pic']) ? base_url('uploads/pujari/profile/image/'.$pujaridata['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
+                                                    class="rounded-circle"
+                                                    style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+                                                <span class="position-absolute bottom-0 end-0 badge rounded-circle p-1"
+                                                    style="background-color: #28a745;">
+                                                    <i class="bi bi-check-circle-fill small"></i>
+                                                </span>
+                                            </div>
                                         </a>
-                                        <div class="d-flex align-items-center gap-1 ">
-                                            <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
-                                            <span class="small text-muted mt-1">4.8 (150+ Poojas)</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Details Section -->
-                                <div class="d-flex flex-column gap-1 mb-2">
-                                    <div class="d-flex align-items-center small">
-                                        <i class="bi bi-bookmark-star-fill me-2" style="color: var(--red);"></i>
-                                        <span class="card-expertise">Vastu Expert, Vedic Scholar</span>
-                                    </div>
-                                    <div class="row g-1">
-                                        <div class="col-12">
-                                            <div class="d-flex align-items-center small">
-                                                <i class="bi bi-calendar2-check me-1 text-success"></i>
-                                                <span class="card-experience">4 Years</span>
+                                        <div class="ms-2">
+                                            <a href="<?php echo base_url('PoojarViewMore/' . $pujaridata["pujari_id_"] . "/" . $pujaridata["service_id"]); ?>"
+                                                class="text-decoration-none">
+                                                <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                    <?php echo $pujaridata["pujariname"] ?>
+                                                </h6>
+                                            </a>
+                                            <div class="d-flex align-items-center gap-1 ">
+                                                <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
+                                                <span class="small text-muted mt-1"><?php echo $pujaridata["average_rating"] ?>
+                                                    (<?php echo $pujaridata["completed_puja_count"]  ?>+ Poojas)</span>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <!-- Details Section -->
+                                    <div class="d-flex flex-column gap-1 mb-2">
+                                        <!-- <div class="d-flex align-items-center small">
+                                        <i class="bi bi-bookmark-star-fill me-2" style="color: var(--red);"></i>
+                                        <span class="card-expertise">Vastu Expert, Vedic Scholar</span>
+                                    </div> -->
+                                        <div class="row g-1">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center small">
+                                                    <i class="bi bi-calendar2-check me-1 text-success"></i>
+                                                    <span class="card-experience"><?php echo $pujaridata["experience"] ?>
+                                                        +Years</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="d-flex align-items-center small">
+                                            <i class="bi bi-translate me-2 text-dark"></i>
+                                            <span class="card-language"> <?php echo $pujaridata["languages"] ?></span>
+                                        </div>
+                                        <div class="d-flex align-items-center small fw-bold">
+                                            <i class="bi bi-currency-rupee me-1"></i>
+                                            <span class="fs-6"> <?php echo $pujaridata["puja_charges"] ?></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="d-flex gap-2">
+                                        <?php if ($this->session->userdata("user_id")): ?>
+                                            <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
+                                                data-bs-toggle="modal" data-bs-target="#bookpooja">
+                                                Book Pooja
+                                            </button>
+                                        <?php else: ?>
+
+                                            <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
+                                                onclick="Showlogin()">
+                                                Book Pooja
+                                            </button>
+
+                                        <?php endif ?>
+
 
                                     </div>
-                                    <div class="d-flex align-items-center small">
-                                        <i class="bi bi-translate me-2 text-dark"></i>
-                                        <span class="card-language">English, Hindi, Marathi</span>
-                                    </div>
-                                    <div class="d-flex align-items-center small fw-bold">
-                                        <i class="bi bi-currency-rupee me-1"></i>
-                                        <span class="fs-6">501</span>
-                                    </div>
-                                </div>
-
-                                <!-- Action Buttons -->
-                                <div class="d-flex gap-2">
-                                    <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
-                                        data-bs-toggle="modal" data-bs-target="#bookpooja">
-                                        Book Pooja
-                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <?php } ?>
-            </div>
-        </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="bookpooja" tabindex="-1" aria-labelledby="bookpoojaLabel" aria-hidden="true">
-            <div class="modal-dialog ">
-                <form>
-                    <div class="modal-content">
-                        <div class="d-flex justify-content-between align-items-center p-3">
-                            <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
+                        <div class="modal fade" id="bookpooja" tabindex="-1" aria-labelledby="bookpoojaLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog ">
+                                <form class="pujadata">
+                                    <div class="modal-content">
+                                        <div class="d-flex justify-content-between align-items-center p-3">
+                                            <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
 
-                            <div class="row g-3">
-                                <div class="col-12">
+                                            <div class="row g-3">
+                                                <!-- <div class="col-12">
                                     <label class="form-label fw-bold">Address</label>
                                     <textarea class="form-control shadow-none" rows="3"
                                         placeholder="Enter your complete address" required
                                         oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s]/g, ''); })(this)"
                                         pattern="^[A-Za-z0-9À-ž\s]+$"
                                         title="Enter Alphabets and Numbers Only"></textarea>
-                                </div>
+                                </div> -->
 
-                                <div class="col-12">
-                                    <label class="form-label fw-bold">Preferred Date</label>
-                                    <input type="date" class="form-control shadow-none"
-                                        min="<?php echo date('Y-m-d'); ?>"
-                                        required>
-                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label fw-bold">User Email</label>
+                                                    <input type="user_email" name="useremail" class="form-control shadow-none"
+                                                        required>
+                                                </div>
 
-                                <div class="col-12">
-                                    <label class="form-label fw-bold">Preferred Time</label>
-                                    <input type="time" class="form-control shadow-none" required>
-                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label fw-bold">Preferred Date</label>
+                                                    <input type="date" name="pujadate" class="form-control shadow-none"
+                                                        min="<?php echo date('Y-m-d'); ?>" required>
+                                                </div>
 
+
+
+
+                                                <input type="text" value="<?php echo $pujaridata["pujari_id_"] ?>"
+                                                    name="pujari_id" hidden>
+                                                <input type="text" value="<?php echo $pujaridata["service_id"] ?>"
+                                                    name="service_id" hidden>
+
+                                                <input type="text" value="<?php echo "Online" ?>" name="puja_mode" hidden>
+
+                                                <input type="text"
+                                                    value="<?php echo $this->session->userdata("user_id") ?? null; ?>"
+                                                    name="user_id" hidden>
+
+                                                <input type="text" value="<?php echo $pujaridata["puja_charges"]; ?>"
+                                                    name="pujari_charges" hidden>
+                                                <div class="col-12">
+                                                    <label class="form-label fw-bold">Preferred Time</label>
+                                                    <input type="time" name="pujatime" class="form-control shadow-none"
+                                                        required>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="p-3 d-flex justify-content-center align-items-center gap-3">
+
+                                            <button type="submit" class="btn text-dark"
+                                                style="background-color: var(--yellow);">
+                                                Confirm Booking
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="p-3 d-flex justify-content-center align-items-center gap-3">
 
-                            <button type="submit" class="btn text-dark" style="background-color: var(--yellow);">
-                                Confirm Booking
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                    <?php endforeach ?>
+                <?php else: ?>
+
+                    <p>There is no pujari available right now</p>
+
+                <?php endif ?>
+
             </div>
         </div>
+
+        <!-- Modal -->
+
 
         <script>
             function filterCards() {
@@ -216,6 +275,110 @@
             document.getElementById("searchInput").addEventListener("input", filterCards);
             document.getElementById("experienceFilter").addEventListener("change", filterCards);
         </script>
+
+        <script>
+            function Showlogin() {
+
+
+                Swal.fire({
+                    title: "Login Required",
+                    text: "Please login to access this service",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Login",
+                    cancelButtonText: "Cancel",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "<?php echo base_url('Login'); ?>";
+                    }
+                });
+            }
+
+        </script>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll("form.pujadata").forEach(form => {
+
+
+
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault();
+
+                        let formdata = new FormData(form);
+                        console.log(form);
+
+
+                        fetch("<?php echo base_url('User_Api_Controller/send_request_to_pujari'); ?>", {
+                            method: "POST",
+                            body: formdata,
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+
+                                if (data["status"] == "success") {
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: "Requested sended successfully",
+                                        icon: "success",
+
+                                    });
+                                }
+                                else if (data["status"] == "warning") {
+                                    Swal.fire({
+                                        title: "warning",
+                                        text: "Pujari already booked",
+                                        icon: "warning",
+
+                                    });
+                                }
+
+
+
+                            })
+                            .catch(error => {
+
+                                Swal.fire({
+                                    title: "error",
+                                    text: "Request not sended successfully",
+                                    icon: "warning",
+
+                                });
+                                console.error("Error:", error);
+
+                            });
+                    });
+                });
+            });
+        </script>
+
+        <!-- <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+
+                document.querySelectorAll("form.pujadata").forEach(form => {
+
+
+                    console.log("hello word");
+                    let formdata = new FormData(this);
+
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault();
+                        fetch("<?php echo base_url("User_Api_Controller/send_request_to_pujari") ?>", {
+                            method: "POST",
+                            body: formdata,
+                        });
+
+                    });
+                })
+
+            });
+
+        </script> -->
+
+
 
     </main>
 

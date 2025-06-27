@@ -152,7 +152,7 @@
         <!-- Mobile Number Form -->
         <div id="mobile-form">
             <div class="logo-container">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
             <form>
                 <div class="mb-3">
@@ -171,7 +171,7 @@
         <!-- OTP Form -->
         <div id="otp-form" style="display: none;">
             <div class="logo-container">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
             <div id="otpSentMessage"></div>
             <p class="text-center" id="otpMessage">We have Sent the code on +91************95</p>
@@ -193,7 +193,7 @@
         <!-- Success Message -->
         <div id="success-message" style="display: none;">
             <div class="checkmark">
-                <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Logo">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Logo">
             </div>
             <p>Login Successfully!</p>
         </div>

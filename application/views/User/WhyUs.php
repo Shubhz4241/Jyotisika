@@ -86,7 +86,10 @@
         <!-- why choose section -->
         <section>
             <div class="container mt-5">
-                <h3 class="text-center my-4">Why Choose Us</h3>
+                <h3 class="text-center my-4">
+                    <?php echo $this->lang->line('Why_Choose_Us') ?: "Why Choose Us"; ?>
+                </h3>
+
                 <div class="row">
                     <div class="col-12 col-sm-6 col-lg-3 text-center">
 
@@ -94,7 +97,9 @@
                             style="background-color:#83B7EB; width:100px; height:100px; margin: 0 auto;">
                             <i class="bi bi-lock-fill" style="font-size: 40px; color: white;"></i>
                         </div>
-                        <p class="mt-2 fw-bold">100% Privacy Satisfaction</p>
+                        <p class="mt-2 fw-bold">
+                            <?php echo $this->lang->line('Privacy_Satisfaction') ?: "100% Privacy Satisfaction"; ?>
+                        </p>
 
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 text-center">
@@ -103,7 +108,9 @@
                             style="background-color:#0A4E93; width:100px; height:100px; margin: 0 auto;">
                             <i class="bi bi-award-fill" style="font-size: 40px; color: white;"></i>
                         </div>
-                        <p class="mt-2 fw-bold">90 % Gaurantee Result</p>
+                        <p class="mt-2 fw-bold">
+                            <?php echo $this->lang->line('Guarantee_Result') ?: "90% Guarantee Result"; ?>
+                        </p>
 
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 text-center">
@@ -112,7 +119,10 @@
                             style="background-color:#83B7EB; width:100px; height:100px; margin: 0 auto;">
                             <i class="bi bi-briefcase-fill" style="font-size: 40px; color: white;"></i>
                         </div>
-                        <p class="mt-2 fw-bold">20+ yrs of Experience </p>
+                        <p class="mt-2 fw-bold">
+                            <?php echo $this->lang->line('Years_Experience') ?: "20+ yrs of Experience"; ?>
+                        </p>
+
 
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 text-center">
@@ -121,7 +131,9 @@
                             style="background-color:#000000; width:100px; height:100px; margin: 0 auto;">
                             <i class="bi bi-translate" style="font-size: 40px; color: white;"></i>
                         </div>
-                        <p class="mt-2 fw-bold">Language Support</p>
+                        <p class="mt-2 fw-bold">
+                            <?php echo $this->lang->line('Language_Support') ?: "Language Support"; ?>
+                        </p>
 
                     </div>
                 </div>
@@ -131,21 +143,26 @@
         <!-- Review section -->
         <section>
             <div class="container my-5">
-                <h3 class="mb-4  text-center">User Services</h3>
+                <h3 class="mb-4 text-center">
+                    <?php echo $this->lang->line('User_Services') ?: "User Services"; ?>
+                </h3>
                 <div class="owl-carousel owl1 owl-theme">
                     <div class="item">
                         <div class="card shadow " style=" border: 1px solid var(--red);">
                             <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top"
                                 alt="Finance Image">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold">Finance</h5>
+                                <h5 class="card-title fw-bold">
+                                    <?php echo $this->lang->line('Finance_Title') ?: "Finance"; ?>
+                                </h5>
                                 <p class="card-text">
-                                    Solving money problems doesn’t happen overnight. Stay consistent and patient with
-                                    your efforts.
+                                    <?php echo $this->lang->line('Finance_Description') ?: "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts."; ?>
                                 </p>
                                 <center>
-                                    <a href="<?php echo base_url("ServiceDetails") ?>" class="btn fw-bold " style="background-color: var(--yellow);">Check
-                                        Now</a>
+                                    <a href="<?php echo base_url("ServiceDetails") ?>" class="btn fw-bold"
+                                        style="background-color: var(--yellow);">
+                                        <?php echo $this->lang->line('Finance_Check_Now') ?: "Check Now"; ?>
+                                    </a>
                                 </center>
                             </div>
                         </div>
@@ -155,14 +172,16 @@
                             <img src="<?php echo base_url('assets/images/question.png'); ?>" class="card-img-top"
                                 alt="Finance Image">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold">Ask a Question?</h5>
+                                <h5 class="card-title fw-bold">
+                                    <?php echo $this->lang->line('Ask_Question_Title') ?: "Ask a Question?"; ?>
+                                </h5>
                                 <p class="card-text">
-                                    Solving money problems doesn’t happen overnight. Stay consistent and patient with
-                                    your efforts.
+                                    <?php echo $this->lang->line('Ask_Question_Description') ?: "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts."; ?>
                                 </p>
                                 <center>
-                                    <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check
-                                        Out</a>
+                                    <a href="#" class="btn fw-bold" style="background-color: var(--yellow);">
+                                        <?php echo $this->lang->line('Ask_Question_Check_Out') ?: "Check Out"; ?>
+                                    </a>
                                 </center>
                             </div>
                         </div>
@@ -172,15 +191,18 @@
                             <img src="<?php echo base_url('assets/images/carrerjob.png'); ?>" class="card-img-top"
                                 alt="Finance Image">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold">Career & Job</h5>
+                                <h5 class="card-title fw-bold">
+                                    <?php echo $this->lang->line('Career_Job_Title') ?: "Career & Job"; ?>
+                                </h5>
                                 <p class="card-text">
-                                    Solving money problems doesn’t happen overnight. Stay consistent and patient with
-                                    your efforts.
+                                    <?php echo $this->lang->line('Career_Job_Description') ?: "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts."; ?>
                                 </p>
                                 <center>
-                                    <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check
-                                        Out</a>
+                                    <a href="#" class="btn fw-bold" style="background-color: var(--yellow);">
+                                        <?php echo $this->lang->line('Career_Job_Check_Out') ?: "Check Out"; ?>
+                                    </a>
                                 </center>
+
                             </div>
                         </div>
                     </div>
@@ -189,16 +211,19 @@
                             <img src="<?php echo base_url('assets/images/counselling.png'); ?>" class="card-img-top"
                                 alt="Finance Image">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold">Counselling</h5>
+                                <h5 class="card-title fw-bold">
+                                    <?php echo $this->lang->line('Counselling_Title') ?: "Counselling"; ?>
+                                </h5>
                                 <p class="card-text">
-                                    Solving money problems doesn’t happen overnight. Stay consistent and patient with
-                                    your efforts.
+                                    <?php echo $this->lang->line('Counselling_Description') ?: "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts."; ?>
                                 </p>
                                 <center>
-                                    <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check
-                                        Out</a>
+                                    <a href="#" class="btn fw-bold" style="background-color: var(--yellow);">
+                                        <?php echo $this->lang->line('Counselling_Check_Out') ?: "Check Out"; ?>
+                                    </a>
                                 </center>
                             </div>
+
                         </div>
                     </div>
                     <div class="item">
@@ -206,21 +231,28 @@
                             <img src="<?php echo base_url('assets/images/yearbook.png'); ?>" class="card-img-top"
                                 alt="Finance Image">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold">Year Book</h5>
+                                <h5 class="card-title fw-bold">
+                                    <?php echo $this->lang->line('Year_Book_Title') ?: "Year Book"; ?>
+                                </h5>
                                 <p class="card-text">
-                                    Solving money problems doesn’t happen overnight. Stay consistent and patient with
-                                    your efforts.
+                                    <?php echo $this->lang->line('Year_Book_Description') ?: "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts."; ?>
                                 </p>
                                 <center>
-                                    <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check
-                                        Out</a>
+                                    <a href="#" class="btn fw-bold" style="background-color: var(--yellow);">
+                                        <?php echo $this->lang->line('Year_Book_Check_Out') ?: "Check Out"; ?>
+                                    </a>
                                 </center>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+      
+
+
 
         <!-- Code for carousel  -->
         <script>

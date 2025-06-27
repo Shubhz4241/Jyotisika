@@ -69,7 +69,6 @@
         width: 350px;
         border-radius: 10px;
         padding: 15px;
-        border: 2px solid #333;
         /* Light black border */
         box-shadow: 0px 4px 10px rgba(252, 251, 251, 0.1);
         z-index: 1001;
@@ -83,10 +82,7 @@
         right: 20px;
         width: 15px;
         height: 15px;
-        background: #fff;
         transform: rotate(45deg);
-        border-left: 2px solid #333;
-        border-top: 2px solid #333;
     }
 
     /* Header */
@@ -98,7 +94,7 @@
 
     .title {
         font-size: 18px;
-        font-weight: bold;
+      
     }
 
     .close-btn {
@@ -155,7 +151,7 @@
     .vertical-line {
         width: 3px;
         height: 35px;
-        background: black;
+        background: gray;
         margin-right: 10px;
     }
 
