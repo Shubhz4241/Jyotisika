@@ -116,10 +116,10 @@
                             });
                     }
 
-                    function func() {
+                   function func() {
+    window.location.href = "<?php echo base_url("/wallet") ?>";
+}
 
-                        console.log("hello world");
-                    }
                 </script>
 
 

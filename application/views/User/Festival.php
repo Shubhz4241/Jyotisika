@@ -37,7 +37,7 @@
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
-    
+
     <div class="container">
         <div class="row">
             <h3 class="text-center fw-bold" style="color: var(--red);">
@@ -83,71 +83,104 @@
         </div> -->
 
         <div class="row d-flex justify-content-center mt-3">
-            <div class="card p-2 " style="width:fit-content">
+            <div>
                 <p class="card-text fs-5">
                     <span style="color: var(--red);">
-                        <?php echo $this->lang->line('Todays_Festival') ?: "Today's Festival :"; ?>
+                        Today's Festival
                     </span>
-                    <?php echo $this->lang->line('No_Festival_Today') ?: "There is no festival Today."; ?>
                 </p>
 
+                <?php if (!empty($today_festivals_response)): ?>
+                    <div class="row my-4 d-flex justify-content-center" id="festivalCards">
+                        <?php foreach ($today_festivals_response as $card): ?>
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center festival-card">
+                                <div class="card p-2" style="width: 16rem;">
+                                    <img src="<?php echo base_url($card['festivals_image']); ?>" class="card-img-top"
+                                        alt="Festival Image" style="height: 250px; width: 100%; object-fit: cover;">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center"><?php echo $card['festivals_title']; ?></h5>
+                                        <center>
+                                            <a href="<?php echo base_url('FestivalReadmore/' . $card['festivals_id']); ?>"
+                                                class="btn mx-auto btn-sm mt-2" style="background-color: var(--yellow);">
+                                                Read More
+                                            </a>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <p class="card-text fs-5">
+                        <?php echo $this->lang->line('No_Festival_Today') ?: "There is no festival Today."; ?>
+                    </p>
+                <?php endif; ?>
             </div>
-
         </div>
-        <?php if(!empty($festivals_data)): ?>
-        <div class="row my-4 d-flex justify-content-center" id="festivalCards">
-            <?php
-            $cards = [
-                [
-                    'title' => 'Merry Christmas',
-                    'image' => 'assets/images/Festival/merryChristmas.png',
-                    'link' => 'FestivalReadmore',
-                    'state' => 'Maharashtra',
-                    'month' => 'December',
-                    'year' => '2025'
-                ],
-                [
-                    'title' => 'Chhath Pooja',
-                    'image' => 'assets/images/Festival/chhathPooja.png',
-                    'link' => '#',
-                    'state' => 'Bihar',
-                    'month' => 'October',
-                    'year' => '2025'
-                ],
-                [
-                    'title' => 'Govardhan Pooja',
-                    'image' => 'assets/images/Festival/govardhanPooja.png',
-                    'link' => '#',
-                    'state' => 'Uttar Pradesh',
-                    'month' => 'November',
-                    'year' => '2025'
-                ],
-            ];
 
-            foreach ($festivals_data as $card) {
-                ?>
-                <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center festival-card" data-state="<?php echo $card['state']; ?>" data-month="<?php echo $card['month']; ?>" data-year="<?php echo $card['year']; ?>"> -->
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center festival-card">
-                    <div class="card p-2" style="width: 16rem;">
-                        <img src="<?php echo $card["festivals_image"] ?>" class="card-img-top" alt="image"
-                            style="height: 250px; width: 100%; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title text-center"><?php echo $card['festivals_title']; ?></h5>
-                            <center>
-                                <a href="<?php echo base_url("FestivalReadmore/".$card["festivals_id"]); ?>"
-                                    class="btn mx-auto btn-sm mt-2" style="background-color: var(--yellow);">
-                                    Read More
-                                </a>
-                            </center>
+        <!-- <?php print_r($festivals_data) ?> -->
+        <?php if (!empty($festivals_data)): ?>
+            <div class="row my-4 d-flex justify-content-center" id="festivalCards">
+                <p class="card-text fs-5">
+
+
+                    <span style="color: var(--red);">
+                       Upcoming Hindu Festivals
+                    </span>
+
+                </p>
+                <?php
+                $cards = [
+                    [
+                        'title' => 'Merry Christmas',
+                        'image' => 'assets/images/Festival/merryChristmas.png',
+                        'link' => 'FestivalReadmore',
+                        'state' => 'Maharashtra',
+                        'month' => 'December',
+                        'year' => '2025'
+                    ],
+                    [
+                        'title' => 'Chhath Pooja',
+                        'image' => 'assets/images/Festival/chhathPooja.png',
+                        'link' => '#',
+                        'state' => 'Bihar',
+                        'month' => 'October',
+                        'year' => '2025'
+                    ],
+                    [
+                        'title' => 'Govardhan Pooja',
+                        'image' => 'assets/images/Festival/govardhanPooja.png',
+                        'link' => '#',
+                        'state' => 'Uttar Pradesh',
+                        'month' => 'November',
+                        'year' => '2025'
+                    ],
+                ];
+
+                foreach ($festivals_data as $card) {
+                    ?>
+                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center festival-card" data-state="<?php echo $card['state']; ?>" data-month="<?php echo $card['month']; ?>" data-year="<?php echo $card['year']; ?>"> -->
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center festival-card">
+                        <div class="card p-2" style="width: 16rem;">
+                            <img src="<?php echo base_url($card["festivals_image"]) ?>" class="card-img-top" alt="image"
+                                style="height: 250px; width: 100%; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title text-center"><?php echo $card['festivals_title']; ?></h5>
+                                <center>
+                                    <a href="<?php echo base_url("FestivalReadmore/" . $card["festivals_id"]); ?>"
+                                        class="btn mx-auto btn-sm mt-2" style="background-color: var(--yellow);">
+                                        Read More
+                                    </a>
+                                </center>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <?php
-            }
-            ?>
-        </div>
+                    <?php
+                }
+                ?>
+            </div>
         <?php endif ?>
-           
+
     </div>
 
     <script>

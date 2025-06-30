@@ -102,7 +102,7 @@
 
             ?> -->
 
-            <!-- <?php print_r($astrologerdata) ?> -->
+            <?php print_r($astrologerdata) ?>
 
 
             <div class="row my-4" id="cardContainer">
