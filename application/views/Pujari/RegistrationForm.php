@@ -361,6 +361,7 @@
                 checkbox.name = 'specialties';
                 checkbox.value = service.name;
                 checkbox.dataset.serviceId = service.id;
+                checkbox.dataset.price = service.price || 0;
 
                 label.appendChild(checkbox);
                 label.appendChild(document.createTextNode(` ${service.name}`));
@@ -375,7 +376,8 @@
                         .filter(cb => cb.checked)
                         .map(cb => ({
                             id: cb.dataset.serviceId,
-                            name: cb.value
+                            name: cb.value,
+                            price: parseFloat(cb.dataset.price)
                         }));
                     dropdownButton.textContent = selected.length > 0 ? selected.map(s => s.name).join(', ') : 'Select Specialties';
                     document.getElementById('specialtiesHidden').value = JSON.stringify(selected);
@@ -434,7 +436,8 @@
                 .filter(cb => cb.checked)
                 .map(cb => ({
                     id: cb.dataset.serviceId,
-                    name: cb.value
+                    name: cb.value,
+                    price: parseFloat(cb.dataset.price) 
                 }));
             document.getElementById('specialtiesHidden').value = JSON.stringify(selectedSpecialties);
 

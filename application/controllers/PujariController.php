@@ -300,6 +300,8 @@ DO NOT SHARE ANYBODY NewAstro
             $pujari_data['certificates'] = implode(',', $certificates['file_names']);
         }
 
+        $this->db->trans_start();
+
         $pujari_insert = $this->PujariModel->registerPujari($pujari_data);
         if (!$pujari_insert) {
             $this->db->trans_rollback();
@@ -312,12 +314,13 @@ DO NOT SHARE ANYBODY NewAstro
             foreach ($specialtiesArray as $specialty) {
                 $service_data = [
                     'pujari_id' => $pujari_id,
+                    'service_id' => $specialty['id'],
                     'specialties' => $specialty['name'],
                     'status' => 'Pending',
                     'available_day' => 'Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
                     'start_time' => '9:30 AM',
                     'end_time' => '9:30 PM',
-                    'puja_charges' => $specialty['price']
+                    'puja_charges' => isset($specialty['price']) ? $specialty['price'] : 0
                 ];
                 $service_insert = $this->PujariModel->addPendingService($service_data);
                 if (!$service_insert) {
