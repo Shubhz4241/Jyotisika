@@ -31,49 +31,81 @@
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
+ 
     <main>
         <section class="pooja-info-section py-5">
             <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                <div class="pooja-image-container">
-                    <img src="assets/images/BookPooja/RitualReuniteYourLove.png" 
-                     alt="Pooja Name" 
-                     class="img-fluid rounded shadow-lg">
-                </div>
-                </div>
-                <div class="col-lg-8">
-                <div class="pooja-details bg-light p-4 rounded shadow">
-                    <h2 class="mb-4" style="color:var(--red)">Pooja Name</h2>
-                    <div class="description mb-4">
-                    <h4 class="text-secondary">Description</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="pooja-image-container">
+                            <img src=<?php echo base_url("assets/images/BookPooja/MahaRudrabhishekpooja.png") ?>
+                                alt="Pooja Name" class="img-fluid rounded shadow-lg">
+                        </div>
                     </div>
-                    <div class="procedure">
-                    <h4 class="text-secondary">Procedure</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <div class="col-lg-8">
+                        <div class="pooja-details bg-light p-4 rounded shadow">
+                            <h2 class="mb-4" style="color:var(--red)"><?php echo $puja_data[0]["name"] ?></h2>
+                            <div class="description mb-4">
+                                <h4 class="text-secondary">Description</h4>
+                                <p><?php echo $puja_data[0]["description"] ?></p>
+                            </div>
+
+                            <p><b>
+                                    Price:- 5500.00
+                                </b></p>
+                            <div class="d-flex gap-3 mb-4">
+                                <a href="<?php echo base_url("OnlinePoojaris/") . $puja_data[0]["id"] ?>"
+                                    class="btn rounded-1" style="background-color: green; color:white;">
+                                    Book Online Pooja
+                                </a>
+                                <!-- <a href="<?php echo base_url('offlinepoojaris') ?>" class="btn btn-outline-dark btnHover rounded-1">
+                            Book Offline Pooja
+                        </a> -->
+                            </div>
+
+                            <div class="procedure">
+                                <h4 class="text-secondary">Procedure</h4>
+                                <p>The pooja follows these steps:</p>
+                                <ul>
+                                    <li>
+                                        Initial prayers and sankalpam
+                                    </li>
+                                    <li>
+                                        Main ritual performance
+                                    </li>
+                                    <li>
+                                        Offerings to deities
+                                    </li>
+                                    <li>
+                                        Final aarti and prasad distribution
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="benefits mb-4">
+                                <h4 class="text-secondary">Benefits</h4>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        Bring peace and harmony
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        Remove obstacles
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        Enhance spiritual growth
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        Promote overall well-being
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="benefits mb-4">
-                    <h4 class="text-secondary">Benefits</h4>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                        <i class="bi bi-check-circle-fill text-success me-2"></i>
-                        Benefit 1
-                        </li>
-                        <li class="list-group-item">
-                        <i class="bi bi-check-circle-fill text-success me-2"></i>
-                        Benefit 2
-                        </li>
-                        <li class="list-group-item">
-                        <i class="bi bi-check-circle-fill text-success me-2"></i>
-                        Benefit 3
-                        </li>
-                    </ul>
-                    </div>
-                   
                 </div>
-                </div>
-            </div>
             </div>
         </section>
     </main>

@@ -51,7 +51,7 @@
     // Output JavaScript for redirection
     echo "<script>
         setTimeout(() => {
-            window.location.href = '" . base_url('UserSelection') . "';
+            window.location.href = '" . base_url('home') . "';
         }, " . ($delay * 1100) . ");
     </script>";
     ?>
@@ -63,7 +63,7 @@
     <div class="background-container"></div>
 
     <!-- Logo positioned half inside, half outside the background image -->
-    <img src="<?php echo base_url('assets/images/Astrologer/Logo Jyotisika.gif'); ?>" alt="Logo" class="logo">
+    <img src="<?php echo base_url('assets/images/Astrologer/J User.gif'); ?>" alt="Logo" class="logo">
 
 </body>
 

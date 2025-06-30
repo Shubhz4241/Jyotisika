@@ -48,7 +48,7 @@
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
-  
+
 
     <main>
 
@@ -65,10 +65,12 @@
                                 <div class="col-lg-3 position-relative rounded-start-3"
                                     style="background: linear-gradient(45deg, var(--red), var(--yellow));">
                                     <div class="d-flex flex-column align-items-center justify-content-center h-100 p-3">
-                                       
-                                        <img src= "<?php echo  !empty($showpujari[0]['profile_pic']) ? base_url('uploads/pujari/profile/image/'.$showpujari[0]['profile_pic']) :base_url('assets/images/astrologerimg.png')?>"  alt="image"
-                                            class="rounded-circle border border-3 border-white mb-2"
-                                            style="width: 100px; height: 100px; object-fit: cover;">
+
+                                        <img src="<?php echo !empty($showpujari[0]['profile_pic']) ? base_url('uploads/pujari/profile/image/' . $showpujari[0]['profile_pic']) : base_url('assets/images/astrologerimg.png'); ?>"
+                                            alt="image" class="rounded-circle border border-3 border-white mb-2"
+                                            style="width: 100px; height: 100px; object-fit: cover;"
+                                            onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/astrologerimg.png'); ?>';">
+
                                         <h5 class="text-white fw-bold mb-1 text-center">
                                             <?php print_r($showpujari[0]["pujariname"]) ?>
                                         </h5>
@@ -152,8 +154,7 @@
                                                 </div>
                                                 <?php if (empty($this->session->userdata("user_id"))): ?>
                                                     <button class="btn  w-fit rounded-3 text-dark fw-bold"
-                                                        style="background-color: var(--yellow);"
-                                                        onclick="alert('pls login')">
+                                                        style="background-color: var(--yellow);" onclick="showlogin()">
                                                         Book Pooja
                                                     </button>
                                                 <?php else: ?>
@@ -281,9 +282,9 @@
                                         </p>
                                         <div class="d-flex align-items-center mb-3">
 
-                                            
-                                            <img src="<?php echo !empty($feedback['user_image']) ? base_url($feedback["user_image"]) : base_url('assets/images/astrologerimg.png') ; ?>" alt="User"
-                                                class="rounded-circle me-3"
+
+                                            <img src="<?php echo !empty($feedback['user_image']) ? base_url($feedback["user_image"]) : base_url('assets/images/astrologerimg.png'); ?>"
+                                                alt="User" class="rounded-circle me-3"
                                                 style="width: 60px; height: 60px; object-fit: cover;">
                                             <div>
                                                 <h5 class="card-title fw-bold mb-1"> <?php echo $feedback["user_name"] ?></h5>
@@ -331,7 +332,7 @@
                     event.preventDefault();
 
                     let formdata = new FormData(form);
-                   
+
 
                     fetch("<?php echo base_url('User_Api_Controller/send_request_to_pujari'); ?>", {
                         method: "POST",
@@ -340,21 +341,21 @@
                         .then(response => response.json())
                         .then(data => {
                             if (data["status"] == "success") {
-                               
-                                 Swal.fire({
-                                        title: "success",
-                                        text: "feedback submited successfully",
-                                        icon: "success",
-                                    });
 
-                               
+                                Swal.fire({
+                                    title: "success",
+                                    text: "feedback submited successfully",
+                                    icon: "success",
+                                });
+
+
                             }
                             else if (data["status"] == "warning") {
-                                 Swal.fire({
-                                        title: "warning",
-                                        text: "pujari already booked",
-                                        icon: "warning",
-                                    });
+                                Swal.fire({
+                                    title: "warning",
+                                    text: "pujari already booked",
+                                    icon: "warning",
+                                });
 
                             }
 
@@ -456,6 +457,17 @@
                 $(this).css('background', 'transparent');
             });
         });
+    </script>
+
+    <script>
+        function showlogin() {
+            Swal.fire({
+                title: "Login required",
+                text: "pls login to access this feature",
+                icon: "warning",
+            });
+
+        }
     </script>
 
 </body>

@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         /* Your existing styles remain unchanged */
@@ -122,11 +123,59 @@
         }
 
         #specialtiesDropdown {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            border: 1px solid #ced4da;
+            border-radius: 0.375rem;
+            padding: 0.375rem 0.75rem;
+            background-color: #fff;
             text-align: left;
+            width: 100%;
+            height: calc(1.5em + 0.75rem + 2px);
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
         }
+
+        form#pujariForm label {
+            font-weight: 600;
+        }
+
+        /* Loader styles */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ff9900;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 
@@ -137,26 +186,26 @@
         </div>
         <h4 class="text-center">Apply for Pujari Role</h4>
         <hr>
-        <form id="pujariForm">
+       <form id="pujariForm">
             <div class="row">
                 <div class="col-md-6 form-group">
                     <label>Name</label>
-                    <input type="text" class="form-control" id="name" required placeholder="Enter your name" pattern="^[a-zA-Z\s]+$" title="Only letters and spaces are allowed.">
+                    <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your name" pattern="^[a-zA-Z\s]+$" title="Only letters and spaces are allowed.">
                     <div class="error" id="nameError"></div>
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Contact</label>
-                    <input type="text" class="form-control" id="contact" maxlength="10" required placeholder="Enter your contact number" pattern="\d{10}" title="Must be a 10-digit number.">
+                    <input type="text" class="form-control" id="contact" name="contact" maxlength="10" required placeholder="Enter your contact number" pattern="\d{10}" title="Must be a 10-digit number.">
                     <div class="error" id="contactError"></div>
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" id="email" required placeholder="Enter your email">
+                    <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
                     <div class="error" id="emailError"></div>
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Gender</label>
-                    <select class="form-control" id="gender" required>
+                    <select class="form-control" id="gender" name="gender" required>
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -165,51 +214,78 @@
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Address</label>
-                    <input type="text" class="form-control" id="address" required minlength="5" placeholder="Enter your Address">
+                    <input type="text" class="form-control" id="address" name="address" required minlength="5" placeholder="Enter your Address">
                     <div class="error" id="addressError"></div>
                 </div>
-                <div class="col-md-6 form-group">
-                    <label>Languages Known</label>
-                    <select class="form-control" id="languages" required>
-                        <option value="">Select languages</option>
-                        <option value="Hindi">Hindi</option>
-                        <option value="Sanskrit">Sanskrit</option>
-                        <option value="English">English</option>
-                    </select>
-                    <div class="error" id="languagesError"></div>
+                <div class="col-md-6 form-group" style="position: relative;">
+                    <label class="form-label">Languages Known</label>
+                    <input type="text" id="selectedLanguages" class="form-control mb-2" placeholder="Select languages" readonly onclick="toggleLanguageDropdown()">
+                    <span class="caret" style="position: absolute; right: 25px; top: 50%; ">▾</span>
+                    <div id="languageDropdown" class="d-flex flex-column border p-3 rounded" style="position: absolute; top: 100%; left: 0; width: 100%; background: #fff; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); max-height: 150px; overflow-y: auto; display: none; z-index: 1000; visibility: hidden;">
+                        <label><input type="checkbox" class="language-option" value="Hindi" onclick="updateSelectedLanguages()"> Hindi</label>
+                        <label><input type="checkbox" class="language-option" value="Sanskrit" onclick="updateSelectedLanguages()"> Sanskrit</label>
+                        <label><input type="checkbox" class="language-option" value="English" onclick="updateSelectedLanguages()"> English</label>
+                        <label><input type="checkbox" class="language-option" value="Marathi" onclick="updateSelectedLanguages()"> Marathi</label>
+                    </div>
+                    <div class="invalid-feedback">Please select at least one language.</div>
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Specialties</label>
                     <div class="dropdown">
-                        <button class="btn btn-outline-secondary dropdown-toggle form-control" type="button" id="specialtiesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            Select Specialties
+                        <button class="btn form-control d-flex justify-content-between align-items-center" type="button" id="specialtiesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span>Select Specialties</span>
+                            <span class="caret">▾</span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="specialtiesDropdown">
-                            <li><label class="dropdown-item"><input type="checkbox" name="specialties" value="Vedic Astrology"> Vedic Astrology</label></li>
-                            <li><label class="dropdown-item"><input type="checkbox" name="specialties" value="Numerology"> Numerology</label></li>
-                            <li><label class="dropdown-item"><input type="checkbox" name="specialties" value="Palmistry"> Palmistry</label></li>
-                            <li><label class="dropdown-item"><input type="checkbox" name="specialties" value="Tarot Reading"> Tarot Reading</label></li>
-                            <li><label class="dropdown-item"><input type="checkbox" name="specialties" value="Vastu Shastra"> Vastu Shastra</label></li>
+                            <!-- Specialties will be populated dynamically via JavaScript -->
                         </ul>
-                        <input type="hidden" id="specialtiesHidden" name="specialtiesHidden" required>
+                        <input type="hidden" id="specialtiesHidden" name="specialties" required>
                     </div>
                     <div class="error" id="specialtiesError"></div>
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Aadhaar Card</label>
-                    <input type="file" class="form-control" id="aadhaarCard" accept=".pdf,.jpg,.png" required>
+                    <input type="file" class="form-control" id="aadhaarCard" name="aadharcard" accept=".pdf,.jpg,.png" required>
                     <div class="error" id="aadhaarCardError"></div>
                 </div>
                 <div class="col-md-6 form-group">
+                    <label>Profile Image</label>
+                    <input type="file" class="form-control" id="profileImage" name="profileImage" accept=".jpg,.png" required>
+                    <div class="error" id="profileImageError"></div>
+                </div>
+                <div class="col-md-6 form-group">
                     <label>Experience (in years)</label>
-                    <input type="number" class="form-control" id="experience" required min="0" max="50" placeholder="Enter experience in years">
+                    <input type="number" class="form-control" id="experience" name="experience" required min="0" max="50" placeholder="Enter experience in years">
                     <div class="error" id="experienceError"></div>
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Certificates (optional)</label>
-                    <input type="file" class="form-control" id="certificates" accept=".pdf,.jpg,.png" multiple>
+                    <input type="file" class="form-control" id="certificates" name="certificates[]" accept=".pdf,.jpg,.png" multiple>
                     <div id="fileList" class="mt-2"></div>
                     <div class="error" id="certificatesError"></div>
+                </div>
+                <label for="showTerms" class="text-primary fw-semibold" style="cursor: pointer;">
+                    <input type="checkbox" class="d-none" id="showTerms" onchange="toggleTerms()">
+                    <i class="bi bi-eye me-1"></i> See Terms and Conditions
+                </label>
+                <div id="terms" class="border rounded p-4 mt-3 bg-light shadow-sm" style="display: none; transition: all 0.3s ease;">
+                    <h5 class="text-center text-dark mb-3"><i class="bi bi-file-earmark-text me-2"></i>Terms and Conditions</h5>
+                    <ul class="list-unstyled ps-2">
+                        <li class="mb-2">
+                            <strong>1. Minimum Working Hours:</strong> You must work for at least <b>8 hours/day</b>.
+                        </li>
+                        <li class="mb-2">
+                            <strong>2. Confidentiality:</strong> Sharing personal contact details is <span class="text-danger fw-bold">strictly prohibited</span>.
+                            Violation incurs a <b>₹51,000 fine</b>.
+                        </li>
+                        <li class="mb-2">
+                            <strong>3. Exclusivity:</strong> You are not allowed to work with other astrology platforms while registered here.
+                        </li>
+                    </ul>
+                    <p class="text-danger text-center mt-4 mb-0 fw-bold">
+                        <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                        By registering, you agree to these terms and conditions.
+                    </p>
                 </div>
             </div>
             <button type="submit" class="btn btn-custom mt-3">Submit</button>
@@ -218,177 +294,225 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        function showLoader() {
+            const loader = document.createElement('div');
+            loader.className = 'loader-overlay';
+            loader.innerHTML = `
+                <div class="loader-container">
+                    <div class="spinner"></div>
+                    <p>Processing request...</p>
+                </div>
+            `;
+            document.body.appendChild(loader);
+            return loader;
+        }
+
+        function hideLoader(loader) {
+            if (loader && loader.parentNode) {
+                document.body.removeChild(loader);
+            }
+        }
+
+        function toggleTerms() {
+            const termsDiv = document.getElementById("terms");
+            termsDiv.style.display = document.getElementById("showTerms").checked ? "block" : "none";
+        }
+
+        async function fetchPujariServices() {
+            try {
+                const response = await fetch('<?php echo base_url('PujariController/getPujariServices'); ?>', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    console.log('Services fetched successfully:', data.services);
+                    populateDropdown(data.services);
+                } else {
+                    console.error('Error from API:', data.message);
+                    document.getElementById('specialtiesError').textContent = data.message || 'Failed to load services.';
+                }
+            } catch (error) {
+                console.error('Fetch error:', error.message);
+                document.getElementById('specialtiesError').textContent = 'An error occurred while fetching services.';
+            }
+        }
+
+        function populateDropdown(services) {
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            const dropdownButton = document.getElementById('specialtiesDropdown');
+            dropdownMenu.innerHTML = '';
+
+            services.forEach(service => {
+                const li = document.createElement('li');
+                const label = document.createElement('label');
+                label.className = 'dropdown-item';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'specialties';
+                checkbox.value = service.name;
+                checkbox.dataset.serviceId = service.id;
+                checkbox.dataset.price = service.price || 0;
+
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(` ${service.name}`));
+                li.appendChild(label);
+                dropdownMenu.appendChild(li);
+            });
+
+            const checkboxes = document.querySelectorAll('input[name="specialties"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const selected = Array.from(checkboxes)
+                        .filter(cb => cb.checked)
+                        .map(cb => ({
+                            id: cb.dataset.serviceId,
+                            name: cb.value,
+                            price: parseFloat(cb.dataset.price)
+                        }));
+                    dropdownButton.textContent = selected.length > 0 ? selected.map(s => s.name).join(', ') : 'Select Specialties';
+                    document.getElementById('specialtiesHidden').value = JSON.stringify(selected);
+                });
+            });
+        }
+
+        function toggleLanguageDropdown() {
+            var dropdown = document.getElementById("languageDropdown");
+            if (dropdown.style.visibility === "hidden") {
+                dropdown.style.visibility = "visible";
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.visibility = "hidden";
+                dropdown.style.display = "none";
+            }
+        }
+
+        document.addEventListener("click", function(event) {
+            var dropdown = document.getElementById("languageDropdown");
+            var input = document.getElementById("selectedLanguages");
+            if (!input.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.visibility = "hidden";
+                dropdown.style.display = "none";
+            }
+        });
+
+        function updateSelectedLanguages() {
+            var checkboxes = document.querySelectorAll(".language-option");
+            var selectedLanguages = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+
+            document.getElementById("selectedLanguages").value = selectedLanguages.join(", ") || "Select languages";
+
+            var hiddenLanguagesInput = document.getElementById("languagesHidden");
+            if (!hiddenLanguagesInput) {
+                hiddenLanguagesInput = document.createElement("input");
+                hiddenLanguagesInput.type = "hidden";
+                hiddenLanguagesInput.id = "languagesHidden";
+                hiddenLanguagesInput.name = "languages";
+                document.getElementById("pujariForm").appendChild(hiddenLanguagesInput);
+            }
+            hiddenLanguagesInput.value = JSON.stringify(selectedLanguages);
+        }
+
         document.getElementById("contact").addEventListener("input", function(event) {
             this.value = this.value.replace(/\D/g, '');
         });
-    </script>
-    <script>
-        // Form validation and submission
-        document.getElementById("pujariForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent actual form submission
 
-            // Reset all error messages
-            document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+        document.getElementById("pujariForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
 
-            let isValid = true;
+            const dropdownButton = document.getElementById('specialtiesDropdown');
+            const selectedSpecialties = Array.from(document.querySelectorAll('input[name="specialties"]'))
+                .filter(cb => cb.checked)
+                .map(cb => ({
+                    id: cb.dataset.serviceId,
+                    name: cb.value,
+                    price: parseFloat(cb.dataset.price) 
+                }));
+            document.getElementById('specialtiesHidden').value = JSON.stringify(selectedSpecialties);
 
-            // Name validation
-            const name = document.getElementById("name").value.trim();
-            if (!name) {
-                document.getElementById("nameError").textContent = "Name is required.";
-                document.getElementById("nameError").style.display = "block";
-                isValid = false;
-            } else if (!/^[a-zA-Z\s]+$/.test(name)) {
-                document.getElementById("nameError").textContent = "Only letters and spaces are allowed.";
-                document.getElementById("nameError").style.display = "block";
-                isValid = false;
-            } else if (name.length < 2) {
-                document.getElementById("nameError").textContent = "Name must be at least 2 characters long.";
-                document.getElementById("nameError").style.display = "block";
-                isValid = false;
-            }
+            const languageCheckboxes = document.querySelectorAll(".language-option");
+            const selectedLanguages = Array.from(languageCheckboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            const hiddenLanguagesInput = document.getElementById("languagesHidden");
+            hiddenLanguagesInput.value = JSON.stringify(selectedLanguages);
 
-            // Contact validation
-            const contact = document.getElementById("contact").value.trim();
-            if (!contact) {
-                document.getElementById("contactError").textContent = "Contact number is required.";
-                document.getElementById("contactError").style.display = "block";
-                isValid = false;
-            } else if (!/^\d{10}$/.test(contact)) {
-                document.getElementById("contactError").textContent = "Must be a 10-digit number.";
-                document.getElementById("contactError").style.display = "block";
-                isValid = false;
-            }
+            const formData = new FormData(this);
+            const loader = showLoader();
 
-            // Email validation
-            const email = document.getElementById("email").value.trim();
-            if (!email) {
-                document.getElementById("emailError").textContent = "Email is required.";
-                document.getElementById("emailError").style.display = "block";
-                isValid = false;
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                document.getElementById("emailError").textContent = "Please enter a valid email address.";
-                document.getElementById("emailError").style.display = "block";
-                isValid = false;
-            }
-
-            // Gender validation
-            const gender = document.getElementById("gender").value;
-            if (!gender) {
-                document.getElementById("genderError").textContent = "Please select a gender.";
-                document.getElementById("genderError").style.display = "block";
-                isValid = false;
-            }
-
-            // Address validation
-            const address = document.getElementById("address").value.trim();
-            if (!address) {
-                document.getElementById("addressError").textContent = "Address is required.";
-                document.getElementById("addressError").style.display = "block";
-                isValid = false;
-            } else if (address.length < 5) {
-                document.getElementById("addressError").textContent = "Address must be at least 5 characters long.";
-                document.getElementById("addressError").style.display = "block";
-                isValid = false;
-            }
-
-            // Languages validation
-            const languages = document.getElementById("languages").value;
-            if (!languages) {
-                document.getElementById("languagesError").textContent = "Please select a language.";
-                document.getElementById("languagesError").style.display = "block";
-                isValid = false;
-            }
-
-            // Specialties validation
-            const specialtiesCheckboxes = document.querySelectorAll('input[name="specialties"]:checked');
-            const specialties = Array.from(specialtiesCheckboxes).map(cb => cb.value);
-            if (specialties.length === 0) {
-                document.getElementById("specialtiesError").textContent = "Please select at least one specialty.";
-                document.getElementById("specialtiesError").style.display = "block";
-                isValid = false;
-            } else {
-                // Store specialties as JSON key-value pair
-                const specialtiesObj = {};
-                specialties.forEach((specialty, index) => {
-                    specialtiesObj[`specialty${index + 1}`] = specialty;
+            try {
+                let response = await fetch('<?php echo base_url('PujariController/registerPujari'); ?>', {
+                    method: "POST",
+                    body: formData
                 });
-                document.getElementById("specialtiesHidden").value = JSON.stringify(specialtiesObj);
-            }
 
-            // Aadhaar Card validation
-            const aadhaarCard = document.getElementById("aadhaarCard").files[0];
-            if (!aadhaarCard) {
-                document.getElementById("aadhaarCardError").textContent = "Aadhaar card is required.";
-                document.getElementById("aadhaarCardError").style.display = "block";
-                isValid = false;
-            } else {
-                const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
-                if (!validTypes.includes(aadhaarCard.type)) {
-                    document.getElementById("aadhaarCardError").textContent = "Only PDF, JPG, or PNG files are allowed.";
-                    document.getElementById("aadhaarCardError").style.display = "block";
-                    isValid = false;
-                } else if (aadhaarCard.size > 5 * 1024 * 1024) { // 5MB limit
-                    document.getElementById("aadhaarCardError").textContent = "File size must be less than 5MB.";
-                    document.getElementById("aadhaarCardError").style.display = "block";
-                    isValid = false;
+                let result = await response.json();
+                hideLoader(loader);
+
+                if (result.status) {
+                    Swal.fire({
+                        title: "Application Submitted!",
+                        html: `
+                            <div style="text-align: center;">
+                                <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif'; ?>" alt="Logo" style="width: 100px; height: 100px;"><br>
+                                <p>Thank you for your submission! Our team is reviewing your application.</p>
+                                <small>Note: You will receive an update within 48 hours. If you have any queries, feel free to contact our support team.</small>
+                            </div>
+                        `,
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 4000
+                    });
+
+                    setTimeout(() => {
+                        window.location.href = '<?php echo base_url('MobileNumberAndOTPForm'); ?>';
+                    }, 4000);
+                } else if (result.message === "Mobile number already registered") {
+                    Swal.fire({
+                        title: "Registration Failed!",
+                        text: "This mobile number is already registered. Please use another number.",
+                        icon: "warning",
+                        confirmButtonText: "OK"
+                    });
+                } else if (result.message === "Email already registered") {
+                    Swal.fire({
+                        title: "Registration Failed!",
+                        text: "This email is already registered. Please use another email address.",
+                        icon: "warning",
+                        confirmButtonText: "OK"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Error!",
+                        text: result.message,
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    });
                 }
-            }
-
-            // Experience validation
-            const experience = document.getElementById("experience").value;
-            if (experience === "") {
-                document.getElementById("experienceError").textContent = "Experience is required.";
-                document.getElementById("experienceError").style.display = "block";
-                isValid = false;
-            } else if (experience < 0 || experience > 50) {
-                document.getElementById("experienceError").textContent = "Experience must be between 0 and 50 years.";
-                document.getElementById("experienceError").style.display = "block";
-                isValid = false;
-            }
-
-            // Certificates validation (optional)
-            const certificates = document.getElementById("certificates").files;
-            if (certificates.length > 0) {
-                const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
-                for (let file of certificates) {
-                    if (!validTypes.includes(file.type)) {
-                        document.getElementById("certificatesError").textContent = "Only PDF, JPG, or PNG files are allowed.";
-                        document.getElementById("certificatesError").style.display = "block";
-                        isValid = false;
-                        break;
-                    }
-                    if (file.size > 5 * 1024 * 1024) { // 5MB limit per file
-                        document.getElementById("certificatesError").textContent = "Each file must be less than 5MB.";
-                        document.getElementById("certificatesError").style.display = "block";
-                        isValid = false;
-                        break;
-                    }
-                }
-            }
-
-            // If all validations pass, proceed with form submission
-            if (isValid) {
-                const contact = document.getElementById("contact").value;
-                window.location.href = "<?php echo base_url('MobileNumberAndOTPForm'); ?>?contact=" + encodeURIComponent(contact);
+            } catch (error) {
+                hideLoader(loader);
+                console.error("Fetch error:", error);
+                Swal.fire({
+                    title: "Error!",
+                    text: "Error submitting form. Please try again.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
             }
         });
 
-        // Specialties dropdown handling
-        const checkboxes = document.querySelectorAll('input[name="specialties"]');
-        const dropdownButton = document.getElementById('specialtiesDropdown');
-
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const selected = Array.from(checkboxes)
-                    .filter(cb => cb.checked)
-                    .map(cb => cb.value);
-                dropdownButton.textContent = selected.length > 0 ? selected.join(', ') : 'Select Specialties';
-            });
-        });
-    </script>
-    <script>
-        let selectedFiles = []; // Store selected files
+        let selectedFiles = [];
 
         document.getElementById("certificates").addEventListener("change", function(event) {
             let newFiles = Array.from(event.target.files);
@@ -429,7 +553,15 @@
         function removeFile(index) {
             selectedFiles.splice(index, 1);
             displayFiles();
+            const certificatesInput = document.getElementById("certificates");
+            const dataTransfer = new DataTransfer();
+            selectedFiles.forEach(file => dataTransfer.items.add(file));
+            certificatesInput.files = dataTransfer.files;
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchPujariServices();
+        });
     </script>
 </body>
 

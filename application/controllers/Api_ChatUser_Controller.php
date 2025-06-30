@@ -82,6 +82,10 @@ class Api_ChatUser_Controller extends CI_Controller
                         'firebase_chat_id' => $firebase_chat_id
                     ]);
                 } else {
+
+                       $querydata =  $this->UserChatModel->endastrologerdata($astrologer_id);
+
+
                     echo json_encode([
                         "astrologeractive" => "astrologer busy with other user have pls wait some time"
 
@@ -151,6 +155,11 @@ class Api_ChatUser_Controller extends CI_Controller
 
         echo json_encode(['status' => 'success', 'duration' => $duration, "amount" => $amount]);
     }
+
+
+   
+
+  
 
 
 

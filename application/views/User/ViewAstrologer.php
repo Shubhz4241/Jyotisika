@@ -46,6 +46,13 @@
     <?php $is_following = $followstatus ?>
     <!-- <?php print_r($astrologerdata) ?> -->
 
+    <?php if (isset($astrologerdata) && !empty($astrologerdata)) {
+
+        $astrologersession = $astrologerdata['chatvalue'];
+        // echo $astrologersession;
+    } ?>
+
+
     <!-- <?php print_r($rating); ?> -->
     <?php $avgrating = (int) $rating[0]["average_rating"] ?>
 
@@ -109,10 +116,10 @@
                             });
                     }
 
-                    function func() {
+                   function func() {
+    window.location.href = "<?php echo base_url("/wallet") ?>";
+}
 
-                        console.log("hello world");
-                    }
                 </script>
 
 
@@ -125,9 +132,9 @@
                                     style="background: linear-gradient(45deg, var(--red), var(--yellow));">
                                     <div class="d-flex align-items-center justify-content-start h-100  p-3">
 
-                                     
-                                        <img src="<?php echo  !empty($astrologerdata[0]['profile_pic']) ? base_url($astrologerdata[0]['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
-                                            class="rounded-circle border border-3 border-white me-3"
+
+                                        <img src="<?php echo !empty($astrologerdata[0]['profile_pic']) ? base_url($astrologerdata[0]['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                            alt="image" class="rounded-circle border border-3 border-white me-3"
                                             style="width: 120px; height: 120px; object-fit: cover;">
                                         <div>
                                             <h5 class="text-white fw-bold mb-1">
@@ -212,48 +219,49 @@
 
                                             <!-- Action Buttons Section -->
 
-                                           
 
-                                          
-                                            <div class="col-md-4 d-flex flex-column justify-content-between mt-3 mt-md-0">
+
+
+                                            <div
+                                                class="col-md-4 d-flex flex-column justify-content-between mt-3 mt-md-0">
                                                 <div class="text-center mb-3">
                                                     <h5 class="fw-bold text-danger mb-1">Consultation Fee</h5>
-                                                    
+
                                                     <h4 class="fw-bold">
                                                         ₹<?php echo isset($astrologerdata[0]["price_per_minute"]) && !empty($astrologerdata[0]["price_per_minute"]) ? $astrologerdata[0]["price_per_minute"] : "N/A" ?>/min
                                                     </h4>
 
-                                                  
 
-                                                       <?php if ($astrologerdata['chatstatus'] !== 'inactive'): ?>
-                                                    <div class="text-center mb-3">
-                                                      
 
-                                                        <?php
-                                                        date_default_timezone_set('Asia/Kolkata'); // Set your desired timezone
-                                                    
-                                                        if (!empty($astrologerdata['chat_expire_on'])) {
-                                                            $now = new DateTime(); // Current time
-                                                            $expire = new DateTime($astrologerdata['chat_expire_on']);
+                                                    <?php if ($astrologerdata['chatstatus'] !== 'inactive'): ?>
+                                                        <div class="text-center mb-3">
 
-                                                            if ($expire > $now) {
-                                                                $interval = $now->diff($expire);
-                                                                $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
-                                                                $seconds = $interval->s;
 
-                                                                echo  '<p class="fw-bold text-danger">' . "wait for ". $waitTimeMinutes . ' min ' . $seconds . ' sec</p>';
+                                                            <?php
+                                                            date_default_timezone_set('Asia/Kolkata'); // Set your desired timezone
+                                                        
+                                                            if (!empty($astrologerdata['chat_expire_on'])) {
+                                                                $now = new DateTime(); // Current time
+                                                                $expire = new DateTime($astrologerdata['chat_expire_on']);
+
+                                                                if ($expire > $now) {
+                                                                    $interval = $now->diff($expire);
+                                                                    $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+                                                                    $seconds = $interval->s;
+
+                                                                    echo '<p class="fw-bold text-danger">' . "wait for " . $waitTimeMinutes . ' min ' . $seconds . ' sec</p>';
+                                                                } else {
+                                                                    echo '<p class="fw-bold text-danger">Not Available ,  wait some time</p>';
+                                                                }
                                                             } else {
-                                                                echo '<p class="fw-bold text-danger">Not Available ,  wait some time</p>';
+                                                                echo '<p class="fw-bold text-success">Available</p>';
                                                             }
-                                                        } else {
-                                                            echo '<p class="fw-bold text-success">Available</p>';
-                                                        }
-                                                        ?>
-                                                    </div>
-                                                <?php endif; ?>
+                                                            ?>
+                                                        </div>
+                                                    <?php endif; ?>
                                                 </div>
 
-                                             
+
                                                 <div class="d-grid gap-2">
 
                                                     <?php if ($this->session->userdata("user_id")): ?>
@@ -263,7 +271,9 @@
                                                     <?php echo $userinfo_data['amount']; ?>, 
                                                     <?php echo $astrologerdata[0]['price_per_minute']; ?>,  
                                                     '<?php echo base_url('chat/' . $astrologerdata[0]['id']); ?>',
-                                                    '<?php echo addslashes($astrologerdata[0]['name']); ?>')">
+                                                    '<?php echo addslashes($astrologerdata[0]['name']); ?>' ,
+                                                    '<?php echo $astrologersession ?>'
+                                                    )">
                                                             <i class="bi bi-chat-dots-fill me-1"></i> Chat
                                                         </button>
                                                     <?php else: ?>
@@ -351,7 +361,7 @@
 
 
         <script>
-            function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name) {
+            function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name, astrologersession) {
                 if (amount < astrologer_charge * 5) {
                     Swal.fire({
                         icon: "warning",
@@ -366,12 +376,18 @@
                     });
                 } else {
                     if (chatstatus == "active") {
-                        Swal.fire({
-                            icon: "warning",
-                            title: "Astrologer is busy",
 
+                        if (astrologersession == "sessionnotend") {
+                            window.location.href = chatUrl;
+                        }
+                        else {
+                            Swal.fire({
+                                icon: "warning",
+                                title: "Astrologer is busy",
+                            });
 
-                        });
+                        }
+                      
                     }
                     else {
                         window.location.href = chatUrl;
@@ -397,11 +413,11 @@
                                         </p>
                                         <div class="d-flex align-items-center mb-3">
 
-                                        
 
 
-                                            <img src="<?php echo  !empty($userratingfeedback['user_images']) ? base_url($userratingfeedback['user_images']) :base_url('assets/images/astrologerimg.png')?>" alt="User"
-                                                class="rounded-circle me-3"
+
+                                            <img src="<?php echo !empty($userratingfeedback['user_images']) ? base_url($userratingfeedback['user_images']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                alt="User" class="rounded-circle me-3"
                                                 style="width: 60px; height: 60px; object-fit: cover;">
                                             <div>
                                                 <h5 class="card-title fw-bold mb-1">

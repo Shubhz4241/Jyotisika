@@ -31,165 +31,243 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
     <style>
-        /* Apply Inter font to the entire page */
+        /* Apply Inter font globally */
         * {
             font-family: 'Inter', sans-serif !important;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        /* Customize headers and table fonts for better readability */
-        h1,
-        h4 {
-            font-weight: 700;
+        /* General Styling */
+        body {
+            background-color: #f4f7fc;
+            color: #333;
         }
 
-        p,
-        td,
-        th {
-            font-weight: 400;
-            font-size: 1rem;
+        /* Container */
+        .container {
+            max-width: 95%;
+            margin: auto;
+            padding: 1rem;
         }
 
-        /* Enhance table header appearance */
-        .table thead th {
-            font-weight: 600;
-            background-color: #f8f9fa;
+        /* Navigation Pills */
+        .nav-pills {
+            background: #fff;
+            border-radius: 8px;
+            padding: 0.5rem;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        /* Adjust buttons for better aesthetics */
-        .btn {
+        .nav-pills .nav-link {
             font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        /* Mobile Responsiveness Improvements */
-        @media (max-width: 768px) {
-            .main {
-                margin-top: 0 !important;
-            }
-
-            .card-dashboard {
-                margin-bottom: 1rem;
-            }
-
-            .table-responsive {
-                font-size: 0.8rem;
-            }
-
-            .table td,
-            .table th {
-                padding: 0.5rem;
-            }
-
-            .btn-sm {
-                padding: 0.25rem 0.5rem;
-                font-size: 0.75rem;
-            }
-
-            /* Responsive table */
-            .table-responsive-stack tr {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-orient: vertical;
-                -webkit-box-direction: normal;
-                -ms-flex-direction: column;
-                flex-direction: column;
-                margin-bottom: 1rem;
-                border-bottom: 1px solid #eee;
-            }
-
-            .table-responsive-stack td {
-                display: block;
-                text-align: right;
-            }
-
-            .table-responsive-stack td:before {
-                content: attr(data-label);
-                float: left;
-                font-weight: bold;
-            }
-        }
-
-        /* Mobile-friendly See All button */
-        @media (max-width: 768px) {
-            .card-footer .btn {
-                margin-top: 10px;
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .card-footer .btn {
-                max-width: 250px;
-            }
+            color: #555;
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
         }
 
         .nav-pills .nav-link.active {
             background-color: #0c768a;
+            color: #fff;
+            font-weight: 600;
         }
 
-        .nav-pills {
-            justify-content: center;
-            /* Centering nav-pills */
+        /* Table Styling */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            /* Ensures table scrolls horizontally on small screens */
         }
 
-        .nav-link {
-            font-size: 18px;
-            /* font-weight: bold; */
+        .table {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
         }
 
-        .container {
-            max-width: 900px;
-            /* Adjust table width */
+        .table thead {
+            background-color: #0c768a;
+            color: white;
         }
 
-        /* Ensure consistent row height */
-        table tbody tr {
-            height: 80px;
+        .table thead th {
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
+            white-space: nowrap;
         }
 
-        /* Truncated Review Column */
+        .table tbody tr:hover {
+            background-color: #e0f2f5;
+        }
+
+        .table td,
+        .table th {
+            padding: 1rem;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Product Review Section */
         .review-column {
-            position: relative;
-            max-width: 300px;
-            height: 50px;
+            max-width: 250px;
+            white-space: normal;
             overflow: hidden;
             text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            word-wrap: break-word;
             cursor: pointer;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #444;
         }
 
-        /* Tooltip styling */
-        .tooltip-text {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            left: 50%;
-            bottom: 100%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            white-space: normal;
-            width: auto;
-            max-width: 250px;
-            text-align: left;
-            transition: opacity 0.3s ease-in-out;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-            z-index: 10;
+        /* Review Card */
+        .review-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: #fff;
+            border-left: 4px solid #0c768a;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 10px;
         }
 
-        /* Show tooltip on hover */
-        .review-column:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
+        /* User Avatar */
+        .review-card .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #0c768a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* User Info */
+        .review-card .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .review-card .user-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0c768a;
+        }
+
+        .review-card .review-text {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* Star Ratings */
+        .text-warning {
+            color: #ffc107 !important;
+            font-size: 16px;
+        }
+
+        /* Review Date */
+        .review-date {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 100%;
+                padding: 0.5rem;
+            }
+
+            .nav-pills {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .nav-pills .nav-link {
+                width: 100%;
+                text-align: center;
+            }
+
+            .table td,
+            .table th {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .review-column {
+                max-width: 150px;
+            }
+
+            .review-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .review-card .avatar {
+                width: 50px;
+                height: 50px;
+            }
+
+            .review-card .user-info {
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .table td,
+            .table th {
+                padding: 0.5rem;
+                font-size: 0.85rem;
+            }
+
+            .review-column {
+                max-width: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .nav-pills .nav-link {
+                font-size: 14px;
+                padding: 0.5rem;
+            }
+
+            .table td,
+            .table th {
+                font-size: 0.8rem;
+            }
+
+            .review-card {
+                padding: 8px;
+            }
+
+            .review-card .user-name {
+                font-size: 13px;
+            }
+
+            .review-card .review-text {
+                font-size: 12px;
+            }
         }
     </style>
+
 </head>
 
 <body>
@@ -224,43 +302,45 @@
                 <div class="tab-content" id="analysisContent">
                     <!-- Product Analysis Tab -->
                     <div class="tab-pane fade show active" id="product-analysis" role="tabpanel">
-                        <!-- <h3 class="text-center">Product Sales Report</h3> -->
-                        <table class="table table-bordered table-striped">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th style="width: 5%;">Sr. No</th>
-                                    <th style="width: 20%;">Product Name</th>
-                                    <th style="width: 15%;">Total Sales</th>
-                                    <th style="width: 15%;">Revenue</th>
-                                    <th style="width: 15%;">Ratings</th>
-                                    <th style="width: 30%;">Product Review</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $products = [
-                                    ["name" => "Product A", "sales" => 120, "revenue" => 24000, "rating" => 4, "review" => "Great product! Great product! Great product! Great product!Great product!Great product!Great product!Great product!Great product!Great product!"],
-                                    ["name" => "Product B", "sales" => 80, "revenue" => 16000, "rating" => 5, "review" => "Best product! Great product! Great product!Great product!Great product!"],
-                                ];
-                                $sr_no = 1;
-                                foreach ($products as $product) { ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thead-dark">
                                     <tr>
-                                        <td><?php echo $sr_no++; ?></td>
-                                        <td><?php echo $product['name']; ?></td>
-                                        <td><?php echo $product['sales']; ?></td>
-                                        <td><?php echo "₹" . number_format($product['revenue'], 2); ?></td>
-                                        <td>
-                                            <?php for ($i = 0; $i < $product['rating']; $i++) {
-                                                echo '<i class="bi bi-star-fill text-warning"></i> ';
-                                            } ?>
-                                            (<?php echo $product['rating']; ?>)
-                                        </td>
-                                        <td class="review-column" title="<?php echo $product['review']; ?>"><?php echo $product['review']; ?></td>
+                                        <th style="width: 5%; color: white;">Sr. No</th>
+                                        <th style="width: 20%; color: white;">Product Name</th>
+                                        <th style="width: 15%; color: white;">Total Sales</th>
+                                        <th style="width: 15%; color: white;">Revenue</th>
+                                        <th style="width: 15%; color: white;">Ratings</th>
+                                        <th style="width: 30%; color: white;">Product Review</th>
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $products = [
+                                        ["name" => "Product A", "sales" => 120, "revenue" => 24000, "rating" => 4, "review" => "Great product! Highly recommended. Amazing quality and performance. "],
+                                        ["name" => "Product B", "sales" => 80, "revenue" => 16000, "rating" => 5, "review" => "Best product! Excellent service and durability. Great product! Highly recommended. Amazing quality and performance."],
+                                    ];
+                                    $sr_no = 1;
+                                    foreach ($products as $product) { ?>
+                                        <tr>
+                                            <td><?php echo $sr_no++; ?></td>
+                                            <td><?php echo $product['name']; ?></td>
+                                            <td><?php echo $product['sales']; ?></td>
+                                            <td><?php echo "₹" . number_format($product['revenue'], 2); ?></td>
+                                            <td>
+                                                <?php for ($i = 0; $i < $product['rating']; $i++) {
+                                                    echo '<i class="bi bi-star-fill text-warning"></i> ';
+                                                } ?>
+                                                (<?php echo $product['rating']; ?>)
+                                            </td>
+                                            <td class="review-column" title="<?php echo $product['review']; ?>"><?php echo $product['review']; ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
 
                     <!-- Service Analysis Tab -->
                     <div class="tab-pane fade" id="service-analysis" role="tabpanel">
@@ -268,12 +348,12 @@
                         <table class="table table-bordered table-striped">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th style="width: 5%;">Sr. No</th>
-                                    <th style="width: 20%;">Service Name</th>
-                                    <th style="width: 15%;">Total Bookings</th>
-                                    <th style="width: 15%;">Revenue</th>
-                                    <th style="width: 15%;">Ratings</th>
-                                    <th style="width: 30%;">Service Review</th>
+                                    <th style="width: 5%; color: white;">Sr. No</th>
+                                    <th style="width: 20%; color: white;">Service Name</th>
+                                    <th style="width: 15%; color: white;">Total Bookings</th>
+                                    <th style="width: 15%; color: white;">Revenue</th>
+                                    <th style="width: 15%; color: white;">Ratings</th>
+                                    <th style="width: 30%; color: white;">Service Review</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -308,12 +388,12 @@
                         <table class="table table-bordered table-striped">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th style="width: 5%;">Sr. No</th>
-                                    <th style="width: 20%;">Puja Name</th>
-                                    <th style="width: 15%;">Total Bookings</th>
-                                    <th style="width: 15%;">Revenue</th>
-                                    <th style="width: 15%;">Ratings</th>
-                                    <th style="width: 30%;">Puja Review</th>
+                                    <th style="width: 5%; color: white;">Sr. No</th>
+                                    <th style="width: 20%; color: white;">Puja Name</th>
+                                    <th style="width: 15%; color: white;">Total Bookings</th>
+                                    <th style="width: 15%; color: white;">Revenue</th>
+                                    <th style="width: 15%; color: white;">Ratings</th>
+                                    <th style="width: 30%; color: white;">Puja Review</th>
                                 </tr>
                             </thead>
                             <tbody>

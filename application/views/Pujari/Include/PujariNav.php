@@ -307,8 +307,17 @@
             </div>
         </div>
 
+
         <a href="<?php echo base_url() . 'PujariUser/ProfileForm'; ?>">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+            <!-- <img src="<?php echo base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
+                alt="Profile Image"
+                class="profile-img rounded-circle"
+                width="30px"
+                height="30px"> -->
+
+            <img src="<?php echo isset($userDetails->profile_image) && !empty($userDetails->profile_image)
+                            ? base_url() . $userDetails->profile_image
+                            : base_url() . 'assets/images/Pujari/Rectangle 5160 (1).png'; ?>"
                 alt="Profile Image"
                 class="profile-img rounded-circle"
                 width="30px"

@@ -298,14 +298,15 @@
 
                     const totalAmount = document.getElementById('totalamount').innerText.replace('₹', '').trim();
                     const addressId = selectedAddress.value;
+                    const user_id = <?php echo $this->session->userdata("user_id") ?>;
 
 
 
-                    initiatePayment(totalAmount);
+                    initiatePayment(totalAmount , user_id);
                 }
 
 
-                function initiatePayment(amount) {
+                function initiatePayment(amount ,user_id ) {
                     const selectedAddress = document.querySelector('input[name="deliveryAddress"]:checked');
 
                     const addressId = selectedAddress.value;
@@ -313,7 +314,7 @@
                     fetch('<?php echo base_url('User_Api_Controller/save_razorpay_order'); ?>', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ amount: amount })
+                        body: JSON.stringify({ amount: amount , user_id:user_id })
                     })
                         .then(response => response.json())
                         .then(data => {
@@ -339,13 +340,14 @@
                                             amount: amount,
                                             addressid: addressId,
                                             order_id: response.razorpay_order_id,
+                                            user_id:user_id
                                         })
                                     })
                                         .then(res => res.json())
                                         .then(result => {
                                             if (result.status === 'success') {
                                                 if (result.status === 'success') {
-                                        
+
                                                     Swal.fire({
                                                         icon: 'success',
                                                         title: 'Payment Successful!',

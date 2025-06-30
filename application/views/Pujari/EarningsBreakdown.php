@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="<?php echo base_url('assets/images/Pujari/jyotishvitaran.png');?>" type="image/png">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
@@ -69,42 +70,7 @@
                     Earnings Breakdown
                 </a>
             </h5>
-            <div class="table-container">
-                <h5>Offline puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('offline')">Filter</button></h5>
-                <div class="filter-dropdown text-end" id="offlineFilterDropdown">
-                    <select id="offlineFilter" onchange="filterData('offline')">
-                        <option value="">All</option>
-                        <option value="Rahu-ketu">Rahu-ketu</option>
-                        <option value="Ghar shanti">Ghar shanti</option>
-                    </select>
-                </div>
-                <table class="table table-bordered table-fixed  text-center table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Pooja</th>
-                            <th>Fees</th>
-                        </tr>
-                    </thead>
-                    <tbody id="offlineBody">
-                        <tr>
-                            <td>Jane Doe</td>
-                            <td>Rahu-ketu</td>
-                            <td>500</td>
-                        </tr>
-                        <tr>
-                            <td>Jane Doe</td>
-                            <td>Rahu-ketu</td>
-                            <td>500</td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Ghar shanti</td>
-                            <td>1200</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            
 
             <div class="table-container">
                 <h5>Online puja Breakdown <button class="filter-btn btn btn-light" onclick="toggleFilter('online')">Filter</button></h5>
@@ -117,6 +83,7 @@
                 </div>
                 <table class="table table-bordered table-fixed  text-center table table-striped">
                     <thead>
+
                         <tr>
                             <th>Name</th>
                             <th>Pooja</th>
@@ -124,26 +91,15 @@
                         </tr>
                     </thead>
                     <tbody id="onlineBody">
+                        <?php if(!empty($earnings)) : ?>
+                        <?php foreach($earnings as $earning) : ?>
                         <tr>
-                            <td>Jane Doe</td>
-                            <td>Rahu-ketu</td>
-                            <td>500</td>
+                            <td><?php echo $earning['user_name']; ?></td>
+                            <td><?php echo $earning['name']; ?></td>
+                            <td><?php echo $earning['price']; ?></td>
                         </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Ghar shanti</td>
-                            <td>1200</td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Ghar shanti</td>
-                            <td>1200</td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Ghar shanti</td>
-                            <td>1200</td>
-                        </tr>
+                        <?php endforeach; ?>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>
@@ -166,21 +122,16 @@
                         </tr>
                     </thead>
                     <tbody id="mobBody">
+                        <?php if(!empty($earningMob)) : ?>
+                            <?php foreach($earningMob as $earningMobs) : ?>
                         <tr>
-                            <td>Jane Doe</td>
-                            <td>Rahu-ketu</td>
-                            <td>500</td>
+                            <td><?php echo $earningMobs['user_name']; ?></td>
+                            <td><?php echo $earningMobs['service_name']; ?></td>
+                            <td><?php echo $earningMobs['discount_price']; ?> </td>
                         </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Ghar shanti</td>
-                            <td>1200</td>
-                        </tr>
-                        <tr>
-                            <td>Jane Doe</td>
-                            <td>Rahu-ketu</td>
-                            <td>500</td>
-                        </tr>
+                         <?php endforeach; ?>
+                        <?php endif ?>
+                       
                     </tbody>
                 </table>
             </div>

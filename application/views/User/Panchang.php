@@ -44,131 +44,658 @@
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
 
-    <div class="container">
-        <div class="table-responsive ">
-            <table class="table table-bordered text-warning-emphasis ">
-                <thead>
-                    <tr>
-                        <th class="bg-color" scope="col">Title</th>
-                        <th class="bg-color" scope="col">Value</th>
+   <div class="container">
+            <div class="table-responsive ">
+                <table class="table table-bordered text-warning-emphasis ">
+                    <thead>
+                        <tr>
+                            <th class="bg-color" scope="col">Title</th>
+                            <th class="bg-color" scope="col">Value</th>
 
-                    </tr>
-                </thead>
-                <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="bg-color">Date</td>
+                            <td class="bg-color" id="todayDate">Loading...</td>
+                        </tr>
 
-                    <!-- <?php print_r($titiData);
-                    $tithi_data = json_decode($titiData['output'], true);
-                    print_r($tithi_data);
-                    ?> -->
+                        <tr>
+                            <td class="bg-color">Today's Tithi</td>
+                            <td class="bg-color" id="tithi">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="bg-color">Today's Nakshatra</td>
+                            <td class="bg-color" id="nakshatra">Loading...</td>
+                        </tr>
 
-                    <!-- <?php print_r($nakshatraData);
-                    $nakshatraData = $nakshatraData['output'];
-                    print_r($nakshatraData);
-                    ?> -->
+                        <tr>
+                            <td class="bg-color">Today's Karana</td>
+                            <td class="bg-color" id="todayKarana">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="bg-color">Today's Paksha</td>
+                            <td class="bg-color" id="todayPaksha">Loading...</td>
+                        </tr>
 
-                  
-                    <td class="bg-color">Date</td>
-                    <td class="bg-color"><?php echo date("d F Y"); ?></td>
+                        <tr>
+                            <td class="bg-color">Today's Yoga</td>
+                            <td class="bg-color" id="todayYoga">Loading...</td>
+                        </tr>
+
+                        <tr>
+                            <td class="bg-color">Today's Sun Rise Time</td>
+                            <td class="bg-color" id="sunrise">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="bg-color">Today's Sun Set Time</td>
+                            <td class="bg-color" id="sunset">Loading...</td>
+                        </tr>
+                        <!-- <tr>
+                            <td class="bg-color">Today's Moon Sign</td>
+                            <td class="bg-color">17:28</td>
 
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Tithi </td>
-                        <td class="bg-color">Today's Tithi</td>
+                        </tr> -->
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Nakshatra </td>
-                        <td class="bg-color">Today's Nakshatra </td>
-                        <!-- <td class="bg-color"><?php print_r($nakshatraData["name"].  $nakshatraData["starts_at"] ."----TO---".$nakshatraData["ends_at"] )?> </td> -->
-                        <!-- <?php print_r($nakshatraData["name"].  $nakshatraData["starts_at"] ."----TO---".$nakshatraData["ends_at"] )?> -->
+                        <tr>
+                            <td class="bg-color">Today's Weekday</td>
+                            <td class="bg-color" id="weekday">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="bg-color">Today's Moon Rise</td>
+                            <td class="bg-color" id="moonrise">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="bg-color">Today's Moon Set</td>
+                            <td class="bg-color" id="moonset">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="bg-color">Today's Ritu</td>
+                            <td class="bg-color" id="todayRitu">Loading...</td>
+                        </tr>
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Karana </td>
-                        <td class="bg-color">Baalav upto 10:05, Kolav upto 22:22</td>
+                        <!-- <tr>
+                            <td class="bg-color">Hindu Month</td>
+                            <td class="bg-color">Pausha</td>
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Paksha </td>
-                        <td class="bg-color">Krishna</td>
+                        </tr> -->
+                        <tr>
+                            <td class="bg-color">Vikram Samvat</td>
+                            <td class="bg-color" id="vikramSamvat">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="bg-color">Shaka Samvat</td>
+                            <td class="bg-color" id="shakaSamvat">Loading...</td>
+                        </tr>
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Yoga </td>
-                        <td class="bg-color">Vaidhriti upto 18:33</td>
+                        <tr>
+                            <td class="bg-color">Today's Dushta Muhurtas </td>
+                            <td class="bg-color">From 10:35:18 To 11:16:35, From 14:42:57 To 15:24:14</td>
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Sun Rise Time </td>
-                        <td class="bg-color">Guruvara</td>
+                        </tr>
+                        <tr>
+                            <td class="bg-color">Today's Kulika</td>
+                            <td class="bg-color">From 10:35:18 To 11:16:35</td>
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Sun Set Time</td>
-                        <td class="bg-color">07:08</td>
+                        </tr>
+                        <tr>
+                            <td class="bg-color">Today's Rahu Kaal</td>
+                            <td class="bg-color">From 13:35:53 To 14:53:17</td>
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Moon Sign</td>
-                        <td class="bg-color">17:28</td>
+                        </tr>
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Moon Rise </td>
-                        <td class="bg-color">Karka upto 26:00</td>
+                        <tr>
+                            <td class="bg-color">Today's Abhijit Muhurat</td>
+                            <td class="bg-color" id="abhijit-time">From 13:35:53 To 14:53:17</td>
+                        </tr>
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Moon Set</td>
-                        <td class="bg-color">21:27</td>
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Ritu</td>
-                        <td class="bg-color">10:30</td>
+                        <tr>
+                            <td class="bg-color">Today's Disha</td>
+                            <td class="bg-color" id="todaysDisha">North</td>
+                        </tr>
 
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Hindu Month</td>
-                        <td class="bg-color">Pausha</td>
-
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Vikram Samvat </td>
-                        <td class="bg-color">2081</td>
-
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Dushta Muhurtas </td>
-                        <td class="bg-color">From 10:35:18 To 11:16:35, From 14:42:57 To 15:24:14</td>
-
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Kulika</td>
-                        <td class="bg-color">From 10:35:18 To 11:16:35</td>
-
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Rahu Kaal</td>
-                        <td class="bg-color">From 13:35:53 To 14:53:17</td>
-
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Abhijit muhurat </td>
-                        <td class="bg-color">From 11:57:51 To 12:39:08</td>
-
-                    </tr>
-                    <tr>
-                        <td class="bg-color">Today's Disha</td>
-                        <td class="bg-color">South</td>
-                    </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+
+         <script>
+        function fetchAndUpdatePanchang() {
+            let lat = 28.6139;
+            let lon = 77.2090;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+
+                    },
+                    function (error) {
+                        console.warn("Geolocation failed, using default location:", error.message);
+
+                    }
+                );
+            } else {
+                console.warn("Geolocation not supported, using default location.");
+
+            }
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+
+            const formData = new FormData();
+            formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
+            formData.append("day", day);
+            formData.append("month", month);
+            formData.append("year", year);
+
+            formData.append("lat", lat);
+            formData.append("lon", lon);
+            formData.append("tzone", "5.5");
+            formData.append("lan", "en");
+
+            fetch("https://astroapi-1.divineapi.com/indian-api/v1/find-panchang", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g"
+                },
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const tithis = data.data.tithis;
+
+                    if (!tithis || tithis.length === 0) {
+                        return alert("No tithi data found.");
+                    }
+
+                    const firstTithi = tithis[0];
+                    const endTime = new Date(firstTithi.end_time);
+                    const hours = endTime.getHours().toString().padStart(2, '0');
+                    const minutes = endTime.getMinutes().toString().padStart(2, '0');
+                    const formattedTithi = `${firstTithi.tithi} upto ${hours}:${minutes}`;
+
+                    // Inject values
+                    document.getElementById("tithi").innerText = formattedTithi;
+
+                    // Sunrise and Sunset
+
+                })
+                .catch(error => {
+                    console.error("Error fetching Panchang data:", error);
+                    alert("Failed to fetch Panchang data.");
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchAndUpdatePanchang);
+    </script>
+
+     <script>
+        function fetchNakshatra() {
+            let lat = 28.6139;
+            let lon = 77.2090;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+
+                    },
+                    function (error) {
+                        console.warn("Geolocation failed, using default location:", error.message);
+
+                    }
+                );
+            } else {
+                console.warn("Geolocation not supported, using default location.");
+
+            }
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+
+            const formData = new FormData();
+            formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
+            formData.append("day", day);
+            formData.append("month", month);
+            formData.append("year", year);
+
+            formData.append("lat", lat);
+            formData.append("lon", lon);
+            formData.append("tzone", "5.5");
+            formData.append("lan", "en");
+
+            fetch("https://astroapi-1.divineapi.com/indian-api/v1/find-nakshatra", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g"
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const nakList = data?.data?.nakshatras?.nakshatra_list;
+                    const nakPada = data?.data?.nakshatras?.nakshatra_pada;
+
+                    if (!nakList || nakList.length === 0) {
+                        document.getElementById("nakshatra").innerText = "No data found";
+                        return;
+                    }
+
+                    // Format: Pushya upto HH:MM
+                    const currentNakshatra = nakPada[0]; // First pada of today
+                    const time = new Date(currentNakshatra.end_time);
+                    const hours = time.getHours().toString().padStart(2, '0');
+                    const minutes = time.getMinutes().toString().padStart(2, '0');
+
+                    const displayText = `${currentNakshatra.nak_name} upto ${hours}:${minutes}`;
+                    document.getElementById("nakshatra").innerText = displayText;
+                })
+                .catch(error => {
+                    console.error("Error fetching nakshatra:", error);
+                    document.getElementById("nakshatra").innerText = "Error loading nakshatra";
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchNakshatra);
+    </script>
 
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let lat = 28.6139;
+            let lon = 77.2090;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+
+                    },
+                    function (error) {
+                        console.warn("Geolocation failed, using default location:", error.message);
+
+                    }
+                );
+            } else {
+                console.warn("Geolocation not supported, using default location.");
+
+            }
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+
+            const formData = new FormData();
+            formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
+            formData.append("day", day);
+            formData.append("month", month);
+            formData.append("year", year);
+
+            formData.append("lat", lat);
+            formData.append("lon", lon);
+            formData.append("tzone", "5.5");
+            formData.append("lan", "en");
+
+
+            fetch("https://astroapi-1.divineapi.com/indian-api/v1/find-karana", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g"
+                },
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.data.karnas.length > 0) {
+                        let karanaText = "";
+                        const karnas = data.data.karnas;
+
+                        // Create readable Karana text with timings
+                        karnas.forEach(karana => {
+                            const endTime = new Date(karana.end_time);
+                            const timeStr = endTime.toLocaleTimeString('en-IN', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: false
+                            });
+                            karanaText += `${karana.karana_name} upto ${timeStr}, `;
+                        });
+
+                        karanaText = karanaText.replace(/, $/, ''); // remove trailing comma
+                        document.getElementById("todayKarana").innerText = karanaText;
+
+                        // Display Paksha from the first Karana (usually all have the same)
+                        document.getElementById("todayPaksha").innerText = karnas[0].paksha;
+                    } else {
+                        document.getElementById("todayKarana").innerText = "Not available";
+                        document.getElementById("todayPaksha").innerText = "Not available";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching Karana data:", error);
+                    document.getElementById("todayKarana").innerText = "Error loading";
+                    document.getElementById("todayPaksha").innerText = "Error loading";
+                });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let lat = 28.6139;
+            let lon = 77.2090;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+
+                    },
+                    function (error) {
+                        console.warn("Geolocation failed, using default location:", error.message);
+
+                    }
+                );
+            } else {
+                console.warn("Geolocation not supported, using default location.");
+
+            }
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+
+            const formData = new FormData();
+            formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
+            formData.append("day", day);
+            formData.append("month", month);
+            formData.append("year", year);
+
+            formData.append("lat", lat);
+            formData.append("lon", lon);
+            formData.append("tzone", "5.5");
+            formData.append("lan", "en");
+
+
+            fetch("https://astroapi-1.divineapi.com/indian-api/v1/find-yoga", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g"
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const yogaArray = data?.data?.yogas;
+                    if (!yogaArray || yogaArray.length === 0) {
+                        document.getElementById("todayYoga").innerText = "Not available";
+                        return;
+                    }
+
+                    // Format: Yoga1 upto HH:MM, Yoga2 upto HH:MM
+                    let yogaText = "";
+                    yogaArray.forEach(yoga => {
+                        const endTime = new Date(yoga.end_time);
+                        const formattedTime = endTime.toLocaleTimeString('en-IN', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: false
+                        });
+                        yogaText += `${yoga.yoga_name} upto ${formattedTime}, `;
+                    });
+
+                    yogaText = yogaText.replace(/,\s*$/, ''); // remove last comma
+                    document.getElementById("todayYoga").innerText = yogaText;
+                })
+                .catch(err => {
+                    console.error("Error fetching Yoga data:", err);
+                    document.getElementById("todayYoga").innerText = "Error loading";
+                });
+        });
+    </script>
+
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const today = new Date();
+
+            const options = {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+            };
+
+            const formattedDate = today.toLocaleDateString('en-IN', options); // e.g. "19 June 2025"
+            document.getElementById("todayDate").innerText = formattedDate;
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let lat = 28.6139;
+            let lon = 77.2090;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+
+                    },
+                    function (error) {
+                        console.warn("Geolocation failed, using default location:", error.message);
+
+                    }
+                );
+            } else {
+                console.warn("Geolocation not supported, using default location.");
+
+            }
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+
+            const formData = new FormData();
+            formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
+            formData.append("day", day);
+            formData.append("month", month);
+            formData.append("year", year);
+
+            formData.append("lat", lat);
+            formData.append("lon", lon);
+            formData.append("tzone", "5.5");
+            formData.append("lan", "en");
+
+
+            fetch("https://astroapi-2.divineapi.com/indian-api/v1/find-ritu-and-anaya", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g"
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const ritu = data?.data?.ritus?.vedic?.[0]?.name;
+                    const ayana = data?.data?.ritus?.vedic?.[0]?.ayana;
+                    const zodiac = data?.data?.ritus?.vedic?.[0]?.zodiac;
+                    const madhyahna = data?.data?.madhyahna;
+
+                    if (ritu) {
+                        document.getElementById("todayRitu").innerText = `${capitalize(ritu)} (${capitalize(ayana)}, ${capitalize(zodiac)}), Madhyahna: ${madhyahna}`;
+                    } else {
+                        document.getElementById("todayRitu").innerText = "Unavailable";
+                    }
+                })
+                .catch(err => {
+                    console.error("Error fetching Ritu:", err);
+                    document.getElementById("todayRitu").innerText = "Error";
+                });
+
+            function capitalize(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1);
+            }
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let lat = 28.6139;
+            let lon = 77.2090;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+
+                    },
+                    function (error) {
+                        console.warn("Geolocation failed, using default location:", error.message);
+
+                    }
+                );
+            } else {
+                console.warn("Geolocation not supported, using default location.");
+
+            }
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+
+            const formData = new FormData();
+            formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
+            formData.append("day", day);
+            formData.append("month", month);
+            formData.append("year", year);
+
+            formData.append("lat", lat);
+            formData.append("lon", lon);
+            formData.append("tzone", "5.5");
+            formData.append("lan", "en");
+
+
+            fetch("https://astroapi-2.divineapi.com/indian-api/v1/find-sun-and-moon", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g"
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const d = data.data;
+                    document.getElementById("sunrise").innerText = d.sunrise || "N/A";
+                    document.getElementById("sunset").innerText = d.sunset || "N/A";
+                    document.getElementById("moonrise").innerText = d.moonrise || "N/A";
+                    document.getElementById("moonset").innerText = d.moonset || "N/A";
+                    document.getElementById("weekday").innerText = d.weekday || "N/A";
+                })
+                .catch(err => {
+                    console.error("Error fetching sun and moon timings:", err);
+                    document.getElementById("sunrise").innerText = "Error";
+                    document.getElementById("sunset").innerText = "Error";
+                    document.getElementById("moonrise").innerText = "Error";
+                    document.getElementById("moonset").innerText = "Error";
+                    document.getElementById("weekday").innerText = "Error";
+                });
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let lat = 28.6139;
+            let lon = 77.2090;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+
+                    },
+                    function (error) {
+                        console.warn("Geolocation failed, using default location:", error.message);
+
+                    }
+                );
+            } else {
+                console.warn("Geolocation not supported, using default location.");
+
+            }
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+
+            const formData = new FormData();
+            formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
+            formData.append("day", day);
+            formData.append("month", month);
+            formData.append("year", year);
+
+            formData.append("lat", lat);
+            formData.append("lon", lon);
+            formData.append("tzone", "5.5");
+            formData.append("lan", "en");
+
+            fetch("https://astroapi-2.divineapi.com/indian-api/v1/find-samvat", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g"
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.data) {
+                        document.getElementById("vikramSamvat").innerText = data.data.vikram_year + " (" + data.data.vikram_name + ")";
+                        document.getElementById("shakaSamvat").innerText = data.data.shaka_year + " (" + data.data.shaka_name + ")";
+                    } else {
+                        document.getElementById("vikramSamvat").innerText = "Unavailable";
+                        document.getElementById("shakaSamvat").innerText = "Unavailable";
+                    }
+                })
+                .catch(err => {
+                    console.error("Error fetching Samvat:", err);
+                    document.getElementById("vikramSamvat").innerText = "Error";
+                    document.getElementById("shakaSamvat").innerText = "Error";
+                });
+        });
+    </script>
+
+    <script>
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    console.log(lat);
+                    console.log(lon);
+                },
+                function (error) {
+                    console.warn("Geolocation failed, using default location:", error.message);
+                    callAstroAPI(28.6139, 77.2090, "New Delhi"); // fallback
+                }
+            );
+        } else {
+            console.warn("Geolocation not supported, using default location.");
+            callAstroAPI(28.6139, 77.2090, "New Delhi"); // fallback
+        }
+    </script>
+
+
+        
 
 
 

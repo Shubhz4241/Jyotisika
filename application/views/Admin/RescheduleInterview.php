@@ -466,6 +466,14 @@ td{
                 max-width: 200px;
             }
         }
+
+        .reschedule-label {
+            display: block;
+            /* Ensures labels take full width */
+            text-align: left;
+            /* Aligns text to the start */
+            font-weight: bold;
+        }
     </style>
 </head>
 

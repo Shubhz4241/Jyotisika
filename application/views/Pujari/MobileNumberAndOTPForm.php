@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Number and OTP Form</title>
+    <title>Pujari Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url('assets/images/Pujari/jyotishvitaran.png');?>" type="image/png">
+
     <style>
         * {
             margin: 0;
@@ -93,7 +96,6 @@
             border-color: #dc3545 !important;
         }
 
-        /* Added styling for the new OTP message */
         #otpSentMessage {
             background-color: #d4edda;
             color: #155724;
@@ -102,6 +104,43 @@
             margin-bottom: 15px;
             font-size: 14px;
             text-align: center;
+        }
+
+        /* Loader styles */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ff9900;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -118,7 +157,7 @@
             <form>
                 <div class="mb-3">
                     <label for="mobile" class="form-label">Mobile No</label>
-                    <input type="tel" class="form-control" id="mobile" placeholder="Enter Mobile Number" maxlength="10" required oninput="validateMobileNumber(this)">
+                    <input type="tel" class="form-control" id="mobile" name="mobile_number" placeholder="Enter Mobile Number" maxlength="10" required oninput="validateMobileNumber(this)">
                     <button type="button" id="getOtpBtn" class="btn btn-custom mt-3 w-100" style="display: none;">Get OTP</button>
                 </div>
             </form>
@@ -134,7 +173,6 @@
             <div class="logo-container">
             <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
             </div>
-            <!-- Added new message div for OTP sent confirmation -->
             <div id="otpSentMessage"></div>
             <p class="text-center" id="otpMessage">We have Sent the code on +91************95</p>
             <form>
@@ -157,9 +195,7 @@
             <div class="checkmark">
             <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Logo">
             </div>
-            <p>Application Submitted Successfully!</p>
-            <small>Thank you for your submission! Our team is reviewing your application.</small>
-            <small>Note:- You will receive an update within 48 hours. If you have any queries, feel free to contact our support team.</small>
+            <p>Login Successfully!</p>
         </div>
     </div>
 
@@ -176,6 +212,25 @@
         const resendOtpBtn = document.getElementById('resendOtpBtn');
         const otpInputs = document.querySelectorAll('.otp-input');
         let countdown;
+
+        function showLoader() {
+            const loader = document.createElement('div');
+            loader.className = 'loader-overlay';
+            loader.innerHTML = `
+                <div class="loader-container">
+                    <div class="spinner"></div>
+                    <p>Processing request...</p>
+                </div>
+            `;
+            document.body.appendChild(loader);
+            return loader;
+        }
+
+        function hideLoader(loader) {
+            if (loader && loader.parentNode) {
+                document.body.removeChild(loader);
+            }
+        }
 
         function validateMobileNumber(input) {
             input.value = input.value.replace(/[^0-9]/g, '');
@@ -212,14 +267,51 @@
 
         getOtpBtn.addEventListener('click', () => {
             if (mobileInput.value.length === 10) {
-                let firstTwo = mobileInput.value.substring(0, 2);
-                let lastTwo = mobileInput.value.substring(8, 10);
-                otpMessage.innerHTML = `We have Sent the code on +91 ${firstTwo}******${lastTwo}`;
-                // Added the new message to the otpSentMessage div
-                document.getElementById('otpSentMessage').innerHTML = `A OTP (One Time Passcode) has been sent to +91 ${firstTwo}******${lastTwo}. Please enter the OTP in the field below to verify your phone.`;
-                mobileForm.style.display = 'none';
-                otpForm.style.display = 'block';
-                startCountdown();
+                const loader = showLoader();
+                fetch('<?php echo base_url() . 'PujariController/sendOtp'; ?>', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `mobile_number=${encodeURIComponent(mobileInput.value)}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    hideLoader(loader);
+                    if (data.status === "success") {
+                        let firstTwo = mobileInput.value.substring(0, 2);
+                        let lastTwo = mobileInput.value.substring(8, 10);
+                        otpMessage.innerHTML = `We have sent the code on +91 ${firstTwo}******${lastTwo}`;
+                        document.getElementById('otpSentMessage').innerHTML = `A OTP (One Time Passcode) has been sent to +91 ${firstTwo}******${lastTwo}. Please enter the OTP in the field below to verify your phone.`;
+                        mobileForm.style.display = 'none';
+                        otpForm.style.display = 'block';
+                        startCountdown();
+                    } else if (data.status === "pending") {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Application in Process',
+                            text: 'Your application is still under review. Please wait for admin approval.',
+                            confirmButtonColor: '#ff8000'
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message || 'Failed to process your request. Please try again.',
+                            confirmButtonColor: '#ff8000'
+                        });
+                    }
+                })
+                .catch(error => {
+                    hideLoader(loader);
+                    console.error("Error:", error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Something went wrong. Please try again later.',
+                        confirmButtonColor: '#ff8000'
+                    });
+                });
             }
         });
 
@@ -240,29 +332,102 @@
         }
 
         resendOtpBtn.addEventListener('click', () => {
-            resendOtpBtn.style.display = 'none';
-            document.getElementById('resendTimer').style.display = 'block';
-            startCountdown();
+            const loader = showLoader();
+            fetch('<?php echo base_url() . 'PujariController/resendOtp'; ?>', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `mobile_number=${encodeURIComponent(mobileInput.value)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoader(loader);
+                if (data.status === "success") {
+                    let firstTwo = mobileInput.value.substring(0, 2);
+                    let lastTwo = mobileInput.value.substring(8, 10);
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'OTP Resent',
+                        text: `New OTP has been sent to +91 ${firstTwo}******${lastTwo}`,
+                        timer: 3000,
+                        showConfirmButton: false
+                    });
+                    
+                    resendOtpBtn.style.display = 'none';
+                    document.getElementById('resendTimer').style.display = 'block';
+                    startCountdown();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message || 'Failed to resend OTP. Please try again.',
+                        confirmButtonColor: '#ff8000'
+                    });
+                }
+            })
+            .catch(error => {
+                hideLoader(loader);
+                console.error("Error:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Something went wrong. Please try again later.',
+                    confirmButtonColor: '#ff8000'
+                });
+            });
         });
 
         verifyOtpBtn.addEventListener('click', () => {
             if (!validateOtpForm()) {
                 return;
             }
-            otpForm.style.display = 'none';
-            successMessage.style.display = 'block';
-            setTimeout(() => {
-                window.location.href = '<?php echo base_url("PujariDashboard"); ?>';
-            }, 3000);
+
+            let otp = "";
+            otpInputs.forEach(input => otp += input.value);
+
+            fetch('<?php echo base_url() . 'PujariController/verifyOtp'; ?>', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `mobile_number=${encodeURIComponent(mobileInput.value)}&otp=${encodeURIComponent(otp)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    otpForm.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = '<?php echo base_url("PujariDashboard"); ?>';
+                    }, 3000);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid OTP',
+                        text: 'The OTP entered is incorrect. Please try again.',
+                        confirmButtonColor: '#ff8000'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Something went wrong. Please try again later.',
+                    confirmButtonColor: '#ff8000'
+                });
+            });
         });
 
-        // Prefill mobile number from URL parameter if available
         document.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
             const contact = urlParams.get("contact");
             if (contact && contact.length === 10) {
                 mobileInput.value = contact;
-                validateMobileNumber(mobileInput); // Show "Get OTP" button if valid
+                validateMobileNumber(mobileInput);
             }
         });
     </script>

@@ -38,7 +38,7 @@
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
-     <?php print_r($showpujari ) ?>
+
     <main>
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
@@ -85,12 +85,14 @@
                                             href="<?php echo base_url('PoojarViewMore/' . $pujaridata["pujari_id_"] . "/" . $pujaridata["service_id"]); ?>">
                                             <div class="position-relative">
                                                 <!-- echo base_url('assets/images/astrologer.png'); -->
-                                               
-                                                
 
-                                                <img src="<?php echo  !empty($pujaridata['profile_pic']) ? base_url('uploads/pujari/profile/image/'.$pujaridata['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
-                                                    class="rounded-circle"
-                                                    style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+
+
+                                                <img src="<?php echo !empty($pujaridata['profile_pic']) ? base_url('uploads/pujari/profile/image/' . $pujaridata['profile_pic']) : base_url('assets/images/astrologerimg.png'); ?>"
+                                                    alt="image" class="rounded-circle"
+                                                    style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);"
+                                                    onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/astrologerimg.png'); ?>';">
+
                                                 <span class="position-absolute bottom-0 end-0 badge rounded-circle p-1"
                                                     style="background-color: #28a745;">
                                                     <i class="bi bi-check-circle-fill small"></i>
@@ -107,7 +109,7 @@
                                             <div class="d-flex align-items-center gap-1 ">
                                                 <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
                                                 <span class="small text-muted mt-1"><?php echo $pujaridata["average_rating"] ?>
-                                                    (150+ Poojas)</span>
+                                                    (<?php echo $pujaridata["completed_puja_count"] ?>+ Poojas)</span>
                                             </div>
                                         </div>
                                     </div>
