@@ -301,7 +301,7 @@
         </form>
 
         <!-- Mobile Number Form -->
-        <div id="mobile-form">
+        <div id="mobile-form" style="display:none;">
             <form>
                 <div class="mb-3">
                     <label for="mobile" class="form-label">Mobile No</label>
@@ -312,7 +312,7 @@
         </div>
 
         <!-- OTP Form -->
-        <div id="otp-form">
+        <div id="otp-form" style="display:none;">
             <div id="otpSentMessage"></div>
             <p class="text-center" id="otpMessage"></p>
             <form>
@@ -331,7 +331,7 @@
         </div>
 
         <!-- Success Message -->
-        <div id="success-message">
+        <div id="success-message" style="display:none;">
             <img src="<?php echo base_url() . 'assets/images/Pujari/ApplicationSubmited.gif' ?>" alt="Success">
             <p>Registration Completed Successfully!</p>
             <small>Thank you for your submission! Our team is reviewing your application.</small>
