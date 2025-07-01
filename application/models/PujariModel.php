@@ -199,19 +199,19 @@ class PujariModel extends CI_Model
 
     public function getAllFeedback($pujari_id)
     {
-        $this->db->select('pujari_reviews.id, pujari_reviews.rating, pujari_reviews.puja_id, pujari_reviews.pujari_id, pujari_reviews.user_id, pujari_reviews.message, pujari_reviews.created_at, jyotisika_users.user_name');
-        $this->db->from('pujari_reviews');
-        $this->db->join('jyotisika_users', 'jyotisika_users.user_id = pujari_reviews.user_id', 'left');
-        $this->db->where('pujari_reviews.pujari_id', $pujari_id);
-        $this->db->group_by('pujari_reviews.id');
+        $this->db->select('pujari_feedback.pujari_feedback_id, pujari_feedback.rating, pujari_feedback.pujari_id, pujari_feedback.user_id, pujari_feedback.message, pujari_feedback.created_at, jyotisika_users.user_name');
+        $this->db->from('pujari_feedback');
+        $this->db->join('jyotisika_users', 'jyotisika_users.user_id = pujari_feedback.user_id', 'left');
+        $this->db->where('pujari_feedback.pujari_id', $pujari_id);
+        $this->db->group_by('pujari_feedback.pujari_feedback_id');
         $query = $this->db->get();
         return $query->result();
     }
 
     public function deleteFeedback($id)
     {
-        $this->db->where('id', $id);
-        return $this->db->delete('pujari_reviews');
+        $this->db->where('pujari_feedback_id', $id);
+        return $this->db->delete('pujari_feedback');
     }
 
     public function addMobPuja($data)
@@ -615,5 +615,14 @@ class PujariModel extends CI_Model
         ];
         $this->db->where('book_puja_id', $id);
         return $this->db->update('bookpuja_request_by_user_to_pujari', $data);
+    }
+      public function get_all_services()
+    {
+        $this->db->select('*');
+        $this->db->from('services');
+        $this->db->where('service_type', 'pujari');
+        $query = $this->db->get();
+
+        return $query->result_array();
     }
 }

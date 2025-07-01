@@ -311,7 +311,7 @@
 <!-- View: FinanceAstrologer.php -->
 <body style="background-color:rgb(228, 236, 241);">
     <div class="d-flex">
-        <?php $this->load->view('Finance/FinanceSidebar'); ?>
+        <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
 
         <!-- Main Content -->
         <div class="main mt-3 w-100">

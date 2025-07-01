@@ -215,7 +215,7 @@
                                 <div class="feedback-content">
                                     <p class="feedback-text"><?php echo $feedback['message']; ?></p>
                                     <?php if (strlen($feedback['message']) > 150) : ?>
-                                        <span class="read-more" data-bs-toggle="modal" data-bs-target="#feedbackModal<?php echo $feedback['id']; ?>">Read more</span>
+                                        <span class="read-more" data-bs-toggle="modal" data-bs-target="#feedbackModal<?php echo $feedback['pujari_feedback_id']; ?>">Read more</span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="user-info">
@@ -231,7 +231,7 @@
                                         <?php endfor; ?>
                                     </div>
                                 </div>
-                                <span class="delete-icon" data-id="<?php echo $feedback['id']; ?>">
+                                <span class="delete-icon" data-id="<?php echo $feedback['pujari_feedback_id']; ?>">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M3 6h18M8 6V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v2M10 11v6M14 11v6M4 6l1 16h14l1-16M9 6h6" />
                                     </svg>
@@ -239,11 +239,11 @@
                             </div>
                             
                             <!-- Modal for full feedback content -->
-                            <div class="modal fade" id="feedbackModal<?php echo $feedback['id']; ?>" tabindex="-1" aria-labelledby="feedbackModalLabel<?php echo $feedback['id']; ?>" aria-hidden="true">
+                            <div class="modal fade" id="feedbackModal<?php echo $feedback['pujari_feedback_id']; ?>" tabindex="-1" aria-labelledby="feedbackModalLabel<?php echo $feedback['pujari_feedback_id']; ?>" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="feedbackModalLabel<?php echo $feedback['id']; ?>">Feedback from <?php echo $feedback['user_name']; ?></h5>
+                                            <h5 class="modal-title" id="feedbackModalLabel<?php echo $feedback['pujari_feedback_id']; ?>">Feedback from <?php echo $feedback['user_name']; ?></h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
