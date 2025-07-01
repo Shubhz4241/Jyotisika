@@ -234,7 +234,47 @@
                 <span class="ms-1" style="color: white;font-weight: 400;">Orders</span>
             </a>
         </li>
-
+        <!-- Astrologer Services -->
+        <li class="sidebar-item">
+                        <a href="<?php echo base_url() . 'Admin/AstrologerServices'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 20px;">
+                         <i class="bi bi-mortarboard"></i> 
+                            <span class="ms-1" style="color: white;font-weight: 400;">Astrologer Services</span>
+                        </a>
+                    </li>
+        <!-- Poojari Services -->
+                    <li class="sidebar-item">
+   
+                        <a href="<?php echo base_url() . 'Admin/pujariServices'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 20px;">
+                         <i class="bi bi-mortarboard-fill"></i> 
+                            
+                            <span class="ms-1" style="color: white;font-weight: 400;">Poojari Services</span>
+                        </a>
+                    </li>
+        <!-- Payments -->
+<li class="sidebar-item">
+            <a href="<?php echo base_url() . 'ManasviDocumentation'; ?>" class="sidebar-link dropdown-toggle collapsed text-white " id="payments-dropdown" data-bs-toggle="collapse"
+                data-bs-target="#paymentsSubmenu" aria-expanded="false" style="font-size: 20px;">
+                <i class="bi bi-credit-card-2-front" style="color: white;"></i>
+                <span class="ms-1" style="color: white;font-weight: 400;">Payments</span>
+            </a>
+            <div class="collapse" id="paymentsSubmenu">
+                <ul class="nav flex-column ms-3">
+                    <li class="nav-item">
+                        <a href="<?php echo base_url() . 'Admin/FinanceAstrologer'; ?>" class="sidebar-link" id="TotalEmployee-link" style="font-size: 20px;">
+                            <!-- <i class="bi bi-person-workspace"></i> -->
+                            <span class="ms-1" style="color: white;font-weight: 400;">Astrologer</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo base_url() . 'Admin/FinancePoojari'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 20px;">
+                            <!-- <i class="bi bi-mortarboard-fill"></i> -->
+                            <span class="ms-1" style="color: white;font-weight: 400;"> Pujari</span>
+                        </a>
+                    </li>
+                   
+                </ul>
+            </div>
+        </li>
         
 
         <!-- Service Management -->
