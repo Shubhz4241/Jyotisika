@@ -6,32 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin: Festivals</title>
-    <!-- Bootstrap CSS for styling and layout -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS file -->
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets\css\style.css' ?>">
-    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- SweetAlert2 CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <style>
-        /* Apply Inter font to the entire page */
         * {
             font-family: 'Inter', sans-serif !important;
         }
 
-        /* Customize headers and table fonts for better readability */
         h1,
         h4 {
             font-weight: 700;
@@ -44,19 +33,16 @@
             font-size: 1rem;
         }
 
-        /* Enhance table header appearance */
         .table thead th {
             font-weight: 600;
             background-color: #f8f9fa;
         }
 
-        /* Adjust buttons for better aesthetics */
         .btn {
             font-weight: 500;
             font-size: 0.9rem;
         }
 
-        /* Mobile Responsiveness Improvements */
         @media (max-width: 768px) {
             .main {
                 margin-top: 0 !important;
@@ -80,14 +66,8 @@
                 font-size: 0.75rem;
             }
 
-            /* Responsive table */
             .table-responsive-stack tr {
-                display: -webkit-box;
-                display: -ms-flexbox;
                 display: flex;
-                -webkit-box-orient: vertical;
-                -webkit-box-direction: normal;
-                -ms-flex-direction: column;
                 flex-direction: column;
                 margin-bottom: 1rem;
                 border-bottom: 1px solid #eee;
@@ -105,7 +85,6 @@
             }
         }
 
-        /* Mobile-friendly See All button */
         @media (max-width: 768px) {
             .card-footer .btn {
                 margin-top: 10px;
@@ -150,11 +129,6 @@
             background-color: #999;
         }
 
-        .fixed-right-btn {
-            position: relative;
-            /* Keeps button aligned */
-        }
-
         @media (max-width: 768px) {
             .fixed-right-btn {
                 position: relative;
@@ -181,7 +155,6 @@
             color: white !important;
         }
 
-        /* Modal styling */
         .modal-content {
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -195,7 +168,6 @@
             border-top: 1px solid #dee2e6;
         }
 
-        /* Image preview styling */
         .image-preview {
             width: 100%;
             height: 200px;
@@ -218,22 +190,15 @@
 
 <body>
     <div class="d-flex">
-        <!-- Sidebar -->
         <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
-        <!-- SIDEBAR END -->
-
-        <!-- Main Component -->
         <div class="main">
-            <!-- Navbar -->
             <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
-            <!-- Navbar End -->
-
             <div class="container-fluid">
                 <div class="row mt-5">
                     <div class="col-md-12">
                         <h3 class="text-center">Festival List</h3>
                         <div class="d-flex justify-content-end mb-5">
-                            <button class="btn fixed-right-btn" style="background-color: #0c768a; color: white;" data-bs-toggle="modal" data-bs-target="#addModal">Add Festival</button>
+                            <button class="btn btn-primary fixed-right-btn" data-bs-toggle="modal" data-bs-target="#addModal" style="background-color: #0c768a; color: white;">Add Festival</button>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -247,267 +212,53 @@
                                     </tr>
                                 </thead>
                                 <tbody id="festival-table-body">
-                                    <!-- Dynamic Rows Here -->
+                                    <?php if (!empty($festival)): ?>
+                                        <?php $i = 1;
+                                        foreach ($festival as $row): ?>
+                                            <tr>
+                                                <th scope="row"><?= $i++ ?></th>
+                                                <td><?= htmlspecialchars($row['festivals_title'], ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td><?= htmlspecialchars($row['festivals_decription'], ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td>
+                                                    <?php
+                                                    $image_path = !empty($row['festivals_image']) ? FCPATH . $row['festivals_image'] : '';
+                                                    if (!empty($row['festivals_image']) && file_exists($image_path)): ?>
+                                                        <img src="<?= base_url($row['festivals_image']) ?>" alt="<?= htmlspecialchars($row['festivals_title'], ENT_QUOTES, 'UTF-8') ?>" class="img-fluid rounded" width="60" onerror="handleImageError(this)">
+                                                    <?php else: ?>
+                                                        <span>No Image</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td class="text-center d-flex justify-content-center">
+                                                    <a href="javascript:void(0)" class="text-primary me-2 edit-btn"
+                                                        data-id="<?= $row['festivals_id'] ?>"
+                                                        data-title="<?= htmlspecialchars($row['festivals_title'], ENT_QUOTES, 'UTF-8') ?>"
+                                                        data-description="<?= htmlspecialchars($row['festivals_decription'], ENT_QUOTES, 'UTF-8') ?>"
+                                                        data-image="<?= $row['festivals_image'] ?>"
+                                                        data-bs-toggle="modal" data-bs-target="#editModal">
+                                                        <i class="bi bi-pencil-square fs-5"></i>
+                                                    </a>
+                                                    <!-- <a href="javascript:void(0)" class="text-danger ms-2 delete-festival" data-id="<?= $row['festivals_id'] ?>">
+                                                        <i class="bi bi-trash fs-5"></i>
+                                                    </a> -->
+                                                    <!-- Delete icon/button -->
+<a href="javascript:void(0)" class="text-danger ms-2 delete-festival" data-id="<?= $row['festivals_id'] ?>">
+    <i class="bi bi-trash fs-5"></i>
+</a>
+
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="5" class="text-center">No Festivals Found</td>
+                                        </tr>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
-                        <nav>
-                            <ul class="pagination justify-content-center" id="pagination">
-                                <!-- Dynamic Pagination Here -->
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </div>
-
-            <script>
-                // Sample data
-                const festivals = [{
-                        id: 1,
-                        title: "Diwali",
-                        description: "The festival of lights",
-                        image: "https://picsum.photos/32"
-                    },
-                    {
-                        id: 2,
-                        title: "Holi",
-                        description: "The festival of colors sdasdasdas dasdasdasd asdsad asds dsa dsa das",
-                        image: "https://picsum.photos/33"
-                    },
-                    {
-                        id: 3,
-                        title: "Navratri",
-                        description: "The festival of nine nights",
-                        image: "https://picsum.photos/34"
-                    },
-                    {
-                        id: 4,
-                        title: "Eid",
-                        description: "The festival of breaking the fast",
-                        image: "https://picsum.photos/35"
-                    },
-                    {
-                        id: 5,
-                        title: "Christmas",
-                        description: "The festival of joy and giving",
-                        image: "https://picsum.photos/36"
-                    },
-                    {
-                        id: 6,
-                        title: "New Year",
-                        description: "The celebration of the new year",
-                        image: "https://picsum.photos/37"
-                    },
-                    {
-                        id: 7,
-                        title: "Pongal",
-                        description: "The harvest festival",
-                        image: "https://picsum.photos/38"
-                    },
-                    {
-                        id: 8,
-                        title: "Onam",
-                        description: "The festival of Kerala",
-                        image: "https://picsum.photos/39"
-                    }
-                ];
-
-                const recordsPerPage = 5;
-                let currentPage = 1;
-
-                // Utility function to truncate text
-                function truncateText(text, maxLength) {
-                    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
-                }
-
-                function renderTable(page) {
-                    const startIndex = (page - 1) * recordsPerPage;
-                    const endIndex = startIndex + recordsPerPage;
-                    const visibleFestivals = festivals.slice(startIndex, endIndex);
-
-                    const tableBody = document.getElementById("festival-table-body");
-                    tableBody.innerHTML = "";
-
-                    visibleFestivals.forEach((festival, index) => {
-                        tableBody.innerHTML += `
-                        <tr>
-                            <th scope="row">${startIndex + index + 1}</th>
-                            <td>${festival.title}</td>
-                            <td>${truncateText(festival.description, 50)}</td>
-                            <td><img src="${festival.image}" class="img-fluid rounded" alt="${festival.title}"></td>
-                            <td class="text-center d-flex justify-content-center">
-                                <a href="#" class="text-primary me-2" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editFestival(${festival.id})">
-                                    <i class="bi bi-pencil-square fs-5"></i>
-                                </a>
-                                <a href="#" class="text-danger ms-2" onclick="deleteFestival(${festival.id})">
-                                    <i class="bi bi-trash fs-5"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    `;
-                    });
-                }
-
-                function renderPagination() {
-                    const totalPages = Math.ceil(festivals.length / recordsPerPage);
-                    const pagination = document.getElementById("pagination");
-                    pagination.innerHTML = "";
-
-                    for (let i = 1; i <= totalPages; i++) {
-                        pagination.innerHTML += `
-                    <li class="page-item ${i === currentPage ? "active" : ""}">
-                        <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
-                    </li>
-                `;
-                    }
-                }
-
-                function changePage(page) {
-                    currentPage = page;
-                    renderTable(page);
-                    renderPagination();
-                }
-
-                // Initial render
-                renderTable(currentPage);
-                renderPagination();
-
-                // Edit Festival
-                function editFestival(id) {
-                    const festival = festivals.find(f => f.id === id);
-                    if (festival) {
-                        document.getElementById("editTitle").value = festival.title;
-                        document.getElementById("editDescription").value = festival.description;
-                        document.getElementById("editImagePreview").innerHTML = `<img src="${festival.image}" class="img-fluid" alt="${festival.title}">`;
-                        document.getElementById("editFestivalId").value = id;
-                    }
-                }
-
-                // Delete Festival
-                function deleteFestival(id) {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            festivals.splice(festivals.findIndex(f => f.id === id), 1);
-                            renderTable(currentPage);
-                            renderPagination();
-                            Swal.fire(
-                                'Deleted!',
-                                'Your festival has been deleted.',
-                                'success'
-                            );
-                        }
-                    });
-                }
-
-                // Add Festival
-                document.getElementById("addFestivalForm").addEventListener("submit", function(event) {
-                    event.preventDefault();
-                    const title = document.getElementById("addTitle").value;
-                    const description = document.getElementById("addDescription").value;
-                    const image = document.getElementById("addImage").files[0];
-
-                    if (title && description && image) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const newFestival = {
-                                id: festivals.length + 1,
-                                title: title,
-                                description: description,
-                                image: e.target.result
-                            };
-                            festivals.push(newFestival);
-                            renderTable(currentPage);
-                            renderPagination();
-                            Swal.fire(
-                                'Added!',
-                                'Your festival has been added.',
-                                'success'
-                            );
-                            document.getElementById("addFestivalForm").reset();
-                            document.getElementById("addImagePreview").innerHTML = "";
-                        };
-                        reader.readAsDataURL(image);
-                    }
-                });
-
-                // Edit Festival Form Submission
-                document.getElementById("editFestivalForm").addEventListener("submit", function(event) {
-                    event.preventDefault();
-                    const id = parseInt(document.getElementById("editFestivalId").value);
-                    const title = document.getElementById("editTitle").value;
-                    const description = document.getElementById("editDescription").value;
-                    const image = document.getElementById("editImage").files[0];
-
-                    const festivalIndex = festivals.findIndex(f => f.id === id);
-                    if (festivalIndex !== -1) {
-                        if (image) {
-                            const reader = new FileReader();
-                            reader.onload = function(e) {
-                                festivals[festivalIndex] = {
-                                    id: id,
-                                    title: title,
-                                    description: description,
-                                    image: e.target.result
-                                };
-                                renderTable(currentPage);
-                                renderPagination();
-                                Swal.fire(
-                                    'Updated!',
-                                    'Your festival has been updated.',
-                                    'success'
-                                );
-                            };
-                            reader.readAsDataURL(image);
-                        } else {
-                            festivals[festivalIndex] = {
-                                id: id,
-                                title: title,
-                                description: description,
-                                image: festivals[festivalIndex].image
-                            };
-                            renderTable(currentPage);
-                            renderPagination();
-                            Swal.fire(
-                                'Updated!',
-                                'Your festival has been updated.',
-                                'success'
-                            );
-                        }
-                    }
-                });
-
-                // Image Preview for Add Modal
-                document.getElementById("addImage").addEventListener("change", function(event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            document.getElementById("addImagePreview").innerHTML = `<img src="${e.target.result}" class="img-fluid" alt="Preview">`;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-
-                // Image Preview for Edit Modal
-                document.getElementById("editImage").addEventListener("change", function(event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            document.getElementById("editImagePreview").innerHTML = `<img src="${e.target.result}" class="img-fluid" alt="Preview">`;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            </script>
 
             <!-- Edit Modal -->
             <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -518,19 +269,27 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="editFestivalForm">
-                                <input type="hidden" id="editFestivalId">
+                            <form id="editFestivalForm" enctype="multipart/form-data">
+                                <input type="hidden" id="editFestivalId" name="festivals_id">
+                                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
                                 <div class="mb-3">
                                     <label for="editTitle" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="editTitle" required>
+                                    <input type="text" class="form-control" id="editTitle" name="festivals_title" required maxlength="50">
                                 </div>
                                 <div class="mb-3">
                                     <label for="editDescription" class="form-label">Description</label>
-                                    <textarea class="form-control" id="editDescription" rows="3" required></textarea>
+                                    <textarea class="form-control" id="editDescription" name="festivals_decription" rows="3" required></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="editImage" class="form-label">Upload Image</label>
-                                    <input type="file" class="form-control" id="editImage" accept="image/*">
+                                    <label class="form-label">Current Image</label>
+                                    <div>
+                                        <img id="current-image" src="" alt="Current Image" class="img-fluid rounded" width="100" style="display: none;">
+                                        <span id="current-image-name"></span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editImage" class="form-label">Upload New Image (Optional)</label>
+                                    <input type="file" class="form-control" id="editImage" name="festivals_image" accept="image/*">
                                     <div class="image-preview" id="editImagePreview"></div>
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="background-color: #0c768a; color: white;">Save</button>
@@ -549,22 +308,28 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="addFestivalForm">
+                            <form action="<?= base_url('Admin/addFestival') ?>" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
                                 <div class="mb-3">
                                     <label for="addTitle" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="addTitle" required>
+                                    <input type="text" class="form-control" id="addTitle" name="festivals_title" required maxlength="50">
                                 </div>
                                 <div class="mb-3">
                                     <label for="addDescription" class="form-label">Description</label>
-                                    <textarea class="form-control" id="addDescription" rows="3" required></textarea>
+                                    <textarea class="form-control" id="addDescription" name="festivals_description" rows="3" required></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="addImage" class="form-label">Upload Image</label>
-                                    <input type="file" class="form-control" id="addImage" accept="image/*" required>
+                                    <input type="file" class="form-control" id="addImage" name="festivals_image" accept="image/*" required>
                                     <div class="image-preview" id="addImagePreview"></div>
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="background-color: #0c768a; color: white;">Add</button>
                             </form>
+                            <?php if ($this->session->flashdata('success')): ?>
+                                <div class="alert alert-success mt-2"><?= $this->session->flashdata('success') ?></div>
+                            <?php elseif ($this->session->flashdata('error')): ?>
+                                <div class="alert alert-danger mt-2"><?= $this->session->flashdata('error') ?></div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -572,19 +337,215 @@
         </div>
     </div>
 
-    <!-- Script Toggle Sidebar -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        const toggler = document.querySelector(".toggler-btn");
-        const closeBtn = document.querySelector(".close-sidebar");
-        const sidebar = document.querySelector("#sidebar");
+        // CSRF token setup
+        let csrfName = '<?= $this->security->get_csrf_token_name() ?>';
+        let csrfHash = '<?= $this->security->get_csrf_hash() ?>';
 
-        toggler.addEventListener("click", function() {
-            sidebar.classList.toggle("collapsed");
+        // Handle image load errors to prevent infinite loops
+        function handleImageError(img) {
+            console.log('Image failed to load:', img.src);
+            img.src = '<?= base_url('assets/images/no-image.png') ?>';
+            img.onerror = null; // Prevent further onerror triggers
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Edit button click handler
+            document.querySelectorAll('.edit-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const id = btn.getAttribute('data-id');
+                    const title = btn.getAttribute('data-title');
+                    const description = btn.getAttribute('data-description');
+                    const image = btn.getAttribute('data-image');
+
+                    document.getElementById('editFestivalId').value = id;
+                    document.getElementById('editTitle').value = title;
+                    document.getElementById('editDescription').value = description;
+
+                    const currentImage = document.getElementById('current-image');
+                    const currentImageName = document.getElementById('current-image-name');
+                    const editImagePreview = document.getElementById('editImagePreview');
+
+                    if (image) {
+                        const imageUrl = '<?= base_url() ?>' + image;
+                        currentImage.src = imageUrl;
+                        currentImage.style.display = 'block';
+                        currentImageName.textContent = image.split('/').pop();
+                        editImagePreview.innerHTML = `<img src="${imageUrl}" class="img-fluid" alt="Preview">`;
+                    } else {
+                        currentImage.style.display = 'none';
+                        currentImageName.textContent = 'No image';
+                        editImagePreview.innerHTML = '';
+                    }
+                });
+            });
+
+            // Delete button click handler
+            // document.getElementById('festival-table-body').addEventListener('click', function(e) {
+            //     const btn = e.target.closest('.delete-festival');
+            //     if (btn) {
+            //         const festivalId = btn.getAttribute('data-id');
+            //         console.log('Delete Festival ID:', festivalId);
+
+            //         Swal.fire({
+            //             title: 'Are you sure?',
+            //             text: "You won't be able to revert this!",
+            //             icon: 'warning',
+            //             showCancelButton: true,
+            //             confirmButtonColor: '#0c768a',
+            //             cancelButtonColor: '#d33',
+            //             confirmButtonText: 'Yes, delete it!'
+            //         }).then((result) => {
+            //             if (result.isConfirmed) {
+            //                 $.ajax({
+            //                     url: '<?= base_url('Admin_API/deleteFestivalAPI') ?>',
+            //                     type: 'POST',
+            //                     data: {
+            //                         id: festivalId,
+            //                         [csrfName]: csrfHash
+            //                     },
+            //                     dataType: 'json',
+            //                     beforeSend: function() {
+            //                         console.log('Sending Delete AJAX:', {
+            //                             id: festivalId,
+            //                             [csrfName]: csrfHash
+            //                         });
+            //                     },
+            //                     success: function(response) {
+            //                         console.log('Delete AJAX Response:', response);
+            //                         if (response.csrfHash) {
+            //                             csrfHash = response.csrfHash;
+            //                         }
+            //                         if (response.status) {
+            //                             Swal.fire('Deleted!', response.message, 'success').then(() => location.reload());
+            //                         } else {
+            //                             Swal.fire('Error!', response.message || 'Failed to delete festival.', 'error');
+            //                         }
+            //                     },
+            //                     error: function(xhr, status, error) {
+            //                         console.error('Delete AJAX Error:', {
+            //                             status: status,
+            //                             error: error,
+            //                             responseText: xhr.responseText,
+            //                             statusCode: xhr.status
+            //                         });
+            //                         Swal.fire('Error!', 'Failed to delete festival. Check console for details.', 'error');
+            //                     }
+            //                 });
+            //             }
+            //         });
+            //     }
+            // });
+            $(document).on('click', '.delete-festival', function () {
+    const festivalId = $(this).data('id');
+
+    if (!confirm('Are you sure you want to delete this festival?')) return;
+
+    $.ajax({
+        url: '<?= base_url("Admin_API/deleteFestivalAPI") ?>', // change to actual controller path
+        method: 'POST',
+        data: {
+            festivals_id: festivalId
+        },
+        dataType: 'json',
+        success: function (response) {
+            alert(response.message);
+            if (response.status) {
+                // Optionally remove the deleted row from DOM
+                location.reload(); // or remove the row using JS
+            }
+        },
+        error: function () {
+            alert('Something went wrong. Please try again.');
+        }
+    });
+});
+
+
+            // Edit form submission via AJAX
+            document.getElementById('editFestivalForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                console.log('FormData entries:');
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value instanceof File ? value.name : value}`);
+                }
+
+                $.ajax({
+                    url: '<?= base_url('Admin_API/updateFestivalAPI') ?>',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function() {
+                        console.log('Sending Update AJAX');
+                    },
+                    success: function(response) {
+                        console.log('Update AJAX Response:', response);
+                        if (response.csrfHash) {
+                            csrfHash = response.csrfHash;
+                        }
+                        if (response.status) {
+                            Swal.fire('Updated!', response.message, 'success').then(() => location.reload());
+                        } else {
+                            Swal.fire('Error!', response.message || 'Failed to update festival.', 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Update AJAX Error:', {
+                            status: status,
+                            error: error,
+                            responseText: xhr.responseText,
+                            statusCode: xhr.status
+                        });
+                        Swal.fire('Error!', 'Failed to update festival. Check console for details.', 'error');
+                    }
+                });
+            });
+
+            // Image preview for Add Modal
+            document.getElementById('addImage').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('addImagePreview').innerHTML = `<img src="${e.target.result}" class="img-fluid" alt="Preview">`;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Image preview for Edit Modal
+            document.getElementById('editImage').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('editImagePreview').innerHTML = `<img src="${e.target.result}" class="img-fluid" alt="Preview">`;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
         });
 
-        closeBtn.addEventListener("click", function() {
-            sidebar.classList.remove("collapsed");
-        });
+        // Sidebar toggle
+        const toggler = document.querySelector('.toggler-btn');
+        const closeBtn = document.querySelector('.close-sidebar');
+        const sidebar = document.querySelector('#sidebar');
+
+        if (toggler && sidebar) {
+            toggler.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+
+        if (closeBtn && sidebar) {
+            closeBtn.addEventListener('click', function() {
+                sidebar.classList.remove('collapsed');
+            });
+        }
     </script>
 </body>
 
