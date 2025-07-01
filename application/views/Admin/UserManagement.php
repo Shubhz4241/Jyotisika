@@ -29,6 +29,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         /* Apply Inter font to the entire page */
@@ -52,7 +53,7 @@
         /* Enhance table header appearance */
         .table thead th {
             font-weight: 600;
-            background-color:#0c768a;
+            background-color: #0c768a;
             padding: 10px;
             height: 60px;
             align-items: center;
@@ -60,6 +61,7 @@
             text-align: center;
             color: white;
         }
+
         .table td {
             font-weight: 400;
             padding: 10px;
@@ -68,10 +70,12 @@
             justify-content: center;
             text-align: center;
         }
+
         .table-responsive {
             border-radius: 8px;
             overflow: auto;
         }
+
         .table {
             margin-bottom: 0;
         }
@@ -154,38 +158,6 @@
                 max-width: 250px;
             }
         }
-      /* Ensure table remains responsive */
-.table-responsive {
-    overflow-x: auto;
-}
-
-/* Adjust column widths */
-th, td {
-    white-space: nowrap;
-    padding: 10px;
-    text-align: left;
-}
-
-/* Ensure Contact No. field is wide enough for 10 digits */
-th:nth-child(3), td:nth-child(3) { /* Contact No */
-    min-width: 140px; /* Adjust width */
-}
-
-/* Adjust Place of Birth column width and allow wrapping */
-th:nth-child(7), td:nth-child(7){
-    min-width: 150px; /* Set a reasonable width */
-    max-width: 400px; /* Prevent excessive width */
-    word-wrap: break-word;
-    white-space: normal;
-} /* Place of Birth */
-th:nth-child(8), td:nth-child(8) { /* Address */
-    min-width: 250px; /* Set a reasonable width */
-    max-width: 400px; /* Prevent excessive width */
-    word-wrap: break-word;
-    white-space: normal;
-}
-
-
     </style>
 </head>
 
@@ -205,9 +177,9 @@ th:nth-child(8), td:nth-child(8) { /* Address */
             <main class="p-3">
                 <div class="container mt-3 mb-4">
                     <!-- Search Bar -->
-                    <input type="text" id="searchBar" class="form-control mb-3 border-3 shadow-none" placeholder="Search..." onkeyup="filterData()"
+                    <input type="text" id="searchBar" class="form-control mb-3 border-3 shadow-none" placeholder="Search..." onkeyup="filterData()">
 
-                        <!-- Table -->
+                    <!-- Table -->
                     <div class="table-responsive">
                         <table class="table table table-hover table-responsive ">
                             <thead>
@@ -217,7 +189,6 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                                     <th>Contact No</th>
                                     <th>Email</th>
                                     <th>Gender</th>
-                                   
                                     <th>Address</th>
                                     <th>Service Taken</th>
                                     <th>Action</th>
@@ -225,7 +196,24 @@ th:nth-child(8), td:nth-child(8) { /* Address */
 
                             </thead>
                             <tbody id="tableBody">
-                                <!-- Data will be displayed here -->
+                                <?php foreach ($users as $user): ?>
+                                    <tr>
+                                        <td><?php echo $user['user_id']; ?></td>
+                                        <td><?php echo $user['user_name']; ?></td>
+                                        <td><?php echo $user['user_mobilenumber']; ?></td>
+                                        <td><?php echo $user['user_email']; ?></td>
+                                        <td><?php echo $user['user_gender']; ?></td>
+                                        <td><?php echo $user['user_CurrentAddress']; ?></td>
+                                        <td><?php echo $user['user_key']; ?></td>
+                                        <td>
+                                            <button class="btn btn-danger delete-btn" data-id="<?php echo $user['user_id']; ?>">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </td>
+
+                                    </tr>
+                                <?php endforeach ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -242,128 +230,6 @@ th:nth-child(8), td:nth-child(8) { /* Address */
                 <script>
                     let currentPage = 1;
                     const rowsPerPage = 8;
-
-                    // Sample Data
-                    const dummyData = [{
-                            name: "John Doe",
-                            contactNo: "1234567890",
-                            email: "johndoe@example.com",
-                            gender: "Male",
-                            address: "123 Main Street",
-                            serviceTaken: 2,
-                            action: `<button class="btn btn-danger delete-btn" data-id="1">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>`
-                        },
-                        {
-                            name: "Jane Smith",
-                            contactNo: "0987654321",
-                            email: "janesmith@example.com",
-                            gender: "Female",
-                         
-                            address: "456 Elm Street",
-                            serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="2">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>`
-                        },
-                        {
-                            name: "Alice Brown",
-                            contactNo: "1122334455",
-                            email: "alicebrown@example.com",
-                            gender: "Female",
-                           
-                            address: "789 Pine Avenue",
-                            serviceTaken: 3,
-                            action: `<button class="btn btn-danger delete-btn" data-id="3">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>`
-                        },
-                        {
-                            name: "Michael Johnson",
-                            contactNo: "6677889900",
-                            email: "michaelj@example.com",
-                            gender: "Male",
-                          
-                            address: "101 Maple Lane",
-                            serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="4">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>`
-                        },
-                        {
-                            name: "Michael Johnson",
-                            contactNo: "6677889900",
-                            email: "michaelj@example.com",
-                            gender: "Male",
-                           
-                            address: "101 Maple Lane",
-                            serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="4">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>`
-                        },
-                        {
-                            name: "Michael Johnson",
-                            contactNo: "6677889900",
-                            email: "michaelj@example.com",
-                            gender: "Male",
-                         
-                            address: "101 Maple Lane",
-                            serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="4">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>`
-                        },
-                        {
-                            name: "Michael Johnson",
-                            contactNo: "6677889900",
-                            email: "michaelj@example.com",
-                            gender: "Male",
-                            address: "101 Maple Lane",
-                            serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="4">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>`
-                        },
-                        {
-                            name: "Michael Johnson",
-                            contactNo: "6677889900",
-                            email: "michaelj@example.com",
-                            gender: "Male",
-                          
-                            address: "101 Maple Lane",
-                            serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="4">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>`
-                        },
-                        {
-                            name: "Michael Johnson",
-                            contactNo: "6677889900",
-                            email: "michaelj@example.com",
-                            gender: "Male",
-                          
-                            address: "101 Maple Lane",
-                            serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="4">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>`
-                        },
-                        {
-                            name: "Michael Johnson",
-                            contactNo: "6677889900",
-                            email: "michaelj@example.com",
-                            gender: "Male",
-                       
-                            address: "101 Maple Lane",
-                            serviceTaken: 1,
-                            action: `<button class="btn btn-danger delete-btn" data-id="4">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>`
-                        },
-                        // Add more entries as needed
-                    ];
 
 
                     let filteredData = [...dummyData]; // Keep a filtered copy of the data
@@ -542,6 +408,50 @@ th:nth-child(8), td:nth-child(8) { /* Address */
 
     </div>
     </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+ $(document).on('click', '.delete-btn', function () {
+  var userId = $(this).data('id');
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You won\'t be able to revert this!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '<?php echo base_url("Admin/delete_user"); ?>',
+        type: 'POST',
+        data: { user_id: userId },
+        dataType: 'json',
+        success: function (response) {
+          if (response && response.status) {
+            Swal.fire({
+              title: 'Deleted!',
+              text: response.message || 'User deleted successfully',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            }).then(() => {
+              location.reload();
+            });
+          } else {
+            Swal.fire('Failed!', response.message || 'Failed to delete user', 'error');
+          }
+        },
+        error: function (xhr, status, error) {
+          Swal.fire('Error!', 'An error occurred: ' + error, 'error');
+        }
+      });
+    }
+  });
+});
+</script>
 
 
     <!-- Script Toggle Sidebar -->

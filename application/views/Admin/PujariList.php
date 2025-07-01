@@ -32,9 +32,9 @@
 
 
         .container {
-    max-width: 1300px;
-    margin: 30px auto 0;
-}
+            max-width: 1300px;
+            margin: 30px auto 0;
+        }
 
 
 
@@ -74,8 +74,8 @@
             height: 40px;
             padding: 0 15px 0 45px;
             border-radius: 5px;
-            border: 1px solid  #0C768A;
-            background-color:rgb(71, 139, 153);
+            border: 1px solid #0C768A;
+            background-color: rgb(71, 139, 153);
             color: white;
             font-size: 15px;
             outline: none;
@@ -88,7 +88,7 @@
         }
 
         .filter-button {
-            background-color:rgb(71, 139, 153) ;
+            background-color: rgb(71, 139, 153);
             color: #000;
             border: 1px solid #0C768A;
             border-radius: 5px;
@@ -144,7 +144,7 @@
         .profile-card .name {
             font-size: 18px;
             font-weight: bold;
-            background-color: #0C768A ;
+            background-color: #0C768A;
             padding: 18px;
             width: 100%;
             border-bottom-left-radius: 20px;
@@ -203,51 +203,19 @@
                 <!-- Profile Grid -->
 
                 <div id="pujari-list" class="card-container">
-                <div class="card-container">
-                <a href="<?php echo site_url('pujarireview'); ?>" class="text-decoration-none text-dark">
-                <div class="profile-card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="pujari Jane Doe">
-        <div class="name pujari">pujari Jane Doe</div>
-    </div>
-    </a> 
-    <a href="<?php echo site_url('pujarireview'); ?>" class="text-decoration-none text-dark">
+                    <?php foreach ($Pujari as $pujari): ?>
+                        <a href="<?php echo site_url('pujarireview/' . $pujari['id']); ?>" class="text-decoration-none text-dark">
+                            <div class="profile-card">
+                               
+                            <!-- <img src="<?php echo !empty($pujari['image']) ? base_url('uploads/pujari_images/' . $pujari['image']) : 'https://randomuser.me/api/portraits/men/32.jpg'; ?>" alt="pujari <?php echo $pujari['name']; ?>"> -->
+                                   <img src="<?php echo base_url('uploads/pujari/profile/' . $pujari['profile_pic']); ?>">
 
-    <div class="profile-card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="pujari Jane Doe">
-        <div class="name pujari">pujari Jane Doe</div>
-    </div>
-    </a> 
-    <a href="<?php echo site_url('pujarireview'); ?>" class="text-decoration-none text-dark">
-
-    <div class="profile-card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="pujari Jane Doe">
-        <div class="name pujari">pujari Jane Doe</div>
-    </div>
-    </a> 
-    <a href="<?php echo site_url('pujarireview'); ?>" class="text-decoration-none text-dark">
-
-    <div class="profile-card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="pujari Jane Doe">
-        <div class="name pujari">pujari Jane Doe</div>
-    </div>
-    </a> 
-    <a href="<?php echo site_url('pujarireview'); ?>" class="text-decoration-none text-dark">
-
-    <div class="profile-card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="pujari Jane Doe">
-        <div class="name pujari">pujari Jane Doe</div>
-    </div>
-    </a> 
-    <a href="<?php echo site_url('pujarireview'); ?>" class="text-decoration-none text-dark">
-
-    <div class="profile-card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="pujari Jane Doe">
-        <div class="name pujari">pujari Jane Doe</div>
-    </div>
-    </a> 
-</div>
+                              
+                                <div class="name pujari"><?php echo $pujari['name']; ?></div>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
-
 
 
 
@@ -268,7 +236,7 @@
 
                         pujaris.forEach(pujari => {
                             let profileImage = pujari.profile_image ?
-                                "<?php echo base_url(); ?>" +'uploads/pujari/'+ pujari.profile_image :
+                                "<?php echo base_url(); ?>" + 'uploads/pujari/' + pujari.profile_image :
                                 "<?php echo base_url('assets/images/admin/rectangle 5185.png'); ?>";
 
                             let profileLink = "<?php echo base_url('viewpujariprofile/'); ?>" + pujari.id;
@@ -291,25 +259,25 @@
         });
     </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-<!-- Script Toggle Sidebar -->
-<script>
-    const toggler = document.querySelector(".toggler-btn");
-    const closeBtn = document.querySelector(".close-sidebar");
-    const sidebar = document.querySelector("#sidebar");
+    <!-- Script Toggle Sidebar -->
+    <script>
+        const toggler = document.querySelector(".toggler-btn");
+        const closeBtn = document.querySelector(".close-sidebar");
+        const sidebar = document.querySelector("#sidebar");
 
-    toggler.addEventListener("click", function() {
-        sidebar.classList.toggle("collapsed");
-    });
+        toggler.addEventListener("click", function() {
+            sidebar.classList.toggle("collapsed");
+        });
 
-    closeBtn.addEventListener("click", function() {
-        sidebar.classList.remove("collapsed");
-    });
-</script>
+        closeBtn.addEventListener("click", function() {
+            sidebar.classList.remove("collapsed");
+        });
+    </script>
 
 
 

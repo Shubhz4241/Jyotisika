@@ -21,6 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         body {
@@ -31,8 +32,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .container {
@@ -44,8 +50,15 @@
         }
 
         @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .back-arrow {
@@ -60,8 +73,15 @@
         }
 
         @keyframes slideInLeft {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .profile-img {
@@ -114,9 +134,19 @@
         }
 
         @keyframes bounceIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            60% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .btn-approve {
@@ -129,7 +159,7 @@
         .btn-reject-approved_astrologer {
             background: linear-gradient(45deg, #A10000, #e74c3c);
             color: white;
-            width: 120px;
+            width: 180px;
         }
 
         /* New Accordion Document Viewing Styles */
@@ -488,7 +518,8 @@
         }
 
         .success-popup .circle::before {
-            content: "\f00c"; /* Changed to checkmark icon */
+            content: "\f00c";
+            /* Changed to checkmark icon */
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
             color: white;
@@ -548,7 +579,7 @@
         }
     </style>
 </head>
-
+ 
 <body>
     <div class="d-flex">
         <!-- Sidebar -->
@@ -561,175 +592,326 @@
 
             <div class="container">
                 <i class="fas fa-arrow-left"></i>
-                <a href="astrologerrequests" class="back-arrow" style="margin-left: 10px;">Recent Astrologer Requests</a>
+                <a href="<?php echo base_url('astrologerrequests'); ?>" class="back-arrow" style="margin-left: 10px;">Recent Astrologer Requests</a>
+
                 <div class="row mt-3 d-flex align-items-center">
                     <div class="col-md-4 text-center">
-                        <img src="<?php echo base_url('assets/images/HRside/profile1.png') ?>" alt="Profile" class="profile-img">
+                        <img src="<?php echo base_url('uploads/astrologer/' . $Astro['profile_image']); ?>" alt="Profile" class="profile-img">
                     </div>
                     <div class="col-md-8">
                         <div class="details">
-                            <p><b>Name:</b> John Doe</p>
-                            <p><b>Contact No:</b> +1 234 567 890</p>
-                            <p><b>Email:</b> johndoe@example.com</p>
-                            <p><b>Gender:</b> Male</p>
-                            <p><b>Address:</b> 123 Main St, City, Country</p>
-                            <p><b>Languages Known:</b> English, Spanish</p>
-                            <p><b>Specialties:</b> Vedic Astrology, Tarot Reading</p>
-                            <p><b>Experience:</b> 5 years</p>
+                            <p><b>Name:</b> <?php echo $Astro['name']; ?></p>
+                            <p><b>Contact No:</b> <?php echo $Astro['contact']; ?></p>
+                            <p><b>Email:</b> <?php echo $Astro['email']; ?></p>
+                            <p><b>Gender:</b> <?php echo $Astro['gender']; ?></p>
+                            <p><b>Address:</b> <?php echo $Astro['address']; ?></p>
+                            <p><b>Languages Known:</b> <?php echo $Astro['languages']; ?></p>
+                            <p><b>Specialties:</b> <?php echo $Astro['specialties']; ?></p>
+                            <p><b>Experience:</b> <?php echo $Astro['experience']; ?> years</p>
+                            <p><b>Status:</b> <?php echo ucfirst($Astro['status']); ?></p>
+                            <p><b>Price per Minute:</b> ₹<?php echo $Astro['price_per_minute']; ?></p>
+                            
+                            <?php if (isset($Astro['mode']) && !empty($Astro['mode'])): ?>
+                                <p><b>Mode:</b> <?php echo $Astro['mode']; ?></p>
+                            <?php endif; ?>
+                            
+                            <?php if (isset($Astro['venue']) && !empty($Astro['venue'])): ?>
+                                <p><b>Venue:</b> <?php echo $Astro['venue']; ?></p>
+                            <?php endif; ?>
+                            
+                            <?php if (isset($Astro['meeting-link']) && !empty($Astro['meeting-link'])): ?>
+                                <p><b>Meeting Link:</b> <a href="<?php echo $Astro['meeting-link']; ?>" target="_blank"><?php echo $Astro['meeting-link']; ?></a></p>
+                            <?php endif; ?>
+                            
+                            <?php if (isset($Astro['time']) && !empty($Astro['time']) && isset($Astro['date']) && !empty($Astro['date'])): ?>
+                                <p><b>Interview Time:</b> <?php echo $Astro['time']; ?> on <?php echo $Astro['date']; ?></p>
+                            <?php endif; ?>
                         </div>
                     </div>
+                </div>
 
-                    <div class="document-section">
-                        <h5 class="text-center mb-4">Documents Attached</h5>
-                        <div class="document-accordion accordion" id="documentAccordion">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="aadhaarHeading">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#aadhaarCollapse" aria-expanded="true" aria-controls="aadhaarCollapse">
-                                        Aadhaar Card
-                                    </button>
-                                </h2>
-                                <div id="aadhaarCollapse" class="accordion-collapse collapse show" aria-labelledby="aadhaarHeading" data-bs-parent="#documentAccordion">
-                                    <div class="accordion-body">
-                                        <div class="doc-card">
-                                            <img src="<?php echo base_url('Uploads/documents/aadharcard.jpg') ?>" alt="Aadhaar Card" class="doc-image" onerror="this.src='<?php echo base_url('assets/images/fallback.jpg') ?>'">
-                                            <div class="doc-info">
-                                                <p>Aadhaar Card</p>
-                                            </div>
-                                            <div class="doc-actions">
-                                                <a href="<?php echo base_url('Uploads/documents/aadharcard.jpg') ?>" target="_blank" class="doc-btn">View</a>
-                                            </div>
+                <div class="document-section">
+                    <h5 class="text-center mb-4">Documents Attached</h5>
+                    <div class="document-accordion accordion" id="documentAccordion">
+                        <!-- Aadhaar Card -->
+                        <?php
+                        $aadharPath = 'Uploads/documents/' . $Astro['aadharcard'];
+                        $aadharSrc = file_exists(FCPATH . $aadharPath) ? base_url($aadharPath) : base_url('assets/images/fallback.jpg');
+                        ?>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="aadhaarHeading">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#aadhaarCollapse" aria-expanded="true" aria-controls="aadhaarCollapse">
+                                    Aadhaar Card
+                                </button>
+                            </h2>
+                            <div id="aadhaarCollapse" class="accordion-collapse collapse show" aria-labelledby="aadhaarHeading" data-bs-parent="#documentAccordion">
+                                <div class="accordion-body">
+                                    <div class="doc-card">
+                                        <img src="<?php echo base_url('uploads/astrologer/aadharcard/' . $Astro['aadharcard']); ?>" alt="Aadhaar Card" class="doc-image" onerror="handleImageError(this)">
+                                        <div class="doc-info">
+                                            <p>Aadhaar Card</p>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="certificateHeading">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#certificateCollapse" aria-expanded="false" aria-controls="certificateCollapse">
-                                        Certificate
-                                    </button>
-                                </h2>
-                                <div id="certificateCollapse" class="accordion-collapse collapse" aria-labelledby="certificateHeading" data-bs-parent="#documentAccordion">
-                                    <div class="accordion-body">
-                                        <div class="doc-card">
-                                            <img src="<?php echo base_url('Uploads/Astologer/aadharcard.png') ?>" alt="Certificate" class="doc-image" onerror="this.src='<?php echo base_url('assets/images/fallback.jpg') ?>'">
-                                            <div class="doc-info">
-                                                <p>Certificate</p>
-                                            </div>
-                                            <div class="doc-actions">
-                                                <a href="<?php echo base_url('Uploads/Astologer/certificate.png') ?>" target="_blank" class="doc-btn">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="certificationsHeading">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#certificationsCollapse" aria-expanded="false" aria-controls="certificationsCollapse">
-                                        Other Certifications
-                                    </button>
-                                </h2>
-                                <div id="certificationsCollapse" class="accordion-collapse collapse" aria-labelledby="certificationsHeading" data-bs-parent="#documentAccordion">
-                                    <div class="accordion-body">
-                                        <div class="certification-grid" id="certificationGrid">
-                                            <!-- Certifications will be populated dynamically -->
+                                        <div class="doc-actions">
+                                            <a href="<?php echo base_url('uploads/astrologer/aadharcard/' . $Astro['aadharcard']); ?>" target="_blank" class="doc-btn">View</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="btn-container">
-                        <!-- if it is new request -->
-                        <button class="btns btn-schedule" data-status="schedule" onclick="showPopup(this)">Schedule</button>
-                        <button class="btns btn-direct-reject" id="reject-without-interview">Reject</button>
-                        <!-- if interview is scheduled -->
-                        <button class="btns btn-approve" id="approve">Approve</button>
-                        <button class="btns btn-reject" id="reject">Reject</button>
-                        <button class="btns btn-update-interview" onclick="showUpdateInterviewPopup()">Update Interview</button>
-                        <!-- for approved status -->
-                        <button class="btns btn-reject-approved_astrologer" id="reject-approved_astrologer">Reject</button>
-                        <!-- if status is rejected -->
-                        <button class="btns btn-assign-charges" data-status="assign-charges" onclick="showChargesPopup(this)">Assign Charges</button>
+                        <!-- Certificate -->
+                        <?php
+                        $certificatePath = 'Uploads/Astologer/' . $Astro['certificates'];
+                        $certificateSrc = file_exists(FCPATH . $certificatePath) ? base_url($certificatePath) : base_url('assets/images/fallback.jpg');
+                        ?>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="certificateHeading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#certificateCollapse" aria-expanded="false" aria-controls="certificateCollapse">
+                                    Certificate
+                                </button>
+                            </h2>
+                            <div id="certificateCollapse" class="accordion-collapse collapse" aria-labelledby="certificateHeading" data-bs-parent="#documentAccordion">
+                                <div class="accordion-body">
+                                    <div class="doc-card">
+                                        <img src="<?php echo base_url('uploads/astrologer/certificates/' . $Astro['certificates']); ?>" alt="Certificate" class="doc-image" onerror="handleImageError(this)">
+                                        <div class="doc-info">
+                                            <p>Certificate</p>
+                                        </div>
+                                        <div class="doc-actions">
+                                            <a href="<?php echo base_url('uploads/astrologer/certificates/' . $Astro['certificates']); ?>" target="_blank" class="doc-btn">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other Certifications -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="certificationsHeading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#certificationsCollapse" aria-expanded="false" aria-controls="certificationsCollapse">
+                                    Other Certifications
+                                </button>
+                            </h2>
+                            <div id="certificationsCollapse" class="accordion-collapse collapse" aria-labelledby="certificationsHeading" data-bs-parent="#documentAccordion">
+                                <div class="accordion-body">
+                                    <div class="certification-grid" id="certificationGrid">
+                                        <p><?php echo !empty($Astro['certificates']) ? $Astro['certificates'] : 'No other certifications uploaded.'; ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <?php if ($this->session->flashdata('success')): ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: '<?php echo $this->session->flashdata('success'); ?>',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    });
+                </script>
+                <?php endif; ?>
+
+                <div class="btn-container">
+                    <?php 
+                    $status = strtolower(trim($Astro['status'])); 
+                    ?>
+                    
+                    <?php if ($status == 'new' || $status == 'pending' || $status == 'active' || empty($status)): ?>
+                        <!-- Step 1: Show Schedule Interview button for new requests -->
+                        <button 
+                            class="btns btn-schedule" 
+                            data-status="schedule" 
+                            data-id="<?php echo $Astro['id']; ?>" 
+                            onclick="showPopup(this)">
+                            Schedule Interview
+                        </button>
+                    
+                    <?php elseif ($status == 'scheduled'): ?>
+                        <!-- Step 2: Show Approve/Reject buttons only when interview is scheduled -->
+                        <div class="scheduled-actions">
+                            <p class="status-info"><i class="fas fa-calendar-check"></i> Interview Scheduled</p>
+                            
+                            <form method="post" action="<?php echo base_url('Admin/approveRejectAstrologer'); ?>" style="display: inline;">
+                                <input type="hidden" name="id" value="<?php echo $Astro['id']; ?>">
+                                <input type="hidden" name="status" value="approved">
+                                <button class="btns btn-approve" type="submit">
+                                    <i class="fas fa-check"></i> Approve
+                                </button>
+                            </form> 
+
+                            <form method="post" action="<?php echo base_url('Admin/approveRejectAstrologer'); ?>" style="display: inline;">
+                                <input type="hidden" name="id" value="<?php echo $Astro['id']; ?>">
+                                <input type="hidden" name="status" value="rejected">
+                                <button class="btns btn-reject" type="submit">
+                                    <i class="fas fa-times"></i> Reject
+                                </button>
+                            </form>
+
+                            <!-- Update Interview button for scheduled status -->
+                            <button 
+                                class="btns btn-update-interview" 
+                                data-status="update-schedule" 
+                                data-id="<?php echo $Astro['id']; ?>" 
+                                onclick="showUpdateInterviewPopup(this)">
+                                <i class="fas fa-edit"></i> Update Interview
+                            </button>
+                        </div>
+                    
+                    <?php elseif ($status == 'approved'): ?>
+                        <!-- Step 3: Show management buttons for approved astrologers -->
+                        <div class="approved-actions">
+                            <p class="status-info success"><i class="fas fa-check-circle"></i> Approved Astrologer</p>
+                            
+                            <button 
+                                class="btns btn-update-interview" 
+                                data-status="update-schedule" 
+                                data-id="<?php echo $Astro['id']; ?>" 
+                                onclick="showUpdateInterviewPopup(this)">
+                                <i class="fas fa-calendar-alt"></i> Update Interview
+                            </button>
+
+                            <button 
+                                class="btns btn-assign-charges" 
+                                data-status="assign-charges" 
+                                data-id="<?php echo $Astro['id']; ?>" 
+                                onclick="showChargesPopup(this)">
+                                <i class="fas fa-rupee-sign"></i> Assign Charges
+                            </button>
+
+                            <button 
+                                class="btns btn-reject-approved_astrologer" 
+                                data-id="<?php echo $Astro['id']; ?>"
+                                onclick="rejectApprovedAstrologer(this)">
+                                <i class="fas fa-user-times"></i> Reject
+                            </button>
+                        </div>
+                    
+                    <?php elseif ($status == 'rejected'): ?>
+                        <!-- Show status and option to reschedule -->
+                        <div class="rejected-actions">
+                            <div class="alert alert-danger">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>Status:</strong> This astrologer has been rejected.
+                            </div>
+                            
+                            <button 
+                                class="btns btn-schedule" 
+                                data-status="reschedule" 
+                                data-id="<?php echo $Astro['id']; ?>" 
+                                onclick="showPopup(this)">
+                                <i class="fas fa-redo"></i> Reschedule Interview
+                            </button>
+                        </div>
+                    
+                    <?php else: ?>
+                        <!-- Default case for any other status -->
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Status:</strong> <?php echo ucfirst($status); ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Schedule Interview Popup -->
-    <div class="popup-overlay" id="popup">
-        <div class="popup">
-            <h5>Schedule Interview</h5>
-            <div class="popup-content">
-                <input type="hidden" id="astrologer-id" value="1">
-                <div class="popup-field">
-                    <label for="mode">Mode</label>
-                    <input type="text" id="mode" placeholder="Mode" value="Online" readonly required pattern="[A-Za-z\s]+" title="Mode should only contain letters and spaces">
+    <form method="post" action="<?php echo base_url('Admin/ScheduleInterview'); ?>">
+        <div class="popup-overlay" id="popup">
+            <div class="popup">
+                <h5>Schedule Interview</h5>
+                <div class="popup-content">
+                    <input type="hidden" id="astrologer-id" name="id">
+
+                    <div class="popup-field">
+                        <label for="mode">Mode</label>
+                        <input type="text" name="mode" id="mode" placeholder="Mode" value="Online" readonly required>
+                    </div>
+                    <div class="popup-field">
+                        <label for="date">Date</label>
+                        <input type="date" name="date" id="date" required min="<?php echo date('Y-m-d'); ?>">
+                    </div>
+                    <div class="popup-field">
+                        <label for="time">Time</label>
+                        <input type="time" name="time" id="time" required>
+                    </div>
+                    <div class="popup-field">
+                        <label for="meeting-link">Meeting Link</label>
+                        <input type="url" name="meeting-link" id="meeting-link" placeholder="https://meet.google.com/..." required>
+                    </div>
                 </div>
-                <div class="popup-field">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" required min="2025-04-22" title="Date must be today or later">
+                <div class="submitbtn">
+                    <button type="submit">
+                        <i class="fas fa-calendar-plus"></i> Schedule
+                    </button>
+                    <button type="button" onclick="hidePopup()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
                 </div>
-                <div class="popup-field">
-                    <label for="time">Time</label>
-                    <input type="time" id="time" required title="Please select a time">
-                </div>
-                <div class="popup-field">
-                    <label for="meeting-link">Meeting Link</label>
-                    <input type="url" id="meeting-link" placeholder="Meeting link" required title="Please enter a valid URL (e.g., https://example.com)">
-                </div>
-            </div>
-            <div class="submitbtn">
-                <button onclick="scheduleInterview()">Submit</button>
-                <button onclick="hidePopup()">Cancel</button>
             </div>
         </div>
-    </div>
+    </form>
 
     <!-- Assign Charges Popup -->
     <div class="popup-overlay" id="charges-popup">
         <div class="popup">
             <h5>Assign Charges</h5>
-            <div class="popup-content">
-                <input type="hidden" id="charges-astrologer-id" value="1">
-                <div class="popup-field">
-                    <label for="charges-per-minute">Charges Per Minute (IN ₹)</label>
-                    <input type="number" id="charges-per-minute" placeholder="Enter charges per minute" required min="1" max="100" step="0.01" title="Charges must be between 1 and 100 INR">
+            <form action="<?php echo base_url('Admin/assignCharges'); ?>" method="post" onsubmit="return assignCharges()">
+                <div class="popup-content">
+                    <input type="hidden" id="charges-astrologer-id" name="id">
+                    <div class="popup-field">
+                        <label for="charges-per-minute">Charges Per Minute (IN ₹)</label>
+                        <input type="number" id="charges-per-minute" name="charges_per_minute" placeholder="Enter charges per minute" required min="1" max="1000" step="0.01">
+                    </div>
                 </div>
-            </div>
-            <div class="submitbtn">
-                <button onclick="assignCharges()">Submit</button>
-                <button onclick="hideChargesPopup()">Cancel</button>
-            </div>
+                <div class="submitbtn">
+                    <button type="submit">
+                        <i class="fas fa-save"></i> Submit
+                    </button>
+                    <button type="button" onclick="hideChargesPopup()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
     <!-- Update Interview Popup -->
-    <div class="popup-overlay" id="update-interview-popup">
-        <div class="popup">
-            <h5>Update Interview Timing</h5>
-            <div class="popup-content">
-                <input type="hidden" id="update-astrologer-id" value="1">
-                <div class="popup-field">
-                    <label for="update-date">Date</label>
-                    <input type="date" id="update-date" required min="2025-04-22" title="Date must be today or later">
+    <form method="post" action="<?php echo base_url('Admin/ScheduleInterview'); ?>">
+        <div class="popup-overlay" id="update-interview-popup">
+            <div class="popup">
+                <h5>Update Interview Timing</h5>
+                <div class="popup-content">
+                    <input type="hidden" id="update-astrologer-id" name="id">
+
+                    <div class="popup-field">
+                        <label for="update-date">Date</label>
+                        <input type="date" id="update-date" name="date" required min="<?php echo date('Y-m-d'); ?>">
+                    </div>
+                    <div class="popup-field">
+                        <label for="update-time">Time</label>
+                        <input type="time" id="update-time" name="time" required>
+                    </div>
+                    <div class="popup-field">
+                        <label for="update-meeting-link">Meeting Link</label>
+                        <input type="url" id="update-meeting-link" name="meeting-link" placeholder="https://meet.google.com/..." required>
+                    </div>
                 </div>
-                <div class="popup-field">
-                    <label for="update-time">Time</label>
-                    <input type="time" id="update-time" required title="Please select a time">
+                <div class="submitbtn">
+                    <button type="submit">
+                        <i class="fas fa-save"></i> Update
+                    </button>
+                    <button type="button" onclick="hideUpdateInterviewPopup()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
                 </div>
-                <div class="popup-field">
-                    <label for="update-meeting-link">Meeting Link</label>
-                    <input type="url" id="update-meeting-link" placeholder="Meeting link" required title="Please enter a valid URL (e.g., https://example.com)">
-                </div>
-            </div>
-            <div class="submitbtn">
-                <button onclick="updateInterviewTiming()">Update</button>
-                <button onclick="hideUpdateInterviewPopup()">Cancel</button>
             </div>
         </div>
-    </div>
+    </form>
 
     <!-- Success Popup -->
     <div class="success-overlay" id="successPopup">
@@ -743,7 +925,14 @@
 
     <!-- Frontend JavaScript -->
     <script>
-        // Simulate backend data for certifications (replace with actual backend data)
+        // Handle image loading errors
+        function handleImageError(img) {
+            console.log('Image failed to load:', img.src);
+            img.src = '<?php echo base_url('assets/images/fallback.jpg'); ?>';
+            img.onerror = null;
+        }
+
+        // Simulate backend data for certifications
         const certifications = [
             { name: "Certification 1", url: "<?php echo base_url('Uploads/Astologer/cert1.pdf') ?>" },
             { name: "Certification 2", url: "<?php echo base_url('Uploads/Astologer/cert2.pdf') ?>" }
@@ -767,175 +956,153 @@
             });
         }
 
-        // Initialize certifications on page load
-        document.addEventListener('DOMContentLoaded', populateCertifications);
-
+        // Show Schedule Interview Popup
         function showPopup(button) {
-            let astrologerId = button.getAttribute("data-id") || "1";
-            let actionStatus = button.getAttribute("data-status");
-            let popup = document.getElementById("popup");
-            popup.classList.add("show");
-            document.getElementById("astrologer-id").value = astrologerId;
-            popup.setAttribute("data-status", actionStatus);
+            const astrologerId = button.getAttribute('data-id');
+            if (!astrologerId) {
+                Swal.fire("Error!", "Astrologer ID is missing.", "error");
+                return;
+            }
+            const popup = document.getElementById('popup');
+            popup.classList.add('show');
+            document.getElementById('astrologer-id').value = astrologerId;
         }
 
+        // Hide Schedule Interview Popup
         function hidePopup() {
-            let popup = document.getElementById("popup");
-            popup.classList.remove("show");
+            const popup = document.getElementById('popup');
+            popup.classList.remove('show');
         }
 
+        // Show Assign Charges Popup
         function showChargesPopup(button) {
-            try {
-                let astrologerId = button.getAttribute("data-id") || "1";
-                let popup = document.getElementById("charges-popup");
-                if (!popup) {
-                    console.error("Charges popup element not found");
-                    Swal.fire("Error!", "Charges popup not found.", "error");
-                    return;
-                }
-                popup.classList.add("show");
-                document.getElementById("charges-astrologer-id").value = astrologerId;
-            } catch (error) {
-                console.error("Error in showChargesPopup:", error);
-                Swal.fire("Error!", "Failed to open charges popup.", "error");
-            }
-        }
-
-        function hideChargesPopup() {
-            let popup = document.getElementById("charges-popup");
-            if (popup) {
-                popup.classList.remove("show");
-            } else {
-                console.error("Charges popup element not found");
-            }
-        }
-
-        function scheduleInterview() {
-            let astrologerId = document.getElementById("astrologer-id").value;
-            let date = document.getElementById("date").value;
-            let time = document.getElementById("time").value;
-            let meetingLink = document.getElementById("meeting-link").value;
-            let actionStatus = document.getElementById("popup").getAttribute("data-status");
-
+            const astrologerId = button.getAttribute('data-id');
             if (!astrologerId) {
                 Swal.fire("Error!", "Astrologer ID is missing.", "error");
                 return;
             }
-
-            if (!date || !time || !meetingLink) {
-                Swal.fire("Error!", "Please fill all required fields.", "error");
-                return;
-            }
-
-            let successPopup = document.getElementById("successPopup");
-            if (successPopup) {
-                successPopup.classList.add("show");
-            } else {
-                console.error("Success popup element with id 'successPopup' not found");
-            }
-            hidePopup();
+            const popup = document.getElementById('charges-popup');
+            popup.classList.add('show');
+            document.getElementById('charges-astrologer-id').value = astrologerId;
         }
 
+        // Validate and Submit Assign Charges
         function assignCharges() {
-            let astrologerId = document.getElementById("charges-astrologer-id").value;
-            let charges = document.getElementById("charges-per-minute").value;
+            const astrologerId = document.getElementById('charges-astrologer-id').value;
+            const charges = document.getElementById('charges-per-minute').value;
+            
+            if (!astrologerId) {
+                Swal.fire("Error!", "Astrologer ID is missing.", "error");
+                return false;
+            }
+            if (!charges || charges < 1 || charges > 1000) {
+                Swal.fire("Error!", "Charges must be between 1 and 1000 INR.", "error");
+                return false;
+            }
+            return true;
+        }
 
+        // Hide Assign Charges Popup
+        function hideChargesPopup() {
+            const popup = document.getElementById('charges-popup');
+            popup.classList.remove('show');
+        }
+
+        // Show Update Interview Popup
+        function showUpdateInterviewPopup(button) {
+            const astrologerId = button.getAttribute('data-id');
             if (!astrologerId) {
                 Swal.fire("Error!", "Astrologer ID is missing.", "error");
                 return;
             }
-
-            if (!charges || charges < 1 || charges > 100) {
-                Swal.fire("Error!", "Charges must be between 1 and 100 INR.", "error");
-                return;
-            }
-
-            let successPopup = document.getElementById("successPopup");
-            if (successPopup) {
-                successPopup.classList.add("show");
-            } else {
-                console.error("Success popup element with id 'successPopup' not found");
-            }
-            hideChargesPopup();
+            const popup = document.getElementById('update-interview-popup');
+            popup.classList.add('show');
+            document.getElementById('update-astrologer-id').value = astrologerId;
         }
 
-        function showUpdateInterviewPopup() {
-            let popup = document.getElementById("update-interview-popup");
-            popup.classList.add("show");
-        }
-
+        // Hide Update Interview Popup
         function hideUpdateInterviewPopup() {
-            let popup = document.getElementById("update-interview-popup");
-            popup.classList.remove("show");
+            const popup = document.getElementById('update-interview-popup');
+            popup.classList.remove('show');
         }
 
-        function updateInterviewTiming() {
-            let astrologerId = document.getElementById("update-astrologer-id").value;
-            let date = document.getElementById("update-date").value;
-            let time = document.getElementById("update-time").value;
-            let meetingLink = document.getElementById("update-meeting-link").value;
-
-            if (!astrologerId) {
-                Swal.fire("Error!", "Astrologer ID is missing.", "error");
-                return;
-            }
-
-            if (!date || !time || !meetingLink) {
-                Swal.fire("Error!", "Please fill all required fields.", "error");
-                return;
-            }
-
-            let successPopup = document.getElementById("successPopup");
-            if (successPopup) {
-                successPopup.classList.add("show");
-            } else {
-                console.error("Success popup element with id 'successPopup' not found");
-            }
-            hideUpdateInterviewPopup();
+        // Reject Approved Astrologer
+        function rejectApprovedAstrologer(button) {
+            const astrologerId = button.getAttribute('data-id');
+            
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to reject this approved astrologer. This action cannot be undone.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Reject',
+                cancelButtonText: 'Cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Create a form to submit the rejection
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '<?php echo base_url('Admin/approveRejectAstrologer'); ?>';
+                    
+                    const idInput = document.createElement('input');
+                    idInput.type = 'hidden';
+                    idInput.name = 'id';
+                    idInput.value = astrologerId;
+                    
+                    const statusInput = document.createElement('input');
+                    statusInput.type = 'hidden';
+                    statusInput.name = 'status';
+                    statusInput.value = 'rejected';
+                    
+                    form.appendChild(idInput);
+                    form.appendChild(statusInput);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
         }
 
-        function hideSuccessPopup() {
-            let successPopup = document.getElementById("successPopup");
-            if (successPopup) {
-                successPopup.classList.remove("show");
-            } else {
-                console.error("Success popup element with id 'successPopup' not found");
-            }
-        }
-
-        document.addEventListener("click", function(event) {
-            if (event.target && event.target.id === "reject-without-interview") {
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You are about to reject this astrologer without an interview.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes, Reject",
-                    cancelButtonText: "Cancel",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire("Success!", "Astrologer rejected successfully!", "success");
-                    }
-                });
-            }
+        // Initialize certifications on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            populateCertifications();
+            
+            // Set minimum date for date inputs
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').setAttribute('min', today);
+            document.getElementById('update-date').setAttribute('min', today);
         });
 
         // Sidebar Toggle
-        const toggler = document.querySelector(".toggler-btn");
-        const closeBtn = document.querySelector(".close-sidebar");
-        const sidebar = document.querySelector("#sidebar");
+        const toggler = document.querySelector('.toggler-btn');
+        const closeBtn = document.querySelector('.close-sidebar');
+        const sidebar = document.querySelector('#sidebar');
 
         if (toggler && sidebar) {
-            toggler.addEventListener("click", function() {
-                sidebar.classList.toggle("collapsed");
+            toggler.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
             });
         }
 
         if (closeBtn && sidebar) {
-            closeBtn.addEventListener("click", function() {
-                sidebar.classList.remove("collapsed");
+            closeBtn.addEventListener('click', function() {
+                sidebar.classList.remove('collapsed');
             });
         }
+
+        // Form validation
+        document.querySelector('#popup form').addEventListener('submit', function(e) {
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const meetingLink = document.getElementById('meeting-link').value;
+            
+            if (!date || !time || !meetingLink) {
+                e.preventDefault();
+                Swal.fire('Error!', 'Please fill all required fields.', 'error');
+            }
+        });
     </script>
+
 </body>
 </html>

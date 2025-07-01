@@ -146,6 +146,33 @@ $route['chat/(:num)'] = 'User/Chat/$1';
 
 
 // Admin Routes
+// $route['admindash'] = 'Admin/AdminDash';
+// $route['astrologerrequests'] = 'Admin/AstrologerReqList';
+// $route['pujarirequests'] = 'Admin/PujariReqList';
+// $route['usermanagement'] = 'Admin/UserManagement';
+// $route['festivals'] = 'Admin/Festivals';
+// $route['poojalist'] = 'Admin/BookPooja';
+// $route['jyotisikastore'] = 'Admin/JyotisikaStore';
+// $route['profile'] = 'Admin/Profile';
+// $route['anyliticsandreports'] = 'Admin/AnyliticsandReports';
+// $route['rescheduleinterview'] = 'Admin/RescheduleInterview';
+// $route['viewastrologer'] = 'Admin/ViewAstrologer';
+// $route['viewpujari'] = 'Admin/ViewPujari';
+// $route['astrologerslist'] = 'Admin/AstrologersList';
+// $route['astrologerreview'] = 'Admin/AstrologerReview';
+// $route['pujariList'] = 'Admin/PujariList';
+// $route['pujarireview'] = 'Admin/PujariReview';
+// $route['adminorders'] = 'Admin/AdminOrders';
+// $route['trackandship'] = 'Admin/TrackandShip';
+// $route['trackorderdetails'] = 'Admin/Track_Order_Details';
+
+
+
+
+// Admin Routes
+$route['SuperAdminlogin'] = 'Admin/Login';
+$route['admin/login'] = 'SuperAdminLogin/AdminLogin';
+
 $route['admindash'] = 'Admin/AdminDash';
 $route['astrologerrequests'] = 'Admin/AstrologerReqList';
 $route['pujarirequests'] = 'Admin/PujariReqList';
@@ -156,15 +183,23 @@ $route['jyotisikastore'] = 'Admin/JyotisikaStore';
 $route['profile'] = 'Admin/Profile';
 $route['anyliticsandreports'] = 'Admin/AnyliticsandReports';
 $route['rescheduleinterview'] = 'Admin/RescheduleInterview';
-$route['viewastrologer'] = 'Admin/ViewAstrologer';
-$route['viewpujari'] = 'Admin/ViewPujari';
+$route['viewastrologere/(:num)'] = 'Admin/ViewAstrologer/$1';
+$route['viewpujaridata/(:num)'] = 'Admin/ViewPujari/$1';
+// $route['viewpujari'] = 'Admin/ViewPujari';
 $route['astrologerslist'] = 'Admin/AstrologersList';
-$route['astrologerreview'] = 'Admin/AstrologerReview';
+$route['astrologerreviewe/(:num)'] = 'Admin/AstrologerReview/$1';
+// $route['astrologerreview/(:num)'] = 'Admin/AstrologerReview/$1';
+//Admin/AstrologerReview
 $route['pujariList'] = 'Admin/PujariList';
-$route['pujarireview'] = 'Admin/PujariReview';
+$route['pujarireview/(:num)'] = 'Admin/PujariReview/$1';
 $route['adminorders'] = 'Admin/AdminOrders';
 $route['trackandship'] = 'Admin/TrackandShip';
-$route['trackorderdetails'] = 'Admin/Track_Order_Details';
+$route['trackorderdetails/(:num)'] = 'Admin/Track_Order_Details/$1';
+$route['Admin/approveRejectAstrologer'] = 'Admin/approveRejectAstrologer';
+$route['Admin/assignCharges'] = 'Admin/assignCharges';
+// $route['Astrologer/ScheduleInterview'] = '';
+
+
 
 // Login Admin Routes
 $route['login'] = 'LoginForgotAdmin/LoginAdmin';
