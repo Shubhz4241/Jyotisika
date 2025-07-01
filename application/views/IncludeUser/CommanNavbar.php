@@ -302,7 +302,7 @@
                         cancelButtonText: "Cancel",
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "<?php echo base_url('login'); ?>";
+                            window.location.href = "<?php echo base_url('Login'); ?>";
                         }
                     });
                 <?php endif; ?>

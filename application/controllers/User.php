@@ -786,6 +786,7 @@ class User extends CI_Controller
 		$formdata = [
 			"user_fullname" => $this->input->post("user_fullname"),
 			"user_phonenumber" => $this->input->post("user_phonenumber"),
+			"user_email" => $this->input->post("user_email"),
 			"user_Address" => $this->input->post("user_Address"),
 			"user_city" => $this->input->post("user_city"),
 			"user_state" => $this->input->post("user_state"),
