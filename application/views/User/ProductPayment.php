@@ -121,8 +121,13 @@
                                 <div class="card border">
                                     <div class="card-body d-flex">
                                         <div class="product-image-container mb-3">
-                                            <img src="<?php echo base_url('assets/images/JyotisikaMall/Rudraksh.png'); ?>"
-                                                class="img-fluid rounded shadow-sm w-75" alt="Rudraksh">
+                                            <img src="<?php echo base_url( $product_data['product_image']); ?>"
+                                                class="img-fluid rounded shadow-sm w-75" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
+
+                                                 <!-- <img src="<?php echo base_url($product_data[0]["product_image"]); ?>" class="img-fluid product-image"
+                    style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';"> -->
+
+  
                                         </div>
                                         <div>
                                             <h5 class="fw-bold text-dark"><?php echo $product_data["product_name"] ?></h5>

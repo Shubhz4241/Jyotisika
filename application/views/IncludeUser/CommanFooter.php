@@ -12,7 +12,7 @@
                         style="background-color: var(--yellow); ">
                         <!-- Column 1: Social Media -->
                         <div class="col-12 col-md-2 text-center">
-                                <img src="<?php echo base_url('assets/images/logojyotisika.jpg'); ?>" alt="Logo"
+                                <img src="<?php echo base_url('assets/images/JyotisikaLogo.png'); ?>" alt="Logo"
                                         style="width: 100px;">
                                 <div class="social-media mt-2">
                                         <a href="#"><img src="<?php echo base_url('assets/images/facebook.png'); ?>"

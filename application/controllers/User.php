@@ -1425,8 +1425,7 @@ class User extends CI_Controller
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
 
-		print_r($data["showpujari"] );
-
+	
 
 		$api_url_get_feedback = base_url("User_Api_Controller/getpujarifeedback");
 		$ch_feedback = curl_init();
@@ -1523,8 +1522,6 @@ class User extends CI_Controller
 			$data["showcompltedpuja"] = $no_of_complted_puja_response_data["data"];
 		}
 
-		print_r("successfully ever seen");
-		print_r($data["showcompltedpuja"]);
 
 
 
@@ -1565,8 +1562,7 @@ class User extends CI_Controller
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
 
-		print_r($data["showpujari"]);
-
+		
 
 		$this->load->view("User/OnlinePoojaris", $data);
 	}
@@ -1759,7 +1755,7 @@ class User extends CI_Controller
 		}
 
 
-		print_r($data["show_completed_puja"]);
+		
 
 
 
