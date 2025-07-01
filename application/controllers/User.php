@@ -1759,6 +1759,8 @@ class User extends CI_Controller
 		}
 
 
+		print_r($data["show_completed_puja"]);
+
 
 
 		$this->load->view('User/Orders', $data);

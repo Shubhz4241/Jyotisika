@@ -88,7 +88,7 @@
 
 
 
-                                                <img src="<?php echo !empty($pujaridata['profile_pic']) ? base_url('uploads/pujari/profile/image/' . $pujaridata['profile_pic']) : base_url('assets/images/astrologerimg.png'); ?>"
+                                                <img src="<?php echo !empty($pujaridata['profile_pic']) ? base_url('uploads/pujari/profile/' . $pujaridata['profile_pic']) : base_url('assets/images/astrologerimg.png'); ?>"
                                                     alt="image" class="rounded-circle"
                                                     style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);"
                                                     onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/astrologerimg.png'); ?>';">

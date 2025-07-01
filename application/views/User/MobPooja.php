@@ -43,7 +43,7 @@
 
         <div class="container">
             <!-- completed_puja_count -->
-            <!-- <?php print_r($showmobpuja) ?> -->
+            <?php print_r($showmobpuja) ?>
             <!-- cards -->
             <div class="row my-4" id="cardContainer">
 
@@ -60,7 +60,7 @@
 
                                         <div class="position-relative">
 
-                                            <img src="<?php echo !empty($showmobpujadata['puja_name']) ? base_url('uploads/pujari/profile/image/' . $showmobpujadata['puja_name']) : base_url('assets/images/astrologerimg.png') ?>"
+                                            <img src="<?php echo !empty($showmobpujadata['profile_pic']) ? base_url('uploads/pujari/profile/' . $showmobpujadata['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
                                                 alt="image" class="rounded-circle"
                                                 style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                         </div>
