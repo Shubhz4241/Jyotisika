@@ -355,11 +355,12 @@
                                         <!-- Profile Section -->
                                         <div class="d-flex align-items-center mb-2">
                                             <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>">
-
-
                                                 <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
                                                     alt="image" class="rounded-circle"
-                                                    style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+                                                    style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);"
+                                                    onerror="this.onerror=null  this.src='<?php echo base_url('assets/images/astrologerimg.png'); ?>';">
+
+
                                             </a>
                                             <div class="ms-2">
                                                 <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>"
@@ -697,7 +698,7 @@
             </h3>
             <div class="row g-4 justify-content-center">
 
-              
+
 
                 <?php if (!empty($service_data)): ?>
                     <?php foreach ($service_data as $service_data_astologer): ?>

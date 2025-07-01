@@ -43,7 +43,7 @@
 
         <div class="container">
             <!-- completed_puja_count -->
-            <?php print_r($showmobpuja) ?>
+            <!-- <?php print_r($showmobpuja) ?> -->
             <!-- cards -->
             <div class="row my-4" id="cardContainer">
 
