@@ -174,21 +174,24 @@
             white-space: nowrap;
             margin-left: 2rem;
         }
-.setprice{
-    padding: 8px 16px;
-    background-color: green;
-     color: white;
-     border: 1px outset black;
-     border-radius: 5px;
-     margin-right: 10px;
-}
-.restrict{
-    padding: 8px 16px;
-     background-color: darkred;
-     color: white;
-     border: 1px outset black;
-      border-radius: 5px;
-}
+
+        .setprice {
+            padding: 8px 16px;
+            background-color: green;
+            color: white;
+            border: 1px outset black;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .restrict {
+            padding: 8px 16px;
+            background-color: darkred;
+            color: white;
+            border: 1px outset black;
+            border-radius: 5px;
+        }
+
         /* Responsive Design */
         @media (max-width: 992px) {
             .profile-container {
@@ -330,108 +333,125 @@
             }
 
         }
+
         .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
-      width: 100%;
-       height: 100%;
-      background: rgba(1, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-border: none;    }
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(1, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            border: none;
+        }
 
-    .modal-content {
-      background: #fff;
-      border-radius: 12px;
-      border: none;
-      width: 100%;
-      max-width: 700px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
+        .modal-content {
+            background: #fff;
+            border-radius: 12px;
+            border: none;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
 
-    .modal-header {
-      background-color: #0C768A;
-      color: #fff;
-      padding: 12px;
-      text-align: center;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      font-size: 18px;
-    }
+        .modal-header {
+            background-color: #0C768A;
+            color: #fff;
+            padding: 12px;
+            text-align: center;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            font-size: 18px;
+        }
 
-    .form-row {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin: 20px 0;
-    }
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        } 
 
-    .form-row input,
-    .form-row select {
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-background-color:rgb(83, 154, 168)  ;
-      color: #fff;
-    }
-    .form-row input::placeholder{
-        color: #fff;
-    }
+        .form-row input,
+        .form-row select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            background-color: rgb(83, 154, 168);
+            color: #fff;
+        }
 
-    .modal-footer {
-      text-align: center;
-    }
+        .form-row input::placeholder {
+            color: #fff;
+        }
 
-    .modal-footer button {
-      padding: 10px 20px;
-      background-color:  #0C768A;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+        .modal-footer {
+            text-align: center;
+        }
 
-    @media (min-width: 480px) {
-      .form-row {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-      .form-row input,
-      .form-row select {
-        width: 48%;
-      }
-    }
+        .modal-footer button {
+            padding: 10px 20px;
+            background-color: #0C768A;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @media (min-width: 480px) {
+            .form-row {
+
+                flex-direction: row;
+                justify-content: space-between;
+
+            }
+
+            .form-row input,
+            .form-row select {
+                width: 48%;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="d-flex">
-    <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
+        <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
 
         <!-- Main Content -->
         <div class="main w-100">
-        <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
+            <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
 
             <!-- Profile Section -->
             <div class="profile-container">
-                <img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" alt="user-image" class="profile-image">
+                <img src="<?php echo base_url('uploads/pujari/profile/' . $Pujari['profile_pic']); ?>" alt="user-image" class="profile-image">
 
-                <div class="profile-details">
+                <div class="profile-details"> 
                     <div>
-<p><strong>Name:</strong>John Doe</p>
+                        <!-- <p><strong>Name:</strong>John Doe</p>
                         <p><strong>Contact No:</strong> 99393779848</p>
                         <p><strong>Email:</strong> JohnDoe@gmail.com</p>
                         <p><strong>Gender:</strong> Male</p>
                         <p><strong>Address:</strong> Pandit colony, Nashik</p>
                         <p><strong>Languages Known:</strong> English, Hindi, Marathi</p>
                         <p><strong>Specialities:</strong> Palm mystery, numerology</p>
-                        <p><strong>Experience:</strong> 10 years</p>
+                        <p><strong>Experience:</strong> 10 years</p> -->
+
+                        <p><strong>Name:</strong> <?= $Pujari['name'] ?></p>
+                        <p><strong>Contact No:</strong> <?= $Pujari['contact'] ?></p>
+                        <p><strong>Email:</strong> <?= $Pujari['email'] ?></p>
+                        <p><strong>Gender:</strong> <?= $Pujari['gender'] ?></p>
+                        <p><strong>Address:</strong> <?= $Pujari['address'] ?></p>
+                        <p><strong>Languages Known:</strong> <?= $Pujari['languages'] ?></p>
+                        <p><strong>Specialities:</strong> <?= $Pujari['specialties'] ?></p>
+                        <p><strong>Experience:</strong> <?= $Pujari['experience'] ?> years</p>
                         <div style="margin-top: 10px;">
-    </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -441,7 +461,7 @@ background-color:rgb(83, 154, 168)  ;
                 <h4>User Reviews</h4>
                 <div id="reviews-container">
                     <div class="review-item">
-                        <img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" alt="user-image">
+                        <img src="<?php echo base_url('assets/images/HRside/Profile1.png') ?>" alt="user-image">
                         <div class="review-content">
                             <div class="review-header">
                                 <div class="review-header-left">
@@ -466,7 +486,7 @@ background-color:rgb(83, 154, 168)  ;
                         </button>
                     </div>
                     <div class="review-item">
-                        <img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" alt="user-image">
+                        <img src="<?php echo base_url('assets/images/HRside/Profile1.png') ?>" alt="user-image">
                         <div class="review-content">
                             <div class="review-header">
                                 <div class="review-header-left">
@@ -496,74 +516,73 @@ background-color:rgb(83, 154, 168)  ;
     </div>
     <!-- Modal -->
     <div class="modal" id="priceModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      Assign Charges (Per Minute)
+        <div class="modal-content">
+            <div class="modal-header">
+                Assign Charges (Per Minute)
+            </div>
+            <div class="form-row" style="align-items: center; justify-content: center;">
+                <label for="priceInput" style="margin-right: 10px;">Price:</label>
+                <input type="number" id="priceInput" placeholder="Price" min="1" oninput="validatePositive(this)">
+            </div>
+
+        </div>
     </div>
-    <div class="form-row" style="align-items: center; justify-content: center;">
-      <label for="priceInput" style="margin-right: 10px;">Price:</label>
-    <input type="number" id="priceInput" placeholder="Price" min="1" oninput="validatePositive(this)">
-    </div>
-    
-  </div>
-</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function openModal() {
-    document.getElementById('priceModal').style.display = 'flex';
-  }
+            document.getElementById('priceModal').style.display = 'flex';
+        }
 
-  function closeModal() {
-    document.getElementById('priceModal').style.display = 'none';
-  }
+        function closeModal() {
+            document.getElementById('priceModal').style.display = 'none';
+        }
 
-  // Optional: Close modal when clicking outside the modal content
-  window.onclick = function(event) {
-    const modal = document.getElementById('priceModal');
-    if (event.target === modal) {
-      closeModal();
-    }
-  }
+        // Optional: Close modal when clicking outside the modal content
+        window.onclick = function(event) {
+            const modal = document.getElementById('priceModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
 
-  function validatePositive(input) {
-    if (input.value < 1) {
-      input.value = 1;
-    }
-  }
+        function validatePositive(input) {
+            if (input.value < 1) {
+                input.value = 1;
+            }
+        }
 
-    $(document).ready(function () {
-        $('.reply-button').on('click', function (e) {
-            e.preventDefault();
+        $(document).ready(function() {
+            $('.reply-button').on('click', function(e) {
+                e.preventDefault();
 
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Perform the delete action here
-                    // For now, let's remove the review-item from DOM as a demo
-                    $(this).closest('.review-item').fadeOut(300, function () {
-                        $(this).remove();
-                    });
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
 
-                    Swal.fire(
-                        'Deleted!',
-                        'The review has been removed.',
-                        'success'
-                    );
-                }
+                        $(this).closest('.review-item').fadeOut(300, function() {
+                            $(this).remove();
+                        });
+
+                        Swal.fire(
+                            'Deleted!',
+                            'The review has been removed.',
+                            'success'
+                        );
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 
-<script>
+    <script>
         const toggler = document.querySelector(".toggler-btn");
         const closeBtn = document.querySelector(".close-sidebar");
         const sidebar = document.querySelector("#sidebar");

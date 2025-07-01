@@ -161,6 +161,30 @@ class User extends CI_Controller
 
 		// $data['astrologersdata'] = $this->Astrologer();
 
+		$ch_url = base_url("User_Api_Controller/showservices_limited");
+
+		$ch_service = curl_init();
+		curl_setopt($ch_service, CURLOPT_URL, $ch_url);
+		curl_setopt($ch_service, CURLOPT_RETURNTRANSFER, true);
+		$service_response = curl_exec($ch_service);
+		$curl_error_service = curl_error($ch_service);
+		curl_close($ch_service);
+
+		if ($service_response === false) {
+			show_error("cURL Error: " . $curl_error_service, 500);
+			return;
+		}
+
+		$service_data = json_decode($service_response, associative: true);
+
+
+		$data["service_data"] = "";
+		if ($service_data["status"] == "success") {
+			$data["service_data"] = $service_data["data"];
+		}
+
+
+		//   print_r($data["service_data"]);
 		$this->lang->load('message', $language);
 		$this->load->view('User/Home', $data);
 	}
@@ -345,6 +369,33 @@ class User extends CI_Controller
 		$language = $this->session->userdata('site_language') ?? 'english';
 		$this->lang->load('message', $language);
 
+
+		
+
+		$ch_url_fest = base_url("User_Api_Controller/show_today_festivals");
+
+		$ch_fest = curl_init();
+		curl_setopt($ch_fest, CURLOPT_URL, $ch_url_fest);
+		curl_setopt($ch_fest, CURLOPT_RETURNTRANSFER, true);
+		$today_festivals_response = curl_exec($ch_fest);
+		$curl_error_today_festivals = curl_error($ch_fest);
+		curl_close($ch_fest);
+
+		if ($today_festivals_response === false) {
+			show_error("cURL Error: " . $curl_error_today_festivals, 500);
+			return;
+		}
+
+		$festivals_data = json_decode($today_festivals_response, associative: true);
+
+
+		$data["today_festivals_response"] = "";
+		if ($festivals_data["status"] == "success") {
+			$data["today_festivals_response"] = $festivals_data["data"];
+		}
+
+		
+
 		$ch_url = base_url("User_Api_Controller/show_festivals");
 
 		$ch = curl_init();
@@ -367,6 +418,7 @@ class User extends CI_Controller
 			$data["festivals_data"] = $festivals_data["data"];
 		}
 
+		
 
 		$this->load->view('User/Festival', $data);
 	}
@@ -1010,11 +1062,8 @@ class User extends CI_Controller
 
 			$data["userinfo_data"] = $getdata["userinfo"];
 
-
-
-
-
 		}
+		
 
 
 
@@ -1191,10 +1240,34 @@ class User extends CI_Controller
 	public function AstrologyServices()
 	{
 		$language = $this->session->userdata('site_language') ?? 'english';
-
-
 		$this->lang->load('message', $language);
-		$this->load->view('User/AstrologyServices');
+
+
+		$ch_url = base_url("User_Api_Controller/showallservices");
+
+		$ch_service = curl_init();
+		curl_setopt($ch_service, CURLOPT_URL, $ch_url);
+		curl_setopt($ch_service, CURLOPT_RETURNTRANSFER, true);
+		$service_response = curl_exec($ch_service);
+		$curl_error_service = curl_error($ch_service);
+		curl_close($ch_service);
+
+		if ($service_response === false) {
+			show_error("cURL Error: " . $curl_error_service, 500);
+			return;
+		}
+
+		$service_data = json_decode($service_response, associative: true);
+
+
+		$data["service_data"] = "";
+		if ($service_data["status"] == "success") {
+			$data["service_data"] = $service_data["data"];
+		}
+
+
+
+		$this->load->view('User/AstrologyServices', $data);
 	}
 
 	public function Following()
@@ -1352,8 +1425,7 @@ class User extends CI_Controller
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
 
-		// print_r($data["showpujari"] );
-
+	
 
 		$api_url_get_feedback = base_url("User_Api_Controller/getpujarifeedback");
 		$ch_feedback = curl_init();
@@ -1453,6 +1525,7 @@ class User extends CI_Controller
 
 
 
+
 		$this->load->view('User/PoojarViewMore', $data);
 	}
 
@@ -1489,7 +1562,7 @@ class User extends CI_Controller
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
 
-
+		
 
 		$this->load->view("User/OnlinePoojaris", $data);
 	}
@@ -1681,6 +1754,8 @@ class User extends CI_Controller
 			$data["show_completed_puja"] = $showbookedpuja_completed_response["data"];
 		}
 
+
+		
 
 
 

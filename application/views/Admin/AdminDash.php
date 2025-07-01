@@ -199,7 +199,7 @@
         <!-- Sidebar -->
         <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
 
-        <!-- SIDEBAR END -->
+        <!-- SIDEBAR END --> 
 
         <!-- Main Component -->
         <div class="main mt-3">
@@ -218,7 +218,7 @@
                             <a href="<?php echo site_url('usermanagement'); ?>" class="text-decoration-none text-dark">
                                 <div class="counter-card">
                                     <div class="counter-card-content">
-                                        <h2 class="mt-1 counter">150+</h2>
+                                        <h2 class="mt-1 counter"><?= $userCount ?>+</h2>
                                         <p>User</p>
                                     </div>
                                     <img src="<?php echo base_url('assets/images/HRside/Priest.png')?>" alt="Pujari icon" class="counter-icon">
@@ -229,7 +229,7 @@
                             <a href="<?php echo site_url('astrologerslist'); ?>" class="text-decoration-none text-dark">
                                 <div class="counter-card">
                                     <div class="counter-card-content">
-                                        <h2 class="mt-1 counter">150+</h2>
+                                        <h2 class="mt-1 counter"><?= $astrologerCount ?>+</h2>
                                         <p>Astrologer</p>
                                     </div>
                                     <img src="<?php echo base_url('assets/images/HRside/Astrology.png')?>" alt="Astrologer icon" class="counter-icon">
@@ -241,7 +241,7 @@
                             <a href="<?php echo site_url('pujariList'); ?>" class="text-decoration-none text-dark">
                                 <div class="counter-card">
                                     <div class="counter-card-content">
-                                        <h2 class="mt-1 counter">150+</h2>
+                                        <h2 class="mt-1 counter"><?= $pujariCount ?>+</h2>
                                         <p>Pujari</p>
                                     </div>
                                     <img src="<?php echo base_url('assets/images/HRside/Priest.png')?>" alt="Pujari icon" class="counter-icon">
@@ -254,7 +254,7 @@
 
                             <div class="counter-card">
                                 <div class="counter-card-content">
-                                    <h2 class="mt-1 counter">150+</h2>
+                                    <h2 class="mt-1 counter"><?= $reinterviewCount ?>+</h2>
                                     <p>Re-Interview</p>
                                 </div>
                                 <img src="<?php echo base_url('assets/images/HRside/Interview.png')?>" alt="Reinterview icon" class="counter-icon">
@@ -262,7 +262,6 @@
                             </a>
                         </div>
                     </div>
-
                     <!-- Recent Astrologer Requests Section -->
                     <h4 class="section-title">Recent Astrologer Requests</h4>
                     <div class="table-responsive mb-4">
@@ -281,18 +280,21 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php foreach($Astro as $astro) :?> 
                                 <tr>
-                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" width="40" width="40"></td>
-                                    <td>John Doe</td>
-                                    <td>9529577564</td>
-                                    <td>johndoe@example.com</td>
-                                    <td>Pandit colony</td>
-                                    <td>English, Hindi, Marathi</td>
-                                    <td>Numerology</td>
-                                    <td>10 years</td>
-                                    <td><button class="btn btn-view" onclick="window.location.href='viewastrologer'">View</button></td>
-                                </tr>
-                                <tr>
+                                    <td><img src="<?php echo base_url('uploads/astrologer/' . $astro['profile_image']); ?>" width="40" width="40"></td>
+                                    <td><?php echo $astro['name'] ?></td>
+                                    <td><?php echo $astro['contact'] ?></td>
+                                    <td><?php echo $astro['email'] ?></td>
+                                    <td><?php echo $astro['address'] ?></td>
+                                    <td><?php echo $astro['languages'] ?></td>      
+                                    <td><?php echo $astro['specialties'] ?></td>            
+                                    <td><?php echo $astro['experience'] ?></td>
+<td>
+  <button class="btn btn-view" onclick="window.location.href='viewastrologere/<?php echo $astro['id']; ?>'">View</button>
+</td>                                </tr>
+                                <?php endforeach?>
+                                <!-- <tr>
                                     <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" width="40" width="40"></td>
                                     <td>John Doe</td>
                                     <td>9529577564</td>
@@ -313,7 +315,7 @@
                                     <td>Numerology</td>
                                     <td>10 years</td>
                                     <td><button class="btn btn-view" onclick="window.location.href='viewastrologer'">View</button></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -339,8 +341,22 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
+
                             <tbody>
+                                 <?php foreach($Pujari as $pujari) :?>
                                 <tr>
+                                    <td><img src="<?php echo base_url('uploads/pujari/profile/' . $pujari['profile_pic']); ?>" width="40" width="40"></td>
+                                    <td><?php echo $pujari['name'] ?></td>
+                                    <td><?php echo $pujari['contact'] ?></td>
+                                    <td><?php echo $pujari['email'] ?></td>
+                                    <td><?php echo $pujari['address'] ?></td>
+                                    <td><?php echo $pujari['languages'] ?></td>
+                                    <td><?php echo $pujari['specialties'] ?></td>
+                                    <td><?php echo $pujari['experience'] ?></td> 
+                                    <td><button class="btn btn-view" onclick="window.location.href='viewpujaridata/<?php echo $pujari['id']; ?>'">View</button></td>
+                                </tr>
+                                <?php endforeach?>
+                                <!-- <tr>
                                     <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" width="40"" width="40"></td>
                                     <td>John Doe</td>
                                     <td>9529577564</td>
@@ -361,18 +377,7 @@
                                     <td>Ghar Shanti Puja</td>
                                     <td>10 years</td>
                                     <td><button class="btn btn-view" onclick="window.location.href='viewpujari'">View</button></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="<?php echo base_url('assets/images/HRside/Profile1.png')?>" width="40"" width="40"></td>
-                                    <td>John Doe</td>
-                                    <td>9529577564</td>
-                                    <td>johndoe@example.com</td>
-                                    <td>Pandit colony</td>
-                                    <td>English, Hindi, Marathi</td>
-                                    <td>Ghar Shanti Puja</td>
-                                    <td>10 years</td>
-                                    <td><button class="btn btn-view" onclick="window.location.href='viewpujari'">View</button></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -385,7 +390,7 @@
     </div>
 
     <!-- PDF Modal -->
-    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -397,7 +402,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- PDF Viewer Script -->
     <script>

@@ -84,7 +84,7 @@
 
         $profile_image_path = isset($userinfo["user_image"]) && !empty($userinfo["user_image"]) 
         ? base_url($userinfo["user_image"]) 
-        : base_url('assets/images/profileimage.png');
+        : base_url('assets/images/profileImage.png');
 
         $current_image =  isset($userinfo["user_image"]) && !empty($userinfo["user_image"])  ? ($userinfo["user_image"])  : ('assets/images/profileimage.png');
 

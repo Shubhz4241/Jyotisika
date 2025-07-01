@@ -16,7 +16,7 @@ class PujariController extends CI_Controller
         parent::__construct();
         // Set CORS headers
         header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
         $this->load->model('PujariModel');
         $this->load->helper(array('form', 'url'));
@@ -636,7 +636,7 @@ DO NOT SHARE ANYBODY NewAstro
         header('Content-Type: application/json');
 
         $data = [
-            
+
             'name' => $this->input->post('pooja_name'),
             'date' => $this->input->post('date'),
             'service_id' => $this->input->post('service_id'),
@@ -771,17 +771,17 @@ DO NOT SHARE ANYBODY NewAstro
             return;
         }
 
-          
+
         $service = $this->PujariModel->getServiceByName($specialties);
 
-         if (!$service) {
-        http_response_code(404);
-        echo json_encode(['status' => 'error', 'message' => 'Service not found.']);
-        return;
-    }
+        if (!$service) {
+            http_response_code(404);
+            echo json_encode(['status' => 'error', 'message' => 'Service not found.']);
+            return;
+        }
 
-    $puja_charges = $service['price'];
-    $service_id = $service['id'];
+        $puja_charges = $service['price'];
+        $service_id = $service['id'];
 
         $data = [
             'pujari_id' => $pujari_id,
@@ -789,7 +789,7 @@ DO NOT SHARE ANYBODY NewAstro
             'available_day' => $availability_days,
             'start_time' => $start_time,
             'end_time' => $end_time,
-            'puja_charges' => $puja_charges ,
+            'puja_charges' => $puja_charges,
             'service_id' => $service_id
         ];
 
@@ -1131,7 +1131,7 @@ DO NOT SHARE ANYBODY NewAstro
         }
     }
 
-     public function earningsBreakdownOnline($pujari_id)
+    public function earningsBreakdownOnline($pujari_id)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             echo json_encode(['status' => false, 'message' => 'Invalid request method']);
@@ -1149,7 +1149,7 @@ DO NOT SHARE ANYBODY NewAstro
         }
     }
 
-     public function earningsBreakdownMob($pujari_id)
+    public function earningsBreakdownMob($pujari_id)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             echo json_encode(['status' => false, 'message' => 'Invalid request method']);
@@ -1167,7 +1167,7 @@ DO NOT SHARE ANYBODY NewAstro
         }
     }
 
-     public function earningsBreakdownMonthlyOnline($pujari_id)
+    public function earningsBreakdownMonthlyOnline($pujari_id)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             echo json_encode(['status' => false, 'message' => 'Invalid request method']);
@@ -1201,7 +1201,7 @@ DO NOT SHARE ANYBODY NewAstro
         }
     }
 
-     public function getTotalEarnings($pujari_id)
+    public function getTotalEarnings($pujari_id)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             echo json_encode(['status' => false, 'message' => 'Invalid request method']);
@@ -1236,7 +1236,4 @@ DO NOT SHARE ANYBODY NewAstro
             echo json_encode(['status' => false, 'message' => 'No poojas found']);
         }
     }
-
-    
-
 }

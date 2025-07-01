@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -252,874 +253,198 @@
                 max-width: 250px;
             }
         }
-
-        .nav-pills .nav-link {
-            color: #333;
-            /* Default text color */
-            /* background-color: #e0e0e0; Default background */
-            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-        }
-
-        .nav-pills .nav-link.active {
-            background-color: #0c768a !important;
-            /* Active color */
-            color: #fff !important;
-            /* White text for better contrast */
-            font-weight: bold;
-        }
     </style>
 </head>
 
 <body style="background-color: rgb(228, 236, 241);">
-    <div class="d-flex">
-        <!-- Sidebar -->
-        <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
-        <!-- SIDEBAR END -->
 
-        <!-- Main Component -->
-        <div class="main mt-3">
-            <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
 
-            <main class="p-3">
-                <div class="container">
-                    <h4 class="float-start">Recent Pujari Requests</h4>
+    <!-- Main Component -->
+    <div class="main mt-3 w-100">
+      <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
 
-                    <!-- NAV TAB -->
-                    <div class="float-end">
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="newest-tab" data-bs-toggle="pill" role="tab" aria-controls="newest" aria-selected="false" onclick="filterTable('newest')">Newest Requests</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pending-tab" data-bs-toggle="pill" role="tab" aria-controls="pending" aria-selected="false" onclick="filterTable('pending')">Scheduled</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="approved-tab" data-bs-toggle="pill" role="tab" aria-controls="approved" aria-selected="false" onclick="filterTable('approved')">Approved</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="rejected-tab" data-bs-toggle="pill" role="tab" aria-controls="rejected" aria-selected="false" onclick="filterTable('rejected')">Rejected</button>
-                            </li>
-                        </ul>
-                    </div>
+      <main class="p-3">
+        <div class="container">
+          <h4 class="float-start">Recent Pujari Requests</h4>
 
-                    <!-- NAV TAB CONTENT -->
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="PujariTable" role="tabpanel" tabindex="0">
-                            <div class="container mt-3 mb-4">
-                                <!-- Search Bar -->
-                                <input type="text" id="searchBar" class="form-control mb-3 border-3 shadow-none" placeholder="Search..." onkeyup="filterData()">
+          <!-- NAV TAB -->
+          <div class="float-end">
+            <ul class="nav nav-pills mb-3" role="tablist">
+              <li class="nav-item"><button class="nav-link active" onclick="filterTable('newest')">Newest Requests</button></li>
+              <li class="nav-item"><button class="nav-link" onclick="filterTable('scheduled')">Scheduled</button></li>
+              <li class="nav-item"><button class="nav-link" onclick="filterTable('approved')">Approved</button></li>
+              <li class="nav-item"><button class="nav-link" onclick="filterTable('rejected')">Rejected</button></li>
+            </ul>
+          </div>
 
-                                <!-- Table -->
-                                <div class="table-responsive">
-                                    <table class="table table-light table-hover" id="leaveTable">
-                                        <thead>
-                                            <tr>
-                                                <th>Sr. No</th>
-                                                <th>Profile</th>
-                                                <th>Name</th>
-                                                <th>Contact</th>
-                                                <th>Gender</th>
-                                                <th>Address</th>
-                                                <th>Languages Known</th>
-                                                <th>Specialities</th>
-                                                <th>Experience</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tableBody"></tbody>
-                                    </table>
-                                </div>
-                            </div>
+          <!-- CONTENT -->
+          <div class="tab-pane fade show active" id="PujariTable">
+            <div class="container mt-3 mb-4">
+              <!-- Search -->
+              <input type="text" id="searchBar" class="form-control mb-3" placeholder="Search..." onkeyup="filterData()">
 
-                            <!-- PDF Modal -->
-                            <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="pdfModalLabel">Document Preview</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <iframe id="pdfViewer" src="" style="width: 100%; height: 500px;" frameborder="0"></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="pagination" class="d-flex justify-content-center mt-3"></div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Script Toggle Sidebar -->
-    <script>
-        const toggler = document.querySelector(".toggler-btn");
-        const closeBtn = document.querySelector(".close-sidebar");
-        const sidebar = document.querySelector("#sidebar");
-
-        toggler.addEventListener("click", function() {
-            sidebar.classList.toggle("collapsed");
-        });
-
-        closeBtn.addEventListener("click", function() {
-            sidebar.classList.remove("collapsed");
-        });
-    </script>
-
-    <!-- Main Data Script -->
-    <script>
-        let currentPage = 1;
-        const rowsPerPage = 7;
-        let PujarisData = [];
-        let filteredData = [];
-        const basePath = "";
-
-        async function fetchPujaris() {
-            try {
-                PujarisData = [
-                    // Newest Requests - 10 rows
-                    {
-                        id: 1,
-                        profile_image: "",
-                        name: "Kavita Sharma",
-                        phone_number: "9876543210",
-                        email: "kavita@example.com",
-                        gender: "Female",
-                        address: "Delhi",
-                        languages_known: "Hindi, English",
-                        specialties: ["Tarot Reading", "Numerology"],
-                        aadhar_card_pdf: "assets/aadhar/id1.pdf",
-                        experience: "2 years",
-                        certificates: ["Tarot Basics"],
-                        status: "New Request"
-                    },
-                    {
-                        id: 2,
-                        profile_image: "",
-                        name: "Amit Patel",
-                        phone_number: "9123456789",
-                        email: "amit.patel@example.com",
-                        gender: "Male",
-                        address: "Mumbai",
-                        languages_known: "Hindi, Marathi",
-                        specialties: ["Vedic Astrology"],
-                        aadhar_card_pdf: "assets/aadhar/id2.pdf",
-                        experience: "3 years",
-                        certificates: ["Vedic Astrology Intro"],
-                        status: "New Request"
-                    },
-                    {
-                        id: 3,
-                        profile_image: "",
-                        name: "Sneha Roy",
-                        phone_number: "9988776655",
-                        email: "sneha.roy@example.com",
-                        gender: "Female",
-                        address: "Kolkata",
-                        languages_known: "Bengali, Hindi",
-                        specialties: ["Palmistry"],
-                        aadhar_card_pdf: "assets/aadhar/id3.pdf",
-                        experience: "1 year",
-                        certificates: [],
-                        status: "New Request"
-                    },
-                    {
-                        id: 4,
-                        profile_image: "",
-                        name: "Vikas Gupta",
-                        phone_number: "9876541234",
-                        email: "vikas.gupta@example.com",
-                        gender: "Male",
-                        address: "Jaipur",
-                        languages_known: "Hindi, Rajasthani",
-                        specialties: ["Kundli Matching"],
-                        aadhar_card_pdf: "assets/aadhar/id4.pdf",
-                        experience: "2 years",
-                        certificates: ["Kundli Basics"],
-                        status: "New Request"
-                    },
-                    {
-                        id: 5,
-                        profile_image: "",
-                        name: "Priyanka Nair",
-                        phone_number: "9123459876",
-                        email: "priyanka.nair@example.com",
-                        gender: "Female",
-                        address: "Chennai",
-                        languages_known: "Tamil, English",
-                        specialties: ["Vastu Shastra"],
-                        aadhar_card_pdf: "assets/aadhar/id5.pdf",
-                        experience: "3 years",
-                        certificates: ["Vastu Intro"],
-                        status: "New Request"
-                    },
-                    {
-                        id: 6,
-                        profile_image: "",
-                        name: "Rahul Desai",
-                        phone_number: "9988775544",
-                        email: "rahul.desai@example.com",
-                        gender: "Male",
-                        address: "Ahmedabad",
-                        languages_known: "Gujarati, Hindi",
-                        specialties: ["Horoscope Analysis"],
-                        aadhar_card_pdf: "assets/aadhar/id6.pdf",
-                        experience: "2 years",
-                        certificates: [],
-                        status: "New Request"
-                    },
-                    {
-                        id: 7,
-                        profile_image: "",
-                        name: "Anjali Verma",
-                        phone_number: "9876544321",
-                        email: "anjali.verma@example.com",
-                        gender: "Female",
-                        address: "Lucknow",
-                        languages_known: "Hindi, Urdu",
-                        specialties: ["Astrology Consultation"],
-                        aadhar_card_pdf: "assets/aadhar/id7.pdf",
-                        experience: "1 year",
-                        certificates: [],
-                        status: "New Request"
-                    },
-                    {
-                        id: 8,
-                        profile_image: "",
-                        name: "Suresh Reddy",
-                        phone_number: "9123458765",
-                        email: "suresh.reddy@example.com",
-                        gender: "Male",
-                        address: "Hyderabad",
-                        languages_known: "Telugu, English",
-                        specialties: ["Palm Reading"],
-                        aadhar_card_pdf: "assets/aadhar/id8.pdf",
-                        experience: "2 years",
-                        certificates: ["Palm Reading Basics"],
-                        status: "New Request"
-                    },
-                    {
-                        id: 9,
-                        profile_image: "",
-                        name: "Meena Joshi",
-                        phone_number: "9988774433",
-                        email: "meena.joshi@example.com",
-                        gender: "Female",
-                        address: "Pune",
-                        languages_known: "Marathi, Hindi",
-                        specialties: ["Numerology"],
-                        aadhar_card_pdf: "assets/aadhar/id9.pdf",
-                        experience: "3 years",
-                        certificates: ["Numerology Intro"],
-                        status: "New Request"
-                    },
-                    {
-                        id: 10,
-                        profile_image: "",
-                        name: "Rohan Kumar",
-                        phone_number: "9876543219",
-                        email: "rohan.kumar@example.com",
-                        gender: "Male",
-                        address: "Bangalore",
-                        languages_known: "Kannada, English",
-                        specialties: ["Tarot Reading"],
-                        aadhar_card_pdf: "assets/aadhar/id10.pdf",
-                        experience: "2 years",
-                        certificates: [],
-                        status: "New Request"
-                    },
-                    // Scheduled (Pending Interview) - 10 rows
-                    {
-                        id: 11,
-                        profile_image: "",
-                        name: "Asha Mehta",
-                        phone_number: "9876543220",
-                        email: "asha.mehta@example.com",
-                        gender: "Female",
-                        address: "Lucknow",
-                        languages_known: "Hindi, Sanskrit",
-                        specialties: ["Palmistry", "Kundli"],
-                        aadhar_card_pdf: "assets/aadhar/id11.pdf",
-                        experience: "4 years",
-                        certificates: ["Vedic Astrology Certificate", "Palmistry Diploma"],
-                        status: "Pending Interview"
-                    },
-                    {
-                        id: 12,
-                        profile_image: "",
-                        name: "Rahul Sen",
-                        phone_number: "9123456790",
-                        email: "rahul.sen@example.com",
-                        gender: "Male",
-                        address: "Delhi",
-                        languages_known: "Hindi, English",
-                        specialties: ["Vedic Astrology"],
-                        aadhar_card_pdf: "assets/aadhar/id12.pdf",
-                        experience: "6 years",
-                        certificates: ["Vedic Astrology Diploma"],
-                        status: "Pending Interview"
-                    },
-                    {
-                        id: 13,
-                        profile_image: "",
-                        name: "Divya Kapoor",
-                        phone_number: "9988776666",
-                        email: "divya.kapoor@example.com",
-                        gender: "Female",
-                        address: "Mumbai",
-                        languages_known: "English, Hindi",
-                        specialties: ["Tarot Reading"],
-                        aadhar_card_pdf: "assets/aadhar/id13.pdf",
-                        experience: "3 years",
-                        certificates: ["Tarot Card Reading Certification"],
-                        status: "Pending Interview"
-                    },
-                    {
-                        id: 14,
-                        profile_image: "",
-                        name: "Vikram Sharma",
-                        phone_number: "9876541244",
-                        email: "vikram.sharma@example.com",
-                        gender: "Male",
-                        address: "Jaipur",
-                        languages_known: "Hindi, Marwari",
-                        specialties: ["Numerology"],
-                        aadhar_card_pdf: "assets/aadhar/id14.pdf",
-                        experience: "5 years",
-                        certificates: ["Numerology Certificate"],
-                        status: "Pending Interview"
-                    },
-                    {
-                        id: 15,
-                        profile_image: "",
-                        name: "Priya Nair",
-                        phone_number: "9123459887",
-                        email: "priya.nair2@example.com",
-                        gender: "Female",
-                        address: "Chennai",
-                        languages_known: "Tamil, English",
-                        specialties: ["Vastu Shastra"],
-                        aadhar_card_pdf: "assets/aadhar/id15.pdf",
-                        experience: "7 years",
-                        certificates: ["Vastu Shastra Diploma"],
-                        status: "Pending Interview"
-                    },
-                    {
-                        id: 16,
-                        profile_image: "",
-                        name: "Sanjay Patel",
-                        phone_number: "9988775555",
-                        email: "sanjay.patel@example.com",
-                        gender: "Male",
-                        address: "Ahmedabad",
-                        languages_known: "Gujarati, Hindi",
-                        specialties: ["Horoscope Analysis"],
-                        aadhar_card_pdf: "assets/aadhar/id16.pdf",
-                        experience: "8 years",
-                        certificates: ["Horoscope Analysis Certification"],
-                        status: "Pending Interview"
-                    },
-                    {
-                        id: 17,
-                        profile_image: "",
-                        name: "Neha Gupta",
-                        phone_number: "9876544332",
-                        email: "neha.gupta@example.com",
-                        gender: "Female",
-                        address: "Kolkata",
-                        languages_known: "Bengali, Hindi",
-                        specialties: ["Astrology Consultation"],
-                        aadhar_card_pdf: "assets/aadhar/id17.pdf",
-                        experience: "4 years",
-                        certificates: ["Astrology Consultation Certificate"],
-                        status: "Pending Interview"
-                    },
-                    {
-                        id: 18,
-                        profile_image: "",
-                        name: "Arjun Reddy",
-                        phone_number: "9123458776",
-                        email: "arjun.reddy@example.com",
-                        gender: "Male",
-                        address: "Hyderabad",
-                        languages_known: "Telugu, English",
-                        specialties: ["Kundli Matching"],
-                        aadhar_card_pdf: "assets/aadhar/id18.pdf",
-                        experience: "6 years",
-                        certificates: ["Kundli Matching Diploma"],
-                        status: "Pending Interview"
-                    },
-                    {
-                        id: 19,
-                        profile_image: "",
-                        name: "Meera Joshi",
-                        phone_number: "9988774444",
-                        email: "meera.joshi2@example.com",
-                        gender: "Female",
-                        address: "Pune",
-                        languages_known: "Marathi, Hindi",
-                        specialties: ["Palm Reading"],
-                        aadhar_card_pdf: "assets/aadhar/id19.pdf",
-                        experience: "5 years",
-                        certificates: ["Palm Reading Certificate"],
-                        status: "Pending Interview"
-                    },
-                    {
-                        id: 20,
-                        profile_image: "",
-                        name: "Rohan Desai",
-                        phone_number: "9876543229",
-                        email: "rohan.desai2@example.com",
-                        gender: "Male",
-                        address: "Bangalore",
-                        languages_known: "Kannada, English",
-                        specialties: ["Vedic Astrology"],
-                        aadhar_card_pdf: "assets/aadhar/id20.pdf",
-                        experience: "7 years",
-                        certificates: ["Vedic Astrology Diploma"],
-                        status: "Pending Interview"
-                    },
-                    // Approved - 10 rows
-                    {
-                        id: 21,
-                        profile_image: "",
-                        name: "Anita Sharma",
-                        phone_number: "9876543230",
-                        email: "anita.sharma@example.com",
-                        gender: "Female",
-                        address: "Varanasi",
-                        languages_known: "Hindi, Sanskrit",
-                        specialties: ["Vedic Astrology", "Kundli"],
-                        aadhar_card_pdf: "assets/aadhar/id21.pdf",
-                        experience: "10 years",
-                        certificates: ["Vedic Astrology Master", "Kundli Specialist"],
-                        status: "Approved"
-                    },
-                    {
-                        id: 22,
-                        profile_image: "",
-                        name: "Kiran Patel",
-                        phone_number: "9123456800",
-                        email: "kiran.patel@example.com",
-                        gender: "Male",
-                        address: "Surat",
-                        languages_known: "Gujarati, Hindi",
-                        specialties: ["Numerology"],
-                        aadhar_card_pdf: "assets/aadhar/id22.pdf",
-                        experience: "12 years",
-                        certificates: ["Numerology Master"],
-                        status: "Approved"
-                    },
-                    {
-                        id: 23,
-                        profile_image: "",
-                        name: "Sneha Verma",
-                        phone_number: "9988776677",
-                        email: "sneha.verma2@example.com",
-                        gender: "Female",
-                        address: "Noida",
-                        languages_known: "Hindi, English",
-                        specialties: ["Tarot Reading"],
-                        aadhar_card_pdf: "assets/aadhar/id23.pdf",
-                        experience: "8 years",
-                        certificates: ["Tarot Master Certification"],
-                        status: "Approved"
-                    },
-                    {
-                        id: 24,
-                        profile_image: "",
-                        name: "Amit Kumar",
-                        phone_number: "9876541255",
-                        email: "amit.kumar2@example.com",
-                        gender: "Male",
-                        address: "Patna",
-                        languages_known: "Hindi, Bhojpuri",
-                        specialties: ["Vastu Shastra"],
-                        aadhar_card_pdf: "assets/aadhar/id24.pdf",
-                        experience: "9 years",
-                        certificates: ["Vastu Shastra Expert"],
-                        status: "Approved"
-                    },
-                    {
-                        id: 25,
-                        profile_image: "",
-                        name: "Pooja Iyer",
-                        phone_number: "9123459898",
-                        email: "pooja.iyer@example.com",
-                        gender: "Female",
-                        address: "Coimbatore",
-                        languages_known: "Tamil, English",
-                        specialties: ["Astrology Consultation"],
-                        aadhar_card_pdf: "assets/aadhar/id25.pdf",
-                        experience: "11 years",
-                        certificates: ["Astrology Expert Certificate"],
-                        status: "Approved"
-                    },
-                    {
-                        id: 26,
-                        profile_image: "",
-                        name: "Vivek Rao",
-                        phone_number: "9988775566",
-                        email: "vivek.rao@example.com",
-                        gender: "Male",
-                        address: "Bhopal",
-                        languages_known: "Hindi, English",
-                        specialties: ["Horoscope Analysis"],
-                        aadhar_card_pdf: "assets/aadhar/id26.pdf",
-                        experience: "10 years",
-                        certificates: ["Horoscope Specialist"],
-                        status: "Approved"
-                    },
-                    {
-                        id: 27,
-                        profile_image: "",
-                        name: "Riya Singh",
-                        phone_number: "9876544343",
-                        email: "riya.singh@example.com",
-                        gender: "Female",
-                        address: "Chandigarh",
-                        languages_known: "Punjabi, Hindi",
-                        specialties: ["Kundli Matching"],
-                        aadhar_card_pdf: "assets/aadhar/id27.pdf",
-                        experience: "7 years",
-                        certificates: ["Kundli Matching Expert"],
-                        status: "Approved"
-                    },
-                    {
-                        id: 28,
-                        profile_image: "",
-                        name: "Aditya Menon",
-                        phone_number: "9123458787",
-                        email: "aditya.menon@example.com",
-                        gender: "Male",
-                        address: "Kochi",
-                        languages_known: "Malayalam, English",
-                        specialties: ["Palm Reading"],
-                        aadhar_card_pdf: "assets/aadhar/id28.pdf",
-                        experience: "8 years",
-                        certificates: ["Palm Reading Master"],
-                        status: "Approved"
-                    },
-                    {
-                        id: 29,
-                        profile_image: "",
-                        name: "Shalini Bose",
-                        phone_number: "9988774455",
-                        email: "shalini.bose@example.com",
-                        gender: "Female",
-                        address: "Guwahati",
-                        languages_known: "Assamese, Hindi",
-                        specialties: ["Vedic Astrology"],
-                        aadhar_card_pdf: "assets/aadhar/id29.pdf",
-                        experience: "9 years",
-                        certificates: ["Vedic Astrology Expert"],
-                        status: "Approved"
-                    },
-                    {
-                        id: 30,
-                        profile_image: "",
-                        name: "Nikhil Jain",
-                        phone_number: "9876543239",
-                        email: "nikhil.jain@example.com",
-                        gender: "Male",
-                        address: "Indore",
-                        languages_known: "Hindi, English",
-                        specialties: ["Numerology"],
-                        aadhar_card_pdf: "assets/aadhar/id30.pdf",
-                        experience: "10 years",
-                        certificates: ["Numerology Specialist"],
-                        status: "Approved"
-                    },
-                    // Rejected - 10 rows
-                    {
-                        id: 31,
-                        profile_image: "",
-                        name: "Ravi Malhotra",
-                        phone_number: "9876543240",
-                        email: "ravi.malhotra@example.com",
-                        gender: "Male",
-                        address: "Agra",
-                        languages_known: "Hindi",
-                        specialties: ["Palmistry"],
-                        aadhar_card_pdf: "assets/aadhar/id31.pdf",
-                        experience: "2 years",
-                        certificates: [],
-                        status: "Rejected"
-                    },
-                    {
-                        id: 32,
-                        profile_image: "",
-                        name: "Suman Das",
-                        phone_number: "9123456811",
-                        email: "suman.das@example.com",
-                        gender: "Female",
-                        address: "Siliguri",
-                        languages_known: "Bengali, Hindi",
-                        specialties: ["Tarot Reading"],
-                        aadhar_card_pdf: "assets/aadhar/id32.pdf",
-                        experience: "1 year",
-                        certificates: [],
-                        status: "Rejected"
-                    },
-                    {
-                        id: 33,
-                        profile_image: "",
-                        name: "Kunal Yadav",
-                        phone_number: "9988776688",
-                        email: "kunal.yadav@example.com",
-                        gender: "Male",
-                        address: "Kanpur",
-                        languages_known: "Hindi",
-                        specialties: ["Vedic Astrology"],
-                        aadhar_card_pdf: "assets/aadhar/id33.pdf",
-                        experience: "3 years",
-                        certificates: ["Basic Astrology Course"],
-                        status: "Rejected"
-                    },
-                    {
-                        id: 34,
-                        profile_image: "",
-                        name: "Lata Mishra",
-                        phone_number: "9876541266",
-                        email: "lata.mishra@example.com",
-                        gender: "Female",
-                        address: "Bhopal",
-                        languages_known: "Hindi",
-                        specialties: ["Numerology"],
-                        aadhar_card_pdf: "assets/aadhar/id34.pdf",
-                        experience: "2 years",
-                        certificates: [],
-                        status: "Rejected"
-                    },
-                    {
-                        id: 35,
-                        profile_image: "",
-                        name: "Manoj Thakur",
-                        phone_number: "9123459909",
-                        email: "manoj.thakur@example.com",
-                        gender: "Male",
-                        address: "Ranchi",
-                        languages_known: "Hindi, English",
-                        specialties: ["Kundli"],
-                        aadhar_card_pdf: "assets/aadhar/id35.pdf",
-                        experience: "4 years",
-                        certificates: ["Kundli Basic Course"],
-                        status: "Rejected"
-                    },
-                    {
-                        id: 36,
-                        profile_image: "",
-                        name: "Anjali Roy",
-                        phone_number: "9988775577",
-                        email: "anjali.roy2@example.com",
-                        gender: "Female",
-                        address: "Durgapur",
-                        languages_known: "Bengali, Hindi",
-                        specialties: ["Vastu Shastra"],
-                        aadhar_card_pdf: "assets/aadhar/id36.pdf",
-                        experience: "2 years",
-                        certificates: [],
-                        status: "Rejected"
-                    },
-                    {
-                        id: 37,
-                        profile_image: "",
-                        name: "Vinod Kumar",
-                        phone_number: "9876544354",
-                        email: "vinod.kumar@example.com",
-                        gender: "Male",
-                        address: "Meerut",
-                        languages_known: "Hindi",
-                        specialties: ["Horoscope Analysis"],
-                        aadhar_card_pdf: "assets/aadhar/id37.pdf",
-                        experience: "3 years",
-                        certificates: [],
-                        status: "Rejected"
-                    },
-                    {
-                        id: 38,
-                        profile_image: "",
-                        name: "Sunita Pal",
-                        phone_number: "9123458798",
-                        email: "sunita.pal@example.com",
-                        gender: "Female",
-                        address: "Jabalpur",
-                        languages_known: "Hindi",
-                        specialties: ["Palm Reading"],
-                        aadhar_card_pdf: "assets/aadhar/id38.pdf",
-                        experience: "1 year",
-                        certificates: [],
-                        status: "Rejected"
-                    },
-                    {
-                        id: 39,
-                        profile_image: "",
-                        name: "Rajesh Sahu",
-                        phone_number: "9988774466",
-                        email: "rajesh.sahu@example.com",
-                        gender: "Male",
-                        address: "Gwalior",
-                        languages_known: "Hindi",
-                        specialties: ["Astrology Consultation"],
-                        aadhar_card_pdf: "assets/aadhar/id39.pdf",
-                        experience: "2 years",
-                        certificates: [],
-                        status: "Rejected"
-                    },
-                    {
-                        id: 40,
-                        profile_image: "",
-                        name: "Geeta Rani",
-                        phone_number: "9876543249",
-                        email: "geeta.rani@example.com",
-                        gender: "Female",
-                        address: "Ludhiana",
-                        languages_known: "Punjabi, Hindi",
-                        specialties: ["Kundli Matching"],
-                        aadhar_card_pdf: "assets/aadhar/id40.pdf",
-                        experience: "3 years",
-                        certificates: ["Basic Kundli Course"],
-                        status: "Rejected"
-                    }
-                ];
-
-                // Initialize with Newest Requests
-                filteredData = PujarisData.filter(item => item.status === "New Request");
-                displayData(currentPage);
-            } catch (error) {
-                console.error("Error fetching Pujaris:", error);
-                document.getElementById("tableBody").innerHTML =
-                    `<tr><td colspan="12" class="text-center text-danger">Failed to load data.</td></tr>`;
-            }
-        }
-
-        function filterTable(status) {
-            const statusMap = {
-                'newest': 'New Request',
-                'pending': 'Pending Interview',
-                'approved': 'Approved',
-                'rejected': 'Rejected'
-            };
-            const mappedStatus = statusMap[status.toLowerCase()] || status;
-            filteredData = PujarisData.filter(item => item.status.toLowerCase() === mappedStatus.toLowerCase());
-            currentPage = 1;
-            displayData(currentPage);
-        }
-
-        function viewPDF(url) {
-            document.getElementById('pdfViewer').src = url;
-        }
-
-        function displayData(page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const paginatedData = filteredData.slice(start, end);
-
-            const tableBody = document.getElementById('tableBody');
-            tableBody.innerHTML = '';
-
-            if (paginatedData.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="12" class="text-center text-muted">No Pujaris found.</td></tr>`;
-                updatePagination();
-                return;
-            }
-
-            paginatedData.forEach((item, index) => {
-                const specialtiesText = item.specialties.length > 0 ? item.specialties.join(', ') : '-';
-                const certificatesText = item.certificates ? item.certificates.join(', ') : '-';
-                const isRejected = item.status.toLowerCase() === 'rejected';
-                const srNo = start + index + 1; // Calculate the serial number
-
-                const row = `
+              <!-- Table -->
+              <div class="table-responsive">
+                <table class="table table-light table-hover">
+                  <thead>
                     <tr>
-                        <td>${srNo}</td> <!-- Add the Sr. No. column -->
-                        <td><img src="${item.profile_image || '<?php echo base_url('assets/images/HRside/Profile1.png')?>'}" alt="Profile" class="profile-img" width="40"></td>
-                        <td>${item.name || '-'}</td>
-                        <td>${item.phone_number || '-'}</td>
-                        <td>${item.gender || '-'}</td>
-                        <td>${item.address || '-'}</td>
-                        <td>${item.languages_known || '-'}</td>
-                        <td>${specialtiesText}</td>
-                        <td>${item.experience || '-'}</td>
-                        <td class="text-center">
-                            ${isRejected ?
-                                '<span class="badge bg-danger">Rejected</span>' :
-                                '<button class="btn btn-sm btn-primary" onclick="window.location.href=\'viewpujari\'">View</button>'
-                            }
-                        </td>
+                      <th>Sr. No</th>
+                      <th>Profile</th>
+                      <th>Name</th>
+                      <th>Contact</th>
+                      <th>Gender</th>
+                      <th>Address</th>
+                      <th>Languages Known</th>
+                      <th>Specialities</th>
+                      <th>Experience</th>
+                      <th>Action</th>
                     </tr>
-                `;
-                tableBody.innerHTML += row;
-            });
+                  </thead>
+                  <tbody id="tableBody"></tbody>
+                </table>
+              </div>
+            </div>
+            <div id="pagination" class="d-flex justify-content-center"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
 
-            updatePagination();
-        }
+  <!-- JS Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        function filterData() {
-            const searchInput = document.getElementById('searchBar').value.toLowerCase();
-            filteredData = PujarisData.filter(item =>
-                item.name.toLowerCase().includes(searchInput) ||
-                item.phone_number.toLowerCase().includes(searchInput) ||
-                item.email.toLowerCase().includes(searchInput) ||
-                item.gender.toLowerCase().includes(searchInput) ||
-                item.address.toLowerCase().includes(searchInput) ||
-                item.languages_known.toLowerCase().includes(searchInput) ||
-                item.specialties.join(', ').toLowerCase().includes(searchInput) ||
-                item.experience.toLowerCase().includes(searchInput)
-            );
-            currentPage = 1;
-            displayData(currentPage);
-        }
+  <!-- Data Injection from PHP -->
+  <script>
+    let currentPage = 1;
+    const rowsPerPage = 7;
+    const baseImagePath = "<?= base_url('uploads/Pujari/profile/') ?>";
+    const defaultImage = "<?= base_url('assets/images/HRside/Profile1.png') ?>";
 
-        function updatePagination() {
-            const totalPages = Math.ceil(filteredData.length / rowsPerPage);
-            const pagination = document.getElementById('pagination');
-            pagination.innerHTML = '';
+    // Actual backend data injected from PHP
+    let PujarisData = <?= json_encode($Pujari) ?>;
+    let filteredData = [];
 
-            let prevButton = `<button class="btn btn-light" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>Previous</button>`;
-            pagination.innerHTML += prevButton;
+    document.addEventListener("DOMContentLoaded", function () {
+      filterTable('newest');
+    });
 
-            for (let i = 1; i <= totalPages; i++) {
-                let pageButton = `<button class="btn ${i === currentPage ? 'btn-primary' : 'btn-light'}" onclick="changePage(${i})">${i}</button>`;
-                pagination.innerHTML += pageButton;
-            }
+    function filterTable(status) {
+      const statusMap = {
+        'newest': 'new request',
+        'scheduled': 'scheduled',
+        'approved': 'approved',
+        'rejected': 'rejected'
+      };
+      const key = statusMap[status.toLowerCase()] || status;
 
-            let nextButton = `<button class="btn btn-light" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>`;
-            pagination.innerHTML += nextButton;
-        }
+      // if (status.toLowerCase() === 'newest') {
+      //   filteredData = PujarisData; // ✅ Show all data for Newest
+      // } else {
+      //   filteredData = PujarisData.filter(item => (item.status || '').toLowerCase() === key);
+      // }
+      if (status.toLowerCase() === 'newest') {
+  filteredData = PujarisData.filter(item => (item.status || '').toLowerCase() === 'pending'); // ✅ Only pending
+} else {
+  filteredData = PujarisData.filter(item => (item.status || '').toLowerCase() === key);
+}
 
-        function changePage(page) {
-            const totalPages = Math.ceil(filteredData.length / rowsPerPage);
-            if (page < 1 || page > totalPages) return;
-            currentPage = page;
-            displayData(currentPage);
-        }
 
-        function deletePujari(id) {
-            // Find the index of the Pujari to delete
-            const index = filteredData.findIndex(item => item.id === id);
-            if (index !== -1) {
-                // Remove the Pujari from the filteredData array
-                filteredData.splice(index, 1);
-                // Remove the Pujari from the PujarisData array
-                const dataIndex = PujarisData.findIndex(item => item.id === id);
-                if (dataIndex !== -1) {
-                    PujarisData.splice(dataIndex, 1);
-                }
-                // Re-render the table to update the serial numbers
-                displayData(currentPage);
-            }
-        }
+      currentPage = 1;
+      displayData(currentPage);
+    }
 
-        document.addEventListener("DOMContentLoaded", fetchPujaris);
-    </script>
+    function displayData(page) {
+      const start = (page - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      const paginated = filteredData.slice(start, end);
+
+      const tableBody = document.getElementById("tableBody");
+      tableBody.innerHTML = "";
+
+      if (paginated.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="10" class="text-center text-muted">No data found.</td></tr>`;
+        updatePagination();
+        return;
+      }
+
+      paginated.forEach((item, index) => {
+        let sr = start + index + 1;
+        let img = item.profile_pic ? baseImagePath + item.profile_pic : defaultImage;
+        let isRejected = (item.status || '').toLowerCase() === 'rejected';
+
+        let row = `
+          <tr>
+            <td>${sr}</td>
+            <td><img src="${img}" class="profile-img" width="40" height="40" /></td>
+            <td>${item.name || '-'}</td>
+            <td>${item.contact || '-'}</td>
+            <td>${item.gender || '-'}</td>
+            <td>${item.address || '-'}</td>
+            <td>${item.languages || '-'}</td>
+            <td>${item.specialties || '-'}</td>
+            <td>${item.experience || '-'}</td>
+            <td class="text-center">
+              ${isRejected 
+                ? '<span class="badge bg-danger">Rejected</span>' 
+                : `<button class="btn btn-sm btn-primary" onclick="viewDetail(${item.id})">View</button>`}
+            </td>
+          </tr>
+        `;
+        tableBody.innerHTML += row;
+      });
+
+      updatePagination();
+    }
+
+    function viewDetail(id) {
+      window.location.href = `viewpujaridata/${id}`;
+    //   http://localhost:8080/Jyotisika/viewpujaridata/8
+    }
+
+    function updatePagination() {
+      const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+      const pagination = document.getElementById("pagination");
+      pagination.innerHTML = "";
+
+      let prevBtn = `<button class="btn btn-light mx-1" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>Prev</button>`;
+      pagination.innerHTML += prevBtn;
+
+      for (let i = 1; i <= totalPages; i++) {
+        let btn = `<button class="btn ${i === currentPage ? 'btn-primary' : 'btn-light'} mx-1" onclick="changePage(${i})">${i}</button>`;
+        pagination.innerHTML += btn;
+      }
+
+      let nextBtn = `<button class="btn btn-light mx-1" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>`;
+      pagination.innerHTML += nextBtn;
+    }
+
+    function changePage(page) {
+      const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+      if (page < 1 || page > totalPages) return;
+      currentPage = page;
+      displayData(page);
+    }
+
+    function filterData() {
+      const search = document.getElementById("searchBar").value.toLowerCase();
+      filteredData = PujarisData.filter(item =>
+        (item.name || '').toLowerCase().includes(search) ||
+        (item.contact || '').toLowerCase().includes(search) ||
+        (item.email || '').toLowerCase().includes(search) ||
+        (item.gender || '').toLowerCase().includes(search) ||
+        (item.address || '').toLowerCase().includes(search) ||
+        (item.languages || '').toLowerCase().includes(search) ||
+        (item.specialties || '').toLowerCase().includes(search) ||
+        (item.experience || '').toString().toLowerCase().includes(search)
+      );
+      currentPage = 1;
+      displayData(currentPage);
+    }
+  </script>
 </body>
 </html>

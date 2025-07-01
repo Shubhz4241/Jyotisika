@@ -183,23 +183,19 @@
         <div class="row product-container">
             <!-- Product Image -->
             <div class="col-md-7 mb-4 d-flex align-items-center justify-content-center">
-                <img src="<?php echo base_url('assets/images/rudraksh.png'); ?>" class="img-fluid product-image"
-                    style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh">
-            </div>
+                <img src="<?php echo base_url($product_data[0]["product_image"]); ?>" class="img-fluid product-image"
+                    style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
 
-
-
+          </div>
             <!-- Product Info -->
-
-             
             <div class="col-md-5 product-info">
                 <h2 class="fw-bold mb-3" style="font-family: 'Kaisei Decol', serif;">
                     <?php echo $product_data[0]["product_name"] ?>
-                  
+
                     <?php if ($product_rating_data[0]["average_product_rating"]): ?>
-                          <br>
+                        <br>
                         <?php for ($number = 0; $number < round($product_rating_data[0]["average_product_rating"]); $number++): ?>
-                           <i class="bi bi-star-fill text-warning me-1"></i>
+                            <i class="bi bi-star-fill text-warning me-1"></i>
                         <?php endfor ?>
                     <?php endif ?>
 
@@ -264,41 +260,48 @@
         </div>
     </div>
 
+ 
     <!-- Reviews -->
     <div class="container my-4 position-relative">
         <h4>Reviews</h4>
         <div class="owl-carousel owl1 owl-theme">
             <!-- Loop Start -->
             <!-- Card 1 -->
+            
             <?php if ($product_feedback_data): ?>
                 <?php foreach ($product_feedback_data as $product_feedback_data_details): ?>
                     <div class="item">
+                        <div class="card review-card shadow p-3">
+                            <div class="d-flex justify-content-center">
+                                <img src="<?php echo !empty($product_feedback_data_details["user_image"])
+                                    ? base_url($product_feedback_data_details["user_image"])
+                                    : base_url("assets/images/profileImage.png"); ?>" alt="User"
+                                    class="rounded-circle shadow-sm" style="width: 100px; height: 100px; object-fit: cover;"
+                                    onerror="this.onerror=null; this.src='<?php echo base_url(`assets/images/profileImage.png`); ?>';">
 
-                        <div class="card review-card shadow">
-                            <div class="d-flex justify-content-center mb-3">
-                                <img src="<?php echo base_url("assets/images/aboutImage.png"); ?>" class="rounded-circle"
-                                    alt="User" />
+                                    
                             </div>
-                            <div class="text-center review-body">
-                                <h5 class="fw-bold mb-2"><?php echo $product_feedback_data_details["user_name"] ?></h5>
+
+                            <div class="text-center review-body mt-3">
+                                <h5 class="fw-bold mb-2"><?php echo $product_feedback_data_details["user_name"]; ?></h5>
+
                                 <div class="d-flex justify-content-center mb-2">
-                                    <!-- <i class="bi bi-star-fill text-warning me-1"></i>
-                                <i class="bi bi-star-fill text-warning me-1"></i>
-                                <i class="bi bi-star-fill text-warning me-1"></i>
-                                <i class="bi bi-star-fill text-warning me-1"></i>
-                                <i class="bi bi-star text-muted me-1"></i> -->
-
                                     <?php
-                                    for ($number = 0; $number <= $product_feedback_data_details["productrating"]; $number++) { ?>
-                                        <i class="bi bi-star-fill text-warning me-1"></i>
-                                    <?php } ?>
-
-
+                                    for ($number = 1; $number <= 5; $number++) {
+                                        if ($number <= $product_feedback_data_details["productrating"]) {
+                                            echo '<i class="bi bi-star-fill text-warning me-1"></i>';
+                                        } else {
+                                            echo '<i class="bi bi-star text-muted me-1"></i>';
+                                        }
+                                    }
+                                    ?>
                                 </div>
-                                <p class="card-text"><?php echo $product_feedback_data_details["message"] ?></p>
+
+                                <p class="card-text text-muted"><?php echo $product_feedback_data_details["message"]; ?></p>
                             </div>
                         </div>
                     </div>
+
                 <?php endforeach ?>
             <?php else: ?>
 
