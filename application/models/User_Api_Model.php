@@ -331,7 +331,7 @@ class User_Api_Model extends CI_Model
 
         $this->db->where("id", $astrologer_id);
         $this->db->where("status", "approved");
-        $this->db->where("is_online", "1");
+
         $query = $this->db->get("astrologer_registration");
         $astrologer = $query->result();
 
@@ -935,32 +935,59 @@ class User_Api_Model extends CI_Model
     }
 
 
-    public function get_pujari_of_puja_model($puja_id)
-    {
 
-        $this->db->select("pujari_registration.id as pujari_id_, 
+    public function get_pujari_of_puja_model($puja_id)
+{
+    $this->db->select("pujari_registration.id as pujari_id_, 
                   pujari_registration.name as pujariname,
                   pujari_registration.*,  
                   services.* , 
                   pujari_services.* , 
                   pujari_services.status as puja_status,  
-                  AVG(pujari_feedback.rating) as average_rating,
+                  ROUND(AVG(pujari_feedback.rating), 1) as average_rating,
                   (SELECT COUNT(*) 
                    FROM bookpuja_request_by_user_to_pujari 
                    WHERE puja_status = 'Completed' 
                      AND pujari_id = pujari_registration.id
                   ) as completed_puja_count");
-        $this->db->from("pujari_services");
-        $this->db->join('pujari_registration', 'pujari_registration.id = pujari_services.pujari_id', 'Left');
-        $this->db->join('pujari_feedback', 'pujari_feedback.pujari_id = pujari_registration.id', 'Left');
-        $this->db->join('services', 'services.id = pujari_services.service_id', 'Left');
-        $this->db->group_by('pujari_registration.id');
-        $this->db->where("service_id", $puja_id);
-        $this->db->where("pujari_services.status", "approved");
+    $this->db->from("pujari_services");
+    $this->db->join('pujari_registration', 'pujari_registration.id = pujari_services.pujari_id', 'Left');
+    $this->db->join('pujari_feedback', 'pujari_feedback.pujari_id = pujari_registration.id', 'Left');
+    $this->db->join('services', 'services.id = pujari_services.service_id', 'Left');
+    $this->db->group_by('pujari_registration.id');
+    $this->db->where("service_id", $puja_id);
+    $this->db->where("pujari_services.status", "approved");
 
-        $query = $this->db->get();
-        return $query->result();
-    }
+    $query = $this->db->get();
+    return $query->result();
+}
+
+    // public function get_pujari_of_puja_model($puja_id)
+    // {
+
+    //     $this->db->select("pujari_registration.id as pujari_id_, 
+    //               pujari_registration.name as pujariname,
+    //               pujari_registration.*,  
+    //               services.* , 
+    //               pujari_services.* , 
+    //               pujari_services.status as puja_status,  
+    //               AVG(pujari_feedback.rating) as average_rating,
+    //               (SELECT COUNT(*) 
+    //                FROM bookpuja_request_by_user_to_pujari 
+    //                WHERE puja_status = 'Completed' 
+    //                  AND pujari_id = pujari_registration.id
+    //               ) as completed_puja_count");
+    //     $this->db->from("pujari_services");
+    //     $this->db->join('pujari_registration', 'pujari_registration.id = pujari_services.pujari_id', 'Left');
+    //     $this->db->join('pujari_feedback', 'pujari_feedback.pujari_id = pujari_registration.id', 'Left');
+    //     $this->db->join('services', 'services.id = pujari_services.service_id', 'Left');
+    //     $this->db->group_by('pujari_registration.id');
+    //     $this->db->where("service_id", $puja_id);
+    //     $this->db->where("pujari_services.status", "approved");
+
+    //     $query = $this->db->get();
+    //     return $query->result();
+    // }
 
     //  $this->db->select("astrologer_registration.* , AVG(astrologer_feedback.rating) as average_rating");
     //     $this->db->from("astrologer_registration");
@@ -1172,20 +1199,21 @@ class User_Api_Model extends CI_Model
     }
 
     public function get_avg_rating_pujari_model($pujari_id)
-    {
-        $this->db->select('pujari_feedback.pujari_id, AVG(pujari_feedback.rating) as average_rating');
-        $this->db->from('pujari_feedback');
-        $this->db->where("pujari_id", $pujari_id);
-        $query = $this->db->get();
+{
+    $this->db->select('pujari_feedback.pujari_id, ROUND(AVG(pujari_feedback.rating), 1) as average_rating'); // Rounded to 1 decimal place
+    $this->db->from('pujari_feedback');
+    $this->db->where("pujari_id", $pujari_id);
+    $query = $this->db->get();
 
-        return $query->result();
+    return $query->result();
+}
 
-    }
 
     public function get_no_of_completed_puja_model($pujari_id)
     {
 
-        $this->db->where("status", "Completed");
+        $this->db->where("puja_status", "Completed");
+        $this->db->where("pujari_id", $pujari_id);
         $query = $this->db->get("bookpuja_request_by_user_to_pujari");
         $count = $query->num_rows();
         return $count;
@@ -1291,6 +1319,33 @@ class User_Api_Model extends CI_Model
         $query = $this->db->get("festivals");
         return $query->result();
     }
+
+
+    public function showservices_model()
+    {
+        $this->db->where("service_type", "astrologer");
+        $this->db->limit(4);
+        $query = $this->db->get("services");
+        return $query->result();
+    }
+
+
+    public function showallservices_model(){
+      $this->db->where("service_type", "astrologer");
+      $query =  $this->db->get("services");
+      return $query->result();
+    }
+
+  public function show_today_festivals_model() {
+    $today = date('Y-m-d');
+
+    $this->db->select('festivals_id, festivals_title, festivals_decription, festivals_date, festivals_image');
+    $this->db->from('festivals');
+    $this->db->where('DATE(festivals_date)', $today); // ✅ This is the fix
+
+    $query = $this->db->get();
+    return $query->result_array();
+}
 
 
 

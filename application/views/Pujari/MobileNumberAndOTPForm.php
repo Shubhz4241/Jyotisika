@@ -152,7 +152,7 @@
         <!-- Mobile Number Form -->
         <div id="mobile-form">
             <div class="logo-container">
-            <img src="<?php echo base_url() . 'assets/images/Pujari/logo.png' ?>" alt="Logo">
+            <img src="<?php echo base_url() . 'assets/images/Pujari/wes.png' ?>" alt="Logo">
             </div>
             <form>
                 <div class="mb-3">

@@ -234,6 +234,17 @@
         <?php $this->load->view('Astrologer/Include/AstrologerFooter') ?>
     </footer>
 
+    <!-- ✅ Firebase v8 SDK (compatible with current global-notify.js) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <!-- Your notification script -->
+    <script>
+        const astrologerId = "<?php echo $_SESSION['astrologer_id']; ?>";
+        const chatPageUrl = "<?php echo base_url('AstrologerUser/AstrologerChatUI'); ?>";
+    </script>
+    <script src="<?php echo base_url('assets/js/global-notify.js'); ?>"></script>
+
     <script>
         window.addEventListener('load', () => {
             fetch('<?php echo base_url('astrologer/get_logged_in_user'); ?>')

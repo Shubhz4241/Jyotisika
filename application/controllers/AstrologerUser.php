@@ -25,9 +25,18 @@ class AstrologerUser extends CI_Controller
 		$this->load->view('Astrologer/AstrologerAnalyticsandEarning1');
 	}
 	public function AstrologerAnalyticsAndEarning2()
-	{
-		$this->load->view('Astrologer/AstrologerAnalyticsAndEarning2');
-	}
+{
+    $this->load->library('session');
+    $astrologerId = $this->session->userdata('astrologer_id');
+
+    $data = [
+        'astrologer_id' => $astrologerId,
+        'chatPageUrl' => base_url('AstrologerUser/AstrologerChatUI')
+    ];
+
+    $this->load->view('Astrologer/AstrologerAnalyticsAndEarning2', $data);
+}
+
 	public function AstrologerEarningsBreakdown()
 	{
 		$this->load->view('Astrologer/AstrologerEarningsBreakdown');

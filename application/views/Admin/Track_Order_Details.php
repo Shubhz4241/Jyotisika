@@ -173,7 +173,7 @@
                         <h1 class="fw-bold text-center">Order Details</h1>
                     </div>
                 </div>
-
+               
                 <div style="background-color: #F9F9F9; padding-top: 20px;" class="px-3">
                     <div class="container text-start">
                         <h3 class="fw-bold">Order details</h3>
@@ -196,30 +196,32 @@
                                 </thead>
                                 <tbody id="dynamic-table-body">
                                     <!-- Static rows -->
-                                    <tr>
-                                        <td class="quantity-cell text-center"><img src="<?php echo base_url('uploads/products/mala.png');?>" alt="Product 1" style="width: 50px; height: 50px;" class="product-img"></td>
-                                        <td class="quantity-cell text-center">Product 1</td>
-                                        <td class="quantity-cell text-center">2</td>
-                                        <td class="price-cell text-center">₹500</td>
-                                        <td class="quantity-cell text-center">x</td>
-                                        <td class="quantity-cell text-center">2</td>
-                                        <td class="quantity-cell text-center">=</td>
-                                        <td class="total-cell text-center">₹1000</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="quantity-cell text-center"><img src="<?php echo base_url('uploads/products/mala.png');?>" alt="Product 1" style="width: 50px; height: 50px;" class="product-img"></td>
-                                        <td class="quantity-cell text-center">Product 2</td>
-                                        <td class="quantity-cell text-center">1</td>
-                                        <td class="price-cell text-center">₹300</td>
-                                        <td class="quantity-cell text-center">x</td>
-                                        <td class="quantity-cell text-center">1</td>
-                                        <td class="quantity-cell text-center">=</td>
-                                        <td class="total-cell text-center">₹300</td>
-                                    </tr>
+                                    <?php foreach ($orders as $row): ?>
+                                        <tr>
+                                            <td class="quantity-cell text-center"><img src="<?php echo base_url('uploads/products/' . $row['product_image']); ?>" alt="Product 1" style="width: 50px; height: 50px;" class="product-img"></td>
+                                            <td class="quantity-cell text-center"><?php echo $row['product_name'] ?></td>
+                                            <td class="quantity-cell text-center"><?php echo $row['quantity'] ?></td>
+                                            <td class="price-cell text-center"><?php echo $row['price_per_product'] ?></td>
+                                            <td class="quantity-cell text-center">x</td>
+                                            <td class="quantity-cell text-center"><?php echo $row['quantity'] ?></td>
+                                            <td class="quantity-cell text-center">=</td>
+                                            <td class="total-cell text-center"><?php echo $row['total_price'] ?></td>
+                                        </tr>
+                                    <?php endforeach ?>
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
+                    <?php
+                    $subtotal = 0;
+                    $shipping = 50; // or dynamic value
+                    foreach ($orders as $row) {
+                        $subtotal += $row['total_price'];
+                    }
+                    $total = $subtotal + $shipping;
+                    ?>
 
                     <div class="container mt-4">
                         <div class="table-responsive bg-white px-0 px-md-2">
@@ -247,141 +249,190 @@
                                         <h4 class="fw-bold mb-3">Order Summary</h4>
                                         <div class="border-bottom pb-2">
                                             <div class="d-flex justify-content-between">
-                                                <strong>Item Subtotal:</strong> <span>₹ <span id="item-subtotal">1300.00</span></span>
+                                                <strong>Item Subtotal:</strong>
+                                                <span>₹ <span id="item-subtotal"><?php echo number_format($subtotal); ?></span></span>
                                             </div>
                                             <div class="d-flex justify-content-between">
-                                                <strong>Shipping:</strong> <span>₹ <span id="shipping">50.00</span></span>
+                                                <strong>Shipping:</strong>
+                                                <span>₹ <span id="shipping"><?php echo number_format($shipping); ?></span></span>
                                             </div>
                                             <div class="d-flex justify-content-between fw-bold">
-                                                <strong>Order Total:</strong> <span>₹ <span id="order-total">1350.00</span></span>
+                                                <strong>Order Total:</strong>
+                                                <span>₹ <span id="order-total"><?php echo number_format($total); ?></span></span>
                                             </div>
                                         </div>
 
-                                        <div id="trackingInfoContainer">
-                                            <h5 class="fw-bold text-dark mt-4">Order Tracking</h5>
-                                            <div class="d-flex justify-content-between">
-                                                <strong>Status:</strong>
-                                                <span id="status" style="color: black;">Shipped</span>
-                                            </div>
-                                            <!-- Static tracking information -->
-                                            <div class="mt-3 mb-3 p-1 rounded" style="background: #E9ECEF;">
-                                                <div class="d-flex justify-content-between">
-                                                    <strong>Tracking Number:</strong> <span>123456789</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <strong>Shipment Provider:</strong> <span>FedEx</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <strong>Last Update:</strong> <span>2023-10-05</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <?php if (!empty($orders)): ?>
+                                            <?php
+                                            $status = $orders[0]['status'] ?? 'Pending'; 
+                                            $date = $orders[0]['created_at'] ?? 'N/A'; 
+                                            $trackingId = $orders[0]['tracking_id'] ?: 'N/A';
+                                            $shipmentProvider = $orders[0]['shipping_provider_id'] == 0 ? 'Default Logistics' : 'Provider #' . $orders[0]['shipping_provider_id'];
+                                            $lastUpdate = $orders[0]['updated_at'] !== '0000-00-00 00:00:00' ? date('Y-m-d', strtotime($orders[0]['updated_at'])) : 'Not available';
+                                            ?>
+                                            <div id="trackingInfoContainer">
+                                                <h5 class="fw-bold text-dark mt-4">Order Tracking</h5>
 
-                                    <div class="w-100 p-4 rounded shadow-sm" style="background: #f8f9fa;" id="paymentDetailsContainer">
-                                        <h5 class="fw-bold mb-2">Payment Details</h5>
-                                        <div class="d-flex justify-content-between fw-bold">
-                                            <strong>Paid By Customer:</strong> <span>₹ <span id="paidAmount">1350.00</span></span>
-                                        </div>
-                                        <p id="paymentId">Payment Id: 123456789</p>
-                                        <div id="paymentFailedInfo" style="display: none;">
-                                            <p id="paymentFailedReason"></p>
-                                            <p id="paymentFailedDescription"></p>
-                                        </div>
-                                        <h6 class="fw-bold mb-2" id="paymentType">Order payment type: Credit Card</h6>
+                                                <div class="d-flex justify-content-between">
+                                                    <strong>Status:</strong>
+                                                    <span id="status" style="color: black;"><?php echo ucfirst($status); ?></span>
+                                                </div>
+
+                                                <div class="mt-3 mb-3 p-1 rounded" style="background: #E9ECEF;">
+                                                    <div class="d-flex justify-content-between">
+                                                        <strong>Tracking Number:</strong> <span><?php echo $trackingId; ?></span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <strong>Shipment Provider:</strong> <span><?php echo $shipmentProvider; ?></span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <strong>Last Update:</strong> <span><?php echo $lastUpdate; ?></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+
+
+                                        <?php if (!empty($orders)): ?>
+                                            <?php
+                                            $paidAmount = $orders[0]['price'] ?? 0;
+                                            $paymentId = $orders[0]['payment_id'] ?? 'N/A';
+                                            $paymentType = !empty($orders[0]['payment_type']) ? $orders[0]['payment_type'] : 'Not specified';
+                                            ?>
+                                            <div class="w-100 p-4 rounded shadow-sm" style="background: #f8f9fa;" id="paymentDetailsContainer">
+                                                <h5 class="fw-bold mb-2">Payment Details</h5>
+
+                                                <div class="d-flex justify-content-between fw-bold">
+                                                    <strong>Paid By Customer:</strong>
+                                                    <span>₹ <span id="paidAmount"><?php echo number_format($total); ?></span></span>
+                                                </div>
+
+                                                <p id="paymentId">Payment Id: <?php echo $paymentId; ?></p>
+
+                                                <div id="paymentFailedInfo" style="display: none;">
+                                                    <p id="paymentFailedReason"></p>
+                                                    <p id="paymentFailedDescription"></p>
+                                                </div>
+
+                                                <h6 class="fw-bold mb-2" id="paymentType">Order payment type: <?php echo ucfirst($paymentType); ?></h6>
+                                            </div>
+                                        <?php endif; ?>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="container mt-5 mb-5" id="actionButtonsContainer">
-                            <!-- Static buttons -->
-                            <button type="button" class="btn btn-success mb-5 ms-3 me-3" onclick="trackOrder(1)">Track Order</button>
-                            <button type="button" class="btn btn-outline-primary mb-5" onclick="populateShipmentForm()">Update Shipment Data</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container bg-white rounded border">
-                    <div class="order-container">
-                        <p class="mb-1 fw-bold fs-4">Order #<span id="order-id">1</span> details</p>
-                        <p class="mb-0 fs-5">Payment ID: <span id="payment-id">123456789</span> On <span id="formatted-date">2023-10-01</span></p>
-                    </div>
-
-                    <div class="row g-4">
-                        <div class="col-md-4 p-5">
-                            <div class="order-container">
-                                <form method="POST" enctype="multipart/form-data" id="orderForm">
-                                    <h5 class="fw-bold">General</h5>
-
-                                    <!-- Hidden Order ID -->
-                                    <input type="hidden" name="order_id" id="orderId" value="1">
-
-                                    <!-- Status Dropdown -->
-                                    <div class="mb-1">
-                                        <label for="status" class="form-label">Status:</label>
-                                        <select id="status" name="status" class="form-select border border-dark" required>
-                                            <option value="Pending" selected>Pending</option>
-                                            <option value="Processed">Processed</option>
-                                            <option value="Packed">Packed</option>
-                                            <option value="Shipped">Shipped</option>
-                                            <option value="Delivered">Delivered</option>
-                                            <option value="Completed">Completed</option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Order Note Input -->
-                                    <div class="mb-1">
-                                        <label for="order_note" class="form-label">Order Note:</label>
-                                        <input type="text" id="order_note" name="order_note" class="p-2 rounded w-100 border border-dark" value="Order updated..." required>
-                                    </div>
-
-                                    <!-- Hidden Fields for Previous States -->
-                                    <input hidden type="text" name="order_process_state_old" id="orderProcessStateOld" value="Pending">
-                                    <input hidden type="text" name="order_status_old" id="orderStatusOld" value="Pending">
-
-                                    <!-- Submit Button -->
-                                    <div class="mb-1 justify-content-center pt-2 d-flex">
-                                        <button type="submit" class="btn btn-primary" id="submitBtn">Update</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <!-- Billing -->
-                        <div class="col-md-4">
-                            <div class="order-container">
-                                <h5 class="fw-bold">Billing</h5>
-                                <p class="mt-2">
-                                    <strong>Customer Name: <span id="billing-customer-name">John Doe</span></strong><br>
-                                    <strong>Order Address: <span id="billing-address">123 Main St</span></strong><br>
-                                    <strong>City: <span id="billing-city">New York</span></strong><br>
-                                    <strong>State: <span id="billing-state">NY</span></strong><br>
-                                    <strong>Pincode: <span id="billing-pincode">10001</span></strong><br>
-                                </p>
-                                <p><strong>Email: </strong> <span id="billing-email" class="text-primary text-decoration-underline">john.doe@example.com</span></p>
-                                <p><strong>Phone No: </strong> <span id="billing-phone" class="text-primary text-decoration-underline">1234567890</span></p>
-                            </div>
-                        </div>
-
-                        <!-- Shipping -->
-                        <div class="col-md-4">
-                            <div class="order-container">
-                                <h5 class="fw-bold">Shipping</h5>
-                                <p class="mt-2">
-                                    <strong>Order Address: <span id="shipping-address">123 Main St</span></strong><br>
-                                    <strong>City: <span id="shipping-city">New York</span></strong><br>
-                                    <strong>State: <span id="shipping-state">NY</span></strong><br>
-                                    <strong>Pincode: <span id="shipping-pincode">10001</span></strong><br>
-                                </p>
-                                <p><strong>Phone No: </strong> <span id="shipping-phone" class="text-primary text-decoration-underline">1234567890</span></p>
+                            <div class="container mt-5 mb-5" id="actionButtonsContainer">
+                                <!-- Static buttons -->
+                                <button type="button" class="btn btn-success mb-5 ms-3 me-3" onclick="trackOrder(1)">Track Order</button>
+                                <button type="button" class="btn btn-outline-primary mb-5" onclick="populateShipmentForm()">Update Shipment Data</button>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="container mt-4 px-3">
-                    <div class="row g-4">
+                    <div class="container bg-white rounded border">
+                        <div class="order-container">
+                            <p class="mb-1 fw-bold fs-4">Order #<span id="order-id">1</span> details</p>
+                            <p class="mb-0 fs-5">Payment ID: <span id="payment-id"> <?php echo $paymentId; ?></span> On <span id="formatted-date"><?php echo $date; ?></span></p>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-4 p-5">
+                                <div class="order-container">
+                                    <form method="POST" enctype="multipart/form-data" id="orderForm">
+                                        <h5 class="fw-bold">General</h5>
+
+                                        <!-- Hidden Order ID -->
+                                        <input type="hidden" name="order_id" id="orderId" value="1">
+
+                                        <!-- Status Dropdown -->
+                                        <!-- <div class="mb-1">
+                                            <label for="status" class="form-label">Status:</label>
+                                            <select id="status" name="status" class="form-select border border-dark" required>
+                                                <option value="Pending" selected>Pending</option>
+                                                <option value="Processed">Processed</option>
+                                                <option value="Packed">Packed</option>
+                                                <option value="Shipped">Shipped</option>
+                                                <option value="Delivered">Delivered</option>
+                                                <option value="Completed">Completed</option>
+                                            </select>
+                                        </div> -->
+
+                                        <!-- Order Note Input -->
+                                        <div class="mb-1">
+                                            <label for="order_note" class="form-label">Order Note:</label>
+                                            <input type="text" id="order_note" name="order_note" class="p-2 rounded w-100 border border-dark" value="Order updated..." required>
+                                        </div>
+
+                                        <!-- Hidden Fields for Previous States -->
+                                        <input hidden type="text" name="order_process_state_old" id="orderProcessStateOld" value="Pending">
+                                        <input hidden type="text" name="order_status_old" id="orderStatusOld" value="Pending">
+
+                                        <!-- Submit Button -->
+                                        <div class="mb-1 justify-content-center pt-2 d-flex">
+                                            <button type="submit" class="btn btn-primary" id="submitBtn">Update</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                           <?php if (!empty($orders)): ?>
+    <?php
+        $billingName     = $orders[0]['user_fullname'] ?? 'N/A';
+        $billingAddress  = $orders[0]['user_address'] ?? 'N/A';
+        $billingCity     = $orders[0]['user_city'] ?? 'N/A';
+        $billingState    = $orders[0]['user_state'] ?? 'N/A';
+        $billingPincode  = $orders[0]['user_pincode'] ?? 'N/A';
+        $billingPhone    = $orders[0]['user_phonenumber'] ?? 'N/A';
+        $billingEmail    = $orders[0]['user_email'] ?? 'N/A'; // If available, else hardcoded fallback
+    ?>
+    
+    <!-- Billing -->
+    <div class="col-md-4">
+        <div class="order-container">
+            <h5 class="fw-bold">Billing</h5>
+            <p class="mt-2">
+                <strong>Customer Name: </strong><span id="billing-customer-name"><?= $billingName; ?></span><br>
+                <strong>Order Address: </strong><span id="billing-address"><?= $billingAddress; ?></span><br>
+                <strong>City: </strong><span id="billing-city"><?= $billingCity; ?></span><br>
+                <strong>State: </strong><span id="billing-state"><?= $billingState; ?></span><br>
+                <strong>Pincode: </strong><span id="billing-pincode"><?= $billingPincode; ?></span><br>
+            </p>
+            <p><strong>Email: </strong> 
+                <span id="billing-email" class="text-primary text-decoration-underline">
+                    <?= $billingEmail; ?>
+                </span>
+            </p>
+            <p><strong>Phone No: </strong> 
+                <span id="billing-phone" class="text-primary text-decoration-underline">
+                    <?= $billingPhone; ?>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Shipping -->
+    <div class="col-md-4">
+        <div class="order-container">
+            <h5 class="fw-bold">Shipping</h5>
+            <p class="mt-2">
+                <strong>Order Address: </strong><span id="shipping-address"><?= $billingAddress; ?></span><br>
+                <strong>City: </strong><span id="shipping-city"><?= $billingCity; ?></span><br>
+                <strong>State: </strong><span id="shipping-state"><?= $billingState; ?></span><br>
+                <strong>Pincode: </strong><span id="shipping-pincode"><?= $billingPincode; ?></span><br>
+            </p>
+            <p><strong>Phone No: </strong> 
+                <span id="shipping-phone" class="text-primary text-decoration-underline">
+                    <?= $billingPhone; ?>
+                </span>
+            </p>
+        </div>
+    </div>
+<?php endif; ?>
+
+                    <div class="container mt-4 px-3">
+                        <!-- <div class="row g-4">
                         <div class="col-md-4 col-12 bg-white border rounded shadow-sm p-4">
                             <h5 class="fw-bold mb-3">Customers History</h5>
                             <div class="d-flex justify-content-between align-items-center">
@@ -391,33 +442,33 @@
                             <p class="mb-0 fs-6">Average Order Value: ₹
                                 <span id="avg-order-value" class="fw-semibold">1000.00</span>
                             </p>
-                        </div>
+                        </div> -->
 
-                        <div class="col-md-4"></div>
+                        <!-- <div class="col-md-4"></div>
 
                         <div class="col-md-4 col-12 bg-white border rounded shadow-sm p-4">
                             <h5 class="fw-bold mb-3">Order Attribution</h5>
                             <p class="mb-0 fs-6">Order From: <span id="order-from" class="fw-semibold text-dark">Website</span></p>
                         </div>
+                    </div> -->
                     </div>
-                </div>
 
-                <div class="container mt-5 px-2 pt-2 border rounded bg-white mb-5">
+                    <!-- <div class="container mt-5 px-2 pt-2 border rounded bg-white mb-5">
                     <h5 class="fw-bold">Order Notes</h5>
                     <div class="container mt-2" id="notes-container">
-                        <h3>Notes</h3>
-                        <!-- Static notes -->
-                        <div class="note-item mb-2">
+                        <h3>Notes</h3> -->
+                    <!-- Static notes -->
+                    <!-- <div class="note-item mb-2">
                             <p class="mb-0">Order Process changed to <strong>Shipped</strong></p>
                             <p class="mb-0">Order updated...</p>
                             <p class="mt-0" style="font-size: 0.9rem; color: #6c757d;">Updated on :- 2023-10-01</p>
-                        </div>
-                    </div>
+                        </div> -->
+                    <!-- </div>
                 </div>
-            </div>
+            </div> -->
 
-            <!-- Shipment Tracking Modal -->
-            <div class="modal fade" id="shipmentTrackingModal" tabindex="-1" aria-hidden="true">
+                    <!-- Shipment Tracking Modal -->
+                    <!-- <div class="modal fade" id="shipmentTrackingModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <form id="trackingForm" method="POST">
@@ -468,36 +519,36 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- SweetAlert2 CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <!-- SweetAlert2 CDN -->
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-        function trackOrder(orderId) {
-            alert(`Tracking order ${orderId}`);
-            // Here you can add logic to track the order
-        }
+                    <script>
+                        function trackOrder(orderId) {
+                            alert(`Tracking order ${orderId}`);
+                            // Here you can add logic to track the order
+                        }
 
-        function populateShipmentForm() {
-            const modal = new bootstrap.Modal(document.getElementById('shipmentTrackingModal'));
-            modal.show();
-        }
+                        function populateShipmentForm() {
+                            const modal = new bootstrap.Modal(document.getElementById('shipmentTrackingModal'));
+                            modal.show();
+                        }
 
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert("Order status updated!");
-            // Here you can add logic to update the status in the backend
-        });
+                        document.getElementById('orderForm').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            alert("Order status updated!");
+                            // Here you can add logic to update the status in the backend
+                        });
 
-        document.getElementById('trackingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert("Shipment details saved successfully.");
-            // Here you can add logic to save the shipment details in the backend
-            const modal = bootstrap.Modal.getInstance(document.getElementById('shipmentTrackingModal'));
-            modal.hide();
-        });
-    </script>
+                        document.getElementById('trackingForm').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            alert("Shipment details saved successfully.");
+                            // Here you can add logic to save the shipment details in the backend
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('shipmentTrackingModal'));
+                            modal.hide();
+                        });
+                    </script>
 </body>
 
 </html>

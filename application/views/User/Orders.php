@@ -981,6 +981,7 @@
 
 
 
+                                 
                                     <?php if (!empty($showorderedproduct)): ?>
                                         <?php foreach ($showorderedproduct as $order): ?>
                                             <div class="col-md-6 col-lg-4 mb-4">
@@ -988,10 +989,10 @@
                                                     style="border: 1px solid var(--red);">
                                                     <div class="row g-0">
                                                         <div class="col-4">
-                                                            <img src="<?php echo base_url('assets/images/JyotisikaMall/Rudraksh.png'); ?>"
+                                                            <img src="<?php echo base_url($order["product_image"]); ?>"
                                                                 class="img-fluid rounded-start h-100"
                                                                 alt="<?php echo $order['product_name']; ?>"
-                                                                style="object-fit: cover;">
+                                                                style="object-fit: cover;" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
                                                         </div>
                                                         <div class="col-8">
                                                             <div class="card-body p-3">
@@ -1061,10 +1062,10 @@
                                                     style="border: 1px solid var(--red);">
                                                     <div class="row g-0">
                                                         <div class="col-4">
-                                                            <img src="<?php echo base_url('assets/images/JyotisikaMall/Rudraksh.png'); ?>"
+                                                            <img src="<?php echo base_url($order["product_image"]); ?>"
                                                                 class="img-fluid rounded-start h-100"
                                                                 alt="<?php echo $order['product_name']; ?>"
-                                                                style="object-fit: cover;">
+                                                                style="object-fit: cover;" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
                                                         </div>
                                                         <div class="col-8">
                                                             <div class="card-body p-3">

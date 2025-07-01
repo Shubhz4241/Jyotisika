@@ -5,38 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin:Jyotisika Store</title>
-    <!-- Bootstrap CSS for styling and layout -->
+    <title>Admin: Jyotisika Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS file -->
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets\css\style.css' ?>">
-    <!-- bootstrap icon -->
+    <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/style.css' ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- GOOGLE FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
-    <!-- bootstrap icon -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        /* Apply Inter font to the entire page */
         * {
             font-family: 'Inter', sans-serif !important;
         }
 
-        /* Customize headers and table fonts for better readability */
         h1,
         h4 {
             font-weight: 700;
@@ -49,19 +31,16 @@
             font-size: 1rem;
         }
 
-        /* Enhance table header appearance */
         .table thead th {
             font-weight: 600;
             background-color: #f8f9fa;
         }
 
-        /* Adjust buttons for better aesthetics */
         .btn {
             font-weight: 500;
             font-size: 0.9rem;
         }
 
-        /* Mobile Responsiveness Improvements */
         @media (max-width: 768px) {
             .main {
                 margin-top: 0 !important;
@@ -85,14 +64,8 @@
                 font-size: 0.75rem;
             }
 
-            /* Responsive table */
             .table-responsive-stack tr {
-                display: -webkit-box;
-                display: -ms-flexbox;
                 display: flex;
-                -webkit-box-orient: vertical;
-                -webkit-box-direction: normal;
-                -ms-flex-direction: column;
                 flex-direction: column;
                 margin-bottom: 1rem;
                 border-bottom: 1px solid #eee;
@@ -110,7 +83,6 @@
             }
         }
 
-        /* Mobile-friendly See All button */
         @media (max-width: 768px) {
             .card-footer .btn {
                 margin-top: 10px;
@@ -155,11 +127,6 @@
             background-color: #999;
         }
 
-        .fixed-right-btn {
-            position: relative;
-            /* Keeps button aligned */
-        }
-
         @media (max-width: 768px) {
             .fixed-right-btn {
                 position: relative;
@@ -190,17 +157,9 @@
 
 <body>
     <div class="d-flex">
-        <!-- Sidebar -->
         <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
-        <!-- SIDEBAR END -->
-
-
-        <!-- Main Component -->
-        <div class="main ">
-            <!-- Navbar -->
+        <div class="main">
             <?php $this->load->view('IncludeAdmin/CommanNavbar'); ?>
-            <!-- Navbar End -->
-
             <div class="container-fluid">
                 <div class="row mt-5">
                     <div class="col-md-12">
@@ -221,151 +180,40 @@
                                     </tr>
                                 </thead>
                                 <tbody id="festival-table-body">
-                                    <!-- Dynamic Rows Here -->
+                                    <?php $i = 1;
+                                    foreach ($data as $p): ?>
+                                        <tr>
+                                            <th scope="row"><?= $i++ ?></th>
+                                            <td><?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($p['product_description'], ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($p['product_price'], ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td>
+                                                <img src="<?= base_url('Uploads/products/' . $p['product_image']) ?>"
+                                                    alt="<?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?>"
+                                                    class="img-fluid rounded" width="60">
+                                            </td>
+                                            <td class="text-center d-flex justify-content-center">
+                                                <a href="javascript:void(0)" class="text-primary me-2 edit-btn"
+                                                    data-id="<?= $p['product_id'] ?>"
+                                                    data-name="<?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?>"
+                                                    data-description="<?= htmlspecialchars($p['product_description'], ENT_QUOTES, 'UTF-8') ?>"
+                                                    data-price="<?= htmlspecialchars($p['product_price'], ENT_QUOTES, 'UTF-8') ?>"
+                                                    data-image="<?= $p['product_image'] ?>"
+                                                    data-bs-toggle="modal" data-bs-target="#editModal">
+                                                    <i class="bi bi-pencil-square fs-5"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="text-danger ms-2 delete-product" data-id="<?= $p['product_id'] ?>">
+                                                    <i class="bi bi-trash fs-5"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
-                        <nav>
-                            <ul class="pagination justify-content-center" id="pagination">
-                                <!-- Dynamic Pagination Here -->
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </div>
-
-            <script>
-                // Sample data
-                const festivals = [{
-                        id: 1,
-                        title: "Rudraksha",
-                        description: "The Seed of Shiva",
-                        price:"2000",
-                        image: "https://picsum.photos/32"
-                    },
-                    {
-                        id: 2,
-                        title: "Shri Yantra",
-                        description: "The Devi's diagram",
-                                                price:"2000",
-
-                        image: "https://picsum.photos/33"
-                    },
-                    {
-                        id: 3,
-                        title: "Kamal Gatta",
-                        description: "The Lotus Beads",
-                                                price:"2000",
-
-                        image: "https://picsum.photos/34"
-                    },
-                    {
-                        id: 4,
-                        title: "Kavach",
-                        description: "The Spiritual Shield",
-                                                price:"2000",
-
-                        image: "https://picsum.photos/35"
-                    },
-                    {
-                        id: 5,
-                        title: "Puja Samagri",
-                        description: "The Puja Material",
-                                                price:"2000",
-
-                        image: "https://picsum.photos/36"
-                    },
-                    {
-                        id: 6,
-                        title: "Vastu Items",
-                        description: "The Vastu Products",
-                                                price:"2000",
-
-                        image: "https://picsum.photos/37"
-                    },
-                    {
-                        id: 7,
-                        title: "Yantras",
-                        description: "The Magical Figures",
-                                                price:"2000",
-
-                        image: "https://picsum.photos/38"
-                    },
-                    {
-                        id: 8,
-                        title: "Rosaries",
-                        description: "The Beads of Spiritual Growth",
-                                                price:"2000",
-
-                        image: "https://picsum.photos/39"
-                    }
-                ];
-
-                const recordsPerPage = 5;
-                let currentPage = 1;
-
-                // Utility function to truncate text
-                function truncateText(text, maxLength) {
-                    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
-                }
-
-                function renderTable(page) {
-                    const startIndex = (page - 1) * recordsPerPage;
-                    const endIndex = startIndex + recordsPerPage;
-                    const visibleFestivals = festivals.slice(startIndex, endIndex);
-
-                    const tableBody = document.getElementById("festival-table-body");
-                    tableBody.innerHTML = "";
-
-                    visibleFestivals.forEach((festival, index) => {
-                        tableBody.innerHTML += `
-                    <tr>
-                        <th scope="row">${startIndex + index + 1}</th>
-                        <td>${festival.title}</td>
-                        <td>${truncateText(festival.description, 50)}</td>
-                                                <td>${festival.price}</td>
-
-                        <td><img src="${festival.image}" class="img-fluid rounded" alt="${festival.title}"></td>
-                        <td class="text-center d-flex justify-content-center">
-                            <a href="#" class="text-primary me-2" data-bs-toggle="modal" data-bs-target="#editModal">
-                                <i class="bi bi-pencil-square fs-5"></i>
-                            </a>
-                            <a href="#" class="text-danger ms-2">
-                                <i class="bi bi-trash fs-5"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                `;
-                    });
-                }
-
-                function renderPagination() {
-                    const totalPages = Math.ceil(festivals.length / recordsPerPage);
-                    const pagination = document.getElementById("pagination");
-                    pagination.innerHTML = "";
-
-                    for (let i = 1; i <= totalPages; i++) {
-                        pagination.innerHTML += `
-                    <li class="page-item ${i === currentPage ? "active" : ""}">
-                        <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
-                    </li>
-                `;
-                    }
-                }
-
-                function changePage(page) {
-                    currentPage = page;
-                    renderTable(page);
-                    renderPagination();
-                }
-
-                // Initial render
-                renderTable(currentPage);
-                renderPagination();
-            </script>
-
-
 
             <!-- Edit Modal -->
             <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -376,32 +224,34 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form action="<?= base_url('Admin/updateProductViaCurl') ?>" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="product_id" id="edit-id">
+                                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="title" aria-describedby="title" required maxlength="50"
-                                        oninput="(function(element) { element.value = element.value.replace(/^[ ]/g, '').replace(/[^a-zA-Z0-9\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
-                                        pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only">
-                                    <div class="invalid-feedback">Please enter a valid title without spaces and special characters.</div>
+                                    <label for="edit-title" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="edit-title" name="product_name" required maxlength="50">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" aria-describedby="description" rows="3" required></textarea>
+                                    <label for="edit-description" class="form-label">Description</label>
+                                    <textarea class="form-control" id="edit-description" name="product_description" rows="3" required></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="prise" class="form-label">Price</label>
-                                    <input type="text" class="form-control" id="prise" aria-describedby="prise"
-                                        required pattern="^\d+(\.\d{1,2})?$"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        title="Please enter a valid price (e.g., 100 or 99.99)">
-                                    <div class="invalid-feedback">Please enter a valid price (numbers only, max 2 decimal places).</div>
+                                    <label for="edit-price" class="form-label">Price</label>
+                                    <input type="number" step="0.01" class="form-control" id="edit-price" name="product_price" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="image" class="form-label">Upload Image</label>
-                                    <input type="file" class="form-control" id="image" aria-describedby="image" accept="image/*" required>
-                                    <div class="invalid-feedback">Please select a valid image file.</div>
+                                    <label class="form-label">Current Image</label>
+                                    <div>
+                                        <img id="current-image" src="" alt="Current Image" class="img-fluid rounded" width="100" style="display: none;">
+                                        <span id="current-image-name"></span>
+                                    </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <div class="mb-3">
+                                    <label for="edit-image" class="form-label">Upload New Image (Optional)</label>
+                                    <input type="file" class="form-control" id="edit-image" name="product_image" accept="image/*">
+                                    <small class="text-muted">Leave empty to keep current image</small>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="background-color: #0c768a; color: white;">Update Product</button>
                             </form>
                         </div>
                     </div>
@@ -417,31 +267,23 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form onsubmit="document.getElementById('addModal').dispatchEvent(new Event('close.bs.modal'));">
+                            <form action="<?= base_url('Admin/addProductViaCurl') ?>" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="title" aria-describedby="title" required maxlength="50"
-                                        oninput="(function(element) { element.value = element.value.replace(/^[ ]/g, '').replace(/[^a-zA-Z0-9\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
-                                        pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only">
-                                    <div class="invalid-feedback">Please enter a valid title without spaces and special characters.</div>
+                                    <input type="text" name="product_name" class="form-control" id="title" required maxlength="50">
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" aria-describedby="description" rows="3" required></textarea>
+                                    <textarea name="product_description" class="form-control" id="description" rows="3" required></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="prise" class="form-label">Price</label>
-                                    <input type="text" class="form-control" id="prise" aria-describedby="prise"
-                                        required pattern="^\d+(\.\d{1,2})?$"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        title="Please enter a valid price (e.g., 100 or 99.99)">
-                                    <div class="invalid-feedback">Please enter a valid price (numbers only, max 2 decimal places).</div>
+                                    <input type="number" step="0.01" name="product_price" class="form-control" id="prise" required>
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Upload Image</label>
-                                    <input type="file" class="form-control" id="image" aria-describedby="image" accept="image/*" required>
-                                    <div class="invalid-feedback">Please select a valid image file.</div>
+                                    <input type="file" name="product_image" class="form-control" id="image" accept="image/*" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="background-color: #0c768a; color: white;">Add</button>
                             </form>
@@ -450,28 +292,102 @@
                 </div>
             </div>
         </div>
-
-    </div>
     </div>
 
-
-
-    <!-- Script Toggle Sidebar -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        const toggler = document.querySelector(".toggler-btn");
-        const closeBtn = document.querySelector(".close-sidebar");
-        const sidebar = document.querySelector("#sidebar");
+        // CSRF token setup
+        let csrfName = '<?= $this->security->get_csrf_token_name() ?>';
+        let csrfHash = '<?= $this->security->get_csrf_hash() ?>';
 
-        toggler.addEventListener("click", function() {
-            sidebar.classList.toggle("collapsed");
-        });
+        document.addEventListener("DOMContentLoaded", function() {
+            // Edit button click handler
+            document.querySelectorAll('.edit-btn').forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    const id = btn.getAttribute('data-id');
+                    const name = btn.getAttribute('data-name');
+                    const description = btn.getAttribute('data-description');
+                    const price = btn.getAttribute('data-price');
+                    const imageName = btn.getAttribute('data-image');
 
-        closeBtn.addEventListener("click", function() {
-            sidebar.classList.remove("collapsed");
+                    document.getElementById('edit-id').value = id;
+                    document.getElementById('edit-title').value = name;
+                    document.getElementById('edit-description').value = description;
+                    document.getElementById('edit-price').value = price;
+
+                    const currentImage = document.getElementById('current-image');
+                    const currentImageName = document.getElementById('current-image-name');
+
+                    if (imageName) {
+                        currentImage.src = '<?= base_url("Uploads/products/") ?>' + imageName;
+                        currentImage.style.display = 'block';
+                        currentImageName.textContent = imageName;
+                    } else {
+                        currentImage.style.display = 'none';
+                        currentImageName.textContent = 'No image';
+                    }
+                });
+            });
+
+            // Delete button click handler
+            document.getElementById('festival-table-body').addEventListener('click', function(e) {
+                const btn = e.target.closest('.delete-product');
+                if (btn) {
+                    const productId = btn.getAttribute('data-id');
+                    console.log('Delete Product ID:', productId);
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#0c768a',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '<?= base_url('Admin_API/deleteProductAPI') ?>',
+                                type: 'POST',
+                                data: {
+                                    id: productId,
+                                    [csrfName]: csrfHash
+                                },
+                                dataType: 'json',
+                                beforeSend: function() {
+                                    console.log('Sending Delete AJAX:', {
+                                        id: productId,
+                                        [csrfName]: csrfHash
+                                    });
+                                },
+                                success: function(response) {
+                                    console.log('Delete AJAX Response:', response);
+                                    if (response.csrfHash) {
+                                        csrfHash = response.csrfHash; // Update CSRF token
+                                    }
+                                    if (response.status) {
+                                        Swal.fire('Deleted!', response.message, 'success').then(() => location.reload());
+                                    } else {
+                                        Swal.fire('Error!', response.message || 'Failed to delete product.', 'error');
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Delete AJAX Error:', {
+                                        status: status,
+                                        error: error,
+                                        responseText: xhr.responseText,
+                                        statusCode: xhr.status
+                                    });
+                                    Swal.fire('Error!', 'Failed to delete product. Check console for details.', 'error');
+                                }
+                            });
+                        }
+                    });
+                }
+            });
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </body>
 
 </html>

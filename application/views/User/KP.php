@@ -31,6 +31,18 @@
 
 </head>
 
+
+<style>
+    .suggestion {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .suggestion:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+
 <body>
 
     <header>
@@ -45,9 +57,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="fw-bold text-center mb-4" style="color:var(--red)">KP Astrology - Krishnamurti Paddhati (KP System)</h2>
-                    <p class="mb-3" style="text-align:justify;">KP Astrology is a refined approach to Stellar Astrology that focuses on the study of Nakshatras (Stars) to predict life events with precision. Explore a comprehensive collection of tools, utilities, and insightful articles dedicated to the KP system, all in one place.</p>
-                    <p class="mb-4" style="text-align:justify;">The KP System is a modern and scientific approach to astrology, developed by the renowned Indian astrologer Prof. K.S. Krishnamurti in the mid-20th century. It refines traditional Vedic astrology to offer more precise predictions. KP Astrology focuses on the Nakshatras (stars) and their sub-lords, enabling detailed analysis and accurate timing of events in one's life.</p>
+                    <h2 class="fw-bold text-center mb-4" style="color:var(--red)">KP Astrology - Krishnamurti Paddhati
+                        (KP System)</h2>
+                    <p class="mb-3" style="text-align:justify;">KP Astrology is a refined approach to Stellar Astrology
+                        that focuses on the study of Nakshatras (Stars) to predict life events with precision. Explore a
+                        comprehensive collection of tools, utilities, and insightful articles dedicated to the KP
+                        system, all in one place.</p>
+                    <p class="mb-4" style="text-align:justify;">The KP System is a modern and scientific approach to
+                        astrology, developed by the renowned Indian astrologer Prof. K.S. Krishnamurti in the mid-20th
+                        century. It refines traditional Vedic astrology to offer more precise predictions. KP Astrology
+                        focuses on the Nakshatras (stars) and their sub-lords, enabling detailed analysis and accurate
+                        timing of events in one's life.</p>
                 </div>
 
                 <div class="col-12 col-md-6 mb-4">
@@ -66,20 +86,158 @@
                     </div>
                 </div>
             </div>
-            
+
+            <div class="container p-3 my-4 rounded-3" style="background-color:rgba(255, 247, 184, 0.59);">
+                <h3 class="text-center mb-3">KP Astrology </h3>
+                <hr>
+
+                <form id="matchForm">
+
+                    <div class="row">
+                        <!-- Boy's Section -->
+                        <div class="col-12 col-md-6">
+
+
+                            <!-- Name -->
+                            <label for="boy_name">Name</label>
+                            <input type="text" id="boy_name" class="form-control shadow-none my-2 p-2 rounded-1"
+                                placeholder="Person Name" required
+                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
+                                pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only" />
+
+                            <!-- Gender -->
+                            <label for="boy_gender">Gender</label>
+                            <select id="boy_gender" class="form-control shadow-none my-2 p-2 rounded-1" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+
+                            </select>
+
+                            <!-- DOB -->
+                            <div class="row">
+                                <div class="col-4">
+                                    <label>Day</label>
+                                    <select id="boy_day" class="form-control shadow-none my-2 p-2 rounded-1"
+                                        required></select>
+                                </div>
+                                <div class="col-4">
+                                    <label>Month</label>
+                                    <select id="boy_month" class="form-control shadow-none my-2 p-2 rounded-1"
+                                        required></select>
+                                </div>
+                                <div class="col-4">
+                                    <label>Year</label>
+                                    <select id="boy_year" class="form-control shadow-none my-2 p-2 rounded-1"
+                                        required></select>
+                                </div>
+                            </div>
+
+                            <!-- Time -->
+                            <div class="row">
+                                <div class="col-4">
+                                    <label>Hour</label>
+                                    <select id="boy_hour" class="form-control shadow-none my-2 p-2 rounded-1"
+                                        required></select>
+                                </div>
+                                <div class="col-4">
+                                    <label>Minute</label>
+                                    <select id="boy_minute" class="form-control shadow-none my-2 p-2 rounded-1"
+                                        required></select>
+                                </div>
+                                <div class="col-4">
+                                    <label>Second</label>
+                                    <select id="boy_second" class="form-control shadow-none my-2 p-2 rounded-1"
+                                        required></select>
+                                </div>
+                            </div>
+
+                            <!-- Birthplace -->
+                            <!-- <label for="boy_birthPlace">Birth Place</label>
+                        <input type="text" id="boy_birthPlace" class="form-control shadow-none my-2 p-2 rounded-1"
+                            placeholder="Birth Place" required
+                            oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
+                            pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only" /> -->
+
+                            <label for="boy_birthPlace">Birth Place</label>
+                            <input type="text" id="boy_birthPlace" class="form-control shadow-none my-2 p-2 rounded-1"
+                                placeholder="Birth Place" autocomplete="off" required />
+                            <input type="hidden" id="boy_lat">
+                            <input type="hidden" id="boy_lon">
+                            <div id="suggestions" class="border rounded bg-white shadow-sm"
+                                style="position: absolute; z-index: 1000;"></div>
+
+                            <!-- <div id="suggestions" class="border rounded bg-white mt-1 position-absolute w-" style="z-index: 1000;"></div> -->
+
+
+                            <center>
+                                <button type="submit" class="btn mt-4 px-4 py-2"
+                                    style="background-color: var(--yellow);">
+                                    Submit
+                                </button>
+
+                            </center>
+                        </div>
+
+                        <!-- Image and Explanation -->
+                        <div class="col-12 col-md-6 text-center">
+                            <img src="<?php echo base_url('assets/images/Freekundli/kundli.png'); ?>" alt="kundli"
+                                class="img-fluid" style="width: 150px; height: 150px;">
+                            <p class="mt-2 justified-text">Your KP Chart, or Cuspal Chart, is a highly refined
+                                astrological map based on the Krishnamurti Paddhati system. Unlike traditional birth
+                                charts, the KP system divides the zodiac into precise sub-divisions using Nakshatras and
+                                their sub-lords, allowing for extremely accurate timing of life events. Each KP chart is
+                                unique and reveals critical insights about your life path, relationships, career, and
+                                destiny through the lens of stellar astrology. By focusing on the ruling planets and
+                                sub-lords at the moment of birth, KP Astrology serves as a practical and scientific tool
+                                for deep self-discovery, decision-making, and future planning</p>
+                        </div>
+                    </div>
+
+
+                </form>
+
+                <!-- <div id="kundliResult" class="mt-4"></div> -->
+
+
+                <div class="mt-5" id="svgChart"></div>
+                <div class="mt-5" id="tableResult"></div>
+
+
+            </div>
+
+
             <div class="row mb-4">
                 <div class="col-12">
                     <h6 class="fw-bold fs-5 mb-3">Zodiac Divisions in KP Astrology</h6>
-                    <p style="text-align:justify;">In KP Astrology, the Zodiac Belt, a 360-degree circle, is divided into 12 equal parts (30 degrees each) called Zodiac Signs or Rashis. Each sign is further divided into 27 Nakshatras (13°20' each), and each Nakshatra is subdivided into 9 parts called "Subs." These Sub divisions, ruled by "Sub Lords," form the core of KP Astrology, enabling precise predictions.
-                    The division of Subs is based on the Vimshottari Dasha system, where planets with shorter Dashas occupy smaller portions of a Nakshatra, while longer Dashas occupy larger portions. This method modernizes Vedic Astrology, simplifying predictions while maintaining accuracy. KP Astrology uses the Placidus House system, with houses measured cusp-to-cusp rather than fixed degrees. This approach, combined with a focus on Sub Lords, offers a streamlined and highly effective way to predict events with clarity and precision.</p>
+                    <p style="text-align:justify;">In KP Astrology, the Zodiac Belt, a 360-degree circle, is divided
+                        into 12 equal parts (30 degrees each) called Zodiac Signs or Rashis. Each sign is further
+                        divided into 27 Nakshatras (13°20' each), and each Nakshatra is subdivided into 9 parts called
+                        "Subs." These Sub divisions, ruled by "Sub Lords," form the core of KP Astrology, enabling
+                        precise predictions.
+                        The division of Subs is based on the Vimshottari Dasha system, where planets with shorter Dashas
+                        occupy smaller portions of a Nakshatra, while longer Dashas occupy larger portions. This method
+                        modernizes Vedic Astrology, simplifying predictions while maintaining accuracy. KP Astrology
+                        uses the Placidus House system, with houses measured cusp-to-cusp rather than fixed degrees.
+                        This approach, combined with a focus on Sub Lords, offers a streamlined and highly effective way
+                        to predict events with clarity and precision.</p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-12">
                     <h6 class="fw-bold fs-5 mb-3">Origin and Essence of KP Astrology</h6>
-                    <p style="text-align:justify;">The Krishnamurti Paddhati (KP) system, developed by Late Astrologer Krishnamurti, revolutionized Vedic Astrology by introducing a simplified yet highly accurate method for event prediction. By focusing on Nakshatras (stars) and their "Sub Lords," KP Astrology offers precise insights into life events. KP Astrology divides the Zodiac Belt (360°) into 12 signs, 27 Nakshatras, and 9 unequal Sub-divisions within each Nakshatra. These divisions are based on the Vimshottari Dasha system, with planets occupying segments proportional to their Dasha periods. The technique emphasizes the Sub Lords, using them to evaluate events with clarity.
-                    Unlike traditional Vedic Astrology, KP utilizes the Placidus House System, measuring houses cusp-to-cusp. This streamlined approach enables astrologers to predict events more accurately, making it a modern and practical evolution of ancient astrology.</p>
+                    <p style="text-align:justify;">The Krishnamurti Paddhati (KP) system, developed by Late Astrologer
+                        Krishnamurti, revolutionized Vedic Astrology by introducing a simplified yet highly accurate
+                        method for event prediction. By focusing on Nakshatras (stars) and their "Sub Lords," KP
+                        Astrology offers precise insights into life events. KP Astrology divides the Zodiac Belt (360°)
+                        into 12 signs, 27 Nakshatras, and 9 unequal Sub-divisions within each Nakshatra. These divisions
+                        are based on the Vimshottari Dasha system, with planets occupying segments proportional to their
+                        Dasha periods. The technique emphasizes the Sub Lords, using them to evaluate events with
+                        clarity.
+                        Unlike traditional Vedic Astrology, KP utilizes the Placidus House System, measuring houses
+                        cusp-to-cusp. This streamlined approach enables astrologers to predict events more accurately,
+                        making it a modern and practical evolution of ancient astrology.</p>
                 </div>
             </div>
         </div>
@@ -90,6 +248,266 @@
         <!-- footer -->
         <?php $this->load->view('IncludeUser/CommanFooter'); ?>
     </footer>
+    <script>
+        function populateSelect(id, start, end, pad = false) {
+            const select = document.getElementById(id);
+            select.innerHTML = '<option value="">Select</option>';
+            for (let i = start; i <= end; i++) {
+                const val = pad ? String(i).padStart(2, '0') : i;
+                select.innerHTML += `<option value="${val}">${val}</option>`;
+            }
+        }
+
+        function populateMonth(id) {
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            const select = document.getElementById(id);
+            select.innerHTML = '<option value="">Select</option>';
+            months.forEach((month, i) => {
+                select.innerHTML += `<option value="${i + 1}">${month}</option>`;
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            populateSelect("boy_day", 1, 31, true);
+            populateMonth("boy_month");
+            populateSelect("boy_year", 1990, new Date().getFullYear());
+            populateSelect("boy_hour", 0, 23, true);
+            populateSelect("boy_minute", 0, 59, true);
+            populateSelect("boy_second", 0, 59, true);
+        });
+
+
+
+        document.getElementById("matchForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const requiredFields = [
+                'boy_name', 'boy_gender', 'boy_day', 'boy_month', 'boy_year',
+                'boy_hour', 'boy_minute', 'boy_second', 'boy_birthPlace'
+            ];
+
+            const missingField = requiredFields.find(id => {
+                const field = document.getElementById(id);
+                return !field || field.value.trim() === "";
+            });
+
+            if (missingField) {
+                
+                const label = document.querySelector(`label[for="${missingField}"]`);
+                const fieldName = label ? label.innerText : missingField;
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Missing Information',
+                    text: `Please fill out the ${fieldName} field.`,
+                    confirmButtonColor: '#28a745',
+                });
+                return;
+            }
+        });
+
+    </script>
+
+
+    <script>
+        const input = document.getElementById("boy_birthPlace");
+        const suggestionBox = document.getElementById("suggestions");
+        let debounceTimer = null;
+
+        input.addEventListener("input", function () {
+            const query = input.value.trim();
+            if (debounceTimer) clearTimeout(debounceTimer);
+            if (query.length < 2) {
+                suggestionBox.innerHTML = '';
+                return;
+            }
+
+            debounceTimer = setTimeout(() => {
+                fetch(`<?= base_url('User_Api_Controller/search_city?q=') ?>${encodeURIComponent(query)}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        suggestionBox.innerHTML = "";
+
+                        if (data.length === 0) {
+                            suggestionBox.innerHTML = '<div class="suggestion">No results found</div>';
+                            return;
+                        }
+
+                        data.forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'suggestion';
+                            div.textContent = item.display_name;
+                            div.addEventListener('click', () => {
+                                input.value = item.display_name;
+                                document.getElementById("boy_lat").value = item.lat;
+                                document.getElementById("boy_lon").value = item.lon;
+                                suggestionBox.innerHTML = '';
+                            });
+                            suggestionBox.appendChild(div);
+                        });
+                    })
+                    .catch(err => {
+                        suggestionBox.innerHTML = '<div class="suggestion">Error fetching results</div>';
+                        console.error(err);
+                    });
+            }, 300);
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener("click", function (e) {
+            if (!suggestionBox.contains(e.target) && e.target !== input) {
+                suggestionBox.innerHTML = "";
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById("matchForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const requiredFields = [
+                'boy_name', 'boy_gender', 'boy_day', 'boy_month', 'boy_year',
+                'boy_hour', 'boy_minute', 'boy_second', 'boy_birthPlace', 'boy_lat', 'boy_lon'
+            ];
+
+            const missingField = requiredFields.find(id => {
+                const field = document.getElementById(id);
+                return !field || field.value.trim() === "";
+            });
+
+            if (missingField) {
+                const label = document.querySelector(`label[for="${missingField}"]`);
+                const fieldName = label ? label.innerText : missingField;
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Missing Information',
+                    text: `Please fill out the ${fieldName} field.`,
+                    confirmButtonColor: '#28a745',
+                });
+                return;
+            }
+
+            fetchKPData(); // Call the API with form values
+        });
+    </script>
+
+
+    <script>
+        async function fetchKPData() {
+            const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g';
+            const apiKey = 'b49e81e874acc04f1141569767b24b79';
+
+            const fullName = document.getElementById("boy_name").value;
+            const gender = document.getElementById("boy_gender").value;
+            const day = parseInt(document.getElementById("boy_day").value);
+            const month = parseInt(document.getElementById("boy_month").value);
+            const year = parseInt(document.getElementById("boy_year").value);
+            const hour = parseInt(document.getElementById("boy_hour").value);
+            const min = parseInt(document.getElementById("boy_minute").value);
+            const sec = parseInt(document.getElementById("boy_second").value);
+            const place = document.getElementById("boy_birthPlace").value;
+            const lat = parseFloat(document.getElementById("boy_lat").value);
+            const lon = parseFloat(document.getElementById("boy_lon").value);
+
+            const bodyData = {
+                api_key: apiKey,
+                full_name: fullName,
+                gender: gender,
+                day: day,
+                month: month,
+                year: year,
+                hour: hour,
+                min: min,
+                sec: sec,
+                place: place,
+                lat: lat,
+                lon: lon,
+                tzone: 5.5,
+                lan: "en"
+            };
+
+            try {
+                const response = await fetch(`https://astroapi-3.divineapi.com/indian-api/v1/kp/cuspal`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify(bodyData)
+                });
+
+                const result = await response.json();
+
+                if (result.success === 1) {
+                    document.getElementById("svgChart").innerHTML = result.data.svg;
+
+                    const tableData = Object.values(result.data.table_data);
+                    displayCuspalTable(tableData);
+                } else {
+                    document.getElementById("svgChart").innerHTML = '<p>Error: Could not fetch KP data</p>';
+                    document.getElementById("tableResult").innerHTML = '';
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById("svgChart").innerHTML = `<p>Error: ${error.message}</p>`;
+                document.getElementById("tableResult").innerHTML = '';
+            }
+        }
+
+
+    </script>
+
+    <script>
+        function displayCuspalTable(data) {
+            let html = `
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="table-dark text-center">
+                        <tr>
+                            <th>Cusp</th>
+                            <th>Sign</th>
+                            <th>Degree</th>
+                            <th>Rashi Lord</th>
+                            <th>Nakshatra</th>
+                            <th>Pada</th>
+                            <th>Nakshatra Lord</th>
+                            <th>Sub Lord</th>
+                            <th>Sub-Sub Lord</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+            data.forEach(item => {
+                html += `
+                <tr class="text-center">
+                    <td>${item.cusp}</td>
+                    <td>${item.house_cusp.sign}</td>
+                    <td>${item.house_cusp.degree}</td>
+                    <td>${item.rashi_lord}</td>
+                    <td>${item.nakshatra}</td>
+                    <td>${item.nakshatra_pada}</td>
+                    <td>${item.nakshatra_lord}</td>
+                    <td>${item.sub_lord}</td>
+                    <td>${item.sub_sub_lord}</td>
+                </tr>
+            `;
+            });
+
+            html += '</tbody></table></div>';
+            document.getElementById("tableResult").innerHTML = html;
+        }
+    </script>
+
+
+
+
+
+
 
 
 </body>

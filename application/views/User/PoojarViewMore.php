@@ -66,9 +66,11 @@
                                     style="background: linear-gradient(45deg, var(--red), var(--yellow));">
                                     <div class="d-flex flex-column align-items-center justify-content-center h-100 p-3">
 
-                                        <img src="<?php echo !empty($showpujari[0]['profile_pic']) ? base_url('uploads/pujari/profile/image/' . $showpujari[0]['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                        <img src="<?php echo !empty($showpujari[0]['profile_pic']) ? base_url('uploads/pujari/profile/' . $showpujari[0]['profile_pic']) : base_url('assets/images/astrologerimg.png'); ?>"
                                             alt="image" class="rounded-circle border border-3 border-white mb-2"
-                                            style="width: 100px; height: 100px; object-fit: cover;">
+                                            style="width: 100px; height: 100px; object-fit: cover;"
+                                            onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/astrologerimg.png'); ?>';">
+
                                         <h5 class="text-white fw-bold mb-1 text-center">
                                             <?php print_r($showpujari[0]["pujariname"]) ?>
                                         </h5>
