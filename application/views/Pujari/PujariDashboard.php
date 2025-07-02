@@ -14,389 +14,392 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="shortcut icon" href="<?php echo base_url('assets/images/Pujari/jyotishvitaran.png'); ?>" type="image/png">
     <style>
-    /* General Reset */
-    body {
-        font-family: 'Montserrat', serif;
-    }
-
-    a {
-        text-decoration: none;
-        color: #7C7C7C;
-    }
-
-    /* Review Card */
-    .review-card {
-        background-color: #E2960126;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin: auto;
-        text-align: center;
-        width: 90%;
-        height: 300px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .review-card .user-section {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        width: 100%;
-    }
-
-    .review-card img {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
-
-    .review-card .user-info {
-        text-align: left;
-    }
-
-    .review-card .fw-bold {
-        margin: 0;
-        font-size: 15px;
-    }
-
-    .review-card .stars {
-        color: gold;
-        font-size: 14px;
-        text-align: left;
-    }
-
-    .review-card blockquote {
-        flex-grow: 1;
-        overflow-y: auto;
-        margin: 0;
-        padding: 5px;
-        font-size: 14px;
-        line-height: 1.4;
-        width: 100%;
-        text-align: left;
-        scrollbar-width: thin;
-        scrollbar-color: #E29601 transparent;
-    }
-
-    .review-card blockquote::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    .review-card blockquote::-webkit-scrollbar-thumb {
-        background-color: #E29601;
-        border-radius: 10px;
-    }
-
-    /* Review Container & Carousel */
-    .review-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 20px;
-        position: relative;
-        height: 280px;
-    }
-
-    .carousel, .carousel-inner, .carousel-item {
-        height: 280px;
-        width: 100%;
-        max-width: 800px;
-        overflow: hidden;
-        text-align: center;
-    }
-
-    .carousel-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .carousel-btn img {
-        width: 90px;
-        height: auto;
-    }
-
-    .carousel-btn.left {
-        left: -50px;
-    }
-
-    .carousel-btn.right {
-        right: -50px;
-    }
-
-    /* Cards and Hover Effects */
-    .card {
-        transition: all 0.3s ease;
-    }
-
-    .card:hover {
-        transform: scale(1.02);
-    }
-
-    .card1 {
-        min-height: 330px !important;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    /* Icon Boxes */
-    .icon-box {
-        font-size: 1.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 50px;
-        height: 50px;
-        margin: 0 auto 10px;
-        border-radius: 50%;
-    }
-
-    .icon-box.green {
-        background-color: #d4edda;
-        color: #155724;
-    }
-
-    .icon-box.purple {
-        background-color: #e2e0f9;
-        color: #6f42c1;
-    }
-
-    .icon-box.red {
-        background-color: #f8d7da;
-        color: #721c24;
-    }
-
-    .icon-box.yellow {
-        background-color: #fff3cd;
-        color: #856404;
-    }
-
-    /* Image Containers */
-    .image-container {
-        width: 100%;
-        max-width: 240px;
-        height: 100%;
-    }
-
-    .image-container img {
-        object-fit: cover;
-    }
-
-    .puja-image {
-        width: 100%;
-        border-radius: 10px;
-    }
-
-    .Rectangle {
-        max-width: 200px;
-    }
-
-    /* Footer */
-    footer {
-        background-color: white;
-        color: black;
-        text-align: center;
-    }
-
-    /* Overlay and Form */
-    .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 998;
-    }
-
-    .form-container {
-        display: none;
-        position: fixed;
-        top: 100px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #fff;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        width: 90%;
-        max-width: 400px;
-        max-height: 80vh;
-        overflow-y: auto;
-        z-index: 999;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .form-container h5 {
-        font-weight: bold;
-        color: #333;
-        text-align: center;
-        margin-bottom: 15px;
-    }
-
-    .close-btn {
-        background: #ff3d3d;
-        color: white;
-        border: none;
-        padding: 5px 12px;
-        border-radius: 50%;
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        cursor: pointer;
-        font-size: 18px;
-    }
-
-    .form-control {
-        border-radius: 8px;
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-    }
-
-    .form-control.is-invalid {
-        border-color: #dc3545;
-    }
-
-    .invalid-feedback {
-        color: #dc3545;
-        font-size: 12px;
-        margin-top: 5px;
-    }
-
-    .btn-submit {
-        background: #f8b400;
-        color: #fff;
-        font-weight: bold;
-        border-radius: 8px;
-        padding: 10px;
-        font-size: 16px;
-        border: none;
-        transition: 0.3s ease-in-out;
-    }
-
-    .btn-submit:hover {
-        background: #e09b00;
-    }
-
-    /* Puja Reminder Section */
-    .puja-reminder-content {
-        font-size: 14px;
-        color: #333;
-    }
-
-    .puja-reminder-content h5 {
-        font-size: 18px;
-        font-weight: 700;
-        margin-bottom: 10px;
-        color: #000;
-    }
-
-    .puja-reminder-content p {
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        flex-wrap: wrap;
-    }
-
-    .puja-reminder-content .price-discount {
-        text-decoration: line-through;
-        color: #888;
-        margin-right: 5px;
-    }
-
-    .puja-reminder-content .price-final {
-        color: #000;
-        font-weight: 600;
-    }
-
-    .puja-reminder-content .text-danger {
-        color: #ff0000 !important;
-    }
-
-    .puja-reminder-content .puja-type {
-        font-weight: 400;
-        color: #333;
-    }
-
-    .exp-price-container {
-        display: flex;
-        gap: 15px;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-
-    /* Typography */
-    .stars {
-        color: gold;
-        text-align: center;
-    }
-
-    .h6, h6 {
-        font-size: 1rem;
-        color: #000000;
-    }
-
-    /* Responsive Fixes */
-    @media (max-width: 1158px) {
-        .card2 {
-            width: 100% !important;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .d-flex.flex-md-row {
-            flex-direction: column !important;
+        /* General Reset */
+        body {
+            font-family: 'Montserrat', serif;
         }
 
-        .image-container {
-            max-width: 100%;
+        a {
+            text-decoration: none;
+            color: #7C7C7C;
+        }
+
+        /* Review Card */
+        .review-card {
+            background-color: #E2960126;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: auto;
+            text-align: center;
+            width: 90%;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .review-card .user-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .review-card img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .review-card .user-info {
+            text-align: left;
+        }
+
+        .review-card .fw-bold {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .review-card .stars {
+            color: gold;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .review-card blockquote {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin: 0;
+            padding: 5px;
+            font-size: 14px;
+            line-height: 1.4;
+            width: 100%;
+            text-align: left;
+            scrollbar-width: thin;
+            scrollbar-color: #E29601 transparent;
+        }
+
+        .review-card blockquote::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .review-card blockquote::-webkit-scrollbar-thumb {
+            background-color: #E29601;
+            border-radius: 10px;
+        }
+
+        /* Review Container & Carousel */
+        .review-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 280px;
+        }
+
+        .carousel,
+        .carousel-inner,
+        .carousel-item {
+            height: 280px;
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .carousel-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .carousel-btn img {
+            width: 90px;
             height: auto;
         }
-    }
 
-    @media (max-width: 576px) {
-        .form-container {
-            top: 80px;
-            width: 95%;
-            max-width: 450px;
+        .carousel-btn.left {
+            left: -50px;
         }
-    }
 
-    /* Utility Classes */
-    .dashboard-sections {
-        padding: 20px;
-    }
+        .carousel-btn.right {
+            right: -50px;
+        }
 
-    .text-center {
-        text-align: center !important;
-        justify-content: center;
-        margin-left: 17px;
-    }
+        /* Cards and Hover Effects */
+        .card {
+            transition: all 0.3s ease;
+        }
 
-    .p-3 {
-        padding: 1rem !important;
-        text-align: start;
-    }
+        .card:hover {
+            transform: scale(1.02);
+        }
 
-    .col-lg-2 {
-        flex: 1;
-        min-width: 180px;
-    }
+        .card1 {
+            min-height: 330px !important;
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
-    .pujari-content {
-        min-width: 200px;
-    }
-</style>
+        /* Icon Boxes */
+        .icon-box {
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+        }
+
+        .icon-box.green {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .icon-box.purple {
+            background-color: #e2e0f9;
+            color: #6f42c1;
+        }
+
+        .icon-box.red {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .icon-box.yellow {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        /* Image Containers */
+        .image-container {
+            width: 100%;
+            max-width: 240px;
+            height: 100%;
+        }
+
+        .image-container img {
+            object-fit: cover;
+        }
+
+        .puja-image {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .Rectangle {
+            max-width: 200px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+
+        /* Overlay and Form */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        .form-container {
+            display: none;
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 999;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-container h5 {
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .close-btn {
+            background: #ff3d3d;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 50%;
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .btn-submit {
+            background: #f8b400;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-submit:hover {
+            background: #e09b00;
+        }
+
+        /* Puja Reminder Section */
+        .puja-reminder-content {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .puja-reminder-content h5 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .puja-reminder-content p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .puja-reminder-content .price-discount {
+            text-decoration: line-through;
+            color: #888;
+            margin-right: 5px;
+        }
+
+        .puja-reminder-content .price-final {
+            color: #000;
+            font-weight: 600;
+        }
+
+        .puja-reminder-content .text-danger {
+            color: #ff0000 !important;
+        }
+
+        .puja-reminder-content .puja-type {
+            font-weight: 400;
+            color: #333;
+        }
+
+        .exp-price-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Typography */
+        .stars {
+            color: gold;
+            text-align: center;
+        }
+
+        .h6,
+        h6 {
+            font-size: 1rem;
+            color: #000000;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 1158px) {
+            .card2 {
+                width: 100% !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .d-flex.flex-md-row {
+                flex-direction: column !important;
+            }
+
+            .image-container {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-container {
+                top: 80px;
+                width: 95%;
+                max-width: 450px;
+            }
+        }
+
+        /* Utility Classes */
+        .dashboard-sections {
+            padding: 20px;
+        }
+
+        .text-center {
+            text-align: center !important;
+            justify-content: center;
+            margin-left: 17px;
+        }
+
+        .p-3 {
+            padding: 1rem !important;
+            text-align: start;
+        }
+
+        .col-lg-2 {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .pujari-content {
+            min-width: 200px;
+        }
+    </style>
 
 </head>
 
@@ -704,10 +707,10 @@
             // }
 
             // Fetch the latest request from the API
-             const pujariId = <?php echo json_encode($pujari_id); ?>;
+            const pujariId = <?php echo json_encode($pujari_id); ?>;
             async function fetchLatestRequest() {
                 try {
-                    const response = await fetch('<?php echo base_url('PujariController/getLatestRequest/'); ?>'+pujariId, {
+                    const response = await fetch('<?php echo base_url('PujariController/getLatestRequest/'); ?>' + pujariId, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json'
@@ -778,7 +781,7 @@
 
             async function fetchAndDisplayLatestReminder() {
                 try {
-                    const response = await fetch('<?php echo base_url('PujariController/getLatestReminder/'); ?>'+pujariId, {
+                    const response = await fetch('<?php echo base_url('PujariController/getLatestReminder/'); ?>' + pujariId, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json'
@@ -839,6 +842,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            console.log("DOMContentLoaded event fired for fetchPujariServices");
             const poojaSelect = document.getElementById("pooja");
             const poojaNameInput = document.getElementById("pooja_name");
             let servicesData = []; // Store services data for later use
@@ -847,7 +851,8 @@
             // Fetch Pujari services to populate the dropdown
             async function fetchPujariServices() {
                 try {
-                    const response = await fetch('<?php echo base_url('PujariController/getLoggedInPujariServices/'); ?>'+pujariId, {
+                    console.log("Fetching Pujari services for ID:", pujariId);
+                    const response = await fetch('<?php echo base_url('PujariController/getLoggedInPujariServices/'); ?>' + pujariId, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json'
@@ -865,7 +870,7 @@
                         servicesData = result.pujari_services; // Store the services data
                         result.pujari_services.forEach(service => {
                             const option = document.createElement('option');
-                            option.value = service.id; // Use 'id' from data, not 'service_id'
+                            option.value = service.service_id; // Use 'service_id' as the option value
                             option.textContent = service.specialties; // Display the name
                             poojaSelect.appendChild(option);
                         });
@@ -889,7 +894,7 @@
             // Update hidden input when a Pooja is selected
             poojaSelect.addEventListener('change', function() {
                 const selectedServiceId = this.value;
-                const selectedService = servicesData.find(service => service.id == selectedServiceId); // Use 'id'
+                const selectedService = servicesData.find(service => service.service_id == selectedServiceId); // Use 'service_id'
                 poojaNameInput.value = selectedService ? selectedService.specialties : '';
                 console.log("Selected Service ID:", selectedServiceId, "Pooja Name:", poojaNameInput.value); // Debug
             });
@@ -900,6 +905,9 @@
                 event.preventDefault();
 
                 const formData = new FormData(this);
+                // Ensure service_id is explicitly set in FormData
+                const selectedServiceId = poojaSelect.value;
+                formData.set('service_id', selectedServiceId); // Explicitly set service_id
                 // Log form data for debugging
                 for (let [key, value] of formData.entries()) {
                     console.log(`${key}: ${value}`);
