@@ -1244,20 +1244,78 @@ class User_Api_Model extends CI_Model
         }
     }
 
-    public function show_mob_puja_model()
-    {
+    // public function show_mob_puja_model()
+    // {
 
-        $this->db->select("services.* ,services.name as puja_name , mob_puja.original_price as original_price  ,mob_puja.totalAttendee as totalAttendee,  mob_puja.discount_price as discount_price , mob_puja.pujari_id as pujari_id , mob_puja.time as puja_time ,mob_puja.id as mobid, pujari_registration.* ,  mob_puja.date as mobpujadate,
+    //     $this->db->select("services.* ,services.name as puja_name , mob_puja.original_price as original_price  ,mob_puja.totalAttendee as totalAttendee,  mob_puja.discount_price as discount_price , mob_puja.pujari_id as pujari_id , mob_puja.time as puja_time ,mob_puja.id as mobid, pujari_registration.* ,  mob_puja.date as mobpujadate,
        
-         (SELECT COUNT(*) FROM bookpuja_request_by_user_to_pujari  WHERE puja_status = 'Completed'  AND pujari_id = pujari_registration.id ) as completed_puja_count");
-        $this->db->from("mob_puja");
-        $this->db->join("services", "services.id = mob_puja.service_id", 'Left');
-        $this->db->join("pujari_registration", "pujari_registration.id =  mob_puja.pujari_id");
+    //      (SELECT COUNT(*) FROM bookpuja_request_by_user_to_pujari  WHERE puja_status = 'Completed'  AND pujari_id = pujari_registration.id ) as completed_puja_count");
+    //     $this->db->from("mob_puja");
+    //     $this->db->join("services", "services.id = mob_puja.service_id", 'Left');
+    //     $this->db->join("pujari_registration", "pujari_registration.id =  mob_puja.pujari_id");
 
-        $query = $this->db->get();
-        return $query->result();
+    //     $query = $this->db->get();
+    //     return $query->result();
 
-    }
+    // }
+
+
+//     public function show_mob_puja_model()
+// {
+//     $this->db->select("services.*,
+//                        services.name as puja_name,
+//                        mob_puja.original_price,
+//                        mob_puja.totalAttendee,
+//                        mob_puja.discount_price,
+//                        mob_puja.pujari_id,
+//                        mob_puja.time as puja_time,
+//                        mob_puja.id as mobid,
+//                        pujari_registration.*,
+//                        mob_puja.date as mobpujadate,
+//                        (SELECT COUNT(*) 
+//                         FROM bookpuja_request_by_user_to_pujari  
+//                         WHERE puja_status = 'Completed'  
+//                         AND pujari_id = pujari_registration.id) as completed_puja_count");
+//     $this->db->from("mob_puja");
+//     $this->db->join("services", "services.id = mob_puja.service_id", 'left');
+//     $this->db->join("pujari_registration", "pujari_registration.id = mob_puja.pujari_id");
+//     $this->db->order_by('mob_puja.date', 'DESC'); // optional
+
+//     $query = $this->db->get();
+//     return $query->result();
+// }
+
+public function show_mob_puja_model()
+{
+    $this->db->select("services.*,
+                       services.name as puja_name,
+                       mob_puja.original_price,
+                       mob_puja.totalAttendee,
+                       mob_puja.discount_price,
+                       mob_puja.pujari_id,
+                       mob_puja.time as puja_time,
+                       mob_puja.id as mobid,
+                       pujari_registration.*,
+                       mob_puja.date as mobpujadate,
+                       (SELECT COUNT(*) 
+                        FROM bookpuja_request_by_user_to_pujari  
+                        WHERE puja_status = 'Completed'  
+                        AND pujari_id = pujari_registration.id) as completed_puja_count");
+
+    $this->db->from("mob_puja");
+    $this->db->join("services", "services.id = mob_puja.service_id", 'left');
+    $this->db->join("pujari_registration", "pujari_registration.id = mob_puja.pujari_id");
+
+    // 👇 Only include upcoming pujas (where date + time is in the future)
+    $this->db->where("STR_TO_DATE(CONCAT(mob_puja.date, ' ', mob_puja.time), '%Y-%m-%d %H:%i:%s') >", date('Y-m-d H:i:s'));
+
+    $this->db->order_by('mob_puja.date', 'ASC');
+
+    $query = $this->db->get();
+    return $query->result();
+}
+
+
 
     //  public function show_mob_puja_model()
     // {
