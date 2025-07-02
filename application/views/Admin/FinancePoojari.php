@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Superadmin: Astrologer Chat Overview</title>
+    <title>Superadmin: Pujari Chat Overview</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -308,21 +308,22 @@
     </style>
 </head>
 
-<!-- View: FinanceAstrologer.php -->
+<!-- View: FinancePujari.php -->
+
 <body style="background-color:rgb(228, 236, 241);">
     <div class="d-flex">
-        <?php $this->load->view('Finance/FinanceSidebar'); ?>
+        <?php $this->load->view('IncludeAdmin/CommanSidebar'); ?>
 
         <!-- Main Content -->
         <div class="main mt-3 w-100">
             <div class="container-fluid">
                 <div class="row mt-2">
                     <div class="col-12">
-                        <h3 class="text-center">Astrologer Chat Overview</h3>
+                        <h3 class="text-center">Pujari Chat Overview</h3>
 
                         <!-- Search Bar -->
                         <div class="search-filter-bar mb-3">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Search by astrologer name...">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Search by pujari name...">
                         </div>
 
                         <div class="table-responsive">
@@ -330,59 +331,60 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Sr. No.</th>
-                                        <th scope="col">Astrologer Name</th>
+                                        <th scope="col">Pujari Name</th>
                                         <th scope="col">Total Users</th>
                                         <th scope="col">Last Active</th>
                                         <th scope="col">Details</th>
                                     </tr>
                                 </thead>
-                                <tbody id="astrologer-table-body">
+                                <tbody id="pujari-table-body">
                                     <?php $sr = 1;
-                                    foreach ($astrologers as $astro): ?>
+                                    foreach ($pujaris as $pujari): ?>
                                         <?php
-                                        $chatsWithStatus = array_filter($astro['chats'], function ($chat) {
+                                        $chatsWithStatus = array_filter($pujari['chats'], function ($chat) {
                                             return !empty($chat->status);
                                         });
                                         if (empty($chatsWithStatus)) continue;
                                         ?>
                                         <tr>
                                             <th><?= $sr++ ?></th>
-                                            <td><?= htmlspecialchars($astro['name']) ?></td>
-                                            <td><?= htmlspecialchars($astro['total_users']) ?></td>
-                                            <td><?= date('d-m-Y H:i A', strtotime($astro['last_active'])) ?></td>
+                                            <td><?= htmlspecialchars($pujari['name']) ?></td>
+                                            <td><?= htmlspecialchars($pujari['total_users']) ?></td>
+                                            <td>
+                                                <?= !empty($pujari['last_active']) ? date('d-m-Y h:i A', strtotime($pujari['last_active'])) : 'N/A' ?>
+                                            </td>
                                             <td>
                                                 <button type="button" class="btn btn-sm btn-primary toggle-btn"
                                                     data-bs-toggle="collapse"
-                                                    data-bs-target="#details-<?= $astro['id'] ?>"
+                                                    data-bs-target="#details-<?= $pujari['id'] ?>"
                                                     aria-expanded="false"
-                                                    aria-controls="details-<?= $astro['id'] ?>">
+                                                    aria-controls="details-<?= $pujari['id'] ?>">
                                                     <i class="bi bi-caret-down-fill"></i>
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr class="collapse chat-details-row" id="details-<?= $astro['id'] ?>">
+                                        <tr class="collapse chat-details-row" id="details-<?= $pujari['id'] ?>">
                                             <td colspan="5">
                                                 <div class="chat-details">
-                                                    <p><strong>Total Amount:</strong> ₹<?= htmlspecialchars($astro['total_amount']) ?></p>
-                                                    <p><strong>Paid Amount:</strong> ₹<?= htmlspecialchars($astro['paid_amount']) ?></p>
-                                                    <p><strong>Paid Chats:</strong> <?= htmlspecialchars($astro['paid_count']) ?></p>
+                                                    <p><strong>Total Amount:</strong> ₹<?= htmlspecialchars($pujari['total_amount']) ?></p>
+                                                    <p><strong>Paid Amount:</strong> ₹<?= htmlspecialchars($pujari['paid_amount']) ?></p>
+                                                    <p><strong>Paid Chats:</strong> <?= htmlspecialchars($pujari['paid_count']) ?></p>
                                                     <hr>
                                                     <?php foreach ($chatsWithStatus as $chat): ?>
-                                                        <?php $amount = 10 * (int)$chat->duration; ?>
                                                         <div class="chat-entry mb-2 p-2 border rounded">
                                                             <div class="chat-info">
-                                                                <p><strong><?= htmlspecialchars($chat->username) ?></strong></p>
-                                                                <p>Duration: <?= $chat->duration ?> mins</p>
-                                                                <p>Charges : ₹<?= ($chat->duration > 0) ? number_format($amount / $chat->duration, 2) : '0.00' ?>/min</p>
+                                                                <p><strong><?= htmlspecialchars($chat->name) ?></strong></p>
+                                                                <p>Puja: <?= $chat->puja_name ?></p>
+                                                                <p>Charges : ₹<?= $chat->pujari_charge ?></p>
                                                             </div>
                                                             <div class="chat-amount-status">
-                                                                <p>Amount: ₹<?= number_format($amount, 2) ?></p>
+                                                                <p>Amount: ₹<?= $chat->amount_paid_by_user ?></p>
                                                                 <p>Status:
-                                                                    <?php if ($chat->status === 'paid'): ?>
+                                                                    <?php if ($chat->payment_status === 'paid'): ?>
                                                                         <span class="badge bg-success">Paid</span>
                                                                     <?php else: ?>
                                                                         <button class="btn btn-sm btn-warning mark-paid-btn"
-                                                                            data-income-id="<?= $chat->id ?>">
+                                                                            data-income-id="<?= $chat->book_puja_id ?>">
                                                                             Mark as Paid
                                                                         </button>
                                                                     <?php endif; ?>
@@ -414,152 +416,134 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Working Search + Status Change -->
-     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.getElementById('searchInput');
-        
-        searchInput.addEventListener('keyup', function () {
-            const query = searchInput.value.toLowerCase().trim();
-            const allRows = Array.from(document.querySelectorAll('#astrologer-table-body > tr:not(.chat-details-row)'));
-            
-            let visibleRows = [];
+    <!-- 🟢 Add this in your existing script block or after it -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const rowsPerPage = 10;
+            const rows = Array.from(document.querySelectorAll('#pujari-table-body > tr:not(.chat-details-row)'));
+            const pagination = document.getElementById('pagination');
+            let currentPage = 1;
 
-            allRows.forEach(row => {
-                const nameCell = row.querySelector('td:nth-child(2)');
-                const detailRow = row.nextElementSibling;
+            // 🚀 Initial Pagination Setup
+            paginate(rows, rowsPerPage, currentPage);
+            renderPaginationControls(rows.length, rowsPerPage);
 
-                if (nameCell && nameCell.textContent.toLowerCase().includes(query)) {
-                    row.style.display = '';
-                    if (detailRow && detailRow.classList.contains('chat-details-row')) {
-                        detailRow.style.display = '';
+            // 🔁 Update Pagination when page changes
+            function paginate(rows, rowsPerPage, page) {
+                const start = (page - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+
+                rows.forEach((row, index) => {
+                    const detailRow = row.nextElementSibling;
+                    if (index >= start && index < end) {
+                        row.style.display = '';
+                        if (detailRow && detailRow.classList.contains('chat-details-row')) {
+                            detailRow.style.display = '';
+                        }
+                    } else {
+                        row.style.display = 'none';
+                        if (detailRow && detailRow.classList.contains('chat-details-row')) {
+                            detailRow.style.display = 'none';
+                        }
                     }
-                    visibleRows.push(row);
-                } else {
-                    row.style.display = 'none';
-                    if (detailRow && detailRow.classList.contains('chat-details-row')) {
-                        detailRow.style.display = 'none';
-                    }
+                });
+            }
+
+            function renderPaginationControls(totalRows, rowsPerPage) {
+                pagination.innerHTML = '';
+                const pageCount = Math.ceil(totalRows / rowsPerPage);
+
+                for (let i = 1; i <= pageCount; i++) {
+                    const li = document.createElement('li');
+                    li.classList.add('page-item');
+                    if (i === currentPage) li.classList.add('active');
+
+                    const a = document.createElement('a');
+                    a.classList.add('page-link');
+                    a.href = '#';
+                    a.textContent = i;
+
+                    a.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        currentPage = i;
+                        paginate(rows, rowsPerPage, currentPage);
+                        renderPaginationControls(totalRows, rowsPerPage);
+                    });
+
+                    li.appendChild(a);
+                    pagination.appendChild(li);
                 }
+            }
+
+            // 🔍 Update Pagination on Search
+            document.getElementById('searchInput').addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+
+                const filteredRows = rows.filter(row => {
+                    const name = row.children[1]?.textContent.toLowerCase();
+                    const detailRow = row.nextElementSibling;
+                    const match = name.includes(searchTerm);
+                    row.style.display = match ? '' : 'none';
+                    if (detailRow && detailRow.classList.contains('chat-details-row')) {
+                        detailRow.style.display = match ? '' : 'none';
+                    }
+                    return match;
+                });
+
+                currentPage = 1;
+                paginate(filteredRows, rowsPerPage, currentPage);
+                renderPaginationControls(filteredRows.length, rowsPerPage);
             });
 
-            // Re-render pagination only with matching rows
-            paginate(visibleRows, rowsPerPage, 1);  // reset to first page
-            renderPaginationControls(visibleRows.length, rowsPerPage);
-        });
-    });
-</script>
-
-  <!-- 🟢 Add this in your existing script block or after it -->
-<script>
-    
-    document.addEventListener("DOMContentLoaded", function () {
-        const rowsPerPage = 10;
-        const rows = Array.from(document.querySelectorAll('#astrologer-table-body > tr:not(.chat-details-row)'));
-        const pagination = document.getElementById('pagination');
-        let currentPage = 1;
-
-        // 🚀 Initial Pagination Setup
-        paginate(rows, rowsPerPage, currentPage);
-        renderPaginationControls(rows.length, rowsPerPage);
-
-        // 🔁 Update Pagination when page changes
-        function paginate(rows, rowsPerPage, page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-
-            rows.forEach((row, index) => {
-                const detailRow = row.nextElementSibling;
-                if (index >= start && index < end) {
-                    row.style.display = '';
-                    if (detailRow && detailRow.classList.contains('chat-details-row')) {
-                        detailRow.style.display = '';
-                    }
-                } else {
-                    row.style.display = 'none';
-                    if (detailRow && detailRow.classList.contains('chat-details-row')) {
-                        detailRow.style.display = 'none';
-                    }
-                }
-            });
-        }
-
-        function renderPaginationControls(totalRows, rowsPerPage) {
-            pagination.innerHTML = '';
-            const pageCount = Math.ceil(totalRows / rowsPerPage);
-
-            for (let i = 1; i <= pageCount; i++) {
-                const li = document.createElement('li');
-                li.classList.add('page-item');
-                if (i === currentPage) li.classList.add('active');
-
-                const a = document.createElement('a');
-                a.classList.add('page-link');
-                a.href = '#';
-                a.textContent = i;
-
-                a.addEventListener('click', function (e) {
+            // 💸 Mark as Paid logic remains unchanged...
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('mark-paid-btn')) {
                     e.preventDefault();
-                    currentPage = i;
-                    paginate(rows, rowsPerPage, currentPage);
-                    renderPaginationControls(totalRows, rowsPerPage);
-                });
+                    const button = e.target;
+                    const incomeId = button.dataset.incomeId;
 
-                li.appendChild(a);
-                pagination.appendChild(li);
-            }
-        }
-
-      
-
-        // 💸 Mark as Paid logic remains unchanged...
-        document.addEventListener('click', function (e) {
-            if (e.target && e.target.classList.contains('mark-paid-btn')) {
-                e.preventDefault();
-                const button = e.target;
-                const incomeId = button.dataset.incomeId;
-
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You want to mark this chat as paid?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#0C768A',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, mark as paid!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        fetch('<?= base_url("Finance/markPaid") ?>', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: `income_id=${incomeId}`
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                button.parentElement.innerHTML = '<span class="badge bg-success">Paid</span>';
-                                Swal.fire({
-                                    title: 'Marked!',
-                                    text: 'Chat marked as paid.',
-                                    icon: 'success',
-                                    timer: 1500,
-                                    showConfirmButton: false
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You want to mark this chat as paid?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#0C768A',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, mark as paid!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch('<?= base_url("Finance/markPujariPaid") ?>', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded',
+                                    },
+                                    body: `income_id=${incomeId}`
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        button.parentElement.innerHTML = '<span class="badge bg-success">Paid</span>';
+                                        Swal.fire({
+                                            title: 'Marked!',
+                                            text: 'Chat marked as paid.',
+                                            icon: 'success',
+                                            timer: 1500,
+                                            showConfirmButton: false
+                                        });
+                                    } else {
+                                        Swal.fire('Error', data.message || 'Something went wrong.', 'error');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('AJAX Error:', error);
+                                    Swal.fire('Error', 'Failed to mark as paid.', 'error');
                                 });
-                            } else {
-                                Swal.fire('Error', data.message || 'Something went wrong.', 'error');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('AJAX Error:', error);
-                            Swal.fire('Error', 'Failed to mark as paid.', 'error');
-                        });
-                    }
-                });
-            }
+                        }
+                    });
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 </body>
 

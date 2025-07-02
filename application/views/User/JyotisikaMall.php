@@ -161,12 +161,16 @@
                         ],
                     ];?>
                 
+              
                    <?php if(!empty($product_data)):?>
                      <?php  foreach ($product_data as $product) : ?>
                         <div class="col d-flex justify-content-center">
                             <div class="card product-card h-100 shadow-sm m-0 p-0" style="border: 1px solid #f0f0f0;">
-                                <img src="assets/images/JyotisikaMall/Rudraksh.png" class="card-img-top" alt="<?php echo $product['product_name']; ?>"
-                                    style=" object-fit: contain;">
+                                <img src="<?php echo base_url('Uploads/products/'.$product["product_image"]); ?>" class="card-img-top" alt="<?php echo $product['product_name']; ?>"
+                                    style=" object-fit: contain;" onerror="this.onerror=null;this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
+
+                                    
+
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title text-center fw-bold mb-2" style="color: var(--text-color);"><?php echo $product['product_name']; ?></h5>
                                     <div class="d-flex justify-content-center align-items-center mb-3">

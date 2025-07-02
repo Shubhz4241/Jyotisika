@@ -19,11 +19,7 @@
     <link rel="icon" href="assets/images/admin/logo.png" type="image/png">
 
     <style>
-        /* Apply Inter font to the entire page */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
+        /* Keep all your existing styles here */
         .main {
             min-height: 100vh;
             padding: 20px;
@@ -34,10 +30,6 @@
             font-weight: 700;
             color: #333;
             margin-bottom: 20px;
-        }
-
-        .close-sidebar {
-            display: none;
         }
 
         .navbar {
@@ -76,7 +68,7 @@
         }
 
         .table th:nth-child(2) {
-            width: 25%;
+            width: 30%;
         }
 
         .table th:nth-child(3) {
@@ -84,11 +76,11 @@
         }
 
         .table th:nth-child(4) {
-            width: 20%;
+            width: 25%;
         }
 
         .table th:nth-child(5) {
-            width: 25%;
+            width: 15%;
         }
 
         .table tbody tr {
@@ -119,7 +111,7 @@
         .toggle-btn {
             font-size: 18px;
             cursor: pointer;
-            color: #8BC24A;
+            color: #0C768A;
             background: none;
             border: none;
             transition: transform 0.3s;
@@ -202,7 +194,7 @@
         }
 
         .pagination .page-link {
-            color: #0C768A;
+            color: #8BC24A;
             border: 1px solid #dee2e6;
             border-radius: 5px;
             margin: 0 2px;
@@ -269,7 +261,7 @@
             }
 
             .table th:nth-child(2) {
-                width: 30%;
+                width: 35%;
             }
 
             .table th:nth-child(3) {
@@ -281,7 +273,7 @@
             }
 
             .table th:nth-child(5) {
-                width: 15%;
+                width: 10%;
             }
 
             .chat-entry {
@@ -316,20 +308,24 @@
     </style>
 </head>
 
+<!-- View: FinancePujari.php -->
+
 <body style="background-color:rgb(228, 236, 241);">
     <div class="d-flex">
-                    <?php $this->load->view('Finance/FinanceSidebar'); ?>
+        <?php $this->load->view('Finance/FinanceSidebar'); ?>
 
         <!-- Main Content -->
-        <div class="main mt-3">
+        <div class="main mt-3 w-100">
             <div class="container-fluid">
                 <div class="row mt-2">
                     <div class="col-12">
                         <h3 class="text-center">Pujari Chat Overview</h3>
+
                         <!-- Search Bar -->
-                        <div class="search-filter-bar">
+                        <div class="search-filter-bar mb-3">
                             <input type="text" class="form-control" id="searchInput" placeholder="Search by pujari name...">
                         </div>
+
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
@@ -337,17 +333,77 @@
                                         <th scope="col">Sr. No.</th>
                                         <th scope="col">Pujari Name</th>
                                         <th scope="col">Total Users</th>
+                                        <th scope="col">Last Active</th>
                                         <th scope="col">Details</th>
                                     </tr>
                                 </thead>
                                 <tbody id="pujari-table-body">
-                                    <!-- Dynamic Rows Here -->
+                                    <?php $sr = 1;
+                                    foreach ($pujaris as $pujari): ?>
+                                        <?php
+                                        $chatsWithStatus = array_filter($pujari['chats'], function ($chat) {
+                                            return !empty($chat->status);
+                                        });
+                                        if (empty($chatsWithStatus)) continue;
+                                        ?>
+                                        <tr>
+                                            <th><?= $sr++ ?></th>
+                                            <td><?= htmlspecialchars($pujari['name']) ?></td>
+                                            <td><?= htmlspecialchars($pujari['total_users']) ?></td>
+                                            <td>
+                                                <?= !empty($pujari['last_active']) ? date('d-m-Y h:i A', strtotime($pujari['last_active'])) : 'N/A' ?>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-primary toggle-btn"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#details-<?= $pujari['id'] ?>"
+                                                    aria-expanded="false"
+                                                    aria-controls="details-<?= $pujari['id'] ?>">
+                                                    <i class="bi bi-caret-down-fill"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="collapse chat-details-row" id="details-<?= $pujari['id'] ?>">
+                                            <td colspan="5">
+                                                <div class="chat-details">
+                                                    <p><strong>Total Amount:</strong> ₹<?= htmlspecialchars($pujari['total_amount']) ?></p>
+                                                    <p><strong>Paid Amount:</strong> ₹<?= htmlspecialchars($pujari['paid_amount']) ?></p>
+                                                    <p><strong>Paid Chats:</strong> <?= htmlspecialchars($pujari['paid_count']) ?></p>
+                                                    <hr>
+                                                    <?php foreach ($chatsWithStatus as $chat): ?>
+                                                        <div class="chat-entry mb-2 p-2 border rounded">
+                                                            <div class="chat-info">
+                                                                <p><strong><?= htmlspecialchars($chat->name) ?></strong></p>
+                                                                <p>Puja: <?= $chat->puja_name ?></p>
+                                                                <p>Charges : ₹<?= $chat->pujari_charge ?></p>
+                                                            </div>
+                                                            <div class="chat-amount-status">
+                                                                <p>Amount: ₹<?= $chat->amount_paid_by_user ?></p>
+                                                                <p>Status:
+                                                                    <?php if ($chat->payment_status === 'paid'): ?>
+                                                                        <span class="badge bg-success">Paid</span>
+                                                                    <?php else: ?>
+                                                                        <button class="btn btn-sm btn-warning mark-paid-btn"
+                                                                            data-income-id="<?= $chat->book_puja_id ?>">
+                                                                            Mark as Paid
+                                                                        </button>
+                                                                    <?php endif; ?>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Optional Pagination -->
                         <nav>
-                            <ul class="pagination justify-content-center" id="pagination">
-                                <!-- Dynamic Pagination Here -->
+                            <ul class="pagination justify-content-center mt-3" id="pagination">
+                                <!-- Add pagination later if needed -->
                             </ul>
                         </nav>
                     </div>
@@ -356,212 +412,139 @@
         </div>
     </div>
 
-    <script>
-        let pujaris = [];
-        let filteredPujaris = [];
-        const recordsPerPage = 8;
-        let currentPage = 1;
-
-        // Dummy data
-        function getDummyData() {
-            return [
-                {
-                    id: 1,
-                    name: "Pujari A",
-                    pujas: [
-                        { userName: "User 1", charges: 100, status: "paid", pujaId: 101, pujaName: "Puja 1" },
-                        { userName: "User 2", charges: 150, status: "pending", pujaId: 102, pujaName: "Puja 2" }
-                    ]
-                },
-                {
-                    id: 2,
-                    name: "Pujari B",
-                    pujas: [
-                        { userName: "User 3", charges: 200, status: "paid", pujaId: 103, pujaName: "Puja 3" },
-                        { userName: "User 4", charges: 250, status: "pending", pujaId: 104, pujaName: "Puja 4" }
-                    ]
-                }
-            ];
-        }
-
-        // Initialize with dummy data
-        function fetchPujariSessions() {
-            pujaris = getDummyData();
-            filteredPujaris = [...pujaris];
-            renderTable(currentPage);
-            renderPagination();
-        }
-
-        function calculateTotalAmount(puja) {
-            const charge = parseFloat(puja.charges);
-            return isNaN(charge) ? 0 : charge;
-        }
-
-        function calculatePujariTotals(pujas) {
-            let totalAmount = 0, paidAmount = 0, paidCount = 0;
-            pujas.forEach(puja => {
-                const amount = calculateTotalAmount(puja);
-                totalAmount += amount;
-                if (puja.status === "paid") {
-                    paidAmount += amount;
-                    paidCount++;
-                }
-            });
-            return { totalAmount, paidAmount, paidCount };
-        }
-
-        function renderTable(page) {
-            const tbody = document.getElementById("pujari-table-body");
-            tbody.innerHTML = "";
-
-            const startIndex = (page - 1) * recordsPerPage;
-            const pagePujaris = filteredPujaris.slice(startIndex, startIndex + recordsPerPage);
-
-            pagePujaris.forEach((p, index) => {
-                const totals = calculatePujariTotals(p.pujas);
-                const mainRow = `
-                    <tr>
-                        <td>${startIndex + index + 1}</td>
-                        <td>${p.name}</td>
-                        <td>${p.pujas.length}</td>
-                        <td>
-                            <button class="toggle-btn" data-id="${p.id}">
-                                <i class="bi bi-caret-down-fill"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="chat-details-row" id="details-${p.id}" style="display: none;">
-                        <td colspan="4" class="chat-details">
-                            <p><strong>Total Amount:</strong> ₹${totals.totalAmount.toFixed(2)}</p>
-                            <p><strong>Paid Amount:</strong> ₹${totals.paidAmount.toFixed(2)}</p>
-                            <p>
-                                <strong>Paid Pujas:</strong> ${totals.paidCount}
-                                <button class="btn btn-sm btn-success float-end mark-pujari-paid-btn"
-                                    data-pujari-id="${p.id}"
-                                    data-name="${p.name}">
-                                    <i class="bi bi-cash-coin"></i> Mark All as Paid
-                                </button>
-                            </p>
-                            <hr>
-                            ${p.pujas.map(puja => `
-                                <div class="chat-entry">
-                                    <div class="chat-info">
-                                        <p><strong>${puja.userName}</strong></p>
-                                        <p><strong>Puja:</strong> ${puja.pujaName}</p>
-                                        <p>Charges: ₹${parseFloat(puja.charges).toFixed(2)}</p>
-                                    </div>
-                                    <div class="chat-amount-status">
-                                        <p>Total Amount: ₹${parseFloat(puja.charges).toFixed(2)}</p>
-                                        <p>Status: ${
-                                            puja.status === "paid"
-                                                ? `<span class="badge bg-success">Paid</span>`
-                                                : `<button class="btn btn-sm btn-primary mark-paid-btn"
-                                                    data-puja-id="${puja.pujaId}"
-                                                    data-username="${puja.userName}">
-                                                    Mark as Paid
-                                                </button>`
-                                        }</p>
-                                    </div>
-                                </div>
-                            `).join("<hr>")}
-                        </td>
-                    </tr>
-                `;
-                tbody.innerHTML += mainRow;
-            });
-
-            document.querySelectorAll(".toggle-btn").forEach(btn => {
-                btn.addEventListener("click", function() {
-                    const id = this.getAttribute("data-id");
-                    const detailsRow = document.getElementById(`details-${id}`);
-                    detailsRow.style.display = detailsRow.style.display === "table-row" ? "none" : "table-row";
-                });
-            });
-        }
-
-        function renderPagination() {
-            const totalPages = Math.ceil(filteredPujaris.length / recordsPerPage);
-            const pagination = document.getElementById("pagination");
-            pagination.innerHTML = "";
-
-            for (let i = 1; i <= totalPages; i++) {
-                pagination.innerHTML += `
-                    <li class="page-item ${i === currentPage ? "active" : ""}">
-                        <a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a>
-                    </li>
-                `;
-            }
-        }
-
-        function changePage(page) {
-            currentPage = page;
-            renderTable(page);
-            renderPagination();
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            fetchPujariSessions();
-
-            document.getElementById("searchInput").addEventListener("input", function() {
-                const searchTerm = this.value.trim().toLowerCase();
-                filteredPujaris = pujaris.filter(p => p.name.toLowerCase().includes(searchTerm));
-                currentPage = 1;
-                renderTable(currentPage);
-                renderPagination();
-            });
-        });
-    </script>
-
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Working Search + Status Change -->
+    <!-- 🟢 Add this in your existing script block or after it -->
     <script>
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('mark-paid-btn')) {
-                const button = event.target;
-                const pujaId = button.getAttribute('data-puja-id');
-                const userEmail = button.getAttribute('data-username');
+        document.addEventListener("DOMContentLoaded", function() {
+            const rowsPerPage = 10;
+            const rows = Array.from(document.querySelectorAll('#pujari-table-body > tr:not(.chat-details-row)'));
+            const pagination = document.getElementById('pagination');
+            let currentPage = 1;
 
-                if (pujaId) {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: `Do you want to mark this puja for ${userEmail} as paid?`,
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, mark as paid'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire('Marked!', 'The puja has been marked as paid.', 'success');
-                            fetchPujariSessions(); // Refresh the table
+            // 🚀 Initial Pagination Setup
+            paginate(rows, rowsPerPage, currentPage);
+            renderPaginationControls(rows.length, rowsPerPage);
+
+            // 🔁 Update Pagination when page changes
+            function paginate(rows, rowsPerPage, page) {
+                const start = (page - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+
+                rows.forEach((row, index) => {
+                    const detailRow = row.nextElementSibling;
+                    if (index >= start && index < end) {
+                        row.style.display = '';
+                        if (detailRow && detailRow.classList.contains('chat-details-row')) {
+                            detailRow.style.display = '';
                         }
-                    });
-                }
-            }
-        });
-
-        document.addEventListener('click', function(event) {
-            if (event.target.closest('.mark-pujari-paid-btn')) {
-                const button = event.target.closest('.mark-pujari-paid-btn');
-                const pujariId = button.getAttribute('data-pujari-id');
-                const pujariName = button.getAttribute('data-name');
-
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: `Mark all pujas for ${pujariName} as paid?`,
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, mark all as paid!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire('Marked!', 'All pujas have been marked as paid.', 'success');
-                        fetchPujariSessions(); // Refresh table
+                    } else {
+                        row.style.display = 'none';
+                        if (detailRow && detailRow.classList.contains('chat-details-row')) {
+                            detailRow.style.display = 'none';
+                        }
                     }
                 });
             }
+
+            function renderPaginationControls(totalRows, rowsPerPage) {
+                pagination.innerHTML = '';
+                const pageCount = Math.ceil(totalRows / rowsPerPage);
+
+                for (let i = 1; i <= pageCount; i++) {
+                    const li = document.createElement('li');
+                    li.classList.add('page-item');
+                    if (i === currentPage) li.classList.add('active');
+
+                    const a = document.createElement('a');
+                    a.classList.add('page-link');
+                    a.href = '#';
+                    a.textContent = i;
+
+                    a.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        currentPage = i;
+                        paginate(rows, rowsPerPage, currentPage);
+                        renderPaginationControls(totalRows, rowsPerPage);
+                    });
+
+                    li.appendChild(a);
+                    pagination.appendChild(li);
+                }
+            }
+
+            // 🔍 Update Pagination on Search
+            document.getElementById('searchInput').addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+
+                const filteredRows = rows.filter(row => {
+                    const name = row.children[1]?.textContent.toLowerCase();
+                    const detailRow = row.nextElementSibling;
+                    const match = name.includes(searchTerm);
+                    row.style.display = match ? '' : 'none';
+                    if (detailRow && detailRow.classList.contains('chat-details-row')) {
+                        detailRow.style.display = match ? '' : 'none';
+                    }
+                    return match;
+                });
+
+                currentPage = 1;
+                paginate(filteredRows, rowsPerPage, currentPage);
+                renderPaginationControls(filteredRows.length, rowsPerPage);
+            });
+
+            // 💸 Mark as Paid logic remains unchanged...
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('mark-paid-btn')) {
+                    e.preventDefault();
+                    const button = e.target;
+                    const incomeId = button.dataset.incomeId;
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You want to mark this chat as paid?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#0C768A',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, mark as paid!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch('<?= base_url("Finance/markPujariPaid") ?>', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded',
+                                    },
+                                    body: `income_id=${incomeId}`
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        button.parentElement.innerHTML = '<span class="badge bg-success">Paid</span>';
+                                        Swal.fire({
+                                            title: 'Marked!',
+                                            text: 'Chat marked as paid.',
+                                            icon: 'success',
+                                            timer: 1500,
+                                            showConfirmButton: false
+                                        });
+                                    } else {
+                                        Swal.fire('Error', data.message || 'Something went wrong.', 'error');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('AJAX Error:', error);
+                                    Swal.fire('Error', 'Failed to mark as paid.', 'error');
+                                });
+                        }
+                    });
+                }
+            });
         });
     </script>
+
 </body>
 
 </html>

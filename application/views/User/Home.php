@@ -707,7 +707,7 @@
                                 <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
                                     <img src="<?php echo base_url('assets/images/' . $service_data_astologer['image']); ?>"
                                         alt="<?php echo $service_data_astologer['name']; ?>" class="mx-auto mb-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;">
+                                        style="width: 60px; height: 60px; object-fit: cover;" onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';"  >
                                     <p class="fw-bold text-dark">
                                         <?php echo $service_data_astologer['name']; ?>
                                     </p>

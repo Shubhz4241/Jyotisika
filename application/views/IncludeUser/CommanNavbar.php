@@ -2,7 +2,7 @@
     style="background-color: var(--yellow) !important;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="<?php echo base_url('assets/images/logojyotisika.jpg'); ?>" alt="logo image"
+            <img src="<?php echo base_url('assets/images/JyotisikaLogo.png'); ?>" alt="logo image"
                 style="width: 70px; height: 60px; mix-blend-mode: multiply;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -302,7 +302,7 @@
                         cancelButtonText: "Cancel",
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "<?php echo base_url('login'); ?>";
+                            window.location.href = "<?php echo base_url('Login'); ?>";
                         }
                     });
                 <?php endif; ?>

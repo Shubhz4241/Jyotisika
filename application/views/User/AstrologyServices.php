@@ -126,11 +126,13 @@
                 ];
                 foreach ($service_data as $service): ?>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a href="" class="text-decoration-none">
+                        <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
                             <div class="card service-card text-center shadow rounded border-0 p-3 h-100 card-hover">
                                 <div class="service-card-image-container">
                                     <img src="<?php echo base_url('assets/images/' . $service['image']); ?>" alt=""
-                                        class="mx-auto mb-2 service-card-image">
+                                        class="mx-auto mb-2 service-card-image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
+
+                                       
                                 </div>
                                 <div class="service-card-body">
                                     <h5 class="fw-bold text-dark"><?php echo $service['name']; ?></h5>

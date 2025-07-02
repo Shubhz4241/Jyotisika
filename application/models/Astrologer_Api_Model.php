@@ -382,4 +382,116 @@ class Astrologer_Api_Model extends CI_Model
 
         return $this->db->get()->result();
     }
+    // edit service details
+     public function edit_service($service_id, $name, $description, $image)
+    {
+        // Get previous image if no new image is provided
+        if ($image === null || empty($image['name'])) {
+            $this->db->select('image');
+            $this->db->from('services');
+            $this->db->where('id', $service_id);
+            $query = $this->db->get();
+            $row = $query->row();
+            $image_path = $row ? $row->image : null;
+        } else {
+            // Ensure "uploads/Services" directory exists
+            $upload_dir = './uploads/Services/';
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+
+            // Upload new image
+            $config['upload_path'] = $upload_dir; // Upload to 'uploads/Services/'
+            $config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
+            $config['max_size'] = 2048;
+            $config['file_name'] = time() . '_' . $image['name']; // Unique filename
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('image')) {
+                return false; // Return false if upload fails
+            }
+
+            $upload_data = $this->upload->data();
+            $image_path = '' . $upload_data['file_name']; // Store relative path
+        }
+
+        // Update service details
+        $data = [
+            'name' => $name,
+            'description' => $description,
+            'image' => $image_path,
+            'price' => 0
+        ];
+
+        $this->db->where('id', $service_id);
+        return $this->db->update('services', $data);
+    }
+    //delete service
+     public function delete_service($service_id)
+    {
+        // Step 1: Get the image filename from the database
+        $this->db->select('image');
+        $this->db->from('services');
+        $this->db->where('id', $service_id);
+        $query = $this->db->get();
+        $row = $query->row();
+
+        if ($row && !empty($row->image)) {
+            $image_path = './uploads/Services/' . $row->image;
+
+            // Step 2: Unlink the image if it exists
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+        }
+
+        // Step 3: Delete the service record
+        $this->db->where('id', $service_id);
+        return $this->db->delete('services');
+    }
+    // Get service by ID
+      public function getServiceById($service_id)
+    {
+        $this->db->where('id', $service_id);
+        $query = $this->db->get('services');
+        return $query->row_array(); // returns a single row as an associative array
+    }
+    // Add a new service
+    public function add_service($name, $description, $service_type, $image)
+    {
+        $image_path = null;
+
+        if (!empty($image['name'])) {
+            // Ensure "uploads/Services" directory exists
+            $upload_dir = './uploads/Services/';
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+
+            // Configure upload settings
+            $config['upload_path'] = $upload_dir;
+            $config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
+            $config['max_size'] = 2048;
+            $config['file_name'] = time() . '_' . $image['name']; // Unique filename
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('image')) {
+                $upload_data = $this->upload->data();
+                $image_path = '' . $upload_data['file_name']; // Store relative path
+            }
+        }
+
+        // Insert new service record
+        $data = [
+            'name' => $name,
+            'description' => $description,
+            'service_type' => $service_type,
+            'image' => $image_path,
+            'price' => 0
+        ];
+
+        return $this->db->insert('services', $data);
+    }
 }

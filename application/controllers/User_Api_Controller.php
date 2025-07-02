@@ -1336,6 +1336,7 @@ class User_Api_Controller extends CI_Controller
 
 
             $username = $this->input->post("user_fullname");
+            $useremail = $this->input->post("user_email");
             $useraddress = $this->input->post("user_Address");
             $usercity = $this->input->post("user_city");
             $userstate = $this->input->post("user_state");
@@ -1345,7 +1346,7 @@ class User_Api_Controller extends CI_Controller
 
             $user_id = $this->input->post("session_id");
 
-            if (empty($username) || empty($useraddress) || empty($usercity) || empty($userpincode) || empty($user_id) || empty($userstate)) {
+            if (empty($username) || empty($useremail) || empty($useraddress) || empty($usercity) || empty($userpincode) || empty($user_id) || empty($userstate)) {
 
                 $response = [
                     "status" => "error",
@@ -1364,6 +1365,7 @@ class User_Api_Controller extends CI_Controller
                 "user_phonenumber" => $userphonenumber,
                 "user_state" => $userstate,
                 "user_id" => $user_id,
+                "user_email"=> $useremail,
 
             ];
 
@@ -1971,6 +1973,7 @@ class User_Api_Controller extends CI_Controller
             'user_id' => $user_id,
             'order_no' => 'ORD_' . date('YmdHis') . rand(1000, 9999),
             'user_fullname' => $getuserdata->user_name,
+            'user_email'=> $getuserdata->user_email,
             'user_phonenumber' => $getuserdata->user_phonenumber,
             'user_address' => $getuserdata->user_address,
             'user_state' => $getuserdata->user_state,

@@ -183,15 +183,11 @@
         <div class="row product-container">
             <!-- Product Image -->
             <div class="col-md-7 mb-4 d-flex align-items-center justify-content-center">
-                <img src="<?php echo base_url('assets/images/rudraksh.png'); ?>" class="img-fluid product-image"
-                    style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh">
-            </div>
+                <img src="<?php echo base_url('Uploads/products/'.$product_data[0]["product_image"]); ?>" class="img-fluid product-image"
+                    style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
 
-
-
+          </div>
             <!-- Product Info -->
-
-
             <div class="col-md-5 product-info">
                 <h2 class="fw-bold mb-3" style="font-family: 'Kaisei Decol', serif;">
                     <?php echo $product_data[0]["product_name"] ?>
@@ -264,13 +260,14 @@
         </div>
     </div>
 
-    <?php print_r($product_feedback_data) ?>
+ 
     <!-- Reviews -->
     <div class="container my-4 position-relative">
         <h4>Reviews</h4>
         <div class="owl-carousel owl1 owl-theme">
             <!-- Loop Start -->
             <!-- Card 1 -->
+            
             <?php if ($product_feedback_data): ?>
                 <?php foreach ($product_feedback_data as $product_feedback_data_details): ?>
                     <div class="item">
