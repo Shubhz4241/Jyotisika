@@ -217,7 +217,7 @@ class Astrologer_Api_Controller extends CI_Controller
         // $this->Send_otp($data['contact'],$otp);
 
         $try = $this->Send_otp_latest($otp, $data['contact']);
-      
+
         if ($try) {
             http_response_code(200);
             echo json_encode(['status' => 'success', 'message' => 'OTP sent successfully.', 'try' => $try]);
@@ -333,7 +333,6 @@ MOBDIG",
         }
     }
 
-
     public function Resend_Otp()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -410,11 +409,6 @@ MOBDIG",
             echo json_encode(['status' => 'error', 'message' => 'User data not found.']);
         }
     }
-
-
-
-
-
 
 
     public function Send_Otp_Login()
@@ -577,17 +571,19 @@ MOBDIG",
             return;
         }
 
-        if (!$this->session->userdata('is_logged_in')) {
-            http_response_code(401);
-            echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
-            return;
-        }
-        $user_id = !empty($data['id'])
-            ? $this->input->get('astrologer_id')
-            : $this->session->userdata('astrologer_id');
+        $astrologer_id = $this->input->get('astrologer_id');
 
-        $user_id = $this->session->userdata('astrologer_id');
-        $user_details = $this->Astrologer_Api_Model->getAstrologerDetailsById($user_id);
+        if (!$astrologer_id) {
+            // If astrologer_id is not sent in request, fallback to session
+            $astrologer_id = $this->session->userdata('astrologer_id');
+
+            if (!$this->session->userdata('is_logged_in') || !$astrologer_id) {
+                http_response_code(401);
+                echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+                return;
+            }
+        }
+        $user_details = $this->Astrologer_Api_Model->getAstrologerDetailsById($astrologer_id);
 
         if ($user_details) {
             http_response_code(200);
@@ -604,15 +600,18 @@ MOBDIG",
             echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
             return;
         }
+        $astrologer_id = $this->input->get('astrologer_id');
+        if (!$astrologer_id) {
+            // If astrologer_id is not sent in request, fallback to session
+            $astrologer_id = $this->session->userdata('astrologer_id');
 
-        if (!$this->session->userdata('is_logged_in')) {
-            http_response_code(401);
-            echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
-            return;
+            if (!$this->session->userdata('is_logged_in') || !$astrologer_id) {
+                http_response_code(401);
+                echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+                return;
+            }
         }
-
-        $user_id = $this->session->userdata('astrologer_id');
-        $user_details = $this->Astrologer_Api_Model->getAstrologerDetailsById($user_id);
+        $user_details = $this->Astrologer_Api_Model->getAstrologerDetailsById($astrologer_id);
 
         if ($user_details) {
             http_response_code(200);
@@ -631,17 +630,22 @@ MOBDIG",
             return;
         }
 
-        if (!$this->session->userdata('is_logged_in')) {
-            http_response_code(401);
-            echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
-            return;
+        $astrologer_id = $this->input->get('astrologer_id');
+        if (!$astrologer_id) {
+            // If astrologer_id is not sent in request, fallback to session
+            $astrologer_id = $this->session->userdata('astrologer_id');
+
+            if (!$this->session->userdata('is_logged_in') || !$astrologer_id) {
+                http_response_code(401);
+                echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+                return;
+            }
         }
+
 
         $input_data = json_decode(file_get_contents('php://input'), true);
 
-        $astrologer_id = $this->input->get('astrologer_id')
-            ? $this->input->get('astrologer_id')
-            : $this->session->userdata('astrologer_id');
+
 
         $service_ids = $input_data['service_ids'] ?? [];
         $availability_days = $input_data['availability_days'] ?? [];
@@ -687,8 +691,6 @@ MOBDIG",
         }
     }
 
-
-
     public function GetAstrologerServicesofLoggedinAstologer()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -697,15 +699,18 @@ MOBDIG",
             return;
         }
 
-        if (!$this->session->userdata('is_logged_in')) {
-            http_response_code(401);
-            echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
-            return;
+        $astrologer_id = $this->input->get('astrologer_id');
+        if (!$astrologer_id) {
+            // If astrologer_id is not sent in request, fallback to session
+            $astrologer_id = $this->session->userdata('astrologer_id');
+
+            if (!$this->session->userdata('is_logged_in') || !$astrologer_id) {
+                http_response_code(401);
+                echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+                return;
+            }
         }
 
-        $astrologer_id = $this->input->get('astrologer_id')
-            ? $this->input->get('astrologer_id')
-            : $this->session->userdata('astrologer_id');;
 
         if (empty($astrologer_id)) {
             http_response_code(400);
@@ -734,20 +739,21 @@ MOBDIG",
     }
 
 
-
-
     //api to get the feedback from the user  to the astrologer
     public function GetAstrologerFeedback()
     {
-        if (!$this->session->userdata('is_logged_in')) {
-            http_response_code(401);
-            echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
-            return;
+        $astrologer_id = $this->input->get('astrologer_id');
+        if (!$astrologer_id) {
+            // If astrologer_id is not sent in request, fallback to session
+            $astrologer_id = $this->session->userdata('astrologer_id');
+
+            if (!$this->session->userdata('is_logged_in') || !$astrologer_id) {
+                http_response_code(401);
+                echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+                return;
+            }
         }
 
-        $astrologer_id = $this->input->get('astrologer_id')
-            ? $this->input->get('astrologer_id')
-            : $this->session->userdata('astrologer_id');;
 
         if (empty($astrologer_id)) {
             http_response_code(400);
@@ -809,16 +815,23 @@ MOBDIG",
             return;
         }
 
-        if (!$this->session->userdata('is_logged_in')) {
-            http_response_code(401);
-            echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
-            return;
-        }
+        $astrologer_id = $this->input->get('astrologer_id');
 
-        $astrologer_id = $this->input->get('astrologer_id')
-            ? $this->input->get('astrologer_id')
-            : $this->session->userdata('astrologer_id');;
-        $status = $this->input->post('status');
+        if (!$astrologer_id) {
+            // If astrologer_id is not sent in request, fallback to session
+            $astrologer_id = $this->session->userdata('astrologer_id');
+
+            if (!$this->session->userdata('is_logged_in') || !$astrologer_id) {
+                http_response_code(401);
+                echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+                return;
+            }
+        }
+        // $status = $this->input->post('status');
+
+        $status = 'online';
+
+
 
         if (empty($status)) {
             http_response_code(400);
@@ -842,15 +855,18 @@ MOBDIG",
             return;
         }
 
-        if (!$this->session->userdata('is_logged_in')) {
-            http_response_code(401);
-            echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
-            return;
-        }
+        $astrologer_id = $this->input->get('astrologer_id');
 
-        $astrologer_id = $this->input->get('astrologer_id')
-            ? $this->input->get('astrologer_id')
-            : $this->session->userdata('astrologer_id');;
+        if (!$astrologer_id) {
+            // If astrologer_id is not sent in request, fallback to session
+            $astrologer_id = $this->session->userdata('astrologer_id');
+
+            if (!$this->session->userdata('is_logged_in')) {
+                http_response_code(401);
+                echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+                return;
+            }
+        }
 
         if (empty($astrologer_id)) {
             http_response_code(400);
@@ -882,7 +898,7 @@ MOBDIG",
         $user_id = $this->session->userdata('astrologer_id');
         $astrologer_id = $this->input->get('astrologer_id')
             ? $this->input->get('astrologer_id')
-            : $this->session->userdata('astrologer_id');;
+            : $this->session->userdata('astrologer_id');
 
         if (!$user_id || !$astrologer_id) {
             return $this->output
@@ -951,7 +967,7 @@ MOBDIG",
         $astrologer_id = $this->input->get('astrologer_id')
             ? $this->input->get('astrologer_id')
             : $this->session->userdata('astrologer_id');
-            
+
         $service_id = $this->input->post('service_id');
         $available_days = $this->input->post('available_days');
         $start_time = $this->input->post('start_time');
@@ -1144,20 +1160,25 @@ MOBDIG",
     public function Update_profile_image()
     {
 
-        if (!$this->session->userdata('astrologer_id')) {
+        $astrologer_id = $this->input->get('astrologer_id')
+            ? $this->input->get('astrologer_id')
+            : $this->session->userdata('astrologer_id');
+
+
+        if (!$astrologer_id) {
             return $this->output
                 ->set_content_type('application/json')
                 ->set_status_header(401)
                 ->set_output(json_encode(['success' => false, 'message' => 'User not logged in']));
         }
 
-        $user_id = $this->session->userdata('astrologer_id');
+
 
         if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == 0) {
             $config['upload_path']   = 'uploads/Astologer/';
             $config['allowed_types'] = 'jpg|jpeg|png';
             $config['max_size']      = 2048; // 2MB
-            $config['file_name']     = 'profile_' . $user_id . '_' . time();
+            $config['file_name']     = 'profile_' . $astrologer_id . '_' . time();
 
             $this->load->library('upload', $config);
 
@@ -1171,7 +1192,7 @@ MOBDIG",
             $uploadData = $this->upload->data();
             $imagePath = 'uploads/Astologer/' . $uploadData['file_name'];
 
-            if ($this->Astrologer_Api_Model->update_profile_image($user_id, $imagePath)) {
+            if ($this->Astrologer_Api_Model->update_profile_image($astrologer_id, $imagePath)) {
                 return $this->output
                     ->set_content_type('application/json')
                     ->set_status_header(200)
@@ -1232,11 +1253,13 @@ MOBDIG",
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $astrologer_id = $this->input->get('astrologer_id');
+
             if (!$astrologer_id) {
                 $astrologer_id = $this->input->get('astrologer_id')
                     ? $this->input->get('astrologer_id')
                     : $this->session->userdata('astrologer_id');;
             }
+
 
             if (!$astrologer_id) {
                 $this->output->set_status_header(401);
@@ -1274,10 +1297,7 @@ MOBDIG",
         $this->output->set_content_type("application/json")->set_output(json_encode($response));
     }
 
-
-
     // get the data by the months
-
     public function Chart_data_monthly()
     {
         $response = [];
@@ -1321,7 +1341,6 @@ MOBDIG",
     }
 
     // get the income statewise
-
     public function Chart_data_pending_paid()
     {
         $astrologer_id = $this->input->get('astrologer_id')
@@ -1342,9 +1361,6 @@ MOBDIG",
 
         echo json_encode(['status' => true, 'data' => $data]);
     }
-
-
-
 
     public function Get_total_stats()
     {

@@ -12,7 +12,7 @@
                         style="background-color: var(--yellow); ">
                         <!-- Column 1: Social Media -->
                         <div class="col-12 col-md-2 text-center">
-                                <img src="<?php echo base_url('assets/images/logo.png'); ?>" alt="Logo"
+                                <img src="<?php echo base_url('assets/images/JyotisikaLogo.png'); ?>" alt="Logo"
                                         style="width: 100px;">
                                 <div class="social-media mt-2">
                                         <a href="#"><img src="<?php echo base_url('assets/images/facebook.png'); ?>"
@@ -69,8 +69,9 @@
 
 
                                         <li><a href="<?php echo base_url("terms") ?>" class="footer-links">
-                                                        <?php echo $this->lang->line('term') ?: "Terms And Conditions "; ?></a></li>
-                                                        
+                                                        <?php echo $this->lang->line('term') ?: "Terms And Conditions "; ?></a>
+                                        </li>
+
 
                                         <li><a href="<?php echo base_url("home") ?>"
                                                         class="footer-links"><?php echo $this->lang->line('Home') ?: "Home"; ?></a>
@@ -104,40 +105,45 @@
 
                         <!-- Column 5: Online Consultations -->
                         <div class="col-12 col-sm-4 col-md-2">
-                                <h5 class="fw-bold">
-                                        <?php echo $this->lang->line('Online_Consultations') ?: "Online Consultations"; ?>
-                                </h5>
-                                <ul class="list-unstyled">
-                                        <li><a href="astrologers"
-                                                        class="footer-links"><?php echo $this->lang->line('Talk_With_Astrologer') ?: "Talk With Astrologer"; ?></a>
-                                        </li>
-                                        <li><a href="astrologers"
-                                                        class="footer-links"><?php echo $this->lang->line('Chat_With_Astrologer') ?: "Chat With Astrologer"; ?></a>
-                                        </li>
-                                        <li><a href="astrologers"
-                                                        class="footer-links"><?php echo $this->lang->line('Marriage_Astrologers') ?: "Marriage Astrologers"; ?></a>
-                                        </li>
-                                        <li><a href="astrologers"
-                                                        class="footer-links"><?php echo $this->lang->line('Career_Astrologer') ?: "Career Astrologer"; ?></a>
-                                        </li>
-                                        <!-- <li><a href="#"
-                                                        class="footer-links"><?php echo $this->lang->line('Financial_Astrologers') ?: "Financial Astrologers"; ?></a>
-                                        </li> -->
-                                        <!-- <li><a href="#"
-                                                        class="footer-links"><?php echo $this->lang->line('Vedic_Astrologers') ?: "Vedic Astrologers"; ?></a>
-                                        </li>
-                                       
-                                        <li><a href="#"
-                                                        class="footer-links"><?php echo $this->lang->line('KP_Astrologers') ?: "KP Astrologers"; ?></a>
-                                        </li>
-                                        <li><a href="#"
-                                                        class="footer-links"><?php echo $this->lang->line('Vastu_Experts') ?: "Vastu Experts"; ?></a>
-                                        </li>
-                                        <li><a href="#"
-                                                        class="footer-links"><?php echo $this->lang->line('Numerologist') ?: "Numerologist"; ?></a>
-                                        </li> -->
+                                <h5 class="fw-bold">Online Consultations</h5>
+                                <ul class="list-unstyled" id="footer-services-list">
+                                        <!-- JavaScript will populate this -->
                                 </ul>
                         </div>
+                        <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                        fetch("<?php echo base_url('User_Api_Controller/showservices_limited'); ?>")
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                        const list = document.getElementById("footer-services-list");
+
+                                                        if (data.status === "success") {
+                                                                let html = "";
+
+                                                                data.data.forEach(service => {
+                                                                        html += `
+                                                                        <li>
+                                                                          <a href="<?php echo base_url('/astrologers') ?>" class="footer-links">
+                                                                            ${service.name}
+                                                                          </a>
+                                                                        </li>
+                                                                      `;
+                                                                });
+
+                                                                list.innerHTML = html;
+                                                        } else {
+                                                                list.innerHTML = "<li>No services found.</li>";
+                                                        }
+                                                })
+                                                .catch(error => {
+                                                        console.error("Error fetching services:", error);
+                                                        document.getElementById("footer-services-list").innerHTML =
+                                                                "<li>Failed to load services.</li>";
+                                                });
+                                });
+                        </script>
+
+
 
                 </div>
                 <div class="row">

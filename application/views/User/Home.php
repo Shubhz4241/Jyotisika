@@ -114,7 +114,7 @@
     //     print_r($userinfo);
     // }
     ?>
-  
+
 
     <section>
         <div class="container mt-3">
@@ -355,11 +355,12 @@
                                         <!-- Profile Section -->
                                         <div class="d-flex align-items-center mb-2">
                                             <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>">
+                                                <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                    alt="image" class="rounded-circle"
+                                                    style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);"
+                                                    onerror="this.onerror=null  this.src='<?php echo base_url('assets/images/astrologerimg.png'); ?>';">
 
-                                           
-                                                <img src="<?php echo  !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
-                                                    class="rounded-circle"
-                                                    style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+
                                             </a>
                                             <div class="ms-2">
                                                 <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>"
@@ -404,39 +405,39 @@
                                                 </small>
                                             </div>
 
-                                             <div class="d-flex align-items-center">
+                                            <div class="d-flex align-items-center">
 
-                                            <?php if ($astrologer['chatstatus'] == "active"): ?>
-                                                <small class="card-language text-danger">Busy , </small>
+                                                <?php if ($astrologer['chatstatus'] == "active"): ?>
+                                                    <small class="card-language text-danger">Busy , </small>
 
 
-                                                <?php
-                                                if (!empty($astrologer['chat_expire_on'])) {
-                                                    date_default_timezone_set('Asia/Kolkata'); // Ensure you're using IST
-                                                    $now = new DateTime(); // current timestamp
-                                                    $expire = new DateTime($astrologer['chat_expire_on']);
+                                                    <?php
+                                                    if (!empty($astrologer['chat_expire_on'])) {
+                                                        date_default_timezone_set('Asia/Kolkata'); // Ensure you're using IST
+                                                        $now = new DateTime(); // current timestamp
+                                                        $expire = new DateTime($astrologer['chat_expire_on']);
 
-                                                    // Calculate only if expire time is in the future
-                                                    if ($expire > $now) {
-                                                        $interval = $now->diff($expire);
-                                                        $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
-                                                        $seconds = $interval->s;
+                                                        // Calculate only if expire time is in the future
+                                                        if ($expire > $now) {
+                                                            $interval = $now->diff($expire);
+                                                            $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+                                                            $seconds = $interval->s;
 
-                                                        echo '<div class="d-flex align-items-center">
+                                                            echo '<div class="d-flex align-items-center">
                                               <small class="card-language text-danger">Wait for Time: ' . $waitTimeMinutes . ' min ' . $seconds . ' sec</small>
                                                 </div>';
-                                                    } else {
-                                                        echo '<div class="d-flex align-items-center">
+                                                        } else {
+                                                            echo '<div class="d-flex align-items-center">
                                                 <small class="card-language text-danger">session not ended</small>
                                             </div>';
+                                                        }
                                                     }
-                                                }
-                                                ?>
+                                                    ?>
 
-                                            <?php else: ?>
-                                                <small class="card-language text-success">Available</small>
-                                            <?php endif ?>
-                                        </div>
+                                                <?php else: ?>
+                                                    <small class="card-language text-success">Available</small>
+                                                <?php endif ?>
+                                            </div>
 
                                         </div>
 
@@ -599,7 +600,7 @@
                 </div>
             </div>
         </div>
-    </section> 
+    </section>
 
 
     <!-- Astrological  Remedies  To  Get  Rid  Of  Your  Problems -->
@@ -696,6 +697,28 @@
                 <?php echo $this->lang->line('FreeHoroscope') ?>
             </h3>
             <div class="row g-4 justify-content-center">
+
+
+
+                <?php if (!empty($service_data)): ?>
+                    <?php foreach ($service_data as $service_data_astologer): ?>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
+                                <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
+                                    <img src="<?php echo base_url('assets/images/' . $service_data_astologer['image']); ?>"
+                                        alt="<?php echo $service_data_astologer['name']; ?>" class="mx-auto mb-3"
+                                        style="width: 60px; height: 60px; object-fit: cover;" onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';"  >
+                                    <p class="fw-bold text-dark">
+                                        <?php echo $service_data_astologer['name']; ?>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+
+
                 <!-- Card 1 -->
                 <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
@@ -707,20 +730,8 @@
                     </a>
                 </div> -->
                 <!-- Card 2 -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 ">
-                    <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
-                        <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/HoroscopeMatching.png'); ?>"
-                                alt="Horoscope Matching" class="mx-auto mb-3"
-                                style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">
-                                <?php echo $this->lang->line('Horoscope_Matching') ?: "Horoscope Matching"; ?> <br>
-                                <small>(<?php echo $this->lang->line('Birth_Chart') ?: "Birth Chart"; ?>)</small>
-                            </p>
 
-                        </div>
-                    </a>
-                </div>
+
                 <!-- Card 3 -->
                 <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
@@ -732,7 +743,7 @@
                     </a>
                 </div> -->
                 <!-- Card 4 -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
                         <div class="card text-center shadow rounded  border-0 p-3 h-100 card-hover">
                             <img src="<?php echo base_url('assets/images/talkToAstrologer.png'); ?>"
@@ -745,7 +756,7 @@
 
                         </div>
                     </a>
-                </div>
+                </div> -->
                 <!-- Card 5 -->
                 <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
@@ -758,7 +769,7 @@
                 </div>
                 -->
 
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
                         <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
                             <img src="<?php echo base_url('assets/images/numerologyCalculator.png'); ?>"
@@ -770,7 +781,7 @@
 
                         </div>
                     </a>
-                </div>
+                </div> -->
 
                 <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="#" class="text-decoration-none">
@@ -823,7 +834,7 @@
                     </a>
                 </div> -->
 
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 ">
+                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3 ">
                     <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
                         <div class="card text-center shadow border-0 p-3 h-100 rounded card-hover">
                             <img src="<?php echo base_url('assets/images/babyName.png'); ?>" alt="Today's Rahukal"
@@ -834,7 +845,7 @@
 
                         </div>
                     </a>
-                </div>
+                </div> -->
                 <div class="text-center mt-4">
                     <a href="<?php echo base_url('AstrologyServices') ?>" class="btn fw-bold"
                         style="background-color: var(--yellow);"><?php echo $this->lang->line('ViewMore') ?></a>

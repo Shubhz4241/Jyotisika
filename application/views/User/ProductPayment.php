@@ -121,8 +121,13 @@
                                 <div class="card border">
                                     <div class="card-body d-flex">
                                         <div class="product-image-container mb-3">
-                                            <img src="<?php echo base_url('assets/images/JyotisikaMall/Rudraksh.png'); ?>"
-                                                class="img-fluid rounded shadow-sm w-75" alt="Rudraksh">
+                                            <img src="<?php echo base_url( 'Uploads/products/'.$product_data['product_image']); ?>"
+                                              style="max-width: 60%; height: 150px;"   class="img-fluid rounded shadow-sm w-50 object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
+
+                                                 <!-- <img src="<?php echo base_url($product_data[0]["product_image"]); ?>" class="img-fluid product-image"
+                    style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';"> -->
+
+  
                                         </div>
                                         <div>
                                             <h5 class="fw-bold text-dark"><?php echo $product_data["product_name"] ?></h5>
@@ -210,6 +215,16 @@
                                             oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/g, '')"
                                             pattern="^[A-Za-z0-9\s]+$" title="Enter Alphabets and Numbers Only">
                                     </div>
+
+                                     <div class="mb-3">
+                                        <label for="city" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="city" name="user_email"
+                                            placeholder="Your order status will update on this email" required
+                                          
+                                           title="Enter valid email id ">
+                                    </div>
+
+
                                     <div class="mb-3">
                                         <label for="city" class="form-label">City</label>
                                         <input type="text" class="form-control" id="city" name="user_city"

@@ -101,7 +101,8 @@
             background-color: #e9ecef;
         }
 
-        .table td, .table th {
+        .table td,
+        .table th {
             vertical-align: middle;
             padding: 12px 15px;
             word-wrap: break-word;
@@ -237,7 +238,8 @@
                 overflow-x: auto;
             }
 
-            .table td, .table th {
+            .table td,
+            .table th {
                 padding: 0.5rem;
             }
 
@@ -294,7 +296,8 @@
                 font-size: 16px;
             }
 
-            .table th, .table td {
+            .table th,
+            .table td {
                 padding: 0.4rem;
             }
 
@@ -305,20 +308,23 @@
     </style>
 </head>
 
+<!-- View: FinanceAstrologer.php -->
 <body style="background-color:rgb(228, 236, 241);">
     <div class="d-flex">
-            <?php $this->load->view('Finance/FinanceSidebar'); ?>
+        <?php $this->load->view('Finance/FinanceSidebar'); ?>
 
         <!-- Main Content -->
-        <div class="main mt-3">
+        <div class="main mt-3 w-100">
             <div class="container-fluid">
                 <div class="row mt-2">
                     <div class="col-12">
                         <h3 class="text-center">Astrologer Chat Overview</h3>
+
                         <!-- Search Bar -->
-                        <div class="search-filter-bar">
+                        <div class="search-filter-bar mb-3">
                             <input type="text" class="form-control" id="searchInput" placeholder="Search by astrologer name...">
                         </div>
+
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
@@ -331,13 +337,71 @@
                                     </tr>
                                 </thead>
                                 <tbody id="astrologer-table-body">
-                                    <!-- Dynamic Rows Here -->
+                                    <?php $sr = 1;
+                                    foreach ($astrologers as $astro): ?>
+                                        <?php
+                                        $chatsWithStatus = array_filter($astro['chats'], function ($chat) {
+                                            return !empty($chat->status);
+                                        });
+                                        if (empty($chatsWithStatus)) continue;
+                                        ?>
+                                        <tr>
+                                            <th><?= $sr++ ?></th>
+                                            <td><?= htmlspecialchars($astro['name']) ?></td>
+                                            <td><?= htmlspecialchars($astro['total_users']) ?></td>
+                                            <td><?= date('d-m-Y H:i A', strtotime($astro['last_active'])) ?></td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-primary toggle-btn"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#details-<?= $astro['id'] ?>"
+                                                    aria-expanded="false"
+                                                    aria-controls="details-<?= $astro['id'] ?>">
+                                                    <i class="bi bi-caret-down-fill"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="collapse chat-details-row" id="details-<?= $astro['id'] ?>">
+                                            <td colspan="5">
+                                                <div class="chat-details">
+                                                    <p><strong>Total Amount:</strong> ₹<?= htmlspecialchars($astro['total_amount']) ?></p>
+                                                    <p><strong>Paid Amount:</strong> ₹<?= htmlspecialchars($astro['paid_amount']) ?></p>
+                                                    <p><strong>Paid Chats:</strong> <?= htmlspecialchars($astro['paid_count']) ?></p>
+                                                    <hr>
+                                                    <?php foreach ($chatsWithStatus as $chat): ?>
+                                                        <?php $amount = 10 * (int)$chat->duration; ?>
+                                                        <div class="chat-entry mb-2 p-2 border rounded">
+                                                            <div class="chat-info">
+                                                                <p><strong><?= htmlspecialchars($chat->username) ?></strong></p>
+                                                                <p>Duration: <?= $chat->duration ?> mins</p>
+                                                                <p>Charges : ₹<?= ($chat->duration > 0) ? number_format($amount / $chat->duration, 2) : '0.00' ?>/min</p>
+                                                            </div>
+                                                            <div class="chat-amount-status">
+                                                                <p>Amount: ₹<?= number_format($amount, 2) ?></p>
+                                                                <p>Status:
+                                                                    <?php if ($chat->status === 'paid'): ?>
+                                                                        <span class="badge bg-success">Paid</span>
+                                                                    <?php else: ?>
+                                                                        <button class="btn btn-sm btn-warning mark-paid-btn"
+                                                                            data-income-id="<?= $chat->id ?>">
+                                                                            Mark as Paid
+                                                                        </button>
+                                                                    <?php endif; ?>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Optional Pagination -->
                         <nav>
-                            <ul class="pagination justify-content-center" id="pagination">
-                                <!-- Dynamic Pagination Here -->
+                            <ul class="pagination justify-content-center mt-3" id="pagination">
+                                <!-- Add pagination later if needed -->
                             </ul>
                         </nav>
                     </div>
@@ -346,220 +410,157 @@
         </div>
     </div>
 
-    <script>
-        let astrologers = [];
-        let filteredAstrologers = [];
-        const recordsPerPage = 8;
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Working Search + Status Change -->
+     <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById('searchInput');
+        
+        searchInput.addEventListener('keyup', function () {
+            const query = searchInput.value.toLowerCase().trim();
+            const allRows = Array.from(document.querySelectorAll('#astrologer-table-body > tr:not(.chat-details-row)'));
+            
+            let visibleRows = [];
+
+            allRows.forEach(row => {
+                const nameCell = row.querySelector('td:nth-child(2)');
+                const detailRow = row.nextElementSibling;
+
+                if (nameCell && nameCell.textContent.toLowerCase().includes(query)) {
+                    row.style.display = '';
+                    if (detailRow && detailRow.classList.contains('chat-details-row')) {
+                        detailRow.style.display = '';
+                    }
+                    visibleRows.push(row);
+                } else {
+                    row.style.display = 'none';
+                    if (detailRow && detailRow.classList.contains('chat-details-row')) {
+                        detailRow.style.display = 'none';
+                    }
+                }
+            });
+
+            // Re-render pagination only with matching rows
+            paginate(visibleRows, rowsPerPage, 1);  // reset to first page
+            renderPaginationControls(visibleRows.length, rowsPerPage);
+        });
+    });
+</script>
+
+  <!-- 🟢 Add this in your existing script block or after it -->
+<script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const rowsPerPage = 10;
+        const rows = Array.from(document.querySelectorAll('#astrologer-table-body > tr:not(.chat-details-row)'));
+        const pagination = document.getElementById('pagination');
         let currentPage = 1;
 
-        // Dummy data
-        function getDummyData() {
-            return [
-                {
-                    id: 1,
-                    name: "Astrologer A",
-                    lastActive: "2023-10-01",
-                    users: [
-                        { userName: "User 1", chargesPerMin: 10, duration: 30, status: "paid", incomeId: 101 },
-                        { userName: "User 2", chargesPerMin: 15, duration: 45, status: "pending", incomeId: 102 }
-                    ]
-                },
-                {
-                    id: 2,
-                    name: "Astrologer B",
-                    lastActive: "2023-10-02",
-                    users: [
-                        { userName: "User 3", chargesPerMin: 20, duration: 60, status: "paid", incomeId: 103 },
-                        { userName: "User 4", chargesPerMin: 25, duration: 30, status: "pending", incomeId: 104 }
-                    ]
-                },
-                // Add more dummy data as needed
-            ];
-        }
+        // 🚀 Initial Pagination Setup
+        paginate(rows, rowsPerPage, currentPage);
+        renderPaginationControls(rows.length, rowsPerPage);
 
-        // Initialize with dummy data
-        function fetchAstrologerSessions() {
-            astrologers = getDummyData();
-            filteredAstrologers = [...astrologers];
-            renderTable(currentPage);
-            renderPagination();
-        }
+        // 🔁 Update Pagination when page changes
+        function paginate(rows, rowsPerPage, page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
 
-        function calculateTotalAmount(chat) {
-            const duration = parseFloat(chat.duration);
-            const rate = parseFloat(chat.chargesPerMin);
-            return (isNaN(duration) || isNaN(rate)) ? 0 : rate * duration;
-        }
-
-        function calculateAstrologerTotals(users) {
-            let totalAmount = 0, paidAmount = 0, paidCount = 0;
-            users.forEach(user => {
-                const amount = calculateTotalAmount(user);
-                totalAmount += amount;
-                if (user.status === "paid") {
-                    paidAmount += amount;
-                    paidCount++;
+            rows.forEach((row, index) => {
+                const detailRow = row.nextElementSibling;
+                if (index >= start && index < end) {
+                    row.style.display = '';
+                    if (detailRow && detailRow.classList.contains('chat-details-row')) {
+                        detailRow.style.display = '';
+                    }
+                } else {
+                    row.style.display = 'none';
+                    if (detailRow && detailRow.classList.contains('chat-details-row')) {
+                        detailRow.style.display = 'none';
+                    }
                 }
             });
-            return { totalAmount, paidAmount, paidCount };
         }
 
-        function renderTable(page) {
-            const startIndex = (page - 1) * recordsPerPage;
-            const endIndex = startIndex + recordsPerPage;
-            const visibleAstrologers = filteredAstrologers.slice(startIndex, endIndex);
+        function renderPaginationControls(totalRows, rowsPerPage) {
+            pagination.innerHTML = '';
+            const pageCount = Math.ceil(totalRows / rowsPerPage);
 
-            const tableBody = document.getElementById("astrologer-table-body");
-            tableBody.innerHTML = "";
+            for (let i = 1; i <= pageCount; i++) {
+                const li = document.createElement('li');
+                li.classList.add('page-item');
+                if (i === currentPage) li.classList.add('active');
 
-            visibleAstrologers.forEach((astrologer, index) => {
-                const totals = calculateAstrologerTotals(astrologer.users);
-                const row = `
-                    <tr>
-                        <th scope="row">${startIndex + index + 1}</th>
-                        <td>${astrologer.name}</td>
-                        <td>${astrologer.users.length}</td>
-                        <td>${astrologer.lastActive}</td>
-                        <td>
-                            <button class="toggle-btn" data-id="${astrologer.id}">
-                                <i class="bi bi-caret-down-fill"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="chat-details-row" id="details-${astrologer.id}" style="display: none;">
-                        <td colspan="5" class="chat-details">
-                            <p><strong>Total Amount:</strong> ₹${totals.totalAmount.toFixed(2)}</p>
-                            <p><strong>Paid Amount:</strong> ₹${totals.paidAmount.toFixed(2)}</p>
-                            <p>
-                                <strong>Paid Chats:</strong> ${totals.paidCount}
-                                <button class="btn btn-sm btn-success float-end mark-astrologer-paid-btn"
-                                    data-astrologer-id="${astrologer.id}"
-                                    data-name="${astrologer.name}">
-                                    <i class="bi bi-cash-coin"></i> Mark All as Paid
-                                </button>
-                            </p>
-                            <hr>
-                            ${astrologer.users.map(user => `
-                                <div class="chat-entry">
-                                    <div class="chat-info">
-                                        <p><strong>${user.userName}</strong></p>
-                                        <p>Charges: ₹${user.chargesPerMin}/min</p>
-                                        <p>Duration: ${user.duration} min</p>
-                                    </div>
-                                    <div class="chat-amount-status">
-                                        <p>Total Amount: ₹${calculateTotalAmount(user).toFixed(2)}</p>
-                                        <p>Status: ${
-                                            user.status === "paid"
-                                                ? `<span class="badge bg-success">Paid</span>`
-                                                : `<button class="btn btn-sm btn-primary mark-paid-btn"
-                                                    data-income-id="${user.incomeId}"
-                                                    data-username="${user.userName}">
-                                                    Mark as Paid
-                                                </button>`
-                                        }</p>
-                                    </div>
-                                </div>
-                            `).join('<hr>')}
-                        </td>
-                    </tr>
-                `;
-                tableBody.innerHTML += row;
-            });
+                const a = document.createElement('a');
+                a.classList.add('page-link');
+                a.href = '#';
+                a.textContent = i;
 
-            document.querySelectorAll('.toggle-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    const detailsRow = document.getElementById(`details-${id}`);
-                    detailsRow.style.display = detailsRow.style.display === 'table-row' ? 'none' : 'table-row';
-                    this.classList.toggle('expanded');
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    currentPage = i;
+                    paginate(rows, rowsPerPage, currentPage);
+                    renderPaginationControls(totalRows, rowsPerPage);
                 });
-            });
-        }
 
-        function renderPagination() {
-            const totalPages = Math.ceil(filteredAstrologers.length / recordsPerPage);
-            const pagination = document.getElementById("pagination");
-            pagination.innerHTML = "";
-
-            for (let i = 1; i <= totalPages; i++) {
-                pagination.innerHTML += `
-                    <li class="page-item ${i === currentPage ? 'active' : ''}">
-                        <a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a>
-                    </li>
-                `;
+                li.appendChild(a);
+                pagination.appendChild(li);
             }
         }
 
-        function changePage(page) {
-            currentPage = page;
-            renderTable(page);
-            renderPagination();
-        }
+      
 
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const searchTerm = this.value.trim().toLowerCase();
-            filteredAstrologers = astrologers.filter(astrologer =>
-                astrologer.name.toLowerCase().includes(searchTerm)
-            );
-            currentPage = 1;
-            renderTable(currentPage);
-            renderPagination();
-        });
-
-        // Initial render
-        fetchAstrologerSessions();
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('mark-paid-btn')) {
-                const button = event.target;
-                const incomeId = button.getAttribute('data-income-id');
-                const username = button.getAttribute('data-username');
-
-                if (incomeId) {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: `Do you want to mark ${username}'s session as paid?`,
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, mark as paid'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire('Marked!', 'The session has been marked as paid.', 'success');
-                            fetchAstrologerSessions(); // Refresh the table
-                        }
-                    });
-                }
-            }
-        });
-
-        document.addEventListener('click', function(event) {
-            if (event.target.closest('.mark-astrologer-paid-btn')) {
-                const button = event.target.closest('.mark-astrologer-paid-btn');
-                const astrologerId = button.getAttribute('data-astrologer-id');
-                const astrologerName = button.getAttribute('data-name');
+        // 💸 Mark as Paid logic remains unchanged...
+        document.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('mark-paid-btn')) {
+                e.preventDefault();
+                const button = e.target;
+                const incomeId = button.dataset.incomeId;
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: `Mark all sessions for ${astrologerName} as paid?`,
+                    text: "You want to mark this chat as paid?",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#0C768A',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, mark all as paid!'
+                    confirmButtonText: 'Yes, mark as paid!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire('Marked!', 'All sessions have been marked as paid.', 'success');
-                        fetchAstrologerSessions(); // Refresh table
+                        fetch('<?= base_url("Finance/markPaid") ?>', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `income_id=${incomeId}`
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                button.parentElement.innerHTML = '<span class="badge bg-success">Paid</span>';
+                                Swal.fire({
+                                    title: 'Marked!',
+                                    text: 'Chat marked as paid.',
+                                    icon: 'success',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                });
+                            } else {
+                                Swal.fire('Error', data.message || 'Something went wrong.', 'error');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('AJAX Error:', error);
+                            Swal.fire('Error', 'Failed to mark as paid.', 'error');
+                        });
                     }
                 });
             }
         });
-    </script>
+    });
+</script>
+
 </body>
 
 </html>

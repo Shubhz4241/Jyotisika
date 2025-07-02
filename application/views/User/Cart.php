@@ -105,6 +105,11 @@
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
+
+     <!-- <img src="<?php echo base_url($product_data[0]["product_image"]); ?>" class="img-fluid product-image"
+                    style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';"> -->
+
+  
     <?php if (!empty($productdata)): ?>
         <div class="container my-5">
             <!-- <?php print_r($productdata) ?> -->
@@ -117,13 +122,13 @@
                     <div id="empty-cart-message">Your Cart is Empty</div>
 
 
-                    <?php foreach ($productdata as $productinfo): ?>
+                     <?php foreach ($productdata as $productinfo): ?>
                         <div class="product-details-box mb-4 product-card">
                             <div class="row">
                                 <!-- Product Image -->
                                 <div class="col-md-5">
-                                    <img src="<?php echo base_url('assets/images/rudraksh.png'); ?>" class="product-image"
-                                        alt="Rudraksh">
+                                    <img src="<?php echo base_url('Uploads/products/'.$productinfo['product_image']); ?>" class="product-image"
+                                        alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
                                 </div>
 
                                 <!-- Product Info -->

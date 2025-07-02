@@ -53,7 +53,6 @@
     } ?>
 
 
-    <!-- <?php print_r($rating); ?> -->
     <?php $avgrating = (int) $rating[0]["average_rating"] ?>
 
 
@@ -116,10 +115,10 @@
                             });
                     }
 
-                    function func() {
+                   function func() {
+    window.location.href = "<?php echo base_url("/wallet") ?>";
+}
 
-                        console.log("hello world");
-                    }
                 </script>
 
 
@@ -142,7 +141,7 @@
                                             </h5>
 
                                             <div class="d-flex align-items-center mb-2">
-                                                <?php for ($i = 0; $i < $avgrating; $i++): ?>
+                                                <?php for ($i = 0; $i <= $avgrating; $i++): ?>
                                                     <i class="bi bi-star-fill text-warning me-1"></i>
                                                 <?php endfor; ?>
                                             </div>

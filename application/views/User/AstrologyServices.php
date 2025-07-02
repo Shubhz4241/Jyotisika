@@ -44,6 +44,7 @@
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
     <section>
+        <!-- <?php print_r($service_data) ?> -->
         <div class="container my-4">
             <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">Free Horoscope and Astrology Services</h3>
             <div class="row g-4 justify-content-center">
@@ -123,19 +124,21 @@
                     ],
 
                 ];
-                foreach ($services as $service): ?>
+                foreach ($service_data as $service): ?>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a href="<?php echo $service['link']; ?>" class="text-decoration-none">
+                        <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
                             <div class="card service-card text-center shadow rounded border-0 p-3 h-100 card-hover">
                                 <div class="service-card-image-container">
-                                    <img src="<?php echo base_url($service['image']); ?>" alt="<?php echo $service['title']; ?>"
-                                        class="mx-auto mb-2 service-card-image">
+                                    <img src="<?php echo base_url('assets/images/' . $service['image']); ?>" alt=""
+                                        class="mx-auto mb-2 service-card-image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
+
+                                       
                                 </div>
                                 <div class="service-card-body">
-                                    <h5 class="fw-bold text-dark"><?php echo $service['title']; ?></h5>
-                                    <?php if (!empty($service['description'])): ?>
+                                    <h5 class="fw-bold text-dark"><?php echo $service['name']; ?></h5>
+                                    <!-- <?php if (!empty($service['description'])): ?>
                                         <small class="text-muted"><?php echo $service['description']; ?></small>
-                                    <?php endif; ?>
+                                    <?php endif; ?> -->
                                 </div>
                             </div>
                         </a>

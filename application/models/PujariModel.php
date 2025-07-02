@@ -616,4 +616,13 @@ class PujariModel extends CI_Model
         $this->db->where('book_puja_id', $id);
         return $this->db->update('bookpuja_request_by_user_to_pujari', $data);
     }
+      public function get_all_services()
+    {
+        $this->db->select('*');
+        $this->db->from('services');
+        $this->db->where('service_type', 'pujari');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
 }

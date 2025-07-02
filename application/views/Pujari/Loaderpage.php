@@ -63,7 +63,7 @@
     <div class="background-container"></div>
 
     <!-- Logo positioned half inside, half outside the background image -->
-    <img src="<?php echo base_url('assets/images/Astrologer/J User.gif'); ?>" alt="Logo" class="logo">
+    <img src="<?php echo base_url('assets/images/Astrologer/Jyotisika User.gif'); ?>" alt="Logo" class="logo">
 
 </body>
 

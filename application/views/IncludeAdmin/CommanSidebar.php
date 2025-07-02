@@ -194,7 +194,7 @@
 
 <aside id="sidebar" class="sidebar-toggle">
     <div class="sidebar-logo ">
-        <i class="bi bi-x-lg close-sidebar mt-3" style="color: white;"></i>
+        <i class="bi bi-x-lg close-sidebar mt-3"></i>
     </div>
     <!-- Sidebar Navigation -->
     <ul class="sidebar-nav p-0">
@@ -234,7 +234,47 @@
                 <span class="ms-1" style="color: white;font-weight: 400;">Orders</span>
             </a>
         </li>
-
+        <!-- Astrologer Services -->
+        <li class="sidebar-item">
+                        <a href="<?php echo base_url() . 'Admin/AstrologerServices'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 20px;">
+                         <i class="bi bi-mortarboard"></i> 
+                            <span class="ms-1" style="color: white;font-weight: 400;">Astrologer Services</span>
+                        </a>
+                    </li>
+        <!-- Poojari Services -->
+                    <li class="sidebar-item">
+   
+                        <a href="<?php echo base_url() . 'Admin/pujariServices'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 20px;">
+                         <i class="bi bi-mortarboard-fill"></i> 
+                            
+                            <span class="ms-1" style="color: white;font-weight: 400;">Poojari Services</span>
+                        </a>
+                    </li>
+        <!-- Payments -->
+<li class="sidebar-item">
+            <a href="<?php echo base_url() . 'ManasviDocumentation'; ?>" class="sidebar-link dropdown-toggle collapsed text-white " id="payments-dropdown" data-bs-toggle="collapse"
+                data-bs-target="#paymentsSubmenu" aria-expanded="false" style="font-size: 20px;">
+                <i class="bi bi-credit-card-2-front" style="color: white;"></i>
+                <span class="ms-1" style="color: white;font-weight: 400;">Payments</span>
+            </a>
+            <div class="collapse" id="paymentsSubmenu">
+                <ul class="nav flex-column ms-3">
+                    <li class="nav-item">
+                        <a href="<?php echo base_url() . 'Admin/FinanceAstrologer'; ?>" class="sidebar-link" id="TotalEmployee-link" style="font-size: 20px;">
+                            <!-- <i class="bi bi-person-workspace"></i> -->
+                            <span class="ms-1" style="color: white;font-weight: 400;">Astrologer</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo base_url() . 'Admin/FinancePoojari'; ?>" class="sidebar-link" id="TotalIntern-link" style="font-size: 20px;">
+                            <!-- <i class="bi bi-mortarboard-fill"></i> -->
+                            <span class="ms-1" style="color: white;font-weight: 400;"> Pujari</span>
+                        </a>
+                    </li>
+                   
+                </ul>
+            </div>
+        </li>
         
 
         <!-- Service Management -->
@@ -276,6 +316,13 @@
             </a>
         </li>
 
+         <li class="sidebar-item">
+            <a href="<?php echo base_url() . 'Admin/staff'; ?>" class="sidebar-link" id="Manageevent-link" style="font-size: 20px;">
+                <i class="bi bi-people" style="color: white;"></i>
+                <span class="ms-1" style="color: white;font-weight: 400;">Staff</span>
+            </a>
+        </li>
+
         <!-- INTERVIEW ANALYSIS -->
         <li class="sidebar-item">
             <a href="<?php echo base_url() . 'profile'; ?>" class="sidebar-link" id="InterviewAnalysis-link" style="font-size: 20px;">
@@ -287,50 +334,108 @@
     </ul>
     <!-- Sidebar Navigation Ends -->
 
+     <!-- Sidebar Navigation Ends -->
+
     <!-- LOGOUT -->
     <div class="sidebar-footer mb-3">
-        <a href="<?php echo base_url() . 'login'; ?>" class="sidebar-link" style="font-size: 20px;">
+        <a href="#" class="sidebar-link" id="logout-link" style="font-size: 20px;">
             <i class="bi bi-box-arrow-left" style="color: white;"></i>
             <span class="ms-1" style="color: white;font-weight: 400;">Logout</span>
         </a>
     </div>
-
 </aside>
 
+<!-- Include SweetAlert2 and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const currentPath = window.location.pathname;
-        const links = {
-            'ManasviHome': document.getElementById('ManasviHome-link'),
-            'ManasviTotalEmployee': document.getElementById('TotalEmployee-link'),
-            'ManasviTotalIntern': document.getElementById('TotalIntern-link'),
-            'ManasviEmployeeAttendance': document.getElementById('EmployeeAttendance-link'),
-            'ManasviInternAttendance': document.getElementById('InternAttendance-link'),
-            'ManasviGenerateAttendance': document.getElementById('GenerateAttendance-link'),
-            'ManasviEmployeeLeaveRequest': document.getElementById('EmployeeLeaveRequest-link'),
-            'ManasviInternLeaveRequest': document.getElementById('InternLeaveRequest-link'),
-            'ManasviLeaveRecords': document.getElementById('leaveRecords-link'),
-            'ManasviSalaryManagement': document.getElementById('ManasviSalaryManagement-link'),
-            'ManasviDocumentation': document.getElementById('ManasviDocumentation-link'),
-            'ManasviManageEvent': document.getElementById('Manageevent-link'),
-            'ManasviInterviewAnalysis': document.getElementById('InterviewAnalysis-link')
-        };
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPath = window.location.pathname;
+    const links = {
+        'ManasviHome': document.getElementById('ManasviHome-link'),
+        'ManasviTotalEmployee': document.getElementById('TotalEmployee-link'),
+        'ManasviTotalIntern': document.getElementById('TotalIntern-link'),
+        'ManasviEmployeeAttendance': document.getElementById('EmployeeAttendance-link'),
+        'ManasviInternAttendance': document.getElementById('InternAttendance-link'),
+        'ManasviGenerateAttendance': document.getElementById('GenerateAttendance-link'),
+        'ManasviEmployeeLeaveRequest': document.getElementById('EmployeeLeaveRequest-link'),
+        'ManasviInternLeaveRequest': document.getElementById('InternLeaveRequest-link'),
+        'ManasviLeaveRecords': document.getElementById('leaveRecords-link'),
+        'ManasviSalaryManagement': document.getElementById('ManasviSalaryManagement-link'),
+        'ManasviDocumentation': document.getElementById('ManasviDocumentation-link'),
+        'ManasviManageEvent': document.getElementById('Manageevent-link'),
+        'ManasviInterviewAnalysis': document.getElementById('InterviewAnalysis-link')
+    };
 
-        const currentPage = currentPath.split('/').pop();
-
-        for (const [path, link] of Object.entries(links)) {
-            if (currentPage === path) {
-                link.style.backgroundColor = '#007AFF';
-                link.style.color = '#FFFFFF';
-                const parentCollapse = link.closest('.collapse');
-                if (parentCollapse) {
-                    parentCollapse.classList.add('show');
-                    const trigger = document.querySelector(`[data-bs-target="#${parentCollapse.id}"]`);
-                    trigger.classList.remove('collapsed');
-                    trigger.setAttribute('aria-expanded', 'true');
-                }
-                break;
+    const currentPage = currentPath.split('/').pop();
+    for (const [path, link] of Object.entries(links)) {
+        if (currentPage === path) {
+            link.classList.add('active-link');
+            const parentCollapse = link.closest('.collapse');
+            if (parentCollapse) {
+                parentCollapse.classList.add('show');
+                const trigger = document.querySelector(`[data-bs-target="#${parentCollapse.id}"]`);
+                trigger.classList.remove('collapsed');
+                trigger.setAttribute('aria-expanded', 'true');
             }
+            break;
         }
-    });
+    }
+
+    // Logout SweetAlert
+    const logoutLink = document.getElementById('logout-link');
+    if (logoutLink) {
+        logoutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You will be logged out of the system.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, logout!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '<?php echo base_url('SuperAdminLogin/logout'); ?>',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+                        },
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                Swal.fire({
+                                    title: 'Logged Out!',
+                                    text: 'You have been successfully logged out.',
+                                    icon: 'success',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    window.location.href = '<?php echo base_url('SuperAdminLogin'); ?>';
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: response.message || 'Logout failed. Please try again.',
+                                    icon: 'error'
+                                });
+                            }
+                        },
+                        error: function() {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'An error occurred. Please try again.',
+                                icon: 'error'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    }
+});
 </script>
