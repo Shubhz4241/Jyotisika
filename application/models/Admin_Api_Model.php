@@ -262,10 +262,30 @@ public function getAllPojas()  {
 
 
 
-
+//  public function getOrderDetails($orderId) {
+//         $this->db->select('jmo.order_id, jmo.order_no, jmo.user_fullname, jmo.user_phonenumber, jmo.user_city, jmo.user_state, jmo.user_pincode, jmo.price, jmo.payment_type, jmo.order_date, jmo.status, GROUP_CONCAT(p.product_name SEPARATOR ", ") as product_name, u.user_email	 as user_email');
+//         $this->db->from('jyotisika_mall_orders AS jmo');
+//         $this->db->join('order_items AS oi', 'jmo.order_id = oi.order_id', 'inner');
+//         $this->db->join('jotishika_mall AS p', 'oi.product_id = p.product_id', 'left');
+//         $this->db->join('jyotisika_users AS u', 'jmo.user_id = u.user_id', 'left');
+//         $this->db->where('jmo.order_id', $orderId);
+//         $this->db->group_by('jmo.order_id');
+//         $query = $this->db->get();
+//         return $query->row_array();
+//     }
  
 
-    public function getAllOrders() {
+//     public function getAllOrders() {
+//         return $this->db
+//             ->select('oi.*, jmo.*, p.product_name, p.product_price, p.product_image')
+//             ->from('jyotisika_mall_orders AS jmo')
+//             ->join('order_items AS oi', 'jmo.order_id = oi.order_id', 'inner')
+//             ->join('jotishika_mall AS p', 'oi.product_id = p.product_id', 'left')
+//             ->order_by('jmo.order_date', 'DESC')
+//             ->get()
+//             ->result_array();
+//     }
+ public function getAllOrders() {
         return $this->db
             ->select('oi.*, jmo.*, p.product_name, p.product_price, p.product_image')
             ->from('jyotisika_mall_orders AS jmo')
@@ -275,6 +295,18 @@ public function getAllPojas()  {
             ->get()
             ->result_array();
     }
+
+    public function getOrderDetails($orderId) {
+        $this->db->select('jmo.order_id, jmo.order_no, jmo.user_fullname, jmo.user_phonenumber, jmo.user_city, jmo.user_state, jmo.user_pincode, jmo.price, jmo.payment_type, jmo.order_date, jmo.status, jmo.user_email, GROUP_CONCAT(p.product_name SEPARATOR ", ") as product_name');
+        $this->db->from('jyotisika_mall_orders AS jmo');
+        $this->db->join('order_items AS oi', 'jmo.order_id = oi.order_id', 'inner');
+        $this->db->join('jotishika_mall AS p', 'oi.product_id = p.product_id', 'left');
+        $this->db->where('jmo.order_id', $orderId);
+        $this->db->group_by('jmo.order_id');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
 
     public function updateOrderStatus($orderId, $status) {
         $this->db->where('order_id', $orderId);

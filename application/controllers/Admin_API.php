@@ -11,6 +11,7 @@ class Admin_API extends CI_Controller
         $this->load->model('Admin_Api_Model');
         $this->load->model('Admin_Login_Model');
         $this->load->library('email');
+        $this->config->load('order_email', TRUE);
     }
 
     public function getallpoojaris() {}
@@ -722,44 +723,406 @@ class Admin_API extends CI_Controller
 
 
 
-    public function updateOrderStatus()
-    {
-        // POST values
+    // public function updateOrderStatus()
+    // {
+    //     // POST values
+    //     $orderId = $this->input->post('order_id');
+    //     $status  = $this->input->post('status');
+
+    //     // Basic validation
+    //     if (!$orderId || !$status) {
+    //         return $this->output
+    //             ->set_content_type('application/json')
+    //             ->set_status_header(400)
+    //             ->set_output(json_encode([
+    //                 'status'  => false,
+    //                 'message' => 'order_id and status required'
+    //             ]));
+    //     }
+
+    //     // Call model
+    //     $updated = $this->Admin_Api_Model->updateOrderStatus($orderId, $status);
+
+    //     if ($updated) {
+    //         $this->output
+    //             ->set_content_type('application/json')
+    //             ->set_status_header(200)
+    //             ->set_output(json_encode([
+    //                 'status'  => true,
+    //                 'message' => 'Order status updated'
+    //             ]));
+    //     } else {
+    //         $this->output
+    //             ->set_content_type('application/json')
+    //             ->set_status_header(500)
+    //             ->set_output(json_encode([
+    //                 'status'  => false,
+    //                 'message' => 'Database update failed'
+    //             ]));
+    //     }
+    // }
+
+public function updateOrderStatus()
+{
+    try {
+        // Get POST data
         $orderId = $this->input->post('order_id');
         $status  = $this->input->post('status');
-
-        // Basic validation
-        if (!$orderId || !$status) {
-            return $this->output
+        
+        // Validate input
+        if (empty($orderId) || empty($status)) {
+            $this->output
                 ->set_content_type('application/json')
                 ->set_status_header(400)
                 ->set_output(json_encode([
                     'status'  => false,
-                    'message' => 'order_id and status required'
+                    'message' => 'Order ID and status are required'
                 ]));
+            return;
         }
-
-        // Call model
+        
+        // Log for debugging
+        log_message('error', 'DEBUG: order_id=' . $orderId . ', status=' . $status);
+        
+        // Update order status in DB
         $updated = $this->Admin_Api_Model->updateOrderStatus($orderId, $status);
-
-        if ($updated) {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_status_header(200)
-                ->set_output(json_encode([
-                    'status'  => true,
-                    'message' => 'Order status updated'
-                ]));
-        } else {
+        
+        if (!$updated) {
             $this->output
                 ->set_content_type('application/json')
                 ->set_status_header(500)
                 ->set_output(json_encode([
                     'status'  => false,
-                    'message' => 'Database update failed'
+                    'message' => 'Failed to update order status in database'
                 ]));
+            return;
         }
+        
+        // Fetch order details (includes email)
+        $orderDetails = $this->Admin_Api_Model->getOrderDetails($orderId);
+        
+        if (!$orderDetails) {
+            $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(404)
+                ->set_output(json_encode([
+                    'status'  => false,
+                    'message' => 'Order details not found'
+                ]));
+            return;
+        }
+        
+        $emailMessage = '';
+        
+        // Check if user email exists
+        if (!empty($orderDetails['user_email'])) {
+            // Load email library
+            $this->load->library('email');
+            
+            // SOLUTION 1: Enhanced Email Configuration with SSL Context Options
+            $emailConfig = array(
+                'protocol'     => 'smtp',
+                'smtp_host'    => 'smtp.gmail.com',
+                'smtp_user'    => 'ganeshgodse1902@gmail.com',
+                'smtp_pass'    => 'mbre meek ymyt eagl',
+                'smtp_port'    => 587,
+                'smtp_crypto'  => 'tls',
+                'mailtype'     => 'html',
+                'charset'      => 'utf-8',
+                'wordwrap'     => TRUE,
+                'newline'      => "\r\n",
+                'crlf'         => "\r\n",
+                'smtp_timeout' => 30,
+                // SSL Context Options to bypass certificate verification
+                'smtp_context' => array(
+                    'ssl' => array(
+                        'verify_peer'       => false,
+                        'verify_peer_name'  => false,
+                        'allow_self_signed' => true
+                    )
+                )
+            );
+            
+            // Initialize email with config
+            $this->email->initialize($emailConfig);
+            
+            // Set email parameters
+            $this->email->from('ganeshgodse1902@gmail.com', 'Jyotisika Mall');
+            $this->email->to($orderDetails['user_email']);
+            $this->email->subject('Order Status Update - Order #' . $orderDetails['order_no']);
+            
+            // Generate email content
+            $emailContent = $this->generateEmailContent($orderDetails, $status);
+            $this->email->message($emailContent);
+            
+            // Send email with additional error handling
+            if ($this->email->send()) {
+                $emailMessage = 'Status updated and email sent to ' . $orderDetails['user_email'];
+                log_message('info', 'Email sent successfully to: ' . $orderDetails['user_email']);
+            } else {
+                $emailMessage = 'Status updated but email failed to send';
+                $debugInfo = $this->email->print_debugger(['headers']);
+                log_message('error', 'Email Error: ' . $debugInfo);
+                
+                // Try alternative configuration if first attempt fails
+                $this->sendEmailAlternative($orderDetails, $status);
+            }
+            
+            // Clear email data for next use
+            $this->email->clear();
+            
+        } else {
+            $emailMessage = 'Status updated but user email not found';
+            log_message('error', 'Email Error: User email not found for order ID: ' . $orderId);
+        }
+        
+        // Success response
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode([
+                'status'  => true,
+                'message' => $emailMessage
+            ]));
+            
+    } catch (Exception $e) {
+        log_message('error', 'Exception in updateOrderStatus: ' . $e->getMessage());
+        
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(500)
+            ->set_output(json_encode([
+                'status'  => false,
+                'message' => 'Server error occurred: ' . $e->getMessage()
+            ]));
     }
+}
+
+// Alternative email sending method with different configuration
+private function sendEmailAlternative($orderDetails, $status)
+{
+    try {
+        // SOLUTION 2: Try with port 465 and SSL
+        $alternativeConfig = array(
+            'protocol'     => 'smtp',
+            'smtp_host'    => 'smtp.gmail.com',
+            'smtp_user'    => 'ganeshgodse1902@gmail.com',
+            'smtp_pass'    => 'mbre meek ymyt eagl',
+            'smtp_port'    => 465,
+            'smtp_crypto'  => 'ssl',
+            'mailtype'     => 'html',
+            'charset'      => 'utf-8',
+            'wordwrap'     => TRUE,
+            'newline'      => "\r\n",
+            'crlf'         => "\r\n",
+            'smtp_timeout' => 30,
+            'smtp_context' => array(
+                'ssl' => array(
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
+                    'allow_self_signed' => true,
+                    'cafile'           => APPPATH . 'config/cacert.pem' // If you have cacert.pem
+                )
+            )
+        );
+        
+        $this->email->initialize($alternativeConfig);
+        $this->email->from('ganeshgodse1902@gmail.com', 'Jyotisika Mall');
+        $this->email->to($orderDetails['user_email']);
+        $this->email->subject('Order Status Update - Order #' . $orderDetails['order_no']);
+        $this->email->message($this->generateEmailContent($orderDetails, $status));
+        
+        if ($this->email->send()) {
+            log_message('info', 'Alternative email method successful');
+            return true;
+        } else {
+            log_message('error', 'Alternative email method also failed: ' . $this->email->print_debugger());
+            return false;
+        }
+        
+    } catch (Exception $e) {
+        log_message('error', 'Alternative email method exception: ' . $e->getMessage());
+        return false;
+    }
+}
+
+// SOLUTION 3: PHPMailer alternative method
+private function sendEmailWithPHPMailer($orderDetails, $status)
+{
+    // If you want to use PHPMailer instead of CodeIgniter's email library
+    // First download PHPMailer and include it in your project
+    
+    /*
+    require_once APPPATH . 'third_party/PHPMailer/src/PHPMailer.php';
+    require_once APPPATH . 'third_party/PHPMailer/src/SMTP.php';
+    require_once APPPATH . 'third_party/PHPMailer/src/Exception.php';
+    
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+    
+    $mail = new PHPMailer(true);
+    
+    try {
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'ganeshgodse1902@gmail.com';
+        $mail->Password   = 'mbre meek ymyt eagl';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+        
+        // Disable SSL verification for local development
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+        
+        $mail->setFrom('ganeshgodse1902@gmail.com', 'Jyotisika Mall');
+        $mail->addAddress($orderDetails['user_email']);
+        
+        $mail->isHTML(true);
+        $mail->Subject = 'Order Status Update - Order #' . $orderDetails['order_no'];
+        $mail->Body    = $this->generateEmailContent($orderDetails, $status);
+        
+        $mail->send();
+        return true;
+        
+    } catch (Exception $e) {
+        log_message('error', 'PHPMailer Error: ' . $mail->ErrorInfo);
+        return false;
+    }
+    */
+}
+
+// Email content generation function
+private function generateEmailContent($orderDetails, $status)
+{
+    $statusMessages = [
+        'packed'    => 'Your order has been packed and is ready for shipment.',
+        'shipped'   => 'Your order has been shipped and is on its way to you.',
+        'delivered' => 'Your order has been delivered successfully.',
+        'pending'   => 'Your order is currently pending and will be processed soon.',
+        'Accepted'  => 'Your order has been accepted and will be processed.',
+        'Rejected'  => 'Unfortunately, your order has been rejected.'
+    ];
+    
+    $statusMessage = isset($statusMessages[$status]) ? $statusMessages[$status] : 'Your order status has been updated.';
+    
+    $emailContent = '
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background-color: #0C768A; color: white; padding: 20px; text-align: center; }
+            .content { padding: 20px; background-color: #f9f9f9; }
+            .order-details { background-color: white; padding: 15px; margin: 10px 0; border-radius: 5px; }
+            .footer { text-align: center; padding: 10px; color: #666; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Order Status Update</h1>
+            </div>
+            <div class="content">
+                <p>Dear ' . htmlspecialchars($orderDetails['user_fullname']) . ',</p>
+                <p>' . $statusMessage . '</p>
+                
+                <div class="order-details">
+                    <h3>Order Details:</h3>
+                    <p><strong>Order Number:</strong> ' . $orderDetails['order_no'] . '</p>
+                    <p><strong>New Status:</strong> ' . ucfirst($status) . '</p>
+                    <p><strong>Order Date:</strong> ' . date('d-m-Y', strtotime($orderDetails['order_date'])) . '</p>
+                    <p><strong>Total Amount:</strong> ₹' . $orderDetails['price'] . '</p>
+                </div>
+                
+                <p>Thank you for shopping with us!</p>
+            </div>
+            <div class="footer">
+                <p>&copy; 2025 Jyotisika Mall. All rights reserved.</p>
+            </div>
+        </div>
+    </body>
+    </html>';
+    
+    return $emailContent;
+}
+
+public function sendBirthdayEmails()
+{
+    // 1. Load email library
+    $this->load->library('email');
+
+    // 2. Configure SMTP
+    $config = array(
+        'protocol'    => 'smtp',
+        'smtp_host'   => 'smtp.gmail.com',
+        'smtp_port'   => 587,
+        'smtp_user'   => 'amplifierlover007@gmail.com',
+        'smtp_pass'   => 'irjwyyggkfnidnue', // Consider using an app password for Gmail
+        'mailtype'    => 'html',
+        'charset'     => 'utf-8',
+        'newline'     => "\r\n",
+        'smtp_crypto' => 'tls'
+    );
+    $this->email->initialize($config);
+
+    // 3. Static birthday message
+    $message = '
+        <h2>🎉 Happy Birthday Ritesh! 🎉</h2>
+        <p>Wishing you a day filled with love, laughter, and joy. May this year bring you success and happiness!</p>
+        <p>— From your HR Team 😊</p>
+    ';
+
+    // 4. Set recipient
+    $this->email->from('amplifierlover007@gmail.com', 'HR Team');
+    $this->email->to('riteshshingote23@gmail.com');
+    $this->email->subject("🎂 Birthday Wishes to You, Ritesh!");
+    $this->email->message($message);
+
+    // 5. Send the email
+    if ($this->email->send()) {
+        echo "✅ Birthday email sent to Ritesh!";
+    } else {
+        echo "❌ Failed to send email.";
+        log_message('error', 'Email error: ' . $this->email->print_debugger());
+    }
+}
+
+     public function testGetOrderDetails()
+{
+    // Get POST data
+    $orderId = $this->input->post('order_id');
+
+    // Fetch order details using model
+    $orderDetails = $this->Admin_Api_Model->getOrderDetails($orderId);
+
+    // Return response
+    if ($orderDetails) {
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode([
+                'status'  => true,
+                'data'    => $orderDetails
+            ]));
+    } else {
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(404)
+            ->set_output(json_encode([
+                'status'  => false,
+                'message' => 'Order not found'
+            ]));
+    }
+}
+
  
 //    public function updateOrderStatus() {
     
