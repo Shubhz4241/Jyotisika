@@ -33,13 +33,13 @@
 
 <style>
     .suggestion {
-    padding: 10px;
-    cursor: pointer;
-}
-.suggestion:hover {
-    background-color: #f1f1f1;
-}
+        padding: 10px;
+        cursor: pointer;
+    }
 
+    .suggestion:hover {
+        background-color: #f1f1f1;
+    }
 </style>
 
 <body>
@@ -173,8 +173,23 @@
                 </div>
 
                 <div class="col-12 col-md-6 my-2">
+                    <label for="language">Select Language</label>
+                    <select id="language" class="form-control shadow-none my-2 p-2 rounded-1" required>
+                        <option value="" disabled selected>Select Language</option>
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="bn">Bengali</option>
+                        <option value="ma">Marathi</option>
+                        <option value="tm">Tamil</option>
+                        <option value="tl">Telugu</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="kn">Kannada</option>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-6 my-2">
                     <label for="astro_feature">Select Feature</label>
-                    <select id="astro_feature" class="form-control shadow-none p-2 rounded-1">
+                    <select id="astro_feature" class="form-control shadow-none  my-2 p-2 rounded-1">
                         <option value="horoscope">Horoscope</option>
                         <option value="ashtakoot">Ashtakoot</option>
                         <option value="dashakoot">Dashakoot</option>
@@ -201,16 +216,25 @@
         </form>
     </div>
 
-     <div class="container my-4" id="chartResult"></div>
+    <div class="container my-4" id="chartResult"></div>
 
-   
+
 
     <!-- Horoscope Matching | Kundali Matching | Kundli Match for Marriage -->
     <div class="container my-4">
         <div class="row">
             <h4 class="text-center my-4" style="color: var(--red); ">Horoscope Matching | Kundali Matching | Kundli
                 Match for Marriage</h4>
-            <p style="text-align: justify;">Horoscope Matching | Kundali Matching | Kundli Match for Marriage is an essential practice in Vedic astrology that assesses the compatibility between two individuals planning to marry. Also known as Guna Milan, this process compares the birth charts (Kundlis) of the prospective bride and groom based on various factors like emotional, physical, spiritual, and intellectual alignment. The system primarily follows the Ashta Koot Milan method, which assigns points to eight different categories totaling 36 points. A higher score indicates greater compatibility and harmony in married life. Kundli matching is not just about future predictions, but also helps identify doshas (flaws), like Manglik Dosha, that may affect marital bliss. Remedies and guidance from astrologers can help mitigate such issues. By aligning celestial influences, horoscope matching aims to ensure a prosperous, peaceful, and balanced married life.</p>
+            <p style="text-align: justify;">Horoscope Matching | Kundali Matching | Kundli Match for Marriage is an
+                essential practice in Vedic astrology that assesses the compatibility between two individuals planning
+                to marry. Also known as Guna Milan, this process compares the birth charts (Kundlis) of the prospective
+                bride and groom based on various factors like emotional, physical, spiritual, and intellectual
+                alignment. The system primarily follows the Ashta Koot Milan method, which assigns points to eight
+                different categories totaling 36 points. A higher score indicates greater compatibility and harmony in
+                married life. Kundli matching is not just about future predictions, but also helps identify doshas
+                (flaws), like Manglik Dosha, that may affect marital bliss. Remedies and guidance from astrologers can
+                help mitigate such issues. By aligning celestial influences, horoscope matching aims to ensure a
+                prosperous, peaceful, and balanced married life.</p>
         </div>
     </div>
 
@@ -387,7 +411,8 @@
                 girl_second: document.getElementById("girl_second")?.value || "",
                 girl_birthPlace: document.getElementById("girl_birthPlace")?.value || "New Delhi",
                 girl_lat: document.getElementById('girl_lat')?.value || "28.7041",
-                girl_lon: document.getElementById('girl_lon')?.value || "77.1025"
+                girl_lon: document.getElementById('girl_lon')?.value || "77.1025", 
+                 lan :document.getElementById('language').value || "en",
             };
 
             const selectedFeature = document.getElementById('astro_feature').value;

@@ -1983,7 +1983,7 @@ class User_Api_Controller extends CI_Controller
             'status' => 'pending',
             'payment_status' => "paid",
             'order_subtotal' => $subtotal,
-            'order_shipping_charges' => 50,
+            'order_shipping_charges' => 40,
             'order_date' => $timestamp,
             'payment_id' => $payment_id,
 
@@ -3198,7 +3198,7 @@ class User_Api_Controller extends CI_Controller
             'lat' => $input['boy_lat'], // optional: replace using geolocation
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
-            'lan' => 'en'
+             'lan' => $input['lan']
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3249,7 +3249,7 @@ class User_Api_Controller extends CI_Controller
             'lat' => $input['boy_lat'], // optional: replace using geolocation
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
-            'lan' => 'en'
+           'lan' => $input['lan']
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3301,7 +3301,7 @@ class User_Api_Controller extends CI_Controller
             'lat' => $input['boy_lat'], // optional: replace using geolocation
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
-            'lan' => 'en'
+           'lan' => $input['lan']
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3353,7 +3353,7 @@ class User_Api_Controller extends CI_Controller
             'lat' => $input['boy_lat'], // optional: replace using geolocation
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
-            'lan' => 'en'
+            'lan' => $input['lan']
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3418,7 +3418,7 @@ class User_Api_Controller extends CI_Controller
             "p2_lon" => $post['girl_lon'],
             "p2_tzone" => 5.5,
 
-            "lan" => "en"
+               'lan' => "en"
         ];
 
         $headers = [
@@ -3478,7 +3478,7 @@ class User_Api_Controller extends CI_Controller
             "p2_lon" => $post['girl_lon'],
             "p2_tzone" => 5.5,
 
-            "lan" => "en"
+               'lan' => $post['lan']
         ];
 
         $headers = [
@@ -3538,7 +3538,7 @@ class User_Api_Controller extends CI_Controller
             "p2_lon" => $post['girl_lon'],
             "p2_tzone" => 5.5,
 
-            "lan" => "en"
+             'lan' => $post['lan']
         ];
 
         $headers = [
@@ -3611,7 +3611,7 @@ class User_Api_Controller extends CI_Controller
             "p2_lon" => $post['girl_lon'],
             "p2_tzone" => 5.5,
 
-            "lan" => "en"
+               'lan' => $post['lan']
         ];
 
         $headers = [

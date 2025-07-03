@@ -152,6 +152,23 @@
                                 </div>
                             </div>
 
+                            <div class="col-12 my-2">
+                                <label for="language">Select Language</label>
+                                <select id="languages" class="form-control shadow-none my-2 p-2 rounded-1" required>
+                                    <option value="" disabled selected>Select Language</option>
+                                    <option value="en">English</option>
+                                    <option value="hi">Hindi</option>
+                                    <option value="bn">Bengali</option>
+                                    <option value="ma">Marathi</option>
+                                    <option value="tm">Tamil</option>
+                                    <option value="tl">Telugu</option>
+                                    <option value="ml">Malayalam</option>
+                                    <option value="kn">Kannada</option>
+                                </select>
+                            </div>
+
+
+
                             <!-- Birthplace -->
                             <!-- <label for="boy_birthPlace">Birth Place</label>
                         <input type="text" id="boy_birthPlace" class="form-control shadow-none my-2 p-2 rounded-1"
@@ -295,7 +312,7 @@
             });
 
             if (missingField) {
-                
+
                 const label = document.querySelector(`label[for="${missingField}"]`);
                 const fieldName = label ? label.innerText : missingField;
 
@@ -412,6 +429,8 @@
             const place = document.getElementById("boy_birthPlace").value;
             const lat = parseFloat(document.getElementById("boy_lat").value);
             const lon = parseFloat(document.getElementById("boy_lon").value);
+            const lans = document.getElementById("languages").value;
+
 
             const bodyData = {
                 api_key: apiKey,
@@ -427,7 +446,7 @@
                 lat: lat,
                 lon: lon,
                 tzone: 5.5,
-                lan: "en"
+                lan: lans,
             };
 
             try {

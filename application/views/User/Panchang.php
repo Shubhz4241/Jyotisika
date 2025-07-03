@@ -44,124 +44,173 @@
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
 
-   <div class="container">
-            <div class="table-responsive ">
-                <table class="table table-bordered text-warning-emphasis ">
-                    <thead>
-                        <tr>
-                            <th class="bg-color" scope="col">Title</th>
-                            <th class="bg-color" scope="col">Value</th>
+    <div class="container">
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="bg-color">Date</td>
-                            <td class="bg-color" id="todayDate">Loading...</td>
-                        </tr>
 
-                        <tr>
-                            <td class="bg-color">Today's Tithi</td>
-                            <td class="bg-color" id="tithi">Loading...</td>
-                        </tr>
-                        <tr>
-                            <td class="bg-color">Today's Nakshatra</td>
-                            <td class="bg-color" id="nakshatra">Loading...</td>
-                        </tr>
+        <select id="language" class="form-control shadow-none col-6 my-2 p-2 rounded-1" required>
+            <option value="" disabled selected>Select Language</option>
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="bn">Bengali</option>
+            <option value="ma">Marathi</option>
+            <option value="tm">Tamil</option>
+            <option value="tl">Telugu</option>
+            <option value="ml">Malayalam</option>
+            <option value="kn">Kannada</option>
+        </select>
 
-                        <tr>
-                            <td class="bg-color">Today's Karana</td>
-                            <td class="bg-color" id="todayKarana">Loading...</td>
-                        </tr>
-                        <tr>
-                            <td class="bg-color">Today's Paksha</td>
-                            <td class="bg-color" id="todayPaksha">Loading...</td>
-                        </tr>
 
-                        <tr>
-                            <td class="bg-color">Today's Yoga</td>
-                            <td class="bg-color" id="todayYoga">Loading...</td>
-                        </tr>
 
-                        <tr>
-                            <td class="bg-color">Today's Sun Rise Time</td>
-                            <td class="bg-color" id="sunrise">Loading...</td>
-                        </tr>
-                        <tr>
-                            <td class="bg-color">Today's Sun Set Time</td>
-                            <td class="bg-color" id="sunset">Loading...</td>
-                        </tr>
-                        <!-- <tr>
+        <div class="table-responsive ">
+            <table class="table table-bordered text-warning-emphasis ">
+                <thead>
+                    <tr>
+                        <th class="bg-color" scope="col">Title</th>
+                        <th class="bg-color" scope="col">Value</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="bg-color">Date</td>
+                        <td class="bg-color" id="todayDate">Loading...</td>
+                    </tr>
+
+                    <tr>
+                        <td class="bg-color">Today's Tithi</td>
+                        <td class="bg-color" id="tithi">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-color">Today's Nakshatra</td>
+                        <td class="bg-color" id="nakshatra">Loading...</td>
+                    </tr>
+
+                    <tr>
+                        <td class="bg-color">Today's Karana</td>
+                        <td class="bg-color" id="todayKarana">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-color">Today's Paksha</td>
+                        <td class="bg-color" id="todayPaksha">Loading...</td>
+                    </tr>
+
+                    <tr>
+                        <td class="bg-color">Today's Yoga</td>
+                        <td class="bg-color" id="todayYoga">Loading...</td>
+                    </tr>
+
+                    <tr>
+                        <td class="bg-color">Today's Sun Rise Time</td>
+                        <td class="bg-color" id="sunrise">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-color">Today's Sun Set Time</td>
+                        <td class="bg-color" id="sunset">Loading...</td>
+                    </tr>
+                    <!-- <tr>
                             <td class="bg-color">Today's Moon Sign</td>
                             <td class="bg-color">17:28</td>
 
 
                         </tr> -->
 
-                        <tr>
-                            <td class="bg-color">Today's Weekday</td>
-                            <td class="bg-color" id="weekday">Loading...</td>
-                        </tr>
-                        <tr>
-                            <td class="bg-color">Today's Moon Rise</td>
-                            <td class="bg-color" id="moonrise">Loading...</td>
-                        </tr>
-                        <tr>
-                            <td class="bg-color">Today's Moon Set</td>
-                            <td class="bg-color" id="moonset">Loading...</td>
-                        </tr>
-                        <tr>
-                            <td class="bg-color">Today's Ritu</td>
-                            <td class="bg-color" id="todayRitu">Loading...</td>
-                        </tr>
+                    <tr>
+                        <td class="bg-color">Today's Weekday</td>
+                        <td class="bg-color" id="weekday">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-color">Today's Moon Rise</td>
+                        <td class="bg-color" id="moonrise">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-color">Today's Moon Set</td>
+                        <td class="bg-color" id="moonset">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-color">Today's Ritu</td>
+                        <td class="bg-color" id="todayRitu">Loading...</td>
+                    </tr>
 
-                        <!-- <tr>
+                    <!-- <tr>
                             <td class="bg-color">Hindu Month</td>
                             <td class="bg-color">Pausha</td>
 
                         </tr> -->
-                        <tr>
-                            <td class="bg-color">Vikram Samvat</td>
-                            <td class="bg-color" id="vikramSamvat">Loading...</td>
-                        </tr>
-                        <tr>
-                            <td class="bg-color">Shaka Samvat</td>
-                            <td class="bg-color" id="shakaSamvat">Loading...</td>
-                        </tr>
+                    <tr>
+                        <td class="bg-color">Vikram Samvat</td>
+                        <td class="bg-color" id="vikramSamvat">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-color">Shaka Samvat</td>
+                        <td class="bg-color" id="shakaSamvat">Loading...</td>
+                    </tr>
 
-                        <tr>
-                            <td class="bg-color">Today's Dushta Muhurtas </td>
-                            <td class="bg-color">From 10:35:18 To 11:16:35, From 14:42:57 To 15:24:14</td>
+                    <tr>
+                        <td class="bg-color">Today's Dushta Muhurtas </td>
+                        <td class="bg-color">From 10:35:18 To 11:16:35, From 14:42:57 To 15:24:14</td>
 
-                        </tr>
-                        <tr>
-                            <td class="bg-color">Today's Kulika</td>
-                            <td class="bg-color">From 10:35:18 To 11:16:35</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-color">Today's Kulika</td>
+                        <td class="bg-color">From 10:35:18 To 11:16:35</td>
 
-                        </tr>
-                        <tr>
-                            <td class="bg-color">Today's Rahu Kaal</td>
-                            <td class="bg-color">From 13:35:53 To 14:53:17</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-color">Today's Rahu Kaal</td>
+                        <td class="bg-color">From 13:35:53 To 14:53:17</td>
 
-                        </tr>
+                    </tr>
 
-                        <tr>
-                            <td class="bg-color">Today's Abhijit Muhurat</td>
-                            <td class="bg-color" id="abhijit-time">From 13:35:53 To 14:53:17</td>
-                        </tr>
+                    <tr>
+                        <td class="bg-color">Today's Abhijit Muhurat</td>
+                        <td class="bg-color" id="abhijit-time">From 13:35:53 To 14:53:17</td>
+                    </tr>
 
 
-                        <tr>
-                            <td class="bg-color">Today's Disha</td>
-                            <td class="bg-color" id="todaysDisha">North</td>
-                        </tr>
+                    <tr>
+                        <td class="bg-color">Today's Disha</td>
+                        <td class="bg-color" id="todaysDisha">North</td>
+                    </tr>
 
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
 
-         <script>
+    </div>
+
+
+    <script>
+
+        let selectedLanguage = "en";
+        const langSelect = document.getElementById("language");
+
+        // If already selected language exists (optional)
+        if (langSelect && langSelect.value) {
+            selectedLanguage = langSelect.value;
+        }
+
+        langSelect.addEventListener("change", function () {
+            selectedLanguage = this.value;
+            console.log(selectedLanguage);
+            fetchAndUpdatePanchang();
+            fetchNakshatra();
+            karana();
+            yoga();
+            ritu();
+            sunandmoon();
+            // findsamvet();
+
+        });
+
+
+
+
+    </script>
+
+
+
+
+    <script>
         function fetchAndUpdatePanchang() {
             let lat = 28.6139;
             let lon = 77.2090;
@@ -195,7 +244,7 @@
             formData.append("lat", lat);
             formData.append("lon", lon);
             formData.append("tzone", "5.5");
-            formData.append("lan", "en");
+            formData.append("lan", selectedLanguage);
 
             fetch("https://astroapi-1.divineapi.com/indian-api/v1/find-panchang", {
                 method: "POST",
@@ -233,7 +282,7 @@
         document.addEventListener("DOMContentLoaded", fetchAndUpdatePanchang);
     </script>
 
-     <script>
+    <script>
         function fetchNakshatra() {
             let lat = 28.6139;
             let lon = 77.2090;
@@ -267,7 +316,7 @@
             formData.append("lat", lat);
             formData.append("lon", lon);
             formData.append("tzone", "5.5");
-            formData.append("lan", "en");
+            formData.append("lan", selectedLanguage);
 
             fetch("https://astroapi-1.divineapi.com/indian-api/v1/find-nakshatra", {
                 method: "POST",
@@ -307,7 +356,7 @@
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        function karana() {
             let lat = 28.6139;
             let lon = 77.2090;
             if (navigator.geolocation) {
@@ -340,7 +389,7 @@
             formData.append("lat", lat);
             formData.append("lon", lon);
             formData.append("tzone", "5.5");
-            formData.append("lan", "en");
+            formData.append("lan", selectedLanguage);
 
 
             fetch("https://astroapi-1.divineapi.com/indian-api/v1/find-karana", {
@@ -382,11 +431,14 @@
                     document.getElementById("todayKarana").innerText = "Error loading";
                     document.getElementById("todayPaksha").innerText = "Error loading";
                 });
-        });
+        };
+
+
+        document.addEventListener("DOMContentLoaded", karana);
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        function yoga() {
             let lat = 28.6139;
             let lon = 77.2090;
             if (navigator.geolocation) {
@@ -419,7 +471,7 @@
             formData.append("lat", lat);
             formData.append("lon", lon);
             formData.append("tzone", "5.5");
-            formData.append("lan", "en");
+            formData.append("lan", selectedLanguage);
 
 
             fetch("https://astroapi-1.divineapi.com/indian-api/v1/find-yoga", {
@@ -456,7 +508,9 @@
                     console.error("Error fetching Yoga data:", err);
                     document.getElementById("todayYoga").innerText = "Error loading";
                 });
-        });
+        };
+
+        document.addEventListener("DOMContentLoaded", yoga);
     </script>
 
 
@@ -478,7 +532,7 @@
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        function ritu() {
 
             let lat = 28.6139;
             let lon = 77.2090;
@@ -512,7 +566,7 @@
             formData.append("lat", lat);
             formData.append("lon", lon);
             formData.append("tzone", "5.5");
-            formData.append("lan", "en");
+            formData.append("lan", selectedLanguage);
 
 
             fetch("https://astroapi-2.divineapi.com/indian-api/v1/find-ritu-and-anaya", {
@@ -543,12 +597,14 @@
             function capitalize(str) {
                 return str.charAt(0).toUpperCase() + str.slice(1);
             }
-        });
+        };
+        document.addEventListener("DOMContentLoaded", ritu);
     </script>
 
 
+
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        function sunandmoon() {
 
             let lat = 28.6139;
             let lon = 77.2090;
@@ -582,7 +638,7 @@
             formData.append("lat", lat);
             formData.append("lon", lon);
             formData.append("tzone", "5.5");
-            formData.append("lan", "en");
+            formData.append("lan", selectedLanguage);
 
 
             fetch("https://astroapi-2.divineapi.com/indian-api/v1/find-sun-and-moon", {
@@ -609,12 +665,16 @@
                     document.getElementById("moonset").innerText = "Error";
                     document.getElementById("weekday").innerText = "Error";
                 });
-        });
+        };
+
+        document.addEventListener("DOMContentLoaded", sunandmoon);
+
     </script>
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+
+        function findsamvet() {
             let lat = 28.6139;
             let lon = 77.2090;
             if (navigator.geolocation) {
@@ -647,7 +707,7 @@
             formData.append("lat", lat);
             formData.append("lon", lon);
             formData.append("tzone", "5.5");
-            formData.append("lan", "en");
+            formData.append("lan", selectedLanguage);
 
             fetch("https://astroapi-2.divineapi.com/indian-api/v1/find-samvat", {
                 method: "POST",
@@ -671,10 +731,13 @@
                     document.getElementById("vikramSamvat").innerText = "Error";
                     document.getElementById("shakaSamvat").innerText = "Error";
                 });
-        });
-    </script>
+        };
+
+        document.addEventListener("DOMContentLoaded", findsamvet);
+    </script> 
 
     <script>
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 function (position) {
@@ -695,7 +758,7 @@
     </script>
 
 
-        
+
 
 
 

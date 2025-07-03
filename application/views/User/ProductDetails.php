@@ -276,8 +276,7 @@
                                 <img src="<?php echo !empty($product_feedback_data_details["user_image"])
                                     ? base_url($product_feedback_data_details["user_image"])
                                     : base_url("assets/images/profileImage.png"); ?>" alt="User"
-                                    class="rounded-circle shadow-sm" style="width: 100px; height: 100px; object-fit: cover;"
-                                    onerror="this.onerror=null; this.src='<?php echo base_url(`assets/images/profileImage.png`); ?>';">
+                                    class="rounded-circle shadow-sm" style="width: 100px; height: 100px; object-fit: cover;">
 
                                     
                             </div>

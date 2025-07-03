@@ -514,7 +514,7 @@
 
 
 
-                                                                <!-- Details -->
+                                                              
                                                                 <div style="font-size: 0.9rem;">
                                                                     <div class="text-truncate mb-1">
                                                                         <i class="bi bi-calendar-check"></i>
@@ -535,24 +535,24 @@
                                                                     <?php
                                                                     $requestCreated = strtotime($pooja['request_created_at']);
                                                                     $pujaDateTime = strtotime($pooja['puja_date'] . ' ' . $pooja['puja_time']);
-                                                                    // Get current time
+                                                                    
                                                             
                                                                     date_default_timezone_set('Asia/Kolkata');
                                                                     $timestamp = date('Y-m-d H:i:s', time());
                                                                     $currentTime = time();
 
-                                                                    $timeDiff = $pujaDateTime - $requestCreated; // Difference in seconds
-                                                                    $remainingTime = $pujaDateTime - $currentTime; // Time left until puja
+                                                                    $timeDiff = $pujaDateTime - $requestCreated; 
+                                                                    $remainingTime = $pujaDateTime - $currentTime;
                                                             
 
-                                                                    // $remainingTime = $pujaDateTime - $currentTime; // Time left until puja in seconds
-                                                                    $daysRemaining = floor($remainingTime / (60 * 60 * 24)); // Days left
-                                                                    $hoursRemaining = floor(($remainingTime % (60 * 60 * 24)) / (60 * 60)); // Hours left
-                                                                    $minutesRemaining = floor(($remainingTime % (60 * 60)) / 60); // Minutes left
+                                                                    // $remainingTime = $pujaDateTime - $currentTime; 
+                                                                    $daysRemaining = floor($remainingTime / (60 * 60 * 24)); 
+                                                                    $hoursRemaining = floor(($remainingTime % (60 * 60 * 24)) / (60 * 60)); 
+                                                                    $minutesRemaining = floor(($remainingTime % (60 * 60)) / 60); 
                                                             
-                                                                    $days = floor($timeDiff / (60 * 60 * 24)); // Days difference
-                                                                    $hours = floor(($timeDiff % (60 * 60 * 24)) / (60 * 60)); // Remaining hours
-                                                                    $minutes = floor(($timeDiff % (60 * 60)) / 60); // Remaining minutes
+                                                                    $days = floor($timeDiff / (60 * 60 * 24));
+                                                                    $hours = floor(($timeDiff % (60 * 60 * 24)) / (60 * 60)); 
+                                                                    $minutes = floor(($timeDiff % (60 * 60)) / 60); 
                                                             
                                                                     ?>
 

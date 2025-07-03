@@ -47,19 +47,18 @@
         .gender-label {
             transition: all 0.3s ease-in-out;
         }
-        
     </style>
 
     <style>
-    .suggestion {
-    padding: 10px;
-    cursor: pointer;
-}
-.suggestion:hover {
-    background-color: #f1f1f1;
-}
+        .suggestion {
+            padding: 10px;
+            cursor: pointer;
+        }
 
-</style>
+        .suggestion:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 
 </head>
 
@@ -142,6 +141,20 @@
                     <div id="suggestions" class="border rounded bg-white shadow-sm"
                         style="position: absolute; z-index: 1000;"></div>
 
+                    <label for="language">Select Language</label>
+                    <select id="language" class="form-control shadow-none my-2 p-2 rounded-1" required>
+                        <option value="" disabled selected>Select Language</option>
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="bn">Bengali</option>
+                        <option value="ma">Marathi</option>
+                        <option value="tm">Tamil</option>
+                        <option value="tl">Telugu</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="kn">Kannada</option>
+                    </select>
+
+
                     <label for="astro_feature">Select Feature</label>
                     <select id="astro_feature" class="form-control shadow-none my-2 p-2 rounded-1" required>
                         <option value="" disabled selected>Select Astrological Feature</option>
@@ -164,9 +177,16 @@
             <div class="col-12 col-md-6 text-center">
                 <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png'); ?>" alt="kundli" class="img-fluid"
                     style="width: 150px; height: 150px;">
-                <p class="text-start mt-2">Kundli, also known as a Birth Chart or Natal Chart, is a detailed astrological diagram created using the exact date, time, and place of a person's birth. It maps the positions of celestial bodies like the Sun, Moon, and planets at the time of birth and helps uncover the unique personality traits, strengths, challenges, and life path of an individual. Kundli plays a vital role in Vedic astrology and is often used to predict future events, career growth, health, and relationships. It is also essential in Kundli Matching before marriage to determine compatibility between partners. Accurate Kundli analysis helps guide important life decisions and brings clarity by aligning one's actions with cosmic influences.
+                <p class="text-start mt-2">Kundli, also known as a Birth Chart or Natal Chart, is a detailed
+                    astrological diagram created using the exact date, time, and place of a person's birth. It maps the
+                    positions of celestial bodies like the Sun, Moon, and planets at the time of birth and helps uncover
+                    the unique personality traits, strengths, challenges, and life path of an individual. Kundli plays a
+                    vital role in Vedic astrology and is often used to predict future events, career growth, health, and
+                    relationships. It is also essential in Kundli Matching before marriage to determine compatibility
+                    between partners. Accurate Kundli analysis helps guide important life decisions and brings clarity
+                    by aligning one's actions with cosmic influences.
 
-</p>
+                </p>
             </div>
 
         </div>
@@ -177,9 +197,15 @@
     <div class="container my-4">
         <div class="row">
             <div class="col-12 col-md-7">
-                <p>A Kundli, or Birth Chart, is more than just a celestial snapshot—it's a personalized cosmic blueprint of your life. Created using your exact birth date, time, and location, the Kundli captures the positions of planets and stars at the moment you were born. In Vedic astrology, this chart reveals your personality, emotions, career potential, relationships, and even future challenges. It’s often the first step in important rituals, especially in Indian marriages, where Kundli matching determines compatibility between two individuals. Whether you're seeking direction, clarity, or spiritual insight, your Kundli offers a map to navigate life’s journey.
+                <p>A Kundli, or Birth Chart, is more than just a celestial snapshot—it's a personalized cosmic blueprint
+                    of your life. Created using your exact birth date, time, and location, the Kundli captures the
+                    positions of planets and stars at the moment you were born. In Vedic astrology, this chart reveals
+                    your personality, emotions, career potential, relationships, and even future challenges. It’s often
+                    the first step in important rituals, especially in Indian marriages, where Kundli matching
+                    determines compatibility between two individuals. Whether you're seeking direction, clarity, or
+                    spiritual insight, your Kundli offers a map to navigate life’s journey.
 
-</p>
+                </p>
             </div>
             <div class="col-12 col-md-5 text-center">
                 <img src="<?php echo base_url('assets/images/FreeKundli/kundli2.png'); ?>" alt="kundli"
@@ -299,7 +325,8 @@
                 boy_second: document.getElementById('second').value,
                 boy_birthPlace: document.getElementById('boy_birthPlace').value,
                 boy_lat: document.getElementById('boy_lat').value || "28.7041",
-                boy_lon: document.getElementById('boy_lon').value || "77.1025"
+                boy_lon: document.getElementById('boy_lon').value || "77.1025",
+                lan :document.getElementById('language').value || "en",
             };
 
             let apiUrl = "";
