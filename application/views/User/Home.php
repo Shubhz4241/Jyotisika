@@ -540,7 +540,7 @@
                         <div class="card-body">
                             <h5 class="card-title fw-bold">Ask a Question?</h5>
                             <p class="card-text">
-                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your
+                                Solving money problemss sdoesn’t happen overnight. Stay consistent and patient with your
                                 efforts.
                             </p>
                             <center>
