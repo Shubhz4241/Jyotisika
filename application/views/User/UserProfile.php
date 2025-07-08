@@ -82,15 +82,11 @@
         $user_City = isset($userinfo["user_City"]) ? $userinfo["user_City"] : '';
         $user_Pincode = isset($userinfo["user_Pincode"]) ? $userinfo["user_Pincode"] : '';
 
-        $profile_image_path = isset($userinfo["user_image"]) && !empty($userinfo["user_image"]) 
-        ? base_url($userinfo["user_image"]) 
-        : base_url('assets/images/profileImage.png');
+        $profile_image_path = isset($userinfo["user_image"]) && !empty($userinfo["user_image"])
+            ? base_url($userinfo["user_image"])
+            : base_url('assets/images/profileImage.png');
 
         $current_image =  isset($userinfo["user_image"]) && !empty($userinfo["user_image"])  ? ($userinfo["user_image"])  : ('assets/images/profileimage.png');
-
-       
-
-
     }
 
     ?>
@@ -120,7 +116,7 @@
                         <script>
                             function previewProfileImage(event) {
                                 var reader = new FileReader();
-                                reader.onload = function () {
+                                reader.onload = function() {
                                     var output = document.getElementById('profileImagePreview');
                                     output.src = reader.result;
                                 }
@@ -141,10 +137,7 @@
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Mobile Number</label>
                                 <input type="hidden" class="form-control"
-                                            value="<?php echo  $current_image; ?>" name="current_image_name">
-
-
-
+                                    value="<?php echo  $current_image; ?>" name="current_image_name">
                                 <input type="text" disabled class="form-control" id="lastName" name="lastName"
                                     value="<?php echo $user_mobilenumber ?>" required autocomplete="off">
                             </div>
@@ -205,9 +198,19 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="pincode" class="form-label">Pincode</label>
-                                <input type="text" class="form-control" id="pincode" name="user_Pincode"
-                                    value="<?php echo $user_Pincode; ?>" autocomplete="off" required
-                                    oninput="(function(element) { element.value = element.value.replace(/[^0-9]/g, ''); })(this)">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="pincode"
+                                    name="user_Pincode"
+                                    value="<?php echo $user_Pincode; ?>"
+                                    autocomplete="off"
+                                    required
+                                    minlength="6"
+                                    maxlength="6"
+                                    pattern="\d{6}"
+                                    title="Pincode must be exactly 6 digits"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);">
                             </div>
                         </div>
                         <center>
@@ -220,10 +223,10 @@
 
 
             <script>
-                document.addEventListener("DOMContentLoaded", function () {
+                document.addEventListener("DOMContentLoaded", function() {
                     const userProfileForm = document.getElementById("userProfileForm");
 
-                    userProfileForm.addEventListener("submit", async function (event) {
+                    userProfileForm.addEventListener("submit", async function(event) {
                         event.preventDefault(); // Prevent default form submission
 
                         const formData = new FormData(userProfileForm); // Collect form data
@@ -276,8 +279,6 @@
                         }
                     });
                 });
-
-
             </script>
 
             <!-- <script>
@@ -305,7 +306,7 @@
                 });
             </script> -->
             <script>
-                document.addEventListener('DOMContentLoaded', function () {
+                document.addEventListener('DOMContentLoaded', function() {
                     <?php if ($this->session->flashdata('success')): ?>
                         Swal.fire({
                             icon: 'success',
