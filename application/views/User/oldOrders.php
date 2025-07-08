@@ -238,7 +238,7 @@
                     </div> -->
 
                     <!-- chat -->
-
+                    
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 
                         <div class="row my-4" id="cardContainer">
@@ -493,43 +493,28 @@
                                                                     <?php endif ?>
                                                                 </h6>
 
-                                                                <div class="d-flex gap-2 mb-2">
-                                                                    <span class="badge rounded-pill"
-                                                                        style="background-color: var(--yellow); 
-                                                                         color: black; font-size: 0.85rem; padding: 6px 12px;">
-                                                                        <?php echo $pooja['puja_mode']; ?>
-                                                                    </span>
-                                                                    <?php if ($pooja['status'] === "Approved") { ?>
-                                                                        <span class="badge rounded-1"
-                                                                            style="background-color: var(--yellow); color: black; font-size: 0.85rem; padding: 6px 12px;">
-                                                                            <?php echo ($pooja['puja_status'] === "Pending") ? "On Process" : $pooja['puja_status']; ?>
-                                                                        </span>
-
-                                                                    <?php } ?>
-
-
-                                                                </div>
-
                                                                 <!-- Pandit Name -->
                                                                 <p class="mb-2 text-truncate" style="font-size: 1rem;">
                                                                     <i class="bi bi-person"></i>
                                                                     <?php echo $pooja['pujari_name']; ?>
                                                                 </p>
 
-                                                                <p class="mb-2 text-truncate" style="font-size: 1rem;">
-                                                                    <i class="bi bi-cash"></i>
-                                                                    ₹<?php echo number_format($pooja['pujari_charge'], 2); ?>
-                                                                    Puja Charge
-                                                                </p>
-
                                                                 <!-- Badges -->
+                                                                <div class="d-flex gap-2 mb-2">
+                                                                    <span class="badge rounded-pill"
+                                                                        style="background-color: var(--yellow); 
+                                                                         color: black; font-size: 0.85rem; padding: 6px 12px;">
+                                                                        <?php echo $pooja['puja_mode']; ?>
+                                                                    </span>
+                                                                    <span class="badge rounded-pill"
+                                                                        style="background-color: var(--yellow); color: black; font-size: 0.85rem; padding: 6px 12px;">
+                                                                        <?php echo $pooja['puja_status']; ?>
+                                                                    </span>
+                                                                </div>
 
 
 
-
-
-
-
+                                                              
                                                                 <div style="font-size: 0.9rem;">
                                                                     <div class="text-truncate mb-1">
                                                                         <i class="bi bi-calendar-check"></i>
@@ -540,85 +525,114 @@
                                                                         <?php echo $pooja['puja_time']; ?>
                                                                     </div>
 
-
-                                                                    <?php if ($pooja['status'] === "Approved") { ?>
-                                                                        <div class="countdown-container"
-                                                                            style="font-size: 1rem; font-weight: bold; color: red; margin-top: 5px;">
-                                                                            <!-- <i class="bi bi-hourglass-split"></i> -->
-                                                                            <span class="countdown"
-                                                                                data-puja-time="<?php echo $pooja['puja_date'] . ' ' . $pooja['puja_time']; ?>"></span>
-                                                                        </div>
-                                                                    <?php } ?>
-
-
-                                                                    <script>
-                                                                        document.querySelectorAll(".countdown").forEach(function (element) {
-
-                                                                            let pujaDateTime = element.getAttribute("data-puja-time");
-                                                                            let countDownDate = new Date(pujaDateTime).getTime();
-
-                                                                            let interval = setInterval(function () {
-                                                                                let now = new Date().getTime();
-                                                                                let distance = countDownDate - now;
-
-                                                                                if (distance < 0) {
-                                                                                    element.innerHTML = " ";
-                                                                                    clearInterval(interval);
-                                                                                    return;
-                                                                                }
-
-                                                                                let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                                                                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                                                                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                                                                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                                                                                element.innerHTML =
-                                                                                    (days > 0 ? days + "d " : "") + hours + "h " + minutes + "m " + seconds + "s";
-                                                                            }, 1000);
-                                                                        });
-                                                                    </script>
-
                                                                     <span>Request accepted by pujari :-</span>
                                                                     <span class="badge rounded-1"
                                                                         style="background-color: var(--yellow); color: black; font-size: 0.85rem; padding: 6px 12px;">
                                                                         <?php echo $pooja['status']; ?>
                                                                     </span>
 
-                                                                    <?php if (($pooja['status'] == "Approved") && ($pooja['puja_status'] != "Cancelled") && ($pooja['payment_status'] == "Pending")): ?>
-                                                                        <span
-                                                                            id="payment-button-<?php echo $pooja['book_puja_id']; ?>"
-                                                                            class="badge rounded-1 payment-button"
-                                                                            data-id="<?php echo $pooja['book_puja_id']; ?>"
-                                                                            data-amount="<?php echo $pooja['pujari_charge']; ?>"
-                                                                            style="background-color: green; color: white; font-size: 0.85rem; padding: 6px 12px; cursor: pointer;">
-                                                                            Do Payment
-                                                                        </span>
 
-                                                                    <?php endif ?>
+                                                                    <?php
+                                                                    $requestCreated = strtotime($pooja['request_created_at']);
+                                                                    $pujaDateTime = strtotime($pooja['puja_date'] . ' ' . $pooja['puja_time']);
+                                                                    
+                                                            
+                                                                    date_default_timezone_set('Asia/Kolkata');
+                                                                    $timestamp = date('Y-m-d H:i:s', time());
+                                                                    $currentTime = time();
+
+                                                                    $timeDiff = $pujaDateTime - $requestCreated; 
+                                                                    $remainingTime = $pujaDateTime - $currentTime;
+                                                            
+
+                                                                    // $remainingTime = $pujaDateTime - $currentTime; 
+                                                                    $daysRemaining = floor($remainingTime / (60 * 60 * 24)); 
+                                                                    $hoursRemaining = floor(($remainingTime % (60 * 60 * 24)) / (60 * 60)); 
+                                                                    $minutesRemaining = floor(($remainingTime % (60 * 60)) / 60); 
+                                                            
+                                                                    $days = floor($timeDiff / (60 * 60 * 24));
+                                                                    $hours = floor(($timeDiff % (60 * 60 * 24)) / (60 * 60)); 
+                                                                    $minutes = floor(($timeDiff % (60 * 60)) / 60); 
+                                                            
+                                                                    ?>
 
                                                                     <?php if ($pooja['payment_status'] === "Paid") { ?>
                                                                         <span class="badge rounded-1"
                                                                             style="background-color: gray; color: white; font-size: 0.85rem; padding: 6px 12px;">
                                                                             Paid
                                                                         </span>
+                                                                    <?php } elseif ($pooja['status'] === "Approved") { ?>
+
+
+                                                                        <?php if ($days > 1) { ?>
+                                                                            <?php if ($daysRemaining >= 2) { ?>
+                                                                                <span
+                                                                                    id="payment-button-<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    class="badge rounded-1 payment-button"
+                                                                                    data-id="<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    data-amount="<?php echo $pooja['pujari_charge']; ?>"
+                                                                                    style="background-color: green; color: white; font-size: 0.85rem; padding: 6px 12px; cursor: pointer;">
+                                                                                    Do Payment
+                                                                                </span>
+                                                                            <?php } else { ?>
+
+                                                                                <span class="badge rounded-1"
+                                                                                    style="background-color: red; color: white; font-size: 0.85rem; padding: 6px 12px;">
+                                                                                    Puja Cancelled
+                                                                                </span>
+
+                                                                            <?php } ?>
+
+                                                                        <?php } elseif ($days >= 0 && $days <= 1) { ?>
+                                                                            <?php if ($daysRemaining >= 1 || $hoursRemaining >= 4) { ?>
+
+
+                                                                                <span
+                                                                                    id="payment-button-<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    class="badge rounded-1 payment-button"
+                                                                                    data-id="<?php echo $pooja['book_puja_id']; ?>"
+                                                                                    data-amount="<?php echo $pooja['pujari_charge']; ?>"
+                                                                                    style="background-color: green; color: white; font-size: 0.85rem; padding: 6px 12px; cursor: pointer;">
+                                                                                    Payment
+                                                                                </span>
+
+
+                                                                            <?php } else { ?>
+
+                                                                                <span class="badge rounded-1"
+                                                                                    style="background-color: red; color: white; font-size: 0.85rem; padding: 6px 12px;">
+                                                                                    Puja Cancelled
+                                                                                </span>
+
+
+                                                                            <?php } ?>
+                                                                        <?php } ?>
                                                                     <?php } ?>
 
+                                                                    <div style="font-size: 0.9rem;">
+                                                                        <div class="text-truncate mb-1">
 
-                                                                    <?php if (($pooja['status'] == "Approved") && ($pooja['puja_status'] != "Cancelled") && ($pooja['payment_status'] == "Pending") && ($pooja['puja_urgency'] == "normal")): ?>
+                                                                            <?php if ($pooja['status'] === "Approved") { ?>
+                                                                                <?php if ($pooja['payment_status'] != "Paid") { ?>
+                                                                                    <?php
+                                                                                    if ($days > 1) {
+                                                                                        echo "$days days, $hours hours, $minutes minutes remaining<br>";
+                                                                                        echo "<span style='color: red; font-weight: bold;'>pay before 2 days of of starting .</span>";
+                                                                                        echo "<p style='color: red; font-weight: bold;'> Puja otherwise, it will be cancelled.</p>";
+                                                                                    } elseif ($days >= 0 && $days <= 1) {
+                                                                                        echo "$days days, $hours hours, $minutes minutes remaining<br>";
+                                                                                        echo "<span style='color: red; font-weight: bold;'>pay before 4 hours of starting Puja.</span>";
+                                                                                        echo "<p style='color: red; font-weight: bold;'>otherwise, it will be cancelled.</p>";
+                                                                                    } else {
+                                                                                        echo "$hours hours, $minutes minutes remaining";
+                                                                                    }
+                                                                                    ?>
+                                                                                <?php } ?>
+                                                                            <?php } ?>
+                                                                        </div>
+                                                                    </div>
 
-                                                                        <p> <span
-                                                                                style='color: red; font-weight: bold; font-size:14px;'>Pay
-                                                                                at least 2 days before the puja starts, or it will
-                                                                                be cancelled.</span></p>
-                                                                    <?php endif ?>
 
-                                                                    <?php if (($pooja['status'] == "Approved") && ($pooja['puja_status'] != "Cancelled") && ($pooja['payment_status'] == "Pending") && ($pooja['puja_urgency'] == "urgent")): ?>
-
-                                                                        <p> <span
-                                                                                style='color: red; font-weight: bold; font-size:14px;'>Pay
-                                                                                at least 4 hours before the puja starts, or it will
-                                                                                be cancelled.</span></p>
-                                                                    <?php endif ?>
 
                                                                 </div>
                                                             </div>
@@ -757,7 +771,7 @@
                                         ]
                                     ]; ?>
 
-
+                                  
 
                                     <?php if ($show_completed_puja): ?>
 
@@ -967,7 +981,7 @@
 
 
 
-
+                                 
                                     <?php if (!empty($showorderedproduct)): ?>
                                         <?php foreach ($showorderedproduct as $order): ?>
                                             <div class="col-md-6 col-lg-4 mb-4">
@@ -975,11 +989,10 @@
                                                     style="border: 1px solid var(--red);">
                                                     <div class="row g-0">
                                                         <div class="col-4">
-                                                            <img src="<?php echo base_url('Uploads/products/' . $order["product_image"]); ?>"
+                                                            <img src="<?php echo base_url('Uploads/products/'.$order["product_image"]); ?>"
                                                                 class="img-fluid rounded-start h-100"
                                                                 alt="<?php echo $order['product_name']; ?>"
-                                                                style="object-fit: cover;"
-                                                                onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
+                                                                style="object-fit: cover;" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
                                                         </div>
                                                         <div class="col-8">
                                                             <div class="card-body p-3">
@@ -1049,11 +1062,10 @@
                                                     style="border: 1px solid var(--red);">
                                                     <div class="row g-0">
                                                         <div class="col-4">
-                                                            <img src="<?php echo base_url('Uploads/products/' . $order["product_image"]); ?>"
+                                                            <img src="<?php echo base_url('Uploads/products/'.$order["product_image"]); ?>"
                                                                 class="img-fluid rounded-start h-100"
                                                                 alt="<?php echo $order['product_name']; ?>"
-                                                                style="object-fit: cover;"
-                                                                onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
+                                                                style="object-fit: cover;" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
                                                         </div>
                                                         <div class="col-8">
                                                             <div class="card-body p-3">

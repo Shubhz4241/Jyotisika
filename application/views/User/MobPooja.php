@@ -372,6 +372,15 @@
                                 });
                             }
 
+                             else if (data["status"] == "pujawarning") {
+                                Swal.fire({
+                                    title: "warning",
+                                    text: "The start time must be within 4 hours",
+                                    icon: "warning",
+
+                                });
+                            }
+
                             else if (data["status"] == "error") {
                                 Swal.fire({
                                     title: "warning",
@@ -380,6 +389,8 @@
 
                                 });
                             }
+
+                            
 
 
 

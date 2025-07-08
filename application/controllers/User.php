@@ -1614,6 +1614,23 @@ class User extends CI_Controller
 	public function Orders()
 	{
 
+
+		$api_url_ = base_url("User_Api_Controller/auto_cancel_puja");
+
+		$curl_ = curl_init();
+
+		curl_setopt($curl_, CURLOPT_URL, $api_url_);
+		curl_setopt($curl_, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl_, CURLOPT_TIMEOUT, 10);
+
+		$response = curl_exec($curl_);
+		$http_code = curl_getinfo($curl_, CURLINFO_HTTP_CODE);
+		$curl_error = curl_error($curl_);
+
+		curl_close($curl_);
+
+		
+
 		$api_url = base_url("User_Api_Controller/get_astrologer_chat_with_user");
 
 		$getastrologer = curl_init();

@@ -513,7 +513,7 @@ class User_Api_Controller extends CI_Controller
                 //Jyotisika test payment
 
                 'key' => 'rzp_test_YcEtdZa9f7N8R6',
-                
+
 
 
 
@@ -2468,53 +2468,57 @@ class User_Api_Controller extends CI_Controller
             $pujatime = $this->input->post("pujatime");
             $mob_puja_id = $this->input->post("mob_puja_id");
 
-            // date_default_timezone_set('Asia/Kolkata');
-            // $timestamp = date('Y-m-d H:i:s', time());
+            date_default_timezone_set('Asia/Kolkata');
+            $timestamp = date('Y-m-d H:i:s', time());
 
-            if (empty($pujari_id) || empty($user_id) || empty($pujari_charge) || empty($pujadate) || empty($user_email) || empty($puja_mode) || empty($pujatime)) {
-                $response = [
-                    "status" => "error",
-                    "message" => "no data found in the  table"
-                ];
-                echo json_encode($response);
-                return;
-            }
+            // if (empty($pujari_id) || empty($user_id) || empty($pujari_charge) || empty($pujadate) || empty($user_email) || empty($puja_mode) || empty($pujatime)) {
+            //     $response = [
+            //         "status" => "error",
+            //         "message" => "no data found in the  table"
+            //     ];
+            //     echo json_encode($response);
+            //     return;
+            // }
 
             date_default_timezone_set('Asia/Kolkata');
             $timestamp = date('Y-m-d H:i:s');
 
 
 
-            // $puja_date = $this->input->post('puja_date');
-            // $puja_time = $this->input->post('puja_time');
 
 
 
-            // $puja_datetime = new DateTime("$puja_date $puja_time");
-            // $request_datetime = new DateTime($timestamp);
-            // if ($puja_datetime <= $request_datetime) {
-            //     $total_hours = 0;
-            // } else {
-            //     $interval = $request_datetime->diff($puja_datetime);
-            //     $total_hours = ($interval->days * 24) + $interval->h + ($interval->i / 60) + ($interval->s / 3600);
-            // }
 
-            // if ($total_hours > 48) {
-            //     $puja_urgency = 'normal';
-            // } elseif ($total_hours > 4) {
-            //     $puja_urgency = 'urgent';
-            // } else {
-            //     $puja_urgency = 'invalid';
-            // }
+            $puja_datetime = new DateTime("$pujadate $pujatime");
+            $request_datetime = new DateTime($timestamp);
+            if ($puja_datetime <= $request_datetime) {
+                $total_hours = 0;
+            } else {
+                $interval = $request_datetime->diff($puja_datetime);
+                $total_hours = ($interval->days * 24) + $interval->h + ($interval->i / 60) + ($interval->s / 3600);
+            }
+
+            if ($total_hours > 48) {
+                $puja_urgency = 'normal';
+            } elseif ($total_hours > 4) {
+                $puja_urgency = 'urgent';
+            } else {
+                $puja_urgency = 'invalid';
+            }
 
 
-            // if ($total_hours < 4 || $puja_urgency == 'invalid') {
-            //     echo json_encode([
-            //         "status" => "pujawarning",
-            //         "message" => "the start time must be within 4 hours"
-            //     ]);
-            //     return;
-            // }
+            // print_r($total_hours);
+
+            // exit();
+
+
+            if ($total_hours < 4 || $puja_urgency == 'invalid') {
+                echo json_encode([
+                    "status" => "pujawarning",
+                    "message" => "the start time must be within 4 hours"
+                ]);
+                return;
+            }
 
 
 
@@ -2531,7 +2535,9 @@ class User_Api_Controller extends CI_Controller
                 "mob_puja_id" => $mob_puja_id,
                 "puja_time" => $pujatime,
                 "request_created_at" => $timestamp,
-               
+                "puja_urgency" => $puja_urgency,
+                "payment_status"=>"Pending"
+
 
             ];
 
@@ -2939,7 +2945,7 @@ class User_Api_Controller extends CI_Controller
 
 
                 //Jyotisika updated test keys
-                   'key' => 'rzp_test_YcEtdZa9f7N8R6',
+                'key' => 'rzp_test_YcEtdZa9f7N8R6',
 
 
                 // 'name'           => $user->username,
@@ -3698,6 +3704,26 @@ class User_Api_Controller extends CI_Controller
 
 
 
+    public function auto_cancel_puja()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $query = $this->User_Api_Model->auto_cancel_puja_model();
+
+
+            $this->output->set_status_header(200);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "success", "message" => "data updated successfully"]));
+
+
+        }
+    }
 
 
 
