@@ -515,8 +515,7 @@
     <!-- Astrological Services For Accurate Answers And Better Future -->
     <section>
         <div class="container">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"> Astrological Services For Accurate Answers
-                And Better Future</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"><?php echo $this->lang->line('Astro_Services_Tagline'); ?></h2>
             <div class="owl-carousel owl1 owl-theme">
                 <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
@@ -529,7 +528,7 @@
                                 efforts.
                             </p>
                             <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
+                                <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
                             </center>
                         </div>
                     </div>
@@ -545,7 +544,7 @@
                                 efforts.
                             </p>
                             <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
+                                <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
                             </center>
                         </div>
                     </div>
@@ -561,7 +560,7 @@
                                 efforts.
                             </p>
                             <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
+                                <a href="<?php echo base_url('astrologers') ?>"class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
                             </center>
                         </div>
                     </div>
@@ -577,7 +576,7 @@
                                 efforts.
                             </p>
                             <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
+                                <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
                             </center>
                         </div>
                     </div>
@@ -593,7 +592,7 @@
                                 efforts.
                             </p>
                             <center>
-                                <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
+                                <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
                             </center>
                         </div>
                     </div>

@@ -86,7 +86,7 @@
             <div>
                 <p class="card-text fs-5">
                     <span style="color: var(--red);">
-                        Today's Festival
+                     <?php  echo $this->lang->line('Todays_Festival'); ?>
                     </span>
                 </p>
 
@@ -106,7 +106,7 @@
                                         <center>
                                             <a href="<?php echo base_url('FestivalReadmore/' . $card['festivals_id']); ?>"
                                                 class="btn mx-auto btn-sm mt-2" style="background-color: var(--yellow);">
-                                                Read More
+                                            <?php  echo $this->lang->line('Read_More'); ?>
                                             </a>
                                         </center>
                                     </div>
@@ -129,7 +129,7 @@
 
 
                     <span style="color: var(--red);">
-                        Upcoming Hindu Festivals
+                      <?php echo $this->lang->line('Upcoming_Hindu_Festivals'); ?>
                     </span>
 
                 </p>
@@ -175,7 +175,7 @@
                                 <center>
                                     <a href="<?php echo base_url("FestivalReadmore/" . $card["festivals_id"]); ?>"
                                         class="btn mx-auto btn-sm mt-2" style="background-color: var(--yellow);">
-                                        Read Mores
+                                       <?php echo $this->lang->line('Read_More');?>
                                     </a>
                                 </center>
                             </div>

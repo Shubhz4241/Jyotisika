@@ -73,11 +73,11 @@
 
 
     <div class="container p-3 my-4 rounded-3" style="background-color: #fff7b8;  ">
-        <h3 class="text-center mb-3">Kundli/Birth Chart</h3>
+        <h3 class="text-center mb-3"><?php echo $this->lang->line('Kundli_Title'); ?></h3>
 
         <div class="row">
             <div class="col-12 col-md-6">
-                <h5>Get Your Kundli by Birth Date</h5>
+                <h5><?php echo $this->lang->line('Kundli_By_BirthDate'); ?></h5>
 
                 <form id="kundliForm">
                     <input type="text" name="name" id="name" placeholder="Name" autocomplete="off"
@@ -86,46 +86,83 @@
                         pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only">
 
                     <div class="row flex-row justify-content-center">
+                         <label class="m-2"><?php echo $this->lang->line('Select_Gender'); ?></label>
                         <div class="col-12 col-md-6 d-flex align-items-center text-start mb-2 mb-md-0">
                             <input type="radio" class="form-check-input d-none" name="gender" id="male" value="male"
                                 required>
                             <label for="male" class="btn border gender-label py-2 w-100 text-gray"
-                                style="color:gray !important;">Male</label>
+                                style="color:gray !important;"><?php echo $this->lang->line('Gender_Male'); ?></label>
                         </div>
                         <div class="col-12 col-md-6 d-flex align-items-center">
                             <input type="radio" class="form-check-input d-none" name="gender" id="female"
                                 value="female">
                             <label for="female" class="btn border gender-label py-2 w-100 text-gray"
-                                style="color:gray !important;">Female</label>
+                                style="color:gray !important;"><?php echo $this->lang->line('Gender_Female'); ?></label>
                         </div>
                     </div>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-12 col-md-4">
-                            <input type="number" name="day" id="day" placeholder="Day" autocomplete="off"
+                            <input type="number" name="day" id="boy_day" placeholder="Day" autocomplete="off"
                                 class="form-control shadow-none my-2 p-2 rounded-1" required min="1" max="31">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="month" id="month" placeholder="Month" autocomplete="off"
+                            <input type="number" name="month" id="boy_month" placeholder="Month" autocomplete="off"
                                 class="form-control shadow-none my-2 p-2 rounded-1" required min="1" max="12">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="year" id="year" placeholder="Year" autocomplete="off"
+                            <input type="number" name="year" id="boy_year" placeholder="Year" autocomplete="off"
                                 class="form-control shadow-none my-2 p-2 rounded-1" required min="1900" max="2024">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="hour" id="hour" placeholder="Hour" autocomplete="off"
+                            <input type="number" name="hour" id="boy_hour" placeholder="Hour" autocomplete="off"
                                 class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="23">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="minute" id="minute" placeholder="Minute" autocomplete="off"
+                            <input type="number" name="minute" id="boy_minute" placeholder="Minute" autocomplete="off"
                                 class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="59">
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="number" name="second" id="second" placeholder="Second" autocomplete="off"
+                            <input type="number" name="second" id="boy_second" placeholder="Second" autocomplete="off"
                                 class="form-control shadow-none my-2 p-2 rounded-1" required min="0" max="59">
                         </div>
+                    </div> -->
+
+                  <div class="row mt-2">
+                   
+                   
+                    <div class="col-12 col-md-4 ">
+                       <label><?php echo $this->lang->line('Birth_Day'); ?></label>
+                        <select name="day" id="boy_day" class="form-control shadow-none my-2 p-2 rounded-1"
+                            required></select>
                     </div>
+                    <div class="col-12 col-md-4">
+                        <label><?php echo $this->lang->line('Birth_Month'); ?></label>
+                        <select name="month" id="boy_month" class="form-control shadow-none my-2 p-2 rounded-1"
+                            required></select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                       <label><?php echo $this->lang->line('Birth_Year'); ?></label>
+                        <select name="year" id="boy_year" class="form-control shadow-none my-2 p-2 rounded-1"
+                            required></select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label>Birth Hour</label>
+                        <select name="hour" id="boy_hour" class="form-control shadow-none my-2 p-2 rounded-1"
+                            required></select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label><?php echo $this->lang->line('Birth_Minutes'); ?></label>
+                        <select name="minute" id="boy_minute" class="form-control shadow-none my-2 p-2 rounded-1"
+                            required></select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                       <label><?php echo $this->lang->line('Birth_Seconds'); ?></label>
+                        <select name="second" id="boy_second" class="form-control shadow-none my-2 p-2 rounded-1"
+                            required></select>
+                    </div>
+                    </div>
+
 
                     <!-- <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off"
                         class="form-control shadow-none my-2 p-2 rounded-1" required pattern="^[a-zA-Z\s\-\.',]+$"
@@ -133,7 +170,7 @@
                         oninput="this.value = this.value.replace(/[^a-zA-Z\s\-\.',]/g, '')"> -->
 
 
-                    <label for="boy_birthPlace">Birth Place</label>
+                   <label><?php echo $this->lang->line('Birth_Place'); ?></label>
                     <input type="text" id="boy_birthPlace" class="form-control shadow-none my-2 p-2 rounded-1"
                         placeholder="Birth Place" autocomplete="off" required />
                     <input type="hidden" id="boy_lat">
@@ -141,17 +178,17 @@
                     <div id="suggestions" class="border rounded bg-white shadow-sm"
                         style="position: absolute; z-index: 1000;"></div>
 
-                    <label for="language">Select Language</label>
+                    <label><?php echo $this->lang->line('Select_Language'); ?></label>
                     <select id="language" class="form-control shadow-none my-2 p-2 rounded-1" required>
                         <option value="" disabled selected>Select Language</option>
-                        <option value="en">English</option>
-                        <option value="hi">Hindi</option>
-                        <option value="bn">Bengali</option>
-                        <option value="ma">Marathi</option>
-                        <option value="tm">Tamil</option>
-                        <option value="tl">Telugu</option>
-                        <option value="ml">Malayalam</option>
-                        <option value="kn">Kannada</option>
+                            <option value="en"><?php echo $this->lang->line('Language_English'); ?></option>
+                         <option value="hi"><?php echo $this->lang->line('Language_Hindi'); ?></option>
+                           <option value="bn"><?php echo $this->lang->line('Language_Bengali'); ?></option>
+                            <option value="mr"><?php echo $this->lang->line('Language_Marathi'); ?></option>
+                        <option value="tm"><?php echo $this->lang->line('Language_Tamil'); ?></option>
+                        <option value="tl"><?php echo $this->lang->line('Language_Telugu'); ?></option>
+                        <option value="ml"><?php echo $this->lang->line('Language_Malayalam'); ?></option>
+                        <option value="kn"><?php echo $this->lang->line('Language_Kannada'); ?></option>
                     </select>
 
 
@@ -167,7 +204,7 @@
                     <center>
                         <button type="submit" class="btn my-2 p-2 fw-bold rounded-1"
                             style="background-color: var(--yellow);">
-                            Get Kundli
+                           <?php echo $this->lang->line('Get_Kundli'); ?>
                         </button>
                     </center>
                 </form>
@@ -177,14 +214,7 @@
             <div class="col-12 col-md-6 text-center">
                 <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png'); ?>" alt="kundli" class="img-fluid"
                     style="width: 150px; height: 150px;">
-                <p class="text-start mt-2">Kundli, also known as a Birth Chart or Natal Chart, is a detailed
-                    astrological diagram created using the exact date, time, and place of a person's birth. It maps the
-                    positions of celestial bodies like the Sun, Moon, and planets at the time of birth and helps uncover
-                    the unique personality traits, strengths, challenges, and life path of an individual. Kundli plays a
-                    vital role in Vedic astrology and is often used to predict future events, career growth, health, and
-                    relationships. It is also essential in Kundli Matching before marriage to determine compatibility
-                    between partners. Accurate Kundli analysis helps guide important life decisions and brings clarity
-                    by aligning one's actions with cosmic influences.
+                <p class="text-start mt-2"><?php echo $this->lang->line('Kundli_Info') ?>
 
                 </p>
             </div>
@@ -197,14 +227,7 @@
     <div class="container my-4">
         <div class="row">
             <div class="col-12 col-md-7">
-                <p>A Kundli, or Birth Chart, is more than just a celestial snapshot—it's a personalized cosmic blueprint
-                    of your life. Created using your exact birth date, time, and location, the Kundli captures the
-                    positions of planets and stars at the moment you were born. In Vedic astrology, this chart reveals
-                    your personality, emotions, career potential, relationships, and even future challenges. It’s often
-                    the first step in important rituals, especially in Indian marriages, where Kundli matching
-                    determines compatibility between two individuals. Whether you're seeking direction, clarity, or
-                    spiritual insight, your Kundli offers a map to navigate life’s journey.
-
+                <p>  <?php echo $this->lang->line('Kundli_Intro'); ?>
                 </p>
             </div>
             <div class="col-12 col-md-5 text-center">
@@ -272,14 +295,66 @@
         });
     </script>
 
+    <!-- <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Fill today's year as default
+        const currentYear = new Date().getFullYear();
+        document.getElementById("year").value = currentYear;
+
+        // Optional: Set default values if needed
+        document.getElementById("day").value = new Date().getDate();
+        document.getElementById("month").value = new Date().getMonth() + 1; // months are 0-indexed
+        document.getElementById("hour").value = new Date().getHours();
+        document.getElementById("minute").value = new Date().getMinutes();
+        document.getElementById("second").value = new Date().getSeconds();
+    });
+</script>
+ -->
+
 
     <script>
+
+
+
+
+        function populateSelect(id, start, end, pad = false) {
+            const select = document.getElementById(id);
+            select.innerHTML = '<option value="">Select</option>';
+            for (let i = start; i <= end; i++) {
+                const val = pad ? String(i).padStart(2, '0') : i;
+                select.innerHTML += `<option value="${val}">${val}</option>`;
+            }
+        }
+
+        function populateMonth(id) {
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            const select = document.getElementById(id);
+            select.innerHTML = '<option value="">Select</option>';
+            months.forEach((month, i) => {
+                select.innerHTML += `<option value="${i + 1}">${month}</option>`;
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            populateSelect("boy_day", 1, 31, true);
+            populateMonth("boy_month");
+            populateSelect("boy_year", 1990, new Date().getFullYear());
+            populateSelect("boy_hour", 0, 23, true);
+            populateSelect("boy_minute", 0, 59, true);
+            populateSelect("boy_second", 0, 59, true);
+        });
+
+
+
         document.getElementById("kundliForm").addEventListener("submit", function (e) {
             e.preventDefault();
 
             const requiredFields = [
-                'name', 'male', 'female', 'day', 'month', 'year',
-                'hour', 'minute', 'second', 'boy_birthPlace', 'astro_feature'
+                'name', 'male', 'female', 'boy_day', 'boy_month', 'boy_year',
+                'boy_hour', 'boy_minute', 'boy_second', 'boy_birthPlace', 'astro_feature'
             ];
 
             const genderChecked = document.querySelector('input[name="gender"]:checked');
@@ -317,16 +392,16 @@
             const formData = {
                 boy_name: document.getElementById('name').value,
                 boy_gender: genderChecked.value,
-                boy_day: document.getElementById('day').value,
-                boy_month: document.getElementById('month').value,
-                boy_year: document.getElementById('year').value,
-                boy_hour: document.getElementById('hour').value,
-                boy_minute: document.getElementById('minute').value,
-                boy_second: document.getElementById('second').value,
+                boy_day: document.getElementById('boy_day').value,
+                boy_month: document.getElementById('boy_month').value,
+                boy_year: document.getElementById('boy_year').value,
+                boy_hour: document.getElementById('boy_hour').value,
+                boy_minute: document.getElementById('boy_minute').value,
+                boy_second: document.getElementById('boy_second').value,
                 boy_birthPlace: document.getElementById('boy_birthPlace').value,
                 boy_lat: document.getElementById('boy_lat').value || "28.7041",
                 boy_lon: document.getElementById('boy_lon').value || "77.1025",
-                lan :document.getElementById('language').value || "en",
+                lan: document.getElementById('language').value || "en",
             };
 
             let apiUrl = "";

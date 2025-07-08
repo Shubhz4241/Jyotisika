@@ -15,13 +15,19 @@ class Razorpay_lib
         // $key_id = 'rzp_test_cFYTpLVvrC4FFn';
         // $secret_key = 'LHymgUT3qIDnvvNoCUG2mN8L';
 
-         $key_id = 'rzp_test_n9TyNiHflMp51H';
-        $secret_key = '2tR5N1R426SIVqvyEAfOzJze';
+        //  $key_id = 'rzp_test_n9TyNiHflMp51H';
+        // $secret_key = '2tR5N1R426SIVqvyEAfOzJze';
 
 
         // $key_id = 'rzp_live_aKnqCVUpRcVAoS';
         // $secret_key = 'IMsHCTErcyGDCfLK312TEkfW';
 
+
+
+        //Jyotisika update keys
+
+         $key_id = 'rzp_test_YcEtdZa9f7N8R6';
+        $secret_key = 'A9amaWCSAUc98Payc0qFml23';
 
         
 
@@ -58,7 +64,7 @@ class Razorpay_lib
     {
         try {
             // $key_secret = 'LHymgUT3qIDnvvNoCUG2mN8L';
-            $key_secret = '2tR5N1R426SIVqvyEAfOzJze';
+            $key_secret = 'A9amaWCSAUc98Payc0qFml23';
 
             // $key_secret = 'IMsHCTErcyGDCfLK312TEkfW';
             

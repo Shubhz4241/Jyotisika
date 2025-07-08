@@ -505,9 +505,15 @@ class User_Api_Controller extends CI_Controller
                 'amount' => $data['amount'],
                 // 'key' => 'rzp_test_cFYTpLVvrC4FFn',
 
-                'key' => 'rzp_test_n9TyNiHflMp51H',
+                // 'key' => 'rzp_test_n9TyNiHflMp51H',
 
                 // 'key' => 'rzp_live_aKnqCVUpRcVAoS',
+
+
+                //Jyotisika test payment
+
+                'key' => 'rzp_test_YcEtdZa9f7N8R6',
+                
 
 
 
@@ -1365,7 +1371,7 @@ class User_Api_Controller extends CI_Controller
                 "user_phonenumber" => $userphonenumber,
                 "user_state" => $userstate,
                 "user_id" => $user_id,
-                "user_email"=> $useremail,
+                "user_email" => $useremail,
 
             ];
 
@@ -1905,12 +1911,18 @@ class User_Api_Controller extends CI_Controller
                 'order_id' => $razorpay_order['id'],
                 'amount' => $total_price, // Convert to paisa
 
+
+
                 // 'key' => 'rzp_test_cFYTpLVvrC4FFn',   rutuja mam dashboard
 
-                'key' => 'rzp_test_n9TyNiHflMp51H',
+                // 'key' => 'rzp_test_n9TyNiHflMp51H',
                 // jotishvitaran
 
                 // 'key' => 'rzp_live_aKnqCVUpRcVAoS',
+
+
+                'key' => 'rzp_test_YcEtdZa9f7N8R6',
+                //
 
 
                 // 'name'           => $user->username,
@@ -1973,7 +1985,7 @@ class User_Api_Controller extends CI_Controller
             'user_id' => $user_id,
             'order_no' => 'ORD_' . date('YmdHis') . rand(1000, 9999),
             'user_fullname' => $getuserdata->user_name,
-            'user_email'=> $getuserdata->user_email,
+            'user_email' => $getuserdata->user_email,
             'user_phonenumber' => $getuserdata->user_phonenumber,
             'user_address' => $getuserdata->user_address,
             'user_state' => $getuserdata->user_state,
@@ -2456,8 +2468,8 @@ class User_Api_Controller extends CI_Controller
             $pujatime = $this->input->post("pujatime");
             $mob_puja_id = $this->input->post("mob_puja_id");
 
-            date_default_timezone_set('Asia/Kolkata');
-            $timestamp = date('Y-m-d H:i:s', time());
+            // date_default_timezone_set('Asia/Kolkata');
+            // $timestamp = date('Y-m-d H:i:s', time());
 
             if (empty($pujari_id) || empty($user_id) || empty($pujari_charge) || empty($pujadate) || empty($user_email) || empty($puja_mode) || empty($pujatime)) {
                 $response = [
@@ -2467,6 +2479,46 @@ class User_Api_Controller extends CI_Controller
                 echo json_encode($response);
                 return;
             }
+
+            date_default_timezone_set('Asia/Kolkata');
+            $timestamp = date('Y-m-d H:i:s');
+
+
+
+            // $puja_date = $this->input->post('puja_date');
+            // $puja_time = $this->input->post('puja_time');
+
+
+
+            // $puja_datetime = new DateTime("$puja_date $puja_time");
+            // $request_datetime = new DateTime($timestamp);
+            // if ($puja_datetime <= $request_datetime) {
+            //     $total_hours = 0;
+            // } else {
+            //     $interval = $request_datetime->diff($puja_datetime);
+            //     $total_hours = ($interval->days * 24) + $interval->h + ($interval->i / 60) + ($interval->s / 3600);
+            // }
+
+            // if ($total_hours > 48) {
+            //     $puja_urgency = 'normal';
+            // } elseif ($total_hours > 4) {
+            //     $puja_urgency = 'urgent';
+            // } else {
+            //     $puja_urgency = 'invalid';
+            // }
+
+
+            // if ($total_hours < 4 || $puja_urgency == 'invalid') {
+            //     echo json_encode([
+            //         "status" => "pujawarning",
+            //         "message" => "the start time must be within 4 hours"
+            //     ]);
+            //     return;
+            // }
+
+
+
+
 
             $formdata = [
                 "pujari_id" => $pujari_id,
@@ -2478,7 +2530,8 @@ class User_Api_Controller extends CI_Controller
                 "puja_date" => $pujadate,
                 "mob_puja_id" => $mob_puja_id,
                 "puja_time" => $pujatime,
-                "request_created_at" => $timestamp
+                "request_created_at" => $timestamp,
+               
 
             ];
 
@@ -2879,11 +2932,14 @@ class User_Api_Controller extends CI_Controller
 
                 // 'key' => 'rzp_test_cFYTpLVvrC4FFn',
 
-                'key' => 'rzp_test_n9TyNiHflMp51H',
+                // 'key' => 'rzp_test_n9TyNiHflMp51H',
 
 
                 // 'key' => 'rzp_live_aKnqCVUpRcVAoS',
 
+
+                //Jyotisika updated test keys
+                   'key' => 'rzp_test_YcEtdZa9f7N8R6',
 
 
                 // 'name'           => $user->username,
@@ -3147,7 +3203,7 @@ class User_Api_Controller extends CI_Controller
     //Kudali api data
 
 
-     public function search_city()
+    public function search_city()
     {
         $query = $this->input->get('q');
 
@@ -3177,9 +3233,10 @@ class User_Api_Controller extends CI_Controller
 
 
 
-      public function getKaalSarpaDosha(){
+    public function getKaalSarpaDosha()
+    {
 
-         $input = json_decode(file_get_contents("php://input"), true);
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3198,7 +3255,7 @@ class User_Api_Controller extends CI_Controller
             'lat' => $input['boy_lat'], // optional: replace using geolocation
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
-             'lan' => $input['lan']
+            'lan' => $input['lan']
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3228,9 +3285,10 @@ class User_Api_Controller extends CI_Controller
 
     }
 
-      public function getSadheSati(){
+    public function getSadheSati()
+    {
 
-         $input = json_decode(file_get_contents("php://input"), true);
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3249,7 +3307,7 @@ class User_Api_Controller extends CI_Controller
             'lat' => $input['boy_lat'], // optional: replace using geolocation
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
-           'lan' => $input['lan']
+            'lan' => 'en'
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3280,9 +3338,10 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-       public function getManglikDosha(){
+    public function getManglikDosha()
+    {
 
-         $input = json_decode(file_get_contents("php://input"), true);
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3301,7 +3360,7 @@ class User_Api_Controller extends CI_Controller
             'lat' => $input['boy_lat'], // optional: replace using geolocation
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
-           'lan' => $input['lan']
+            'lan' => $input['lan']
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3332,7 +3391,7 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-      public function getKundli()
+    public function getKundli()
     {
         $input = json_decode(file_get_contents("php://input"), true);
 
@@ -3353,7 +3412,7 @@ class User_Api_Controller extends CI_Controller
             'lat' => $input['boy_lat'], // optional: replace using geolocation
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
-            'lan' => $input['lan']
+            'lan' => ($input['lan'] === 'mr') ? 'en' : $input['lan'],
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3383,9 +3442,9 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-      public function ManglikDoshakudalimatch()
+    public function ManglikDoshakudalimatch()
     {
-        
+
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $url = "https://astroapi-3.divineapi.com/indian-api/v2/matching/manglik-dosha";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3418,7 +3477,7 @@ class User_Api_Controller extends CI_Controller
             "p2_lon" => $post['girl_lon'],
             "p2_tzone" => 5.5,
 
-               'lan' => "en"
+            'lan' => "en"
         ];
 
         $headers = [
@@ -3436,16 +3495,16 @@ class User_Api_Controller extends CI_Controller
 
         $result = json_decode($response, true);
 
-        
+
         echo json_encode(['success' => true, 'data' => $result]);
 
-       
+
     }
 
 
-     public function Dashakoot()
+    public function Dashakoot()
     {
-        
+
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $url = "https://astroapi-3.divineapi.com/indian-api/v1/dashakoot-milan";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3478,7 +3537,7 @@ class User_Api_Controller extends CI_Controller
             "p2_lon" => $post['girl_lon'],
             "p2_tzone" => 5.5,
 
-               'lan' => $post['lan']
+            'lan' => $post['lan']
         ];
 
         $headers = [
@@ -3496,14 +3555,14 @@ class User_Api_Controller extends CI_Controller
 
         $result = json_decode($response, true);
 
-        
+
         echo json_encode(['success' => true, 'data' => $result]);
 
-       
+
     }
 
 
-     public function match_kundli()
+    public function match_kundli()
     {
         $chart_id = "D1";
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
@@ -3538,7 +3597,7 @@ class User_Api_Controller extends CI_Controller
             "p2_lon" => $post['girl_lon'],
             "p2_tzone" => 5.5,
 
-             'lan' => $post['lan']
+            'lan' => $post['lan']
         ];
 
         $headers = [
@@ -3578,7 +3637,7 @@ class User_Api_Controller extends CI_Controller
 
     public function ashtakoot()
     {
-        
+
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $url = "https://astroapi-3.divineapi.com/indian-api/v2/ashtakoot-milan";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3611,7 +3670,7 @@ class User_Api_Controller extends CI_Controller
             "p2_lon" => $post['girl_lon'],
             "p2_tzone" => 5.5,
 
-               'lan' => $post['lan']
+            'lan' => $post['lan']
         ];
 
         $headers = [
@@ -3629,10 +3688,10 @@ class User_Api_Controller extends CI_Controller
 
         $result = json_decode($response, true);
 
-        
+
         echo json_encode(['success' => true, 'data' => $result]);
 
-       
+
     }
 
 

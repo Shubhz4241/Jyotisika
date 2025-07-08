@@ -99,7 +99,7 @@
 
             <div id="signdata" class="row my-4">
                 <div class="text-center mb-2">
-                    <h2 class="fw-bold"><?php echo ucfirst($sign); ?> Today’s Horoscope</h2>
+                    <h2 class="fw-bold"><?php echo ucfirst($sign); ?> <?php echo $this->lang->line('Horoscope_Today'); ?></h2>
                     <p class="fs-5"><?php echo $date; ?></p>
                 </div>
                 <div>
@@ -118,7 +118,7 @@
             <div class="row my-4">
                 <div class="col-12 col-md-4 order-2 order-md-1 ">
                     <div class="card p-3 shadow border-1 rounded-2 ">
-                        <label for="zodiacSign" class="form-label fw-bold mb-2">Select Other Sign</label>
+                        <label for="zodiacSign" class="form-label fw-bold mb-2"><?php echo $this->lang->line('Select_Other_Sign'); ?></label>
                         <select name="zodiacSign" id="zodiacSign" class="form-select shadow-none">
                             <option value="Aries" <?php echo ($sign == "Aries") ? "selected" : ""; ?>>Aries</option>
                             <option value="Taurus" <?php echo ($sign == "Taurus") ? "selected" : ""; ?>>Taurus</option>
@@ -141,13 +141,13 @@
                     </div>
 
                     <div class="card shadow border-1 rounded-2 mt-1 p-3">
-                        <label for="horoscopeSelect" class="form-label fw-bold mb-2">Select Horoscope Type</label>
+                        <label for="horoscopeSelect" class="form-label fw-bold mb-2"><?php echo $this->lang->line('Select_Horoscope_Type'); ?></label>
                         <select name="horoscopeSelect" id="horoscopeSelect" class="form-select shadow-none">
-                            <option value="today" selected>Today's Horoscope</option>
+                            <option value="today" selected><?php echo $this->lang->line('Todays_Horoscope'); ?></option>
                             <!-- <option value="tomorrow">Tomorrow Horoscope</option>
                             <option value="yestarday">Yestarday Horoscope</option> -->
-                            <option value="weekly">Weekly Horoscope</option>
-                            <option value="monthly">Monthly Horoscope</option>
+                            <option value="weekly"><?php echo $this->lang->line('Weekly_Horoscope'); ?></option>
+                            <option value="monthly"><?php echo $this->lang->line('Monthly_Horoscope'); ?></option>
                             <!-- <option value="yearly">Yearly Horoscope</option> -->
                         </select>
                     </div>
@@ -160,7 +160,7 @@
                                         style="width:40px; height:40px">
                                 </div>
                                 <div>
-                                    <p class=" fw-bold mb-0 text-black">Chat With Astrologer</p>
+                                    <p class=" fw-bold mb-0 text-black"><?php echo $this->lang->line('Chat_With_Astrologer'); ?></p>
                                 </div>
                             </div>
                         </a>
@@ -175,7 +175,7 @@
                                         style="width:40px; height:40px">
                                 </div>
                                 <div>
-                                    <p class=" fw-bold mb-0 text-black">Call With Astrologer</p>
+                                    <p class=" fw-bold mb-0 text-black"><?php echo $this->lang->line('Chat_With_Astrologer'); ?></p>
                                 </div>
                             </div>
                         </a>

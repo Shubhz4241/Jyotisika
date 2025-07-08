@@ -113,13 +113,13 @@
     <?php if (!empty($productdata)): ?>
         <div class="container my-5">
             <!-- <?php print_r($productdata) ?> -->
-            <h2 class="mb-4">Your Cart</h2>
+            <h2 class="mb-4"><?php echo $this->lang->line('Your_Cart');?></h2>
 
             <div class="row cart-container d-flex align-items-center">
                 <!-- Left Column: Products -->
                 <div class="col-md-7">
                     <!-- Empty cart message -->
-                    <div id="empty-cart-message">Your Cart is Empty</div>
+                    <div id="empty-cart-message"><?php echo $this->lang->line('Cart_Empty'); ?></div>
 
 
                      <?php foreach ($productdata as $productinfo): ?>
@@ -146,12 +146,12 @@
 
                                     <!-- <p><?php echo $productinfo["product_description"]; ?></p> -->
 
-                                    <p><strong>Unit Price:</strong> ₹<span
+                                    <p><strong><?php echo $this->lang->line('Unit_Price'); ?>:</strong> ₹<span
                                             class="productunitprice"><?php echo $productinfo["product_price"]; ?> </span></p>
 
                                     <!-- Quantity Controls -->
                                     <div class="d-flex align-items-center mb-2">
-                                        <strong class="me-2">Quantity:</strong>
+                                        <strong class="me-2"><?php echo $this->lang->line('Quantity'); ?>:</strong>
                                         <button class="btn btn-outline-dark btn-sm me-2 quantity-decrease"
                                             style="background-color: var(--yellow);">
                                             <i class="bi bi-dash" style="color: black;"></i>
@@ -163,7 +163,7 @@
                                             <i class="bi bi-plus" style="color: black;"></i>
                                         </button>
                                     </div>
-                                    <p><strong>Subtotal:</strong> ₹<span
+                                    <p><strong><?php echo $this->lang->line('Subtotal'); ?>:</strong> ₹<span
                                             class="subtotal"><?php echo $productinfo['product_price'] * $productinfo['product_quantity']; ?></span>
                                     </p>
                                 </div>
@@ -175,7 +175,7 @@
                 <!-- Right Column: Price Details -->
                 <div class="col-md-5 d-flex align-items-center justify-content-center">
                     <div class="price-box w-100">
-                        <h5 class="mb-3">Price Details</h5>
+                        <h5 class="mb-3"><?php echo $this->lang->line('Price_Details'); ?></h5>
 
                         <!-- <div class="price-row">
                         <span><strong>Product:</strong> Rudraksh</span>
@@ -189,12 +189,12 @@
                         <span>2</span>
                     </div> -->
                         <div class="price-row">
-                            <span>Item Total</span>
+                            <span><?php echo $this->lang->line('Item_Total'); ?></span>
                             <span class="price-subtotal">₹ </span>
                         </div>
 
                         <div class="price-row">
-                            <span>Item Total</span>
+                            <span><?php echo $this->lang->line('Item_Total'); ?></span>
                             <span class="price-delievery">40</span>
                         </div>
 
@@ -211,12 +211,12 @@
                     </div> -->
 
                         <div class="price-row total">
-                            <span><strong>Grand Total</strong></span>
+                            <span><strong><?php echo $this->lang->line('Grand_Total'); ?></strong></span>
                             <span class="grand-total"><strong>₹ </strong></span>
                         </div>
 
                         <div class="text-center mt-4">
-                            <a href="ProductPayment"><button class="continue-btn">Continue to Buy</button></a>
+                            <a href="ProductPayment"><button class="continue-btn"><?php echo $this->lang->line('Continue_To_Buy'); ?></button></a>
                         </div>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
             <div class="text-center p-5">
                 <h4 class="text-muted">🛒 Your cart is empty!</h4>
                 <p class="text-muted">Looks like you haven't added anything to your cart yet.</p>
-                <a href="<?php echo base_url('jyotisikamall'); ?>" class="btn btn-warning">Browse Products</a>
+                <a href="<?php echo base_url('jyotisikamall'); ?>" class="btn btn-warning"><?php echo $this->lang->line('Browse_Products'); ?></a>
             </div>
         </div>
     <?php endif ?>

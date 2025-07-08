@@ -57,30 +57,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="fw-bold text-center mb-4" style="color:var(--red)">KP Astrology - Krishnamurti Paddhati
-                        (KP System)</h2>
-                    <p class="mb-3" style="text-align:justify;">KP Astrology is a refined approach to Stellar Astrology
-                        that focuses on the study of Nakshatras (Stars) to predict life events with precision. Explore a
-                        comprehensive collection of tools, utilities, and insightful articles dedicated to the KP
-                        system, all in one place.</p>
-                    <p class="mb-4" style="text-align:justify;">The KP System is a modern and scientific approach to
-                        astrology, developed by the renowned Indian astrologer Prof. K.S. Krishnamurti in the mid-20th
-                        century. It refines traditional Vedic astrology to offer more precise predictions. KP Astrology
-                        focuses on the Nakshatras (stars) and their sub-lords, enabling detailed analysis and accurate
-                        timing of events in one's life.</p>
+                    <h2 class="fw-bold text-center mb-4" style="color:var(--red)"><?php echo $this->lang->line('KP_Astrology_Title'); ?></h2>
+                    <p class="mb-3" style="text-align:justify;"><?php echo $this->lang->line('KP_Astrology_Desc'); ?></p>
+                    <p class="mb-4" style="text-align:justify;"><?php echo $this->lang->line('KP_System_Info'); ?></p>
                 </div>
 
                 <div class="col-12 col-md-6 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-3">Quick Links</h5>
+                            <h5 class="card-title mb-3"><?php echo $this->lang->line('Quick_Links'); ?></h5>
                             <ol class="ps-3">
-                                <li class="mb-2">What is KP System?</li>
-                                <li class="mb-2">Create KP Chart Online</li>
-                                <li class="mb-2">Current Ruling Planets</li>
-                                <li class="mb-2">KP Panchang</li>
-                                <li class="mb-2">KP Horary Chart Generator</li>
-                                <li>KP Astrology Guide</li>
+                                <li class="mb-2"><?php echo $this->lang->line('What_Is_KP_System'); ?></li>
+                                <li class="mb-2"><?php echo $this->lang->line('Create_KP_Chart'); ?></li>
+                                <li class="mb-2"><?php echo $this->lang->line('Current_Ruling_Planets'); ?></li>
+                                <li class="mb-2"><?php echo $this->lang->line('KP_Panchang'); ?></li>
+                                <li class="mb-2"><?php echo $this->lang->line('KP_Horary_Chart'); ?></li>
+                                <li><?php echo $this->lang->line('KP_Guide'); ?></li>
                             </ol>
                         </div>
                     </div>
@@ -88,7 +80,7 @@
             </div>
 
             <div class="container p-3 my-4 rounded-3" style="background-color:rgba(255, 247, 184, 0.59);">
-                <h3 class="text-center mb-3">KP Astrology </h3>
+                <h3 class="text-center mb-3"><?php echo $this->lang->line('KP_Astrology'); ?></h3>
                 <hr>
 
                 <form id="matchForm">
@@ -99,35 +91,35 @@
 
 
                             <!-- Name -->
-                            <label for="boy_name">Name</label>
+                            <label for="boy_name"><?php echo $this->lang->line('Label_Name'); ?></label>
                             <input type="text" id="boy_name" class="form-control shadow-none my-2 p-2 rounded-1"
                                 placeholder="Person Name" required
                                 oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
                                 pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only" />
 
                             <!-- Gender -->
-                            <label for="boy_gender">Gender</label>
+                            <label for="boy_gender"><?php echo $this->lang->line('Label_Gender'); ?></label>
                             <select id="boy_gender" class="form-control shadow-none my-2 p-2 rounded-1" required>
-                                <option value="" disabled selected>Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="" disabled selected><?php echo $this->lang->line('Label_Select_Gender'); ?></option>
+                                <option value="male"><?php echo $this->lang->line('Label_Male'); ?></option>
+                                <option value="female"><?php echo $this->lang->line('Label_Female'); ?></option>
 
                             </select>
 
                             <!-- DOB -->
                             <div class="row">
                                 <div class="col-4">
-                                    <label>Day</label>
+                                    <label><?php echo $this->lang->line('Label_Day'); ?></label>
                                     <select id="boy_day" class="form-control shadow-none my-2 p-2 rounded-1"
                                         required></select>
                                 </div>
                                 <div class="col-4">
-                                    <label>Month</label>
+                                    <label><?php echo $this->lang->line('Label_Month'); ?></label>
                                     <select id="boy_month" class="form-control shadow-none my-2 p-2 rounded-1"
                                         required></select>
                                 </div>
                                 <div class="col-4">
-                                    <label>Year</label>
+                                    <label><?php echo $this->lang->line('Label_Year'); ?></label>
                                     <select id="boy_year" class="form-control shadow-none my-2 p-2 rounded-1"
                                         required></select>
                                 </div>
@@ -136,24 +128,24 @@
                             <!-- Time -->
                             <div class="row">
                                 <div class="col-4">
-                                    <label>Hour</label>
+                                    <label><?php echo $this->lang->line('Label_Hour'); ?></label>
                                     <select id="boy_hour" class="form-control shadow-none my-2 p-2 rounded-1"
                                         required></select>
                                 </div>
                                 <div class="col-4">
-                                    <label>Minute</label>
+                                    <label><?php echo $this->lang->line('Label_Minute'); ?></label>
                                     <select id="boy_minute" class="form-control shadow-none my-2 p-2 rounded-1"
                                         required></select>
                                 </div>
                                 <div class="col-4">
-                                    <label>Second</label>
+                                    <label><?php echo $this->lang->line('Label_Second'); ?></label>
                                     <select id="boy_second" class="form-control shadow-none my-2 p-2 rounded-1"
                                         required></select>
                                 </div>
                             </div>
 
                             <div class="col-12 my-2">
-                                <label for="language">Select Language</label>
+                                <label for="language"><?php echo $this->lang->line('Label_Select_Language'); ?></label>
                                 <select id="languages" class="form-control shadow-none my-2 p-2 rounded-1" required>
                                     <option value="" disabled selected>Select Language</option>
                                     <option value="en">English</option>
@@ -176,7 +168,7 @@
                             oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
                             pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only" /> -->
 
-                            <label for="boy_birthPlace">Birth Place</label>
+                            <label for="boy_birthPlace"><?php echo $this->lang->line('Label_Birth_Place'); ?></label>
                             <input type="text" id="boy_birthPlace" class="form-control shadow-none my-2 p-2 rounded-1"
                                 placeholder="Birth Place" autocomplete="off" required />
                             <input type="hidden" id="boy_lat">
@@ -190,7 +182,7 @@
                             <center>
                                 <button type="submit" class="btn mt-4 px-4 py-2"
                                     style="background-color: var(--yellow);">
-                                    Submit
+                                   <?php echo $this->lang->line('Submit'); ?>
                                 </button>
 
                             </center>
@@ -200,14 +192,7 @@
                         <div class="col-12 col-md-6 text-center">
                             <img src="<?php echo base_url('assets/images/Freekundli/kundli.png'); ?>" alt="kundli"
                                 class="img-fluid" style="width: 150px; height: 150px;">
-                            <p class="mt-2 justified-text">Your KP Chart, or Cuspal Chart, is a highly refined
-                                astrological map based on the Krishnamurti Paddhati system. Unlike traditional birth
-                                charts, the KP system divides the zodiac into precise sub-divisions using Nakshatras and
-                                their sub-lords, allowing for extremely accurate timing of life events. Each KP chart is
-                                unique and reveals critical insights about your life path, relationships, career, and
-                                destiny through the lens of stellar astrology. By focusing on the ruling planets and
-                                sub-lords at the moment of birth, KP Astrology serves as a practical and scientific tool
-                                for deep self-discovery, decision-making, and future planning</p>
+                            <p class="mt-2 justified-text"><p><?php echo $this->lang->line('KP_Chart_Info'); ?></p>
                         </div>
                     </div>
 
@@ -226,35 +211,15 @@
 
             <div class="row mb-4">
                 <div class="col-12">
-                    <h6 class="fw-bold fs-5 mb-3">Zodiac Divisions in KP Astrology</h6>
-                    <p style="text-align:justify;">In KP Astrology, the Zodiac Belt, a 360-degree circle, is divided
-                        into 12 equal parts (30 degrees each) called Zodiac Signs or Rashis. Each sign is further
-                        divided into 27 Nakshatras (13°20' each), and each Nakshatra is subdivided into 9 parts called
-                        "Subs." These Sub divisions, ruled by "Sub Lords," form the core of KP Astrology, enabling
-                        precise predictions.
-                        The division of Subs is based on the Vimshottari Dasha system, where planets with shorter Dashas
-                        occupy smaller portions of a Nakshatra, while longer Dashas occupy larger portions. This method
-                        modernizes Vedic Astrology, simplifying predictions while maintaining accuracy. KP Astrology
-                        uses the Placidus House system, with houses measured cusp-to-cusp rather than fixed degrees.
-                        This approach, combined with a focus on Sub Lords, offers a streamlined and highly effective way
-                        to predict events with clarity and precision.</p>
+                    <h6 class="fw-bold fs-5 mb-3"><?php echo $this->lang->line('Zodiac_Divisions_Title'); ?></h6>
+                    <p style="text-align:justify;"><?php echo $this->lang->line('Zodiac_Divisions_Info'); ?></p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-12">
-                    <h6 class="fw-bold fs-5 mb-3">Origin and Essence of KP Astrology</h6>
-                    <p style="text-align:justify;">The Krishnamurti Paddhati (KP) system, developed by Late Astrologer
-                        Krishnamurti, revolutionized Vedic Astrology by introducing a simplified yet highly accurate
-                        method for event prediction. By focusing on Nakshatras (stars) and their "Sub Lords," KP
-                        Astrology offers precise insights into life events. KP Astrology divides the Zodiac Belt (360°)
-                        into 12 signs, 27 Nakshatras, and 9 unequal Sub-divisions within each Nakshatra. These divisions
-                        are based on the Vimshottari Dasha system, with planets occupying segments proportional to their
-                        Dasha periods. The technique emphasizes the Sub Lords, using them to evaluate events with
-                        clarity.
-                        Unlike traditional Vedic Astrology, KP utilizes the Placidus House System, measuring houses
-                        cusp-to-cusp. This streamlined approach enables astrologers to predict events more accurately,
-                        making it a modern and practical evolution of ancient astrology.</p>
+                    <h6 class="fw-bold fs-5 mb-3"><?php echo $this->lang->line('KP_Origin_Title'); ?></h6>
+                    <p style="text-align:justify;"><?php echo $this->lang->line('KP_Origin_Info'); ?></p>
                 </div>
             </div>
         </div>

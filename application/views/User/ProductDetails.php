@@ -263,7 +263,7 @@
  
     <!-- Reviews -->
     <div class="container my-4 position-relative">
-        <h4>Reviews</h4>
+        <h4> <?php echo $this->lang->line('Reviews');?></h4>
         <div class="owl-carousel owl1 owl-theme">
             <!-- Loop Start -->
             <!-- Card 1 -->

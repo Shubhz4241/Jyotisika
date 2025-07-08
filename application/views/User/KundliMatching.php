@@ -51,13 +51,13 @@
 
     <!-- kundli matching -->
     <div class="container rounded p-4 my-4 shadow" style="background-color: #fff7b8; ">
-        <h3 class="text-center mb-4">Kundli/Birth Chart</h3>
+        <h3 class="text-center mb-4"><?php echo $this->lang->line('Kundli_Birth_Chart'); ?></h3>
         <form id="matchForm">
             <div class="row ">
 
                 <div class="col-12 col-md-6">
 
-                    <h5>Boy's Details</h5>
+                    <h5><?php echo $this->lang->line('Boy_Details'); ?></h5>
 
 
                     <input type="text" name="boy_name" id="boy_name" placeholder="Name" autocomplete="off"
@@ -65,7 +65,35 @@
                         oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
                         pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only">
 
+
                     <div class="row">
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Day'); ?></label>
+                            <select id="boy_day" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Month'); ?></label>
+                            <select id="boy_month" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Year'); ?></label>
+                            <select id="boy_year" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Hour'); ?></label>
+                            <select id="boy_hour" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Minute'); ?></label>
+                            <select id="boy_minute" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Second'); ?></label>
+                            <select id="boy_second" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row">
                         <div class="col-12 col-md-4">
                             <input type="number" name="boy_day" id="boy_day" placeholder="Day" autocomplete="off"
                                 class="form-control shadow-none my-2 p-2 rounded-1" required min="1" max="31">
@@ -92,14 +120,14 @@
                                 autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0"
                                 max="59">
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off"
                         class="form-control shadow-none my-2 p-2 rounded-1" required pattern="^[a-zA-Z\s\-\.',]+$"
                         title="Please enter a valid city name"
                         oninput="this.value = this.value.replace(/[^a-zA-Z\s\-\.',]/g, '')"> -->
 
-                    <label for="boy_birthPlace">Birth Place</label>
+                    <label for="boy_birthPlace"><?php echo $this->lang->line('Boy_Birth_Place'); ?></label>
                     <!-- <input type="text" id="boy_birthPlace" class="form-control shadow-none my-2 p-2 rounded-1"
                             placeholder="Birth Place" required
                             oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
@@ -115,13 +143,40 @@
                 </div>
 
                 <div class="col-12 col-md-6">
-                    <h5>Girl's Details</h5>
+                    <h5><?php echo $this->lang->line('Girl_Details'); ?></h5>
 
 
                     <input type="text" name="girl_name" id="girl_name" placeholder="Name" autocomplete="off"
                         class="form-control shadow-none my-2 p-2 rounded-1">
 
                     <div class="row">
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Day'); ?></label>
+                            <select id="girl_day" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Month'); ?></label>
+                            <select id="girl_month" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Year'); ?></label>
+                            <select id="girl_year" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Hour'); ?></label>
+                            <select id="girl_hour" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Minute'); ?></label>
+                            <select id="girl_minute" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                        <div class="col-4">
+                             <label><?php echo $this->lang->line('Birth_Seconds'); ?></label>
+                            <select id="girl_second" class="form-control my-2 p-2 rounded-1" required></select>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row">
                         <div class="col-12 col-md-4">
                             <input type="number" name="girl_day" id="girl_day" placeholder="Day" autocomplete="off"
                                 class="form-control shadow-none my-2 p-2 rounded-1" required min="1" max="31">
@@ -149,7 +204,7 @@
                                 autocomplete="off" class="form-control shadow-none my-2 p-2 rounded-1" required min="0"
                                 max="59">
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- <input type="text" name="birthPlace" id="birthPlace" placeholder="Birth Place" autocomplete="off"
                         class="form-control shadow-none my-2 p-2 rounded-1" required pattern="^[a-zA-Z\s\-\.',]+$"
@@ -157,7 +212,7 @@
                         oninput="this.value = this.value.replace(/[^a-zA-Z\s\-\.',]/g, '')"> -->
 
 
-                    <label for="girl_birthPlace">Birth Place</label>
+                    <label for="girl_birthPlace"><?php echo $this->lang->line('Girl_Birth_Place'); ?></label>
                     <!-- <input type="text" id="girl_birthPlace" class="form-control shadow-none my-2 p-2 rounded-1"
                             placeholder="Birth Place" required
                             oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
@@ -199,7 +254,7 @@
 
                 <div class="col-12 d-flex gap-2 justify-content-center mt-3">
                     <button type="submit" class="btn" style="background-color: var(--yellow); color: black;">
-                        Submit
+                       <?php echo $this->lang->line('Submit'); ?>
                     </button>
                     <!-- <button type="button" class="btn" style="background-color: var(--yellow); color: black;">
                         Reset
@@ -207,7 +262,7 @@
 
                     <button type="button" class="btn" style="background-color: var(--yellow); color: black;"
                         onclick="document.getElementById('matchForm').reset(); document.getElementById('chartResult').innerHTML = '';">
-                        Reset
+                       <?php echo $this->lang->line('Reset'); ?>
                     </button>
 
 
@@ -223,64 +278,111 @@
     <!-- Horoscope Matching | Kundali Matching | Kundli Match for Marriage -->
     <div class="container my-4">
         <div class="row">
-            <h4 class="text-center my-4" style="color: var(--red); ">Horoscope Matching | Kundali Matching | Kundli
-                Match for Marriage</h4>
-            <p style="text-align: justify;">Horoscope Matching | Kundali Matching | Kundli Match for Marriage is an
-                essential practice in Vedic astrology that assesses the compatibility between two individuals planning
-                to marry. Also known as Guna Milan, this process compares the birth charts (Kundlis) of the prospective
-                bride and groom based on various factors like emotional, physical, spiritual, and intellectual
-                alignment. The system primarily follows the Ashta Koot Milan method, which assigns points to eight
-                different categories totaling 36 points. A higher score indicates greater compatibility and harmony in
-                married life. Kundli matching is not just about future predictions, but also helps identify doshas
-                (flaws), like Manglik Dosha, that may affect marital bliss. Remedies and guidance from astrologers can
-                help mitigate such issues. By aligning celestial influences, horoscope matching aims to ensure a
-                prosperous, peaceful, and balanced married life.</p>
+            <h4 class="text-center my-4" style="color: var(--red); "><?php echo $this->lang->line('Horoscope_Matching_Title'); ?></h4>
+            <p style="text-align: justify;"><?php echo $this->lang->line('Horoscope_Matching_Info'); ?></p>
         </div>
     </div>
 
     <!-- Guna Milan -->
     <div class="container">
         <div class="row">
-            <h4 class="text-center my-4" style="color: var(--red); ">Guna Milan</h4>
-            <p>Each category of the Ashta Koot focuses on a different aspect of life and compatibility, including</p>
+            <h4 class="text-center my-4" style="color: var(--red); "><?php echo $this->lang->line('Guna_Milan'); ?></h4>
+            <p><?php echo $this->lang->line('Ashta_Koot_Intro'); ?></p>
             <ul>
-                <li>Varna: Spiritual compatibility and ego levels</li>
-                <li>Vashya: Mutual control and attraction between partners</li>
-                <li>Tara: Health and well-being compatibility</li>
-                <li>Yoni: Sexual compatibility and overall nature</li>
+                <li><?php echo $this->lang->line('Koot_Varna'); ?></li>
+                <li><?php echo $this->lang->line('Koot_Vashya'); ?></li>
+                <li><?php echo $this->lang->line('Koot_Tara'); ?></li>
+                <li><?php echo $this->lang->line('Koot_Yoni'); ?></li>
             </ul>
         </div>
         <div class="row">
-            <p>In Vedic astrology, the 36 Gunas are a way to compare two people's birth charts to predict how compatible
-                they might be in a marriage. The 36 Gunas are divided into eight categories, called Ashta Koot, and each
-                category is worth a different number of points</p>
-            <ul>
-                <li>Nadi: 8 points</li>
-                <li>Bhakoot: 7 points</li>
-                <li>Gana: 6 points</li>
-                <li>Maitri: 5 points</li>
-                <li>Yoni: 4 points</li>
-                <li>Tara: 3 points</li>
-                <li>Vasya: 2 points</li>
-                <li>Varna: 1 point </li>
-            </ul>
+            <p><?php echo $this->lang->line('Guna_Explanation'); ?></p>
+           <ul>
+  <li><?php echo $this->lang->line('Koot_Nadi'); ?></li>
+  <li><?php echo $this->lang->line('Koot_Bhakoot'); ?></li>
+  <li><?php echo $this->lang->line('Koot_Gana'); ?></li>
+  <li><?php echo $this->lang->line('Koot_Maitri'); ?></li>
+  <li><?php echo $this->lang->line('Koot_Yoni'); ?></li>
+  <li><?php echo $this->lang->line('Koot_Tara'); ?></li>
+  <li><?php echo $this->lang->line('Koot_Vasya'); ?></li>
+  <li><?php echo $this->lang->line('Koot_Varna'); ?></li>
+</ul>
+
         </div>
     </div>
 
     <!-- Importance Of Guna Milan< -->
     <div class="container mb-4">
         <div class="row">
-            <h4 class="text-center my-4" style="color: var(--red); ">Importance Of Guna Milan</h4>
-            <p>For a marriage to be approved, at least 18 Gunas must match between the bride and groom. The degree of
-                compatibility between the couple increases with the number of matching Gunas</p>
+            <h4 class="text-center my-4" style="color: var(--red); "><?php echo $this->lang->line('Guna_Importance_Title'); ?></h4>
+           <p><?php echo $this->lang->line('Guna_Importance_Desc'); ?></p>
             <ul>
-                <li>18–25 Gunas: Considered a good marriage</li>
-                <li>26–32 Gunas: Considered a best match</li>
-                <li>More than 32 Gunas: Considered an ideal marriage</li>
-            </ul>
+    <li><?php echo $this->lang->line('Guna_18_25'); ?></li>
+    <li><?php echo $this->lang->line('Guna_26_32'); ?></li>
+    <li><?php echo $this->lang->line('Guna_32_plus'); ?></li>
+</ul>
         </div>
     </div>
 
+       <script>
+        function populateSelect(id, start, end, pad = false) {
+            const select = document.getElementById(id);
+            select.innerHTML = '<option value="">Select</option>';
+            for (let i = start; i <= end; i++) {
+                const val = pad ? String(i).padStart(2, '0') : i;
+                select.innerHTML += `<option value="${val}">${val}</option>`;
+            }
+        }
+
+        function populateMonth(id) {
+            const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            const select = document.getElementById(id);
+            select.innerHTML = '<option value="">Select</option>';
+            months.forEach((month, i) => {
+                select.innerHTML += `<option value="${i + 1}">${month}</option>`;
+            });
+        }
+
+        // Populate all dropdowns on load
+        document.addEventListener("DOMContentLoaded", function () {
+            ['boy_day', 'girl_day'].forEach(id => populateSelect(id, 1, 31, true));
+            ['boy_month', 'girl_month'].forEach(id => populateMonth(id));
+            ['boy_year', 'girl_year'].forEach(id => populateSelect(id, 1990, new Date().getFullYear()));
+            ['boy_hour', 'girl_hour'].forEach(id => populateSelect(id, 0, 23, true));
+            ['boy_minute', 'girl_minute', 'boy_second', 'girl_second'].forEach(id => populateSelect(id, 0, 59, true));
+        });
+
+        // Form validation
+        document.getElementById("matchForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const requiredFields = [
+                'boy_name', 'boy_day', 'boy_month', 'boy_year', 'boy_hour', 'boy_minute', 'boy_second', 'boy_birthPlace',
+                'girl_name', 'girl_day', 'girl_month', 'girl_year', 'girl_hour', 'girl_minute', 'girl_second', 'girl_birthPlace',
+                'language'
+            ];
+
+            const isValid = requiredFields.every(id => document.getElementById(id)?.value?.trim() !== "");
+
+            if (!isValid) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Missing Information',
+                    text: 'Please fill all required fields.',
+                    confirmButtonColor: '#3085d6',
+                });
+                return;
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: 'All Set!',
+                text: 'All fields are properly filled.',
+                confirmButtonColor: '#3085d6',
+            });
+        });
+    </script>
     <script>
         const input = document.getElementById("boy_birthPlace");
         const suggestionBox = document.getElementById("suggestions");
@@ -386,6 +488,8 @@
         });
     </script>
 
+
+
     <script>
         document.getElementById("matchForm").addEventListener("submit", function (e) {
             e.preventDefault();
@@ -411,8 +515,8 @@
                 girl_second: document.getElementById("girl_second")?.value || "",
                 girl_birthPlace: document.getElementById("girl_birthPlace")?.value || "New Delhi",
                 girl_lat: document.getElementById('girl_lat')?.value || "28.7041",
-                girl_lon: document.getElementById('girl_lon')?.value || "77.1025", 
-                 lan :document.getElementById('language').value || "en",
+                girl_lon: document.getElementById('girl_lon')?.value || "77.1025",
+                lan: document.getElementById('language').value || "en",
             };
 
             const selectedFeature = document.getElementById('astro_feature').value;

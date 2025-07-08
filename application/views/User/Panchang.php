@@ -65,46 +65,46 @@
             <table class="table table-bordered text-warning-emphasis ">
                 <thead>
                     <tr>
-                        <th class="bg-color" scope="col">Title</th>
-                        <th class="bg-color" scope="col">Value</th>
+                        <th class="bg-color" scope="col"><?php echo $this->lang->line('Title'); ?></th>
+                        <th class="bg-color" scope="col"><?php echo $this->lang->line('Value'); ?></th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="bg-color">Date</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Date'); ?></td>
                         <td class="bg-color" id="todayDate">Loading...</td>
                     </tr>
 
                     <tr>
-                        <td class="bg-color">Today's Tithi</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Tithi'); ?></td>
                         <td class="bg-color" id="tithi">Loading...</td>
                     </tr>
                     <tr>
-                        <td class="bg-color">Today's Nakshatra</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Nakshatra'); ?></td>
                         <td class="bg-color" id="nakshatra">Loading...</td>
                     </tr>
 
                     <tr>
-                        <td class="bg-color">Today's Karana</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Karana'); ?></td>
                         <td class="bg-color" id="todayKarana">Loading...</td>
                     </tr>
                     <tr>
-                        <td class="bg-color">Today's Paksha</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Paksha'); ?></td>
                         <td class="bg-color" id="todayPaksha">Loading...</td>
                     </tr>
 
                     <tr>
-                        <td class="bg-color">Today's Yoga</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Yoga'); ?></td>
                         <td class="bg-color" id="todayYoga">Loading...</td>
                     </tr>
 
                     <tr>
-                        <td class="bg-color">Today's Sun Rise Time</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Sunrise'); ?></td>
                         <td class="bg-color" id="sunrise">Loading...</td>
                     </tr>
                     <tr>
-                        <td class="bg-color">Today's Sun Set Time</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Sunset'); ?></td>
                         <td class="bg-color" id="sunset">Loading...</td>
                     </tr>
                     <!-- <tr>
@@ -115,19 +115,19 @@
                         </tr> -->
 
                     <tr>
-                        <td class="bg-color">Today's Weekday</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Weekday'); ?></td>
                         <td class="bg-color" id="weekday">Loading...</td>
                     </tr>
                     <tr>
-                        <td class="bg-color">Today's Moon Rise</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Moonrise'); ?></td>
                         <td class="bg-color" id="moonrise">Loading...</td>
                     </tr>
                     <tr>
-                        <td class="bg-color">Today's Moon Set</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Moonset'); ?></td>
                         <td class="bg-color" id="moonset">Loading...</td>
                     </tr>
                     <tr>
-                        <td class="bg-color">Today's Ritu</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Ritu'); ?></td>
                         <td class="bg-color" id="todayRitu">Loading...</td>
                     </tr>
 
@@ -137,38 +137,38 @@
 
                         </tr> -->
                     <tr>
-                        <td class="bg-color">Vikram Samvat</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Vikram_Samvat'); ?></td>
                         <td class="bg-color" id="vikramSamvat">Loading...</td>
                     </tr>
                     <tr>
-                        <td class="bg-color">Shaka Samvat</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Shaka_Samvat'); ?></td>
                         <td class="bg-color" id="shakaSamvat">Loading...</td>
                     </tr>
 
                     <tr>
-                        <td class="bg-color">Today's Dushta Muhurtas </td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Dushta_Muhurtas'); ?> </td>
                         <td class="bg-color">From 10:35:18 To 11:16:35, From 14:42:57 To 15:24:14</td>
 
                     </tr>
                     <tr>
-                        <td class="bg-color">Today's Kulika</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Kulika'); ?></td>
                         <td class="bg-color">From 10:35:18 To 11:16:35</td>
 
                     </tr>
                     <tr>
-                        <td class="bg-color">Today's Rahu Kaal</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Rahu_Kaal'); ?></td>
                         <td class="bg-color">From 13:35:53 To 14:53:17</td>
 
                     </tr>
 
                     <tr>
-                        <td class="bg-color">Today's Abhijit Muhurat</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Abhijit_Muhurat'); ?></td>
                         <td class="bg-color" id="abhijit-time">From 13:35:53 To 14:53:17</td>
                     </tr>
 
 
                     <tr>
-                        <td class="bg-color">Today's Disha</td>
+                        <td class="bg-color"><?php echo $this->lang->line('Todays_Disha'); ?></td>
                         <td class="bg-color" id="todaysDisha">North</td>
                     </tr>
 

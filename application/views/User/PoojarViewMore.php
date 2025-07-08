@@ -50,6 +50,7 @@
 
 
 
+
     <main>
 
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
@@ -103,8 +104,8 @@
                                                         <div class="d-flex align-items-center m-0 p-0">
                                                             <i class="bi bi-stars text-danger me-2"></i>
                                                             <div>
-                                                                <p class="fw-bold mb-0">Expertise</p>
-                                                                <p class="card-expertise mb-0">Vastu, Vedic</p>
+                                                                <p class="fw-bold mb-0"><?php echo $this->lang->line('Expertise'); ?></p>
+                                                                <p class="card-expertise mb-0"><?php print_r($showpujari[0]["specialties"]) ?></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -112,7 +113,7 @@
                                                         <div class="d-flex align-items-center">
                                                             <i class="bi bi-clock-history text-danger me-2"></i>
                                                             <div>
-                                                                <p class="fw-bold mb-0">Experience</p>
+                                                                <p class="fw-bold mb-0"><?php echo $this->lang->line('Experience'); ?></p>
                                                                 <p class="card-expertise mb-0">
                                                                     <?php print_r($showpujari[0]["experience"]) ?>+
                                                                     Years
@@ -133,7 +134,7 @@
                                                         <div class="d-flex align-items-center">
                                                             <i class="bi bi-translate text-danger me-2"></i>
                                                             <div>
-                                                                <p class="fw-bold mb-0">Languages</p>
+                                                                <p class="fw-bold mb-0"> <?php echo $this->lang->line('Languages'); ?></p>
                                                                 <p class="card-expertise mb-0">
                                                                     <?php print_r($showpujari[0]["languages"]) ?>
                                                                 </p>
@@ -147,7 +148,7 @@
                                             <div
                                                 class="col-md-4 d-flex flex-column justify-content-center align-items-center mt-3 mt-md-0">
                                                 <div class="text-center mb-2">
-                                                    <h5 class="fw-bold text-danger mb-0">Pooja Fee</h5>
+                                                    <h5 class="fw-bold text-danger mb-0"> <?php echo $this->lang->line('Pooja_Fee'); ?></h5>
                                                     <h4 class="fw-bold mb-2">₹
                                                         <?php print_r($showpujari[0]["puja_charges"]) ?>
                                                     </h4>
@@ -155,13 +156,13 @@
                                                 <?php if (empty($this->session->userdata("user_id"))): ?>
                                                     <button class="btn  w-fit rounded-3 text-dark fw-bold"
                                                         style="background-color: var(--yellow);" onclick="showlogin()">
-                                                        Book Pooja
+                                                      <?php  echo $this->lang->line('Book_Pooja');?>
                                                     </button>
                                                 <?php else: ?>
                                                     <button class="btn  w-fit rounded-3 text-dark fw-bold"
                                                         style="background-color: var(--yellow);" data-bs-toggle="modal"
                                                         data-bs-target="#bookpooja">
-                                                        Book Pooja
+                                                    <?php   echo $this->lang->line('Book_Pooja'); ?>
                                                     </button>
 
                                                 <?php endif ?>
@@ -181,7 +182,7 @@
                             <form class="pujadata">
                                 <div class="modal-content">
                                     <div class="d-flex justify-content-between align-items-center p-3">
-                                        <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
+                                        <h1 class="modal-title fs-5" id="bookpoojaLabel"> <?php echo $this->lang->line('Book_Your_Pooja'); ?></h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -198,14 +199,14 @@
                                             </div> -->
 
                                             <div class="col-12">
-                                                <label class="form-label fw-bold">User Email</label>
+                                                <label class="form-label fw-bold"><?php echo $this->lang->line('User_Email');?></label>
                                                 <input type="user_email" name="useremail"
                                                     class="form-control shadow-none" required>
                                             </div>
 
 
                                             <div class="col-12">
-                                                <label class="form-label fw-bold">Preferred Datse</label>
+                                                <label class="form-label fw-bold"><?php echo $this->lang->line('Preferred_Date');?></label>
                                                 <input type="date" name="pujadate" class="form-control shadow-none"
                                                     min="<?php echo date('Y-m-d'); ?>" required>
                                             </div>
@@ -225,7 +226,7 @@
                                                 name="pujari_charges" hidden>
 
                                             <div class="col-12">
-                                                <label class="form-label fw-bold">Preferred Time</label>
+                                                <label class="form-label fw-bold"><?php echo $this->lang->line('Preferred_Time'); ?></label>
                                                 <input type="time" name="pujatime" class="form-control shadow-none"
                                                     required>
                                             </div>
@@ -237,7 +238,7 @@
 
                                         <button type="submit" class="btn text-dark"
                                             style="background-color: var(--yellow);">
-                                            Confirm Booking
+                                         <?php echo $this->lang->line('Confirm_Booking'); ?>
                                         </button>
                                     </div>
                                 </div>
@@ -268,7 +269,7 @@
 
         <section>
             <div class="container mb-5">
-                <h5 class=" mb-4 fw-bold">User Reviews</h5>
+                <h5 class=" mb-4 fw-bold"><?php echo $this->lang->line('User_Reviews'); ?></h5>
                 <div class="owl-carousel owl1 owl-theme">
 
                     <?php if (!empty($showfeedback)): ?>
@@ -322,7 +323,7 @@
 
     <!-- Code for carousel  -->
 
-    <script>
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll("form.pujadata").forEach(form => {
 
@@ -367,7 +368,59 @@
                 });
             });
         });
+    </script> -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("form.pujadata").forEach(form => {
+                form.addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    let formdata = new FormData(form);
+                    const modal = form.closest(".modal"); // get parent modal
+
+                    fetch("<?php echo base_url('User_Api_Controller/send_request_to_pujari'); ?>", {
+                        method: "POST",
+                        body: formdata,
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data["status"] === "success") {
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Feedback submitted successfully",
+                                    icon: "success",
+                                }).then(() => {
+                                    // ✅ Close the modal
+                                    const modalInstance = bootstrap.Modal.getInstance(modal);
+                                    if (modalInstance) {
+                                        modalInstance.hide();
+                                    }
+
+                                    // ✅ Reset form values
+                                    form.reset();
+                                });
+                            } else if (data["status"] === "warning") {
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "Pujari already booked",
+                                    icon: "warning",
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                            Swal.fire({
+                                title: "Error",
+                                text: "Request not sent successfully",
+                                icon: "error",
+                            });
+                        });
+                });
+            });
+        });
     </script>
+
 
 
 

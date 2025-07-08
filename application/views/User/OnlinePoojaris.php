@@ -49,11 +49,11 @@
                 <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
                     <select class="form-select w-auto shadow-none" aria-label="Filter by experience"
                         id="experienceFilter" onchange="filterCards()">
-                        <option selected value="">Experience</option>
-                        <option value="1">0-2 Years</option>
-                        <option value="2">3-5 Years</option>
-                        <option value="3">6-8 Years</option>
-                        <option value="4">9+ Years</option>
+                        <option selected value=""><?php echo $this->lang->line('Experience') ?></option>
+                        <option value="1"> <?php echo $this->lang->line('Experience_0_2') ?></option>
+                        <option value="2"><?php echo $this->lang->line('Experience_3_5') ?></option>
+                        <option value="3"><?php echo $this->lang->line('Experience_6_8') ?></option>
+                        <option value="4"><?php echo $this->lang->line('Experience_9_plus') ?></option>
                     </select>
 
                 </div>
@@ -109,7 +109,7 @@
                                             <div class="d-flex align-items-center gap-1 ">
                                                 <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
                                                 <span class="small text-muted mt-1"><?php echo $pujaridata["average_rating"] ?>
-                                                    (<?php echo $pujaridata["completed_puja_count"] ?>+ Poojas)</span>
+                                                    (<?php echo $pujaridata["completed_puja_count"] ?> <?php echo $this->lang->line('Plus_Years') ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -143,15 +143,22 @@
                                     <!-- Action Buttons -->
                                     <div class="d-flex gap-2">
                                         <?php if ($this->session->userdata("user_id")): ?>
-                                            <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
+                                            <!-- <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
                                                 data-bs-toggle="modal" data-bs-target="#bookpooja">
                                                 Book Pooja
+                                            </button> -->
+
+                                            <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#bookpooja<?php echo $pujaridata["pujari_id_"]; ?>">
+                                               <?php echo $this->lang->line('Book_Pooja') ?>
                                             </button>
+
                                         <?php else: ?>
 
                                             <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
                                                 onclick="Showlogin()">
-                                                Book Pooja
+                                                <?php echo $this->lang->line('Book_Pooja') ?>
                                             </button>
 
                                         <?php endif ?>
@@ -162,7 +169,75 @@
                             </div>
                         </div>
 
-                        <div class="modal fade" id="bookpooja" tabindex="-1" aria-labelledby="bookpoojaLabel"
+                        <div class="modal fade" id="bookpooja<?php echo $pujaridata["pujari_id_"]; ?>" tabindex="-1"
+                            aria-labelledby="bookpoojaLabel<?php echo $pujaridata["pujari_id_"]; ?>" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form class="pujadata">
+                                    <div class="modal-content">
+                                        <div class="d-flex justify-content-between align-items-center p-3">
+                                            <h1 class="modal-title fs-5"
+                                                id="bookpoojaLabel<?php echo $pujaridata["pujari_id_"]; ?>"> <?php echo $this->lang->line('Book_Your_Pooja'); ?></h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row g-3">
+
+                                                <!-- Email -->
+                                                <div class="col-12">
+                                                    <label class="form-label fw-bold"> <?php echo $this->lang->line('User_Email') ?></label>
+                                                    <input type="email" name="useremail" class="form-control shadow-none"
+                                                        required>
+                                                </div>
+
+                                                <!-- Preferred Date -->
+                                                <div class="col-12">
+                                                    <label class="form-label fw-bold"><?php echo $this->lang->line('Preferred_Date') ?></label>
+                                                    <input type="date" name="pujadate" class="form-control shadow-none"
+                                                        min="<?php echo date('Y-m-d'); ?>" required>
+                                                </div>
+
+                                                <!-- Preferred Time -->
+                                                <div class="col-12">
+                                                    <label class="form-label fw-bold"><?php echo $this->lang->line('Preferred_Time') ?></label>
+                                                    <input type="time" name="pujatime" class="form-control shadow-none"
+                                                        required>
+                                                </div>
+
+                                                <!-- Hidden Fields -->
+                                                <input type="hidden" name="pujari_id"
+                                                    value="<?php echo $pujaridata["pujari_id_"]; ?>">
+                                                <input type="hidden" name="service_id"
+                                                    value="<?php echo $pujaridata["service_id"]; ?>">
+                                                <input type="hidden" name="puja_mode" value="Online">
+                                                <input type="hidden" name="user_id"
+                                                    value="<?php echo $this->session->userdata("user_id") ?? null; ?>">
+                                                <input type="hidden" name="pujari_charges"
+                                                    value="<?php echo $pujaridata["puja_charges"]; ?>">
+
+                                            </div>
+                                        </div>
+                                        <div class="p-3 d-flex justify-content-center align-items-center gap-3">
+                                            <button type="submit" class="btn text-dark"
+                                                style="background-color: var(--yellow);">
+                                           <?php  echo $this->lang->line('Confirm_Booking') ?>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-12">
+                                    <label class="form-label fw-bold">Address</label>
+                                    <textarea class="form-control shadow-none" rows="3"
+                                        placeholder="Enter your complete address" required
+                                        oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s]/g, ''); })(this)"
+                                        pattern="^[A-Za-z0-9À-ž\s]+$"
+                                        title="Enter Alphabets and Numbers Only"></textarea>
+                                </div> -->
+
+                        <!-- <div class="modal fade" id="bookpooja" tabindex="-1" aria-labelledby="bookpoojaLabel"
                             aria-hidden="true">
                             <div class="modal-dialog ">
                                 <form class="pujadata">
@@ -175,14 +250,7 @@
                                         <div class="modal-body">
 
                                             <div class="row g-3">
-                                                <!-- <div class="col-12">
-                                    <label class="form-label fw-bold">Address</label>
-                                    <textarea class="form-control shadow-none" rows="3"
-                                        placeholder="Enter your complete address" required
-                                        oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s]/g, ''); })(this)"
-                                        pattern="^[A-Za-z0-9À-ž\s]+$"
-                                        title="Enter Alphabets and Numbers Only"></textarea>
-                                </div> -->
+                                               
 
                                                 <div class="col-12">
                                                     <label class="form-label fw-bold">User Email</label>
@@ -230,7 +298,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> -->
 
                     <?php endforeach ?>
                 <?php else: ?>
@@ -299,7 +367,7 @@
         </script>
 
         <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-        <script>
+        <!-- <script>
             document.addEventListener("DOMContentLoaded", function () {
                 document.querySelectorAll("form.pujadata").forEach(form => {
 
@@ -354,6 +422,58 @@
                     });
                 });
             });
+        </script> -->
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll("form.pujadata").forEach(form => {
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault();
+
+                        let formdata = new FormData(form);
+                        const modal = form.closest(".modal");
+
+                        fetch("<?php echo base_url('User_Api_Controller/send_request_to_pujari'); ?>", {
+                            method: "POST",
+                            body: formdata,
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data["status"] == "success") {
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: "Request sent successfully",
+                                        icon: "success",
+                                    }).then(() => {
+                                        // ✅ Close modal
+                                        const modalInstance = bootstrap.Modal.getInstance(modal);
+                                        if (modalInstance) {
+                                            modalInstance.hide();
+                                        }
+
+                                        // ✅ Reset form
+                                        form.reset();
+                                    });
+                                } else if (data["status"] == "warning") {
+                                    Swal.fire({
+                                        title: "Warning",
+                                        text: "Pujari already booked",
+                                        icon: "warning",
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "Request not sent successfully",
+                                    icon: "error",
+                                });
+                                console.error("Error:", error);
+                            });
+                    });
+                });
+            });
+
         </script>
 
         <!-- <script>

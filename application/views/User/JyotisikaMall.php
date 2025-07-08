@@ -180,7 +180,7 @@
                                     <div class="mt-auto text-center">
                                         <a href="ProductDetails/<?php echo $product['product_id'] ?>" class="btn btn-sm  mt-2"
                                             style="background-color: var(--yellow); color: var(--text-color);">
-                                            View Details
+                                       <?php   echo $this->lang->line('View_Details'); ?>
                                         </a>
                                     </div>
                                 </div>
@@ -188,7 +188,7 @@
                         </div>
                         <?php endforeach?>
                         <?php else :?>
-                            <p>There is no product </p>
+                            <p> <?php echo $this->lang->line('No_Product'); ?> </p>
                             <?php endif ?>
                 </div>
             </div>
@@ -268,7 +268,7 @@
         <!-- carousel gallery for products -->
         <section>
             <div class="container py-5">
-                <h1 class="text-start mb-5" style="color: var(--red);">Our Photo Gallery</h1>
+                <h1 class="text-start mb-5" style="color: var(--red);"><?php echo $this->lang->line('Photo_Gallery'); ?></h1>
 
                 <div class="row g-3">
                     <!-- Large featured image -->

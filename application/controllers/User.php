@@ -510,6 +510,8 @@ class User extends CI_Controller
 
 	public function ProductDetails($product_id)
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 
 		$api_url = base_url("User_Api_Controller/get_specific_product");
 
@@ -654,6 +656,9 @@ class User extends CI_Controller
 	public function Cart()
 	{
 
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
 		if (!$this->session->userdata("user_id")) {
 			redirect('home');
 		}
@@ -704,6 +709,9 @@ class User extends CI_Controller
 	}
 	public function ProductPayment()
 	{
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 
 		if (!$this->session->userdata("user_id")) {
 			redirect('home');
@@ -1392,6 +1400,8 @@ class User extends CI_Controller
 	public function PoojarViewMore($pujari_id, $puja_id)
 	{
 
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 
 		$formdata = [
 			"pujari_id" => $pujari_id,
@@ -1533,6 +1543,9 @@ class User extends CI_Controller
 
 	public function OnlinePoojaris($puja_id)
 	{
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 
 		$api_url = base_url("User_Api_Controller/get_pujari_of_puja");
 		$ch = curl_init();

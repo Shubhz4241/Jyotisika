@@ -122,7 +122,7 @@
                                         <!-- Time Section -->
                                         <div class="d-flex align-items-center small fw-bold text-danger">
                                             <i class="bi bi-clock me-2"></i>
-                                            <span class="fs-6"> Pooja Start in:-</span>
+                                            <span class="fs-6"> <?php  echo $this->lang->line('Pooja_Start_In');?></span>
                                         </div>
                                         <div class="d-flex align-items-center small fw-bold text-danger">
                                             <i class="bi  me-2"></i>
@@ -142,7 +142,7 @@
                                             <button class="btn text-dark btn-sm w-100 rounded-3 fw-bold"
                                                 style="background-color: var(--yellow);" data-bs-toggle="modal"
                                                 data-bs-target="#<?php echo $modalId; ?>">
-                                                Book Pooja
+                                             <?php   echo $this->lang->line('Book_Pooja'); ?>
                                             </button>
                                         </div>
                                     <?php else: ?>
@@ -155,7 +155,7 @@
                                         <div class="d-grid">
                                             <button class="btn showlogin text-dark btn-sm w-100 rounded-3 fw-bold"
                                                 style="background-color: var(--yellow);">
-                                                Book Puja
+                                            <?php  echo $this->lang->line('Book_Pooja'); ?>
                                             </button>
                                         </div>
 
@@ -174,7 +174,7 @@
                                 <form class="pujadata">
                                     <div class="modal-content">
                                         <div class="d-flex justify-content-between align-items-center p-3">
-                                            <h1 class="modal-title fs-5" id="bookpoojaLabel">Book Your Pooja</h1>
+                                            <h1 class="modal-title fs-5" id="bookpoojaLabel"><?php echo $this->lang->line('Book_Your_Pooja'); ?></h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
@@ -184,13 +184,13 @@
 
 
                                                 <div class="col-12">
-                                                    <label class="form-label fw-bold">User Email</label>
+                                                    <label class="form-label fw-bold"><?php echo $this->lang->line('User_Email'); ?></label>
                                                     <input type="user_email" name="useremail" class="form-control shadow-none"
                                                         required>
                                                 </div>
 
                                                 <div class="col-12">
-                                                    <label class="form-label fw-bold">Preferred Date</label>
+                                                    <label class="form-label fw-bold"><?php echo $this->lang->line('Preferred_Date'); ?></label>
                                                     <input type="date" name="pujadate" class="form-control shadow-none"
                                                         value="<?php echo $showmobpujadata["mobpujadate"] ?>"
                                                         min="<?php echo date('Y-m-d'); ?>" required readonly>
@@ -213,7 +213,7 @@
                                                 <input type="text" value="<?php echo $showmobpujadata["discount_price"] ?>"
                                                     name="pujari_charges" hidden>
                                                 <div class="col-12">
-                                                    <label class="form-label fw-bold">Preferred Time</label>
+                                                    <label class="form-label fw-bold"><?php echo $this->lang->line('Preferred_Time'); ?></label>
                                                     <input type="time" value="<?php echo $showmobpujadata["puja_time"] ?>"
                                                         name="pujatime" class="form-control shadow-none" required readonly>
                                                 </div>
@@ -224,7 +224,7 @@
 
                                             <button type="submit" class="btn text-dark"
                                                 style="background-color: var(--yellow);">
-                                                Confirm Booking
+                                             <?php echo $this->lang->line('Confirm_Booking'); ?>
                                             </button>
                                         </div>
                                     </div>
