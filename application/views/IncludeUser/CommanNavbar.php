@@ -2,7 +2,7 @@
     style="background-color: var(--yellow) !important;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="<?php echo base_url('assets/images/userlogodemo.png'); ?>" alt="logo image"
+            <img src="<?php echo base_url('assets/images/new_logo.png'); ?>" alt="logo image"
                 style="width: 60px; height: 60px; mix-blend-mode: multiply;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

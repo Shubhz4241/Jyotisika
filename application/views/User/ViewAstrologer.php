@@ -132,7 +132,7 @@
                                     <div class="d-flex align-items-center justify-content-start h-100  p-3">
 
 
-                                        <img src="<?php echo !empty($astrologerdata[0]['profile_pic']) ? base_url($astrologerdata[0]['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                        <img src="<?php echo !empty($astrologerdata[0]['profile_pic']) ? base_url("/uploads/Astologer/".$astrologerdata[0]['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
                                             alt="image" class="rounded-circle border border-3 border-white me-3"
                                             style="width: 120px; height: 120px; object-fit: cover;">
                                         <div>

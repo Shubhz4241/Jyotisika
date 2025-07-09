@@ -190,7 +190,7 @@
 
                         <!-- Image and Explanation -->
                         <div class="col-12 col-md-6 text-center">
-                            <img src="<?php echo base_url('assets/images/Freekundli/kundli.png'); ?>" alt="kundli"
+                            <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png'); ?>" alt="kundli"
                                 class="img-fluid" style="width: 150px; height: 150px;">
                             <p class="mt-2 justified-text"><p><?php echo $this->lang->line('KP_Chart_Info'); ?></p>
                         </div>

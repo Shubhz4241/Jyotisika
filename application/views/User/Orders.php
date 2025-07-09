@@ -287,25 +287,25 @@
 
 
 
-                                                    <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                    <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url("/uploads/Astologer/".$astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
                                                         alt="image" class="rounded-circle"
                                                         style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
 
 
                                                     <div class="ms-2">
-                                                        <a href="<?php echo base_url('ViewAstrologer'); ?>"
-                                                            class="text-decoration-none">
+                                                        <!-- <a href="<?php echo base_url('ViewAstrologer'); ?>"
+                                                            class="text-decoration-none"> -->
                                                             <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
                                                                 <?php echo $astrologer['name']; ?>
                                                             </h6>
-                                                        </a>
+                                                        <!-- </a> -->
 
-                                                        <div class="d-flex align-items-center gap-1">
+                                                        <!-- <div class="d-flex align-items-center gap-1">
                                                             <?php for ($i = 0; $i < 3; $i++): ?>
                                                                 <img src="<?php echo base_url('assets/images/rating.png'); ?>"
                                                                     alt="star" style="width: 15px; height: 15px;">
                                                             <?php endfor; ?>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
 
@@ -664,7 +664,7 @@
                                                         "key": data.key,
                                                         "amount": data.amount,
                                                         "currency": "INR",
-                                                        "name": "New Astro",
+                                                        "name": "Jyotisika",
                                                         "description": "Order Payment",
                                                         "order_id": data.order_id,
                                                         "handler": function (response) {

@@ -512,7 +512,14 @@ class User_Api_Controller extends CI_Controller
 
                 //Jyotisika test payment
 
-                'key' => 'rzp_test_YcEtdZa9f7N8R6',
+                // 'key' => 'rzp_test_YcEtdZa9f7N8R6',
+
+
+                //Jyotisika live payment
+
+                'key' => 'rzp_live_OhYeV3XCMIFBH5',
+
+                
 
 
 
@@ -1921,8 +1928,13 @@ class User_Api_Controller extends CI_Controller
                 // 'key' => 'rzp_live_aKnqCVUpRcVAoS',
 
 
-                'key' => 'rzp_test_YcEtdZa9f7N8R6',
-                //
+                // 'key' => 'rzp_test_YcEtdZa9f7N8R6',
+
+
+                //Javascript live keys
+
+
+                 'key' => 'rzp_live_OhYeV3XCMIFBH5',
 
 
                 // 'name'           => $user->username,
@@ -2945,7 +2957,13 @@ class User_Api_Controller extends CI_Controller
 
 
                 //Jyotisika updated test keys
-                'key' => 'rzp_test_YcEtdZa9f7N8R6',
+                // 'key' => 'rzp_test_YcEtdZa9f7N8R6',
+
+
+                //Jyotisika live updated test keys
+                 'key' => 'rzp_live_OhYeV3XCMIFBH5',
+                
+
 
 
                 // 'name'           => $user->username,
