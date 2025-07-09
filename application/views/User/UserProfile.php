@@ -181,10 +181,17 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="address" class="form-label">Current Address</label>
-                                <input type="text" class="form-control" id="address" name="user_CurrentAddress"
-                                    value="<?php echo $user_CurrentAddress; ?>" autocomplete="off" required
-                                    oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s]/g, ''); })(this)"
-                                    pattern="^[A-Za-z0-9À-ž\s]+$" title="Enter Alphabets and Numbers Only">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="address"
+                                    name="user_CurrentAddress"
+                                    value="<?php echo $user_CurrentAddress; ?>"
+                                    autocomplete="off"
+                                    required
+                                    oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s,]/g, ''); })(this)"
+                                    pattern="^[A-Za-z0-9À-ž\s,]+$"
+                                    title="Enter Alphabets, Numbers, and Commas Only">
                             </div>
                         </div>
                         <div class="col-md-6">

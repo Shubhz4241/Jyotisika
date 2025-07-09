@@ -216,19 +216,56 @@
                     <div class="p-4  rounded-3 shadow-sm">
                         <h4 class="mb-3">Still have questions?</h4>
                         <p class="mb-3">We're here to help! If your query isn't listed above, feel free to reach out to us.</p>
-                        <a href="#" class="btn btn-warning btn-lg px-4">
+                        <a href="#" class="btn btn-warning btn-sm px-4" data-bs-toggle="modal" data-bs-target="#contactModal">
                             <i class="bi bi-envelope-fill me-2"></i>Contact Us
                         </a>
                     </div>
                 </div>
             </div>
         </section>
-
-
-
-
-
     </main>
+
+
+    <!-- Contact Us Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="post" action="your-backend-handler.php" class="modal-content needs-validation" novalidate>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Contact Us</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label for="contactName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="contactName" name="contact_name" required pattern="[A-Za-z\s]+" title="Only letters and spaces allowed" placeholder="Enter your name">
+                        <div class="invalid-feedback">Please enter a valid name (letters only).</div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="contactEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="contactEmail" name="contact_email" required placeholder="Enter your email">
+                        <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="mb-3">
+                        <label for="contactMessage" class="form-label">Message</label>
+                        <textarea class="form-control" id="contactMessage" name="contact_message" rows="4" required placeholder="Enter Message"></textarea>
+                        <div class="invalid-feedback">Please enter your message.</div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn" style="background-color: var(--yellow);">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 
 
@@ -237,6 +274,22 @@
     </footer>
 
 
+    <!-- Add this script for Bootstrap validation -->
+    <script>
+        (() => {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
 
 
 </body>

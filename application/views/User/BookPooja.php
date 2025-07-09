@@ -33,7 +33,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="input-group w-50 text-center mx-auto">
+            <div class="input-group w-md-50 text-center mx-auto">
                 <input id="searchInput" type="search" class="form-control shadow-none"
                     placeholder="Let’s book your puja, what do you need help with?" onkeyup="filterCards()">
                 <button class="btn border" type="button" style="background-color: var(--yellow); color: black;">
@@ -44,83 +44,80 @@
 
         <!-- <?php print_r($puja_data) ?> -->
 
-        <?php if(!empty($puja_data)): ?>
-        <div class="row my-4" id="cardContainer">
+        <?php if (!empty($puja_data)): ?>
+            <div class="row my-4" id="cardContainer">
 
+                <?php
+                $cards = [
+                    [
+                        'image' => 'assets/images/BookPooja/RitualReuniteYourLove.png',
+                        'title' => 'Ritual: Reunite Your Love',
+                        'description' => 'Heal bonds, foster harmony, and rebuild connections.',
+                        'badge' => 'New'
+                    ],
+                    [
+                        'image' => 'assets/images/BookPooja/Rahuketu&ShaniPooja.png',
+                        'title' => 'Rahuketu & ShaniPooja',
+                        'description' => 'Heal bonds, foster harmony, and rebuild connections.',
+                        'badge' => 'Popular'
+                    ],
+                    [
+                        'image' => 'assets/images/BookPooja/GauriShankarPooja.png',
+                        'title' => 'Gauri Shankar Pooja',
+                        'description' => 'Attract wealth and success into your life.',
+                        'badge' => 'New'
+                    ],
+                    [
+                        'image' => 'assets/images/BookPooja/MahaRudrabhishekpooja.png',
+                        'title' => 'Maha Rudrabhishek Pooja',
+                        'description' => 'Attract wealth and success into your life.',
+                        'badge' => 'New'
+                    ],
+                    // Add more cards as needed
+                ];
 
+                ?>
 
+                <?php foreach ($puja_data as $card): ?>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 card-item">
+                        <div class="card h-100 shadow-sm border-0 card-hover">
 
-            <?php
-            $cards = [
-                [
-                    'image' => 'assets/images/BookPooja/RitualReuniteYourLove.png',
-                    'title' => 'Ritual: Reunite Your Love',
-                    'description' => 'Heal bonds, foster harmony, and rebuild connections.',
-                    'badge' => 'New'
-                ],
-                [
-                    'image' => 'assets/images/BookPooja/Rahuketu&ShaniPooja.png',
-                    'title' => 'Rahuketu & ShaniPooja',
-                    'description' => 'Heal bonds, foster harmony, and rebuild connections.',
-                    'badge' => 'Popular'
-                ],
-                [
-                    'image' => 'assets/images/BookPooja/GauriShankarPooja.png',
-                    'title' => 'Gauri Shankar Pooja',
-                    'description' => 'Attract wealth and success into your life.',
-                    'badge' => 'New'
-                ],
-                [
-                    'image' => 'assets/images/BookPooja/MahaRudrabhishekpooja.png',
-                    'title' => 'Maha Rudrabhishek Pooja',
-                    'description' => 'Attract wealth and success into your life.',
-                    'badge' => 'New'
-                ],
-                // Add more cards as needed
-            ];
-
-            ?>
-
-            <?php foreach ($puja_data as $card): ?>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 card-item">
-                    <div class="card h-100 shadow-sm border-0 card-hover">
-
-                        <a href="<?php echo base_url('PoojaInfo/' . $card["id"]) ?>">
-                            <div class="position-relative">
-                                <img src="<?php echo 'assets/images/BookPooja/MahaRudrabhishekpooja.png' ?>"
-                                    class="card-img-top" alt="<?php echo $card['name']; ?>"
-                                    style="height: 200px; object-fit: cover;">
-                                <div class="position-absolute top-0 end-0 m-2">
-                                    <span class="badge bg-danger"><?php echo $card['name']; ?></span>
+                            <a href="<?php echo base_url('PoojaInfo/' . $card["id"]) ?>">
+                                <div class="position-relative">
+                                    <img src="<?php echo 'assets/images/BookPooja/MahaRudrabhishekpooja.png' ?>"
+                                        class="card-img-top" alt="<?php echo $card['name']; ?>"
+                                        style="height: 200px; object-fit: cover;">
+                                    <div class="position-absolute top-0 end-0 m-2">
+                                        <span class="badge bg-danger"><?php echo $card['name']; ?></span>
+                                    </div>
                                 </div>
+                            </a>
+
+
+
+                            <div class="card-body text-center">
+                                <h5 class="card-title fw-bold"><?php echo $card['name']; ?></h5>
+                                <p class="card-text text-muted"><?php echo $card['description']; ?></p>
                             </div>
-                        </a>
-
-
-
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold"><?php echo $card['name']; ?></h5>
-                            <p class="card-text text-muted"><?php echo $card['description']; ?></p>
-                        </div>
-                        <div class="card-footer bg-transparent border-0">
-                            <div class="d-flex justify-content-between gap-2 px-2">
-                                <!-- <a href="<?php echo base_url('OfflinePoojaris') ?>" class="btn btn-dark text-dark flex-grow-1" style="background-color:var(--yellow)">
+                            <div class="card-footer bg-transparent border-0">
+                                <div class="d-flex justify-content-between gap-2 px-2">
+                                    <!-- <a href="<?php echo base_url('OfflinePoojaris') ?>" class="btn btn-dark text-dark flex-grow-1" style="background-color:var(--yellow)">
                                     Offline
                                 </a> -->
-                                <a href="<?php echo base_url('OnlinePoojaris/' . $card['id']) ?>"
-                                    class="btn btn-outline-dark btnHover flex-grow-1">
-                                    Online
-                                </a>
+                                    <a href="<?php echo base_url('OnlinePoojaris/' . $card['id']) ?>"
+                                        class="btn btn-outline-dark btnHover flex-grow-1">
+                                        Online
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
+                <?php endforeach; ?>
+            </div>
 
-        <?php  else: ?>
-           <p>There is no puja Available</p>
-            <?php endif?>
+        <?php else: ?>
+            <p>There is no puja Available</p>
+        <?php endif ?>
 
     </div>
 

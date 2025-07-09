@@ -80,7 +80,7 @@ $lang['Astrological_Services'] = "ज्योतिष सेवा";
 $lang['Astrological_Description'] = "आपल्या गरजेनुसार आमच्या विविध ज्योतिष सेवांचा शोध घ्या.";
 
 $lang['Categories'] = "विभाग";
-$lang['Kundli_Birth_Chart'] = "कुंडली / जन्म पत्रिका";
+$lang['Kundli_Birth_Chart'] = "कुंडली जुळत";
 $lang['Kundli_Matching'] = "कुंडली मिलान";
 $lang['Panchang'] = "पंचांग";
 $lang['Horoscope'] = "राशिफळ";
@@ -314,7 +314,7 @@ $lang['Todays_Disha'] = "आजची दिशा";
 
 //Kudali mactching
 
-$lang['Kundli_Birth_Chart'] = "कुंडली / जन्मपत्रिका";
+$lang['Kundli_Birth_Chart'] = "कुंडली जुळत";
 $lang['Boy_Details'] = "मुलाचा तपशील";
 $lang['Girl_Details'] = "मुलीचा तपशील";
 
@@ -455,6 +455,3 @@ $lang['Continue_To_Buy'] = "खरेदी सुरू ठेवा";
 $lang['Cart_Empty_Message'] = "तुमची कार्ट रिकामी आहे!";
 $lang['Cart_Empty_Subtext'] = "अजून तुम्ही कार्टमध्ये काहीही जोडलेले नाही.";
 $lang['Browse_Products'] = "उत्पादने ब्राउझ करा";
-
-?>
-

@@ -89,7 +89,7 @@ $lang['Astrological_Services'] = "Astrological Services";
 $lang['Astrological_Description'] = "Explore our range of astrological services tailored to your needs.";
 
 $lang['Categories'] = "Categories";
-$lang['Kundli_Birth_Chart'] = "Kundli/Birth Chart";
+$lang['Kundli_Birth_Chart'] = "Kundli Matching";
 $lang['Kundli_Matching'] = "Kundli Matching";
 $lang['Panchang'] = "Panchang";
 $lang['Horoscope'] = "Horoscope";
@@ -339,7 +339,7 @@ $lang['Todays_Disha'] = "Today's Disha";
 //Kudali matching 
 
 // Kundli Matching Form Labels
-$lang['Kundli_Birth_Chart'] = "Kundli / Birth Chart";
+$lang['Kundli_Birth_Chart'] = "Kundli Matching";
 $lang['Boy_Details'] = "Boy's Details";
 $lang['Girl_Details'] = "Girl's Details";
 
@@ -480,9 +480,3 @@ $lang['Continue_To_Buy'] = "Continue to Buy";
 $lang['Cart_Empty_Message'] = "Your cart is empty!";
 $lang['Cart_Empty_Subtext'] = "Looks like you haven't added anything to your cart yet.";
 $lang['Browse_Products'] = "Browse Products";
-
-?>
-
-
-
-
