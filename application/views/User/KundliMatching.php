@@ -68,27 +68,27 @@
 
                     <div class="row">
                         <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Day'); ?></label>
+                            <label><?php echo $this->lang->line('Birth_Day'); ?></label>
                             <select id="boy_day" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Month'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Month'); ?></label>
                             <select id="boy_month" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Year'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Year'); ?></label>
                             <select id="boy_year" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Hour'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Hour'); ?></label>
                             <select id="boy_hour" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Minute'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Minute'); ?></label>
                             <select id="boy_minute" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Second'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Second'); ?></label>
                             <select id="boy_second" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
                     </div>
@@ -150,28 +150,28 @@
                         class="form-control shadow-none my-2 p-2 rounded-1">
 
                     <div class="row">
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Day'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Day'); ?></label>
                             <select id="girl_day" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Month'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Month'); ?></label>
                             <select id="girl_month" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Year'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Year'); ?></label>
                             <select id="girl_year" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Hour'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Hour'); ?></label>
                             <select id="girl_hour" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Minute'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Minute'); ?></label>
                             <select id="girl_minute" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
-                        <div class="col-4">
-                             <label><?php echo $this->lang->line('Birth_Seconds'); ?></label>
+                        <div class="col-6 col-lg-4">
+                            <label><?php echo $this->lang->line('Birth_Seconds'); ?></label>
                             <select id="girl_second" class="form-control my-2 p-2 rounded-1" required></select>
                         </div>
                     </div>
@@ -212,7 +212,8 @@
                         oninput="this.value = this.value.replace(/[^a-zA-Z\s\-\.',]/g, '')"> -->
 
 
-                    <label for="girl_birthPlace"><?php echo $this->lang->line('Girl_Birth_Place'); ?></label>
+                   
+                        <label for="girl_birthPlace"><?php echo $this->lang->line('Girl_Birth_Place'); ?></label>
                     <!-- <input type="text" id="girl_birthPlace" class="form-control shadow-none my-2 p-2 rounded-1"
                             placeholder="Birth Place" required
                             oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
@@ -254,7 +255,7 @@
 
                 <div class="col-12 d-flex gap-2 justify-content-center mt-3">
                     <button type="submit" class="btn" style="background-color: var(--yellow); color: black;">
-                       <?php echo $this->lang->line('Submit'); ?>
+                        <?php echo $this->lang->line('Submit'); ?>
                     </button>
                     <!-- <button type="button" class="btn" style="background-color: var(--yellow); color: black;">
                         Reset
@@ -262,7 +263,7 @@
 
                     <button type="button" class="btn" style="background-color: var(--yellow); color: black;"
                         onclick="document.getElementById('matchForm').reset(); document.getElementById('chartResult').innerHTML = '';">
-                       <?php echo $this->lang->line('Reset'); ?>
+                        <?php echo $this->lang->line('Reset'); ?>
                     </button>
 
 
@@ -297,16 +298,16 @@
         </div>
         <div class="row">
             <p><?php echo $this->lang->line('Guna_Explanation'); ?></p>
-           <ul>
-  <li><?php echo $this->lang->line('Koot_Nadi'); ?></li>
-  <li><?php echo $this->lang->line('Koot_Bhakoot'); ?></li>
-  <li><?php echo $this->lang->line('Koot_Gana'); ?></li>
-  <li><?php echo $this->lang->line('Koot_Maitri'); ?></li>
-  <li><?php echo $this->lang->line('Koot_Yoni'); ?></li>
-  <li><?php echo $this->lang->line('Koot_Tara'); ?></li>
-  <li><?php echo $this->lang->line('Koot_Vasya'); ?></li>
-  <li><?php echo $this->lang->line('Koot_Varna'); ?></li>
-</ul>
+            <ul>
+                <li><?php echo $this->lang->line('Koot_Nadi'); ?></li>
+                <li><?php echo $this->lang->line('Koot_Bhakoot'); ?></li>
+                <li><?php echo $this->lang->line('Koot_Gana'); ?></li>
+                <li><?php echo $this->lang->line('Koot_Maitri'); ?></li>
+                <li><?php echo $this->lang->line('Koot_Yoni'); ?></li>
+                <li><?php echo $this->lang->line('Koot_Tara'); ?></li>
+                <li><?php echo $this->lang->line('Koot_Vasya'); ?></li>
+                <li><?php echo $this->lang->line('Koot_Varna'); ?></li>
+            </ul>
 
         </div>
     </div>
@@ -315,16 +316,16 @@
     <div class="container mb-4">
         <div class="row">
             <h4 class="text-center my-4" style="color: var(--red); "><?php echo $this->lang->line('Guna_Importance_Title'); ?></h4>
-           <p><?php echo $this->lang->line('Guna_Importance_Desc'); ?></p>
+            <p><?php echo $this->lang->line('Guna_Importance_Desc'); ?></p>
             <ul>
-    <li><?php echo $this->lang->line('Guna_18_25'); ?></li>
-    <li><?php echo $this->lang->line('Guna_26_32'); ?></li>
-    <li><?php echo $this->lang->line('Guna_32_plus'); ?></li>
-</ul>
+                <li><?php echo $this->lang->line('Guna_18_25'); ?></li>
+                <li><?php echo $this->lang->line('Guna_26_32'); ?></li>
+                <li><?php echo $this->lang->line('Guna_32_plus'); ?></li>
+            </ul>
         </div>
     </div>
 
-       <script>
+    <script>
         function populateSelect(id, start, end, pad = false) {
             const select = document.getElementById(id);
             select.innerHTML = '<option value="">Select</option>';
@@ -336,7 +337,8 @@
 
         function populateMonth(id) {
             const months = ['January', 'February', 'March', 'April', 'May', 'June',
-                'July', 'August', 'September', 'October', 'November', 'December'];
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
             const select = document.getElementById(id);
             select.innerHTML = '<option value="">Select</option>';
             months.forEach((month, i) => {
@@ -345,7 +347,7 @@
         }
 
         // Populate all dropdowns on load
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             ['boy_day', 'girl_day'].forEach(id => populateSelect(id, 1, 31, true));
             ['boy_month', 'girl_month'].forEach(id => populateMonth(id));
             ['boy_year', 'girl_year'].forEach(id => populateSelect(id, 1990, new Date().getFullYear()));
@@ -354,7 +356,7 @@
         });
 
         // Form validation
-        document.getElementById("matchForm").addEventListener("submit", function (e) {
+        document.getElementById("matchForm").addEventListener("submit", function(e) {
             e.preventDefault();
 
             const requiredFields = [
@@ -388,7 +390,7 @@
         const suggestionBox = document.getElementById("suggestions");
         let debounceTimer = null;
 
-        input.addEventListener("input", function () {
+        input.addEventListener("input", function() {
             const query = input.value.trim();
             if (debounceTimer) clearTimeout(debounceTimer);
             if (query.length < 2) {
@@ -428,7 +430,7 @@
         });
 
         // Hide suggestions when clicking outside
-        document.addEventListener("click", function (e) {
+        document.addEventListener("click", function(e) {
             if (!suggestionBox.contains(e.target) && e.target !== input) {
                 suggestionBox.innerHTML = "";
             }
@@ -441,7 +443,7 @@
         const suggestionBoxgirl = document.getElementById("suggestionsgirl");
         let debounceTimergirl = null;
 
-        inputgirl.addEventListener("input", function () {
+        inputgirl.addEventListener("input", function() {
             const querygirl = inputgirl.value.trim();
             if (debounceTimergirl) clearTimeout(debounceTimergirl);
             if (querygirl.length < 2) {
@@ -481,7 +483,7 @@
         });
 
         // Hide suggestions when clicking outside
-        document.addEventListener("click", function (e) {
+        document.addEventListener("click", function(e) {
             if (!suggestionBoxgirl.contains(e.target) && e.target !== input) {
                 suggestionBoxgirl.innerHTML = "";
             }
@@ -491,7 +493,7 @@
 
 
     <script>
-        document.getElementById("matchForm").addEventListener("submit", function (e) {
+        document.getElementById("matchForm").addEventListener("submit", function(e) {
             e.preventDefault();
 
             const formData = {
@@ -539,12 +541,12 @@
             }
 
             fetch(apiUrl, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            })
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                })
                 .then(res => {
                     if (selectedFeature === 'horoscope') {
                         return res.text(); // For horoscope, get raw HTML/text
@@ -555,8 +557,7 @@
                 .then(data => {
                     if (selectedFeature === 'horoscope') {
                         document.getElementById("chartResult").innerHTML = data;
-                    }
-                    else if (selectedFeature === 'ashtakoot') {
+                    } else if (selectedFeature === 'ashtakoot') {
 
                         console.log(data);
                         const ak = data.data.data.ashtakoot_milan;
@@ -593,11 +594,7 @@
                         }
 
                         document.getElementById("chartResult").innerHTML = html;
-                    }
-
-
-
-                    else if (selectedFeature === 'dashakoot') {
+                    } else if (selectedFeature === 'dashakoot') {
                         const dk = data.data.data.dashakoot_milan;
                         const result = data.data.data.dashakoot_milan_result;
 
@@ -632,9 +629,7 @@
                         }
 
                         document.getElementById("chartResult").innerHTML = html;
-                    }
-
-                    else if (selectedFeature === 'manglik') {
+                    } else if (selectedFeature === 'manglik') {
                         const manglikData = data.data.data;
 
                         const p1 = manglikData.p1;
@@ -665,9 +660,7 @@
     `;
 
                         document.getElementById("chartResult").innerHTML = html;
-                    }
-
-                    else {
+                    } else {
                         document.getElementById("chartResult").innerHTML = `
                         <div class="alert alert-success">Data Loaded Successfully</div>
                         <pre class="bg-light p-2 rounded">${data}</pre>

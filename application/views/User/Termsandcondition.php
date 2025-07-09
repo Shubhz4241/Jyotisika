@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jyotisika:Privacy Policy</title>
@@ -41,27 +42,33 @@
             padding: 0;
             background-color: #f4f4f4;
         }
+
         .container {
-            width: 60%;
+            width: 100%;
             margin: 50px auto;
             padding: 20px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
             text-align: center;
             color: #333;
         }
+
         .terms {
             margin-top: 20px;
         }
+
         .terms h3 {
             color: #444;
         }
+
         .terms p {
             line-height: 1.6;
         }
+
         .accept-btn {
             display: block;
             width: 100%;
@@ -75,13 +82,15 @@
             margin-top: 20px;
             font-size: 20px;
         }
+
         .accept-btn:hover {
             background: #218838;
         }
     </style>
 </head>
+
 <body>
-<header>
+    <header>
         <!-- Navbar -->
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
@@ -89,21 +98,20 @@
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
     <div class="container">
-    <h1><?php echo $this->lang->line('Terms_Conditions_Title') ?: "Terms and Conditions"; ?></h1>
-    <div class="terms">
-        <h3><?php echo $this->lang->line('Terms_Conditions_Min_Working_Hours') ?: "1. Minimum Working Hours"; ?></h3>
-        <p><?php echo $this->lang->line('Terms_Conditions_Min_Working_Hours_Desc') ?: "As a registered astrologer or pujari, you must work for at least 8 hours per day."; ?></p>
+        <h1><?php echo $this->lang->line('Terms_Conditions_Title') ?: "Terms and Conditions"; ?></h1>
+        <div class="terms">
 
-        <h3><?php echo $this->lang->line('Terms_Conditions_Confidentiality') ?: "2. Confidentiality & Personal Information Sharing"; ?></h3>
-        <p><?php echo $this->lang->line('Terms_Conditions_Confidentiality_Desc') ?: "Sharing personal contact details is strictly prohibited. Violation will result in a fine of ₹51,000."; ?></p>
+            <h3><?php echo $this->lang->line('Terms_Conditions_Min_Working_Hours') ?: "1. Minimum Working Hours"; ?></h3>
+            <p><?php echo $this->lang->line('Terms_Conditions_Min_Working_Hours_Desc') ?: "As a registered astrologer or pujari, you must work for at least 8 hours per day."; ?></p>
 
-        <h3><?php echo $this->lang->line('Terms_Conditions_Exclusivity') ?: "3. Exclusivity Agreement"; ?></h3>
-        <p><?php echo $this->lang->line('Terms_Conditions_Exclusivity_Desc') ?: "While working with us, you cannot register or provide services on other astrology platforms."; ?></p>
+            <h3><?php echo $this->lang->line('Terms_Conditions_Confidentiality') ?: "2. Confidentiality & Personal Information Sharing"; ?></h3>
+            <p><?php echo $this->lang->line('Terms_Conditions_Confidentiality_Desc') ?: "Sharing personal contact details is strictly prohibited. Violation will result in a fine of ₹51,000."; ?></p>
+
+            <h3><?php echo $this->lang->line('Terms_Conditions_Exclusivity') ?: "3. Exclusivity Agreement"; ?></h3>
+            <p><?php echo $this->lang->line('Terms_Conditions_Exclusivity_Desc') ?: "While working with us, you cannot register or provide services on other astrology platforms."; ?></p>
+        </div>
+
     </div>
-    <button class="accept-btn" onclick="acceptTerms()">
-        <?php echo $this->lang->line('Accept_Terms_Button') ?: "Accept Terms"; ?>
-    </button>
-</div>
 
 
     <footer>
@@ -111,11 +119,11 @@
         <?php $this->load->view('IncludeUser/CommanFooter'); ?>
     </footer>
 
-    <script>
+    <!-- <script>
         function acceptTerms() {
             alert("You have accepted the Terms and Conditions.");
         }
-    </script>
+    </script> -->
 </body>
-</html>
 
+</html>
