@@ -388,7 +388,7 @@
                             if (data["status"] === "success") {
                                 Swal.fire({
                                     title: "Success",
-                                    text: "Feedback submitted successfully",
+                                    text: "Puja request sended successfully",
                                     icon: "success",
                                 }).then(() => {
                                     // ✅ Close the modal
@@ -400,7 +400,17 @@
                                     // ✅ Reset form values
                                     form.reset();
                                 });
-                            } else if (data["status"] === "warning") {
+                            }
+                             else if (data["status"] == "pujawarning") {
+                                Swal.fire({
+                                    title: "warning",
+                                    text: "The start time must be within 4 hours",
+                                    icon: "warning",
+
+                                });
+                            }
+                            
+                             else if (data["status"] === "warning") {
                                 Swal.fire({
                                     title: "Warning",
                                     text: "Pujari already booked",

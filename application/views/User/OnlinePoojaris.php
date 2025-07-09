@@ -454,7 +454,16 @@
                                         // ✅ Reset form
                                         form.reset();
                                     });
-                                } else if (data["status"] == "warning") {
+                                } 
+                                 else if (data["status"] == "pujawarning") {
+                                Swal.fire({
+                                    title: "warning",
+                                    text: "The start time must be within 4 hours",
+                                    icon: "warning",
+
+                                });
+                            }
+                                else if (data["status"] == "warning") {
                                     Swal.fire({
                                         title: "Warning",
                                         text: "Pujari already booked",

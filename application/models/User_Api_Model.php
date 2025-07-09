@@ -1407,6 +1407,50 @@ public function show_mob_puja_model()
 
 
 
+ public function auto_cancel_puja_model()
+    {
+        date_default_timezone_set('Asia/Kolkata');
+
+        
+        $this->db->where('payment_status', 'Pending');
+        $this->db->where('puja_status !=', 'Cancelled');
+        $query = $this->db->get('bookpuja_request_by_user_to_pujari');
+
+        $pujas = $query->result();
+
+        foreach ($pujas as $puja) {
+             print_r( $puja->book_puja_id);
+            $pujaDateTime = new DateTime($puja->puja_date . ' ' . $puja->puja_time);
+            $now = new DateTime();
+            $cancel = false;
+
+           
+            if ($now >= $pujaDateTime) {
+                $cancel = true;
+            } else {
+                $interval = $now->diff($pujaDateTime);
+                $hoursDiff = ($interval->days * 24) + $interval->h + ($interval->i / 60);                
+                if ($puja->puja_urgency === 'urgent') {
+                    if ($hoursDiff < 4) { 
+                        $cancel = true;
+                    }
+                } else { 
+                  
+                    if ($hoursDiff < 48) {
+                        $cancel = true;
+                    }
+                }
+            }
+
+            if ($cancel) {
+                $this->db->where('book_puja_id', $puja->book_puja_id);
+                $this->db->update('bookpuja_request_by_user_to_pujari', ['puja_status' => 'Cancelled']);
+            }
+        }
+    }
+
+
+
 
 
 }
