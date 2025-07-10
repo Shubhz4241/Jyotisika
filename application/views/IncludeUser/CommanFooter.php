@@ -15,14 +15,15 @@
                                 <img src="<?php echo base_url('assets/images/new_logo.png'); ?>" alt="Logo"
                                         style="width: 100px;">
                                 <div class="social-media mt-2">
-                                        <a href="#"><img src="<?php echo base_url('assets/images/facebook.png'); ?>"
+                                        <a href="https://www.facebook.com/profile.php?id=61578103586317"><img src="<?php echo base_url('assets/images/facebook.png'); ?>"
                                                         alt="Facebook" style="width: 30px;"></a>
                                         <a href="#"><img src="<?php echo base_url('assets/images/whatsapp.png'); ?>"
                                                         alt="WhatsApp" style="width: 30px;"></a>
                                         <a href="#"><img src="<?php echo base_url('assets/images/youtube.png'); ?>"
                                                         alt="YouTube" style="width: 30px;"></a>
-                                        <a href="#"><img src="<?php echo base_url('assets/images/instagram.png'); ?>"
+                                        <a href="https://www.instagram.com/jyotisikaa?igsh=Z2hmOWtlM3RhMXVu"><img src="<?php echo base_url('assets/images/instagram.png'); ?>"
                                                         alt="Instagram" style="width: 30px;"></a>
+
                                 </div>
                         </div>
                         <!-- Column 2: Astrological Services -->
@@ -32,6 +33,8 @@
                                 </h5>
                                 <?php echo $this->lang->line('Astrological_Description') ?: "Explore our range of astrological services tailored to your needs."; ?>
                         </div>
+
+
                         <!-- Column 3: Categories -->
                         <div class="col-12 col-sm-4 col-md-2">
                                 <h5 class="fw-bold">
@@ -52,6 +55,11 @@
                                         </li>
                                         <li><a href="<?php echo base_url("festival") ?>"
                                                         class="footer-links"><?php echo $this->lang->line('Festivals') ?: "Festivals"; ?></a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">
+                                                        <?php echo $this->lang->line('WhyUs') ? $this->lang->line('WhyUs') : 'Why Us'; ?>
+                                                </a>
                                         </li>
                                         <!-- <li><a href="<?php echo base_url("festival") ?>"
                                                         class="footer-links"><?php echo $this->lang->line('Remedies') ?: "Remedies"; ?></a>
@@ -107,11 +115,94 @@
                                 </ul>
                         </div>
 
+
+                        <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+                                        Astrological Services
+                                </h5>
+                                <ul class="list-unstyled">
+
+                                        <li><a href="<?php echo base_url("astrologers") ?>"
+                                                        class="footer-links">Finance</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("astrologers") ?>" class="footer-links">Ask a
+                                                        questions</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("astrologers") ?>" class="footer-links">Career
+                                                        and Job</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("astrologers") ?>"
+                                                        class="footer-links">Counselling</a>
+                                        </li>
+
+                                        <li><a href="<?php echo base_url("astrologers") ?>" class="footer-links">Year
+                                                        Book</a>
+                                        </li>
+
+                                </ul>
+                        </div>
+
+                        <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+                                        Our Services
+                                </h5>
+                                <ul class="list-unstyled">
+
+                                        <li><a href="<?php echo base_url("bookpooja") ?>" class="footer-links">book
+                                                        puja</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("todayhoroscope") ?>"
+                                                        class="footer-links">Horoscope</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("freekundli") ?>" class="footer-links">free
+                                                        Kundli</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("kundlimatching") ?>"
+                                                        class="footer-links">Kudali
+                                                        Matching?</a>
+                                        </li>
+
+                                        <li><a href="<?php echo base_url("panchang") ?>" class="footer-links">Jyotisika
+                                                        Mall</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("kp") ?>" class="footer-links">Panchang</a>
+                                        </li>
+
+                                        <li><a href="<?php echo base_url("festival") ?>"
+                                                        class="footer-links">Festivals</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("MobPooja") ?>" class="footer-links">Mob
+                                                        Puja</a>
+                                        </li>
+
+
+                                </ul>
+                        </div>
+
+
+
+
                         <!-- Column 5: Online Consultations -->
                         <div class="col-12 col-sm-4 col-md-2">
                                 <h5 class="fw-bold">Online Consultations</h5>
                                 <ul class="list-unstyled" id="footer-services-list">
                                         <!-- JavaScript will populate this -->
+                                </ul>
+                        </div>
+
+                        <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+                                        Contact us
+                                </h5>
+                                <ul class="list-unstyled">
+
+                                        <li>
+                                                <a href="mailto:contact@jyotisika.in"
+                                                        class="footer-links">contact@jyotisika.in</a>
+                                        </li>
+
+
+
                                 </ul>
                         </div>
                         <script>

@@ -1629,7 +1629,7 @@ class User extends CI_Controller
 
 		curl_close($curl_);
 
-		
+
 
 		$api_url = base_url("User_Api_Controller/get_astrologer_chat_with_user");
 
@@ -2032,4 +2032,51 @@ class User extends CI_Controller
 
 		$this->load->view("User/AddToCart");
 	}
+
+
+	public function send_email()
+{
+    $name = $this->input->post('contact_name');
+    $email = $this->input->post('contact_email');
+    $message = $this->input->post('contact_message');
+
+    // Load email library
+    $this->load->library('email');
+
+    // Set email configuration
+    $config = array(
+        'protocol'  => 'smtp',
+        'smtp_host' => 'smtp.gmail.com',  // change if using different provider
+        'smtp_port' => 587,
+        'smtp_user' => 'saurv1220@gmail.com',     // your email address
+        'smtp_pass' => 'bods rigu tscn nzqf',        // Gmail App password or actual SMTP password
+        'mailtype'  => 'html',
+        'charset'   => 'utf-8',
+        'newline'   => "\r\n"
+    );
+
+    $this->email->initialize($config);
+
+    // Set email parameters
+    $this->email->from($email, $name);
+    $this->email->to('saurv1220@gmail.com'); // where you want to receive the email
+    $this->email->subject('New Contact Form Submission');
+    $this->email->message("
+        <h3>Contact Form Submission</h3>
+        <p><strong>Name:</strong> {$name}</p>
+        <p><strong>Email:</strong> {$email}</p>
+        <p><strong>Message:</strong><br>{$message}</p>
+    ");
+
+    if ($this->email->send()) {
+        $this->session->set_flashdata('success', 'Thank you! Your message has been sent.');
+    } else {
+        $this->session->set_flashdata('error', 'Sorry, there was a problem sending your message.');
+        log_message('error', $this->email->print_debugger(['headers']));
+		print_r($this->email->print_debugger(['headers']));
+    }
+
+    redirect(base_url('CustomerSupport')); // redirect to homepage or contact section
+}
+
 }

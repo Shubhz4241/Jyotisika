@@ -183,7 +183,7 @@
         <div class="row product-container">
             <!-- Product Image -->
             <div class="col-md-7 mb-4 d-flex align-items-center justify-content-center">
-                <img src="<?php echo base_url('Uploads/products/'.$product_data[0]["product_image"]); ?>" class="img-fluid product-image"
+                <img src="<?php echo base_url('uploads/products/'.$product_data[0]["product_image"]); ?>" class="img-fluid product-image"
                     style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
 
           </div>

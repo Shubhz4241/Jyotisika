@@ -78,15 +78,16 @@
 
                 ?>
 
+
                 <?php foreach ($puja_data as $card): ?>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 card-item">
                         <div class="card h-100 shadow-sm border-0 card-hover">
 
                             <a href="<?php echo base_url('PoojaInfo/' . $card["id"]) ?>">
                                 <div class="position-relative">
-                                    <img src="<?php echo 'assets/images/BookPooja/MahaRudrabhishekpooja.png' ?>"
-                                        class="card-img-top" alt="<?php echo $card['name']; ?>"
-                                        style="height: 200px; object-fit: cover;">
+                                    <img src="<?php echo base_url("uploads/services/".$card["image"]) ?>"
+                                        class="card-img-top" alt="<?php echo $card['name'];  ?>"
+                                        style="height: 200px; object-fit: cover;"  onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';" >
                                     <div class="position-absolute top-0 end-0 m-2">
                                         <span class="badge bg-danger"><?php echo $card['name']; ?></span>
                                     </div>

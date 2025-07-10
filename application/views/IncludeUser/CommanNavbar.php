@@ -33,11 +33,11 @@
                         <?php echo $this->lang->line('Astrologers') ? $this->lang->line('Astrologers') : 'Astrologers'; ?>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link text-black" href="<?php echo base_url('WhyUs') ?>">
                         <?php echo $this->lang->line('WhyUs') ? $this->lang->line('WhyUs') : 'Why Us'; ?>
                     </a>
-                </li>
+                </li> -->
             </ul>
 
 
@@ -199,10 +199,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item py-2 ps-4" href="#">
+                                <a class="dropdown-item py-2 ps-4"
+                                    href="https://api.whatsapp.com/send?text=Check%20out%20this%20awesome%20website!%20https%3A%2F%2Fexample.com"
+                                    target="_blank">
                                     <i class="bi bi-share me-2"></i> Refer to Friends
                                 </a>
                             </li>
+
                             <li>
                                 <hr class="dropdown-divider mx-3">
                             </li>

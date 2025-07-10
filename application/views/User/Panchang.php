@@ -237,7 +237,7 @@
 
             const formData = new FormData();
             formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
-            formData.append("day", day);
+            formData.append("day", 10);
             formData.append("month", month);
             formData.append("year", year);
 
@@ -309,7 +309,7 @@
 
             const formData = new FormData();
             formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
-            formData.append("day", day);
+            formData.append("day", day +1);
             formData.append("month", month);
             formData.append("year", year);
 
@@ -382,7 +382,7 @@
 
             const formData = new FormData();
             formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
-            formData.append("day", day);
+            formData.append("day", day+1);
             formData.append("month", month);
             formData.append("year", year);
 
@@ -464,7 +464,7 @@
 
             const formData = new FormData();
             formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
-            formData.append("day", day);
+            formData.append("day", day+1);
             formData.append("month", month);
             formData.append("year", year);
 
@@ -559,7 +559,7 @@
 
             const formData = new FormData();
             formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
-            formData.append("day", day);
+            formData.append("day", day +1);
             formData.append("month", month);
             formData.append("year", year);
 
@@ -631,7 +631,7 @@
 
             const formData = new FormData();
             formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
-            formData.append("day", day);
+            formData.append("day", day+1);
             formData.append("month", month);
             formData.append("year", year);
 
@@ -700,7 +700,7 @@
 
             const formData = new FormData();
             formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
-            formData.append("day", day);
+            formData.append("day", day +1);
             formData.append("month", month);
             formData.append("year", year);
 

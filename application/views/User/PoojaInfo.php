@@ -31,15 +31,18 @@
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
- 
+
     <main>
         <section class="pooja-info-section py-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="pooja-image-container">
-                            <img src=<?php echo base_url("assets/images/BookPooja/MahaRudrabhishekpooja.png") ?>
-                                alt="Pooja Name" class="img-fluid rounded shadow-lg">
+                            <img src="<?php echo base_url("uploads/services/" . $puja_data[0]["image"]) ?>"
+                                alt="Pooja Name" class="img-fluid rounded shadow-lg"
+                                onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';">
+
+
                         </div>
                     </div>
                     <div class="col-lg-8">

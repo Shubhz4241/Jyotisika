@@ -127,7 +127,7 @@
                             <div class="row">
                                 <!-- Product Image -->
                                 <div class="col-md-5">
-                                    <img src="<?php echo base_url('Uploads/products/'.$productinfo['product_image']); ?>" class="product-image"
+                                    <img src="<?php echo base_url('uploads/products/'.$productinfo['product_image']); ?>" class="product-image"
                                         alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
                                 </div>
 

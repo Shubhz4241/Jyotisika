@@ -121,7 +121,7 @@
                                 <div class="card border">
                                     <div class="card-body d-flex">
                                         <div class="product-image-container mb-3">
-                                            <img src="<?php echo base_url( 'Uploads/products/'.$product_data['product_image']); ?>"
+                                            <img src="<?php echo base_url( 'uploads/products/'.$product_data['product_image']); ?>"
                                               style="max-width: 60%; height: 150px;"   class="img-fluid rounded shadow-sm w-50 object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
 
                                                  <!-- <img src="<?php echo base_url($product_data[0]["product_image"]); ?>" class="img-fluid product-image"

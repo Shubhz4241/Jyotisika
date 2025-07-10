@@ -166,7 +166,7 @@
                      <?php  foreach ($product_data as $product) : ?>
                         <div class="col d-flex justify-content-center">
                             <div class="card product-card h-100 shadow-sm m-0 p-0" style="border: 1px solid #f0f0f0;">
-                                <img src="<?php echo base_url('Uploads/products/'.$product["product_image"]); ?>" class="card-img-top" alt="<?php echo $product['product_name']; ?>"
+                                <img src="<?php echo base_url('uploads/products/'.$product["product_image"]); ?>" class="card-img-top" alt="<?php echo $product['product_name']; ?>"
                                     style=" object-fit: contain;" onerror="this.onerror=null;this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
 
                                     

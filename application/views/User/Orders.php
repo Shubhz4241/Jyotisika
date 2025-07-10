@@ -975,7 +975,7 @@
                                                     style="border: 1px solid var(--red);">
                                                     <div class="row g-0">
                                                         <div class="col-4">
-                                                            <img src="<?php echo base_url('Uploads/products/' . $order["product_image"]); ?>"
+                                                            <img src="<?php echo base_url('uploads/products/' . $order["product_image"]); ?>"
                                                                 class="img-fluid rounded-start h-100"
                                                                 alt="<?php echo $order['product_name']; ?>"
                                                                 style="object-fit: cover;"
@@ -1049,7 +1049,7 @@
                                                     style="border: 1px solid var(--red);">
                                                     <div class="row g-0">
                                                         <div class="col-4">
-                                                            <img src="<?php echo base_url('Uploads/products/' . $order["product_image"]); ?>"
+                                                            <img src="<?php echo base_url('uploads/products/' . $order["product_image"]); ?>"
                                                                 class="img-fluid rounded-start h-100"
                                                                 alt="<?php echo $order['product_name']; ?>"
                                                                 style="object-fit: cover;"
