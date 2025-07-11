@@ -225,7 +225,7 @@
                     <!-- Input Group with Icons Inside -->
                     <div class="chat-input d-flex align-items-center bg-light flex-grow-1 rounded px-2">
                         <!-- Emoji Button (Left Side) -->
-                        <i class="bi bi-emoji-smile text-secondary me-2"></i>
+                        <!-- <i class="bi bi-emoji-smile text-secondary me-2"></i> -->
 
                         <!-- Input Field -->
                         <input type="text" id="message" class="form-control border-0 bg-light"

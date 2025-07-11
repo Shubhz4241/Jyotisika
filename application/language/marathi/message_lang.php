@@ -455,3 +455,19 @@ $lang['Continue_To_Buy'] = "खरेदी सुरू ठेवा";
 $lang['Cart_Empty_Message'] = "तुमची कार्ट रिकामी आहे!";
 $lang['Cart_Empty_Subtext'] = "अजून तुम्ही कार्टमध्ये काहीही जोडलेले नाही.";
 $lang['Browse_Products'] = "उत्पादने ब्राउझ करा";
+
+
+//Wallete
+
+$lang['Available_Balance']      = "उपलब्ध शिल्लक";
+$lang['Recharge_Wallet']        = "वॉलेट रिचार्ज करा";
+$lang['Add_Money']              = "रक्कम जोडा";
+$lang['Payment_Information']    = "पेमेंट माहिती";
+$lang['Selected_Amount']        = "निवडलेली रक्कम";
+$lang['GST_Amount']             = "जीएसटी (18%)";
+$lang['Total_Amount']           = "एकूण रक्कम";
+$lang['Proceed_to_Pay']         = "पेमेंट करा";
+
+
+
+$lang['our_services'] = "आमच्या सेवा";

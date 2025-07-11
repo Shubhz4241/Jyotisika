@@ -26,14 +26,14 @@ class Razorpay_lib
 
         //Jyotisika update keys
 
-        //  $key_id = 'rzp_test_YcEtdZa9f7N8R6';
-        // $secret_key = 'A9amaWCSAUc98Payc0qFml23';
+         $key_id = 'rzp_test_YcEtdZa9f7N8R6';
+        $secret_key = 'A9amaWCSAUc98Payc0qFml23';
 
         
          //Jyotisika updated live keys
 
-          $key_id = 'rzp_live_OhYeV3XCMIFBH5';
-        $secret_key = '0qBqV0NMUQHtkVT8AthE9959';
+        //   $key_id = 'rzp_live_OhYeV3XCMIFBH5';
+        // $secret_key = '0qBqV0NMUQHtkVT8AthE9959';
 
         $this->api = new Api($key_id, $secret_key);
     }
@@ -68,12 +68,14 @@ class Razorpay_lib
     {
         try {
             // $key_secret = 'LHymgUT3qIDnvvNoCUG2mN8L';
-            // $key_secret = 'A9amaWCSAUc98Payc0qFml23';
+            $key_secret = 'A9amaWCSAUc98Payc0qFml23';
 
 
             //Secrete key 
-            $key_secret = '0qBqV0NMUQHtkVT8AthE9959';
+            // $key_secret = '0qBqV0NMUQHtkVT8AthE9959';
 
+
+            
             
 
             // $key_secret = 'IMsHCTErcyGDCfLK312TEkfW';

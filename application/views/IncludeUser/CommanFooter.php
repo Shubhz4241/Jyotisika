@@ -15,13 +15,15 @@
                                 <img src="<?php echo base_url('assets/images/new_logo.png'); ?>" alt="Logo"
                                         style="width: 100px;">
                                 <div class="social-media mt-2">
-                                        <a href="https://www.facebook.com/profile.php?id=61578103586317"><img src="<?php echo base_url('assets/images/facebook.png'); ?>"
+                                        <a href="https://www.facebook.com/profile.php?id=61578103586317"><img
+                                                        src="<?php echo base_url('assets/images/facebook.png'); ?>"
                                                         alt="Facebook" style="width: 30px;"></a>
-                                        <a href="#"><img src="<?php echo base_url('assets/images/whatsapp.png'); ?>"
-                                                        alt="WhatsApp" style="width: 30px;"></a>
-                                        <a href="#"><img src="<?php echo base_url('assets/images/youtube.png'); ?>"
-                                                        alt="YouTube" style="width: 30px;"></a>
-                                        <a href="https://www.instagram.com/jyotisikaa?igsh=Z2hmOWtlM3RhMXVu"><img src="<?php echo base_url('assets/images/instagram.png'); ?>"
+                                        <!-- <a href="#"><img src="<?php echo base_url('assets/images/whatsapp.png'); ?>"
+                                                        alt="WhatsApp" style="width: 30px;"></a> -->
+                                        <!-- <a href="#"><img src="<?php echo base_url('assets/images/youtube.png'); ?>"
+                                                        alt="YouTube" style="width: 30px;"></a> -->
+                                        <a href="https://www.instagram.com/jyotisikaa?igsh=Z2hmOWtlM3RhMXVu"><img
+                                                        src="<?php echo base_url('assets/images/instagram.png'); ?>"
                                                         alt="Instagram" style="width: 30px;"></a>
 
                                 </div>
@@ -115,6 +117,55 @@
                                 </ul>
                         </div>
 
+                        <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+                                      <?php echo $this->lang->line('our_services'); ?>
+
+                                </h5>
+                                <ul class="list-unstyled">
+
+                                        <li><a href="<?php echo base_url("bookpooja") ?>" class="footer-links"><?php
+                                           echo $this->lang->line('freekundali') ? $this->lang->line('freekundali') : 'Free Kundali'; ?></a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("todayhoroscope") ?>"
+                                                        class="footer-links"><?php echo $this->lang->line('kundlimatching') ? $this->lang->line('kundlimatching') : 'Kundli Matching'; ?></a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("freekundli") ?>" class="footer-links">
+                                                        <?php echo $this->lang->line('Horoscope') ? $this->lang->line('Horoscope') : 'Horoscope'; ?>
+                                                </a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("kundlimatching") ?>" class="footer-links">
+                                                        <?php echo $this->lang->line('jyotisikamall') ? $this->lang->line('jyotisikamall') : 'Jyotisika Mall'; ?></a>
+                                        </li>
+
+                                        <li><a href="<?php echo base_url("panchang") ?>" class="footer-links">
+                                                        <?php echo $this->lang->line('panchang') ? $this->lang->line('panchang') : 'Panchang'; ?></a>
+                                        </li>
+
+
+                                        <li><a href="<?php echo base_url("kp") ?>" class="footer-links">
+                                                        <?php echo $this->lang->line('kp') ? $this->lang->line('kp') : 'KP'; ?></a>
+                                        </li>
+
+                                        <li><a href="<?php echo base_url("festival") ?>"
+                                                        class="footer-links"><?php echo $this->lang->line('festival') ? $this->lang->line('festival') : 'Festival'; ?></a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("MobPooja") ?>" class="footer-links"> <?php
+                                           echo $this->lang->line('bookpuja') ? $this->lang->line('bookpuja') : 'Book Puja';
+                                           ?>
+                                                </a>
+                                        </li>
+
+
+                                         <li><a href="<?php echo base_url("MobPooja") ?>" class="footer-links">  <?php echo $this->lang->line('MobPooja') ? $this->lang->line('MobPooja') : 'Mob Pooja'; ?>
+                                                </a>
+                                        </li>
+
+                                </ul>
+                        </div>
+
+
+
 
                         <div class="col-12 col-sm-4 col-md-2">
                                 <h5 class="fw-bold">
@@ -135,46 +186,9 @@
                                                         class="footer-links">Counselling</a>
                                         </li>
 
-                                        <li><a href="<?php echo base_url("astrologers") ?>" class="footer-links">Year
-                                                        Book</a>
+                                        <li><a href="<?php echo base_url("astrologers") ?>"
+                                                        class="footer-links">YearBook</a>
                                         </li>
-
-                                </ul>
-                        </div>
-
-                        <div class="col-12 col-sm-4 col-md-2">
-                                <h5 class="fw-bold">
-                                        Our Services
-                                </h5>
-                                <ul class="list-unstyled">
-
-                                        <li><a href="<?php echo base_url("bookpooja") ?>" class="footer-links">book
-                                                        puja</a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("todayhoroscope") ?>"
-                                                        class="footer-links">Horoscope</a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("freekundli") ?>" class="footer-links">free
-                                                        Kundli</a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("kundlimatching") ?>"
-                                                        class="footer-links">Kudali
-                                                        Matching?</a>
-                                        </li>
-
-                                        <li><a href="<?php echo base_url("panchang") ?>" class="footer-links">Jyotisika
-                                                        Mall</a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("kp") ?>" class="footer-links">Panchang</a>
-                                        </li>
-
-                                        <li><a href="<?php echo base_url("festival") ?>"
-                                                        class="footer-links">Festivals</a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("MobPooja") ?>" class="footer-links">Mob
-                                                        Puja</a>
-                                        </li>
-
 
                                 </ul>
                         </div>
@@ -244,9 +258,12 @@
                 <div class="row">
                         <div class="col-12 text-center bg-white p-2">
                                 <p class="text-dark">
-                                        Design By : <span><img
+                                        Design By :
+                                        <!-- <span>
+                                                <img
                                                         src="<?php echo base_url('assets/images/manasviTechSolutionLogo.png'); ?>"
-                                                        alt="Manasvi Tech Solution" style="width: 120px;"></span>
+                                                        alt="Manasvi Tech Solution" style="width: 120px;">
+                                                </span> -->
                                         This site is designed, hosted and maintained by <a
                                                 class="text-dark text-decoration-none"
                                                 href="https://manasvi.tech/">Manasvi Tech Solutions Pvt. Ltd.</a>

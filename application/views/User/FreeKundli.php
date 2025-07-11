@@ -341,7 +341,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             populateSelect("boy_day", 1, 31, true);
             populateMonth("boy_month");
-            populateSelect("boy_year", 1990, new Date().getFullYear());
+            populateSelect("boy_year", 1980, new Date().getFullYear());
             populateSelect("boy_hour", 0, 23, true);
             populateSelect("boy_minute", 0, 59, true);
             populateSelect("boy_second", 0, 59, true);

@@ -159,7 +159,7 @@
                                     <?php echo $this->lang->line('Finance_Description') ?: "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts."; ?>
                                 </p>
                                 <center>
-                                    <a href="<?php echo base_url("ServiceDetails") ?>" class="btn fw-bold"
+                                    <a href="<?php echo base_url('astrologers')?>" class="btn fw-bold"
                                         style="background-color: var(--yellow);">
                                         <?php echo $this->lang->line('Finance_Check_Now') ?: "Check Now"; ?>
                                     </a>
@@ -179,7 +179,7 @@
                                     <?php echo $this->lang->line('Ask_Question_Description') ?: "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts."; ?>
                                 </p>
                                 <center>
-                                    <a href="#" class="btn fw-bold" style="background-color: var(--yellow);">
+                                    <a href="<?php echo base_url('astrologers')?>" class="btn fw-bold" style="background-color: var(--yellow);">
                                         <?php echo $this->lang->line('Ask_Question_Check_Out') ?: "Check Out"; ?>
                                     </a>
                                 </center>
@@ -198,7 +198,7 @@
                                     <?php echo $this->lang->line('Career_Job_Description') ?: "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts."; ?>
                                 </p>
                                 <center>
-                                    <a href="#" class="btn fw-bold" style="background-color: var(--yellow);">
+                                    <a href="<?php echo base_url('astrologers')?>" class="btn fw-bold" style="background-color: var(--yellow);">
                                         <?php echo $this->lang->line('Career_Job_Check_Out') ?: "Check Out"; ?>
                                     </a>
                                 </center>
@@ -218,7 +218,7 @@
                                     <?php echo $this->lang->line('Counselling_Description') ?: "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts."; ?>
                                 </p>
                                 <center>
-                                    <a href="#" class="btn fw-bold" style="background-color: var(--yellow);">
+                                    <a href="<?php echo base_url('astrologers')?>" class="btn fw-bold" style="background-color: var(--yellow);">
                                         <?php echo $this->lang->line('Counselling_Check_Out') ?: "Check Out"; ?>
                                     </a>
                                 </center>
@@ -238,7 +238,7 @@
                                     <?php echo $this->lang->line('Year_Book_Description') ?: "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts."; ?>
                                 </p>
                                 <center>
-                                    <a href="#" class="btn fw-bold" style="background-color: var(--yellow);">
+                                    <a href="<?php echo base_url('astrologers')?>" class="btn fw-bold" style="background-color: var(--yellow);">
                                         <?php echo $this->lang->line('Year_Book_Check_Out') ?: "Check Out"; ?>
                                     </a>
                                 </center>

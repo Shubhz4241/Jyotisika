@@ -450,3 +450,17 @@ $lang['Continue_To_Buy'] = "खरीदारी जारी रखें";
 $lang['Cart_Empty_Message'] = "आपकी कार्ट खाली है!";
 $lang['Cart_Empty_Subtext'] = "ऐसा लगता है कि आपने अभी तक कुछ भी नहीं जोड़ा है।";
 $lang['Browse_Products'] = "उत्पाद ब्राउज़ करें";
+
+
+//Wallet
+$lang['Available_Balance']      = "उपलब्ध शेष राशि";
+$lang['Recharge_Wallet']        = "वॉलेट रिचार्ज करें";
+$lang['Add_Money']              = "पैसे जोड़ें";
+$lang['Payment_Information']    = "भुगतान जानकारी";
+$lang['Selected_Amount']        = "चयनित राशि";
+$lang['GST_Amount']             = "जीएसटी (18%)";
+$lang['Total_Amount']           = "कुल राशि";
+$lang['Proceed_to_Pay']         = "भुगतान करें";
+
+
+$lang['our_services'] = "हमारी सेवाएं";

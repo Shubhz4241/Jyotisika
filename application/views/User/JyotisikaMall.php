@@ -266,19 +266,19 @@
         </section> -->
 
         <!-- carousel gallery for products -->
-        <section>
+        <!-- <section>
             <div class="container py-5">
                 <h1 class="text-start mb-5" style="color: var(--red);"><?php echo $this->lang->line('Photo_Gallery'); ?></h1>
 
                 <div class="row g-3">
-                    <!-- Large featured image -->
+                  
                     <div class="col-md-6">
                         <div class="card gallery overflow-hidden">
                             <img src="https://plus.unsplash.com/premium_photo-1699967437640-17ec76db90d5?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img object-fit-cover" alt="Featured Project" style="height: 413px; transition: transform 0.3s;">
                         </div>
                     </div>
 
-                    <!-- 2x2 Grid -->
+                 
                     <div class="col-md-6">
                         <div class="row g-3">
                             <div class="col-6">
@@ -304,7 +304,7 @@
                         </div>
                     </div>
 
-                    <!-- Bottom row with 5 images -->
+                  
                     <div class="col-md-12">
                         <div class="row g-3">
                             <div class="col-md-15 col-6">
@@ -337,7 +337,7 @@
                 </div>
             </div>
 
-        </section>
+        </section> -->
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="

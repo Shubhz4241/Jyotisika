@@ -68,7 +68,9 @@
             </div>
 
             <!-- cards -->
-            <div class="row my-4" class="cardContainer">
+            <div class="row my-4 cardContainer">
+
+                <!-- <div class="row my-4" class="cardContainer"> -->
 
                 <?php if ($showpujari): ?>
 
@@ -109,7 +111,8 @@
                                             <div class="d-flex align-items-center gap-1 ">
                                                 <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
                                                 <span class="small text-muted mt-1"><?php echo $pujaridata["average_rating"] ?>
-                                                    (<?php echo $pujaridata["completed_puja_count"] ?> <?php echo $this->lang->line('Plus_Years') ?></span>
+                                                    (<?php echo $pujaridata["completed_puja_count"] ?>
+                                                    <?php echo $this->lang->line('Plus_Years') ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -151,7 +154,7 @@
                                             <button class="btn btn-sm w-100 rounded-3" style="background-color: var(--yellow);"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#bookpooja<?php echo $pujaridata["pujari_id_"]; ?>">
-                                               <?php echo $this->lang->line('Book_Pooja') ?>
+                                                <?php echo $this->lang->line('Book_Pooja') ?>
                                             </button>
 
                                         <?php else: ?>
@@ -176,7 +179,8 @@
                                     <div class="modal-content">
                                         <div class="d-flex justify-content-between align-items-center p-3">
                                             <h1 class="modal-title fs-5"
-                                                id="bookpoojaLabel<?php echo $pujaridata["pujari_id_"]; ?>"> <?php echo $this->lang->line('Book_Your_Pooja'); ?></h1>
+                                                id="bookpoojaLabel<?php echo $pujaridata["pujari_id_"]; ?>">
+                                                <?php echo $this->lang->line('Book_Your_Pooja'); ?></h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
@@ -185,21 +189,24 @@
 
                                                 <!-- Email -->
                                                 <div class="col-12">
-                                                    <label class="form-label fw-bold"> <?php echo $this->lang->line('User_Email') ?></label>
+                                                    <label class="form-label fw-bold">
+                                                        <?php echo $this->lang->line('User_Email') ?></label>
                                                     <input type="email" name="useremail" class="form-control shadow-none"
                                                         required>
                                                 </div>
 
                                                 <!-- Preferred Date -->
                                                 <div class="col-12">
-                                                    <label class="form-label fw-bold"><?php echo $this->lang->line('Preferred_Date') ?></label>
+                                                    <label
+                                                        class="form-label fw-bold"><?php echo $this->lang->line('Preferred_Date') ?></label>
                                                     <input type="date" name="pujadate" class="form-control shadow-none"
                                                         min="<?php echo date('Y-m-d'); ?>" required>
                                                 </div>
 
                                                 <!-- Preferred Time -->
                                                 <div class="col-12">
-                                                    <label class="form-label fw-bold"><?php echo $this->lang->line('Preferred_Time') ?></label>
+                                                    <label
+                                                        class="form-label fw-bold"><?php echo $this->lang->line('Preferred_Time') ?></label>
                                                     <input type="time" name="pujatime" class="form-control shadow-none"
                                                         required>
                                                 </div>
@@ -220,7 +227,7 @@
                                         <div class="p-3 d-flex justify-content-center align-items-center gap-3">
                                             <button type="submit" class="btn text-dark"
                                                 style="background-color: var(--yellow);">
-                                           <?php  echo $this->lang->line('Confirm_Booking') ?>
+                                                <?php echo $this->lang->line('Confirm_Booking') ?>
                                             </button>
                                         </div>
                                     </div>
@@ -312,7 +319,42 @@
 
         <!-- Modal -->
 
+        <script>
+            function filterCards() {
+                const query = document.getElementById("searchInput").value.trim().toLowerCase();
+                const expCode = document.getElementById("experienceFilter").value;
 
+                document.querySelectorAll(".card-item").forEach(card => {
+                    // ‑‑ pull text safely (use optional chaining + fallback) ‑‑
+                    const title = card.querySelector(".card-title")?.textContent.toLowerCase() || "";
+                    const lang = card.querySelector(".card-language")?.textContent.toLowerCase() || "";
+                    const expertise = card.querySelector(".card-expertise")?.textContent.toLowerCase() || "";
+                    const yearsText = card.querySelector(".card-experience")?.textContent || "0";
+                    const years = parseInt(yearsText.match(/\d+/)?.[0] ?? 0, 10);   // first number
+
+                    /* ------- search logic ------- */
+                    const matchesQuery = !query || [title, lang, expertise].some(t => t.includes(query));
+                    const matchesYears =
+                        !expCode ||
+                        (expCode === "1" && years <= 2) ||
+                        (expCode === "2" && years >= 3 && years <= 5) ||
+                        (expCode === "3" && years >= 6 && years <= 8) ||
+                        (expCode === "4" && years >= 9);
+
+                    // Bootstrap helper: d-none = display:none
+                    card.classList.toggle("d-none", !(matchesQuery && matchesYears));
+                });
+            }
+
+            /*  events */
+            document.addEventListener("DOMContentLoaded", () => {
+                filterCards();   // run once on load
+                document.getElementById("searchInput").addEventListener("input", filterCards);
+                document.getElementById("experienceFilter").addEventListener("change", filterCards);
+            });
+        </script>
+
+        <!-- 
         <script>
             function filterCards() {
                 const input = document.getElementById("searchInput").value.toLowerCase();
@@ -344,7 +386,7 @@
             // Add event listener for search input
             document.getElementById("searchInput").addEventListener("input", filterCards);
             document.getElementById("experienceFilter").addEventListener("change", filterCards);
-        </script>
+        </script> -->
 
         <script>
             function Showlogin() {
@@ -454,15 +496,15 @@
                                         // ✅ Reset form
                                         form.reset();
                                     });
-                                } 
-                                 else if (data["status"] == "pujawarning") {
-                                Swal.fire({
-                                    title: "warning",
-                                    text: "The start time must be within 4 hours",
-                                    icon: "warning",
+                                }
+                                else if (data["status"] == "pujawarning") {
+                                    Swal.fire({
+                                        title: "warning",
+                                        text: "The start time must be within 4 hours",
+                                        icon: "warning",
 
-                                });
-                            }
+                                    });
+                                }
                                 else if (data["status"] == "warning") {
                                     Swal.fire({
                                         title: "Warning",

@@ -102,6 +102,10 @@
 
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
+   
+
+
+
     <!-- astro signs -->
 
     <!-- <?php print_r($userinfo_data) ?> -->
@@ -355,7 +359,7 @@
                                         <!-- Profile Section -->
                                         <div class="d-flex align-items-center mb-2">
                                             <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>">
-                                                <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url("/uploads/Astologer/".$astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url("/uploads/Astologer/" . $astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
                                                     alt="image" class="rounded-circle"
                                                     style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);"
                                                     onerror="this.onerror=null  this.src='<?php echo base_url('assets/images/astrologerimg.png'); ?>';">
@@ -513,27 +517,41 @@
     </script>
 
     <!-- Astrological Services For Accurate Answers And Better Future -->
+
+
     <section>
         <div class="container">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"><?php echo $this->lang->line('Astro_Services_Tagline'); ?></h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
+                <?php echo $this->lang->line('Astro_Services_Tagline'); ?>
+            </h2>
             <div class="owl-carousel owl1 owl-theme">
-                <div class="item">
-                    <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/finance.png'); ?>" class="card-img-top"
-                            alt="Finance Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Finance</h5>
-                            <p class="card-text">
-                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your
-                                efforts.
-                            </p>
-                            <center>
-                                <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
-                            </center>
+
+
+
+                <?php if (!empty($home_service_data)): ?>
+                    <?php foreach ($home_service_data as $home_service_data_data): ?>
+
+                        <div class="item">
+                            <div class="card shadow " style=" border: 1px solid var(--red);">
+                                <img src="<?php echo base_url("assets/images/" . $home_service_data_data['image']); ?>"
+                                    class="card-img-top" alt="Finance Image">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold"><?php print_r($home_service_data_data["title"]) ?></h5>
+                                    <p class="card-text">
+                                        <?php print_r($home_service_data_data["text"]) ?>
+                                    </p>
+                                    <center>
+                                        <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold "
+                                            style="background-color: var(--yellow);">Check Now</a>
+                                    </center>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="item">
+
+                    <?php endforeach ?>
+
+                <?php endif ?>
+                <!-- <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
                         <img src="<?php echo base_url('assets/images/question.png'); ?>" class="card-img-top"
                             alt="Finance Image">
@@ -548,8 +566,8 @@
                             </center>
                         </div>
                     </div>
-                </div>
-                <div class="item">
+                </div> -->
+                <!-- <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
                         <img src="<?php echo base_url('assets/images/carrerjob.png'); ?>" class="card-img-top"
                             alt="Finance Image">
@@ -564,8 +582,8 @@
                             </center>
                         </div>
                     </div>
-                </div>
-                <div class="item">
+                </div> -->
+                <!-- <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
                         <img src="<?php echo base_url('assets/images/counselling.png'); ?>" class="card-img-top"
                             alt="Finance Image">
@@ -580,8 +598,8 @@
                             </center>
                         </div>
                     </div>
-                </div>
-                <div class="item">
+                </div> -->
+                <!-- <div class="item">
                     <div class="card shadow " style=" border: 1px solid var(--red);">
                         <img src="<?php echo base_url('assets/images/yearbook.png'); ?>" class="card-img-top"
                             alt="Finance Image">
@@ -596,7 +614,7 @@
                             </center>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -690,6 +708,8 @@
     </section> -->
 
     <!-- Free Horoscope and Astrology Services -->
+
+   
     <section>
         <div class="container my-4">
             <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">
@@ -699,14 +719,17 @@
 
 
 
+
                 <?php if (!empty($service_data)): ?>
                     <?php foreach ($service_data as $service_data_astologer): ?>
+
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
+                            <a href="<?php echo base_url('User/astrolgerservices/').$service_data_astologer["id"] ?>" class="text-decoration-none">
                                 <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                                    <img src="<?php echo base_url('assets/images/' . $service_data_astologer['image']); ?>"
+                                    <img src="<?php echo base_url('uploads/services/' . $service_data_astologer['image']); ?>"
                                         alt="<?php echo $service_data_astologer['name']; ?>" class="mx-auto mb-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;" onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';"  >
+                                        style="width: 60px; height: 60px; object-fit: cover;"
+                                        onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
                                     <p class="fw-bold text-dark">
                                         <?php echo $service_data_astologer['name']; ?>
                                     </p>

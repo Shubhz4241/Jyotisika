@@ -297,7 +297,7 @@
         });
 
 
-       
+
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -309,13 +309,16 @@
 
         document.addEventListener("DOMContentLoaded", function () {
 
-          
+
             const getOtpBtn = document.getElementById("getOtpBtn");
             const mobileNumberInput = document.getElementById("mobileNumber");
 
             function sendOtp() {
                 let phoneNumber = mobileNumberInput.value.trim();
 
+
+                getOtpBtn.disabled = true;
+                getOtpBtn.innerText = "Sending...";
                 // Validate mobile number
                 if (!phoneNumber) {
                     Swal.fire({
@@ -348,7 +351,7 @@
                 fetch("<?php echo base_url('User_Api_Controller/sendOtpmobile'); ?>", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ mobile_number: phoneNumber , action:"signin"})
+                    body: JSON.stringify({ mobile_number: phoneNumber, action: "signin" })
                 })
                     .then(response => response.json())
                     .then(data => {
@@ -366,7 +369,7 @@
                                 document.getElementById("otpStep").style.display = "block";
                                 startOtpTimer(); // Start OTP timer
                             });
-                        }else if (data.status === "notregistered") {
+                        } else if (data.status === "notregistered") {
                             Swal.fire({
                                 icon: "warning",
                                 title: "User not found",
@@ -377,7 +380,7 @@
                             // document.getElementById("mobileStep").style.display = "none";
                             // document.getElementById("otpStep").style.display = "block";
                             // startOtpTimer();
-                        }  else {
+                        } else {
                             Swal.fire({
                                 icon: "error",
                                 title: "Failed to Send OTP",
@@ -392,6 +395,10 @@
                             title: "Oops!",
                             text: "Something went wrong! Please try again later.",
                         });
+                    }).finally(() => {
+                        // Enable the button again after response or failure
+                        getOtpBtn.disabled = false;
+                        getOtpBtn.innerText = "Get OTP";
                     });
             }
 
@@ -407,10 +414,10 @@
             });
 
             document.getElementById('resendOtpBtn').addEventListener('click', function () {
-            document.getElementById('timerDisplay').style.display = 'block';
-            sendOtp();
-            startOtpTimer();
-        });
+                document.getElementById('timerDisplay').style.display = 'block';
+                sendOtp();
+                startOtpTimer();
+            });
         });
     </script>
 
@@ -471,7 +478,7 @@
                                 text: "Please complete your registration.",
                             }).then(() => {
 
-                               document.getElementById("otpStep").innerHTML = ""; // Clears OTP step before registration
+                                document.getElementById("otpStep").innerHTML = ""; // Clears OTP step before registration
 
                                 document.getElementById("userDetailsStep").style.display = "block";
                             });
@@ -518,7 +525,7 @@
 
                 const formData = {
                     mobile_number: document.getElementById("mobileNumber").value,
-                 
+
                     user_name: document.getElementById("fullName").value,
                     user_gender: document.getElementById("gender").value,
                     user_dob: document.getElementById("dob").value

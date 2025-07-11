@@ -937,8 +937,8 @@ class User_Api_Model extends CI_Model
 
 
     public function get_pujari_of_puja_model($puja_id)
-{
-    $this->db->select("pujari_registration.id as pujari_id_, 
+    {
+        $this->db->select("pujari_registration.id as pujari_id_, 
                   pujari_registration.name as pujariname,
                   pujari_registration.*,  
                   services.* , 
@@ -950,17 +950,17 @@ class User_Api_Model extends CI_Model
                    WHERE puja_status = 'Completed' 
                      AND pujari_id = pujari_registration.id
                   ) as completed_puja_count");
-    $this->db->from("pujari_services");
-    $this->db->join('pujari_registration', 'pujari_registration.id = pujari_services.pujari_id', 'Left');
-    $this->db->join('pujari_feedback', 'pujari_feedback.pujari_id = pujari_registration.id', 'Left');
-    $this->db->join('services', 'services.id = pujari_services.service_id', 'Left');
-    $this->db->group_by('pujari_registration.id');
-    $this->db->where("service_id", $puja_id);
-    $this->db->where("pujari_services.status", "approved");
+        $this->db->from("pujari_services");
+        $this->db->join('pujari_registration', 'pujari_registration.id = pujari_services.pujari_id', 'Left');
+        $this->db->join('pujari_feedback', 'pujari_feedback.pujari_id = pujari_registration.id', 'Left');
+        $this->db->join('services', 'services.id = pujari_services.service_id', 'Left');
+        $this->db->group_by('pujari_registration.id');
+        $this->db->where("service_id", $puja_id);
+        $this->db->where("pujari_services.status", "approved");
 
-    $query = $this->db->get();
-    return $query->result();
-}
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     // public function get_pujari_of_puja_model($puja_id)
     // {
@@ -1199,14 +1199,14 @@ class User_Api_Model extends CI_Model
     }
 
     public function get_avg_rating_pujari_model($pujari_id)
-{
-    $this->db->select('pujari_feedback.pujari_id, ROUND(AVG(pujari_feedback.rating), 1) as average_rating'); // Rounded to 1 decimal place
-    $this->db->from('pujari_feedback');
-    $this->db->where("pujari_id", $pujari_id);
-    $query = $this->db->get();
+    {
+        $this->db->select('pujari_feedback.pujari_id, ROUND(AVG(pujari_feedback.rating), 1) as average_rating'); // Rounded to 1 decimal place
+        $this->db->from('pujari_feedback');
+        $this->db->where("pujari_id", $pujari_id);
+        $query = $this->db->get();
 
-    return $query->result();
-}
+        return $query->result();
+    }
 
 
     public function get_no_of_completed_puja_model($pujari_id)
@@ -1248,7 +1248,7 @@ class User_Api_Model extends CI_Model
     // {
 
     //     $this->db->select("services.* ,services.name as puja_name , mob_puja.original_price as original_price  ,mob_puja.totalAttendee as totalAttendee,  mob_puja.discount_price as discount_price , mob_puja.pujari_id as pujari_id , mob_puja.time as puja_time ,mob_puja.id as mobid, pujari_registration.* ,  mob_puja.date as mobpujadate,
-       
+
     //      (SELECT COUNT(*) FROM bookpuja_request_by_user_to_pujari  WHERE puja_status = 'Completed'  AND pujari_id = pujari_registration.id ) as completed_puja_count");
     //     $this->db->from("mob_puja");
     //     $this->db->join("services", "services.id = mob_puja.service_id", 'Left');
@@ -1260,7 +1260,7 @@ class User_Api_Model extends CI_Model
     // }
 
 
-//     public function show_mob_puja_model()
+    //     public function show_mob_puja_model()
 // {
 //     $this->db->select("services.*,
 //                        services.name as puja_name,
@@ -1281,13 +1281,13 @@ class User_Api_Model extends CI_Model
 //     $this->db->join("pujari_registration", "pujari_registration.id = mob_puja.pujari_id");
 //     $this->db->order_by('mob_puja.date', 'DESC'); // optional
 
-//     $query = $this->db->get();
+    //     $query = $this->db->get();
 //     return $query->result();
 // }
 
-public function show_mob_puja_model()
-{
-    $this->db->select("services.*,
+    public function show_mob_puja_model()
+    {
+        $this->db->select("services.*,
                        services.name as puja_name,
                        mob_puja.original_price,
                        mob_puja.totalAttendee,
@@ -1302,18 +1302,18 @@ public function show_mob_puja_model()
                         WHERE puja_status = 'Completed'  
                         AND pujari_id = pujari_registration.id) as completed_puja_count");
 
-    $this->db->from("mob_puja");
-    $this->db->join("services", "services.id = mob_puja.service_id", 'left');
-    $this->db->join("pujari_registration", "pujari_registration.id = mob_puja.pujari_id");
+        $this->db->from("mob_puja");
+        $this->db->join("services", "services.id = mob_puja.service_id", 'left');
+        $this->db->join("pujari_registration", "pujari_registration.id = mob_puja.pujari_id");
 
-    // 👇 Only include upcoming pujas (where date + time is in the future)
-    $this->db->where("STR_TO_DATE(CONCAT(mob_puja.date, ' ', mob_puja.time), '%Y-%m-%d %H:%i:%s') >", date('Y-m-d H:i:s'));
+        // 👇 Only include upcoming pujas (where date + time is in the future)
+        $this->db->where("STR_TO_DATE(CONCAT(mob_puja.date, ' ', mob_puja.time), '%Y-%m-%d %H:%i:%s') >", date('Y-m-d H:i:s'));
 
-    $this->db->order_by('mob_puja.date', 'ASC');
+        $this->db->order_by('mob_puja.date', 'ASC');
 
-    $query = $this->db->get();
-    return $query->result();
-}
+        $query = $this->db->get();
+        return $query->result();
+    }
 
 
 
@@ -1382,36 +1382,38 @@ public function show_mob_puja_model()
     public function showservices_model()
     {
         $this->db->where("service_type", "astrologer");
-        $this->db->limit(4);
+        $this->db->limit(5);
         $query = $this->db->get("services");
         return $query->result();
     }
 
 
-    public function showallservices_model(){
-      $this->db->where("service_type", "astrologer");
-      $query =  $this->db->get("services");
-      return $query->result();
+    public function showallservices_model()
+    {
+        $this->db->where("service_type", "astrologer");
+        $query = $this->db->get("services");
+        return $query->result();
     }
 
-  public function show_today_festivals_model() {
-    $today = date('Y-m-d');
+    public function show_today_festivals_model()
+    {
+        $today = date('Y-m-d');
 
-    $this->db->select('festivals_id, festivals_title, festivals_decription, festivals_date, festivals_image');
-    $this->db->from('festivals');
-    $this->db->where('DATE(festivals_date)', $today); // ✅ This is the fix
+        $this->db->select('festivals_id, festivals_title, festivals_decription, festivals_date, festivals_image');
+        $this->db->from('festivals');
+        $this->db->where('DATE(festivals_date)', $today); // ✅ This is the fix
 
-    $query = $this->db->get();
-    return $query->result_array();
-}
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
 
 
- public function auto_cancel_puja_model()
+    public function auto_cancel_puja_model()
     {
         date_default_timezone_set('Asia/Kolkata');
 
-        
+
         $this->db->where('payment_status', 'Pending');
         $this->db->where('puja_status !=', 'Cancelled');
         $query = $this->db->get('bookpuja_request_by_user_to_pujari');
@@ -1419,23 +1421,23 @@ public function show_mob_puja_model()
         $pujas = $query->result();
 
         foreach ($pujas as $puja) {
-             print_r( $puja->book_puja_id);
+            print_r($puja->book_puja_id);
             $pujaDateTime = new DateTime($puja->puja_date . ' ' . $puja->puja_time);
             $now = new DateTime();
             $cancel = false;
 
-           
+
             if ($now >= $pujaDateTime) {
                 $cancel = true;
             } else {
                 $interval = $now->diff($pujaDateTime);
-                $hoursDiff = ($interval->days * 24) + $interval->h + ($interval->i / 60);                
+                $hoursDiff = ($interval->days * 24) + $interval->h + ($interval->i / 60);
                 if ($puja->puja_urgency === 'urgent') {
-                    if ($hoursDiff < 4) { 
+                    if ($hoursDiff < 4) {
                         $cancel = true;
                     }
-                } else { 
-                  
+                } else {
+
                     if ($hoursDiff < 48) {
                         $cancel = true;
                     }
@@ -1449,6 +1451,159 @@ public function show_mob_puja_model()
         }
     }
 
+
+
+    public function show_home_astrologer_service_model()
+    {
+
+        $query = $this->db->get("home_page_service");
+        return $query->result();
+
+
+    }
+
+
+
+    //  $this->db->select("astrologer_registration.* , AVG(astrologer_feedback.rating) as average_rating ");
+    //     $this->db->from("astrologer_registration");
+    //     $this->db->join('astrologer_feedback', 'astrologer_feedback.astrologer_id = astrologer_registration.id', 'Left');
+    //     $this->db->group_by('astrologer_registration.id');
+    //     $this->db->where("status", "approved");
+    //     $this->db->where("is_online", "1");
+
+    //     $query = $this->db->get();
+    //     $astrologers = $query->result();
+    //     foreach ($astrologers as &$astro) {
+    //         $chatSession = $this->db->select('start_time, expire_on')
+    //             ->from('chat_sessions')
+    //             ->where('astrologer_id', $astro->id)
+    //             ->where('status', 'active')
+    //             ->order_by('id', 'DESC')
+    //             ->limit(1)
+    //             ->get()
+    //             ->row();
+
+    //         if ($chatSession) {
+
+    //             date_default_timezone_set('Asia/Kolkata');
+    //             $timestamp = date('Y-m-d H:i:s', time());
+
+    //             $astro->chat_start_time = $chatSession->start_time;
+    //             $astro->chat_expire_on = $chatSession->expire_on;
+    //             $astro->chatstatus = "active";
+
+    //             if ($chatSession->expire_on < $timestamp) {
+    //                 $astro->chatvalue = "sessionnotend";
+    //             } else {
+    //                 $astro->chatvalue = null;
+    //             }
+
+
+    //         } else {
+    //             // $astro->chat_start_time = null;
+    //             // $astro->chat_expire_on = null;
+    //             // $astro->chatstatus = "inactive";
+
+    //             $astro->chat_start_time = null;
+    //             $astro->chat_expire_on = null;
+    //             $astro->chatvalue = null;
+    //             $astro->chatstatus = "inactive";
+    //         }
+    //     }
+
+    //     return $astrologers;
+
+
+
+
+
+
+    public function show_filtered_astrolger_model($service_id)
+    {
+
+        $this->db->select("astrologer_registration.*, astrologer_services.*, AVG(astrologer_feedback.rating) as average_rating");
+
+        $this->db->from("astrologer_services");
+        $this->db->join("astrologer_registration", "astrologer_registration.id = astrologer_services.astrologer_id",'Left');
+        $this->db->join('astrologer_feedback', 'astrologer_feedback.astrologer_id = astrologer_registration.id', 'Left');
+        $this->db->group_by('astrologer_registration.id');
+        $this->db->where("astrologer_registration.status", "approved");
+        $this->db->where("astrologer_registration.is_online", "1");
+        $this->db->where("astrologer_services.service_id",$service_id );
+         $query = $this->db->get();
+
+        $astrologers=$query->result() ;
+
+         foreach ($astrologers as &$astro) {
+            $chatSession = $this->db->select('start_time, expire_on')
+                ->from('chat_sessions')
+                ->where('astrologer_id', $astro->id)
+                ->where('status', 'active')
+                ->order_by('id', 'DESC')
+                ->limit(1)
+                ->get()
+                ->row();
+
+            if ($chatSession) {
+
+                date_default_timezone_set('Asia/Kolkata');
+                $timestamp = date('Y-m-d H:i:s', time());
+
+                $astro->chat_start_time = $chatSession->start_time;
+                $astro->chat_expire_on = $chatSession->expire_on;
+                $astro->chatstatus = "active";
+
+                if ($chatSession->expire_on < $timestamp) {
+                    $astro->chatvalue = "sessionnotend";
+                } else {
+                    $astro->chatvalue = null;
+                }
+
+
+            } else {
+                // $astro->chat_start_time = null;
+                // $astro->chat_expire_on = null;
+                // $astro->chatstatus = "inactive";
+
+                $astro->chat_start_time = null;
+                $astro->chat_expire_on = null;
+                $astro->chatvalue = null;
+                $astro->chatstatus = "inactive";
+            }
+        }
+
+        return $astrologers;
+
+
+    }
+    //    public function show_filtered_astrolger_model($service_id)
+// {
+//     $this->db->select('
+//         ar.id,
+//         ar.name,
+//         ar.profile_image,
+//         ar.contact,
+//         ar.email,
+//         ar.gender,
+//         ar.languages,
+//         ar.specialties,
+//         ar.experience,
+//         ar.price_per_minute,
+//         ar.is_online,
+
+    //         ar.status,
+//         ar.created_at,
+//         ast_service.specialities as service_specialities,
+
+    //     ');
+//     $this->db->from('astrologer_services as ast_service');
+//     $this->db->join('astrologer_registration as ar', 'ast_service.astrologer_id = ar.id');
+//     $this->db->where('ast_service.service_id', $service_id);
+//     $this->db->where('ar.is_online', '1'); // Only active astrologers
+//      $this->db->where('ar.status', 'Approved');
+//     $query = $this->db->get();
+//     return $query->result();
+// }
 
 
 

@@ -44,7 +44,7 @@
                     <div class="card text-center shadow">
                         <div class="card-body">
                             <i class="bi bi-wallet2 fs-1 text-warning mb-3"></i>
-                            <h4 class="card-title">Available Balance</h4>
+                            <h4 class="card-title"><?php echo $this->lang->line('Available_Balance'); ?></h4>
                             <h3 style="color: var(--green);">
                                 ₹<?php echo isset($userinfo["amount"]) && !empty($userinfo["amount"]) ? $userinfo["amount"] : "0"; ?>
                             </h3>
@@ -56,7 +56,7 @@
                 <div class="col-md-8">
                     <div class="card shadow">
                         <div class="card-header text-white" style="background-color: var(--yellow);">
-                            <h4 class="mb-0">Recharge Wallet</h4>
+                            <h4 class="mb-0"><?php echo $this->lang->line('Recharge_Wallet') ?></h4>
                         </div>
                         <div class="card-body">
                             <div class="row g-3">
@@ -65,7 +65,7 @@
                                         <div class="card-body text-center">
                                             <h5>₹50</h5>
                                             <button class="btn btn-outline-dark btnAddMoney btnHover w-100"
-                                                onclick="showPaymentInfo(50)">Add Money</button>
+                                                onclick="showPaymentInfo(50)"><?php echo $this->lang->line('Add_Money') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@
                                         <div class="card-body text-center">
                                             <h5>₹100</h5>
                                             <button class="btn btn-outline-dark btnAddMoney btnHover w-100"
-                                                onclick="showPaymentInfo(100)">Add Money</button>
+                                                onclick="showPaymentInfo(100)"><?php echo $this->lang->line('Add_Money') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                         <div class="card-body text-center">
                                             <h5>₹200</h5>
                                             <button class="btn btn-outline-dark btnAddMoney btnHover w-100"
-                                                onclick="showPaymentInfo(200)">Add Money</button>
+                                                onclick="showPaymentInfo(200)"><?php echo $this->lang->line('Add_Money') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                                         <div class="card-body text-center">
                                             <h5>₹300</h5>
                                             <button class="btn btn-outline-dark btnAddMoney btnHover w-100"
-                                                onclick="showPaymentInfo(300)">Add Money</button>
+                                                onclick="showPaymentInfo(300)"><?php echo $this->lang->line('Add_Money') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                         <div class="card-body text-center">
                                             <h5>₹400</h5>
                                             <button class="btn btn-outline-dark btnAddMoney btnHover w-100"
-                                                onclick="showPaymentInfo(400)">Add Money</button>
+                                                onclick="showPaymentInfo(400)"><?php echo $this->lang->line('Add_Money') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                         <div class="card-body text-center">
                                             <h5>₹500</h5>
                                             <button class="btn btn-outline-dark btnAddMoney btnHover w-100"
-                                                onclick="showPaymentInfo(500)">Add Money</button>
+                                                onclick="showPaymentInfo(500)"><?php echo $this->lang->line('Add_Money') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                                         <div class="card-body text-center">
                                             <h5>₹1000</h5>
                                             <button class="btn btn-outline-dark btnAddMoney btnHover w-100"
-                                                onclick="showPaymentInfo(1000)">Add Money</button>
+                                                onclick="showPaymentInfo(1000)"><?php echo $this->lang->line('Add_Money') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
                                         <div class="card-body text-center">
                                             <h5>₹2000</h5>
                                             <button class="btn btn-outline-dark btnAddMoney btnHover w-100"
-                                                onclick="showPaymentInfo(2000)">Add Money</button>
+                                                onclick="showPaymentInfo(2000)"><?php echo $this->lang->line('Add_Money') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -143,29 +143,28 @@
                     <div id="paymentInfo" class="mt-4">
                         <div class="card shadow">
                             <div class="card-header text-white" style="background-color: var(--yellow);">
-                                <h5 class="mb-0">Payment Information</h5>
+                                <h5 class="mb-0"><?php echo $this->lang->line('Payment_Information') ?></h5>
                             </div>
                             <div class="card-body">
                                 <div class="row mb-2">
-                                    <div class="col-6">Selected Amount:</div>
+                                    <div class="col-6"><?php echo $this->lang->line('Selected_Amount') ?></div>
                                     <div class="col-6 text-end">₹<span id="selectedAmount">0</span></div>
                                 </div>
                                 <div class="row mb-2">
-                                    <div class="col-6">GST (18%):</div>
+                                    <div class="col-6"><?php echo $this->lang->line('GST_Amount') ?> (18%):</div>
                                     <div class="col-6 text-end">₹<span id="gstAmount">0</span></div>
                                 </div>
                                 <hr>
                                 <div class="row mb-3">
-                                    <div class="col-6"><strong>Total Amount:</strong></div>
+                                    <div class="col-6"><strong><?php echo $this->lang->line('Total_Amount')  ?>:</strong></div>
                                     <div class="col-6 text-end"><strong>₹<span id="totalAmount">0</span></strong></div>
                                 </div>
                                 <center>
                                     <center>
                                         <?php if (!$this->session->userdata("user_id")): ?>
-                                            <button onclick="loginuser()" class="btn btn-success w-fit">Proceed toss
-                                                Pay</button>
+                                            <button onclick="loginuser()" class="btn btn-success w-fit"><?php echo $this->lang->line('Proceed_to_Pay') ?></button>
                                         <?php else: ?>
-                                            <button class="btn btn-success w-fit" id="rzp-button1">Proceed to Pay</button>
+                                            <button class="btn btn-success w-fit" id="rzp-button1"><?php echo $this->lang->line('Proceed_to_Pay') ?></button>
                                         <?php endif; ?>
                                     </center>
 

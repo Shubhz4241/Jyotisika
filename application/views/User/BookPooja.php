@@ -35,7 +35,7 @@
         <div class="row">
             <div class="input-group w-md-50 text-center mx-auto">
                 <input id="searchInput" type="search" class="form-control shadow-none"
-                    placeholder="Let’s book your puja, what do you need help with?" onkeyup="filterCards()">
+                    placeholder="Let’s book your pooja, what do you need help with?" onkeyup="filterCards()">
                 <button class="btn border" type="button" style="background-color: var(--yellow); color: black;">
                     <i class="bi bi-search"></i>
                 </button>

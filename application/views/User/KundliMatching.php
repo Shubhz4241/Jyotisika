@@ -147,6 +147,8 @@
 
 
                     <input type="text" name="girl_name" id="girl_name" placeholder="Name" autocomplete="off"
+                     oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, '').replace(/(\..*)\./g, '$1'); })(this)"
+                        pattern="^[^\s][A-Za-zÀ-ž\s]+$" title="Enter Alphabets Only"
                         class="form-control shadow-none my-2 p-2 rounded-1">
 
                     <div class="row">
@@ -350,7 +352,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             ['boy_day', 'girl_day'].forEach(id => populateSelect(id, 1, 31, true));
             ['boy_month', 'girl_month'].forEach(id => populateMonth(id));
-            ['boy_year', 'girl_year'].forEach(id => populateSelect(id, 1990, new Date().getFullYear()));
+            ['boy_year', 'girl_year'].forEach(id => populateSelect(id, 1980, new Date().getFullYear()));
             ['boy_hour', 'girl_hour'].forEach(id => populateSelect(id, 0, 23, true));
             ['boy_minute', 'girl_minute', 'boy_second', 'girl_second'].forEach(id => populateSelect(id, 0, 59, true));
         });

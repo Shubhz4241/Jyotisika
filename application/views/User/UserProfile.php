@@ -174,6 +174,7 @@
                                 <input type="text" class="form-control" id="user_PlaceofBirth" name="user_PlaceofBirth"
                                     value="<?php echo $user_PlaceofBirth; ?>" autocomplete="off" required
                                     pattern="^[a-zA-Z\s]+$"
+                                    placeholder="Place of Birth"
                                     oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
                                     title="Please enter only letters and spaces">
                             </div>
@@ -188,6 +189,7 @@
                                     name="user_CurrentAddress"
                                     value="<?php echo $user_CurrentAddress; ?>"
                                     autocomplete="off"
+                                    placeholder="Current Address"
                                     required
                                     oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z0-9\s,]/g, ''); })(this)"
                                     pattern="^[A-Za-z0-9À-ž\s,]+$"
@@ -198,6 +200,7 @@
                             <div class="mb-3">
                                 <label for="city" class="form-label">City</label>
                                 <input type="text" class="form-control" id="city" name="user_City"
+                                placeholder="Your  City Name"
                                     value="<?php echo $user_City; ?>" autocomplete="off" required
                                     oninput="(function(element) { element.value = element.value.replace(/[^a-zA-Z\s]/g, ''); })(this)">
                             </div>
@@ -213,6 +216,7 @@
                                     value="<?php echo $user_Pincode; ?>"
                                     autocomplete="off"
                                     required
+                                    placeholder="pincode"
                                     minlength="6"
                                     maxlength="6"
                                     pattern="\d{6}"

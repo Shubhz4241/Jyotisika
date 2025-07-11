@@ -519,7 +519,7 @@
                                                                 <p class="mb-2 text-truncate" style="font-size: 1rem;">
                                                                     <i class="bi bi-cash"></i>
                                                                     ₹<?php echo number_format($pooja['pujari_charge'], 2); ?>
-                                                                    Puja Charge
+                                                                    Pooja Charge
                                                                 </p>
 
                                                                 <!-- Badges -->
@@ -608,7 +608,7 @@
 
                                                                         <p> <span
                                                                                 style='color: red; font-weight: bold; font-size:14px;'>Pay
-                                                                                at least 2 days before the puja starts, or it will
+                                                                                at least 2 days before the pooja starts, or it will
                                                                                 be cancelled.</span></p>
                                                                     <?php endif ?>
 
@@ -616,7 +616,7 @@
 
                                                                         <p> <span
                                                                                 style='color: red; font-weight: bold; font-size:14px;'>Pay
-                                                                                at least 4 hours before the puja starts, or it will
+                                                                                at least 4 hours before the pooja starts, or it will
                                                                                 be cancelled.</span></p>
                                                                     <?php endif ?>
 

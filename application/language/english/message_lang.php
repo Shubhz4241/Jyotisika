@@ -68,7 +68,7 @@ $lang['Baby_Name'] = "Baby Name";
 
 
 
-$lang['bookpuja'] = "Bookpuja";
+$lang['bookpuja'] = "Bookpooja";
 
 
 $lang['freekundali'] = "Free Kundli";
@@ -83,6 +83,9 @@ $lang['MobPooja'] = "Mob Pooja";
 
 
 //Footer
+
+
+$lang['our_services'] = "Our Services";
 
 
 $lang['Astrological_Services'] = "Astrological Services";
@@ -180,7 +183,7 @@ $lang['Counselling_Description'] = "Solving money problems doesn’t happen over
 $lang['Counselling_Check_Out'] = "Check Out";
 
 
-$lang['Year_Book_Title'] = "Year Book";
+$lang['Year_Book_Title'] = "YearBook";
 $lang['Year_Book_Description'] = "Solving money problems doesn’t happen overnight. Stay consistent and patient with your efforts.";
 $lang['Year_Book_Check_Out'] = "Check Out";
 
@@ -480,3 +483,15 @@ $lang['Continue_To_Buy'] = "Continue to Buy";
 $lang['Cart_Empty_Message'] = "Your cart is empty!";
 $lang['Cart_Empty_Subtext'] = "Looks like you haven't added anything to your cart yet.";
 $lang['Browse_Products'] = "Browse Products";
+
+
+//Wallete
+
+$lang['Available_Balance']      = "Available Balance";
+$lang['Recharge_Wallet']        = "Recharge Wallet";
+$lang['Add_Money']              = "Add Money";
+$lang['Payment_Information']    = "Payment Information";
+$lang['Selected_Amount']        = "Selected Amount";
+$lang['GST_Amount']             = "GST (18%)";
+$lang['Total_Amount']           = "Total Amount";
+$lang['Proceed_to_Pay']         = "Proceed to Pay";

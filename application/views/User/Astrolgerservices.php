@@ -116,7 +116,7 @@
                                 <div class="card-body p-3">
                                     <!-- Profile Section -->
                                     <div class="d-flex align-items-center mb-2">
-                                        <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>"
+                                        <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['astrologer_id']); ?>"
                                             class="text-decoration-none">
 
 
@@ -126,7 +126,7 @@
                                         </a>
                                         <div class="ms-2">
 
-                                            <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>"
+                                            <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['astrologer_id']); ?>"
                                                 class="text-decoration-none">
                                                 <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
                                                     <?php
@@ -164,7 +164,7 @@
                                             <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
                                                 style="width: 15px; height: 15px; margin-right: 5px;">
                                             <small><?php echo isset($astrologer['price_per_minute']) && !empty($astrologer['price_per_minute']) ? $astrologer['price_per_minute'] : "0"; ?>
-                                               Rs per minute</small>
+                                                per minite</small>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
@@ -220,7 +220,7 @@
                                                      '<?php echo $astrologer['chatstatus']; ?>',
                                                     <?php echo $userinfo_data['amount']; ?>, 
                                                     <?php echo $astrologer['price_per_minute']; ?>,  
-                                                    '<?php echo base_url('chat/' . $astrologer['id']); ?>',
+                                                    '<?php echo base_url('chat/' . $astrologer['astrologer_id']); ?>',
                                                     '<?php echo addslashes($astrologer['name']); ?>' ,
                                                     '<?php echo $astrologer['chatvalue'] ?>' 
                                                 )"> Chat</button>

@@ -184,6 +184,38 @@ class User extends CI_Controller
 		}
 
 
+		//Static page
+
+
+		$ch_url_data = base_url("User_Api_Controller/show_home_astrologer_service");
+
+		$ch_service_data = curl_init();
+		curl_setopt($ch_service_data, CURLOPT_URL, $ch_url_data);
+		curl_setopt($ch_service_data, CURLOPT_RETURNTRANSFER, true);
+		$service_response_data = curl_exec($ch_service_data);
+		$curl_error_service_data = curl_error($ch_service_data);
+		curl_close($ch_service_data);
+
+		if ($service_response_data === false) {
+			show_error("cURL Error: " . $curl_error_service_data, 500);
+			return;
+		}
+
+		$home_service_data = json_decode($service_response_data, associative: true);
+
+
+		$data["home_service_data"] = "";
+		if ($home_service_data["status"] == "success") {
+			$data["home_service_data"] = $home_service_data["data"];
+		}
+
+
+
+
+
+
+
+
 		//   print_r($data["service_data"]);
 		$this->lang->load('message', $language);
 		$this->load->view('User/Home', $data);
@@ -370,7 +402,7 @@ class User extends CI_Controller
 		$this->lang->load('message', $language);
 
 
-		
+
 
 		$ch_url_fest = base_url("User_Api_Controller/show_today_festivals");
 
@@ -394,7 +426,7 @@ class User extends CI_Controller
 			$data["today_festivals_response"] = $festivals_data["data"];
 		}
 
-		
+
 
 		$ch_url = base_url("User_Api_Controller/show_festivals");
 
@@ -418,7 +450,7 @@ class User extends CI_Controller
 			$data["festivals_data"] = $festivals_data["data"];
 		}
 
-		
+
 
 		$this->load->view('User/Festival', $data);
 	}
@@ -1072,7 +1104,7 @@ class User extends CI_Controller
 			$data["userinfo_data"] = $getdata["userinfo"];
 
 		}
-		
+
 
 
 
@@ -1436,7 +1468,7 @@ class User extends CI_Controller
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
 
-	
+
 
 		$api_url_get_feedback = base_url("User_Api_Controller/getpujarifeedback");
 		$ch_feedback = curl_init();
@@ -1576,7 +1608,7 @@ class User extends CI_Controller
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
 
-		
+
 
 		$this->load->view("User/OnlinePoojaris", $data);
 	}
@@ -1786,7 +1818,7 @@ class User extends CI_Controller
 		}
 
 
-		
+
 
 
 
@@ -2035,48 +2067,154 @@ class User extends CI_Controller
 
 
 	public function send_email()
-{
-    $name = $this->input->post('contact_name');
-    $email = $this->input->post('contact_email');
-    $message = $this->input->post('contact_message');
+	{
+		$name = $this->input->post('contact_name');
+		$email = $this->input->post('contact_email');
+		$message = $this->input->post('contact_message');
 
-    // Load email library
-    $this->load->library('email');
+		// Load email library
+		$this->load->library('email');
 
-    // Set email configuration
-    $config = array(
-        'protocol'  => 'smtp',
-        'smtp_host' => 'smtp.gmail.com',  // change if using different provider
-        'smtp_port' => 587,
-        'smtp_user' => 'saurv1220@gmail.com',     // your email address
-        'smtp_pass' => 'bods rigu tscn nzqf',        // Gmail App password or actual SMTP password
-        'mailtype'  => 'html',
-        'charset'   => 'utf-8',
-        'newline'   => "\r\n"
-    );
+		// Set email configuration
+		$config = array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'smtp.gmail.com',  // change if using different provider
+			'smtp_port' => 587,
+			'smtp_user' => 'saurv1220@gmail.com',     // your email address
+			'smtp_pass' => 'bods rigu tscn nzqf',        // Gmail App password or actual SMTP password
+			'mailtype' => 'html',
+			'charset' => 'utf-8',
+			'newline' => "\r\n"
+		);
 
-    $this->email->initialize($config);
+		$this->email->initialize($config);
 
-    // Set email parameters
-    $this->email->from($email, $name);
-    $this->email->to('saurv1220@gmail.com'); // where you want to receive the email
-    $this->email->subject('New Contact Form Submission');
-    $this->email->message("
+		// Set email parameters
+		$this->email->from($email, $name);
+		$this->email->to('saurv1220@gmail.com'); // where you want to receive the email
+		$this->email->subject('New Contact Form Submission');
+		$this->email->message("
         <h3>Contact Form Submission</h3>
         <p><strong>Name:</strong> {$name}</p>
         <p><strong>Email:</strong> {$email}</p>
         <p><strong>Message:</strong><br>{$message}</p>
     ");
 
-    if ($this->email->send()) {
-        $this->session->set_flashdata('success', 'Thank you! Your message has been sent.');
-    } else {
-        $this->session->set_flashdata('error', 'Sorry, there was a problem sending your message.');
-        log_message('error', $this->email->print_debugger(['headers']));
-		print_r($this->email->print_debugger(['headers']));
-    }
+		if ($this->email->send()) {
+			$this->session->set_flashdata('success', 'Thank you! Your message has been sent.');
+		} else {
+			$this->session->set_flashdata('error', 'Sorry, there was a problem sending your message.');
+			log_message('error', $this->email->print_debugger(['headers']));
+			print_r($this->email->print_debugger(['headers']));
+		}
 
-    redirect(base_url('CustomerSupport')); // redirect to homepage or contact section
-}
+		redirect(base_url('CustomerSupport')); // redirect to homepage or contact section
+	}
+
+
+
+	public function astrolgerservices($service_id){
+		
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+
+		
+
+		if (!$service_id) {
+			show_error("Service id is required", 400);
+			return;
+		}
+
+		//Get astrolger by id
+		$api_url = base_url("User_Api_Controller/show_filtered_astrolger");
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(["service_id" => $service_id]));
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		$curl_error = curl_error($ch);
+		$response = curl_exec($ch);
+
+		curl_close($ch);
+
+		if ($response === false) {
+			show_error("cURL Error: " . $curl_error, 500);
+			return;
+		}
+
+		$astrologer_data = json_decode($response, associative: true);
+		$data["astrologerdata"] = "";
+
+		if ($astrologer_data["status"] == "success") {
+
+			$data["astrologerdata"] = $astrologer_data["data"];
+		} else {
+			$data["astrologerdata"] = "";
+		}
+
+
+		
+
+		// print_r($data["astrologerdata"]);
+
+
+		// 	$language = $this->session->userdata('site_language') ?? 'english';
+		// $this->lang->load('message', $language);
+
+
+		// $api_url = base_url("User_Api_Controller/getastrologer");
+		// $ch = curl_init();
+		// curl_setopt($ch, CURLOPT_URL, $api_url);
+		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// $response = curl_exec($ch);
+		// $curl_error = curl_error($ch);
+		// curl_close($ch);
+
+		// if ($response === false) {
+		// 	show_error("cURL Error: " . $curl_error, 500);
+		// 	return;
+		// }
+
+		// $astrologer_data = json_decode($response, associative: true);
+		// $data["astrologerdata"] = "";
+
+		// if ($astrologer_data["status"] == "success") {
+
+		// 	$data["astrologerdata"] = $astrologer_data["data"];
+		// } else {
+		// 	$data["astrologerdata"] = "";
+		// }
+
+		$user_id = $this->session->userdata('user_id');
+		if ($user_id) {
+			$getdata["userinfo"] = $this->get_userdata($user_id);
+			$data["userinfo_data"] = "";
+
+			if (!$getdata["userinfo"]) {
+				show_error("Failed to fetch user profile", 500);
+				redirect("UserLoginSignup/Logout");
+			} else if ($getdata["userinfo"] == "usernotfound") {
+				redirect("UserLoginSignup/Logout");
+			} else if ($getdata["userinfo"] == "userfound") {
+				redirect("UserLoginSignup/Logout");
+			}
+
+			$data["userinfo_data"] = $getdata["userinfo"];
+
+		}
+
+
+
+
+
+		$this->load->view("User/Astrolgerservices" , $data);
+
+
+	}
+
+
 
 }

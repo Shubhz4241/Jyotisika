@@ -512,14 +512,14 @@ class User_Api_Controller extends CI_Controller
 
                 //Jyotisika test payment
 
-                // 'key' => 'rzp_test_YcEtdZa9f7N8R6',
+                'key' => 'rzp_test_YcEtdZa9f7N8R6',
 
 
                 //Jyotisika live payment
 
-                'key' => 'rzp_live_OhYeV3XCMIFBH5',
+                // 'key' => 'rzp_live_OhYeV3XCMIFBH5',
 
-                
+
 
 
 
@@ -1928,13 +1928,13 @@ class User_Api_Controller extends CI_Controller
                 // 'key' => 'rzp_live_aKnqCVUpRcVAoS',
 
 
-                // 'key' => 'rzp_test_YcEtdZa9f7N8R6',
+                'key' => 'rzp_test_YcEtdZa9f7N8R6',
 
 
                 //Javascript live keys
 
 
-                 'key' => 'rzp_live_OhYeV3XCMIFBH5',
+                // 'key' => 'rzp_live_OhYeV3XCMIFBH5',
 
 
                 // 'name'           => $user->username,
@@ -2548,7 +2548,7 @@ class User_Api_Controller extends CI_Controller
                 "puja_time" => $pujatime,
                 "request_created_at" => $timestamp,
                 "puja_urgency" => $puja_urgency,
-                "payment_status"=>"Pending"
+                "payment_status" => "Pending"
 
 
             ];
@@ -2957,12 +2957,12 @@ class User_Api_Controller extends CI_Controller
 
 
                 //Jyotisika updated test keys
-                // 'key' => 'rzp_test_YcEtdZa9f7N8R6',
+                'key' => 'rzp_test_YcEtdZa9f7N8R6',
 
 
                 //Jyotisika live updated test keys
-                 'key' => 'rzp_live_OhYeV3XCMIFBH5',
-                
+                // 'key' => 'rzp_live_OhYeV3XCMIFBH5',
+
 
 
 
@@ -3740,6 +3740,77 @@ class User_Api_Controller extends CI_Controller
             $this->output->set_output(json_encode(["status" => "success", "message" => "data updated successfully"]));
 
 
+        }
+    }
+
+
+
+    public function show_home_astrologer_service()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $query = $this->User_Api_Model->show_home_astrologer_service_model();
+
+
+            $this->output->set_status_header(200);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "success", "message" => "data updated successfully", "data" => $query]));
+
+
+        }
+    }
+
+    public function show_filtered_astrolger()
+    {
+
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $service_id = $this->input->post("service_id");
+
+            if (!$service_id) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "service id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            }
+
+            $query = $this->User_Api_Model->show_filtered_astrolger_model($service_id);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no astrolger found with this service"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
         }
     }
 

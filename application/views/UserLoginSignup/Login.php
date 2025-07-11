@@ -79,7 +79,7 @@
             <!-- Right Section: Login Form -->
             <div class="col-md-6 d-flex flex-column justify-content-center align-items-center p-5 order-1 order-md-2"
                 style="background: #FFF;">
-                <h5 class="fw-bold mb-4" style="color: #444; font-size: 1.6rem;">LogIn to Continue</h5>
+                <h5 class="fw-bold mb-4" style="color: #444; font-size: 1.6rem;">Login to Continue</h5>
 
                 <!-- <form id="loginForm" method="POST" action="<?php echo base_url("UserLoginSignup/login_user"); ?>"
                     style="width: 100%; max-width: 420px;"> -->
@@ -172,7 +172,7 @@
             // startOtpTimer();
         });
 
-      
+
 
     </script>
 
@@ -194,6 +194,10 @@
                     mobileError.innerText = "Please enter a valid 10-digit mobile number";
                     return;
                 }
+
+                getOtpBtn.disabled = true;
+                getOtpBtn.innerText = "Sending...";
+
                 mobileError.innerText = ""; // Clear error if valid
 
                 fetch("<?php echo base_url('User_Api_Controller/sendOtpmobile'); ?>", {
@@ -214,7 +218,7 @@
                             document.getElementById("mobileStep").style.display = "none";
                             document.getElementById("otpStep").style.display = "block";
                             startOtpTimer();
-                        }else if (data.status === "notregistered") {
+                        } else if (data.status === "notregistered") {
                             Swal.fire({
                                 icon: "warning",
                                 title: "User not found",
@@ -240,7 +244,11 @@
                             title: "Error",
                             text: "Something went wrong!",
                         });
-                    });
+                    }).finally(() => {
+                    // Enable the button again after response or failure
+                    getOtpBtn.disabled = false;
+                    getOtpBtn.innerText = "Get OTP";
+                });
             }
 
             getOtpBtn.addEventListener("click", sendOtp);
@@ -252,12 +260,12 @@
                 }
             });
 
-            
-        document.getElementById('resendOtpBtn').addEventListener('click', function () {
-            document.getElementById('timerDisplay').style.display = 'block';
-            sendOtp();
-            startOtpTimer();
-        });
+
+            document.getElementById('resendOtpBtn').addEventListener('click', function () {
+                document.getElementById('timerDisplay').style.display = 'block';
+                sendOtp();
+                startOtpTimer();
+            });
         });
     </script>
 
