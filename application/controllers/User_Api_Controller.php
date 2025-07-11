@@ -3815,6 +3815,109 @@ class User_Api_Controller extends CI_Controller
     }
 
 
+    public function show_service_info()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+        $service_id = $this->input->post("service_id");
+
+        if (!$service_id) {
+
+            $response = [
+                "status" => "error",
+                "message" => "service id not found"
+            ];
+
+            echo json_encode($response);
+            return;
+
+        }
+
+        $query = $this->User_Api_Model->show_service_info_model($service_id);
+
+        if ($query) {
+            $response = [
+                "status" => "success",
+                "message" => "data fetched successfully",
+                "data" => $query
+            ];
+        } else {
+
+            $response = [
+                "status" => "error",
+                "message" => "There is no astrolger found with this service"
+
+            ];
+        }
+
+        echo json_encode($response);
+
+        return;
+
+    }
+
+
+
+
+    public function show_notification()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $user_id = $this->input->post("user_id");
+
+            if (!$user_id) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "user id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            }
+            $query = $this->User_Api_Model->show_notification_model($user_id);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no new notification"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+
+
+
+        }
+
+
+    }
+
+
+
+
 
 }
 

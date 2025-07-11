@@ -37,6 +37,7 @@
             border: 1px solid #ccc;
             border-radius: 15px;
             /* Optional: Add a border for definition */
+            cursor: pointer;
         }
 
         .nav-pills .nav-link.active {
@@ -50,6 +51,10 @@
             background-color: var(--yellow);
             /* Slightly different shade on hover */
         }
+
+        .card {
+            cursor: pointer;
+        }
     </style>
 
 
@@ -62,84 +67,160 @@
     </header>
 
 
+
+
     <main>
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
+       
         <div class="container my-4">
-            <h2 class="text-center mb-3" style="color:var(--red) ; font-family: 'Kaisei Decol', serif; font-size: 1.8rem;">
-            <i class="bi bi-bell-fill me-2"></i>Your Notifications
+            <h2 class="text-center mb-3"
+                style="color:var(--red) ; font-family: 'Kaisei Decol', serif; font-size: 1.8rem;">
+                <i class="bi bi-bell-fill me-2"></i>Your Notifications
             </h2>
         </div>
+
+
         <div class="container">
             <div class="row">
-            <div class="col-md-8 mx-auto">
-                <div class="notification-list">
-                <!-- Notification 1 -->
-                <div class="card mb-3 border-0 shadow hover-shadow" 
-                     style="border-radius: 12px; transition: all 0.2s ease;">
-                    <div class="card-body p-3">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                        <div class="rounded-circle bg-warning bg-opacity-25 p-2">
-                            <i class="bi bi-bell-fill text-warning"></i>
-                        </div>
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-1 fw-bold">Your Puja booking is confirmed</h6>
-                        <p class="mb-1 text-muted small">Your booking for Ganesh Puja on March 15th has been confirmed.</p>
-                        <small class="text-primary" style="font-size: 0.75rem;"><i class="bi bi-clock me-1"></i>2 hours ago</small>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                <div class="col-md-8 mx-auto">
+                    <div class="notification-list">
+                        <!-- Notification 1 -->
 
-                <!-- Notification 2 -->
-                <div class="card mb-3 border-0 shadow hover-shadow" 
-                     style="border-radius: 12px; transition: all 0.2s ease;">
-                    <div class="card-body p-3">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                        <div class="rounded-circle bg-success bg-opacity-25 p-2">
-                            <i class="bi bi-gift-fill text-success"></i>
-                        </div>
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-1 fw-bold">New Product Available</h6>
-                        <p class="mb-1 text-muted small">Check out our new collection of puja items.</p>
-                        <small class="text-primary" style="font-size: 0.75rem;"><i class="bi bi-clock me-1"></i>1 day ago</small>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                        <?php if (!empty($show_notification_data_response)): ?>
 
-                <!-- Notification 3 -->
-                <div class="card mb-3 border-0 shadow hover-shadow" 
-                     style="border-radius: 12px; transition: all 0.2s ease;">
-                    <div class="card-body p-3">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                        <div class="rounded-circle bg-danger bg-opacity-25 p-2">
-                            <i class="bi bi-calendar-event-fill text-danger"></i>
-                        </div>
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-1 fw-bold">Upcoming Festival Reminder</h6>
-                        <p class="mb-1 text-muted small">Navratri celebrations start next week. Book your puja slots now.</p>
-                        <small class="text-primary" style="font-size: 0.75rem;"><i class="bi bi-clock me-1"></i>2 days ago</small>
-                        </div>
-                    </div>
+                            <?php foreach ($show_notification_data_response as $shownotification): ?>
+                                <div class="card mb-3 border-0 shadow hover-shadow"
+                                    style="border-radius: 12px; transition: all 0.2s ease;">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <?php if ($shownotification["type"] == "info"): ?>
+                                                    <div class="rounded-circle bg-warning bg-opacity-25 p-2">
+                                                        <i class="bi bi-bell-fill text-warning"></i>
+                                                    </div>
+                                                <?php elseif ($shownotification["type"] == "success"): ?>
+                                                    <div class="rounded-circle bg-success bg-opacity-25 p-2">
+                                                        <i class="bi bi-gift-fill text-success"></i>
+                                                    </div>
+
+                                                <?php elseif ($shownotification["type"] == "warning"): ?>
+
+                                                    <div class="rounded-circle bg-danger bg-opacity-25 p-2">
+                                                        <i class="bi bi-calendar-event-fill text-danger"></i>
+                                                    </div>
+
+                                                <?php else: ?>
+                                                    <div class="rounded-circle bg-warning bg-opacity-25 p-2">
+                                                        <i class="bi bi-bell-fill text-warning"></i>
+                                                    </div>
+                                                <?php endif ?>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h6 class="mb-1 fw-bold"><?php echo $shownotification["title"] ?></h6>
+                                                <p class="mb-1 text-muted small"><?php echo $shownotification["message"] ?></p>
+                                                <small class="text-primary time-ago"
+                                                    data-created-at="<?= $shownotification['created_at'] ?>"
+                                                    style="font-size: 0.75rem;">
+                                                    <i class="bi bi-clock me-1"></i> <!-- Time will be inserted here -->
+                                                </small>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <?php endforeach ?>
+
+                        <?php else: ?>
+                            <p>There is no new notification </p>
+
+                        <?php endif ?>
+
+                        <script>
+                            function timeAgo(datetime) {
+                                const now = new Date();
+                                const past = new Date(datetime);
+                                const diffInSeconds = Math.floor((now - past) / 1000);
+
+                                if (diffInSeconds < 60) return 'just now';
+                                const minutes = Math.floor(diffInSeconds / 60);
+                                if (minutes < 60) return `${minutes} min${minutes > 1 ? 's' : ''} ago`;
+                                const hours = Math.floor(minutes / 60);
+                                if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+                                const days = Math.floor(hours / 24);
+                                if (days < 30) return `${days} day${days > 1 ? 's' : ''} ago`;
+                                const months = Math.floor(days / 30);
+                                if (months < 12) return `${months} month${months > 1 ? 's' : ''} ago`;
+                                const years = Math.floor(months / 12);
+                                return `${years} year${years > 1 ? 's' : ''} ago`;
+                            }
+
+                            document.addEventListener("DOMContentLoaded", function () {
+                                const timeElements = document.querySelectorAll('.time-ago');
+                                timeElements.forEach(el => {
+                                    const datetime = el.getAttribute('data-created-at');
+                                    el.innerHTML = `<i class="bi bi-clock me-1"></i>` + timeAgo(datetime);
+                                });
+                            });
+                        </script>
+
+
+
+
+
+                        <!-- Notification 2 -->
+                        <!-- <div class="card mb-3 border-0 shadow hover-shadow"
+                            style="border-radius: 12px; transition: all 0.2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="rounded-circle bg-success bg-opacity-25 p-2">
+                                            <i class="bi bi-gift-fill text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="mb-1 fw-bold">New Product Available</h6>
+                                        <p class="mb-1 text-muted small">Check out our new collection of puja items.</p>
+                                        <small class="text-primary" style="font-size: 0.75rem;"><i
+                                                class="bi bi-clock me-1"></i>1 day ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- Notification 3 -->
+                        <!-- <div class="card mb-3 border-0 shadow hover-shadow"
+                            style="border-radius: 12px; transition: all 0.2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="rounded-circle bg-danger bg-opacity-25 p-2">
+                                            <i class="bi bi-calendar-event-fill text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="mb-1 fw-bold">Upcoming Festival Reminder</h6>
+                                        <p class="mb-1 text-muted small">Navratri celebrations start next week. Book
+                                            your puja slots now.</p>
+                                        <small class="text-primary" style="font-size: 0.75rem;"><i
+                                                class="bi bi-clock me-1"></i>2 days ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
-                </div>
-            </div>
             </div>
         </div>
 
         <style>
-        .hover-shadow:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
-        }
+            .hover-shadow:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+            }
         </style>
 
     </main>

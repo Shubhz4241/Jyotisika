@@ -1828,7 +1828,49 @@ class User extends CI_Controller
 
 	public function Notification()
 	{
-		$this->load->view('User/Notification');
+
+
+
+		$show_notification = base_url("User_Api_Controller/show_notification");
+		$show_notification_url = curl_init();
+		curl_setopt($show_notification_url, CURLOPT_URL, $show_notification);
+		curl_setopt($show_notification_url, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($show_notification_url, CURLOPT_POST, 1);
+		curl_setopt($show_notification_url, CURLOPT_POSTFIELDS, http_build_query(["user_id" => $this->session->userdata("user_id")]));
+		curl_setopt($show_notification_url, CURLOPT_TIMEOUT, 10);
+		$show_notification_error = curl_error($show_notification_url);
+		$show_notification_data = curl_exec($show_notification_url);
+
+		curl_close($show_notification_url);
+
+		if ($show_notification_data === false) {
+			show_error("cURL Error: " . $show_notification_error, 500);
+			return;
+		}
+
+
+
+
+
+		
+		$show_notification_data_response  = json_decode($show_notification_data , associative: true);
+
+
+		$data["show_notification_data_response"] = "";
+
+		if ($show_notification_data_response["status"] == "success") {
+			$data["show_notification_data_response"] = $show_notification_data_response["data"];
+		}
+
+
+		// print_r($data["show_notification_data_response"] );
+
+
+
+
+
+
+		$this->load->view('User/Notification', $data);
 	}
 
 
@@ -2113,14 +2155,45 @@ class User extends CI_Controller
 
 
 
-	public function astrolgerservices($service_id){
-		
+	public function astrolgerservices($service_id)
+	{
+
 
 		$language = $this->session->userdata('site_language') ?? 'english';
 		$this->lang->load('message', $language);
 
 
-		
+
+		$api_url_service = base_url("User_Api_Controller/show_service_info");
+		$ch_serv = curl_init();
+		curl_setopt($ch_serv, CURLOPT_URL, $api_url_service);
+		curl_setopt($ch_serv, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_serv, CURLOPT_POST, 1);
+		curl_setopt($ch_serv, CURLOPT_POSTFIELDS, http_build_query(["service_id" => $service_id]));
+		curl_setopt($ch_serv, CURLOPT_TIMEOUT, 10);
+		$curl_error_service = curl_error($ch_serv);
+		$response_service = curl_exec($ch_serv);
+
+		curl_close($ch_serv);
+
+		if ($response_service === false) {
+			show_error("cURL Error: " . $curl_error_service, 500);
+			return;
+		}
+
+		$response_service_data = json_decode($response_service, associative: true);
+		$data["service_data"] = "";
+
+		if ($response_service_data["status"] == "success") {
+
+			$data["service_data"] = $response_service_data["data"];
+		} else {
+			$data["service_data"] = "";
+		}
+
+
+
+
 
 		if (!$service_id) {
 			show_error("Service id is required", 400);
@@ -2156,7 +2229,7 @@ class User extends CI_Controller
 		}
 
 
-		
+
 
 		// print_r($data["astrologerdata"]);
 
@@ -2210,7 +2283,7 @@ class User extends CI_Controller
 
 
 
-		$this->load->view("User/Astrolgerservices" , $data);
+		$this->load->view("User/Astrolgerservices", $data);
 
 
 	}
