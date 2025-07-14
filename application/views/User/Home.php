@@ -359,7 +359,7 @@
                                         <!-- Profile Section -->
                                         <div class="d-flex align-items-center mb-2">
                                             <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>">
-                                                <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url( $astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
                                                     alt="image" class="rounded-circle"
                                                     style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);"
                                                     onerror="this.onerror=null  this.src='<?php echo base_url('assets/images/astrologerimg.png'); ?>';">
@@ -515,6 +515,9 @@
         }
 
     </script>
+
+    <!-- blog data -->
+
 
     <!-- Astrological Services For Accurate Answers And Better Future -->
 
@@ -898,6 +901,274 @@
         </div>
 
     </section>
+
+
+    <!-- <section>
+        <div class="container my-4">
+            <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">
+                <?php echo $this->lang->line('FreeHoroscope') ?>
+            </h3>
+            <div class="row g-4 justify-content-center">
+
+
+
+
+                <?php if (!empty($blogdata)): ?>
+                    <?php foreach ($blogdata as $product): ?>
+
+
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <a href="<?= base_url('User/ViewBlogInfo/' . $product['blog_id']); ?>"
+                                class="text-decoration-none">
+                                <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
+                                    <img src="<?= base_url($product['blog_image']); ?>"
+                                        alt="<?php echo $service_data_astologer['name']; ?>" class="mx-auto mb-3"
+                                        style="width: 60px; height: 60px; object-fit: cover;"
+                                        onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
+                                    <p class="fw-bold text-dark">
+                                        <?= $product["blog_title"]; ?>
+                                    </p>
+                                   
+                                </div>
+                            </a>
+                        </div>
+
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+
+
+                <div class="text-center mt-4">
+                    <a href="<?php echo base_url('AstrologyServices') ?>" class="btn fw-bold"
+                        style="background-color: var(--yellow);"><?php echo $this->lang->line('ViewMore') ?></a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+ -->
+
+    <!-- <section>
+        <div class="container my-4">
+            <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">
+                <?php echo $this->lang->line('FreeHoroscope') ?>
+            </h3>
+            <div class="row g-4 justify-content-center">
+
+
+
+
+                <?php if (!empty($productdata)): ?>
+                    <?php foreach ($productdata as $product): ?>
+
+
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <a href="<?php echo base_url('productview/' . $product["product_id"]) ?>"
+                                class="text-decoration-none">
+                                <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
+                                    <img src="<?php echo base_url("uploads/products/" . $product["product_image"]); ?>"
+                                        class="mx-auto mb-3"
+                                        style="width: 60px; height: 60px; object-fit: cover;"
+                                        onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
+                                    <p class="fw-bold text-dark">
+                                         <?php echo $product["product_name"] ?>
+                                    </p>
+                                   
+                                </div>
+                            </a>
+                        </div>
+
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+
+
+                <div class="text-center mt-4">
+                    <a href="<?php echo base_url('AstrologyServices') ?>" class="btn fw-bold"
+                        style="background-color: var(--yellow);"><?php echo $this->lang->line('ViewMore') ?></a>
+                </div>
+            </div>
+        </div>
+
+    </section> -->
+
+
+    <section class="py-5">
+    <div class="container">
+        <!-- Header row -->
+        <div class="row align-items-center mb-4">
+            <div class="col text-center">
+                <h3 class="fw-bold">Blogs of Astrology</h3>
+                <p class="text-muted mb-0">Explore the stars, decode your destiny.</p>
+            </div>
+
+            <!-- Optional: Remove or keep this top button -->
+            <!-- 
+            <div class="col-auto">
+                <a href="<?= base_url('User/Blog'); ?>" class="btn btn-sm text-white px-3 rounded-3"
+                    style="background-color: var(--yellow);">
+                    View All
+                </a>
+            </div>
+            -->
+        </div>
+
+        <!-- Carousel -->
+        <div class="row">
+            <div id="blog" class="owl-carousel owl1 owl-theme">
+                <?php if (!empty($blogdata)): ?>
+                    <?php foreach (array_slice($blogdata, 0, 6) as $product): ?>
+                        <div class="item">
+                            <a href="<?= base_url('User/ViewBlogInfo/' . $product['blog_id']); ?>" class="text-decoration-none">
+                                <div class="card border-0 shadow-sm rounded-3 h-100" style="height: 320px;">
+                                    <img src="<?= base_url($product['blog_image']); ?>" class="card-img-top rounded-top-3"
+                                         alt="Blog Image" style="height: 170px; object-fit: cover;">
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <h5 class="card-title text-dark mb-2"
+                                            style="font-size: 1rem; height: 48px; overflow: hidden; text-overflow: ellipsis; line-height: 1.3;">
+                                            <?= $product["blog_title"]; ?>
+                                        </h5>
+                                        <p class="text-muted small mb-0"><?= $this->lang->line('Today') ?? 'Today'; ?></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-center text-muted">No blogs available at the moment.</p>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <!-- Bottom "View All" button -->
+        <div class="row mt-4">
+            <div class="col text-center">
+                <a href="<?= base_url('User/Blog'); ?>" class="btn  fw-bold px-4 py-2 rounded-3"
+                   style="background-color: var(--yellow);">
+                    View More
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+    <!-- <section class="py-5">
+        <div class="container">
+          
+            <div class="row align-items-center mb-4">
+                <div class="col text-center">
+                    <h3 class="fw-bold">Blogs of Astrology</h3>
+                    <p class="text-muted mb-0">Explore the stars, decode your destiny.</p>
+
+                </div>
+                <div class="col-auto">
+                    <a href="<?= base_url('User/Blog'); ?>" class="btn btn-sm text-white px-3 rounded-3"
+                        style="background-color: var(--yellow);">
+                        View All
+                    </a>
+                </div>
+            </div>
+
+           
+            <div class="row">
+                <div id="blog" class="owl-carousel owl1 owl-theme">
+                    <?php if (!empty($blogdata)): ?>
+                        <?php foreach (array_slice($blogdata, 0, 6) as $product): ?>
+                            <div class="item">
+                                <a href="<?= base_url('User/ViewBlogInfo/' . $product['blog_id']); ?>"
+                                    class="text-decoration-none">
+                                    <div class="card border-0 shadow-sm rounded-3 h-100" style="height: 320px;">
+                                        <img src="<?= base_url($product['blog_image']); ?>" class="card-img-top rounded-top-3"
+                                            alt="Blog Image" style="height: 170px; object-fit: cover;">
+                                        <div class="card-body d-flex flex-column justify-content-between">
+                                            <h5 class="card-title text-dark mb-2"
+                                                style="font-size: 1rem; height: 48px; overflow: hidden; text-overflow: ellipsis; line-height: 1.3;">
+                                                <?= $product["blog_title"]; ?>
+                                            </h5>
+                                            <p class="text-muted small mb-0"><?= $this->lang->line('Today') ?? 'Today'; ?></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-center text-muted">No blogs available at the moment.</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+ -->
+
+    <!-- Top Shop section -->
+    <section>
+    <div class="container mb-5">
+        <div class="row">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="col text-center">
+                    <h3 class="fw-bold">Top Shop</h3>
+                    <p class="text-muted mb-0">Divine essentials crafted for your journey.</p>
+                </div>
+                <!-- Hidden top View All button -->
+                <div class="col-auto d-none">
+                    <button class="btn rounded-1" style="background-color: var(--yellow);">
+                        <a class="text-decoration-none text-dark" href="<?php echo base_url('jyotisikamall') ?>">
+                            View All
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Carousel -->
+        <div class="row">
+            <div id="topShop" class="owl-carousel owl1 owl-theme">
+                <?php if (!empty($productdata)): ?>
+                    <?php foreach (array_slice($productdata, 0, 5) as $product): ?>
+                        <a class="text-decoration-none"
+                           href="<?php echo base_url('ProductDetails/' . $product["product_id"]) ?>">
+                            <div class="card shadow-sm h-100 rounded-2"
+                                 style="font-size: 0.85rem; max-width: 200px; margin: 0 auto;">
+                                <img src="<?php echo base_url("uploads/products/" . $product["product_image"]); ?>"
+                                     class="card-img-top p-2" alt="Product Image" style="height: 130px; object-fit: cover;">
+                                <div class="card-body py-2 px-3">
+                                    <h6 class="card-title fw-semibold mb-2 text-truncate">
+                                        <?php echo $product["product_name"] ?>
+                                    </h6>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="fw-bold text-success">₹<?php echo $product["product_price"] ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-center text-muted">
+                        <?= $this->lang->line('NoProducts') ?? 'No products available.'; ?>
+                    </p>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <!-- Bottom View All Button -->
+         
+        <div class="row mt-5">
+            <div class="col text-center">
+                <a href="<?= base_url('jyotisikamall'); ?>" class="btn  fw-bold px-4 py-2 rounded-3"
+                   style="background-color: var(--yellow);">
+                    View More
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <!-- Footer -->
     <?php $this->load->view('IncludeUser/CommanFooter'); ?>

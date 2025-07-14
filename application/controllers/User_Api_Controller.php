@@ -971,6 +971,7 @@ class User_Api_Controller extends CI_Controller
                         "message" => "astrologer unfollowed successfully"
                     ];
 
+                  
                 } else if ($query["status"] == "notfound") {
                     $response = [
                         "status" => "notfound",
@@ -2479,6 +2480,7 @@ class User_Api_Controller extends CI_Controller
             $puja_mode = $this->input->post("puja_mode");
             $pujatime = $this->input->post("pujatime");
             $mob_puja_id = $this->input->post("mob_puja_id");
+            $puja_image = $this->input->post("puja_image");
 
             date_default_timezone_set('Asia/Kolkata');
             $timestamp = date('Y-m-d H:i:s', time());
@@ -2548,7 +2550,8 @@ class User_Api_Controller extends CI_Controller
                 "puja_time" => $pujatime,
                 "request_created_at" => $timestamp,
                 "puja_urgency" => $puja_urgency,
-                "payment_status" => "Pending"
+                "payment_status" => "Pending",
+                "puja_image"=> $puja_image ,
 
 
             ];
@@ -3004,6 +3007,8 @@ class User_Api_Controller extends CI_Controller
         $amount = $data['amount'];
 
         $update_payment_status = $this->User_Api_Model->update_payment_status_model($book_puja_id, $amount, $payment_id);
+
+
 
         if ($update_payment_status) {
             echo json_encode(['status' => 'success', 'message' => 'puja payment done successfully']);
@@ -3914,6 +3919,238 @@ class User_Api_Controller extends CI_Controller
 
 
     }
+
+
+
+      public function show_notification_number()
+    {
+
+         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        }
+        else{
+              $user_id = $this->input->post("user_id");
+
+            if (!$user_id) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "user id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            }
+            $query = $this->User_Api_Model->show_notification_number_model($user_id);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no new notification"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+
+
+
+        }
+
+    }
+
+
+     public function mark_as_read_notification()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else {
+
+            $user_id = $this->input->post("user_id");
+
+            if (!$user_id) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "user id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            }
+            $query = $this->User_Api_Model->mark_as_read_notification($user_id);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data updated"
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no new notification"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+
+
+
+        }
+
+
+    }
+
+    public function show_blogs(){
+
+         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else{
+
+             $query = $this->User_Api_Model->show_blogs_model();
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data"=>$query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no new notification"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+
+        }
+
+
+    }
+
+
+     public function viewspecificblog(){
+
+         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->output->set_status_header(405);
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            return;
+        } else{
+
+            
+
+                $blog_id = $this->input->post("blog_id");
+
+            if (!$blog_id) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "blog id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            }
+
+             $query = $this->User_Api_Model->show_specific_blogs_model($blog_id);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data"=>$query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no new notification"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+
+        }
+
+
+    }
+
+     public function Get_top_products()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            return $this->output
+                ->set_status_header(405)
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    "status" => "error",
+                    "message" => "Invalid request method"
+                ]));
+        }
+
+        $query = $this->User_Api_Model->get_top_ratedproduct();
+
+
+
+
+        if ($query["status"] === "success") {
+            $this->output->set_status_header(200);
+            $response = $query;
+        } elseif ($query["status"] === "notfound") {
+            $this->output->set_status_header(404);
+            $response = $query;
+        } elseif ($query["status"] === "error") {
+            $this->output->set_status_header(500);
+            $response = $query;
+        } else {
+            $this->output->set_status_header(500);
+            $response = [
+                "status" => "error",
+                "message" => "Unexpected error occurred"
+            ];
+        }
+
+        $this->output->set_content_type("application/json");
+        $this->output->set_output(json_encode($response));
+
+    }
+
+
 
 
 

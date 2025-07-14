@@ -76,10 +76,35 @@ class User_Api_Model extends CI_Model
     public function getUserByMobile($mobile_number)
     {
 
+
         $this->db->where("user_mobilenumber", $mobile_number);
         $query = $this->db->get("jyotisika_users");
+        $data = $query->row_array();
 
-        return $query->row_array();
+
+        date_default_timezone_set('Asia/Kolkata');
+
+
+        $timestamp = date('Y-m-d H:i:s');
+
+
+        $form_data_user_notification = [
+            "sender_id" => $data["user_id"],
+            "sender_role" => "user",
+            "receiver_id" => $data["user_id"],
+            "receiver_role" => "user",
+            "title" => "Welcome Back!",
+            "message" => "Hello " . $data["user_name"] . ", welcome back to Jyotisika! We're happy to see you again.",
+            "type" => "info",
+            "created_at" => $timestamp,
+            "updated_at" => $timestamp
+        ];
+
+
+        $this->db->insert("jyotisika_notifications", $form_data_user_notification);
+
+
+        return $data;
 
     }
 
@@ -95,19 +120,50 @@ class User_Api_Model extends CI_Model
                     "message" => "Mobile number already exists"
                 ];
             } else {
-                $this->db->insert("jyotisika_users", $userdata);
 
+
+
+
+
+                $this->db->insert("jyotisika_users", $userdata);
 
                 if ($this->db->affected_rows() == 1) {
                     $inserted_id = $this->db->insert_id();
                     $this->db->where("user_id", $inserted_id);
                     $query = $this->db->get("jyotisika_users");
 
+
+                    date_default_timezone_set('Asia/Kolkata');
+
+                    $timestamp = date('Y-m-d H:i:s');
+
+
+                    $form_data_user_notification = [
+                        "sender_id" => $inserted_id,
+                        "sender_role" => "user",
+                        "receiver_id" => $inserted_id,
+                        "receiver_role" => "user",
+                        "title" => "Welcome Aboard!",
+                        "message" => "Dear " . $userdata["user_name"] . ", we're delighted to welcome you! Thank you for joining Jyotisika. We’re here to guide you on your spiritual journey.",
+                        "type" => "info",
+                        "created_at" => $timestamp,
+                        "updated_at" => $timestamp
+                    ];
+
+
+                    $this->db->insert("jyotisika_notifications", $form_data_user_notification);
+
                     return [
                         "status" => "success",
                         "message" => "User added successfully",
                         "data" => $query->row_array()
                     ];
+
+
+
+
+
+
                 } else {
                     $error = $this->db->error();
 
@@ -249,6 +305,30 @@ class User_Api_Model extends CI_Model
 
     public function updatewallet_model($sessionid, $amount)
     {
+
+
+        date_default_timezone_set('Asia/Kolkata');
+        $timestamp = date('Y-m-d H:i:s');
+
+        // Prepare wallet update notification
+        $form_data_user_notification = [
+            "sender_id" => $sessionid,
+            "sender_role" => "user",
+            "receiver_id" => $sessionid,
+            "receiver_role" => "user",
+            "title" => "Wallet Updated",
+            "message" => "Your wallet has been updated successfully. You’re now ready to chat with your preferred astrologer.",
+
+            "type" => "success",
+            "created_at" => $timestamp,
+            "updated_at" => $timestamp
+        ];
+
+        $this->db->insert("jyotisika_notifications", $form_data_user_notification);
+
+
+
+
         $this->db->where("user_id", $sessionid);
         $query = $this->db->get("jyotisika_users");
 
@@ -389,6 +469,9 @@ class User_Api_Model extends CI_Model
             $this->db->where("user_id", $data["user_id"]);
             $query = $this->db->get("following");
 
+
+
+
             if ($query->num_rows() > 0) {
 
                 $response = [
@@ -423,6 +506,32 @@ class User_Api_Model extends CI_Model
                 "message" => "astrologer followed successfully",
 
             ];
+
+
+            $this->db->where("user_id", $data["user_id"]);
+            $user_data = $this->db->get("jyotisika_users")->row_array();
+
+            date_default_timezone_set('Asia/Kolkata');
+
+            $timestamp = date('Y-m-d H:i:s');
+
+
+            $form_data_astrologer_notification = [
+
+                "sender_id" => $data["user_id"],
+                "sender_role" => "user",
+                "receiver_id" => $data["astrologer_id"],
+                "receiver_role" => "astrologer",
+                "title" => "New Follower",
+                "message" => $user_data["user_name"] . " has started following you. Stay connected and share your guidance.",
+                "type" => "info",
+                "created_at" => $timestamp,
+                "updated_at" => $timestamp
+
+
+            ];
+
+            $this->db->insert("jyotisika_notifications", $form_data_astrologer_notification);
         } else {
             $response = [
                 "status" => "error",
@@ -611,6 +720,33 @@ class User_Api_Model extends CI_Model
                     "message" => "astrologer unfollwed successfully"
                 ];
 
+
+                $this->db->where("user_id", $data["session_id"]);
+                $user_data = $this->db->get("jyotisika_users")->row_array();
+
+                  date_default_timezone_set('Asia/Kolkata');
+
+                    $timestamp = date('Y-m-d H:i:s');
+
+
+                    $form_data_astrologer_notification = [
+
+                        "sender_id" => $data["session_id"],
+                        "sender_role" => "user",
+                        "receiver_id" => $data["astrologer_id"],
+                        "receiver_role" => "astrologer",
+                        "title"   => "Unfollowed",
+                        "message" => $user_data["user_name"] . " has unfollowed you.",
+
+                        "type" => "info",
+                        "created_at" => $timestamp,
+                        "updated_at" => $timestamp
+
+                    ];
+
+                     $this->db->insert("jyotisika_notifications", $form_data_astrologer_notification);
+
+
                 return $response;
 
             }
@@ -621,6 +757,35 @@ class User_Api_Model extends CI_Model
 
     public function submitfeedback($data)
     {
+
+        $this->db->where("user_id", $data["user_id"]);
+        $user_data = $this->db->get("jyotisika_users")->row_array();
+
+        date_default_timezone_set('Asia/Kolkata');
+
+        $timestamp = date('Y-m-d H:i:s');
+
+
+        $form_data_pujari_notification = [
+
+            "sender_id" => $data["user_id"],
+            "sender_role" => "user",
+            "receiver_id" => $data["astrologer_id"],
+            "receiver_role" => "astrologer",
+            "title" => "New Feedback Received",
+            "message" => $user_data["user_name"] . " has submitted feedback on your service. You can view it in your dashboard.",
+            "type" => "info",
+            "created_at" => $timestamp,
+            "updated_at" => $timestamp
+
+        ];
+
+
+
+        // Insert into notifications table
+
+        $this->db->insert("jyotisika_notifications", $form_data_pujari_notification);
+
 
         $query = $this->db->insert("astrologer_feedback", $data);
 
@@ -839,6 +1004,48 @@ class User_Api_Model extends CI_Model
     public function create_order($orderdata)
     {
 
+        date_default_timezone_set('Asia/Kolkata');
+
+        $timestamp = date('Y-m-d H:i:s');
+
+
+        $this->db->where("user_id", $orderdata["user_id"]);
+        $user_data = $this->db->get("jyotisika_users")->row_array();
+
+
+        $form_data_order_notification = [
+
+            "sender_id" => $orderdata["user_id"],
+            "sender_role" => "user",
+            "receiver_id" => $orderdata["user_id"],
+            "receiver_role" => "user",
+            "title" => "Order Confirmed",
+            "message" => "Thank you, " . $user_data["user_name"] . "! Your order has been successfully placed. We will keep you updated on its status.",
+            "type" => "success",
+            "created_at" => $timestamp,
+            "updated_at" => $timestamp,
+        ];
+
+        $this->db->insert("jyotisika_notifications", $form_data_order_notification);
+
+
+        $form_data_order_notification = [
+
+            "sender_id" => $orderdata["user_id"],
+            "sender_role" => "user",
+            "receiver_id" => 1,
+            "receiver_role" => "admin",
+            "title" => "New Order Placed",
+            "message" => $orderdata["user_fullname"] . " has placed a new order. Please review and process it at your earliest convenience.",
+            "type" => "success",
+            "created_at" => $timestamp,
+            "updated_at" => $timestamp,
+        ];
+
+        $this->db->insert("jyotisika_notifications", $form_data_order_notification);
+
+
+
         $this->db->insert('jyotisika_mall_orders', $orderdata);
         return $this->db->insert_id();
     }
@@ -892,6 +1099,29 @@ class User_Api_Model extends CI_Model
 
     public function save_feedback($formdata)
     {
+
+        date_default_timezone_set('Asia/Kolkata');
+
+        $timestamp = date('Y-m-d H:i:s');
+
+        $this->db->where("user_id", $formdata["session_id"]);
+        $user_data = $this->db->get("jyotisika_users")->row_array();
+
+        $form_data_product_notification = [
+
+            "sender_id" => $formdata["session_id"],
+            "sender_role" => "user",
+            "receiver_id" => 1,
+            "receiver_role" => "admin",
+            "title" => "Product Feedback Submitted",
+            "message" => $user_data["user_name"] . " has submitted feedback on a product. Please review it in the admin panel.",
+            "type" => "info",
+            "created_at" => $timestamp,
+            "updated_at" => $timestamp
+
+        ];
+
+        $this->db->insert("jyotisika_notifications", $form_data_product_notification);
 
         $query = $this->db->insert("product_feedback", $formdata);
         return $query;
@@ -1107,12 +1337,63 @@ class User_Api_Model extends CI_Model
 
         $this->db->insert("bookpuja_request_by_user_to_pujari", $formdata);
 
+
+
+
+
+
         if ($this->db->affected_rows() == 1) {
             $inserted_id = $this->db->insert_id();
 
 
             $this->db->where("book_puja_id", $inserted_id);
             $query = $this->db->get("bookpuja_request_by_user_to_pujari");
+
+
+
+
+
+            date_default_timezone_set('Asia/Kolkata');
+            $timestamp = date('Y-m-d H:i:s', time());
+
+
+            $this->db->where("user_id", $formdata["jyotisika_user_id"]);
+            $userdata = $this->db->get("jyotisika_users")->row_array();
+
+
+            $formdatanotification = [
+                "sender_id" => $formdata["jyotisika_user_id"],
+                "sender_role" => "user",
+                "receiver_id" => $formdata["pujari_id"],
+                "receiver_role" => "pujari",
+                "title" => "Pooja Booking Request",
+                "message" => $userdata["user_name"] . " has sent a request to book a pooja on " . $formdata["puja_date"] . ".",
+                "type" => "info",
+                "created_at" => $timestamp,
+                "updated_at" => $timestamp
+            ];
+
+            $this->db->insert("jyotisika_notifications", $formdatanotification);
+
+
+
+            $formdatanotificationuser = [
+                "sender_id" => $formdata["jyotisika_user_id"],
+                "sender_role" => "user",
+                "receiver_id" => $formdata["jyotisika_user_id"],
+                "receiver_role" => "user",
+                "title" => "Pooja Booking Request Sent",
+                "message" => "Your pooja booking request has been sent. Please wait for the pujari's approval. You can track the status from the Orders section.",
+                "type" => "success",
+                "created_at" => $timestamp,
+                "updated_at" => $timestamp
+            ];
+
+            $this->db->insert("jyotisika_notifications", $formdatanotificationuser);
+
+
+
+
 
             $response = [
                 "status" => "success",
@@ -1180,6 +1461,28 @@ class User_Api_Model extends CI_Model
     public function pujarifeedback_model($formdata)
     {
 
+        date_default_timezone_set('Asia/Kolkata');
+        $timestamp = date('Y-m-d H:i:s');
+
+
+        $this->db->where("user_id", $formdata["user_id"]);
+        $user_data = $this->db->get("jyotisika_users")->row_array();
+
+        $form_data_pujari_notification = [
+            "sender_id" => $formdata["user_id"],
+            "sender_role" => "user",
+            "receiver_id" => $formdata["pujari_id"],
+            "receiver_role" => "pujari",
+            "title" => "New Feedback Received",
+            "message" => $user_data["user_name"] . " has submitted feedback on your service. You can view it in your dashboard.",
+            "type" => "info",
+            "created_at" => $timestamp,
+            "updated_at" => $timestamp
+        ];
+
+        // Insert into notifications table
+        $this->db->insert("jyotisika_notifications", $form_data_pujari_notification);
+
         $query = $this->db->insert("pujari_feedback", $formdata);
         return $query;
 
@@ -1235,9 +1538,61 @@ class User_Api_Model extends CI_Model
         // Update the database
         $this->db->where("book_puja_id", $book_puja_id);
         $this->db->update("bookpuja_request_by_user_to_pujari", $data);
+        $num = $this->db->affected_rows();
+
+
+
+        $this->db->where("book_puja_id", $book_puja_id);
+        $notification_data = $this->db->get("bookpuja_request_by_user_to_pujari")->row_array();
+
+        date_default_timezone_set('Asia/Kolkata');
+        $timestamp = date('Y-m-d H:i:s');
+
+        $this->db->where("user_id", $notification_data["jyotisika_user_id"]);
+        $querydata = $this->db->get("jyotisika_users")->row_array();
+
+       
+        $formdata = [
+            "sender_id" => $notification_data["jyotisika_user_id"],
+            "sender_role" => "user",
+            "receiver_id" => $notification_data["pujari_id"],
+            "receiver_role" => "pujari",
+            "title" => "Pooja Payment Done",
+            "message" => $querydata["user_name"] . " has successfully completed the payment for the pooja.",
+            "type" => "success",
+            "created_at" => $timestamp,
+            "updated_at" => $timestamp
+        ];
+
+       
+        $this->db->insert("jyotisika_notifications", $formdata);
+
+
+
+        $formdata_pujari = [
+            "sender_id" => $notification_data["jyotisika_user_id"],
+            "sender_role" => "user",
+            "receiver_id" => $notification_data["jyotisika_user_id"],
+            "receiver_role" => "user",
+            "title" => "Pooja Payment Done",
+           "message" => "You have successfully completed the payment for your pooja. Thank you!",
+            "type" => "success",
+            "created_at" => $timestamp,
+            "updated_at" => $timestamp
+        ];
+
+        // Insert into notifications table
+        $this->db->insert("jyotisika_notifications", $formdata_pujari);
+
+
+
+
+
+
+
 
         // Check if update was successful
-        if ($this->db->affected_rows() > 0) {
+        if ($num > 0) {
             return true;
         } else {
             return false; // No rows updated
@@ -1382,7 +1737,7 @@ class User_Api_Model extends CI_Model
     public function showservices_model()
     {
         $this->db->where("service_type", "astrologer");
-        $this->db->limit(5);
+        $this->db->limit(4);
         $query = $this->db->get("services");
         return $query->result();
     }
@@ -1421,7 +1776,7 @@ class User_Api_Model extends CI_Model
         $pujas = $query->result();
 
         foreach ($pujas as $puja) {
-            print_r($puja->book_puja_id);
+
             $pujaDateTime = new DateTime($puja->puja_date . ' ' . $puja->puja_time);
             $now = new DateTime();
             $cancel = false;
@@ -1447,6 +1802,50 @@ class User_Api_Model extends CI_Model
             if ($cancel) {
                 $this->db->where('book_puja_id', $puja->book_puja_id);
                 $this->db->update('bookpuja_request_by_user_to_pujari', ['puja_status' => 'Cancelled']);
+
+
+                $this->db->where("user_id",  $puja->jyotisika_user_id);
+                $user_data = $this->db->get("jyotisika_users")->row_array();
+
+                date_default_timezone_set('Asia/Kolkata');
+                $timestamp = date('Y-m-d H:i:s');
+
+
+                $formdata_pujari_notification = [
+                    "sender_id" => $puja->jyotisika_user_id,
+                    "sender_role" => "user",
+                    "receiver_id" => $puja->pujari_id,
+                    "receiver_role" => "pujari",
+                    "title" => "Pooja Cancelled",
+                   "message" => $user_data["user_name"] . " was unable to make the payment for the pooja, so the booking has been cancelled.",
+                    "type" => "success",
+                    "created_at" => $timestamp,
+                    "updated_at" => $timestamp
+                ];
+
+
+                $this->db->insert("jyotisika_notifications", $formdata_pujari_notification);
+
+
+
+
+
+                $formdata_user_notification = [
+                    "sender_id" => $puja->jyotisika_user_id,
+                    "sender_role" => "user",
+                    "receiver_id" => $puja->jyotisika_user_id,
+                    "receiver_role" => "user",
+                    "title" => "Pooja Cancelled",
+                  "message" => "Your pooja booking has been cancelled as the payment was not completed. Please rebook and complete the payment to confirm.",
+                    "type" => "warning",
+                    "created_at" => $timestamp,
+                    "updated_at" => $timestamp
+                ];
+
+
+                $this->db->insert("jyotisika_notifications", $formdata_user_notification);
+
+
             }
         }
     }
@@ -1617,12 +2016,98 @@ class User_Api_Model extends CI_Model
     }
 
 
-    public function show_notification_model($user_id){
-
-         $this->db->where("receiver_id",  $user_id);
-         $this->db->where("receiver_role","user");
+    public function show_notification_model($user_id)
+    {
+        $this->db->where("receiver_id", $user_id);
+        $this->db->where("receiver_role", "user");
+        $this->db->order_by("created_at", "DESC"); // Latest first
         $query = $this->db->get("jyotisika_notifications");
         return $query->result();
     }
+
+
+
+    public function show_notification_number_model($user_id)
+    {
+        $this->db->where("receiver_id", $user_id);
+        $this->db->where("receiver_role", "user");
+        $this->db->where("is_read", 0);
+        $query = $this->db->get("jyotisika_notifications");
+        return $query->num_rows();
+    }
+
+
+
+    public function mark_as_read_notification($user_id)
+    {
+
+        $this->db->set('is_read', 1);
+
+
+        $this->db->where('receiver_id', $user_id);
+        $this->db->where('receiver_role', 'user');
+        $this->db->where('is_read', 0);
+
+
+        $this->db->update('jyotisika_notifications');
+
+
+        return true;
+    }
+
+
+
+    public function show_blogs_model(){
+
+      $query =   $this->db->get("blogs");
+      return $query->result();
+    }
+
+
+
+    public function show_specific_blogs_model($blog_id){
+
+        $this->db->where("blog_id", $blog_id);
+        $query = $this->db->get("blogs");
+        return $query->result();
+
+    }
+
+
+    public function get_top_ratedproduct()
+    {
+        try {
+            $this->db->select('as.*, AVG(pf.productrating) as average_rating');
+            $this->db->from('jotishika_mall as as');
+            $this->db->join('product_feedback as pf', 'pf.product_id = as.product_id', 'left');
+            $this->db->group_by('as.product_id');
+            $this->db->order_by('average_rating', 'DESC');
+            $this->db->limit(5);
+
+            $query = $this->db->get();
+            $result = $query->result();
+
+            if (!empty($result)) {
+                return [
+                    "status" => "success",
+                    "data" => $result
+                ];
+            } else {
+                return [
+                    "status" => "notfound",
+                    "message" => "No top-rated products found."
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                "status" => "error",
+                "message" => "Something went wrong: " . $e->getMessage()
+            ];
+        }
+    }
+
+
+
+
 
 }

@@ -57,6 +57,15 @@
         }
     </style>
 
+<style>
+    .unread-notification {
+        border-left: 5px solid #ff6f00; /* Deep orange */
+        background-color: #fff3e0 !important; /* Light peach/orange background */
+        transition: background-color 0.3s ease;
+    }
+</style>
+
+
 
 </head>
 
@@ -72,7 +81,7 @@
     <main>
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
-       
+
         <div class="container my-4">
             <h2 class="text-center mb-3"
                 style="color:var(--red) ; font-family: 'Kaisei Decol', serif; font-size: 1.8rem;">
@@ -90,7 +99,8 @@
                         <?php if (!empty($show_notification_data_response)): ?>
 
                             <?php foreach ($show_notification_data_response as $shownotification): ?>
-                                <div class="card mb-3 border-0 shadow hover-shadow"
+                                <div class="card mb-3 border-0 shadow hover-shadow 
+        <?php echo ($shownotification['is_read'] == 0) ? 'bg-light unread-notification' : ''; ?>"
                                     style="border-radius: 12px; transition: all 0.2s ease;">
                                     <div class="card-body p-3">
                                         <div class="d-flex align-items-center">
@@ -103,13 +113,10 @@
                                                     <div class="rounded-circle bg-success bg-opacity-25 p-2">
                                                         <i class="bi bi-gift-fill text-success"></i>
                                                     </div>
-
                                                 <?php elseif ($shownotification["type"] == "warning"): ?>
-
                                                     <div class="rounded-circle bg-danger bg-opacity-25 p-2">
                                                         <i class="bi bi-calendar-event-fill text-danger"></i>
                                                     </div>
-
                                                 <?php else: ?>
                                                     <div class="rounded-circle bg-warning bg-opacity-25 p-2">
                                                         <i class="bi bi-bell-fill text-warning"></i>
@@ -122,16 +129,12 @@
                                                 <small class="text-primary time-ago"
                                                     data-created-at="<?= $shownotification['created_at'] ?>"
                                                     style="font-size: 0.75rem;">
-                                                    <i class="bi bi-clock me-1"></i> <!-- Time will be inserted here -->
+                                                    <i class="bi bi-clock me-1"></i>
                                                 </small>
-
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             <?php endforeach ?>
 
                         <?php else: ?>
@@ -215,6 +218,33 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Create FormData and append user_id from PHP session
+                const formData = new FormData();
+                formData.append("user_id", "<?php echo $this->session->userdata('user_id'); ?>");
+
+                // Send POST request to mark notifications as read
+                fetch("<?php echo base_url('User_Api_Controller/mark_as_read_notification'); ?>", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Mark as read response:", data);
+                        if (data.status === "success") {
+                            console.log(data.message); // e.g., "3 notifications marked as read"
+                        } else {
+                            console.error(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error marking notifications as read:", error);
+                    });
+            });
+        </script>
+
 
         <style>
             .hover-shadow:hover {

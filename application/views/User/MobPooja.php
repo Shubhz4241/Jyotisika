@@ -180,6 +180,9 @@
                                                 <input type="text" value="<?php echo $showmobpujadata["mobid"] ?>"
                                                     name="mob_puja_id" hidden>
 
+                                                     <input type="text" value="<?php echo $showmobpujadata["image"] ?>"
+                                                    name="puja_image" hidden>
+
                                                 <input type="text" value="<?php echo "Mob" ?>" name="puja_mode" hidden>
 
                                                 <input type="text"

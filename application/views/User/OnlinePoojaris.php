@@ -112,7 +112,7 @@
                                                 <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
                                                 <span class="small text-muted mt-1"><?php echo $pujaridata["average_rating"] ?>
                                                     (<?php echo $pujaridata["completed_puja_count"] ?>
-                                                    <?php echo $this->lang->line('Plus_Years') ?></span>
+                                                    + Poojas)</span>
                                             </div>
                                         </div>
                                     </div>
@@ -216,6 +216,9 @@
                                                     value="<?php echo $pujaridata["pujari_id_"]; ?>">
                                                 <input type="hidden" name="service_id"
                                                     value="<?php echo $pujaridata["service_id"]; ?>">
+                                                <input type="hidden" name="puja_image"
+                                                    value="<?php echo $pujaridata["image"]; ?>">
+
                                                 <input type="hidden" name="puja_mode" value="Online">
                                                 <input type="hidden" name="user_id"
                                                     value="<?php echo $this->session->userdata("user_id") ?? null; ?>">

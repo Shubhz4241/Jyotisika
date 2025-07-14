@@ -213,6 +213,13 @@
 
                                             <input type="text" value="<?php echo $showpujari[0]["pujari_id_"] ?>"
                                                 name="pujari_id" hidden>
+
+                                            
+
+                                                 <input type="text" value="<?php echo $showpujari[0]["image"] ?>"
+                                                name="puja_image" hidden>
+
+
                                             <input type="text" value="<?php echo $showpujari[0]["service_id"] ?>"
                                                 name="service_id" hidden>
 
