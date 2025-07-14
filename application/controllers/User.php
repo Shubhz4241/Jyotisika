@@ -103,6 +103,29 @@ class User extends CI_Controller
 	//------------------------------------------- USER  SELF PAGES---------------------------------------------------------------------
 
 
+		function Get_top_products()
+	{
+
+		// $api_urlsBLOG = "http://localhost/Astrology/User_Api_Controller/Get_top_products";
+		$api_url = base_url("User_Api_Controller/Get_top_products");
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$response = curl_exec($ch);
+		curl_close($ch);
+		$response_data = json_decode($response, true);
+		if (isset($response_data["status"]) && $response_data["status"] == "success") {
+			$data = $response_data;
+		} else {
+			$data = null;
+		}
+		return $data;
+	}
+
+
+
+
 
 
 	public function Home()
@@ -212,9 +235,70 @@ class User extends CI_Controller
 
 
 
+         //Blogs section 
+
+		$ch_url_blogs = base_url("User_Api_Controller/show_blogs");
+
+		$ch_data_blogs = curl_init();
+		curl_setopt($ch_data_blogs, CURLOPT_URL, $ch_url_blogs);
+		curl_setopt($ch_data_blogs, CURLOPT_RETURNTRANSFER, true);
+		$blog_response_data = curl_exec($ch_data_blogs);
+		$curl_error_blog_data = curl_error($ch_data_blogs);
+		curl_close($ch_data_blogs);
+
+		if ($blog_response_data === false) {
+			show_error("cURL Error: " . $curl_error_blog_data, 500);
+			return;
+		}
+
+		$blog_data = json_decode($blog_response_data, associative: true);
+
+
+		$data["blogdata"] = "";
+		if ($blog_data["status"] == "success") {
+			$data["blogdata"] = $blog_data["data"];
+		}
+
+
+	
+
+		  //product section 
+
+		$ch_url_product = base_url("User_Api_Controller/Get_top_products");
+
+		$ch_data_product = curl_init();
+		curl_setopt($ch_data_product, CURLOPT_URL, $ch_url_product);
+		curl_setopt($ch_data_product, CURLOPT_RETURNTRANSFER, true);
+		$ch_data_product_response = curl_exec($ch_data_product);
+		$ch_data_product_error = curl_error($ch_data_product);
+		curl_close($ch_data_product);
+
+		if ($ch_data_product_response === false) {
+			show_error("cURL Error: " . $ch_data_product_error, 500);
+			return;
+		}
+		
+			
+
+		$product_data = json_decode($ch_data_product_response, associative: true);
 
 
 
+		$data["productdata"] = "";
+		if ($product_data["status"] == "success") {
+			$data["productdata"] = $product_data["data"];
+		}
+
+		// print_r($data["productdata"]);
+
+
+		
+
+		
+
+
+
+		// print_r($data["blogdata"]);
 
 		//   print_r($data["service_data"]);
 		$this->lang->load('message', $language);
@@ -1468,6 +1552,8 @@ class User extends CI_Controller
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
 
+		
+
 
 
 		$api_url_get_feedback = base_url("User_Api_Controller/getpujarifeedback");
@@ -1573,9 +1659,8 @@ class User extends CI_Controller
 	}
 
 
-	public function OnlinePoojaris($puja_id)
+	public function OnlinePoojaris($puja_id )
 	{
-
 		$language = $this->session->userdata('site_language') ?? 'english';
 		$this->lang->load('message', $language);
 
@@ -1607,6 +1692,10 @@ class User extends CI_Controller
 		if ($showpujariresponse["status"] == "success") {
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
+
+		
+
+
 
 
 
@@ -1917,6 +2006,8 @@ class User extends CI_Controller
 		if (isset($show_mob_puja["status"]) && $show_mob_puja["status"] === "success") {
 			$data["showmobpuja"] = $show_mob_puja["data"];
 		}
+
+		
 
 		$this->load->view('User/MobPooja', $data);
 	}
@@ -2287,6 +2378,113 @@ class User extends CI_Controller
 
 
 	}
+
+
+	function getblogs()
+	{
+
+		// $api_urlsBLOG = "http://localhost/Astrology/User_Api_Controller/showblogs";
+		$api_url = base_url("User_Api_Controller/showblogs");
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$response = curl_exec($ch);
+		curl_close($ch);
+		$response_data = json_decode($response, true);
+		if (isset($response_data["status"]) && $response_data["status"] == "success") {
+			$data = $response_data["data"];
+		} else {
+			$data = null;
+		}
+		return $data;
+	}
+
+
+	public function Blog()
+	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+		$ch_url_blogs = base_url("User_Api_Controller/show_blogs");
+
+		$ch_data_blogs = curl_init();
+		curl_setopt($ch_data_blogs, CURLOPT_URL, $ch_url_blogs);
+		curl_setopt($ch_data_blogs, CURLOPT_RETURNTRANSFER, true);
+		$blog_response_data = curl_exec($ch_data_blogs);
+		$curl_error_blog_data = curl_error($ch_data_blogs);
+		curl_close($ch_data_blogs);
+
+		if ($blog_response_data === false) {
+			show_error("cURL Error: " . $curl_error_blog_data, 500);
+			return;
+		}
+
+		$blog_data = json_decode($blog_response_data, associative: true);
+
+
+		$data["blogdata"] = "";
+		if ($blog_data["status"] == "success") {
+			$data["blogdata"] = $blog_data["data"];
+		}
+
+
+
+		$this->load->view('User/Blog', $data);
+	}
+
+
+
+	public function ViewBlogInfo($blog_id)
+	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+		if (!$blog_id) {
+			show_404();
+			return;
+		}
+
+		// $api_url = "http://localhost/Astrology/User_Api_Controller/viewspecificblog";
+
+		$api_url = base_url("User_Api_Controller/viewspecificblog");
+
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, [
+			CURLOPT_URL => $api_url,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_CUSTOMREQUEST => "POST",
+			CURLOPT_POSTFIELDS => http_build_query(["blog_id" => $blog_id]),
+			CURLOPT_HTTPHEADER => ["Content-Type: application/x-www-form-urlencoded"]
+		]);
+
+		$response = curl_exec($curl);
+		$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+		$curlError = curl_error($curl);
+
+		curl_close($curl);
+
+
+
+		$response_data = json_decode($response, true);
+
+
+		if (isset($response_data["status"]) && $response_data["status"] == "success") {
+			$data = $response_data["data"];
+		} else {
+			$data = null;
+		}
+
+		$data["blogdata"] = $data;
+
+
+
+		$this->load->view('User/ViewBlogInfo', $data);
+	}
+
+
 
 
 

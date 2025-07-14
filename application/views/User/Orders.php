@@ -439,7 +439,9 @@
                         <div class="tab-content" id="mall-subTabContent">
                             <!-- ongoing -->
                             <div class="tab-pane fade show active" id="orders" role="tabpanel">
+
                                 <div class="row">
+                                  
 
                                     <?php
                                     $poojas = [
@@ -476,9 +478,9 @@
                                                     style="border: 1px solid var(--red);">
                                                     <div class="row g-0">
                                                         <div class="col-4">
-                                                            <img src="<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>"
+                                                            <img src="<?php echo base_url("uploads/services/".$pooja["puja_image"]) ?>"
                                                                 class="img-fluid rounded-start h-100"
-                                                                style="object-fit: cover;">
+                                                                style="object-fit: cover;"  onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';">
                                                         </div>
                                                         <div class="col-8">
                                                             <div class="card-body p-3">
@@ -767,9 +769,9 @@
                                                     style="border: 1px solid var(--red);">
                                                     <div class="row g-0 h-100">
                                                         <div class="col-4">
-                                                            <img src="<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>"
+                                                            <img src="<?php echo base_url("uploads/services/".$pooja["puja_image"]) ?>"
                                                                 class="img-fluid rounded-start h-100 w-100"
-                                                                style="object-fit: cover;">
+                                                                style="object-fit: cover;"  onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';">
                                                         </div>
                                                         <div class="col-8">
                                                             <div class="card-body p-3 d-flex flex-column h-100">
