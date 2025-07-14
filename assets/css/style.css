@@ -1,15 +1,14 @@
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: "Kaisei Decol", serif;
     box-sizing: border-box
-    
 }
 
-:root{
-    --yellow: #F2DC51;
-    --red:#810909;   
-    
+:root {
+    --yellow: #fea01ce8;
+    --red: #810909;
+
 }
 
 /* Custom scrollbar styles */

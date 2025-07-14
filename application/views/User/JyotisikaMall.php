@@ -34,327 +34,698 @@
         integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
     <!-- EXTERNAL CSS -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <style>
-       
-
-
-        .col-md-15 {
-            width: 20%;
+        .carousel-inner img {
+            height: 400px;
+            object-fit: cover;
         }
 
-        .gallery {
-            border: none;
-            border-radius: 15px;
+        .collection-circle {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--yellow, #ffc107);
+            /* fallback to Bootstrap yellow if variable missing */
+            margin: 0 auto;
+        }
+
+        /* best seller card */
+        .best-seller-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            transition: transform 0.2s;
+            height: 100%;
+        }
+
+
+
+        .discount-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #b41f1f;
+            color: white;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-bottom-right-radius: 8px;
+            z-index: 1;
+        }
+
+        .best-seller-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-content {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .product-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .product-rating {
+            color: #e60023;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .product-rating i {
+            color: #f9b500;
+        }
+
+        .product-price {
+            margin-top: 6px;
+        }
+
+        .product-price .current-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .product-price .original-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 0.9rem;
+            margin-left: 6px;
+        }
+
+        /* image gallery */
+        .gallery-grid img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
 
-        .gallery img {
-            border-radius: 15px;
-            object-fit: cover; /* Ensure images cover the area */
-        }
-
-        .gallery:hover img {
+        .gallery-grid img:hover {
             transform: scale(1.05);
         }
 
         @media (max-width: 768px) {
-            .col-md-15 {
-                width: 50%;
+            .gallery-grid .col-12 {
+                flex: 0 0 100%;
+                max-width: 100%;
             }
         }
-    </style>
 
+        /* reviw */
+        .review-card {
+            background: #fff;
+            border-radius: 10px;
+
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 20px;
+            transition: transform 0.3s;
+            height: 100%;
+        }
+
+
+
+        .review-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .review-stars {
+            color: #e60023;
+            font-size: 1.2rem;
+            margin: 15px 0 5px;
+        }
+
+        .review-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .review-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .review-text {
+            font-size: 0.9rem;
+            color: #444;
+            padding: 0 15px;
+        }
+
+        /* carousel */
+        /* slider code  */
+        .owl-nav .owl-prev,
+        .owl-nav .owl-next {
+            pointer-events: auto;
+            background-color: yellow;
+            border: 2px solid var(--red);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--red);
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .owl-nav .owl-prev:hover,
+        .owl-nav .owl-next:hover {
+            background-color: yellow;
+            color: var(--yellow) !important;
+        }
+
+        .owl-nav .owl-prev {
+            margin-left: 10px;
+        }
+
+        .owl-nav .owl-next {
+            margin-right: 10px;
+        }
+
+        .owl-carousel .item {
+            margin: 15px;
+        }
+    </style>
 </head>
 
 <body>
-
     <header>
-
+        <!-- Navbar -->
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
-
     </header>
-
 
     <main>
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
-        <!-- <?php print_r($product_data) ?> -->
-
-        <!-- Product Section -->
-        <section class="product-section py-5">
-            <div class="container">
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
-                    <h2 class="text-center fw-bold mb-0 mb-md-0" style="color: var(--red);">Our Products</h2>
-                    <div class="input-group mt-3 mt-md-0" style="max-width: 300px;">
-                        <input type="text" class="form-control rounded-start" placeholder="Search products..."
-                            aria-label="Search products" aria-describedby="search-button">
-                        <button class="btn btn-outline-secondary rounded-end" type="button" id="search-button"
-                            style="background-color: var(--yellow);">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
+        <!-- Banner Carousel -->
+        <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" class="d-block w-100" alt="Banner 1">
                 </div>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                    <?php
-
-                    // $products = $product;
-                    $products = [
-                        [
-                            'title' => 'Rudraksh',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '999',
-                            'original_price' => '1299'
-                        ],
-                        [
-                            'title' => 'Yantra',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '799',
-                            'original_price' => '1099'
-                        ],
-                        [
-                            'title' => 'Gemstones',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '1499',
-                            'original_price' => '1999'
-                        ],
-                        [
-                            'title' => 'Idols',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '2499',
-                            'original_price' => '2999'
-                        ],
-                        [
-                            'title' => 'Rudraksh',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '999',
-                            'original_price' => '1299'
-                        ],
-                        [
-                            'title' => 'Yantra',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '799',
-                            'original_price' => '1099'
-                        ],
-                        [
-                            'title' => 'Gemstones',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '1499',
-                            'original_price' => '1999'
-                        ],
-                        [
-                            'title' => 'Idols',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => 'ProductDetails',
-                            'price' => '2499',
-                            'original_price' => '2999'
-                        ],
-                    ];?>
-                
-              
-                   <?php if(!empty($product_data)):?>
-                     <?php  foreach ($product_data as $product) : ?>
-                        <div class="col d-flex justify-content-center">
-                            <div class="card product-card h-100 shadow-sm m-0 p-0" style="border: 1px solid #f0f0f0;">
-                                <img src="<?php echo base_url('uploads/products/'.$product["product_image"]); ?>" class="card-img-top" alt="<?php echo $product['product_name']; ?>"
-                                    style=" object-fit: contain;" onerror="this.onerror=null;this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
-
-                                    
-
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title text-center fw-bold mb-2" style="color: var(--text-color);"><?php echo $product['product_name']; ?></h5>
-                                    <div class="d-flex justify-content-center align-items-center mb-3">
-                                        <!-- <span class="text-decoration-line-through text-muted me-2">Rs.<?php echo $product['product_price']; ?></span> -->
-                                        <span class="fw-bold" style="color: var(--red);">Rs.<?php echo $product['product_price']; ?></span>
-                                    </div>
-                                    <div class="mt-auto text-center">
-                                        <a href="ProductDetails/<?php echo $product['product_id'] ?>" class="btn btn-sm  mt-2"
-                                            style="background-color: var(--yellow); color: var(--text-color);">
-                                       <?php   echo $this->lang->line('View_Details'); ?>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endforeach?>
-                        <?php else :?>
-                            <p> <?php echo $this->lang->line('No_Product'); ?> </p>
-                            <?php endif ?>
+                <div class="carousel-item">
+                    <img src="<?php echo base_url('assets/images/JyotisikaMall/productbanner1.JPG'); ?>" class="d-block w-100" alt="Banner 2">
                 </div>
+
             </div>
+            <!-- <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button> -->
+        </div>
+        <div class="container">
 
-           <div class="contaier">
-
-           </div>
-        </section>
-        <!-- End Product Section -->
-
-        <!-- <section class="product-section py-5">
-            <div class="container">
-                <div class="mb-4">
-                    <h2 class="text-start fw-bold mb-0 mb-md-0" style="color: var(--red);">Combo Offers</h2>
-                   
-                </div>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                    <?php
-                    $comboOffers = [
-                        [
-                            'title' => 'Pooja Kit Combo',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => '#',
-                            'price' => '999',
-                            'original_price' => '1299'
-                        ],
-                        [
-                            'title' => 'Rudraksha + Gemstone',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => '#',
-                            'price' => '1999',
-                            'original_price' => '2499'
-                        ],
-                        [
-                            'title' => 'Idol + Pooja Kit',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => '#',
-                            'price' => '2999',
-                            'original_price' => '3499'
-                        ],
-                        [
-                            'title' => 'All in One Combo',
-                            'image' => 'assets/images/JyotisikaMall/Rudraksh.png',
-                            'link' => '#',
-                            'price' => '4999',
-                            'original_price' => '5999'
-                        ],
-                    ];
-                    foreach ($comboOffers as $combo) {
-                        ?>
-                        <div class="col d-flex justify-content-center">
-                            <div class="card product-card h-100 shadow-sm m-0 p-0" style="border: 1px solid #f0f0f0;">
-                                <img src="<?php echo $combo['image']; ?>" class="card-img-top" alt="<?php echo $combo['title']; ?>"
-                                    style=" object-fit: contain;">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title text-center fw-bold mb-2" style="color: var(--text-color);"><?php echo $combo['title']; ?></h5>
-                                    <div class="d-flex justify-content-center align-items-center mb-3">
-                                        <span class="text-decoration-line-through text-muted me-2">Rs.<?php echo $combo['original_price']; ?></span>
-                                        <span class="fw-bold" style="color: var(--red);">Rs.<?php echo $combo['price']; ?></span>
-                                    </div>
-                                    <div class="mt-auto text-center">
-                                        <a href="<?php echo $combo['link']; ?>" class="btn btn-sm  mt-2"
-                                            style="background-color: var(--yellow); color: var(--text-color);">
-                                            View Details
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Collections Section -->
+            <section class="py-5 text-center mt-2">
+                <div class="container">
+                    <h2 class="mb-4">Shop Our Collections</h2>
+                    <div class="owl-carousel collection-carousel owl-theme">
                         <?php
-                    }
-                    ?>
-                </div>
-            </div>
-        </section> -->
+                        // Array of collection items with title, image path, and link
+                        $collections = [
+                            ['title' => 'Rudraksh', 'image' => 'productbanner1.JPG', 'link' => 'products/rudraksh'],
+                            ['title' => 'Yantra', 'image' => 'productbanner1.JPG', 'link' => 'products/yantra'],
+                            ['title' => 'Gemstones', 'image' => 'productbanner1.JPG', 'link' => 'products/gemstones'],
+                            ['title' => 'Pooja Items', 'image' => 'productbanner1.JPG', 'link' => 'products/pooja-items'],
+                            ['title' => 'Spiritual Books', 'image' => 'productbanner1.JPG', 'link' => 'products/spiritual-books'],
+                        ];
 
-        <!-- carousel gallery for products -->
-        <!-- <section>
-            <div class="container py-5">
-                <h1 class="text-start mb-5" style="color: var(--red);"><?php echo $this->lang->line('Photo_Gallery'); ?></h1>
-
-                <div class="row g-3">
-                  
-                    <div class="col-md-6">
-                        <div class="card gallery overflow-hidden">
-                            <img src="https://plus.unsplash.com/premium_photo-1699967437640-17ec76db90d5?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img object-fit-cover" alt="Featured Project" style="height: 413px; transition: transform 0.3s;">
-                        </div>
-                    </div>
-
-                 
-                    <div class="col-md-6">
-                        <div class="row g-3">
-                            <div class="col-6">
-                                <div class="card gallery overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1612323272007-3e7c28f6eb05?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img object-fit-cover" alt="Project 2" style="height: 200px; transition: transform 0.3s;">
-                                </div>
+                        foreach ($collections as $item): ?>
+                            <div class="item">
+                                <a href="<?php echo base_url('cardcategoryfilter'); ?>" style="text-decoration: none; color: inherit;">
+                                    <img src="<?php echo base_url('assets/images/JyotisikaMall/' . $item['image']); ?>" class="img-fluid collection-circle" alt="<?php echo $item['title']; ?>">
+                                    <p class="mt-2"><?php echo $item['title']; ?></p>
+                                </a>
                             </div>
-                            <div class="col-6">
-                                <div class="card gallery overflow-hidden">
-                                    <img src="https://plus.unsplash.com/premium_photo-1700740342767-9ca82d2c6eb6?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img object-fit-cover" alt="Project 3" style="height: 200px; transition: transform 0.3s;">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="card gallery overflow-hidden">
-                                    <img src="https://plus.unsplash.com/premium_photo-1679811674659-21be3cc25946?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTY5fHxhc3Ryb2xvZ3klMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" class="card-img object-fit-cover" alt="Project 4" style="height: 200px; transition: transform 0.3s;">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="card gallery overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fGFzdHJvbG9neSUyMHByb2R1Y3RzfGVufDB8fDB8fHww" class="card-img object-fit-cover" alt="Project 5" style="height: 200px; transition: transform 0.3s;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                  
-                    <div class="col-md-12">
-                        <div class="row g-3">
-                            <div class="col-md-15 col-6">
-                                <div class="card gallery gallery overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1651863548695-b474e99ffcb9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTV8fGFzdHJvbG9neSUyMHByb2R1Y3RzfGVufDB8fDB8fHww" class="card-img object-fit-cover" alt="Project 6" style="height: 250px; transition: transform 0.3s;">
-                                </div>
-                            </div>
-                            <div class="col-md-15 col-6">
-                                <div class="card gallery  overflow-hidden">
-                                    <img src="https://plus.unsplash.com/premium_photo-1699967711116-135fb8247ab0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTUzfHxhc3Ryb2xvZ3klMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" class="card-img object-fit-cover" alt="Project 7" style="height: 250px; transition: transform 0.3s;">
-                                </div>
-                            </div>
-                            <div class="col-md-15 col-6">
-                                <div class="card gallery overflow-hidden">
-                                    <img src="https://plus.unsplash.com/premium_photo-1699967711097-8cc5764fac19?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI5fHxhc3Ryb2xvZ3klMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" class="card-img object-fit-cover" alt="Project 8" style="height: 250px; transition: transform 0.3s;">
-                                </div>
-                            </div>
-                            <div class="col-md-15 col-6">
-                                <div class="card gallery overflow-hidden">
-                                    <img src="https://plus.unsplash.com/premium_photo-1699967520283-3215b2922ee7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA1fHxhc3Ryb2xvZ3klMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" class="card-img object-fit-cover" alt="Project 9" style="height: 250px; transition: transform 0.3s;">
-                                </div>
-                            </div>
-                            <div class="col-md-15 col-6">
-                                <div class="card gallery overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1627384113710-424c9181ebbb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fGFzdHJvbG9neSUyMHByb2R1Y3RzfGVufDB8fDB8fHww" class="card-img object-fit-cover" alt="Project 10" style="height: 250px; transition: transform 0.3s;">
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
+            </section>
+
+            <!-- Best Sellers Carousel -->
+            <section class="">
+                <div class="container">
+                    <h2 class="text-center mb-4">Best Sellers</h2>
+                    <div class="owl-carousel owl-theme">
+                        <?php
+                        if (empty($bestSellers)) {
+                            $bestSellers = [
+                                (object)[
+                                    'discount' => 'Up to 40% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/product6.png'),
+                                    'title' => 'Gold Plated Modern Rudraksha Bracelet',
+                                    'rating' => 4.5,
+                                    'reviews' => 2156,
+                                    'current_price' => 599,
+                                    'original_price' => 999,
+                                    'slug' => 'rudraksha-bracelet'
+                                ],
+                                (object)[
+                                    'discount' => 'Up to 30% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/product7.png'),
+                                    'title' => 'Spiritual Yantra Pendant',
+                                    'rating' => 4,
+                                    'reviews' => 1520,
+                                    'current_price' => 699,
+                                    'original_price' => 999,
+                                    'slug' => 'yantra-pendant'
+                                ],
+                                (object)[
+                                    'discount' => 'Up to 25% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/product8.png'),
+                                    'title' => 'Natural Gemstone Mala',
+                                    'rating' => 4.2,
+                                    'reviews' => 980,
+                                    'current_price' => 899,
+                                    'original_price' => 1199,
+                                    'slug' => 'gemstone-mala'
+                                ],
+                                (object)[
+                                    'discount' => 'Up to 35% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/product9.png'),
+                                    'title' => 'Premium Pooja Thali Set',
+                                    'rating' => 4.8,
+                                    'reviews' => 3200,
+                                    'current_price' => 1299,
+                                    'original_price' => 1999,
+                                    'slug' => 'pooja-thali'
+                                ],
+                                (object)[
+                                    'discount' => 'Up to 20% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/product10.png'),
+                                    'title' => 'Handcrafted Brass Diya',
+                                    'rating' => 4.0,
+                                    'reviews' => 750,
+                                    'current_price' => 499,
+                                    'original_price' => 699,
+                                    'slug' => 'brass-diya'
+                                ]
+                            ];
+                        }
+
+                        if (!empty($bestSellers)) :
+                            foreach ($bestSellers as $product) :
+                                // Assuming you'll handle routes like site.com/product-details/<slug>
+                                $productUrl = base_url('product-details/' . $product->slug);
+                        ?>
+                                <div class="item">
+                                    <a href="<?php echo base_url('productdetails'); ?>" style="text-decoration: none; color: inherit;">
+                                        <div class="best-seller-card h-100">
+                                            <div class="discount-badge">
+                                                <i class="bi bi-heart-fill me-1"></i><?php echo $product->discount; ?>
+                                            </div>
+                                            <img src="<?php echo $product->img; ?>" class="best-seller-img" alt="Product">
+                                            <div class="product-content">
+                                                <div class="product-title"><?php echo $product->title; ?></div>
+                                                <div class="product-rating">
+                                                    <span>
+                                                        <?php
+                                                        $fullStars = floor($product->rating);
+                                                        $halfStar = ($product->rating - $fullStars) >= 0.5 ? 1 : 0;
+                                                        for ($i = 0; $i < $fullStars; $i++) {
+                                                            echo '<i class="bi bi-star-fill"></i>';
+                                                        }
+                                                        if ($halfStar) {
+                                                            echo '<i class="bi bi-star-half"></i>';
+                                                        }
+                                                        for ($i = $fullStars + $halfStar; $i < 5; $i++) {
+                                                            echo '<i class="bi bi-star"></i>';
+                                                        }
+                                                        ?>
+                                                    </span>
+                                                    <span>(<?php echo $product->reviews; ?>)</span>
+                                                </div>
+                                                <div class="product-price">
+                                                    <span class="current-price">₹ <?php echo $product->current_price; ?><sup>00</sup></span>
+                                                    <span class="original-price">₹ <?php echo $product->original_price; ?><sup>00</sup></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                        <?php
+                            endforeach;
+                        endif;
+                        ?>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Energy Stones-->
+            <section class="py-3">
+                <div class="container">
+                    <h2 class="text-center mb-4">Energy Stones</h2>
+                    <div class="owl-carousel owl-theme">
+                        <?php
+                        $energyStones = [
+                            [
+                                'slug' => 'rudraksha-bracelet',
+                                'discount' => 'Up to 40% off',
+                                'img' => base_url('assets/images/JyotisikaMall/stone1.png'),
+                                'title' => 'Gold Plated Modern Rudraksha Bracelet',
+                                'rating' => 4.5,
+                                'reviews' => 2156,
+                                'current_price' => 599,
+                                'original_price' => 999
+                            ],
+                            [
+                                'slug' => 'yantra-pendant-1',
+                                'discount' => 'Up to 30% off',
+                                'img' => base_url('assets/images/JyotisikaMall/stone2.png'),
+                                'title' => 'Spiritual Yantra Pendant',
+                                'rating' => 4,
+                                'reviews' => 1520,
+                                'current_price' => 699,
+                                'original_price' => 999
+                            ],
+                            // ... Add more with different slugs
+                            [
+                                'slug' => 'stone-3',
+                                'discount' => 'Up to 30% off',
+                                'img' => base_url('assets/images/JyotisikaMall/stone3.png'),
+                                'title' => 'Spiritual Yantra Pendant',
+                                'rating' => 4,
+                                'reviews' => 1520,
+                                'current_price' => 699,
+                                'original_price' => 999
+                            ],
+                            [
+                                'slug' => 'stone-4',
+                                'discount' => 'Up to 30% off',
+                                'img' => base_url('assets/images/JyotisikaMall/stone4.png'),
+                                'title' => 'Spiritual Yantra Pendant',
+                                'rating' => 4,
+                                'reviews' => 1520,
+                                'current_price' => 699,
+                                'original_price' => 999
+                            ],
+                            // Repeat for rest with unique slugs
+                        ];
+
+                        foreach ($energyStones as $stone):
+                            $link = base_url('product-details/' . $stone['slug']);
+                        ?>
+                            <div class="item">
+                                <a href="<?php echo base_url('productdetails'); ?>" style="text-decoration: none; color: inherit;">
+                                    <div class="best-seller-card">
+                                        <div class="discount-badge"><i class="bi bi-heart-fill me-1"></i><?php echo $stone['discount']; ?></div>
+                                        <img src="<?php echo $stone['img']; ?>" class="best-seller-img" alt="Product">
+                                        <div class="product-content">
+                                            <div class="product-title"><?php echo $stone['title']; ?></div>
+                                            <div class="product-rating">
+                                                <span>
+                                                    <?php
+                                                    $fullStars = floor($stone['rating']);
+                                                    $halfStar = ($stone['rating'] - $fullStars) >= 0.5 ? 1 : 0;
+                                                    for ($i = 0; $i < $fullStars; $i++) {
+                                                        echo '<i class="bi bi-star-fill"></i>';
+                                                    }
+                                                    if ($halfStar) {
+                                                        echo '<i class="bi bi-star-half"></i>';
+                                                    }
+                                                    for ($i = $fullStars + $halfStar; $i < 5; $i++) {
+                                                        echo '<i class="bi bi-star"></i>';
+                                                    }
+                                                    ?>
+                                                </span>
+                                                <span>(<?php echo $stone['reviews']; ?>)</span>
+                                            </div>
+                                            <div class="product-price">
+                                                <span class="current-price">₹ <?php echo $stone['current_price']; ?><sup>00</sup></span>
+                                                <span class="original-price">₹ <?php echo $stone['original_price']; ?><sup>00</sup></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Gallery -->
+            <div class="row">
+                <h2 class="text-center mb-4">Gallery</h2>
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <img
+                        src="<?php echo base_url('assets/images/JyotisikaMall/product9.png'); ?>"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Boat on Calm Water" />
+
+                    <img
+                        src="<?php echo base_url('assets/images/JyotisikaMall/image2.png'); ?>"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Wintry Mountain Landscape" />
+                    <img
+                        src="<?php echo base_url('assets/images/JyotisikaMall/product9.png') ?>"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Yosemite National Park" />
+                </div>
+
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <img
+                        src="<?php echo base_url('assets/images/JyotisikaMall/image1.png'); ?>"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Mountains in the Clouds" />
+
+                    <img
+                        src="<?php echo base_url('assets/images/JyotisikaMall/image3.png') ?>"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Boat on Calm Water" />
+                </div>
+
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <img
+                        src="<?php echo base_url('assets/images/JyotisikaMall/image4.png') ?>"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Waves at Sea" />
+
+                    <img
+                        src="<?php echo base_url('assets/images/JyotisikaMall/product9.png') ?>"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Yosemite National Park" />
+                </div>
             </div>
 
-        </section> -->
+            <!-- Customer Reviews -->
+            <section class="py-5">
+                <div class="container">
+                    <h2 class="text-center mb-4">Customer Reviews</h2>
+                    <div class="owl-carousel owl-theme">
+                        <?php
+                        // Demo data for $customerReviews if not set or empty
+                        if (empty($customerReviews)) {
+                            $customerReviews = [
+                                (object)[
+                                    'image' => base_url('assets/images/JyotisikaMall/review.png'),
+                                    'stars' => 5,
+                                    'name' => 'Dvs Raju',
+                                    'title' => 'Very Nice',
+                                    'text' => 'Excellent Karungali mala and bracelet... I am happy. Good packing and fast delivery...'
+                                ],
+                                (object)[
+                                    'image' => base_url('assets/images/JyotisikaMall/review2.png'),
+                                    'stars' => 5,
+                                    'name' => 'Meena S.',
+                                    'title' => 'Powerful Rudraksh',
+                                    'text' => 'Loved the Rudraksh. It gives positive energy. Also arrived well packed.'
+                                ],
+                                (object)[
+                                    'image' => base_url('assets/images/JyotisikaMall/review2.png'),
+                                    'stars' => 5,
+                                    'name' => 'Meena S.',
+                                    'title' => 'Powerful Rudraksh',
+                                    'text' => 'Loved the Rudraksh. It gives positive energy. Also arrived well packed.'
+                                ],
+                                (object)[
+                                    'image' => base_url('assets/images/JyotisikaMall/review2.png'),
+                                    'stars' => 5,
+                                    'name' => 'Meena S.',
+                                    'title' => 'Powerful Rudraksh',
+                                    'text' => 'Loved the Rudraksh. It gives positive energy. Also arrived well packed.'
+                                ],
+                                (object)[
+                                    'image' => base_url('assets/images/JyotisikaMall/review3.png'),
+                                    'stars' => 5,
+                                    'name' => 'Ramesh K.',
+                                    'title' => 'Perfect for Gifting',
+                                    'text' => 'Beautiful idols and mala. Looks divine. Excellent delivery and service.'
+                                ]
+                            ];
+                        }
+                        foreach ($customerReviews as $review): ?>
+                            <div class="item">
+                                <div class="review-card">
+                                    <img src="<?php echo $review->image; ?>" class="review-image" alt="Customer <?php echo htmlspecialchars($review->name); ?>">
+                                    <div class="review-stars">
+                                        <?php
+                                        for ($i = 0; $i < $review->stars; $i++) {
+                                            echo '★';
+                                        }
+                                        for ($i = $review->stars; $i < 5; $i++) {
+                                            echo '☆';
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="review-name"><?php echo htmlspecialchars($review->name); ?></div>
+                                    <div class="review-title"><?php echo htmlspecialchars($review->title); ?></div>
+                                    <div class="review-text">
+                                        <?php echo htmlspecialchars($review->text); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </section>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-            integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
+        </div>
     </main>
 
-
     <footer>
-
         <?php $this->load->view('IncludeUser/CommanFooter'); ?>
-
     </footer>
+
+    <script>
+        $(document).ready(function() {
+
+
+            // For collection section only
+            $('.collection-carousel').owlCarousel({
+                loop: true,
+                margin: 15,
+                nav: true,
+                dots: false,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 2
+                    },
+                    600: {
+                        items: 4
+                    },
+                    1000: {
+                        items: 6
+                    }
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                dots: false,
+                navText: [
+                    "<i class='bi bi-chevron-left' style='font-size: 2rem; color: var(--red);'></i>",
+                    "<i class='bi bi-chevron-right' style='font-size: 2rem; color: var(--red);'></i>"
+                ],
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 2,
+                        nav: false
+                    },
+                    800: {
+                        items: 3,
+                        nav: false
+                    },
+                    1000: {
+                        items: 4,
+                        nav: true,
+                        loop: false
+                    }
+                }
+            });
+
+            function positionNavButtons() {
+                if ($(window).width() < 768) {
+                    // For mobile screens, position buttons below
+                    $('.owl-nav').css({
+                        'position': 'relative',
+                        'width': '100%',
+                        'margin-top': '20px',
+                        'display': 'flex',
+                        'justify-content': 'center',
+                        'gap': '20px'
+                    });
+
+                    $('.owl-prev, .owl-next').css({
+                        'position': 'relative',
+                        'left': 'auto',
+                        'right': 'auto'
+                    });
+                } else {
+                    // For larger screens, position buttons on sides
+                    $('.owl-nav').css({
+                        'position': 'absolute',
+                        'top': '50%',
+                        'width': '100%',
+                        'transform': 'translateY(-50%)',
+                        'margin-top': '0'
+                    });
+
+                    $('.owl-prev').css({
+                        'position': 'absolute',
+                        'left': '-40px'
+                    });
+
+                    $('.owl-next').css({
+                        'position': 'absolute',
+                        'right': '-40px'
+                    });
+                }
+            }
+
+            // Initial positioning
+            positionNavButtons();
+
+            // Reposition on window resize
+            $(window).resize(function() {
+                positionNavButtons();
+            });
+
+            // Prevent hover color change
+            $('.owl-nav button').hover(function() {
+                $(this).css('background', 'transparent');
+            });
+
+
+        });
+    </script>
 
 </body>
 
