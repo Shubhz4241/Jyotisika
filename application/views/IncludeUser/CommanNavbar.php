@@ -74,7 +74,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-black" href="<?php echo base_url('bookpuja'); ?>" style="font-size: medium;">
+                            <a class="nav-link text-black" href="<?php echo base_url('bookpooja'); ?>" style="font-size: medium;">
                                 <?php
                                 echo $this->lang->line('bookpuja') ? $this->lang->line('bookpuja') : 'Book Puja';
                                 ?>

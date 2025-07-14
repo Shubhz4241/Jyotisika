@@ -31,6 +31,15 @@
             transform: scale(1.05);
             /* Slightly scales up on hover */
         }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Show only 2 lines */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 
 
@@ -47,100 +56,23 @@
             <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">Free Horoscope and Astrology Services</h3>
             <div class="row g-4 justify-content-center">
 
-           
-                <?php
-                $services = [
-                    [
-                        'image' => 'assets/images/kundli.png',
-                        'title' => 'Kundli',
-                        'description' => '(Birth Chart)',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/HoroscopeMatching.png',
-                        'title' => 'Horoscope Matching',
-                        'description' => '(Birth Chart)',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/examResult.png',
-                        'title' => 'Exam Result',
-                        'description' => '(Birth Chart)',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/talkToAstrologer.png',
-                        'title' => 'Talk To Astrologer',
-                        'description' => '(Birth Chart)',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/askQuestion.png',
-                        'title' => 'Ask Questions',
-                        'description' => '(Birth Chart)',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/numerologyCalculator.png',
-                        'title' => 'Numerology Calculator',
-                        'description' => '',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/sadeSatiLifeReport.png',
-                        'title' => 'Sade Sati Life Report',
-                        'description' => '',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/hindiKundli.png',
-                        'title' => 'Hindi Kundli',
-                        'description' => '',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/yearAnalysis.png',
-                        'title' => 'Year Analysis',
-                        'description' => '',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/kaalsarpDosha.png',
-                        'title' => 'Kaalsarp Dosha',
-                        'description' => '',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/paidService.png',
-                        'title' => 'Paid Service',
-                        'description' => '',
-                        'link' => 'astrologers'
-                    ],
-                    [
-                        'image' => 'assets/images/babyName.png',
-                        'title' => 'Baby Name',
-                        'description' => '',
-                        'link' => 'astrologers'
-                    ],
 
-                ];
+                <?php
+
                 foreach ($service_data as $service): ?>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a href="<?php echo base_url('User/astrolgerservices/') . $service["id"] ?>"
-                            class="text-decoration-none">
-                            <div class="card service-card text-center shadow rounded border-0 p-3 h-100 card-hover">
+                        <a href="<?php echo base_url('User/astrolgerservices/') . $service["id"] ?>" class="text-decoration-none">
+                            <div class="card service-card text-center shadow-sm rounded border-0 p-3 h-100 card-hover">
                                 <div class="service-card-image-container">
                                     <img src="<?php echo base_url('uploads/services/' . $service['image']); ?>"
                                         alt="<?php echo $service['name']; ?>" class="mx-auto mb-3"
                                         style="width: 60px; height: 60px; object-fit: cover;"
                                         onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
-
-
                                 </div>
                                 <div class="service-card-body">
-                                    <h5 class="fw-bold text-dark"><?php echo $service['name']; ?></h5>
+                                    <h class="fw-bold text-dark"><?php echo $service['name']; ?></h>
                                     <?php if (!empty($service['description'])): ?>
-                                        <small class="text-muted"><?php echo $service['description']; ?></small>
+                                        <small class="text-muted line-clamp-2"><?php echo $service['description']; ?></small>
                                     <?php endif; ?>
                                 </div>
                             </div>

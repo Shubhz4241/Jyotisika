@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -33,11 +32,11 @@
     <!-- Custom Inline CSS for Styling -->
     <style>
         .product-container {
-            border: 1px solid #ddd;
+            /* border: 1px solid #ddd; */
             padding: 20px;
             border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* background-color: #fff; */
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
         }
 
         .quantity-input {
@@ -62,15 +61,15 @@
         }
 
         .product-info {
-            border: 1px solid #ddd;
+            /* border: 1px solid #ddd; */
             padding: 20px;
             border-radius: 10px;
-            background-color: #f9f9f9;
+            /* background-color: #f9f9f9; */
         }
 
         .product-image {
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
         }
 
         .cart-item {
@@ -83,7 +82,6 @@
         .cart-container {
             margin-top: 50px;
         }
-
 
         .review-card {
             border: 1px solid var(--red, #d9534f);
@@ -184,13 +182,16 @@
         <div class="row product-container">
             <!-- Product Image -->
             <div class="col-md-7 mb-4 d-flex align-items-center justify-content-center">
-                <img src="<?php echo base_url('uploads/products/'.$product_data[0]["product_image"]); ?>" class="img-fluid product-image"
-                    style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
+                <img src="<?php echo base_url('uploads/products/' . $product_data[0]["product_image"]); ?>"
+                    class="img-fluid product-image"
+                    style="max-width: 60%; height: 350px; object-fit: contain;"
+                    alt="Rudraksh"
+                    onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
+            </div>
 
-          </div>
             <!-- Product Info -->
             <div class="col-md-5 product-info">
-                <h2 class="fw-bold mb-3" style="font-family: 'Kaisei Decol', serif;">
+                <h3 class="fw-bold mb-1" style="font-family: 'Kaisei Decol', serif;">
                     <?php echo $product_data[0]["product_name"] ?>
 
                     <?php if ($product_rating_data[0]["average_product_rating"]): ?>
@@ -199,87 +200,62 @@
                             <i class="bi bi-star-fill text-warning me-1"></i>
                         <?php endfor ?>
                     <?php endif ?>
-
-                </h2>
-                <p class="text-muted">
-                    <?php echo ($product_data[0]["product_description"]) ?>
-                </p>
-
-                <h4 class="fw-bold text-warning">₹ <?php echo $product_data[0]["product_price"] ?></h4>
+                </h3>
 
 
 
-                <!-- <div class="mt-4">
-                    <label for="quantity" class="form-label fw-bold">Quantity</label>
-                    <div class="input-group w-25">
-                        <button class="btn btn-outline-secondary" type="button" onclick="decreaseQty()">−</button>
-                        <input type="text" id="quantity" readonly class="form-control text-center" value="1">
-                        <button class="btn btn-outline-secondary" type="button" onclick="increaseQty()">+</button>
-                    </div>
+                <!-- Price Section -->
+                <div>
+                    <span class="text-muted text-decoration-line-through me-2 fs-5">₹
+                        <?php echo $product_data[0]["product_price"] + 300; ?>
+                    </span>
+                    <span class="text-warning fw-bold fs-5">₹
+                        <?php echo $product_data[0]["product_price"] ?>
+                    </span>
                 </div>
 
-                <script>
-                    function increaseQty() {
-                        const qty = document.getElementById('quantity');
-                        qty.value = parseInt(qty.value) + 1;
-                    }
-
-                    function decreaseQty() {
-                        const qty = document.getElementById('quantity');
-                        if (parseInt(qty.value) > 1) {
-                            qty.value = parseInt(qty.value) - 1;
-                        }
-                    }
-                </script> -->
-
-
-                <div class="button-group">
-
+                <!-- Cart Buttons -->
+                <div class="button-group mb-2">
                     <?php if ($this->session->userdata("user_id")): ?>
-
                         <?php if ($productverify == "exist"): ?>
-                            <a href="<?php echo base_url('Cart'); ?>"> <button class="btn mt-4 add-to-cart-btn">View
-                                    Cart</button> </a>
-
-
+                            <a href="<?php echo base_url('Cart'); ?>">
+                                <button class="btn mt-2 btn-sm add-to-cart-btn">View Cart</button>
+                            </a>
                         <?php else: ?>
-                            <button onclick="AddThisToCart()" id="cartbutton" class="btn mt-4 add-to-cart-btn">Add To
-                                Cart</button>
-
+                            <button onclick="AddThisToCart()" id="cartbutton" class="btn mt-4 btn-sm add-to-cart-btn">Add To Cart</button>
                         <?php endif ?>
-
-
                     <?php else: ?>
-                        <button class="btn mt-4 add-to-cart-btn showloginbtn">Add to Cart</button>
+                        <button class="btn mt-4 btn-sm add-to-cart-btn showloginbtn">Add to Cart</button>
                     <?php endif ?>
                 </div>
+
+                <!-- Product Description -->
+                <p class="text-muted mb-3">
+                    <?php echo $product_data[0]["product_description"] ?>
+                </p>
             </div>
-        </div>
-
-        <div class="row">
-
         </div>
     </div>
 
- 
+
     <!-- Reviews -->
     <div class="container my-4 position-relative">
-        <h4> <?php echo $this->lang->line('Reviews');?></h4>
+        <h4> <?php echo $this->lang->line('Reviews'); ?></h4>
         <div class="owl-carousel owl1 owl-theme">
             <!-- Loop Start -->
             <!-- Card 1 -->
-            
+
             <?php if ($product_feedback_data): ?>
                 <?php foreach ($product_feedback_data as $product_feedback_data_details): ?>
                     <div class="item">
                         <div class="card review-card shadow p-3">
                             <div class="d-flex justify-content-center">
                                 <img src="<?php echo !empty($product_feedback_data_details["user_image"])
-                                    ? base_url($product_feedback_data_details["user_image"])
-                                    : base_url("assets/images/profileImage.png"); ?>" alt="User"
+                                                ? base_url($product_feedback_data_details["user_image"])
+                                                : base_url("assets/images/profileImage.png"); ?>" alt="User"
                                     class="rounded-circle shadow-sm" style="width: 100px; height: 100px; object-fit: cover;">
 
-                                    
+
                             </div>
 
                             <div class="text-center review-body mt-3">
@@ -331,11 +307,11 @@
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const showloginbtn = document.querySelectorAll(".showloginbtn");
 
-            Array.from(showloginbtn).forEach(function (showloginbtn) {
-                showloginbtn.addEventListener("click", function (e) {
+            Array.from(showloginbtn).forEach(function(showloginbtn) {
+                showloginbtn.addEventListener("click", function(e) {
                     e.preventDefault(); // Now correctly inside the clic
                     Swal.fire({
                         title: "Login Required",
@@ -473,7 +449,7 @@
 
     <!-- Owl Carousel Init -->
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.owl1').owlCarousel({
                 loop: true,
                 margin: 10,
@@ -500,8 +476,6 @@
                 }
             });
         });
-
-
     </script>
 
 
