@@ -9,7 +9,7 @@
 <footer>
         <div class="container-fluid ">
                 <div class="row d-flex flex-row justify-content-center align-items-start gap-3 p-3"
-                        style="background-color: var(--yellow); ">
+                        style="background-color: rgba(254, 156, 19, 0.96); ">
                         <!-- Column 1: Social Media -->
                         <div class="col-12 col-md-2 text-center">
                                 <img src="<?php echo base_url('assets/images/new_logo.png'); ?>" alt="Logo"
@@ -119,13 +119,13 @@
 
                         <div class="col-12 col-sm-4 col-md-2">
                                 <h5 class="fw-bold">
-                                      <?php echo $this->lang->line('our_services'); ?>
+                                        <?php echo $this->lang->line('our_services'); ?>
 
                                 </h5>
                                 <ul class="list-unstyled">
 
                                         <li><a href="<?php echo base_url("bookpooja") ?>" class="footer-links"><?php
-                                           echo $this->lang->line('freekundali') ? $this->lang->line('freekundali') : 'Free Kundali'; ?></a>
+                                                                                                                echo $this->lang->line('freekundali') ? $this->lang->line('freekundali') : 'Free Kundali'; ?></a>
                                         </li>
                                         <li><a href="<?php echo base_url("todayhoroscope") ?>"
                                                         class="footer-links"><?php echo $this->lang->line('kundlimatching') ? $this->lang->line('kundlimatching') : 'Kundli Matching'; ?></a>
@@ -151,13 +151,13 @@
                                                         class="footer-links"><?php echo $this->lang->line('festival') ? $this->lang->line('festival') : 'Festival'; ?></a>
                                         </li>
                                         <li><a href="<?php echo base_url("MobPooja") ?>" class="footer-links"> <?php
-                                           echo $this->lang->line('bookpuja') ? $this->lang->line('bookpuja') : 'Book Puja';
-                                           ?>
+                                                                                                                echo $this->lang->line('bookpuja') ? $this->lang->line('bookpuja') : 'Book Puja';
+                                                                                                                ?>
                                                 </a>
                                         </li>
 
 
-                                         <li><a href="<?php echo base_url("MobPooja") ?>" class="footer-links">  <?php echo $this->lang->line('MobPooja') ? $this->lang->line('MobPooja') : 'Mob Pooja'; ?>
+                                        <li><a href="<?php echo base_url("MobPooja") ?>" class="footer-links"> <?php echo $this->lang->line('MobPooja') ? $this->lang->line('MobPooja') : 'Mob Pooja'; ?>
                                                 </a>
                                         </li>
 
@@ -220,7 +220,7 @@
                                 </ul>
                         </div>
                         <script>
-                                document.addEventListener("DOMContentLoaded", function () {
+                                document.addEventListener("DOMContentLoaded", function() {
                                         fetch("<?php echo base_url('User_Api_Controller/showservices_limited'); ?>")
                                                 .then(response => response.json())
                                                 .then(data => {

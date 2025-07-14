@@ -10,7 +10,6 @@ class User extends CI_Controller
 		$this->load->helper(array('form', 'url'));
 
 		$this->load->library('session');
-
 	}
 
 
@@ -65,9 +64,6 @@ class User extends CI_Controller
 		} else {
 			return null;
 		}
-
-
-
 	}
 
 
@@ -174,9 +170,6 @@ class User extends CI_Controller
 			}
 
 			$data["userinfo_data"] = $getdata["userinfo"];
-
-
-
 		}
 
 
@@ -690,9 +683,6 @@ class User extends CI_Controller
 
 			if ($httpCode === 200 && isset($decodedResponsev["data"])) {
 				$data["productverify"] = $decodedResponsev["data"];
-
-
-
 			} else {
 
 				log_message('error', "Failed to fetch product: " . $responsesve);
@@ -808,9 +798,6 @@ class User extends CI_Controller
 
 			if ($httpCode === 200 && isset($decoded["data"])) {
 				$data["productdata"] = $decoded["data"];
-
-
-
 			} else {
 
 				log_message('error', "Failed to fetch product: " . $responsesve);
@@ -821,7 +808,6 @@ class User extends CI_Controller
 
 
 		$this->load->view("User/Cart", $data);
-
 	}
 	public function ProductPayment()
 	{
@@ -890,9 +876,6 @@ class User extends CI_Controller
 
 			if ($httpCode === 200 && isset($decoded["data"])) {
 				$data["productdata"] = $decoded["data"];
-
-
-
 			} else {
 
 				log_message('error', "Failed to fetch product: " . $responsesve);
@@ -1054,29 +1037,29 @@ class User extends CI_Controller
 	}
 
 	// 	public function HoroscopeReadmore()
-// {
-//     // API URL
-//     $api_url = "https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=Taurus&day=TODAY";
+	// {
+	//     // API URL
+	//     $api_url = "https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=Taurus&day=TODAY";
 
 	//     // Initialize cURL session
-//     $ch = curl_init();
+	//     $ch = curl_init();
 
 	//     // Set cURL options
-//     curl_setopt($ch, CURLOPT_URL, $api_url);
-//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	//     curl_setopt($ch, CURLOPT_URL, $api_url);
+	//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 	//     // Execute cURL session and store response
-//     $response = curl_exec($ch);
+	//     $response = curl_exec($ch);
 
 	//     // Close cURL session
-//     curl_close($ch);
+	//     curl_close($ch);
 
 	//     // Decode JSON response
-//     $data['horoscope'] = json_decode($response, true);
+	//     $data['horoscope'] = json_decode($response, true);
 
 	//     // Load view and pass API response data
-//     $this->load->view('User/HoroscopeReadmore', $data);
-// }
+	//     $this->load->view('User/HoroscopeReadmore', $data);
+	// }
 
 	public function HoroscopeReadmore($sign) // Default to Taurus if no sign is provided
 	{
@@ -1186,14 +1169,12 @@ class User extends CI_Controller
 			}
 
 			$data["userinfo_data"] = $getdata["userinfo"];
-
 		}
 
 
 
 
 		$this->load->view('User/Astrologers', $data);
-
 	}
 
 
@@ -1259,7 +1240,6 @@ class User extends CI_Controller
 
 			if ($checkfollowstatusresponse["status"] == "success") {
 				$data["followstatus"] = $checkfollowstatusresponse["value"];
-
 			}
 		}
 
@@ -1348,11 +1328,6 @@ class User extends CI_Controller
 			}
 
 			$data["userinfo_data"] = $getdata["userinfo"];
-
-
-
-
-
 		}
 
 
@@ -2103,10 +2078,6 @@ class User extends CI_Controller
 			}
 
 			$data["userinfo_data"] = $getdata["userinfo"];
-
-
-
-
 		}
 
 
@@ -2133,10 +2104,7 @@ class User extends CI_Controller
 		$this->load->view('User/Recharge');
 	}
 
-	public function getdata()
-	{
-
-	}
+	public function getdata() {}
 
 	public function Demo()
 	{
@@ -2162,7 +2130,6 @@ class User extends CI_Controller
 			}
 		} else {
 			$data["userinfo"] = [];
-
 		}
 
 		// print_r($data["userinfo"]);
@@ -2367,7 +2334,6 @@ class User extends CI_Controller
 			}
 
 			$data["userinfo_data"] = $getdata["userinfo"];
-
 		}
 
 
@@ -2488,4 +2454,9 @@ class User extends CI_Controller
 
 
 
+	// new controller by bhuvan
+	public function CardCategoryFilter()
+	{
+		$this->load->view("User/CardCategoryFilter");
+	}
 }
