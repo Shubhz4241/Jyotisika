@@ -23,17 +23,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-           
-           * Card Hover Effect */
-       .card-hover {
-           transition: transform 0.3s ease-in;
-       }
+        * Card Hover Effect */ .card-hover {
+            transition: transform 0.3s ease-in;
+        }
 
-       .card-hover:hover {
-           transform: scale(1.05);
-           /* Slightly scales up on hover */
-       }
-       </style>
+        .card-hover:hover {
+            transform: scale(1.05);
+            /* Slightly scales up on hover */
+        }
+    </style>
 
 
 </head>
@@ -48,6 +46,8 @@
         <div class="container my-4">
             <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">Free Horoscope and Astrology Services</h3>
             <div class="row g-4 justify-content-center">
+
+           
                 <?php
                 $services = [
                     [
@@ -74,11 +74,11 @@
                         'description' => '(Birth Chart)',
                         'link' => 'astrologers'
                     ],
-                     [
+                    [
                         'image' => 'assets/images/askQuestion.png',
                         'title' => 'Ask Questions',
                         'description' => '(Birth Chart)',
-                         'link' => 'astrologers'
+                        'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/numerologyCalculator.png',
@@ -104,41 +104,44 @@
                         'description' => '',
                         'link' => 'astrologers'
                     ],
-                     [
+                    [
                         'image' => 'assets/images/kaalsarpDosha.png',
                         'title' => 'Kaalsarp Dosha',
-                         'description' => '',
-                         'link' => 'astrologers'
+                        'description' => '',
+                        'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/paidService.png',
                         'title' => 'Paid Service',
-                         'description' => '',
-                         'link' => 'astrologers'
+                        'description' => '',
+                        'link' => 'astrologers'
                     ],
                     [
                         'image' => 'assets/images/babyName.png',
                         'title' => 'Baby Name',
-                         'description' => '',
-                         'link' => 'astrologers'
+                        'description' => '',
+                        'link' => 'astrologers'
                     ],
 
                 ];
                 foreach ($service_data as $service): ?>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
+                        <a href="<?php echo base_url('User/astrolgerservices/') . $service["id"] ?>"
+                            class="text-decoration-none">
                             <div class="card service-card text-center shadow rounded border-0 p-3 h-100 card-hover">
                                 <div class="service-card-image-container">
-                                    <img src="<?php echo base_url('assets/images/' . $service['image']); ?>" alt=""
-                                        class="mx-auto mb-2 service-card-image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
+                                    <img src="<?php echo base_url('uploads/services/' . $service['image']); ?>"
+                                        alt="<?php echo $service['name']; ?>" class="mx-auto mb-3"
+                                        style="width: 60px; height: 60px; object-fit: cover;"
+                                        onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
 
-                                       
+
                                 </div>
                                 <div class="service-card-body">
                                     <h5 class="fw-bold text-dark"><?php echo $service['name']; ?></h5>
-                                    <!-- <?php if (!empty($service['description'])): ?>
+                                    <?php if (!empty($service['description'])): ?>
                                         <small class="text-muted"><?php echo $service['description']; ?></small>
-                                    <?php endif; ?> -->
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </a>
@@ -146,7 +149,7 @@
                 <?php endforeach; ?>
             </div>
         </div>
-       
+
 
     </section>
 

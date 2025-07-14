@@ -1524,17 +1524,17 @@ class User_Api_Model extends CI_Model
         $this->db->select("astrologer_registration.*, astrologer_services.*, AVG(astrologer_feedback.rating) as average_rating");
 
         $this->db->from("astrologer_services");
-        $this->db->join("astrologer_registration", "astrologer_registration.id = astrologer_services.astrologer_id",'Left');
+        $this->db->join("astrologer_registration", "astrologer_registration.id = astrologer_services.astrologer_id", 'Left');
         $this->db->join('astrologer_feedback', 'astrologer_feedback.astrologer_id = astrologer_registration.id', 'Left');
         $this->db->group_by('astrologer_registration.id');
         $this->db->where("astrologer_registration.status", "approved");
         $this->db->where("astrologer_registration.is_online", "1");
-        $this->db->where("astrologer_services.service_id",$service_id );
-         $query = $this->db->get();
+        $this->db->where("astrologer_services.service_id", $service_id);
+        $query = $this->db->get();
 
-        $astrologers=$query->result() ;
+        $astrologers = $query->result();
 
-         foreach ($astrologers as &$astro) {
+        foreach ($astrologers as &$astro) {
             $chatSession = $this->db->select('start_time, expire_on')
                 ->from('chat_sessions')
                 ->where('astrologer_id', $astro->id)
@@ -1607,5 +1607,22 @@ class User_Api_Model extends CI_Model
 
 
 
+    public function show_service_info_model($service_id)
+    {
+
+        $this->db->where("id", $service_id);
+        $query = $this->db->get("services");
+        return $query->result();
+
+    }
+
+
+    public function show_notification_model($user_id){
+
+         $this->db->where("receiver_id",  $user_id);
+         $this->db->where("receiver_role","user");
+        $query = $this->db->get("jyotisika_notifications");
+        return $query->result();
+    }
 
 }

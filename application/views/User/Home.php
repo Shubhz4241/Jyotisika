@@ -102,7 +102,7 @@
 
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
-   
+
 
 
 
@@ -359,7 +359,7 @@
                                         <!-- Profile Section -->
                                         <div class="d-flex align-items-center mb-2">
                                             <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>">
-                                                <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url("/uploads/Astologer/" . $astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url( $astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
                                                     alt="image" class="rounded-circle"
                                                     style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);"
                                                     onerror="this.onerror=null  this.src='<?php echo base_url('assets/images/astrologerimg.png'); ?>';">
@@ -709,7 +709,7 @@
 
     <!-- Free Horoscope and Astrology Services -->
 
-   
+
     <section>
         <div class="container my-4">
             <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">
@@ -723,8 +723,8 @@
                 <?php if (!empty($service_data)): ?>
                     <?php foreach ($service_data as $service_data_astologer): ?>
 
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <a href="<?php echo base_url('User/astrolgerservices/').$service_data_astologer["id"] ?>" class="text-decoration-none">
+                        <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <a href="<?php echo base_url('User/astrolgerservices/') . $service_data_astologer["id"] ?>" class="text-decoration-none">
                                 <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
                                     <img src="<?php echo base_url('uploads/services/' . $service_data_astologer['image']); ?>"
                                         alt="<?php echo $service_data_astologer['name']; ?>" class="mx-auto mb-3"
@@ -733,9 +733,31 @@
                                     <p class="fw-bold text-dark">
                                         <?php echo $service_data_astologer['name']; ?>
                                     </p>
+                                     <p class="fw-bold text-dark">
+                                        <?php echo $service_data_astologer['description']; ?>
+                                    </p>
+                                </div>
+                            </a>
+                        </div> -->
+
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <a href="<?php echo base_url('User/astrolgerservices/') . $service_data_astologer["id"] ?>"
+                                class="text-decoration-none">
+                                <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
+                                    <img src="<?php echo base_url('uploads/services/' . $service_data_astologer['image']); ?>"
+                                        alt="<?php echo $service_data_astologer['name']; ?>" class="mx-auto mb-3"
+                                        style="width: 60px; height: 60px; object-fit: cover;"
+                                        onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
+                                    <p class="fw-bold text-dark">
+                                        <?php echo $service_data_astologer['name']; ?>
+                                    </p>
+                                    <p class="text-muted">
+                                        <?php echo $service_data_astologer['description']; ?>
+                                    </p>
                                 </div>
                             </a>
                         </div>
+
                     <?php endforeach; ?>
                 <?php endif; ?>
 

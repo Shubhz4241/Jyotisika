@@ -287,7 +287,7 @@
 
 
 
-                                                    <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url("/uploads/Astologer/".$astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                    <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
                                                         alt="image" class="rounded-circle"
                                                         style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
 

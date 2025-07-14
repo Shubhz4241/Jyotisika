@@ -104,6 +104,47 @@
 
             <!-- <?php print_r($astrologerdata) ?> -->
 
+             <!-- <?php print_r($service_data)?> -->
+
+             <div class="row mt-5">
+    <h4 class="fw-bold mb-4 text-center">Astrologer Services</h4>
+
+    <?php if (!empty($service_data)): ?>
+        <?php foreach ($service_data as $service): ?>
+            <div class="col-12 mb-4">
+                <div class="d-flex flex-column flex-md-row align-items-center p-4 shadow rounded bg-light">
+                    <!-- Image Section -->
+                    <img src="<?php echo base_url('uploads/services/' . $service['image']); ?>"
+                         alt="<?php echo $service['name']; ?>"
+                         class="me-md-4 mb-3 mb-md-0 rounded-circle"
+                         style="width: 100px; height: 100px; object-fit: cover;"
+                         onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
+                    
+                    <!-- Text Section -->
+                    <div class="flex-grow-1">
+                        <h5 class="fw-bold mb-2"><?php echo $service['name']; ?></h5>
+                        <p class="text-muted mb-2"><?php echo $service['description']; ?></p>
+                        <!-- <p class="fw-semibold text-success">₹ <?php echo $service['price']; ?></p> -->
+                    </div>
+
+                    <!-- Button -->
+                    <div>
+                        <a href="<?php echo base_url('AstrologyServices'); ?>"
+                           class="btn btn-outline-primary rounded-pill px-4">View More</a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <div class="col-12 text-center">
+            <p class="fw-bold text-danger">No services available at the moment.</p>
+        </div>
+    <?php endif; ?>
+</div>
+
+
+
+
 
             <div class="row my-4" id="cardContainer">
 
@@ -120,7 +161,7 @@
                                             class="text-decoration-none">
 
 
-                                            <img src=" <?php echo !empty($astrologer['profile_pic']) ? base_url('/uploads/Astologer/' . $astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                            <img src=" <?php echo !empty($astrologer['profile_pic']) ? base_url( $astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
                                                 alt="image" class="rounded-circle"
                                                 style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                         </a>
