@@ -74,7 +74,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-black" href="<?php echo base_url('bookpuja'); ?>" style="font-size: medium;">
+                            <a class="nav-link text-black" href="<?php echo base_url('bookpooja'); ?>" style="font-size: medium;">
                                 <?php
                                 echo $this->lang->line('bookpuja') ? $this->lang->line('bookpuja') : 'Book Puja';
                                 ?>
@@ -201,12 +201,59 @@
                             <li>
                                 <hr class="dropdown-divider mx-3">
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Notification'); ?>">
                                     <i class="bi bi-bell me-2"></i> Notifications
                                     <span class="badge bg-danger rounded-pill float-end me-2">3</span>
                                 </a>
-                            </li>
+                            </li> -->
+
+                            <li>
+                                <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Notification'); ?>">
+                                    <i class="bi bi-bell me-2"></i> Notifications
+                                    <span id="notificationCount" class="badge bg-danger rounded-pill float-end me-2"
+                                style="display:none;">0</span>
+                                </a>
+                            </li> 
+
+                           
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    // 1️⃣ Build FormData with the user_id from PHP session
+                                    const formData = new FormData();
+                                    formData.append('user_id', '<?php echo $this->session->userdata("user_id"); ?>');
+
+                                    // 2️⃣ Send POST request
+                                    fetch('<?php echo base_url("User_Api_Controller/show_notification_number"); ?>', {
+                                        method: 'POST',
+                                        body: formData
+                                    })
+                                        .then(res => res.json())
+                                        .then(res => {
+                                            if (res.status !== 'success') {
+                                                console.error(res.message);
+                                                return;
+                                            }
+
+                                            const count = parseInt(res.data, 10) || 0;
+                                            const badge = document.getElementById('notificationCount');
+
+                                            if (badge) {
+                                                if (count > 0) {
+                                                    badge.textContent = count;
+                                                    badge.style.display = 'inline-block';
+                                                } else {
+                                                    badge.style.display = 'none';
+                                                }
+                                            }
+                                        })
+                                        .catch(err => console.error('Error fetching notification count:', err));
+                                });
+                            </script>
+
+
+
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Orders'); ?>">
                                     <i class="bi bi-bag me-2"></i> My Orders

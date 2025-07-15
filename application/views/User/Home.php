@@ -755,8 +755,12 @@
                                         <?php echo $service_data_astologer['name']; ?>
                                     </p>
                                     <p class="text-muted">
-                                        <?php echo $service_data_astologer['description']; ?>
-                                    </p>
+    <?php
+    $words = explode(' ', $service_data_astologer['description']);
+    echo implode(' ', array_slice($words, 0, 10)) . (count($words) > 10 ? '...' : '');
+    ?>
+</p>
+
                                 </div>
                             </a>
                         </div>

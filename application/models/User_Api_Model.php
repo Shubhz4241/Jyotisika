@@ -2074,6 +2074,15 @@ class User_Api_Model extends CI_Model
     }
 
 
+    public function show_pooja_info_model($puja_id){
+
+        $this->db->where("id", $puja_id);
+        $query = $this->db->get("services");
+        return $query->result();
+
+    }
+
+
     public function get_top_ratedproduct()
     {
         try {

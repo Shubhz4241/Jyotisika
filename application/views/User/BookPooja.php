@@ -98,7 +98,14 @@
 
                             <div class="card-body text-center">
                                 <h5 class="card-title fw-bold"><?php echo $card['name']; ?></h5>
-                                <p class="card-text text-muted"><?php echo $card['description']; ?></p>
+                              <p class="card-text text-muted">
+    <?php
+        $words = explode(' ', strip_tags($card['description']));
+        $short_desc = implode(' ', array_slice($words, 0, 8)) . (count($words) > 15 ? '...' : '');
+        echo $short_desc;
+    ?>
+</p>
+
                             </div>
                             <div class="card-footer bg-transparent border-0">
                                 <div class="d-flex justify-content-between gap-2 px-2">

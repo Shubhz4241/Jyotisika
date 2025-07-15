@@ -3261,6 +3261,509 @@ class User_Api_Controller extends CI_Controller
     }
 
 
+    public function basicastrology(){
+
+            $input = json_decode(file_get_contents("php://input"), true);
+
+        $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+        $api_key = "b49e81e874acc04f1141569767b24b79";
+
+        $data = [
+            'api_key' => $api_key,
+            'full_name' => $input['boy_name'],
+            'day' => (int) $input['boy_day'],
+            'month' => (int) $input['boy_month'],
+            'year' => (int) $input['boy_year'],
+            'hour' => (int) $input['boy_hour'],
+            'min' => (int) $input['boy_minute'],
+            'sec' => (int) $input['boy_second'],
+            'gender' => $input['boy_gender'],
+            'place' => $input['boy_birthPlace'],
+            'lat' => $input['boy_lat'], // optional: replace using geolocation
+            'lon' => $input['boy_lon'],
+            'tzone' => 5.5,
+            'lan' => $input['lan']
+        ];
+        // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
+
+        $url = 'https://astroapi-3.divineapi.com/indian-api/v2/basic-astro-details';
+
+
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $access_token,
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            echo json_encode(['success' => false, 'message' => $error]);
+        } else {
+            $result = json_decode($response, true);
+            echo json_encode(['success' => true, 'data' => $result]);
+        }
+    }
+
+
+    public function planetary_positions(){
+
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+        $api_key = "b49e81e874acc04f1141569767b24b79";
+
+        $data = [
+            'api_key' => $api_key,
+            'full_name' => $input['boy_name'],
+            'day' => (int) $input['boy_day'],
+            'month' => (int) $input['boy_month'],
+            'year' => (int) $input['boy_year'],
+            'hour' => (int) $input['boy_hour'],
+            'min' => (int) $input['boy_minute'],
+            'sec' => (int) $input['boy_second'],
+            'gender' => $input['boy_gender'],
+            'place' => $input['boy_birthPlace'],
+            'lat' => $input['boy_lat'], // optional: replace using geolocation
+            'lon' => $input['boy_lon'],
+            'tzone' => 5.5,
+            'lan' => $input['lan']
+        ];
+        // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
+
+        $url = 'https://astroapi-3.divineapi.com/indian-api/v1/planetary-positions';
+
+
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $access_token,
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            echo json_encode(['success' => false, 'message' => $error]);
+        } else {
+            $result = json_decode($response, true);
+            echo json_encode(['success' => true, 'data' => $result]);
+        }
+
+
+    }
+
+
+    public function vimshottari_dasha(){
+
+          $input = json_decode(file_get_contents("php://input"), true);
+
+        $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+        $api_key = "b49e81e874acc04f1141569767b24b79";
+
+        $data = [
+            'api_key' => $api_key,
+            'full_name' => $input['boy_name'],
+            'day' => (int) $input['boy_day'],
+            'month' => (int) $input['boy_month'],
+            'year' => (int) $input['boy_year'],
+            'hour' => (int) $input['boy_hour'],
+            'min' => (int) $input['boy_minute'],
+            'sec' => (int) $input['boy_second'],
+            'gender' => $input['boy_gender'],
+            'place' => $input['boy_birthPlace'],
+            'lat' => $input['boy_lat'], // optional: replace using geolocation
+            'lon' => $input['boy_lon'],
+            'tzone' => 5.5,
+            'lan' => $input['lan'],
+            'dasha_type'=>'maha-dasha'
+        ];
+        // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
+
+        $url = 'https://astroapi-3.divineapi.com/indian-api/v1/vimshottari-dasha';
+
+
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $access_token,
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            echo json_encode(['success' => false, 'message' => $error]);
+        } else {
+            $result = json_decode($response, true);
+            echo json_encode(['success' => true, 'data' => $result]);
+        }
+
+
+
+    }
+
+
+    public function ascendant_report(){
+
+        
+          $input = json_decode(file_get_contents("php://input"), true);
+
+        $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+        $api_key = "b49e81e874acc04f1141569767b24b79";
+
+        $data = [
+            'api_key' => $api_key,
+            'full_name' => $input['boy_name'],
+            'day' => (int) $input['boy_day'],
+            'month' => (int) $input['boy_month'],
+            'year' => (int) $input['boy_year'],
+            'hour' => (int) $input['boy_hour'],
+            'min' => (int) $input['boy_minute'],
+            'sec' => (int) $input['boy_second'],
+            'gender' => $input['boy_gender'],
+            'place' => $input['boy_birthPlace'],
+            'lat' => $input['boy_lat'], // optional: replace using geolocation
+            'lon' => $input['boy_lon'],
+            'tzone' => 5.5,
+            'lan' => $input['lan']
+        ];
+        // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
+
+        $url = 'https://astroapi-3.divineapi.com/indian-api/v2/ascendant-report';
+
+
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $access_token,
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            echo json_encode(['success' => false, 'message' => $error]);
+        } else {
+            $result = json_decode($response, true);
+            echo json_encode(['success' => true, 'data' => $result]);
+        }
+
+
+
+    }
+
+
+
+     public function gemstone_suggestions(){
+
+        
+          $input = json_decode(file_get_contents("php://input"), true);
+
+        $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+        $api_key = "b49e81e874acc04f1141569767b24b79";
+
+        $data = [
+            'api_key' => $api_key,
+            'full_name' => $input['boy_name'],
+            'day' => (int) $input['boy_day'],
+            'month' => (int) $input['boy_month'],
+            'year' => (int) $input['boy_year'],
+            'hour' => (int) $input['boy_hour'],
+            'min' => (int) $input['boy_minute'],
+            'sec' => (int) $input['boy_second'],
+            'gender' => $input['boy_gender'],
+            'place' => $input['boy_birthPlace'],
+            'lat' => $input['boy_lat'], // optional: replace using geolocation
+            'lon' => $input['boy_lon'],
+            'tzone' => 5.5,
+            'lan' => $input['lan'],
+            
+        ];
+        // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
+
+        $url = 'https://astroapi-3.divineapi.com/indian-api/v2/gemstone-suggestion';
+
+
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $access_token,
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            echo json_encode(['success' => false, 'message' => $error]);
+        } else {
+            $result = json_decode($response, true);
+            echo json_encode(['success' => true, 'data' => $result]);
+        }
+
+
+
+    }
+
+
+
+      public function composite_friendship(){
+
+        
+          $input = json_decode(file_get_contents("php://input"), true);
+
+        $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+        $api_key = "b49e81e874acc04f1141569767b24b79";
+
+        $data = [
+            'api_key' => $api_key,
+            'full_name' => $input['boy_name'],
+            'day' => (int) $input['boy_day'],
+            'month' => (int) $input['boy_month'],
+            'year' => (int) $input['boy_year'],
+            'hour' => (int) $input['boy_hour'],
+            'min' => (int) $input['boy_minute'],
+            'sec' => (int) $input['boy_second'],
+            'gender' => $input['boy_gender'],
+            'place' => $input['boy_birthPlace'],
+            'lat' => $input['boy_lat'], // optional: replace using geolocation
+            'lon' => $input['boy_lon'],
+            'tzone' => 5.5,
+            'lan' => $input['lan'],
+            
+        ];
+        // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
+
+        $url = 'https://astroapi-3.divineapi.com/indian-api/v1/composite-friendship';
+
+
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $access_token,
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            echo json_encode(['success' => false, 'message' => $error]);
+        } else {
+            $result = json_decode($response, true);
+            echo json_encode(['success' => true, 'data' => $result]);
+        }
+
+
+
+    }
+
+
+
+
+     public function shadbala(){
+
+        
+          $input = json_decode(file_get_contents("php://input"), true);
+
+        $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+        $api_key = "b49e81e874acc04f1141569767b24b79";
+
+        $data = [
+            'api_key' => $api_key,
+            'full_name' => $input['boy_name'],
+            'day' => (int) $input['boy_day'],
+            'month' => (int) $input['boy_month'],
+            'year' => (int) $input['boy_year'],
+            'hour' => (int) $input['boy_hour'],
+            'min' => (int) $input['boy_minute'],
+            'sec' => (int) $input['boy_second'],
+            'gender' => $input['boy_gender'],
+            'place' => $input['boy_birthPlace'],
+            'lat' => $input['boy_lat'], // optional: replace using geolocation
+            'lon' => $input['boy_lon'],
+            'tzone' => 5.5,
+            'lan' => $input['lan'],
+            
+        ];
+        // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
+
+        $url = 'https://astroapi-3.divineapi.com/indian-api/v2/shadbala';
+
+
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $access_token,
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            echo json_encode(['success' => false, 'message' => $error]);
+        } else {
+            $result = json_decode($response, true);
+            echo json_encode(['success' => true, 'data' => $result]);
+        }
+
+
+
+    }
+
+      public function yogini_dasha(){
+
+        
+          $input = json_decode(file_get_contents("php://input"), true);
+
+        $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+        $api_key = "b49e81e874acc04f1141569767b24b79";
+
+        $data = [
+            'api_key' => $api_key,
+            'full_name' => $input['boy_name'],
+            'day' => (int) $input['boy_day'],
+            'month' => (int) $input['boy_month'],
+            'year' => (int) $input['boy_year'],
+            'hour' => (int) $input['boy_hour'],
+            'min' => (int) $input['boy_minute'],
+            'sec' => (int) $input['boy_second'],
+            'gender' => $input['boy_gender'],
+            'place' => $input['boy_birthPlace'],
+            'lat' => $input['boy_lat'], // optional: replace using geolocation
+            'lon' => $input['boy_lon'],
+            'tzone' => 5.5,
+            'lan' => $input['lan'],
+            
+        ];
+        // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
+
+        $url = 'https://astroapi-3.divineapi.com/indian-api/v2/yogini-dasha';
+
+
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $access_token,
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            echo json_encode(['success' => false, 'message' => $error]);
+        } else {
+            $result = json_decode($response, true);
+            echo json_encode(['success' => true, 'data' => $result]);
+        }
+
+
+
+    }
+
+
+
+    public function bhava_kundli(){
+
+        
+          $input = json_decode(file_get_contents("php://input"), true);
+
+        $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+        $api_key = "b49e81e874acc04f1141569767b24b79";
+
+        $data = [
+            'api_key' => $api_key,
+            'full_name' => $input['boy_name'],
+            'day' => (int) $input['boy_day'],
+            'month' => (int) $input['boy_month'],
+            'year' => (int) $input['boy_year'],
+            'hour' => (int) $input['boy_hour'],
+            'min' => (int) $input['boy_minute'],
+            'sec' => (int) $input['boy_second'],
+            'gender' => $input['boy_gender'],
+            'place' => $input['boy_birthPlace'],
+            'lat' => $input['boy_lat'], // optional: replace using geolocation
+            'lon' => $input['boy_lon'],
+            'tzone' => 5.5,
+            'lan' => $input['lan'],
+            
+        ];
+        // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
+
+        $url = 'https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1';
+
+
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $access_token,
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            echo json_encode(['success' => false, 'message' => $error]);
+        } else {
+            $result = json_decode($response, true);
+            echo json_encode(['success' => true, 'data' => $result]);
+        }
+
+
+
+    }
+   
+
+    
+  
+   
+
+
 
     public function getKaalSarpaDosha()
     {
@@ -3336,7 +3839,7 @@ class User_Api_Controller extends CI_Controller
             'lat' => $input['boy_lat'], // optional: replace using geolocation
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
-            'lan' => 'en'
+            'lan' => $input['lan']
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3441,7 +3944,7 @@ class User_Api_Controller extends CI_Controller
             'lat' => $input['boy_lat'], // optional: replace using geolocation
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
-            'lan' => ($input['lan'] === 'mr') ? 'en' : $input['lan'],
+            'lan' => $input['lan'],
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -4147,6 +4650,59 @@ class User_Api_Controller extends CI_Controller
 
         $this->output->set_content_type("application/json");
         $this->output->set_output(json_encode($response));
+
+    }
+
+
+    public function show_pooja_info(){
+
+          if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return $this->output
+                ->set_status_header(405)
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    "status" => "error",
+                    "message" => "Invalid request method"
+                ]));
+        }
+        else{
+
+        
+       
+                $puja_id = $this->input->post("puja_id");
+
+            if (!$puja_id) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "blog id not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            }
+
+             $query = $this->User_Api_Model->show_pooja_info_model($puja_id);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data"=>$query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no new notification"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+        }
 
     }
 

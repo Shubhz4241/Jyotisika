@@ -138,11 +138,20 @@
 
                                 </div>
                                 <div class="service-card-body">
-                                    <h5 class="fw-bold text-dark"><?php echo $service['name']; ?></h5>
-                                    <?php if (!empty($service['description'])): ?>
-                                        <small class="text-muted"><?php echo $service['description']; ?></small>
-                                    <?php endif; ?>
-                                </div>
+    <h5 class="fw-bold text-dark"><?php echo $service['name']; ?></h5>
+    <?php if (!empty($service['description'])): ?>
+        <?php
+            // Limit description to 100 words
+            $words = explode(' ', strip_tags($service['description']));
+            $short_description = implode(' ', array_slice($words, 0,10));
+            if (count($words) > 100) {
+                $short_description .= '...';
+            }
+        ?>
+        <small class="text-muted"><?php echo $short_description; ?></small>
+    <?php endif; ?>
+</div>
+
                             </div>
                         </a>
                     </div>

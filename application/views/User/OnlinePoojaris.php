@@ -67,6 +67,43 @@
                 </div>
             </div>
 
+            <?php if (!empty($showpuja_info_response)) : ?>
+    <?php foreach ($showpuja_info_response as $service) : ?>
+        <div class="card mb-4 shadow-sm border-0">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-3 text-center">
+                    <img src="<?php echo base_url('uploads/services/' . $service['image']); ?>"
+                         alt="<?php echo $service['name']; ?>"
+                         class="img-fluid rounded-circle m-3"
+                         style="width: 100px; height: 100px; object-fit: cover;"
+                         onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="fw-bold"><?php echo $service['name']; ?></h5>
+                        <p class="text-muted">
+                            <?php
+                              
+                                echo $service['description'];
+                            ?>
+                        </p>
+                        <p class="fw-semibold text-success">₹ <?php echo number_format($service['price'], 2); ?></p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a href="<?php echo base_url('bookpooja'); ?>"
+                       class="btn btn-outline-primary rounded-pill px-4">
+                        View More
+                    </a>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p class="text-muted">No services found.</p>
+<?php endif; ?>
+
+
             <!-- cards -->
             <div class="row my-4 cardContainer">
 

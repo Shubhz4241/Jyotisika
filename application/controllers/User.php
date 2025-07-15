@@ -610,6 +610,11 @@ class User extends CI_Controller
 		}
 
 
+		// print_r($data["product_data"]);
+
+
+
+
 
 
 
@@ -1639,6 +1644,10 @@ class User extends CI_Controller
 		$language = $this->session->userdata('site_language') ?? 'english';
 		$this->lang->load('message', $language);
 
+		//Pooja data
+
+
+
 		$api_url = base_url("User_Api_Controller/get_pujari_of_puja");
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $api_url);
@@ -1668,6 +1677,41 @@ class User extends CI_Controller
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
 
+
+		
+		$api_url_pooja_info = base_url("User_Api_Controller/show_pooja_info");
+		$ch_pooja = curl_init();
+		curl_setopt($ch_pooja, CURLOPT_URL, $api_url_pooja_info);
+		curl_setopt($ch_pooja, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_pooja, CURLOPT_POST, 1);
+		curl_setopt($ch_pooja, CURLOPT_POSTFIELDS, http_build_query(["puja_id" => $puja_id]));
+		curl_setopt($ch_pooja, CURLOPT_TIMEOUT, 10);
+		$curl_error_pooja = curl_error($ch_pooja);
+		$showpuja_info = curl_exec($ch_pooja);
+
+		curl_close($ch_pooja);
+
+
+		if ($showpuja_info === false) {
+			show_error("cURL Error: " . $curl_error_pooja, 500);
+			return;
+		}
+
+
+
+		$showpuja_info_response = json_decode($showpuja_info, associative: true);
+
+
+		$data["showpuja_info_response"] = "";
+
+		if ($showpuja_info_response["status"] == "success") {
+			$data["showpuja_info_response"] = $showpuja_info_response["data"];
+		}
+
+		// print_r($data["showpuja_info_response"]);
+
+
+		
 		
 
 
