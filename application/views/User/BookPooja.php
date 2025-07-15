@@ -105,7 +105,7 @@
                                     <!-- <a href="<?php echo base_url('OfflinePoojaris') ?>" class="btn btn-dark text-dark flex-grow-1" style="background-color:var(--yellow)">
                                     Offline
                                 </a> -->
-                                    <a href="<?php echo base_url('OnlinePoojaris/' . $card['id'])?>"
+                                    <a href="<?php echo base_url('OnlinePoojaris/' . $card['id']) ?>"
                                         class="btn btn-outline-dark btnHover flex-grow-1">
                                         Online
                                     </a>
