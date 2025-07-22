@@ -73,7 +73,7 @@ $lang['bookpuja'] = "Bookpooja";
 
 $lang['freekundali'] = "Free Kundli";
 
-$lang['kundlimatching'] = "Kundli Matching";
+$lang['kundlimatching'] = "Kundali Milan";
 $lang['jyotisikamall'] = "Jyotisika Mall";
 $lang['panchang'] = "Panchang";
 $lang['kp'] = "KP";
@@ -495,3 +495,21 @@ $lang['Selected_Amount']        = "Selected Amount";
 $lang['GST_Amount']             = "GST (18%)";
 $lang['Total_Amount']           = "Total Amount";
 $lang['Proceed_to_Pay']         = "Proceed to Pay";
+
+
+
+//Category filter
+
+
+$lang['energy_stones']   = "Energy Stones - Pyrite, Citrine, Tiger Eye & More";
+
+$lang['semi'] = "Semi-precious authentic healing and energy stones in modern wearable designs by Jyotisika";
+
+
+//Jyotisika mall
+$lang['shop_our_collections'] = "Shop Our Collections";
+
+$lang['best_sellers']        = "Best Sellers";
+$lang['energy_stones']       = "Energy Stones";
+$lang['gallery']             = "Gallery";
+$lang['customer_reviews']    = "Customer Reviews";

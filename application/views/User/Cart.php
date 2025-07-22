@@ -106,9 +106,7 @@
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
 
-     <!-- <img src="<?php echo base_url($product_data[0]["product_image"]); ?>" class="img-fluid product-image"
-                    style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';"> -->
-
+     
   
     <?php if (!empty($productdata)): ?>
         <div class="container my-5">
@@ -147,7 +145,7 @@
                                     <!-- <p><?php echo $productinfo["product_description"]; ?></p> -->
 
                                     <p><strong><?php echo $this->lang->line('Unit_Price'); ?>:</strong> ₹<span
-                                            class="productunitprice"><?php echo $productinfo["product_price"]; ?> </span></p>
+                                            class="productunitprice"><?php echo $productinfo["discount_price"]; ?> </span></p>
 
                                     <!-- Quantity Controls -->
                                     <div class="d-flex align-items-center mb-2">
@@ -157,14 +155,14 @@
                                             <i class="bi bi-dash" style="color: black;"></i>
                                         </button>
                                         <span class="px-2 quantity-value"
-                                            data-price="<?php echo $productinfo['product_price']; ?>"><?php echo $productinfo['product_quantity']; ?></span>
+                                            data-price="<?php echo $productinfo['discount_price']; ?>"><?php echo $productinfo['product_quantity']; ?></span>
                                         <button class="btn btn-outline-dark btn-sm ms-2 quantity-increase"
                                             style="background-color: var(--yellow);">
                                             <i class="bi bi-plus" style="color: black;"></i>
                                         </button>
                                     </div>
                                     <p><strong><?php echo $this->lang->line('Subtotal'); ?>:</strong> ₹<span
-                                            class="subtotal"><?php echo $productinfo['product_price'] * $productinfo['product_quantity']; ?></span>
+                                            class="subtotal"><?php echo $productinfo['discount_price'] * $productinfo['product_quantity']; ?></span>
                                     </p>
                                 </div>
                             </div>

@@ -177,6 +177,7 @@
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
 
+     
 
     <div class="container my-5">
         <div class="row product-container">
@@ -207,10 +208,10 @@
                 <!-- Price Section -->
                 <div>
                     <span class="text-muted text-decoration-line-through me-2 fs-5">₹
-                        <?php echo $product_data[0]["product_price"] + 300; ?>
+                        <?php echo $product_data[0]["product_price"] ; ?>
                     </span>
                     <span class="text-warning fw-bold fs-5">₹
-                        <?php echo $product_data[0]["product_price"] ?>
+                        <?php echo $product_data[0]["discount_price"] ?>
                     </span>
                 </div>
 
@@ -340,7 +341,7 @@
 
             let product_id = <?php echo $product_data[0]["product_id"] ?>;
             let user_id = <?php echo $this->session->userdata("user_id") ?? 'null' ?>;
-            let product_price = <?php echo $product_data[0]["product_price"] ?>;
+            let product_price = <?php echo $product_data[0]["discount_price"] ?>;
             let cartButton = document.getElementById("cartbutton"); // Get button element
 
             if (!product_id || !user_id) {

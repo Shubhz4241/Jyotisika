@@ -100,7 +100,7 @@
                                     <!-- Profile Section -->
                                     <div class="d-flex align-items-center mb-2">
                                        
-                                            <img src="<?php echo  !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
+                                            <img src="<?php echo  !empty($astrologer['profile_image']) ? base_url($astrologer['profile_image']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
                                                 class="rounded-circle"
                                                 style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
 

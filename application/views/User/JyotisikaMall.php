@@ -242,10 +242,12 @@
         <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" class="d-block w-100" alt="Banner 1">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" class="d-block w-100"
+                        alt="Banner 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="<?php echo base_url('assets/images/JyotisikaMall/productbanner1.JPG'); ?>" class="d-block w-100" alt="Banner 2">
+                    <img src="<?php echo base_url('assets/images/JyotisikaMall/productbanner1.jpg'); ?>"
+                        class="d-block w-100" alt="Banner 2">
                 </div>
 
             </div>
@@ -258,44 +260,59 @@
                     <span class="visually-hidden">Next</span>
                 </button> -->
         </div>
+
+        <?php print_r($getcategory_data)?>
         <div class="container">
 
             <!-- Collections Section -->
-            <section class="py-5 text-center mt-2">
-                <div class="container">
-                    <h2 class="mb-4">Shop Our Collections</h2>
-                    <div class="owl-carousel collection-carousel owl-theme">
-                        <?php
-                        // Array of collection items with title, image path, and link
-                        $collections = [
-                            ['title' => 'Rudraksh', 'image' => 'productbanner1.JPG', 'link' => 'products/rudraksh'],
-                            ['title' => 'Yantra', 'image' => 'productbanner1.JPG', 'link' => 'products/yantra'],
-                            ['title' => 'Gemstones', 'image' => 'productbanner1.JPG', 'link' => 'products/gemstones'],
-                            ['title' => 'Pooja Items', 'image' => 'productbanner1.JPG', 'link' => 'products/pooja-items'],
-                            ['title' => 'Spiritual Books', 'image' => 'productbanner1.JPG', 'link' => 'products/spiritual-books'],
-                        ];
+            <?php if (empty(!$getcategory_data)): ?>
+                <section class="py-5 text-center mt-2">
+                    <div class="container">
+                        <h2 class="mb-4"><?php echo $this->lang->line('shop_our_collections'); ?></h2>
+                        <div class="owl-carousel collection-carousel owl-theme">
+                            <?php
+                            // Array of collection items with title, image path, and link
+                            $collections = [
+                                ['title' => 'Rudraksh', 'image' => 'productbanner1.JPG', 'link' => 'products/rudraksh'],
+                                ['title' => 'Yantra', 'image' => 'productbanner1.JPG', 'link' => 'products/yantra'],
+                                ['title' => 'Gemstones', 'image' => 'productbanner1.JPG', 'link' => 'products/gemstones'],
+                                ['title' => 'Pooja Items', 'image' => 'productbanner1.JPG', 'link' => 'products/pooja-items'],
+                                ['title' => 'Spiritual Books', 'image' => 'productbanner1.JPG', 'link' => 'products/spiritual-books'],
+                            ]; ?>
 
-                        foreach ($collections as $item): ?>
-                            <div class="item">
-                                <a href="<?php echo base_url('cardcategoryfilter'); ?>" style="text-decoration: none; color: inherit;">
-                                    <img src="<?php echo base_url('assets/images/JyotisikaMall/' . $item['image']); ?>" class="img-fluid collection-circle" alt="<?php echo $item['title']; ?>">
-                                    <p class="mt-2"><?php echo $item['title']; ?></p>
-                                </a>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php if (empty(!$getcategory_data)): ?>
+                                <?php foreach ($getcategory_data as $item): ?>
+                                    <div class="item">
+                                        <a href="<?php echo base_url('cardcategoryfilter/' . $item['category']); ?>"
+                                            style="text-decoration: none; color: inherit;">
+                                            <img src="<?php echo base_url('uploads/products/' . $item["product_image"]); ?>"
+                                                class="img-fluid collection-circle">
+                                         <p class="mt-2"><strong><?php echo ucwords($item['category']); ?></strong></p>
+
+
+                                        </a>
+                                    </div>
+
+                                <?php endforeach; ?>
+                            <?php endif ?>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            <?php endif ?>
+
+
 
             <!-- Best Sellers Carousel -->
             <section class="">
                 <div class="container">
-                    <h2 class="text-center mb-4">Best Sellers</h2>
+                    <?php if ((empty(!$productdata))): ?>
+                        <h2 class="text-center mb-4"><?php echo $this->lang->line('best_sellers'); ?></h2>
+                    <?php endif ?>
                     <div class="owl-carousel owl-theme">
                         <?php
                         if (empty($bestSellers)) {
                             $bestSellers = [
-                                (object)[
+                                (object) [
                                     'discount' => 'Up to 40% off',
                                     'img' => base_url('assets/images/JyotisikaMall/product6.png'),
                                     'title' => 'Gold Plated Modern Rudraksha Bracelet',
@@ -305,7 +322,7 @@
                                     'original_price' => 999,
                                     'slug' => 'rudraksha-bracelet'
                                 ],
-                                (object)[
+                                (object) [
                                     'discount' => 'Up to 30% off',
                                     'img' => base_url('assets/images/JyotisikaMall/product7.png'),
                                     'title' => 'Spiritual Yantra Pendant',
@@ -315,7 +332,7 @@
                                     'original_price' => 999,
                                     'slug' => 'yantra-pendant'
                                 ],
-                                (object)[
+                                (object) [
                                     'discount' => 'Up to 25% off',
                                     'img' => base_url('assets/images/JyotisikaMall/product8.png'),
                                     'title' => 'Natural Gemstone Mala',
@@ -325,7 +342,7 @@
                                     'original_price' => 1199,
                                     'slug' => 'gemstone-mala'
                                 ],
-                                (object)[
+                                (object) [
                                     'discount' => 'Up to 35% off',
                                     'img' => base_url('assets/images/JyotisikaMall/product9.png'),
                                     'title' => 'Premium Pooja Thali Set',
@@ -335,7 +352,7 @@
                                     'original_price' => 1999,
                                     'slug' => 'pooja-thali'
                                 ],
-                                (object)[
+                                (object) [
                                     'discount' => 'Up to 20% off',
                                     'img' => base_url('assets/images/JyotisikaMall/product10.png'),
                                     'title' => 'Handcrafted Brass Diya',
@@ -348,25 +365,39 @@
                             ];
                         }
 
-                        if (!empty($bestSellers)) :
-                            foreach ($bestSellers as $product) :
-                                // Assuming you'll handle routes like site.com/product-details/<slug>
-                                $productUrl = base_url('product-details/' . $product->slug);
-                        ?>
+                        if (!empty($productdata)):
+                            foreach ($productdata as $product):
+                                ?>
                                 <div class="item">
-                                    <a href="<?php echo base_url('productdetails'); ?>" style="text-decoration: none; color: inherit;">
+                                    <a href="<?php echo base_url("ProductDetails/" . $product["product_id"]); ?>"
+                                        style="text-decoration: none; color: inherit;">
                                         <div class="best-seller-card h-100">
+                                            <?php
+
+                                            if ($product['product_price'] > 0) {
+                                                $discount = round((($product['product_price'] - $product['discount_price']) / $product['product_price']) * 100);
+                                            } else {
+                                                $discount = 0;
+                                            }
+                                            ?>
+
                                             <div class="discount-badge">
-                                                <i class="bi bi-heart-fill me-1"></i><?php echo $product->discount; ?>
+                                                <i class="bi bi-heart-fill me-1"></i><?php echo $discount . "% Off"; ?>
                                             </div>
-                                            <img src="<?php echo $product->img; ?>" class="best-seller-img" alt="Product">
+
+
+
+                                            <img src="<?php echo base_url('uploads/products/' . $product["product_image"]); ?>"
+                                                class="best-seller-img" alt="Product"
+                                                onerror="this.onerror=null;this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
                                             <div class="product-content">
-                                                <div class="product-title"><?php echo $product->title; ?></div>
+                                                <div class="product-title"><?php echo $product["product_name"]; ?></div>
                                                 <div class="product-rating">
                                                     <span>
                                                         <?php
-                                                        $fullStars = floor($product->rating);
-                                                        $halfStar = ($product->rating - $fullStars) >= 0.5 ? 1 : 0;
+                                                        $rating = isset($product["average_rating"]) && is_numeric($product["average_rating"]) ? floatval($product["average_rating"]) : 0;
+                                                        $fullStars = floor($rating);
+                                                        $halfStar = ($rating - $fullStars) >= 0.5 ? 1 : 0;
                                                         for ($i = 0; $i < $fullStars; $i++) {
                                                             echo '<i class="bi bi-star-fill"></i>';
                                                         }
@@ -378,17 +409,19 @@
                                                         }
                                                         ?>
                                                     </span>
-                                                    <span>(<?php echo $product->reviews; ?>)</span>
+                                                    <span>(<?php echo $product["total_reviews"]; ?>)</span>
                                                 </div>
                                                 <div class="product-price">
-                                                    <span class="current-price">₹ <?php echo $product->current_price; ?><sup>00</sup></span>
-                                                    <span class="original-price">₹ <?php echo $product->original_price; ?><sup>00</sup></span>
+                                                    <span class="current-price">₹
+                                                        <?php echo $product["discount_price"]; ?><sup>00</sup></span>
+                                                    <span class="original-price">₹
+                                                        <?php echo $product["product_price"]; ?><sup>00</sup></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-                        <?php
+                                <?php
                             endforeach;
                         endif;
                         ?>
@@ -397,181 +430,208 @@
             </section>
 
 
-            <!-- Energy Stones-->
-            <section class="py-3">
-                <div class="container">
-                    <h2 class="text-center mb-4">Energy Stones</h2>
-                    <div class="owl-carousel owl-theme">
-                        <?php
-                        $energyStones = [
-                            [
-                                'slug' => 'rudraksha-bracelet',
-                                'discount' => 'Up to 40% off',
-                                'img' => base_url('assets/images/JyotisikaMall/stone1.png'),
-                                'title' => 'Gold Plated Modern Rudraksha Bracelet',
-                                'rating' => 4.5,
-                                'reviews' => 2156,
-                                'current_price' => 599,
-                                'original_price' => 999
-                            ],
-                            [
-                                'slug' => 'yantra-pendant-1',
-                                'discount' => 'Up to 30% off',
-                                'img' => base_url('assets/images/JyotisikaMall/stone2.png'),
-                                'title' => 'Spiritual Yantra Pendant',
-                                'rating' => 4,
-                                'reviews' => 1520,
-                                'current_price' => 699,
-                                'original_price' => 999
-                            ],
-                            // ... Add more with different slugs
-                            [
-                                'slug' => 'stone-3',
-                                'discount' => 'Up to 30% off',
-                                'img' => base_url('assets/images/JyotisikaMall/stone3.png'),
-                                'title' => 'Spiritual Yantra Pendant',
-                                'rating' => 4,
-                                'reviews' => 1520,
-                                'current_price' => 699,
-                                'original_price' => 999
-                            ],
-                            [
-                                'slug' => 'stone-4',
-                                'discount' => 'Up to 30% off',
-                                'img' => base_url('assets/images/JyotisikaMall/stone4.png'),
-                                'title' => 'Spiritual Yantra Pendant',
-                                'rating' => 4,
-                                'reviews' => 1520,
-                                'current_price' => 699,
-                                'original_price' => 999
-                            ],
-                            // Repeat for rest with unique slugs
-                        ];
+            <!-- <?php print_r($energy_stone) ?> -->
 
-                        foreach ($energyStones as $stone):
-                            $link = base_url('product-details/' . $stone['slug']);
-                        ?>
-                            <div class="item">
-                                <a href="<?php echo base_url('productdetails'); ?>" style="text-decoration: none; color: inherit;">
-                                    <div class="best-seller-card">
-                                        <div class="discount-badge"><i class="bi bi-heart-fill me-1"></i><?php echo $stone['discount']; ?></div>
-                                        <img src="<?php echo $stone['img']; ?>" class="best-seller-img" alt="Product">
-                                        <div class="product-content">
-                                            <div class="product-title"><?php echo $stone['title']; ?></div>
-                                            <div class="product-rating">
-                                                <span>
+            <!-- Energy Stones-->
+
+
+
+
+            <?php if (empty(!$energy_stone)): ?>
+                <section class="py-3">
+                    <div class="container">
+                        <h2 class="text-center mb-4"><?php echo $this->lang->line('energy_stones'); ?></h2>
+                        <div class="owl-carousel owl-theme">
+                            <?php
+                            $energyStones = [
+                                [
+                                    'slug' => 'rudraksha-bracelet',
+                                    'discount' => 'Up to 40% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/stone1.png'),
+                                    'title' => 'Gold Plated Modern Rudraksha Bracelet',
+                                    'rating' => 4.5,
+                                    'reviews' => 2156,
+                                    'current_price' => 599,
+                                    'original_price' => 999
+                                ],
+                                [
+                                    'slug' => 'yantra-pendant-1',
+                                    'discount' => 'Up to 30% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/stone2.png'),
+                                    'title' => 'Spiritual Yantra Pendant',
+                                    'rating' => 4,
+                                    'reviews' => 1520,
+                                    'current_price' => 699,
+                                    'original_price' => 999
+                                ],
+                                // ... Add more with different slugs
+                                [
+                                    'slug' => 'stone-3',
+                                    'discount' => 'Up to 30% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/stone3.png'),
+                                    'title' => 'Spiritual Yantra Pendant',
+                                    'rating' => 4,
+                                    'reviews' => 1520,
+                                    'current_price' => 699,
+                                    'original_price' => 999
+                                ],
+                                [
+                                    'slug' => 'stone-4',
+                                    'discount' => 'Up to 30% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/stone4.png'),
+                                    'title' => 'Spiritual Yantra Pendant',
+                                    'rating' => 4,
+                                    'reviews' => 1520,
+                                    'current_price' => 699,
+                                    'original_price' => 999
+                                ],
+                                // Repeat for rest with unique slugs
+                            ]; ?>
+
+                            <!-- <?php print_r($energy_stone) ?> -->
+
+
+                            <?php if (empty(!$energy_stone)): ?>
+
+                                <?php foreach ($energy_stone as $stone): ?>
+                                    <div class="item">
+                                        <a href="<?php echo base_url('ProductDetails/' . $stone["product_id"]); ?>"
+                                            style="text-decoration: none; color: inherit;">
+                                            <div class="best-seller-card">
+                                                <div class="discount-badge">
+                                                    <i class="bi bi-heart-fill me-1"></i>
                                                     <?php
-                                                    $fullStars = floor($stone['rating']);
-                                                    $halfStar = ($stone['rating'] - $fullStars) >= 0.5 ? 1 : 0;
-                                                    for ($i = 0; $i < $fullStars; $i++) {
-                                                        echo '<i class="bi bi-star-fill"></i>';
-                                                    }
-                                                    if ($halfStar) {
-                                                        echo '<i class="bi bi-star-half"></i>';
-                                                    }
-                                                    for ($i = $fullStars + $halfStar; $i < 5; $i++) {
-                                                        echo '<i class="bi bi-star"></i>';
+                                                    $original = (float) $stone['product_price'];
+                                                    $discount = (float) $stone['discount_price'];
+                                                    if ($original > 0 && $discount < $original) {
+                                                        $percent = round((($original - $discount) / $original) * 100);
+                                                        echo $percent . "% off";
+                                                    } else {
+                                                        echo "No discount";
                                                     }
                                                     ?>
-                                                </span>
-                                                <span>(<?php echo $stone['reviews']; ?>)</span>
+                                                </div>
+
+
+
+                                                <img src="<?php echo base_url('uploads/products/' . $stone["product_image"]); ?>"
+                                                    class="best-seller-img" alt="Product"
+                                                    onerror="this.onerror=null;this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
+                                                <div class="product-content">
+                                                    <div class="product-title"><?php echo $stone['product_name']; ?></div>
+                                                    <div class="product-rating">
+                                                        <span>
+                                                            <?php
+                                                            $rating = isset($stone["average_rating"]) && is_numeric($stone["average_rating"]) ? floatval($stone["average_rating"]) : 0;
+                                                            $fullStars = floor($rating);
+                                                            $halfStar = ($rating - $fullStars) >= 0.5 ? 1 : 0;
+                                                            for ($i = 0; $i < $fullStars; $i++) {
+                                                                echo '<i class="bi bi-star-fill"></i>';
+                                                            }
+                                                            if ($halfStar) {
+                                                                echo '<i class="bi bi-star-half"></i>';
+                                                            }
+                                                            for ($i = $fullStars + $halfStar; $i < 5; $i++) {
+                                                                echo '<i class="bi bi-star"></i>';
+                                                            }
+                                                            ?>
+                                                        </span>
+                                                        <!-- <span>(<?php echo 2; ?>)</span> -->
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <span class="current-price">₹
+                                                            <?php echo $stone['discount_price']; ?><sup>00</sup></span>
+                                                        <span class="original-price">₹
+                                                            <?php echo $stone['product_price']; ?><sup>00</sup></span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="product-price">
-                                                <span class="current-price">₹ <?php echo $stone['current_price']; ?><sup>00</sup></span>
-                                                <span class="original-price">₹ <?php echo $stone['original_price']; ?><sup>00</sup></span>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
-                        <?php endforeach; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>There is no product with energy stones category</p>
+                            <?php endif ?>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            <?php endif ?>
+
+
 
 
             <!-- Gallery -->
             <div class="row">
-                <h2 class="text-center mb-4">Gallery</h2>
+                <h2 class="text-center mb-4"><?php echo $this->lang->line('gallery'); ?></h2>
                 <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                    <img
-                        src="<?php echo base_url('assets/images/JyotisikaMall/product9.png'); ?>"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Boat on Calm Water" />
+                    <img src="<?php echo base_url('assets/images/JyotisikaMall/product9.png'); ?>"
+                        class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
 
-                    <img
-                        src="<?php echo base_url('assets/images/JyotisikaMall/image2.png'); ?>"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Wintry Mountain Landscape" />
-                    <img
-                        src="<?php echo base_url('assets/images/JyotisikaMall/product9.png') ?>"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Yosemite National Park" />
+                    <img src="<?php echo base_url('assets/images/JyotisikaMall/image2.png'); ?>"
+                        class="w-100 shadow-1-strong rounded mb-4" alt="Wintry Mountain Landscape" />
+                    <img src="<?php echo base_url('assets/images/JyotisikaMall/product9.png') ?>"
+                        class="w-100 shadow-1-strong rounded mb-4" alt="Yosemite National Park" />
                 </div>
 
                 <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="<?php echo base_url('assets/images/JyotisikaMall/image1.png'); ?>"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Mountains in the Clouds" />
+                    <img src="<?php echo base_url('assets/images/JyotisikaMall/image1.png'); ?>"
+                        class="w-100 shadow-1-strong rounded mb-4" alt="Mountains in the Clouds" />
 
-                    <img
-                        src="<?php echo base_url('assets/images/JyotisikaMall/image3.png') ?>"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Boat on Calm Water" />
+                    <img src="<?php echo base_url('assets/images/JyotisikaMall/image3.png') ?>"
+                        class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
                 </div>
 
                 <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="<?php echo base_url('assets/images/JyotisikaMall/image4.png') ?>"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Waves at Sea" />
+                    <img src="<?php echo base_url('assets/images/JyotisikaMall/image4.png') ?>"
+                        class="w-100 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
 
-                    <img
-                        src="<?php echo base_url('assets/images/JyotisikaMall/product9.png') ?>"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Yosemite National Park" />
+                    <img src="<?php echo base_url('assets/images/JyotisikaMall/product9.png') ?>"
+                        class="w-100 shadow-1-strong rounded mb-4" alt="Yosemite National Park" />
                 </div>
             </div>
+
+
 
             <!-- Customer Reviews -->
             <section class="py-5">
                 <div class="container">
-                    <h2 class="text-center mb-4">Customer Reviews</h2>
+                    <?php if (empty(!$product_feedback)): ?>
+                        <h2 class="text-center mb-4"><?php echo $this->lang->line('customer_reviews'); ?></h2>
+                    <?php endif ?>
                     <div class="owl-carousel owl-theme">
                         <?php
                         // Demo data for $customerReviews if not set or empty
                         if (empty($customerReviews)) {
                             $customerReviews = [
-                                (object)[
+                                (object) [
                                     'image' => base_url('assets/images/JyotisikaMall/review.png'),
                                     'stars' => 5,
                                     'name' => 'Dvs Raju',
                                     'title' => 'Very Nice',
                                     'text' => 'Excellent Karungali mala and bracelet... I am happy. Good packing and fast delivery...'
                                 ],
-                                (object)[
+                                (object) [
                                     'image' => base_url('assets/images/JyotisikaMall/review2.png'),
                                     'stars' => 5,
                                     'name' => 'Meena S.',
                                     'title' => 'Powerful Rudraksh',
                                     'text' => 'Loved the Rudraksh. It gives positive energy. Also arrived well packed.'
                                 ],
-                                (object)[
+                                (object) [
                                     'image' => base_url('assets/images/JyotisikaMall/review2.png'),
                                     'stars' => 5,
                                     'name' => 'Meena S.',
                                     'title' => 'Powerful Rudraksh',
                                     'text' => 'Loved the Rudraksh. It gives positive energy. Also arrived well packed.'
                                 ],
-                                (object)[
+                                (object) [
                                     'image' => base_url('assets/images/JyotisikaMall/review2.png'),
                                     'stars' => 5,
                                     'name' => 'Meena S.',
                                     'title' => 'Powerful Rudraksh',
                                     'text' => 'Loved the Rudraksh. It gives positive energy. Also arrived well packed.'
                                 ],
-                                (object)[
+                                (object) [
                                     'image' => base_url('assets/images/JyotisikaMall/review3.png'),
                                     'stars' => 5,
                                     'name' => 'Ramesh K.',
@@ -579,29 +639,40 @@
                                     'text' => 'Beautiful idols and mala. Looks divine. Excellent delivery and service.'
                                 ]
                             ];
-                        }
-                        foreach ($customerReviews as $review): ?>
-                            <div class="item">
-                                <div class="review-card">
-                                    <img src="<?php echo $review->image; ?>" class="review-image" alt="Customer <?php echo htmlspecialchars($review->name); ?>">
-                                    <div class="review-stars">
-                                        <?php
-                                        for ($i = 0; $i < $review->stars; $i++) {
-                                            echo '★';
-                                        }
-                                        for ($i = $review->stars; $i < 5; $i++) {
-                                            echo '☆';
-                                        }
-                                        ?>
-                                    </div>
-                                    <div class="review-name"><?php echo htmlspecialchars($review->name); ?></div>
-                                    <div class="review-title"><?php echo htmlspecialchars($review->title); ?></div>
-                                    <div class="review-text">
-                                        <?php echo htmlspecialchars($review->text); ?>
+                        } ?>
+
+                        <?php if (empty(!$product_feedback)): ?>
+                            <?php foreach ($product_feedback as $review): ?>
+                                <div class="item">
+                                    <div class="review-card">
+
+
+
+                                        <img src="<?php echo base_url($review["product_feedback_image"]) ?>"
+                                            class="review-image"
+                                            alt="Customer <?php echo htmlspecialchars($review["message"]); ?>">
+                                        <div class="review-stars">
+                                            <?php
+                                            for ($i = 0; $i < $review["productrating"]; $i++) {
+                                                echo '★';
+                                            }
+                                            for ($i = $review["productrating"]; $i < 5; $i++) {
+                                                echo '☆';
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="review-name"><?php echo htmlspecialchars($review["user_name"]); ?></div>
+                                        <div class="review-title"><?php echo htmlspecialchars($review["product_name"]); ?></div>
+                                        <div class="review-text">
+                                            <?php echo htmlspecialchars($review["message"]); ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+
+                        <?php else: ?>
+
+                        <?php endif ?>
                     </div>
                 </div>
             </section>
@@ -614,7 +685,7 @@
     </footer>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
 
             // For collection section only
@@ -640,7 +711,7 @@
             });
         });
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.owl-carousel').owlCarousel({
                 loop: true,
                 margin: 10,
@@ -714,12 +785,12 @@
             positionNavButtons();
 
             // Reposition on window resize
-            $(window).resize(function() {
+            $(window).resize(function () {
                 positionNavButtons();
             });
 
             // Prevent hover color change
-            $('.owl-nav button').hover(function() {
+            $('.owl-nav button').hover(function () {
                 $(this).css('background', 'transparent');
             });
 

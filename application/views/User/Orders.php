@@ -287,7 +287,7 @@
 
 
 
-                                                    <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                    <img src="<?php echo !empty($astrologer['profile_image']) ? base_url($astrologer['profile_image']) : base_url('assets/images/astrologerimg.png') ?>"
                                                         alt="image" class="rounded-circle"
                                                         style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
 
@@ -295,9 +295,9 @@
                                                     <div class="ms-2">
                                                         <!-- <a href="<?php echo base_url('ViewAstrologer'); ?>"
                                                             class="text-decoration-none"> -->
-                                                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
-                                                                <?php echo $astrologer['name']; ?>
-                                                            </h6>
+                                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                            <?php echo $astrologer['name']; ?>
+                                                        </h6>
                                                         <!-- </a> -->
 
                                                         <!-- <div class="d-flex align-items-center gap-1">
@@ -441,7 +441,7 @@
                             <div class="tab-pane fade show active" id="orders" role="tabpanel">
 
                                 <div class="row">
-                                  
+
 
                                     <?php
                                     $poojas = [
@@ -478,9 +478,9 @@
                                                     style="border: 1px solid var(--red);">
                                                     <div class="row g-0">
                                                         <div class="col-4">
-                                                            <img src="<?php echo base_url("uploads/services/".$pooja["puja_image"]) ?>"
-                                                                class="img-fluid rounded-start h-100"
-                                                                style="object-fit: cover;"  onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';">
+                                                            <img src="<?php echo base_url("uploads/services/" . $pooja["puja_image"]) ?>"
+                                                                class="img-fluid rounded-start h-100" style="object-fit: cover;"
+                                                                onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';">
                                                         </div>
                                                         <div class="col-8">
                                                             <div class="card-body p-3">
@@ -769,9 +769,10 @@
                                                     style="border: 1px solid var(--red);">
                                                     <div class="row g-0 h-100">
                                                         <div class="col-4">
-                                                            <img src="<?php echo base_url("uploads/services/".$pooja["puja_image"]) ?>"
+                                                            <img src="<?php echo base_url("uploads/services/" . $pooja["puja_image"]) ?>"
                                                                 class="img-fluid rounded-start h-100 w-100"
-                                                                style="object-fit: cover;"  onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';">
+                                                                style="object-fit: cover;"
+                                                                onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';">
                                                         </div>
                                                         <div class="col-8">
                                                             <div class="card-body p-3 d-flex flex-column h-100">
@@ -1137,6 +1138,13 @@
                                                                     <textarea class="form-control shadow-none" name="message"
                                                                         rows="3" required></textarea>
                                                                 </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Upload Product Image </label>
+                                                                    <input type="file" required class="form-control shadow-none"
+                                                                        name="product_image" accept="image/*">
+                                                                </div>
+
                                                                 <button type="submit" class="btn w-100"
                                                                     style="background-color: var(--yellow);">Submit
                                                                     Feedback</button>

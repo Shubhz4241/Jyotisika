@@ -99,7 +99,7 @@ class User extends CI_Controller
 	//------------------------------------------- USER  SELF PAGES---------------------------------------------------------------------
 
 
-		function Get_top_products()
+	function Get_top_products()
 	{
 
 		// $api_urlsBLOG = "http://localhost/Astrology/User_Api_Controller/Get_top_products";
@@ -228,7 +228,7 @@ class User extends CI_Controller
 
 
 
-         //Blogs section 
+		//Blogs section 
 
 		$ch_url_blogs = base_url("User_Api_Controller/show_blogs");
 
@@ -253,9 +253,9 @@ class User extends CI_Controller
 		}
 
 
-	
 
-		  //product section 
+
+		//product section 
 
 		$ch_url_product = base_url("User_Api_Controller/Get_top_products");
 
@@ -270,8 +270,8 @@ class User extends CI_Controller
 			show_error("cURL Error: " . $ch_data_product_error, 500);
 			return;
 		}
-		
-			
+
+
 
 		$product_data = json_decode($ch_data_product_response, associative: true);
 
@@ -285,9 +285,9 @@ class User extends CI_Controller
 		// print_r($data["productdata"]);
 
 
-		
 
-		
+
+
 
 
 
@@ -587,33 +587,115 @@ class User extends CI_Controller
 		$this->lang->load('message', $language);
 
 
-		$api_url = base_url("User_Api_Controller/getproduct");
+		$api_url = base_url("User_Api_Controller/show_category");
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $api_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$getproduct = curl_exec($ch);
+		$getcategory = curl_exec($ch);
 		$curl_error_ch = curl_error($ch);
 		curl_close($ch);
 
-		if ($getproduct === false) {
+		if ($getcategory === false) {
 			show_error("cURL Error: " . $curl_error_ch, 500);
 			return;
 		}
 
-		$getproduct_data = json_decode($getproduct, associative: true);
+		$getcategory_data = json_decode($getcategory, associative: true);
 
 
 
-		$data["product_data"] = "";
-		if ($getproduct_data["status"] == "success") {
-			$data["product_data"] = $getproduct_data["data"];
+		$data["getcategory_data"] = "";
+		if ($getcategory_data["status"] == "success") {
+			$data["getcategory_data"] = $getcategory_data["data"];
 		}
 
 
-		// print_r($data["product_data"]);
+		// print_r($data["getcategory_data"]);
 
 
 
+		$api_url_energy_stone = base_url("User_Api_Controller/show_energy_stones");
+		$ch_energy_stone = curl_init();
+		curl_setopt($ch_energy_stone, CURLOPT_URL, $api_url_energy_stone);
+		curl_setopt($ch_energy_stone, CURLOPT_RETURNTRANSFER, true);
+		$energy_stone_data = curl_exec($ch_energy_stone);
+		$curl_error_energy_stone = curl_error($ch_energy_stone);
+		curl_close($ch_energy_stone);
+
+		if ($energy_stone_data === false) {
+			show_error("cURL Error: " . $curl_error_energy_stone, 500);
+			return;
+		}
+
+		$energy_stone_product_data = json_decode($energy_stone_data, associative: true);
+
+
+
+		$data["energy_stone"] = "";
+		if ($energy_stone_product_data["status"] == "success") {
+			$data["energy_stone"] = $energy_stone_product_data["data"];
+		}
+
+
+		$ch_url_feedback = base_url("User_Api_Controller/show_product_feedback_data");
+
+		$ch_feedback = curl_init();
+		curl_setopt($ch_feedback, CURLOPT_URL, $ch_url_feedback);
+		curl_setopt($ch_feedback, CURLOPT_RETURNTRANSFER, true);
+		$feedback_response = curl_exec($ch_feedback);
+		$feedback_error = curl_error($ch_feedback);
+		curl_close($ch_feedback);
+
+		if ($feedback_response === false) {
+			show_error("cURL Error: " . $feedback_error, 500);
+			return;
+		}
+
+		$feedback_data = json_decode($feedback_response, associative: true);
+
+
+		$data["product_feedback"] = "";
+		if ($feedback_data["status"] == "success") {
+			$data["product_feedback"] = $feedback_data["data"];
+		}
+
+		// print_r($data["product_feedback"]);
+
+
+
+
+		// print_r($data["energy_stone"]);
+
+
+		$ch_url_product = base_url("User_Api_Controller/Get_top_products");
+
+		$ch_data_product = curl_init();
+		curl_setopt($ch_data_product, CURLOPT_URL, $ch_url_product);
+		curl_setopt($ch_data_product, CURLOPT_RETURNTRANSFER, true);
+		$ch_data_product_response = curl_exec($ch_data_product);
+		$ch_data_product_error = curl_error($ch_data_product);
+		curl_close($ch_data_product);
+
+		if ($ch_data_product_response === false) {
+			show_error("cURL Error: " . $ch_data_product_error, 500);
+			return;
+		}
+
+
+
+		$product_data = json_decode($ch_data_product_response, associative: true);
+
+
+
+		$data["productdata"] = "";
+		if ($product_data["status"] == "success") {
+			$data["productdata"] = $product_data["data"];
+			if ($data["productdata"][0]["product_id"] == "") {
+				$data["productdata"] = "";
+			}
+		}
+
+		// print_r($data["productdata"]);
 
 
 
@@ -959,6 +1041,7 @@ class User extends CI_Controller
 
 
 
+
 		$this->load->view('User/TodayHoroscope');
 	}
 
@@ -1066,7 +1149,42 @@ class User extends CI_Controller
 	//     $this->load->view('User/HoroscopeReadmore', $data);
 	// }
 
-	public function HoroscopeReadmore($sign) // Default to Taurus if no sign is provided
+	// Default to Taurus if no sign is provided
+	// public function HoroscopeReadmore($sign)
+	// {
+
+	// 	$language = $this->session->userdata('site_language') ?? 'english';
+
+
+	// 	$this->lang->load('message', $language);
+
+	// 	$api_url = "https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=$sign&day=TODAY";
+
+
+	// 	$ch = curl_init();
+
+
+	// 	curl_setopt($ch, CURLOPT_URL, $api_url);
+	// 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+
+	// 	$response = curl_exec($ch);
+
+	// 	curl_close($ch);
+
+
+	// 	$decoded_response = json_decode($response, true);
+
+
+	// 	$data['horoscope'] = json_decode($response, true);
+
+	// 	$data["sign"] = $sign;
+
+	// 	$this->load->view('User/HoroscopeReadmore', $data);
+	// }
+
+
+	public function HoroscopeReadmore($sign)
 	{
 
 		$language = $this->session->userdata('site_language') ?? 'english';
@@ -1074,7 +1192,7 @@ class User extends CI_Controller
 
 		$this->lang->load('message', $language);
 
-		$api_url = "https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=$sign&day=TODAY";
+		$api_url = base_url("User_Api_Controller/horoscopereadmoredata");
 
 
 		$ch = curl_init();
@@ -1092,12 +1210,15 @@ class User extends CI_Controller
 		$decoded_response = json_decode($response, true);
 
 
-		$data['horoscope'] = json_decode($response, true);
+		// $data['horoscope'] = json_decode($response, true);
 
 		$data["sign"] = $sign;
 
 		$this->load->view('User/HoroscopeReadmore', $data);
 	}
+
+
+
 
 	public function HoroscopeReadmores($sign = "Taurus")
 	{
@@ -1216,6 +1337,8 @@ class User extends CI_Controller
 		}
 
 
+
+
 		$data["followstatus"] = "unfollowed";
 		if ($this->session->userdata("user_id")) {
 
@@ -1317,6 +1440,12 @@ class User extends CI_Controller
 			$data["astrologerdata"] = "";
 		}
 
+		// print_r($data["astrologerdata"]);
+
+		if ($data["astrologerdata"][0]['id'] == '') {
+			redirect('home');
+		}
+
 
 		$user_id = $this->session->userdata('user_id');
 		if ($user_id) {
@@ -1377,6 +1506,13 @@ class User extends CI_Controller
 
 	public function Following()
 	{
+
+		$user_id = $this->session->userdata('user_id');
+
+		if ($user_id == '') {
+			redirect('home');
+		}
+
 
 		$api_url = base_url("User_Api_Controller/getfollowed_astrologer_by_user");
 		$ch = curl_init();
@@ -1479,6 +1615,11 @@ class User extends CI_Controller
 		}
 
 
+		if ($data["puja_data"] == "") {
+			redirect('home');
+		}
+
+
 
 		$this->load->view('User/PoojaInfo', $data);
 	}
@@ -1532,7 +1673,12 @@ class User extends CI_Controller
 			$data["showpujari"] = $showpujariresponse["data"];
 		}
 
-		
+
+
+		if ($data["showpujari"] == '') {
+			redirect('home');
+		}
+
 
 
 
@@ -1639,7 +1785,7 @@ class User extends CI_Controller
 	}
 
 
-	public function OnlinePoojaris($puja_id )
+	public function OnlinePoojaris($puja_id)
 	{
 		$language = $this->session->userdata('site_language') ?? 'english';
 		$this->lang->load('message', $language);
@@ -1678,7 +1824,7 @@ class User extends CI_Controller
 		}
 
 
-		
+
 		$api_url_pooja_info = base_url("User_Api_Controller/show_pooja_info");
 		$ch_pooja = curl_init();
 		curl_setopt($ch_pooja, CURLOPT_URL, $api_url_pooja_info);
@@ -1711,8 +1857,8 @@ class User extends CI_Controller
 		// print_r($data["showpuja_info_response"]);
 
 
-		
-		
+
+
 
 
 
@@ -1753,6 +1899,13 @@ class User extends CI_Controller
 
 	public function Orders()
 	{
+
+
+		$user_id = $this->session->userdata('user_id');
+
+		if ($user_id == '') {
+			redirect('home');
+		}
 
 
 		$api_url_ = base_url("User_Api_Controller/auto_cancel_puja");
@@ -1937,6 +2090,13 @@ class User extends CI_Controller
 	public function Notification()
 	{
 
+		$user_id = $this->session->userdata('user_id');
+
+		if ($user_id == '') {
+			redirect('home');
+		}
+
+
 
 
 		$show_notification = base_url("User_Api_Controller/show_notification");
@@ -1960,8 +2120,8 @@ class User extends CI_Controller
 
 
 
-		
-		$show_notification_data_response  = json_decode($show_notification_data , associative: true);
+
+		$show_notification_data_response = json_decode($show_notification_data, associative: true);
 
 
 		$data["show_notification_data_response"] = "";
@@ -2026,7 +2186,7 @@ class User extends CI_Controller
 			$data["showmobpuja"] = $show_mob_puja["data"];
 		}
 
-		
+
 
 		$this->load->view('User/MobPooja', $data);
 	}
@@ -2088,6 +2248,8 @@ class User extends CI_Controller
 		$curl_error = curl_error($ch);
 		$response = curl_exec($ch);
 
+
+
 		curl_close($ch);
 
 		if ($response === false) {
@@ -2103,6 +2265,12 @@ class User extends CI_Controller
 			$data["astrologerdata"] = $astrologer_data["data"];
 		} else {
 			$data["astrologerdata"] = "";
+		}
+
+		// print_r($data["astrologerdata"]);
+
+		if ($data["astrologerdata"][0]['id'] == '') {
+			redirect('home');
 		}
 
 
@@ -2122,6 +2290,7 @@ class User extends CI_Controller
 			}
 
 			$data["userinfo_data"] = $getdata["userinfo"];
+
 		}
 
 
@@ -2148,7 +2317,9 @@ class User extends CI_Controller
 		$this->load->view('User/Recharge');
 	}
 
-	public function getdata() {}
+	public function getdata()
+	{
+	}
 
 	public function Demo()
 	{
@@ -2499,8 +2670,147 @@ class User extends CI_Controller
 
 
 	// new controller by bhuvan
-	public function CardCategoryFilter()
+	public function CardCategoryFilter($category)
 	{
-		$this->load->view("User/CardCategoryFilter");
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+		$decoded_category = urldecode($category);
+
+		$api_url_product = base_url("User_Api_Controller/show_specific_category");
+		$ch_product = curl_init();
+		curl_setopt($ch_product, CURLOPT_URL, $api_url_product);
+		curl_setopt($ch_product, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_product, CURLOPT_POST, 1);
+		curl_setopt($ch_product, CURLOPT_POSTFIELDS, http_build_query(["category" => $decoded_category]));
+		curl_setopt($ch_product, CURLOPT_TIMEOUT, 10);
+		$curl_error_product = curl_error($ch_product);
+		$ch_product_data = curl_exec($ch_product);
+		curl_close($ch_product);
+
+		if ($ch_product_data === false) {
+			show_error("cURL Error: " . $curl_error_product, 500);
+			return;
+		}
+
+		$product_data = json_decode($ch_product_data, true);
+		$data["product_data"] = [];
+
+
+
+
+
+		// if ($product_data["status"] === "success") {
+		// 	foreach ($product_data["data"] as &$product) {
+
+
+
+		// 		if (isset($product['purpose']) && is_string($product['purpose'])) {
+
+		// 			$cleaned = str_replace(["[", "]", "'"], "", $product['purpose']);
+		// 			$product['purposes'] = array_map('trim', explode(",", $cleaned));
+		// 		} else {
+
+		// 			$product['purposes'] = [];
+		// 		}
+
+
+		// 		unset($product['purpose']);
+		// 	}
+		// 	$data["product_data"] = $product_data["data"];
+
+		// }
+
+		if ($product_data["status"] === "success") {
+			foreach ($product_data["data"] as &$product) {
+
+				if (isset($product['purpose']) && is_string($product['purpose'])) {
+					$cleaned = str_replace(["[", "]", "'"], "", $product['purpose']);
+					$product['purposes'] = array_map(function ($item) {
+						return strtolower(trim($item));
+					}, explode(",", $cleaned));
+				} else {
+					$product['purposes'] = [];
+				}
+
+				unset($product['purpose']);
+			}
+			$data["product_data"] = $product_data["data"];
+		}
+
+
+
+
+		$api_url_product_count = base_url("User_Api_Controller/get_total_product_in_category");
+		$ch_product_count = curl_init();
+		curl_setopt($ch_product_count, CURLOPT_URL, $api_url_product_count);
+		curl_setopt($ch_product_count, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_product_count, CURLOPT_POST, 1);
+		curl_setopt($ch_product_count, CURLOPT_POSTFIELDS, http_build_query(["category" => $decoded_category]));
+		curl_setopt($ch_product_count, CURLOPT_TIMEOUT, 10);
+		$curl_error_product_count = curl_error($ch_product_count);
+		$ch_product_data_count = curl_exec($ch_product_count);
+		curl_close($ch_product_count);
+
+		if ($ch_product_data_count === false) {
+			show_error("cURL Error: " . $curl_error_product_count, 500);
+			return;
+		}
+
+		$product_count_data = json_decode($ch_product_data_count, true);
+		$data["product__count_data"] = [];
+
+
+		if (isset($product_count_data["status"]) && $product_count_data["status"] == "success") {
+			$data["product__count_data"] = $product_count_data["data"];
+		} else {
+			$data["product__count_data"] = 0;
+		}
+
+
+
+
+
+		$api_url_show_purpose = base_url("User_Api_Controller/show_purpose");
+		$ch_product_purpose = curl_init();
+		curl_setopt($ch_product_purpose, CURLOPT_URL, $api_url_show_purpose);
+		curl_setopt($ch_product_purpose, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_product_purpose, CURLOPT_POST, 1);
+		curl_setopt($ch_product_purpose, CURLOPT_POSTFIELDS, http_build_query(["category" => $decoded_category]));
+		curl_setopt($ch_product_purpose, CURLOPT_TIMEOUT, 10);
+		$curl_error_product_purpose = curl_error($ch_product_purpose);
+		$ch_product_data_purpose = curl_exec($ch_product_purpose);
+		curl_close($ch_product_purpose);
+
+		if ($ch_product_data_purpose === false) {
+			show_error("cURL Error: " . $curl_error_product_purpose, 500);
+			return;
+		}
+
+		$product_purpose = json_decode($ch_product_data_purpose, true);
+		$data["product_purpose"] = [];
+
+
+		if (isset($product_purpose["status"]) && $product_purpose["status"] == "success") {
+			$data["product_purpose"] = $product_purpose["data"];
+		} else {
+			$data["product_purpose"] = "wealth";
+		}
+
+
+
+
+
+
+
+
+
+
+		// print_r($data["product__count_data"]);
+
+
+		$this->load->view("User/CardCategoryFilter", $data);
 	}
+
 }

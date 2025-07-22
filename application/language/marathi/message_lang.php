@@ -471,3 +471,23 @@ $lang['Proceed_to_Pay']         = "पेमेंट करा";
 
 
 $lang['our_services'] = "आमच्या सेवा";
+
+
+
+//Category filter
+
+
+$lang['energy_stones']   = "एनर्जी स्टोन्स - पाइराइट, साइट्रीन, टायगर आय आणि अधिक";
+
+$lang['semi'] = "ज्योतिसिका द्वारे आधुनिक परिधान डिझाईनमध्ये अर्ध-मूल्यवान, अस्सल उपचार आणि उर्जा दगड";
+
+
+//Jyotisika mall
+
+
+$lang['shop_our_collections'] = "आमच्या संग्रहातून खरेदी करा";
+
+$lang['best_sellers']        = "सर्वाधिक विक्री";
+$lang['energy_stones']       = "उर्जा दगड";
+$lang['gallery']             = "गॅलरी";
+$lang['customer_reviews']    = "ग्राहक पुनरावलोकने";

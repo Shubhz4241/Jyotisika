@@ -155,16 +155,11 @@
                                 <h5 class="card-title text-center fw-bold" style="color: var(--red)">
                                     <?php echo $horoscope['name']; ?> Horoscope Today
                                 </h5>
-                                <!-- <div class="card-text" style="height: 60px; overflow: hidden; position: relative;">
-                                    <p class="text-muted" style="text-align:justify;">Loading..</p>
-                                    <div class="fade-overlay"
-                                        style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(transparent, white);">
-                                    </div>
-                                </div> -->
-                                <!-- <p class="mt-3 mb-1"> <span class="fw-bold">Remedies:</span> <span class="text-muted">Lorem
-                                        Ipsum
-                                        Contrary to popular belief</span></p> -->
+
+                                <!-- Placeholder for dynamic horoscope text -->
+                                <div id="desc-<?php echo strtolower($horoscope['name']); ?>" class="card-text small"></div>
                             </div>
+
                             <div class="text-center mb-3">
 
                                 <a href="<?php echo base_url('horoscopereadmore/') . $horoscope['name']; ?>"
@@ -184,6 +179,58 @@
     </footer>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const signs = [
+                "aries", "taurus", "gemini", "cancer", "leo", "virgo",
+                "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"
+            ];
+
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+
+            signs.forEach(sign => {
+                const formData = new FormData();
+                formData.append("api_key", "b49e81e874acc04f1141569767b24b79");
+                formData.append("sign", sign);
+                formData.append("day", day);
+                formData.append("month", month);
+                formData.append("year", year);
+                formData.append("tzone", "5.5");
+                formData.append("lan", "en");
+
+                fetch("https://astroapi-5.divineapi.com/api/v2/daily-horoscope", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g"
+                    },
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        const container = document.getElementById(`desc-${sign}`);
+                        if (data?.success && data.data?.prediction?.personal) {
+                            const personal = data.data.prediction.personal;
+                            const shortText = personal.length > 120 ? personal.slice(0, 120) + "..." : personal;
+                            container.innerHTML = `<p class="text-muted" style="text-align:justify;">${shortText}</p>`;
+                        } else {
+                            container.innerHTML = `<p class="text-muted">No data available</p>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Error fetching ${sign} data:`, error);
+                        const container = document.getElementById(`desc-${sign}`);
+                        if (container) {
+                            container.innerHTML = `<p class="text-danger">Data not loading</p>`;
+                        }
+                    });
+            });
+        });
+    </script>
+
+
+    <!-- <script>
 
         document.addEventListener("DOMContentLoaded", function () {
             let url = "<?php echo base_url('User/getrashidata'); ?>";
@@ -256,7 +303,7 @@
     </div>
 </div>
 <div class="text-center mb-3">
-    <a href="<?php echo base_url('horoscopereadmore/'); ?>${signName.toLowerCase()}" 
+    <a href="<?php echo base_url('horoscopereadmore/'); ?>${signName}" 
         class="btn btn-hover btn-outline-dark rounded-pill px-4">Read More</a>
 </div>
 
@@ -268,7 +315,7 @@
             });
         }
 
-    </script>
+    </script> -->
 
 
 </body>

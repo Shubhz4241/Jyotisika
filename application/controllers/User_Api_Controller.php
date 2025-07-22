@@ -971,7 +971,7 @@ class User_Api_Controller extends CI_Controller
                         "message" => "astrologer unfollowed successfully"
                     ];
 
-                  
+
                 } else if ($query["status"] == "notfound") {
                     $response = [
                         "status" => "notfound",
@@ -2187,13 +2187,66 @@ class User_Api_Controller extends CI_Controller
     }
 
 
+    // public function productfeedback()
+    // {
+
+    //     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    //         $this->output->set_status_header(405);
+    //         $this->output->set_content_type('application/json');
+    //         $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+    //         return;
+    //     }
+
+    //     $session_id = $this->input->post("session_id");
+    //     $message = $this->input->post("message");
+    //     $product_id = $this->input->post("product_id");
+    //     $productrating = $this->input->post("productrating");
+
+
+    //     if (!$session_id || !$message || !$product_id || !$productrating) {
+
+    //         $this->output->set_status_header(400);
+    //         $this->output->set_content_type('application/json');
+    //         $this->output->set_output(json_encode(["status" => "error", "message" => "id not found"]));
+    //         return;
+    //     }
+
+    //     $formdata = [
+
+    //         "session_id" => $session_id,
+    //         "message" => $message,
+    //         "product_id" => $product_id,
+    //         "productrating" => $productrating,
+
+    //     ];
+
+    //     $query = $this->User_Api_Model->save_feedback($formdata);
+
+    //     if ($query) {
+
+    //         $response = [
+    //             "status" => "success",
+    //             "message" => "feedback saved successfully"
+    //         ];
+    //     } else {
+    //         $response = [
+    //             "status" => "error",
+    //             "message" => "feedback not saved successfully"
+    //         ];
+
+    //     }
+
+    //     echo json_encode($response);
+
+    // }
+
+
     public function productfeedback()
     {
-
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->output->set_status_header(405);
-            $this->output->set_content_type('application/json');
-            $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
+            $this->output->set_status_header(405)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
             return;
         }
 
@@ -2202,43 +2255,59 @@ class User_Api_Controller extends CI_Controller
         $product_id = $this->input->post("product_id");
         $productrating = $this->input->post("productrating");
 
-
         if (!$session_id || !$message || !$product_id || !$productrating) {
-
-            $this->output->set_status_header(400);
-            $this->output->set_content_type('application/json');
-            $this->output->set_output(json_encode(["status" => "error", "message" => "id not found"]));
+            $this->output->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(["status" => "error", "message" => "Missing required fields"]));
             return;
         }
 
-        $formdata = [
+        $product_image_name = null;
 
+
+        if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === 0) {
+            $upload_path = './uploads/product_feedback_image/';
+            if (!is_dir($upload_path)) {
+                mkdir($upload_path, 0755, true);
+            }
+
+            $extension = pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION);
+            $product_image_name = 'feedback_' . time() . '_' . rand(1000, 9999) . '.' . $extension;
+            $destination = $upload_path . $product_image_name;
+
+            if (!move_uploaded_file($_FILES['product_image']['tmp_name'], $destination)) {
+                $this->output->set_status_header(500)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(["status" => "error", "message" => "Failed to upload image"]));
+                return;
+            }
+        }
+
+        $formdata = [
             "session_id" => $session_id,
             "message" => $message,
             "product_id" => $product_id,
             "productrating" => $productrating,
-
+            "product_feedback_image" => "uploads/product_feedback_image/" . $product_image_name // this should be a column in your DB
         ];
 
         $query = $this->User_Api_Model->save_feedback($formdata);
 
         if ($query) {
-
             $response = [
                 "status" => "success",
-                "message" => "feedback saved successfully"
+                "message" => "Feedback saved successfully"
             ];
         } else {
             $response = [
                 "status" => "error",
-                "message" => "feedback not saved successfully"
+                "message" => "Feedback not saved"
             ];
-
         }
 
         echo json_encode($response);
-
     }
+
 
 
 
@@ -2551,7 +2620,7 @@ class User_Api_Controller extends CI_Controller
                 "request_created_at" => $timestamp,
                 "puja_urgency" => $puja_urgency,
                 "payment_status" => "Pending",
-                "puja_image"=> $puja_image ,
+                "puja_image" => $puja_image,
 
 
             ];
@@ -3261,9 +3330,10 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-    public function basicastrology(){
+    public function basicastrology()
+    {
 
-            $input = json_decode(file_get_contents("php://input"), true);
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3312,7 +3382,8 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-    public function planetary_positions(){
+    public function planetary_positions()
+    {
 
         $input = json_decode(file_get_contents("php://input"), true);
 
@@ -3365,9 +3436,10 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-    public function vimshottari_dasha(){
+    public function vimshottari_dasha()
+    {
 
-          $input = json_decode(file_get_contents("php://input"), true);
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3387,7 +3459,7 @@ class User_Api_Controller extends CI_Controller
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
             'lan' => $input['lan'],
-            'dasha_type'=>'maha-dasha'
+            'dasha_type' => 'maha-dasha'
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3420,10 +3492,11 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-    public function ascendant_report(){
+    public function ascendant_report()
+    {
 
-        
-          $input = json_decode(file_get_contents("php://input"), true);
+
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3476,10 +3549,11 @@ class User_Api_Controller extends CI_Controller
 
 
 
-     public function gemstone_suggestions(){
+    public function gemstone_suggestions()
+    {
 
-        
-          $input = json_decode(file_get_contents("php://input"), true);
+
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3499,7 +3573,7 @@ class User_Api_Controller extends CI_Controller
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
             'lan' => $input['lan'],
-            
+
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3533,10 +3607,11 @@ class User_Api_Controller extends CI_Controller
 
 
 
-      public function composite_friendship(){
+    public function composite_friendship()
+    {
 
-        
-          $input = json_decode(file_get_contents("php://input"), true);
+
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3556,7 +3631,7 @@ class User_Api_Controller extends CI_Controller
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
             'lan' => $input['lan'],
-            
+
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3591,10 +3666,11 @@ class User_Api_Controller extends CI_Controller
 
 
 
-     public function shadbala(){
+    public function shadbala()
+    {
 
-        
-          $input = json_decode(file_get_contents("php://input"), true);
+
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3614,7 +3690,7 @@ class User_Api_Controller extends CI_Controller
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
             'lan' => $input['lan'],
-            
+
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3646,10 +3722,11 @@ class User_Api_Controller extends CI_Controller
 
     }
 
-      public function yogini_dasha(){
+    public function yogini_dasha()
+    {
 
-        
-          $input = json_decode(file_get_contents("php://input"), true);
+
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3669,7 +3746,7 @@ class User_Api_Controller extends CI_Controller
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
             'lan' => $input['lan'],
-            
+
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3703,10 +3780,11 @@ class User_Api_Controller extends CI_Controller
 
 
 
-    public function bhava_kundli(){
+    public function bhava_kundli()
+    {
 
-        
-          $input = json_decode(file_get_contents("php://input"), true);
+
+        $input = json_decode(file_get_contents("php://input"), true);
 
         $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
         $api_key = "b49e81e874acc04f1141569767b24b79";
@@ -3726,7 +3804,7 @@ class User_Api_Controller extends CI_Controller
             'lon' => $input['boy_lon'],
             'tzone' => 5.5,
             'lan' => $input['lan'],
-            
+
         ];
         // https://astroapi-3.divineapi.com/indian-api/v1/bhava-kundli/1
 
@@ -3757,11 +3835,11 @@ class User_Api_Controller extends CI_Controller
 
 
     }
-   
 
-    
-  
-   
+
+
+
+
 
 
 
@@ -4425,17 +4503,16 @@ class User_Api_Controller extends CI_Controller
 
 
 
-      public function show_notification_number()
+    public function show_notification_number()
     {
 
-         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->output->set_status_header(405);
             $this->output->set_content_type('application/json');
             $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
             return;
-        }
-        else{
-              $user_id = $this->input->post("user_id");
+        } else {
+            $user_id = $this->input->post("user_id");
 
             if (!$user_id) {
 
@@ -4476,7 +4553,7 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-     public function mark_as_read_notification()
+    public function mark_as_read_notification()
     {
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -4526,22 +4603,23 @@ class User_Api_Controller extends CI_Controller
 
     }
 
-    public function show_blogs(){
+    public function show_blogs()
+    {
 
-         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             $this->output->set_status_header(405);
             $this->output->set_content_type('application/json');
             $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
             return;
-        } else{
+        } else {
 
-             $query = $this->User_Api_Model->show_blogs_model();
+            $query = $this->User_Api_Model->show_blogs_model();
 
             if ($query) {
                 $response = [
                     "status" => "success",
                     "message" => "data fetched successfully",
-                    "data"=>$query
+                    "data" => $query
                 ];
             } else {
 
@@ -4562,18 +4640,19 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-     public function viewspecificblog(){
+    public function viewspecificblog()
+    {
 
-         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->output->set_status_header(405);
             $this->output->set_content_type('application/json');
             $this->output->set_output(json_encode(["status" => "error", "message" => "Invalid request method"]));
             return;
-        } else{
+        } else {
 
-            
 
-                $blog_id = $this->input->post("blog_id");
+
+            $blog_id = $this->input->post("blog_id");
 
             if (!$blog_id) {
 
@@ -4587,13 +4666,13 @@ class User_Api_Controller extends CI_Controller
 
             }
 
-             $query = $this->User_Api_Model->show_specific_blogs_model($blog_id);
+            $query = $this->User_Api_Model->show_specific_blogs_model($blog_id);
 
             if ($query) {
                 $response = [
                     "status" => "success",
                     "message" => "data fetched successfully",
-                    "data"=>$query
+                    "data" => $query
                 ];
             } else {
 
@@ -4613,7 +4692,7 @@ class User_Api_Controller extends CI_Controller
 
     }
 
-     public function Get_top_products()
+    public function Get_top_products()
     {
 
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -4654,9 +4733,10 @@ class User_Api_Controller extends CI_Controller
     }
 
 
-    public function show_pooja_info(){
+    public function show_pooja_info()
+    {
 
-          if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             return $this->output
                 ->set_status_header(405)
                 ->set_content_type('application/json')
@@ -4664,12 +4744,11 @@ class User_Api_Controller extends CI_Controller
                     "status" => "error",
                     "message" => "Invalid request method"
                 ]));
-        }
-        else{
+        } else {
 
-        
-       
-                $puja_id = $this->input->post("puja_id");
+
+
+            $puja_id = $this->input->post("puja_id");
 
             if (!$puja_id) {
 
@@ -4683,13 +4762,13 @@ class User_Api_Controller extends CI_Controller
 
             }
 
-             $query = $this->User_Api_Model->show_pooja_info_model($puja_id);
+            $query = $this->User_Api_Model->show_pooja_info_model($puja_id);
 
             if ($query) {
                 $response = [
                     "status" => "success",
                     "message" => "data fetched successfully",
-                    "data"=>$query
+                    "data" => $query
                 ];
             } else {
 
@@ -4708,7 +4787,329 @@ class User_Api_Controller extends CI_Controller
 
 
 
+    public function show_category()
+    {
 
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            return $this->output
+                ->set_status_header(405)
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    "status" => "error",
+                    "message" => "Invalid request method"
+                ]));
+        } else {
+
+            $query = $this->User_Api_Model->show_category_model();
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data fetched successfully",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no new notification"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+
+        }
+
+
+    }
+
+    public function show_specific_category()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return $this->output
+                ->set_status_header(405)
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    "status" => "error",
+                    "message" => "Invalid request method"
+                ]));
+        } else {
+
+            $category = $this->input->post("category");
+
+            if (!$category) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "category not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            }
+            $query = $this->User_Api_Model->show_specific_category_model($category);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data updated",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no product with this category"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+
+
+
+        }
+    }
+
+
+   public function show_purpose()
+{
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        return $this->output
+            ->set_status_header(405)
+            ->set_content_type('application/json')
+            ->set_output(json_encode([
+                "status" => "error",
+                "message" => "Invalid request method"
+            ]));
+    }
+
+    $category = $this->input->post("category");
+
+    if (!$category) {
+        $response = [
+            "status" => "error",
+            "message" => "category not found"
+        ];
+        echo json_encode($response);
+        return;
+    }
+
+    // Fetch raw purpose rows from DB
+    $raw_data = $this->User_Api_Model->show_purpose_model($category);
+
+    // Process data to count individual purposes
+    $purpose_count = [];
+
+    foreach ($raw_data as $row) {
+        $purposes = explode(',', $row['purpose']); // split by comma
+        foreach ($purposes as $p) {
+            $p = trim($p); // trim spaces
+            if (!empty($p)) {
+                if (isset($purpose_count[$p])) {
+                    $purpose_count[$p]++;
+                } else {
+                    $purpose_count[$p] = 1;
+                }
+            }
+        }
+    }
+
+    if (!empty($purpose_count)) {
+        $response = [
+            "status" => "success",
+            "message" => "data updated",
+            "data" => $purpose_count
+        ];
+    } else {
+        $response = [
+            "status" => "error",
+            "message" => "There is no product with this category"
+        ];
+    }
+
+    echo json_encode($response);
+}
+
+
+    public function get_total_product_in_category()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return $this->output
+                ->set_status_header(405)
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    "status" => "error",
+                    "message" => "Invalid request method"
+                ]));
+        } else {
+
+            $category = $this->input->post("category");
+
+            if (!$category) {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "category not found"
+                ];
+
+                echo json_encode($response);
+                return;
+
+            }
+            $query = $this->User_Api_Model->get_total_product_in_category_model($category);
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data updated",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no product with this category"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+
+
+        }
+    }
+
+
+
+
+    public function show_energy_stones()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            return $this->output
+                ->set_status_header(405)
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    "status" => "error",
+                    "message" => "Invalid request method"
+                ]));
+        } else {
+
+
+            $query = $this->User_Api_Model->show_energy_stones_model();
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data updated",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no product with this category"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+
+        }
+
+    }
+
+
+
+    public function show_product_feedback_data()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            return $this->output
+                ->set_status_header(405)
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    "status" => "error",
+                    "message" => "Invalid request method"
+                ]));
+        } else {
+
+
+            $query = $this->User_Api_Model->show_product_feedback_data_model();
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data updated",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no product with this category"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+
+        }
+    }
+
+
+    public function show_astrologer_free_kudali(){
+
+         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            return $this->output
+                ->set_status_header(405)
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    "status" => "error",
+                    "message" => "Invalid request method"
+                ]));
+        }
+
+        else{
+               
+            
+            $query = $this->User_Api_Model->show_astrologer_free_kundali_model();
+
+            if ($query) {
+                $response = [
+                    "status" => "success",
+                    "message" => "data updated",
+                    "data" => $query
+                ];
+            } else {
+
+                $response = [
+                    "status" => "error",
+                    "message" => "There is no astrologer available"
+
+                ];
+            }
+
+            echo json_encode($response);
+
+            return;
+
+        }
+    }
 
 
 

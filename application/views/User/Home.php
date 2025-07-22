@@ -28,8 +28,44 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+<!-- Bootstrap Bundle (includes Popper) -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-RWcAUkBBaTzZ7OmFcOwKp0QATKcPfPK4D38x7qnL8Mpt5AVnwl0FkpGyoC7tVZ1T"
+        crossorigin="anonymous"></script>
+
 
     <style>
+        
+    .ticker-wrapper {
+      overflow: hidden;
+      background-color: #fff;
+     
+      padding: 10px 0;
+    }
+
+    .ticker {
+      display: flex;
+      width: calc(200px * 24); /* 12 images * 2 sets = 24 */
+      animation: scroll 30s linear infinite;
+    }
+
+    .ticker img {
+      width: 200px;
+      height: auto;
+      margin-right: 20px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
         /* slider code  */
         .owl-nav .owl-prev,
         .owl-nav .owl-next {
@@ -89,6 +125,138 @@
             transform: scale(1.1);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        .containernew {
+            margin: auto;
+            padding: 20px;
+        }
+
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .box {
+            background: #fff;
+            border: 1px solid #f29408ff;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            color: #f57c00;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .box:hover {
+            background: #feaa2cff;
+            color: #fff;
+        }
+
+
+
+        .box.red {
+            color: red;
+            text-decoration: underline;
+        }
+
+        .box img {
+            display: block;
+            margin: 0 auto 5px;
+            max-height: 40px;
+        }
+
+        .kundli-box {
+            background: #fff;
+            border: 1px solid #ffa726;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #f57c00;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: 0.3s;
+            height: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .kundli-box:hover {
+            background: #fbab34ff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #fff;
+
+        }
+
+        .center-last-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .kundli-box {
+            width: 200px;
+            height: 110px;
+        }
+
+        .kundli-box.violet {
+            background-color: #b39ddb;
+            color: white;
+        }
+
+        .kundli-box.orange {
+            background-color: #ffb74d;
+            color: white;
+        }
+
+        .kundli-box.red {
+            color: red;
+            text-decoration: underline;
+        }
+
+        .kundli-box img {
+            display: block;
+            margin: 0 auto 5px;
+            max-height: 40px;
+        }
+
+        .grid-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .center-last-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 576px) {
+            .col-custom {
+                flex: 0 0 calc(50% - 10px);
+            }
+        }
+
+        @media (min-width: 577px) and (max-width: 991px) {
+            .col-custom {
+                flex: 0 0 calc(33.33% - 10px);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-custom {
+                flex: 0 0 calc(20% - 10px);
+                /* 5 per row */
+            }
+        }
     </style>
 
 </head>
@@ -101,24 +269,6 @@
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
 
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
-
-
-
-
-
-    <!-- astro signs -->
-
-    <!-- <?php print_r($userinfo_data) ?> -->
-
-
-
-    <?php
-
-    // if (isset($userinfo)) {
-    //     print_r($userinfo);
-    // }
-    ?>
-
 
     <section>
         <div class="container mt-3">
@@ -138,14 +288,7 @@
                 </div>
 
 
-                <!-- <div class="col-auto">
-                    <a href="<?php echo base_url('horoscopereadmore') ?>"
-                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
-                        <img src="<?php echo base_url('assets/images/aris.png'); ?>" alt="Aris"
-                            class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold"> Aris</p>
-                    </a>s
-                </div> -->
+
 
                 <div class="col-auto">
                     <a href="<?php echo base_url('horoscopereadmore/Taurus'); ?>"
@@ -260,63 +403,13 @@
         </div>
 
 
-        <!-- <div class="container mt-4">
-            <div class="row d-flex justify-content-center g-3">
-                <div class="col-12 col-md-6 " style="width: fit-content;">
-                    <a href="#" style="text-decoration: none;">
-                        <div
-                            class="card d-flex  flex-row justify-content-center align-items-center p-2 shadow-sm text-center rounded-4 ">
-                            <img src="<?php echo base_url('assets/images/whatsapp.png'); ?>" alt=""
-                                style="width: 40px; height: 40px; object-fit: cover;">
-                            <p class="mb-0 ms-2">Chat with Astrologer</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12 col-md-6 " style="width: fit-content;">
-                    <a href="#" style="text-decoration: none;">
-                        <div
-                            class="card d-flex flex-row justify-content-center align-items-center p-2 shadow-sm text-center rounded-4 ">
-                            <img src="<?php echo base_url('assets/images/call.png'); ?>" alt=""
-                                style="width: 40px; height: 40px; object-fit: cover;">
-                            <p class="mb-0 ms-2">Call with Astrologer</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div> -->
+
     </section>
 
-    <!-- about astrology section -->
-    <!-- <section>
-        <div class="container my-4">
-            <div class="row p-3  rounded-3 d-flex justify-content-center align-items-center shadow-sm"
-                style="background-color: var(--yellow);">
-                <div class="col-12 col-lg-4 text-center">
-                    <img src="<?php echo base_url('assets/images/aboutImage.png'); ?>" alt="Image"
-                        style="width: 300px; height: 300px; object-fit: cover;">
-                </div>
-                <div class="col-12 col-lg-8 ">
-                    <h3 class="mb-3 fw-bold text-center text-lg-start " style="color: var(--red);">About Astrology</h3>
-                    <p style="text-align: justify;">Astrology can offer insights into one’s personality, life path, and
-                        future possibilities, but it’s important to approach it as a tool for reflection rather than a
-                        rigid predictor of fate. Different branches of astrology (e.g., psychological, traditional,
-                        horoscopic, and electional astrology) may interpret these elements in unique ways. Would you
-                        like to know about a specific area or need a birth chart interpretation</p>
-                    <p style="text-align: justify;">
-                        Astrology is a belief system that suggests the positions and movements of celestial bodies (such
-                        as planets, the Sun, and the Moon) influence or correlate with human affairs and natural events.
-                        While not scientifically validated, astrology has been practiced in various cultures for
-                        thousands of years and is still popular today.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    </section> -->
 
     <!--CAROUSEL CODE  -->
     <section>
-        <div class="container my-4">
+        <div class="container-md my-4">
             <div id="carouselExampleIndicators" class="carousel slide rounded-4" data-bs-ride="carousel"
                 style="overflow: hidden;">
 
@@ -337,6 +430,39 @@
             </div>
         </div>
     </section>
+<section> <div class="ticker-wrapper">
+   
+    <div class="ticker">
+      <!-- Repeat images twice for seamless scroll -->
+  <img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1">
+<img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2">
+<img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3">
+<img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4">
+<img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5">
+<img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6">
+<img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7">
+<img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8">
+<img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9">
+<img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10">
+<img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11">
+<img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12">
+<img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1">
+<img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2">
+<img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3">
+<img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4">
+<img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5">
+<img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6">
+<img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7">
+<img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8">
+<img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9">
+<img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10">
+<img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11">
+<img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12">
+
+    </div>
+   </div>
+ 
+</section>
 
     <!-- Astrologer on call or chat -->
 
@@ -463,8 +589,10 @@
 
                                             <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
                                         </div>
+                                        
                                     </div>
                                 </div>
+                                
                             </div>
 
 
@@ -481,7 +609,9 @@
                             style="background-color: var(--yellow);"> <?php echo $this->lang->line('ViewMore') ?></a>
                     </div>
                 </div>
+                
 
+            </div>
             </div>
     </section>
 
@@ -507,208 +637,63 @@
 
 
                     });
-                }
-                else {
+                } else {
                     window.location.href = chatUrl;
                 }
             }
         }
-
     </script>
 
-    <!-- blog data -->
 
-
-    <!-- Astrological Services For Accurate Answers And Better Future -->
-
-
-    <section>
+    <section class="containernew py-4">
         <div class="container">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
-                <?php echo $this->lang->line('Astro_Services_Tagline'); ?>
-            </h2>
-            <div class="owl-carousel owl1 owl-theme">
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Free Kundli Generation</h2>
+            <div class="grid-wrapper">
+                <a href="<?php echo base_url('FreeKundli_Controller/BasicAstrology'); ?>" class="text-decoration-none">
+                <div class="kundli-box"><img src="<?php echo base_url("assets/images/esoteric.png") ?>" /> Basic Astrology </div>
+    </a>
+    <a href="<?php echo base_url('FreeKundli_Controller/PlanetaryPosition'); ?>" class="text-decoration-none">
+                <div class="kundli-box"><img src="<?php echo base_url("assets/images/galaxy.png") ?>" /> Planetary Positions</div>
+    </a>
+    <a href="<?php echo base_url('FreeKundli_Controller/VimshottariDasha'); ?>" class="text-decoration-none">
+              
+    <div class="kundli-box"><img src="<?php echo base_url("assets/images/magic-book.png") ?>" />Vimshottari Dasha</div>
+    </a>
+    <a  href="<?php echo base_url('FreeKundli_Controller/AscendantReport'); ?>" class="text-decoration-none">
+                <div class="kundli-box"><img src="<?php echo base_url("assets/images/book.png") ?>" /> Ascendant Report</div>
+    </a>
+    <a href="<?php echo base_url('FreeKundli_Controller/GemstoneRecommendation'); ?>" class="text-decoration-none">
+                <div class="kundli-box"><img src="<?php echo base_url("assets/images/diamond.png") ?>" /> Gemstone Recommendation</div>
+    </a>
+    <a href="<?php echo base_url('FreeKundli_Controller/CompositeFriendship'); ?>" class="text-decoration-none">
+                <div class="kundli-box"><img src="<?php echo base_url("assets/images/friendship.png") ?>" style="width: 50px;" /> Composite Friendship</div>
+    </a>
+    <a  href="<?php echo base_url('FreeKundli_Controller/Shadbala'); ?>" class="text-decoration-none">
+                <div class="kundli-box"><img src="<?php echo base_url("assets/images/parchment.png") ?>" />Shadbala</div>
+    </a>
+                <a  href="<?php echo base_url('FreeKundli_Controller/YoginiDasha'); ?>" class="text-decoration-none">
 
+    <div class="kundli-box"><img src="<?php echo base_url("assets/images/sun.png") ?>" />Yogini Dasha</div>
+    </a>
+              <a href="<?php echo base_url('FreeKundli_Controller/HoroscopeCharts'); ?>" class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/horoscopecharts.png") ?>" />Horoscope Charts</div>
+                </a>
 
-
-                <?php if (!empty($home_service_data)): ?>
-                    <?php foreach ($home_service_data as $home_service_data_data): ?>
-
-                        <div class="item">
-                            <div class="card shadow " style=" border: 1px solid var(--red);">
-                                <img src="<?php echo base_url("assets/images/" . $home_service_data_data['image']); ?>"
-                                    class="card-img-top" alt="Finance Image">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold"><?php print_r($home_service_data_data["title"]) ?></h5>
-                                    <p class="card-text">
-                                        <?php print_r($home_service_data_data["text"]) ?>
-                                    </p>
-                                    <center>
-                                        <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold "
-                                            style="background-color: var(--yellow);">Check Now</a>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-
-                    <?php endforeach ?>
-
-                <?php endif ?>
-                <!-- <div class="item">
-                    <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/question.png'); ?>" class="card-img-top"
-                            alt="Finance Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Ask a Question?</h5>
-                            <p class="card-text">
-                                Solving money problemss sdoesn’t n happen overnight. Stay consistent and patient with your
-                                efforts.
-                            </p>
-                            <center>
-                                <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
-                            </center>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="item">
-                    <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/carrerjob.png'); ?>" class="card-img-top"
-                            alt="Finance Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Career & Job</h5>
-                            <p class="card-text">
-                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your
-                                efforts.
-                            </p>
-                            <center>
-                                <a href="<?php echo base_url('astrologers') ?>"class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
-                            </center>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="item">
-                    <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/counselling.png'); ?>" class="card-img-top"
-                            alt="Finance Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Counselling</h5>
-                            <p class="card-text">
-                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your
-                                efforts.
-                            </p>
-                            <center>
-                                <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
-                            </center>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="item">
-                    <div class="card shadow " style=" border: 1px solid var(--red);">
-                        <img src="<?php echo base_url('assets/images/yearbook.png'); ?>" class="card-img-top"
-                            alt="Finance Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Year Book</h5>
-                            <p class="card-text">
-                                Solving money problems doesn’t happen overnight. Stay consistent and patient with your
-                                efforts.
-                            </p>
-                            <center>
-                                <a href="<?php echo base_url('astrologers') ?>" class="btn fw-bold " style="background-color: var(--yellow);">Check Now</a>
-                            </center>
-                        </div>
-                    </div>
-                </div> -->
+                <a href="<?php echo base_url('FreeKundli_Controller/ManglikDosha'); ?>" class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/mangal.png") ?>" />Manglik Dosha</div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/KaalSarpaDosha'); ?>" class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/king.png") ?>" />Kaal Sarpa Dosha</div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/SadheSati'); ?>" class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/sadhesati.png") ?>" />Sadhe Sati</div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/BhavaKundli'); ?>" class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/houses.png") ?>" />Bhava Kundli</div>
+                </a>
             </div>
         </div>
     </section>
-
-
-    <!-- Astrological  Remedies  To  Get  Rid  Of  Your  Problems -->
-    <!-- <section>
-        <div class="container my-4">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
-                <?php echo $this->lang->line('AstrologicalRemedies') ?></a>
-        </div>
-        </h2>
-        <div class="owl-carousel owl1 owl-theme">
-            <div class="item">
-                <div class="card shadow " style=" border: 1px solid var(--red);">
-                    <img src="<?php echo base_url('assets/images/rudraksh.png'); ?>" class="card-img-top"
-                        alt="Finance Image">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Rudraksh</h5>
-                        <p class="card-text">
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                        </p>
-                        <center>
-                            <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
-                        </center>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card shadow " style=" border: 1px solid var(--red);">
-                    <img src="<?php echo base_url('assets/images/gamestones.png'); ?>" class="card-img-top"
-                        alt="Finance Image">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Gamestones</h5>
-                        <p class="card-text">
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                        </p>
-                        <center>
-                            <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
-                        </center>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card shadow " style=" border: 1px solid var(--red);">
-                    <img src="<?php echo base_url('assets/images/yantras.png'); ?>" class="card-img-top"
-                        alt="Finance Image">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Yantras</h5>
-                        <p class="card-text">
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                        </p>
-                        <center>
-                            <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
-                        </center>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card shadow " style=" border: 1px solid var(--red);">
-                    <img src="<?php echo base_url('assets/images/mala.png'); ?>" class="card-img-top"
-                        alt="Finance Image">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Mala</h5>
-                        <p class="card-text">
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                        </p>
-                        <center>
-                            <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
-                        </center>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card shadow " style=" border: 1px solid var(--red);">
-                    <img src="<?php echo base_url('assets/images/jadi.png'); ?>" class="card-img-top"
-                        alt="Finance Image">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Jadi</h5>
-                        <p class="card-text">
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                        </p>
-                        <center>
-                            <a href="#" class="btn fw-bold " style="background-color: var(--yellow);">Buy Now</a>
-                        </center>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section> -->
 
     <!-- Free Horoscope and Astrology Services -->
 
@@ -716,370 +701,64 @@
     <section>
         <div class="container my-4">
             <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">
-                <?php echo $this->lang->line('FreeHoroscope') ?>
+                <?php echo $this->lang->line('FreeHoroscope') ?: 'Free Horoscope Services'; ?>
             </h3>
+
             <div class="row g-4 justify-content-center">
-
-
-
-
                 <?php if (!empty($service_data)): ?>
-                    <?php foreach ($service_data as $service_data_astologer): ?>
-
-                        <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <a href="<?php echo base_url('User/astrolgerservices/') . $service_data_astologer["id"] ?>" class="text-decoration-none">
-                                <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                                    <img src="<?php echo base_url('uploads/services/' . $service_data_astologer['image']); ?>"
-                                        alt="<?php echo $service_data_astologer['name']; ?>" class="mx-auto mb-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;"
-                                        onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
-                                    <p class="fw-bold text-dark">
-                                        <?php echo $service_data_astologer['name']; ?>
-                                    </p>
-                                     <p class="fw-bold text-dark">
-                                        <?php echo $service_data_astologer['description']; ?>
-                                    </p>
-                                </div>
-                            </a>
-                        </div> -->
-
+                    <?php foreach ($service_data as $service): ?>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <a href="<?php echo base_url('User/astrolgerservices/') . $service_data_astologer["id"] ?>"
-                                class="text-decoration-none">
+                            <a href="<?php echo base_url('User/astrolgerservices/') . $service["id"]; ?>" class="text-decoration-none">
                                 <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                                    <img src="<?php echo base_url('uploads/services/' . $service_data_astologer['image']); ?>"
-                                        alt="<?php echo $service_data_astologer['name']; ?>" class="mx-auto mb-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;"
-                                        onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
-                                    <p class="fw-bold text-dark">
-                                        <?php echo $service_data_astologer['name']; ?>
-                                    </p>
-                                    <p class="text-muted">
-    <?php
-    $words = explode(' ', $service_data_astologer['description']);
-    echo implode(' ', array_slice($words, 0, 10)) . (count($words) > 10 ? '...' : '');
-    ?>
-</p>
-
-                                </div>
-                            </a>
-                        </div>
-
-                    <?php endforeach; ?>
-                <?php endif; ?>
-
-
-
-                <!-- Card 1 -->
-                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/kundli.png'); ?>" alt="Kundli"
-                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Kundli <br> <small>(Birth Chart)</small></p>
-                        </div>
-                    </a>
-                </div> -->
-                <!-- Card 2 -->
-
-
-                <!-- Card 3 -->
-                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/examResult.png'); ?>" alt="Exam Result"
-                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Exam Result <br> <small>(Birth Chart)</small></p>
-                        </div>
-                    </a>
-                </div> -->
-                <!-- Card 4 -->
-                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
-                        <div class="card text-center shadow rounded  border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/talkToAstrologer.png'); ?>"
-                                alt="Talk To Astrologer" class="mx-auto mb-3"
-                                style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">
-                                <?php echo $this->lang->line('Talk_To_Astrologer') ?: "Talk To Astrologer"; ?> <br>
-                                <small>(<?php echo $this->lang->line('Birth_Chart') ?: "Birth Chart"; ?>)</small>
-                            </p>
-
-                        </div>
-                    </a>
-                </div> -->
-                <!-- Card 5 -->
-                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/askQuestion.png'); ?>" alt="Ask Questions"
-                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Ask Questions <br> <small>(Birth Chart)</small></p>
-                        </div>
-                    </a>
-                </div>
-                -->
-
-                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
-                        <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/numerologyCalculator.png'); ?>"
-                                alt="Numerology Calculator" class="mx-auto mb-3"
-                                style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">
-                                <?php echo $this->lang->line('Numerology_Calculator') ?: "Numerology Calculator"; ?>
-                            </p>
-
-                        </div>
-                    </a>
-                </div> -->
-
-                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/sadeSatiLifeReport.png'); ?>"
-                                alt="Sade Sati Life Report" class="mx-auto mb-3"
-                                style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Sade Sati Life Report </p>
-                        </div>
-                    </a>
-                </div> -->
-                <!-- 
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="card text-center shadow  rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/hindiKundli.png'); ?>" alt="Hindi Kundli"
-                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Hindi Kundli</p>
-                        </div>
-                    </a>
-                </div> -->
-
-                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/yearAnalysis.png'); ?>" alt="Year Analysis"
-                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Year Analysis</p>
-                        </div>
-                    </a>
-                </div> -->
-
-                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="card text-center shadow  rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/kaalsarpDosha.png'); ?>" alt="Kaalsarp Dosha"
-                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Kaalsarp Dosha</p>
-                        </div>
-                    </a>
-                </div> -->
-
-                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                            <img src="<?php echo base_url('assets/images/paidService.png'); ?>" alt="Paid Service"
-                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">Paid Service</p>
-                        </div>
-                    </a>
-                </div> -->
-
-                <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3 ">
-                    <a href="<?php echo base_url('astrologers') ?>" class="text-decoration-none">
-                        <div class="card text-center shadow border-0 p-3 h-100 rounded card-hover">
-                            <img src="<?php echo base_url('assets/images/babyName.png'); ?>" alt="Today's Rahukal"
-                                class="mx-auto mb-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <p class="fw-bold text-dark">
-                                <?php echo $this->lang->line('Baby_Name') ?: "Baby Name"; ?>
-                            </p>
-
-                        </div>
-                    </a>
-                </div> -->
-                <div class="text-center mt-4">
-                    <a href="<?php echo base_url('AstrologyServices') ?>" class="btn fw-bold"
-                        style="background-color: var(--yellow);"><?php echo $this->lang->line('ViewMore') ?></a>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-
-    <!-- <section>
-        <div class="container my-4">
-            <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">
-                <?php echo $this->lang->line('FreeHoroscope') ?>
-            </h3>
-            <div class="row g-4 justify-content-center">
-
-
-
-
-                <?php if (!empty($blogdata)): ?>
-                    <?php foreach ($blogdata as $product): ?>
-
-
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <a href="<?= base_url('User/ViewBlogInfo/' . $product['blog_id']); ?>"
-                                class="text-decoration-none">
-                                <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                                    <img src="<?= base_url($product['blog_image']); ?>"
-                                        alt="<?php echo $service_data_astologer['name']; ?>" class="mx-auto mb-3"
-                                        style="width: 60px; height: 60px; object-fit: cover;"
-                                        onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
-                                    <p class="fw-bold text-dark">
-                                        <?= $product["blog_title"]; ?>
-                                    </p>
-                                   
-                                </div>
-                            </a>
-                        </div>
-
-                    <?php endforeach; ?>
-                <?php endif; ?>
-
-
-
-                <div class="text-center mt-4">
-                    <a href="<?php echo base_url('AstrologyServices') ?>" class="btn fw-bold"
-                        style="background-color: var(--yellow);"><?php echo $this->lang->line('ViewMore') ?></a>
-                </div>
-            </div>
-        </div>
-
-    </section>
- -->
-
-    <!-- <section>
-        <div class="container my-4">
-            <h3 class="text-center mb-4 fw-bold" style="color: var(--red);">
-                <?php echo $this->lang->line('FreeHoroscope') ?>
-            </h3>
-            <div class="row g-4 justify-content-center">
-
-
-
-
-                <?php if (!empty($productdata)): ?>
-                    <?php foreach ($productdata as $product): ?>
-
-
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <a href="<?php echo base_url('productview/' . $product["product_id"]) ?>"
-                                class="text-decoration-none">
-                                <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
-                                    <img src="<?php echo base_url("uploads/products/" . $product["product_image"]); ?>"
+                                    <img src="<?php echo base_url('uploads/services/' . $service['image']); ?>"
+                                        alt="<?php echo htmlspecialchars($service['name']); ?>"
                                         class="mx-auto mb-3"
                                         style="width: 60px; height: 60px; object-fit: cover;"
                                         onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
-                                    <p class="fw-bold text-dark">
-                                         <?php echo $product["product_name"] ?>
+
+                                    <p class="fw-bold text-dark mb-1">
+                                        <?php echo htmlspecialchars($service['name']); ?>
                                     </p>
-                                   
-                                </div>
-                            </a>
-                        </div>
 
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                                    <p class="text-muted mb-0">
+                                        <?php
+                                        $desc = strip_tags($service['description']);
+                                        $words = explode(' ', $desc);
+                                        echo implode(' ', array_slice($words, 0, 10)) . (count($words) > 10 ? '...' : '');
+                                        ?>
 
-
-
-                <div class="text-center mt-4">
-                    <a href="<?php echo base_url('AstrologyServices') ?>" class="btn fw-bold"
-                        style="background-color: var(--yellow);"><?php echo $this->lang->line('ViewMore') ?></a>
-                </div>
-            </div>
-        </div>
-
-    </section> -->
-
-
-    <section class="py-5">
-    <div class="container">
-        <!-- Header row -->
-        <div class="row align-items-center mb-4">
-            <div class="col text-center">
-                <h3 class="fw-bold">Blogs of Astrology</h3>
-                <p class="text-muted mb-0">Explore the stars, decode your destiny.</p>
-            </div>
-
-            <!-- Optional: Remove or keep this top button -->
-            <!-- 
-            <div class="col-auto">
-                <a href="<?= base_url('User/Blog'); ?>" class="btn btn-sm text-white px-3 rounded-3"
-                    style="background-color: var(--yellow);">
-                    View All
-                </a>
-            </div>
-            -->
-        </div>
-
-        <!-- Carousel -->
-        <div class="row">
-            <div id="blog" class="owl-carousel owl1 owl-theme">
-                <?php if (!empty($blogdata)): ?>
-                    <?php foreach (array_slice($blogdata, 0, 6) as $product): ?>
-                        <div class="item">
-                            <a href="<?= base_url('User/ViewBlogInfo/' . $product['blog_id']); ?>" class="text-decoration-none">
-                                <div class="card border-0 shadow-sm rounded-3 h-100" style="height: 320px;">
-                                    <img src="<?= base_url($product['blog_image']); ?>" class="card-img-top rounded-top-3"
-                                         alt="Blog Image" style="height: 170px; object-fit: cover;">
-                                    <div class="card-body d-flex flex-column justify-content-between">
-                                        <h5 class="card-title text-dark mb-2"
-                                            style="font-size: 1rem; height: 48px; overflow: hidden; text-overflow: ellipsis; line-height: 1.3;">
-                                            <?= $product["blog_title"]; ?>
-                                        </h5>
-                                        <p class="text-muted small mb-0"><?= $this->lang->line('Today') ?? 'Today'; ?></p>
-                                    </div>
+                                    </p>
                                 </div>
                             </a>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <p class="text-center text-muted">No blogs available at the moment.</p>
+                    <div class="col-12 text-center">
+                        <p class="text-muted">No services found.</p>
+                    </div>
                 <?php endif; ?>
             </div>
-        </div>
 
-        <!-- Bottom "View All" button -->
-        <div class="row mt-4">
-            <div class="col text-center">
-                <a href="<?= base_url('User/Blog'); ?>" class="btn  fw-bold px-4 py-2 rounded-3"
-                   style="background-color: var(--yellow);">
-                    View More
+            <div class="text-center mt-4">
+                <a href="<?php echo base_url('AstrologyServices'); ?>" class="btn fw-bold"
+                    style="background-color: var(--yellow);">
+                    <?php echo $this->lang->line('ViewMore') ?: 'View More'; ?>
                 </a>
             </div>
         </div>
-    </div>
-</section>
-
-
-
-
-
-
-
-    <!-- <section class="py-5">
+    </section>
+ <section class="py-5">
         <div class="container">
-          
+
             <div class="row align-items-center mb-4">
                 <div class="col text-center">
                     <h3 class="fw-bold">Blogs of Astrology</h3>
                     <p class="text-muted mb-0">Explore the stars, decode your destiny.</p>
+                </div>
 
-                </div>
-                <div class="col-auto">
-                    <a href="<?= base_url('User/Blog'); ?>" class="btn btn-sm text-white px-3 rounded-3"
-                        style="background-color: var(--yellow);">
-                        View All
-                    </a>
-                </div>
             </div>
 
-           
+
             <div class="row">
                 <div id="blog" class="owl-carousel owl1 owl-theme">
                     <?php if (!empty($blogdata)): ?>
@@ -1088,7 +767,7 @@
                                 <a href="<?= base_url('User/ViewBlogInfo/' . $product['blog_id']); ?>"
                                     class="text-decoration-none">
                                     <div class="card border-0 shadow-sm rounded-3 h-100" style="height: 320px;">
-                                        <img src="<?= base_url($product['blog_image']); ?>" class="card-img-top rounded-top-3"
+                                        <img src="<?= base_url("uploads/blogs/".$product['blog_image']); ?>" class="card-img-top rounded-top-3"
                                             alt="Blog Image" style="height: 170px; object-fit: cover;">
                                         <div class="card-body d-flex flex-column justify-content-between">
                                             <h5 class="card-title text-dark mb-2"
@@ -1106,72 +785,80 @@
                     <?php endif; ?>
                 </div>
             </div>
+
+
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <a href="<?= base_url('User/Blog'); ?>" class="btn  fw-bold px-4 py-2 rounded-3"
+                        style="background-color: var(--yellow);">
+                        View More
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
- -->
-
     <!-- Top Shop section -->
     <section>
-    <div class="container mb-5">
-        <div class="row">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div class="col text-center">
-                    <h3 class="fw-bold">Top Shop</h3>
-                    <p class="text-muted mb-0">Divine essentials crafted for your journey.</p>
-                </div>
-                <!-- Hidden top View All button -->
-                <div class="col-auto d-none">
-                    <button class="btn rounded-1" style="background-color: var(--yellow);">
-                        <a class="text-decoration-none text-dark" href="<?php echo base_url('jyotisikamall') ?>">
-                            View All
-                        </a>
-                    </button>
+        <div class="container mb-5">
+            <div class="row">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="col text-center">
+                        <h3 class="fw-bold">Top Shop</h3>
+                        <p class="text-muted mb-0">Divine essentials crafted for your journey.</p>
+                    </div>
+
+                    <div class="col-auto d-none">
+                        <button class="btn rounded-1" style="background-color: var(--yellow);">
+                            <a class="text-decoration-none text-dark" href="<?php echo base_url('jyotisikamall') ?>">
+                                View All
+                            </a>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Product Carousel -->
-        <div class="row">
-            <div id="topShop" class="owl-carousel owl1 owl-theme">
-                <?php if (!empty($productdata)): ?>
-                    <?php foreach (array_slice($productdata, 0, 5) as $product): ?>
-                        <a class="text-decoration-none"
-                           href="<?php echo base_url('ProductDetails/' . $product["product_id"]) ?>">
-                            <div class="card shadow-sm h-100 rounded-2"
-                                 style="font-size: 0.85rem; max-width: 200px; margin: 0 auto;">
-                                <img src="<?php echo base_url("uploads/products/" . $product["product_image"]); ?>"
-                                     class="card-img-top p-2" alt="Product Image" style="height: 130px; object-fit: cover;">
-                                <div class="card-body py-2 px-3">
-                                    <h6 class="card-title fw-semibold mb-2 text-truncate">
-                                        <?php echo $product["product_name"] ?>
-                                    </h6>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="fw-bold text-success">₹<?php echo $product["product_price"] ?></span>
+
+            <div class="row">
+                <div id="topShop" class="owl-carousel owl1 owl-theme">
+                    <?php if (!empty($productdata)): ?>
+                        <?php foreach (array_slice($productdata, 0, 5) as $product): ?>
+                            <a class="text-decoration-none"
+                                href="<?php echo base_url('ProductDetails/' . $product["product_id"]) ?>">
+                                <div class="card shadow-sm h-100 rounded-2"
+                                    style="font-size: 0.85rem; max-width: 200px; margin: 0 auto;">
+                                    <img src="<?php echo base_url("uploads/products/" . $product["product_image"]); ?>"
+                                        class="card-img-top p-2" alt="Product Image" style="height: 130px; object-fit: cover;">
+                                    <div class="card-body py-2 px-3">
+                                        <h6 class="card-title fw-semibold mb-2 text-truncate">
+                                            <?php echo $product["product_name"] ?>
+                                        </h6>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="fw-bold text-success">₹<?php echo $product["product_price"] ?></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p class="text-center text-muted">
-                        <?= $this->lang->line('NoProducts') ?? 'No products available.'; ?>
-                    </p>
-                <?php endif; ?>
+                            </a>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-center text-muted">
+                            <?= $this->lang->line('NoProducts') ?? 'No products available.'; ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
             </div>
-        </div>
 
-        <!-- Bottom View All Button -->
-         
-        <div class="row mt-5">
-            <div class="col text-center">
-                <a href="<?= base_url('jyotisikamall'); ?>" class="btn  fw-bold px-4 py-2 rounded-3"
-                   style="background-color: var(--yellow);">
-                    View More
-                </a>
+
+
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <a href="<?= base_url('jyotisikamall'); ?>" class="btn  fw-bold px-4 py-2 rounded-3"
+                        style="background-color: var(--yellow);">
+                        View More
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
     <!-- Footer -->
@@ -1202,8 +889,7 @@
                     icon: "warning",
                 });
 
-            }
-            else {
+            } else {
 
                 window.location.href = "<?php echo base_url("chat") ?>";
 
@@ -1214,7 +900,7 @@
             // window.location.href = "<?php echo base_url("chat") ?>"; // Change this to your actual chat page URL
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.owl1').owlCarousel({
                 loop: true,
                 margin: 10,
@@ -1288,30 +974,26 @@
             positionNavButtons();
 
             // Reposition on window resize
-            $(window).resize(function () {
+            $(window).resize(function() {
                 positionNavButtons();
             });
 
             // Prevent hover color change
-            $('.owl-nav button').hover(function () {
+            $('.owl-nav button').hover(function() {
                 $(this).css('background', 'transparent');
             });
 
 
         });
 
-
-
-
-
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const chatlinks = document.querySelectorAll(".chatlink");
 
             let data = Array.from(chatlinks);
             console.log(chatlinks);
             console.log(data);
-            Array.from(chatlinks).forEach(function (chatlink) {
-                chatlink.addEventListener("click", function (e) {
+            Array.from(chatlinks).forEach(function(chatlink) {
+                chatlink.addEventListener("click", function(e) {
                     e.preventDefault(); // Now correctly inside the click event
 
                     <?php if (!$this->session->userdata('user_id')): ?>
@@ -1333,21 +1015,11 @@
                 });
             });
         });
-
-
-
-
-
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz4fnFO9gybBogGzDO9Jq/Uy1p1Lw2jG/q04FH04EZoQUlBgDkfiC9UvN0"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cn7l7gDp0eyl2nq2K9KVDL9VkUsRxKSh3zO7lHcKrCdP4I3ZeGIDc9HrT2yztVR"
-        crossorigin="anonymous"></script>
+   
 
 </body>
 

@@ -464,3 +464,21 @@ $lang['Proceed_to_Pay']         = "भुगतान करें";
 
 
 $lang['our_services'] = "हमारी सेवाएं";
+
+
+
+//Category filter
+
+
+$lang['energy_stones']   = "ऊर्जा पत्थर - पाइराइट, साइट्रीन, टाइगर आई और अधिक";
+$lang['semi'] = "ज्योतिसिका द्वारा आधुनिक पहनने योग्य डिज़ाइन में अर्ध-कीमती प्रामाणिक उपचार और ऊर्जा पत्थर";
+
+
+//Jyotisika mall
+
+$lang['shop_our_collections'] = "हमारे संग्रह से खरीदें";
+
+$lang['best_sellers']        = "सर्वाधिक बिकने वाले";
+$lang['energy_stones']       = "ऊर्जा पत्थर";
+$lang['gallery']             = "गैलरी";
+$lang['customer_reviews']    = "ग्राहक समीक्षाएं";

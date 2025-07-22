@@ -35,7 +35,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- EXTERNAL CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url("assets/css/style.css") ?>">
 
     <style>
         /* best seller card */
@@ -345,6 +345,8 @@
         <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     </header>
 
+    <!-- <?php print_r($product_data); ?> -->
+
     <main>
         <!-- Energy Stones-->
         <section class="py-3">
@@ -353,9 +355,9 @@
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="text-center">
-                            <h1 class="display-6 fw-bold mb-2">Energy Stones - Pyrite, Citrine, Tiger Eye & More</h1>
-                            <p class="text-muted mb-0">(163 products)</p>
-                            <p class="small text-muted">Semi-precious authentic healing and energy stones in modern wearable designs by Jyotisika</p>
+                            <h1 class="display-6 fw-bold mb-2"><?php echo $this->lang->line('energy_stones');?></h1>
+                            <p class="text-muted mb-0">(<?php echo $product__count_data ?> products)</p>
+                            <p class="small text-muted"><?php echo $this->lang->line('semi');?></p>
                         </div>
                     </div>
                 </div>
@@ -363,7 +365,8 @@
                 <!-- Filter Toggle for Mobile -->
                 <div class="row mb-3 d-lg-none">
                     <div class="col-6">
-                        <button class="btn btn-outline-secondary btn-sm w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
+                        <button class="btn btn-outline-secondary btn-sm w-100" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#filterOffcanvas">
                             <i class="bi bi-funnel me-2"></i>Filter
                         </button>
                     </div>
@@ -412,47 +415,37 @@
                     <div class="col-lg-3 d-none d-lg-block">
                         <div class="filter-sidebar">
                             <!-- Purpose Filter -->
+
                             <div class="filter-section mb-4">
                                 <h6 class="fw-bold mb-3">Purpose</h6>
+
                                 <div class="filter-options">
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="wealth" id="wealth">
-                                        <label class="form-check-label" for="wealth">
-                                            Wealth <span class="text-muted">(4)</span>
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="peace" id="peace">
-                                        <label class="form-check-label" for="peace">
-                                            Peace <span class="text-muted">(20)</span>
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="love" id="love">
-                                        <label class="form-check-label" for="love">
-                                            Love <span class="text-muted">(12)</span>
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="protection" id="protection">
-                                        <label class="form-check-label" for="protection">
-                                            Protection <span class="text-muted">(25)</span>
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="balance" id="balance">
-                                        <label class="form-check-label" for="balance">
-                                            Balance <span class="text-muted">(2)</span>
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="courage" id="courage">
-                                        <label class="form-check-label" for="courage">
-                                            Courage <span class="text-muted">(10)</span>
-                                        </label>
-                                    </div>
+                                    <?php if (!empty($product_purpose) && is_array($product_purpose)): ?>
+                                        <?php foreach ($product_purpose as $purpose => $count): ?>
+                                            <?php
+                                            $safePurpose = strtolower(trim($purpose)); // ID-safe value
+                                            $label = ucfirst($safePurpose);            // Label for UI
+                                            ?>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" value="<?= $safePurpose ?>"
+                                                    id="<?= $safePurpose ?>">
+                                                <label class="form-check-label" for="<?= $safePurpose ?>">
+                                                    <?= $label ?> <span class="text-muted">(<?= $count ?>)</span>
+                                                </label>
+                                            </div>
+                                        <?php endforeach; ?>
+
+                                    <?php endif ?>
+
+                                    <?php ?>
                                 </div>
-                                <button class="btn btn-sm btn-link p-0 text-decoration-none">Show more</button>
+
+                               <?php if (!empty($product_purpose) && is_array($product_purpose)): ?>
+                                    <?php if (count($product_purpose) > 6): ?>
+                                        <button class="btn btn-sm btn-link p-0 text-decoration-none" id="showMoreBtn">Show
+                                            more</button>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </div>
 
                             <!-- Price Filter -->
@@ -461,15 +454,19 @@
                                 <div class="price-range">
                                     <div class="row mb-2">
                                         <div class="col-6">
-                                            <input type="number" class="form-control form-control-sm" placeholder="₹ 0" value="0" id="priceMin">
+                                            <input type="number" class="form-control form-control-sm" placeholder="₹ 0"
+                                                value="0" id="priceMin">
                                         </div>
                                         <div class="col-6">
-                                            <input type="number" class="form-control form-control-sm" placeholder="₹ 999" value="999" id="priceMax">
+                                            <input type="number" class="form-control form-control-sm"
+                                                placeholder="₹ 999" value="999" id="priceMax">
                                         </div>
                                     </div>
                                     <div class="range-slider">
-                                        <input type="range" class="form-range" min="0" max="999" value="0" id="priceRangeMin">
-                                        <input type="range" class="form-range" min="0" max="999" value="999" id="priceRangeMax">
+                                        <input type="range" class="form-range" min="0" max="999" value="0"
+                                            id="priceRangeMin">
+                                        <input type="range" class="form-range" min="0" max="999" value="999"
+                                            id="priceRangeMax">
                                     </div>
                                 </div>
                             </div>
@@ -580,48 +577,86 @@
                                     'purposes' => ['peace', 'balance'],
                                     'created_at' => '2025-09-01'
                                 ]
-                            ];
+                            ]; ?>
 
-                            foreach ($energyStones as $stone):
-                            ?>
-                                <div class="col-lg-4 col-md-6 col-12 mb-4 product-item"
-                                    data-purposes="<?php echo implode(',', $stone['purposes']); ?>"
-                                    data-price="<?php echo $stone['current_price']; ?>"
-                                    data-rating="<?php echo $stone['rating']; ?>"
-                                    data-created-at="<?php echo $stone['created_at']; ?>">
-                                    <div class="product-card h-100">
-                                        <div class="product-image-container">
-                                            <span class="discount-badge-new"><?php echo $stone['discount']; ?></span>
-                                            <img src="<?php echo $stone['img']; ?>" class="product-image" alt="<?php echo $stone['title']; ?>">
-                                        </div>
-                                        <div class="product-content">
-                                            <h6 class="product-title"><?php echo $stone['title']; ?></h6>
-                                            <div class="product-rating">
-                                                <div class="stars">
+                            <!-- <?php print_r($product_data) ?> -->
+                            <?php if (empty(!$product_data)): ?>
+
+                                <?php foreach ($product_data as $stone): ?>
+
+
+
+                                    <div class="col-lg-4 col-md-6 col-12 mb-4 product-item"
+                                        data-purposes="<?php echo implode(',', $stone['purposes']); ?>"
+                                        data-price="<?php echo $stone['discount_price']; ?>" data-rating="<?php echo 2 ?>"
+                                        data-created-at="<?php echo $stone['created_at']; ?>">
+                                        <a href=<?php echo base_url("ProductDetails/" . $stone["product_id"]) ?>
+                                            class="text-decoration-none">
+                                            <div class="product-card h-100">
+
+                                                <div class="product-image-container">
                                                     <?php
-                                                    $fullStars = floor($stone['rating']);
-                                                    $halfStar = ($stone['rating'] - $fullStars) >= 0.5 ? 1 : 0;
-                                                    for ($i = 0; $i < $fullStars; $i++) {
-                                                        echo '<i class="bi bi-star-fill text-warning"></i>';
-                                                    }
-                                                    if ($halfStar) {
-                                                        echo '<i class="bi bi-star-half text-warning"></i>';
-                                                    }
-                                                    for ($i = $fullStars + $halfStar; $i < 5; $i++) {
-                                                        echo '<i class="bi bi-star text-warning"></i>';
+                                                    $original = (float) $stone['product_price'];
+                                                    $discounted = (float) $stone['discount_price'];
+                                                    $discountPercent = 0;
+
+                                                    if ($original > 0 && $discounted < $original) {
+                                                        $discountPercent = round((($original - $discounted) / $original) * 100);
                                                     }
                                                     ?>
+                                                    <span
+                                                        class="discount-badge-new"><?php echo $discountPercent . "% off"; ?></span>
+
+                                                    <img src="<?php echo base_url('uploads/products/' . $stone["product_image"]); ?>"
+                                                        class="product-image" alt="<?php echo $stone['product_name']; ?>"
+                                                        onerror="this.onerror=null;this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
+
+
+
+
                                                 </div>
-                                                <span class="review-count">(<?php echo $stone['reviews']; ?>)</span>
+                                                <div class="product-content">
+                                                    <h6 class="product-title"><?php echo $stone['product_name']; ?></h6>
+                                                    <div class="product-rating">
+                                                        <div class="stars">
+                                                            <?php
+
+                                                           
+                                                             $rating = isset($stone["average_rating"]) && is_numeric($stone["average_rating"]) ? floatval($stone["average_rating"]) : 0;
+                                                            $fullStars = floor($rating);
+                                                            $halfStar = ($rating - $fullStars) >= 0.5 ? 1 : 0;
+                                                            for ($i = 0; $i < $fullStars; $i++) {
+                                                                echo '<i class="bi bi-star-fill text-warning"></i>';
+                                                            }
+                                                            if ($halfStar) {
+                                                                echo '<i class="bi bi-star-half text-warning"></i>';
+                                                            }
+                                                            for ($i = $fullStars + $halfStar; $i < 5; $i++) {
+                                                                echo '<i class="bi bi-star text-warning"></i>';
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                        <!-- <span
+                                                            class="review-count">(<?php echo $stone["total_reviews"]; ?>)</span> -->
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <span class="current-price">₹
+                                                            <?php echo $stone['discount_price']; ?><sup>00</sup></span>
+                                                        <span class="original-price">₹
+                                                            <?php echo $stone['product_price']; ?><sup>00</sup></span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="product-price">
-                                                <span class="current-price">₹ <?php echo $stone['current_price']; ?><sup>00</sup></span>
-                                                <span class="original-price">₹ <?php echo $stone['original_price']; ?><sup>00</sup></span>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
+
+                                <?php endforeach; ?>
+
+                            <?php else: ?>
+                                <p>There is no product with this Category</p>
+
+                            <?php endif ?>
+
                         </div>
                     </div>
                 </div>
@@ -629,7 +664,8 @@
         </section>
 
         <!-- Mobile Filter Offcanvas -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="filterOffcanvas"
+            aria-labelledby="filterOffcanvasLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="filterOffcanvasLabel">Filter & Sort</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -639,7 +675,8 @@
                 <div class="mb-4">
                     <h6 class="fw-bold mb-3">Sort by</h6>
                     <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="sort" id="bestSelling" value="bestSelling" checked>
+                        <input class="form-check-input" type="radio" name="sort" id="bestSelling" value="bestSelling"
+                            checked>
                         <label class="form-check-label" for="bestSelling">Best Selling</label>
                     </div>
                     <div class="form-check mb-2">
@@ -658,43 +695,22 @@
 
                 <!-- Purpose Filter -->
                 <div class="mb-4">
-                    <h6 class="fw-bold mb-3">Purpose</h6>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" value="wealth" id="wealthMobile">
-                        <label class="form-check-label" for="wealthMobile">
-                            Wealth <span class="text-muted">(4)</span>
-                        </label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" value="peace" id="peaceMobile">
-                        <label class="form-check-label" for="peaceMobile">
-                            Peace <span class="text-muted">(20)</span>
-                        </label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" value="love" id="loveMobile">
-                        <label class="form-check-label" for="loveMobile">
-                            Love <span class="text-muted">(12)</span>
-                        </label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" value="protection" id="protectionMobile">
-                        <label class="form-check-label" for="protectionMobile">
-                            Protection <span class="text-muted">(25)</span>
-                        </label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" value="balance" id="balanceMobile">
-                        <label class="form-check-label" for="balanceMobile">
-                            Balance <span class="text-muted">(2)</span>
-                        </label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" value="courage" id="courageMobile">
-                        <label class="form-check-label" for="courageMobile">
-                            Courage <span class="text-muted">(10)</span>
-                        </label>
-                    </div>
+                    <h6 class="fw-bold mb-3">Purpossse</h6>
+                    <?php if (empty(!$product_purpose)): ?>
+                        <?php foreach ($product_purpose as $purpose => $count): ?>
+                            <?php
+                            $safePurpose = strtolower(trim($purpose));
+                            $label = ucfirst($safePurpose);
+                            ?>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="<?= $safePurpose ?>"
+                                    id="<?= $safePurpose ?>Mobile">
+                                <label class="form-check-label" for="<?= $safePurpose ?>Mobile">
+                                    <?= $label ?> <span class="text-muted">(<?= $count ?>)</span>
+                                </label>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif ?>
                 </div>
 
                 <!-- Price Filter -->
@@ -702,10 +718,12 @@
                     <h6 class="fw-bold mb-3">Price</h6>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <input type="number" class="form-control form-control-sm" placeholder="₹ 0" value="0" id="priceMinMobile">
+                            <input type="number" class="form-control form-control-sm" placeholder="₹ 0" value="0"
+                                id="priceMinMobile">
                         </div>
                         <div class="col-6">
-                            <input type="number" class="form-control form-control-sm" placeholder="₹ 999" value="999" id="priceMaxMobile">
+                            <input type="number" class="form-control form-control-sm" placeholder="₹ 999" value="999"
+                                id="priceMaxMobile">
                         </div>
                     </div>
                     <div class="range-slider">
@@ -725,7 +743,7 @@
     </footer>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Debounce function to limit rapid filter updates
             function debounce(func, wait) {
                 let timeout;
@@ -740,7 +758,7 @@
             }
 
             // Grid/List View Toggle
-            $('#gridView, #listView').on('click', function() {
+            $('#gridView, #listView').on('click', function () {
                 $('#gridView, #listView').removeClass('active');
                 $(this).addClass('active');
 
@@ -760,14 +778,14 @@
             // Sync filter values between desktop and mobile
             function syncFilters() {
                 // Sync purpose checkboxes
-                $('.filter-options input[type="checkbox"]').each(function() {
+                $('.filter-options input[type="checkbox"]').each(function () {
                     const value = $(this).val();
                     const isChecked = $(this).prop('checked');
                     $(`#${value}Mobile`).prop('checked', isChecked);
                 });
 
                 // Sync mobile to desktop
-                $('.offcanvas-body input[type="checkbox"]').each(function() {
+                $('.offcanvas-body input[type="checkbox"]').each(function () {
                     const value = $(this).val();
                     const isChecked = $(this).prop('checked');
                     $(`#${value}`).prop('checked', isChecked);
@@ -805,7 +823,7 @@
 
             $('#priceRangeMin, #priceRangeMax').on('input', () => updatePriceRange());
             $('#priceRangeMinMobile, #priceRangeMaxMobile').on('input', () => updatePriceRange(true));
-            $('#priceMin, #priceMax, #priceMinMobile, #priceMaxMobile').on('change', function() {
+            $('#priceMin, #priceMax, #priceMinMobile, #priceMaxMobile').on('change', function () {
                 const isMobile = this.id.includes('Mobile');
                 const prefix = isMobile ? 'Mobile' : '';
                 const minVal = parseInt($(`#priceMin${prefix}`).val()) || 0;
@@ -817,20 +835,20 @@
             });
 
             // Filter functionality
-            const applyFilters = debounce(function() {
+            const applyFilters = debounce(function () {
                 const selectedPurposes = [];
                 const minPrice = parseInt($('#priceMin').val()) || 0;
                 const maxPrice = parseInt($('#priceMax').val()) || 999;
 
                 // Get selected purposes
-                $('.filter-options input[type="checkbox"]:checked, .offcanvas-body input[type="checkbox"]:checked').each(function() {
+                $('.filter-options input[type="checkbox"]:checked, .offcanvas-body input[type="checkbox"]:checked').each(function () {
                     const purpose = $(this).val();
                     if (!selectedPurposes.includes(purpose)) {
                         selectedPurposes.push(purpose);
                     }
                 });
 
-                $('.product-item').each(function() {
+                $('.product-item').each(function () {
                     const $item = $(this);
                     const productPrice = parseInt($item.data('price'));
                     const productPurposes = $item.data('purposes').split(',');
@@ -855,7 +873,7 @@
             }, 300);
 
             // Apply filters on checkbox change
-            $('.filter-options input[type="checkbox"], .offcanvas-body input[type="checkbox"]').on('change', function() {
+            $('.filter-options input[type="checkbox"], .offcanvas-body input[type="checkbox"]').on('change', function () {
                 syncFilters();
                 applyFilters();
             });
@@ -891,12 +909,12 @@
             }
 
             // Sort dropdown change
-            $('select').on('change', function() {
+            $('select').on('change', function () {
                 sortProducts($(this).val());
             });
 
             // Mobile sort radio change
-            $('input[name="sort"]').on('change', function() {
+            $('input[name="sort"]').on('change', function () {
                 sortProducts($(this).val());
             });
 

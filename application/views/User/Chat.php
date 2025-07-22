@@ -202,7 +202,7 @@
 
                    
 
-                        <img src="<?php echo  !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) :base_url('assets/images/astrologerimg.png')?>" alt="Profile Image" class="profile-img rounded-circle" width="30px" height="30px">
+                        <img src="<?php echo  !empty($astrologer['profile_image']) ? base_url($astrologer['profile_image']) :base_url('assets/images/astrologerimg.png')?>" alt="Profile Image" class="profile-img rounded-circle" width="30px" height="30px">
                         <h5 class="mb-0"><?php echo $astrolger_name ?></h5>
                     </div>
 

@@ -724,27 +724,27 @@ class User_Api_Model extends CI_Model
                 $this->db->where("user_id", $data["session_id"]);
                 $user_data = $this->db->get("jyotisika_users")->row_array();
 
-                  date_default_timezone_set('Asia/Kolkata');
+                date_default_timezone_set('Asia/Kolkata');
 
-                    $timestamp = date('Y-m-d H:i:s');
+                $timestamp = date('Y-m-d H:i:s');
 
 
-                    $form_data_astrologer_notification = [
+                $form_data_astrologer_notification = [
 
-                        "sender_id" => $data["session_id"],
-                        "sender_role" => "user",
-                        "receiver_id" => $data["astrologer_id"],
-                        "receiver_role" => "astrologer",
-                        "title"   => "Unfollowed",
-                        "message" => $user_data["user_name"] . " has unfollowed you.",
+                    "sender_id" => $data["session_id"],
+                    "sender_role" => "user",
+                    "receiver_id" => $data["astrologer_id"],
+                    "receiver_role" => "astrologer",
+                    "title" => "Unfollowed",
+                    "message" => $user_data["user_name"] . " has unfollowed you.",
 
-                        "type" => "info",
-                        "created_at" => $timestamp,
-                        "updated_at" => $timestamp
+                    "type" => "info",
+                    "created_at" => $timestamp,
+                    "updated_at" => $timestamp
 
-                    ];
+                ];
 
-                     $this->db->insert("jyotisika_notifications", $form_data_astrologer_notification);
+                $this->db->insert("jyotisika_notifications", $form_data_astrologer_notification);
 
 
                 return $response;
@@ -1551,7 +1551,7 @@ class User_Api_Model extends CI_Model
         $this->db->where("user_id", $notification_data["jyotisika_user_id"]);
         $querydata = $this->db->get("jyotisika_users")->row_array();
 
-       
+
         $formdata = [
             "sender_id" => $notification_data["jyotisika_user_id"],
             "sender_role" => "user",
@@ -1564,7 +1564,7 @@ class User_Api_Model extends CI_Model
             "updated_at" => $timestamp
         ];
 
-       
+
         $this->db->insert("jyotisika_notifications", $formdata);
 
 
@@ -1575,7 +1575,7 @@ class User_Api_Model extends CI_Model
             "receiver_id" => $notification_data["jyotisika_user_id"],
             "receiver_role" => "user",
             "title" => "Pooja Payment Done",
-           "message" => "You have successfully completed the payment for your pooja. Thank you!",
+            "message" => "You have successfully completed the payment for your pooja. Thank you!",
             "type" => "success",
             "created_at" => $timestamp,
             "updated_at" => $timestamp
@@ -1804,7 +1804,7 @@ class User_Api_Model extends CI_Model
                 $this->db->update('bookpuja_request_by_user_to_pujari', ['puja_status' => 'Cancelled']);
 
 
-                $this->db->where("user_id",  $puja->jyotisika_user_id);
+                $this->db->where("user_id", $puja->jyotisika_user_id);
                 $user_data = $this->db->get("jyotisika_users")->row_array();
 
                 date_default_timezone_set('Asia/Kolkata');
@@ -1817,7 +1817,7 @@ class User_Api_Model extends CI_Model
                     "receiver_id" => $puja->pujari_id,
                     "receiver_role" => "pujari",
                     "title" => "Pooja Cancelled",
-                   "message" => $user_data["user_name"] . " was unable to make the payment for the pooja, so the booking has been cancelled.",
+                    "message" => $user_data["user_name"] . " was unable to make the payment for the pooja, so the booking has been cancelled.",
                     "type" => "success",
                     "created_at" => $timestamp,
                     "updated_at" => $timestamp
@@ -1836,7 +1836,7 @@ class User_Api_Model extends CI_Model
                     "receiver_id" => $puja->jyotisika_user_id,
                     "receiver_role" => "user",
                     "title" => "Pooja Cancelled",
-                  "message" => "Your pooja booking has been cancelled as the payment was not completed. Please rebook and complete the payment to confirm.",
+                    "message" => "Your pooja booking has been cancelled as the payment was not completed. Please rebook and complete the payment to confirm.",
                     "type" => "warning",
                     "created_at" => $timestamp,
                     "updated_at" => $timestamp
@@ -2057,15 +2057,17 @@ class User_Api_Model extends CI_Model
 
 
 
-    public function show_blogs_model(){
+    public function show_blogs_model()
+    {
 
-      $query =   $this->db->get("blogs");
-      return $query->result();
+        $query = $this->db->get("blogs");
+        return $query->result();
     }
 
 
 
-    public function show_specific_blogs_model($blog_id){
+    public function show_specific_blogs_model($blog_id)
+    {
 
         $this->db->where("blog_id", $blog_id);
         $query = $this->db->get("blogs");
@@ -2074,7 +2076,8 @@ class User_Api_Model extends CI_Model
     }
 
 
-    public function show_pooja_info_model($puja_id){
+    public function show_pooja_info_model($puja_id)
+    {
 
         $this->db->where("id", $puja_id);
         $query = $this->db->get("services");
@@ -2083,20 +2086,141 @@ class User_Api_Model extends CI_Model
     }
 
 
+
+    //     public function get_top_ratedproduct()
+// {
+//     try {
+//         $this->db->select('as.*, AVG(pf.productrating) as average_rating, COUNT(pf.productrating) as total_reviews');
+//         $this->db->from('jotishika_mall as as');
+//         $this->db->join('product_feedback as pf', 'pf.product_id = as.product_id', 'left');
+//         $this->db->group_by('as.product_id');
+//         $this->db->order_by('average_rating', 'DESC');
+//         $this->db->limit(5);
+
+    //         $query = $this->db->get();
+//         $result = $query->result();
+
+    //         if (!empty($result)) {
+//             return [
+//                 "status" => "success",
+//                 "data" => $result
+//             ];
+//         } else {
+//             return [
+//                 "status" => "notfound",
+//                 "message" => "No top-rated products found."
+//             ];
+//         }
+//     } catch (Exception $e) {
+//         return [
+//             "status" => "error",
+//             "message" => "Something went wrong: " . $e->getMessage()
+//         ];
+//     }
+// }
+
+
+    // public function get_top_ratedproduct()
+    // {
+    //     try {
+    //         $this->db->select('as.*, AVG(pf.productrating) as average_rating');
+    //         $this->db->from('jotishika_mall as as');
+    //         $this->db->join('product_feedback as pf', 'pf.product_id = as.product_id', 'left');
+    //         $this->db->group_by('as.product_id');
+    //         $this->db->order_by('average_rating', 'DESC');
+    //         $this->db->limit(5);
+
+    //         $query = $this->db->get();
+    //         $result = $query->result();
+
+    //         if (!empty($result)) {
+    //             return [
+    //                 "status" => "success",
+    //                 "data" => $result
+    //             ];
+    //         } else {
+    //             return [
+    //                 "status" => "notfound",
+    //                 "message" => "No top-rated products found."
+    //             ];
+    //         }
+    //     } catch (Exception $e) {
+    //         return [
+    //             "status" => "error",
+    //             "message" => "Something went wrong: " . $e->getMessage()
+    //         ];
+    //     }
+    // }
+
+    // public function get_top_ratedproduct()
+    // {
+    //     try {
+    //         // Step 1: Get top 5 rated products
+    //         $this->db->select('as.*, AVG(pf.productrating) as average_rating');
+    //         $this->db->from('jotishika_mall as as');
+    //         $this->db->join('product_feedback as pf', 'pf.product_id = as.product_id', 'left');
+    //         $this->db->group_by('as.product_id');
+    //         $this->db->order_by('average_rating', 'DESC');
+    //         $this->db->limit(5);
+
+    //         $query = $this->db->get();
+    //         $result = $query->result();
+
+    //         // Step 2: For each product, get number of users who gave reviews
+    //         if (!empty($result)) {
+    //             foreach ($result as &$product) {
+    //                 $this->db->select('COUNT(*) as total_reviews');
+    //                 $this->db->where('product_id', $product->product_id);
+    //                 $review_query = $this->db->get('product_feedback');
+    //                 $review_result = $review_query->row();
+
+    //                 // Attach total number of reviews (rows) to each product
+    //                 $product->total_reviews = $review_result ? $review_result->total_reviews : 0;
+    //             }
+
+    //             return [
+    //                 "status" => "success",
+    //                 "data" => $result
+    //             ];
+    //         } else {
+    //             return [
+    //                 "status" => "notfound",
+    //                 "message" => "No top-rated products found."
+    //             ];
+    //         }
+    //     } catch (Exception $e) {
+    //         return [
+    //             "status" => "error",
+    //             "message" => "Something went wrong: " . $e->getMessage()
+    //         ];
+    //     }
+    // }
+
+
     public function get_top_ratedproduct()
     {
         try {
-            $this->db->select('as.*, AVG(pf.productrating) as average_rating');
+
+            $this->db->select('as.*, COUNT(*) as total_reviews');
             $this->db->from('jotishika_mall as as');
-            $this->db->join('product_feedback as pf', 'pf.product_id = as.product_id', 'left');
+            $this->db->join('product_feedback as pf', 'pf.product_id = as.product_id', 'right');
             $this->db->group_by('as.product_id');
-            $this->db->order_by('average_rating', 'DESC');
+            $this->db->order_by('total_reviews', 'DESC');
             $this->db->limit(5);
 
             $query = $this->db->get();
             $result = $query->result();
 
+
             if (!empty($result)) {
+                foreach ($result as &$product) {
+                    $this->db->select('AVG(productrating) as average_rating');
+                    $this->db->where('product_id', $product->product_id);
+                    $review_query = $this->db->get('product_feedback');
+                    $review_result = $review_query->row();
+                    $product->average_rating = $review_result ? round($review_result->average_rating, 2) : 0;
+                }
+
                 return [
                     "status" => "success",
                     "data" => $result
@@ -2116,7 +2240,239 @@ class User_Api_Model extends CI_Model
     }
 
 
+    // public function get_top_ratedproduct()
+    // {
+    //     try {
+    //         // Step 1: Get all products
+    //         $this->db->select('as.*');
+    //         $this->db->from('jotishika_mall as as');
+    //         $query = $this->db->get();
+    //         $products = $query->result();
 
+    //         $results = [];
+
+
+    //         foreach ($products as $product) {
+
+    //             $this->db->select('productrating');
+    //             $this->db->where('product_id', $product->product_id);
+    //             $feedbacks = $this->db->get('product_feedback')->result();
+
+    //             $total_reviews = count($feedbacks);
+    //             $sum_rating = 0;
+
+    //             foreach ($feedbacks as $fb) {
+    //                 $sum_rating += $fb->productrating;
+    //             }
+
+    //             $average_rating = $total_reviews > 0 ? round($sum_rating / $total_reviews, 2) : 0;
+
+
+    //             $product->total_reviews = $total_reviews;
+    //             $product->average_rating = $average_rating;
+
+    //             $results[] = $product;
+    //         }
+
+    //         // Step 3: Sort by total_reviews first, then average_rating
+    //         usort($results, function ($a, $b) {
+    //             if ($a->total_reviews == $b->total_reviews) {
+    //                 return $b->average_rating <=> $a->average_rating;
+    //             }
+    //             return $b->total_reviews <=> $a->total_reviews;
+    //         });
+
+    //         // Step 4: Limit to top 5
+    //         $top_results = array_slice($results, 0, 5);
+
+    //         if (!empty($top_results)) {
+    //             return [
+    //                 "status" => "success",
+    //                 "data" => $top_results
+    //             ];
+    //         } else {
+    //             return [
+    //                 "status" => "notfound",
+    //                 "message" => "No top-rated products found."
+    //             ];
+    //         }
+    //     } catch (Exception $e) {
+    //         return [
+    //             "status" => "error",
+    //             "message" => "Something went wrong: " . $e->getMessage()
+    //         ];
+    //     }
+    // }
+
+
+    public function show_category_model()
+    {
+        $this->db->group_by('category');
+        $query = $this->db->get('jotishika_mall');
+        return $query->result();
+    }
+
+
+    public function show_purpose_model($category)
+    {
+        $this->db->select('purpose, COUNT(*) as total');
+        $this->db->where('category', $category);
+        $this->db->group_by('purpose');
+        $query = $this->db->get('jotishika_mall'); // Your table name
+
+        return $query->result_array(); // Returns array with purpose and count
+    }
+
+
+
+    public function show_specific_category_model($category)
+    {
+        $this->db->select('jotishika_mall.*, AVG(product_feedback.productrating) as average_rating');
+        $this->db->from('jotishika_mall');
+        $this->db->join('product_feedback', 'product_feedback.product_id = jotishika_mall.product_id', 'left');
+        $this->db->where('jotishika_mall.category', $category);
+        $this->db->group_by('jotishika_mall.product_id');
+        $query = $this->db->get();
+        $result = $query->result();
+
+        return $result;
+
+
+    }
+
+
+    //       public function show_specific_category_model($category)
+// {
+//     // Step 1: Get products with average rating
+//     $this->db->select('jotishika_mall.*, AVG(product_feedback.productrating) as average_rating');
+//     $this->db->from('jotishika_mall');
+//     $this->db->join('product_feedback', 'product_feedback.product_id = jotishika_mall.product_id', 'left');
+//     $this->db->where('jotishika_mall.category', $category);
+//     $this->db->group_by('jotishika_mall.product_id');
+
+    //     $query = $this->db->get();
+//     $result = $query->result();
+
+    //     // Step 2: Add total reviews to each product
+//     if (!empty($result)) {
+//         foreach ($result as &$product) {
+//             $this->db->select('COUNT(*) as total_reviews');
+//             $this->db->where('product_id', $product->product_id);
+//             $review_query = $this->db->get('product_feedback');
+//             $review_result = $review_query->row();
+
+    //             $product->total_reviews = $review_result ? $review_result->total_reviews : 0;
+//         }
+
+    //         // Step 3: Return full structured data
+//         return [
+//             "status" => "success",
+//             "data" => $result
+//         ];
+//     } else {
+//         return [
+//             "status" => "notfound",
+//             "message" => "No products found in this category."
+//         ];
+//     }
+// }
+
+
+
+    public function get_total_product_in_category_model($category)
+    {
+        $this->db->where("category", $category);
+        return $this->db->count_all_results('jotishika_mall');
+    }
+
+
+    public function show_energy_stones_model()
+    {
+
+
+        $this->db->select('jotishika_mall.*, AVG(product_feedback.productrating) as average_rating');
+        $this->db->from('jotishika_mall');
+        $this->db->join('product_feedback', 'product_feedback.product_id = jotishika_mall.product_id', 'left');
+        $this->db->where('jotishika_mall.category', "energy stones");
+        $this->db->group_by('jotishika_mall.product_id');
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+
+
+
+
+    public function show_product_feedback_data_model()
+    {
+        $this->db->select("product_feedback.* , jyotisika_users.*, jotishika_mall.*");
+        $this->db->from('product_feedback');
+        $this->db->join("jyotisika_users", 'jyotisika_users.user_id = product_feedback.session_id');
+        $this->db->join("jotishika_mall", 'jotishika_mall.product_id = product_feedback.product_id');
+        $this->db->order_by('product_feedback.productrating', 'DESC'); // Order by highest rating
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+
+    public function show_astrologer_free_kundali_model()
+    {
+
+       $this->db->select("astrologer_registration.*, astrologer_services.*, AVG(astrologer_feedback.rating) as average_rating");
+
+        $this->db->from("astrologer_services");
+        $this->db->join("astrologer_registration", "astrologer_registration.id = astrologer_services.astrologer_id", 'Left');
+        $this->db->join('astrologer_feedback', 'astrologer_feedback.astrologer_id = astrologer_registration.id', 'Left');
+        $this->db->group_by('astrologer_registration.id');
+        $this->db->where("astrologer_registration.status", "approved");
+        $this->db->where("astrologer_registration.is_online", "1");
+        $this->db->where("astrologer_services.service_id", 1);
+        $query = $this->db->get();
+
+        $astrologers = $query->result();
+
+        foreach ($astrologers as &$astro) {
+            $chatSession = $this->db->select('start_time, expire_on')
+                ->from('chat_sessions')
+                ->where('astrologer_id', $astro->id)
+                ->where('status', 'active')
+                ->order_by('id', 'DESC')
+                ->limit(1)
+                ->get()
+                ->row();
+
+            if ($chatSession) {
+
+                date_default_timezone_set('Asia/Kolkata');
+                $timestamp = date('Y-m-d H:i:s', time());
+
+                $astro->chat_start_time = $chatSession->start_time;
+                $astro->chat_expire_on = $chatSession->expire_on;
+                $astro->chatstatus = "active";
+
+                if ($chatSession->expire_on < $timestamp) {
+                    $astro->chatvalue = "sessionnotend";
+                } else {
+                    $astro->chatvalue = null;
+                }
+
+
+            } else {
+                // $astro->chat_start_time = null;
+                // $astro->chat_expire_on = null;
+                // $astro->chatstatus = "inactive";
+
+                $astro->chat_start_time = null;
+                $astro->chat_expire_on = null;
+                $astro->chatvalue = null;
+                $astro->chatstatus = "inactive";
+            }
+        }
+
+        return $astrologers;
+
+    }
 
 
 }

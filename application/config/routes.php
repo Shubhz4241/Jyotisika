@@ -181,7 +181,7 @@ $route['festivals'] = 'Admin/Festivals';
 $route['poojalist'] = 'Admin/BookPooja';
 $route['jyotisikastore'] = 'Admin/JyotisikaStore';
 $route['profile'] = 'Admin/Profile';
-$route['anyliticsandreports'] = 'Admin/AnyliticsandReports';
+$route['anyliticsandreports'] = 'Admin/Anyliticsa   ndReports';
 $route['rescheduleinterview'] = 'Admin/RescheduleInterview';
 $route['viewastrologere/(:num)'] = 'Admin/ViewAstrologer/$1';
 $route['viewpujaridata/(:num)'] = 'Admin/ViewPujari/$1';
@@ -346,4 +346,5 @@ $route['financeprofile'] = 'Finance/FinanceProfile';
 
 //new routes by bhuvan
 // new astrologer card category filter
-$route['cardcategoryfilter'] = 'User/CardCategoryFilter';
+// $route['cardcategoryfilter'] = 'User/CardCategoryFilter';
+$route['cardcategoryfilter/(:any)'] = 'User/CardCategoryFilter/$1';

@@ -75,8 +75,8 @@
                             <a class="text-decoration-none"
                                 href="<?php echo base_url('User/ViewBlogInfo/' . $product['blog_id']); ?>">
                                 <div class="card shadow h-100 rounded-1">
-                                    <img src="<?php echo base_url($product["blog_image"]); ?>" class="card-img-top p-2"
-                                        alt="Product Image" style="height: 200px; object-fit: cover;">
+                                    <img src="<?php echo base_url("uploads/blogs/".$product["blog_image"]); ?>" class="card-img-top p-2"
+                                        alt="Product Image" style="height: 200px; object-fit: cover;"  onerror="this.onerror=null;this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
                                     <div class="card-body">
                                         <h5 class="card-title "><?php echo $product["blog_title"] ?></h5>
                                         <p class="text-muted">Today</p>

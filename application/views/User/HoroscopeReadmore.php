@@ -61,11 +61,11 @@
 <body>
 
 
-    <?php
-    // Extracting the horoscope description safely
+    <!-- <?php
+
     $description = $horoscope['data']['horoscope_data'] ?? 'Horoscope data not available.';
     $date = $horoscope['data']['date'] ?? 'Horoscope data not available.';
-    ?>
+    ?> -->
 
 
     <!-- Navbar -->
@@ -78,6 +78,8 @@
         <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
         <div class="container">
+        
+
 
             <!-- <div class="row my-4">
                 <div class="text-center mb-2">
@@ -99,15 +101,19 @@
 
             <div id="signdata" class="row my-4">
                 <div class="text-center mb-2">
-                    <h2 class="fw-bold"><?php echo ucfirst($sign); ?> <?php echo $this->lang->line('Horoscope_Today'); ?></h2>
+                    <h2 class="fw-bold"><?php echo ucfirst($sign); ?>
+                        <?php echo $this->lang->line('Horoscope_Today'); ?>
+                    </h2>
                     <p class="fs-5"><?php echo $date; ?></p>
                 </div>
                 <div>
                     <div class="position-relative">
                         <hr class="border border-dark opacity-25">
                         <div class="position-absolute top-50 start-50 translate-middle bg-white px-3">
-                            <img src="<?php echo base_url('assets/images/' . strtolower($sign) . '.png'); ?>"
+                            <img id="zodiacImage"
+                                src="<?php echo base_url('assets/images/' . strtolower($sign) . '.png'); ?>"
                                 alt="horoscope" style="width: 50px; height: 50px;">
+
                         </div>
                     </div>
                 </div>
@@ -118,9 +124,10 @@
             <div class="row my-4">
                 <div class="col-12 col-md-4 order-2 order-md-1 ">
                     <div class="card p-3 shadow border-1 rounded-2 ">
-                        <label for="zodiacSign" class="form-label fw-bold mb-2"><?php echo $this->lang->line('Select_Other_Sign'); ?></label>
+                        <label for="zodiacSign"
+                            class="form-label fw-bold mb-2"><?php echo $this->lang->line('Select_Other_Sign'); ?></label>
                         <select name="zodiacSign" id="zodiacSign" class="form-select shadow-none">
-                            <option value="Aries" <?php echo ($sign == "Aries") ? "selected" : ""; ?>>Aries</option>
+                            <option value="Aries" <?php echo ($sign == "Aries") ? "selected" : ""; ?>>Ariess</option>
                             <option value="Taurus" <?php echo ($sign == "Taurus") ? "selected" : ""; ?>>Taurus</option>
                             <option value="Gemini" <?php echo ($sign == "Gemini") ? "selected" : ""; ?>>Gemini</option>
                             <option value="Cancer" <?php echo ($sign == "Cancer") ? "selected" : ""; ?>>Cancer</option>
@@ -141,14 +148,14 @@
                     </div>
 
                     <div class="card shadow border-1 rounded-2 mt-1 p-3">
-                        <label for="horoscopeSelect" class="form-label fw-bold mb-2"><?php echo $this->lang->line('Select_Horoscope_Type'); ?></label>
+                        <label for="horoscopeSelect"
+                            class="form-label fw-bold mb-2"><?php echo $this->lang->line('Select_Horoscope_Type'); ?></label>
                         <select name="horoscopeSelect" id="horoscopeSelect" class="form-select shadow-none">
                             <option value="today" selected><?php echo $this->lang->line('Todays_Horoscope'); ?></option>
-                            <!-- <option value="tomorrow">Tomorrow Horoscope</option>
-                            <option value="yestarday">Yestarday Horoscope</option> -->
+
                             <option value="weekly"><?php echo $this->lang->line('Weekly_Horoscope'); ?></option>
                             <option value="monthly"><?php echo $this->lang->line('Monthly_Horoscope'); ?></option>
-                            <!-- <option value="yearly">Yearly Horoscope</option> -->
+
                         </select>
                     </div>
 
@@ -160,7 +167,9 @@
                                         style="width:40px; height:40px">
                                 </div>
                                 <div>
-                                    <p class=" fw-bold mb-0 text-black"><?php echo $this->lang->line('Chat_With_Astrologer'); ?></p>
+                                    <p class=" fw-bold mb-0 text-black">
+                                        <?php echo $this->lang->line('Chat_With_Astrologer'); ?>
+                                    </p>
                                 </div>
                             </div>
                         </a>
@@ -175,20 +184,31 @@
                                         style="width:40px; height:40px">
                                 </div>
                                 <div>
-                                    <p class=" fw-bold mb-0 text-black"><?php echo $this->lang->line('Chat_With_Astrologer'); ?></p>
+                                    <p class=" fw-bold mb-0 text-black">
+                                        <?php echo $this->lang->line('Chat_With_Astrologer'); ?>
+                                    </p>
                                 </div>
                             </div>
                         </a>
                     </div>
 
                 </div>
-                <div id="horoscopeContainer" class="col-12 col-md-8 order-1 order-md-2">
+                <!-- <div id="horoscopeContainer" class="col-12 col-md-8 order-1 order-md-2">
                     <div class="card shadow border-1 rounded-2 p-3">
                         <p class="fs-5 text-center fw-bold"><?php echo ucfirst($sign); ?> Today’s Horoscope</p>
                         <p style="text-align:justify;"><?php echo $description; ?></p>
 
                     </div>
+                </div> -->
+
+                <div id="horoscopeContainer" class="col-12 col-md-8 order-1 order-md-2">
+                    <div class="card shadow border-1 rounded-2 p-3">
+                        <p id="signTitle" class="fs-5 text-center fw-bold"><?php echo ucfirst($sign); ?> Today’s
+                            Horoscope</p>
+                        <div id="horoscopeContent" style="text-align: justify;"></div>
+                    </div>
                 </div>
+
 
 
             </div>
@@ -201,140 +221,269 @@
         <?php $this->load->view('IncludeUser/CommanFooter'); ?>
     </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const horoscopeSelect = document.getElementById("horoscopeSelect");
-            document.getElementById("zodiacSign").addEventListener("change", function () {
-                let selectedSign = this.value;
-                let url = "<?php echo base_url('User/HoroscopeReadmores/'); ?>" + selectedSign;
 
-                fetch(url)
-                    .then(response => response.json()) // Parse JSON response
-                    .then(data => {
-                        if (data.success && data.status === 200) {
 
-                            horoscopeSelect.value="today";
-                            document.getElementById("horoscopeContainer").innerHTML = `
-                            <div class="card shadow border-1 rounded-2 p-3">
-                                <p class="fs-5 text-center fw-bold">${selectedSign} Today’s Horoscope</p>
-                                <p style="text-align:justify;">${data.data.horoscope_data}</p>
-                            </div>
-                        `;
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const form = new FormData();
+            form.append("api_key", "b49e81e874acc04f1141569767b24b79");
+            form.append("sign", "<?php echo $sign; ?>");
+            const today = new Date();
+            form.append("day", today.getDate());
+            form.append("month", today.getMonth() + 1);
+            form.append("year", today.getFullYear());
+            form.append("tzone", "5.5");
+            form.append("lan", "en");
 
-                            // Corrected `signdata` section
-                            document.getElementById("signdata").innerHTML = `
-                            <div class="text-center mb-2">
-                                <h2 class="fw-bold">${selectedSign} Today’s Horoscope</h2>
-                                <p class="fs-5">${data.data.date}</p>
-                            </div>
-                            <div>
-                                <div class="position-relative">
-                                    <hr class="border border-dark opacity-25">
-                                    <div class="position-absolute top-50 start-50 translate-middle bg-white px-3">
-                                        <img src="<?php echo base_url('assets/images/'); ?>${selectedSign.toLowerCase()}.png"
-                                            alt="horoscope" style="width: 50px; height: 50px;">
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        } else {
-                            document.getElementById("horoscopeContainer").innerHTML = `<p>Unable to fetch horoscope data. Please try again later.</p>`;
-                        }
-                        console.log(data); // Debugging
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        document.getElementById("horoscopeContainer").innerHTML = `<p>Something went wrong. Please try again.</p>`;
-                    });
-            });
+            const options = {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g"
+                },
+                body: form,
+            };
+
+            try {
+                const res = await fetch("https://astroapi-5.divineapi.com/api/v2/daily-horoscope", options);
+                const result = await res.json();
+
+                if (result.success && result.data && result.data.prediction) {
+                    const d = result.data.prediction;
+
+                    // Create HTML string
+                    const content = `
+                <h6><strong>Emotions:</strong></h6>
+                <p>${d.emotions}</p>
+
+                <h6><strong>Health:</strong></h6>
+                <p>${d.health}</p>
+
+                <h6><strong>Personal Life:</strong></h6>
+                <p>${d.personal}</p>
+
+                <h6><strong>Profession:</strong></h6>
+                <p>${d.profession}</p>
+
+                <h6><strong>Travel:</strong></h6>
+                <p>${d.travel}</p>
+
+                <h6><strong>Luck:</strong></h6>
+                <ul>
+                    ${d.luck.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            `;
+
+                    // Inject content into the container
+                    document.getElementById("horoscopeContent").innerHTML = content;
+                } else {
+                    document.getElementById("horoscopeContent").innerHTML =
+                        "<p class='text-danger'>Unable to load horoscope. Please try again later.</p>";
+                }
+            } catch (error) {
+                console.error("Error fetching horoscope:", error);
+                document.getElementById("horoscopeContent").innerHTML =
+                    "<p class='text-danger'>Network error occurred.</p>";
+            }
         });
     </script>
 
+
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+
+ document.addEventListener("DOMContentLoaded", () => {
         const zodiacSelect = document.getElementById("zodiacSign");
-        const horoscopeSelect = document.getElementById("horoscopeSelect");
-        const horoscopeContainer = document.getElementById("horoscopeContainer");
-        const signdataContainer = document.getElementById("signdata");
 
-        function fetchHoroscope() {
-            let selectedSign = zodiacSelect.value;
-            let selectedType = horoscopeSelect.value;
-            let url = "<?php echo base_url('User/getrashidatatime'); ?>";
+        // Initial load
+        fetchHoroscope(zodiacSelect.value);
 
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ sign: selectedSign, type: selectedType })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success && data.status === 200) {
-                        let horoscopeText = data.data.horoscope_data;
-                        let dateDisplay = "";
-
-                        // Dynamically set date based on type
-                        if (selectedType === "today") {
-                            dateDisplay = data.data.date;
-                        } else if (selectedType === "weekly") {
-                            dateDisplay = data.data.week;
-                        } else if (selectedType === "monthly") {
-                            dateDisplay = data.data.month;
-                        }
-
-                        displayHoroscope(selectedSign, selectedType, horoscopeText, dateDisplay);
-                    } else {
-                        horoscopeContainer.innerHTML = `<p class="text-danger">Unable to fetch horoscope data.</p>`;
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    horoscopeContainer.innerHTML = `<p class="text-danger">Something went wrong. Please try again.</p>`;
-                });
-        }
-
-        function displayHoroscope(sign, type, horoscopeText, date) {
-            horoscopeContainer.innerHTML = `
-                <div class="card shadow border-1 rounded-2 p-3">
-                    <p class="fs-5 text-center fw-bold">${sign} ${capitalizeFirstLetter(type)} Horoscope</p>
-                    <p style="text-align:justify;">${horoscopeText}</p>
-                </div>
-            `;
-
-            signdataContainer.innerHTML = `
-                <div class="text-center mb-2">
-                    <h2 class="fw-bold">${sign} ${capitalizeFirstLetter(type)} Horoscope</h2>
-                    <p class="fs-5">${date}</p>
-                </div>
-                <div>
-                    <div class="position-relative">
-                        <hr class="border border-dark opacity-25">
-                        <div class="position-absolute top-50 start-50 translate-middle bg-white px-3">
-                            <img src="<?php echo base_url('assets/images/'); ?>${sign.toLowerCase()}.png"
-                                alt="horoscope" style="width: 50px; height: 50px;">
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-
-        // Fetch horoscope on type change
-        horoscopeSelect.addEventListener("change", fetchHoroscope);
-
-        // Initial Fetch
-        // fetchHoroscope();
+        // On change
+        zodiacSelect.addEventListener("change", function () {
+            fetchHoroscope(this.value);
+        });
     });
+
+   
+    async function fetchHoroscope(sign) {
+        const form = new FormData();
+        form.append("api_key", "b49e81e874acc04f1141569767b24b79");
+        form.append("sign", sign);
+
+        const today = new Date();
+        form.append("day", today.getDate());
+        form.append("month", today.getMonth() + 1);
+        form.append("year", today.getFullYear());
+        form.append("tzone", "5.5");
+        form.append("lan", "en");
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g"
+            },
+            body: form,
+        };
+
+        try {
+            const res = await fetch("https://astroapi-5.divineapi.com/api/v2/daily-horoscope", options);
+            const result = await res.json();
+
+            if (result.success && result.data && result.data.prediction) {
+                const d = result.data.prediction;
+
+                const content = `
+                    <h6><strong>Emotions:</strong></h6><p>${d.emotions}</p>
+                    <h6><strong>Health:</strong></h6><p>${d.health}</p>
+                    <h6><strong>Personal Life:</strong></h6><p>${d.personal}</p>
+                    <h6><strong>Profession:</strong></h6><p>${d.profession}</p>
+                    <h6><strong>Travel:</strong></h6><p>${d.travel}</p>
+                    <h6><strong>Luck:</strong></h6>
+                    <ul>${d.luck.map(item => `<li>${item}</li>`).join('')}</ul>
+                `;
+
+                document.getElementById("horoscopeContent").innerHTML = content;
+                document.getElementById("signTitle").innerText = `${sign} Today’s Horoscope`;
+            } else {
+                document.getElementById("horoscopeContent").innerHTML = "<p class='text-danger'>Unable to load horoscope.</p>";
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+            document.getElementById("horoscopeContent").innerHTML = "<p class='text-danger'>Network error occurred.</p>";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const zodiacSelect = document.getElementById("zodiacSign");
+
+        // Initial load
+        fetchHoroscope(zodiacSelect.value);
+
+        // On change
+        zodiacSelect.addEventListener("change", function () {
+            fetchHoroscope(this.value);
+        });
+    });
+
+
 </script>
+     -->
 
 
-    <!-- Container to display horoscope -->
-    <!-- <div id="horoscopeContainer" class="mt-3"></div> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const apiKey = "b49e81e874acc04f1141569767b24b79";
+            const authToken = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ..."; // shortened for clarity
+            const tzone = "5.5";
+            const lang = "en";
+
+            const zodiacSelect = document.getElementById("zodiacSign");
+            const typeSelect = document.getElementById("horoscopeSelect");
+            const container = document.getElementById("horoscopeContent");
+            const signTitle = document.querySelector("#signdata h2");
+            const signsubTitle = document.querySelector("#signTitle");
+            const signDate = document.querySelector("#signdata .fs-5");
+
+
+
+            async function fetchHoroscope() {
+
+
+
+                const sign = zodiacSelect.value;
+                const type = typeSelect.value;
+
+                const selectedSign = sign // get selected sign
+                const img = document.getElementById("zodiacImage");
+
+                img.src = `<?php echo base_url('assets/images/'); ?>${selectedSign.toLowerCase()}.png`;
+                img.alt = selectedSign + " horoscope";
+
+
+                const form = new FormData();
+                form.append("api_key", apiKey);
+                form.append("sign", sign);
+                form.append("tzone", tzone);
+                form.append("lan", lang);
+
+                let url = "";
+                if (type === "today") {
+                    const today = new Date();
+                    form.append("day", today.getDate());
+                    form.append("month", today.getMonth() + 1);
+                    form.append("year", today.getFullYear());
+                    url = "https://astroapi-5.divineapi.com/api/v2/daily-horoscope";
+                    signDate.textContent = today.toLocaleDateString("en-GB");
+                } else if (type === "weekly") {
+
+
+                    form.append("week", "current");
+                    url = "https://astroapi-5.divineapi.com/api/v3/weekly-horoscope";
+                    signDate.textContent = "This Week";
+                } else if (type === "monthly") {
+                    form.append("month", "current");
+                    url = "https://astroapi-5.divineapi.com/api/v3/monthly-horoscope";
+                    signDate.textContent = "This Month";
+                }
+
+                signTitle.innerHTML = `${sign} Horoscope`;
+
+                signsubTitle.innerHTML = `${sign} Horoscope`;
+                try {
+                    const res = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Authorization": authToken
+                        },
+                        body: form
+                    });
+
+                    const result = await res.json();
+                    console.log(result);
+
+                    // ----------------- NEW unified rendering block -----------------
+                    let pred;
+
+                    // choose the correct field based on the selected type
+                    if (type === "today") {
+                        pred = result.data.prediction || result.data.daily_horoscope;
+                    } else if (type === "weekly") {
+                        pred = result.data.weekly_horoscope;
+                    } else if (type === "monthly") {
+                        pred = result.data.monthly_horoscope;
+                    }
+
+                   
+                    if (result.success && pred) {
+                        container.innerHTML = `
+        ${result.data.week ? `<h6><strong>Week:</strong> ${result.data.week}</h6>` : ""}
+        ${result.data.month ? `<h6><strong>Month:</strong> ${result.data.month}</h6>` : ""}
+
+        <h6><strong>Emotions:</strong></h6><p>${pred.emotions}</p>
+        <h6><strong>Health:</strong></h6><p>${pred.health}</p>
+        <h6><strong>Personal:</strong></h6><p>${pred.personal}</p>
+        <h6><strong>Profession:</strong></h6><p>${pred.profession}</p>
+        <h6><strong>Travel:</strong></h6><p>${pred.travel}</p>
+        <h6><strong>Luck:</strong></h6>
+        <ul>${(pred.luck || []).map(item => `<li>${item}</li>`).join("")}</ul>
+    `;
+                    } else {
+                        container.innerHTML = `<p class="text-danger">No data found for ${type} horoscope.</p>`;
+                    }
+                    // ----------------------------------------------------------------
+
+                } catch (err) {
+                    console.error(err);
+                    container.innerHTML = `<p class="text-danger">API request failed. Please try again later.</p>`;
+                }
+            }
+
+            zodiacSelect.addEventListener("change", fetchHoroscope);
+            typeSelect.addEventListener("change", fetchHoroscope);
+
+            fetchHoroscope(); // load default
+        });
+    </script>
+
+
 
 
 

@@ -127,14 +127,14 @@
                                         <li><a href="<?php echo base_url("bookpooja") ?>" class="footer-links"><?php
                                                                                                                 echo $this->lang->line('freekundali') ? $this->lang->line('freekundali') : 'Free Kundali'; ?></a>
                                         </li>
-                                        <li><a href="<?php echo base_url("todayhoroscope") ?>"
+                                        <li><a href="<?php echo base_url("kundlimatching") ?>"
                                                         class="footer-links"><?php echo $this->lang->line('kundlimatching') ? $this->lang->line('kundlimatching') : 'Kundli Matching'; ?></a>
                                         </li>
                                         <li><a href="<?php echo base_url("freekundli") ?>" class="footer-links">
                                                         <?php echo $this->lang->line('Horoscope') ? $this->lang->line('Horoscope') : 'Horoscope'; ?>
                                                 </a>
                                         </li>
-                                        <li><a href="<?php echo base_url("kundlimatching") ?>" class="footer-links">
+                                        <li><a href="<?php echo base_url("jyotisikamall") ?>" class="footer-links">
                                                         <?php echo $this->lang->line('jyotisikamall') ? $this->lang->line('jyotisikamall') : 'Jyotisika Mall'; ?></a>
                                         </li>
 
@@ -150,7 +150,7 @@
                                         <li><a href="<?php echo base_url("festival") ?>"
                                                         class="footer-links"><?php echo $this->lang->line('festival') ? $this->lang->line('festival') : 'Festival'; ?></a>
                                         </li>
-                                        <li><a href="<?php echo base_url("MobPooja") ?>" class="footer-links"> <?php
+                                        <li><a href="<?php echo base_url("bookpooja") ?>" class="footer-links"> <?php
                                                                                                                 echo $this->lang->line('bookpuja') ? $this->lang->line('bookpuja') : 'Book Puja';
                                                                                                                 ?>
                                                 </a>
@@ -193,6 +193,56 @@
                                 </ul>
                         </div>
 
+                         <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+                                       Get Free Kundali
+                                </h5>
+                                <ul class="list-unstyled">
+
+                                        <li><a href="<?php echo base_url("freekundli") ?>"
+                                                        class="footer-links">Basic Astrology</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("freekundli") ?>" class="footer-links">Birth Chat</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("freekundli") ?>" class="footer-links">Planetary positions
+                                                       </a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("freekundli") ?>"
+                                                        class="footer-links">Bhava Kundali</a>
+                                        </li>
+
+                                        <li><a href="<?php echo base_url("freekundli") ?>"
+                                                        class="footer-links">Manglik Dosh</a>
+                                        </li>
+
+                                        <li><a href="<?php echo base_url("freekundli") ?>"
+                                                        class="footer-links">Vimshottari dasha</a>
+                                        </li>
+                                        
+
+                                </ul>
+                        </div>
+
+                         <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+                                        Horoscope
+                                </h5>
+                                <ul class="list-unstyled">
+
+                                        <li><a href="<?php echo base_url("horoscopereadmore/Aries") ?>"
+                                                        class="footer-links">Today's Horoscope</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("horoscopereadmore/Aries") ?>" class="footer-links">Weekly Horoscope</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("horoscopereadmore/Aries") ?>" class="footer-links">Monthly Horoscope</a>
+                                        </li>
+                                        
+
+                                </ul>
+                        </div>
+
+
+
 
 
 
@@ -203,6 +253,8 @@
                                         <!-- JavaScript will populate this -->
                                 </ul>
                         </div>
+
+                        
 
                         <div class="col-12 col-sm-4 col-md-2">
                                 <h5 class="fw-bold">

@@ -61,8 +61,8 @@
                 <div class="col-md-8 mx-auto">
                     <!-- Blog Image -->
                     <div class="blog-image text-center mb-4">
-                        <img src="<?php echo !empty($blogdata[0]["blog_image"]) ? base_url($blogdata[0]["blog_image"]) : base_url('assets/images/default-blog.png'); ?>"
-                            class="img-fluid w-50" alt="Blog Image">
+                        <img src="<?php echo !empty($blogdata[0]["blog_image"]) ? base_url("uploads/blogs/".$blogdata[0]["blog_image"]) : base_url('assets/images/default-blog.png'); ?>"
+                            class="img-fluid w-50" alt="Blog Image" >
                     </div>
 
 

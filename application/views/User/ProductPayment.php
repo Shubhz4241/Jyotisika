@@ -124,16 +124,13 @@
                                             <img src="<?php echo base_url( 'uploads/products/'.$product_data['product_image']); ?>"
                                               style="max-width: 60%; height: 150px;"   class="img-fluid rounded shadow-sm w-50 object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
 
-                                                 <!-- <img src="<?php echo base_url($product_data[0]["product_image"]); ?>" class="img-fluid product-image"
-                    style="max-width: 60%; height: 350px; object-fit: contain;" alt="Rudraksh" onerror="this.onerror=null; this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';"> -->
-
-  
+                                           
                                         </div>
                                         <div>
                                             <h5 class="fw-bold text-dark"><?php echo $product_data["product_name"] ?></h5>
                                             <div class="price-section mb-3">
                                                 <p class="fw-bold mb-1 product-price" data-price="999">
-                                                    <strong>Price:</strong> ₹ <?php echo $product_data["product_price"] ?>
+                                                    <strong>Price:</strong> ₹ <?php echo $product_data["discount_price"] ?>
                                                 </p>
                                                 <p>
                                                     <strong>Quantity:</strong> <span
@@ -143,7 +140,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php $sum += $product_data['product_price'] * $product_data['product_quantity']; ?>
+                                <?php $sum += $product_data['discount_price'] * $product_data['product_quantity']; ?>
                             <?php endforeach ?>
                         <?php endif ?>
 
