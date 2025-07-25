@@ -31,6 +31,8 @@
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
 
+  
+
 
     <main>
         <section class="pooja-info-section py-5">
@@ -49,17 +51,17 @@
                         <div class="pooja-details bg-light p-4 rounded shadow">
                             <h2 class="mb-4" style="color:var(--red)"><?php echo $puja_data[0]["name"] ?></h2>
                             <div class="description mb-4">
-                                <h4 class="text-secondary">Description</h4>
+                                <h4 class="text-secondary"><?php echo $this->lang->line('description') ?></h4>
                                 <p><?php echo $puja_data[0]["description"] ?></p>
                             </div>
 
-                            <p><b>
-                                    Price:- 5500.00
-                                </b></p>
+                            <b>
+                                     <p>  <?php echo $this->lang->line('price') ?> <?php echo $puja_data[0]["price"] ?></p>
+                                </b>
                             <div class="d-flex gap-3 mb-4">
                                 <a href="<?php echo base_url("OnlinePoojaris/") . $puja_data[0]["id"] ?>"
                                     class="btn rounded-1" style="background-color: green; color:white;">
-                                    Book Online Pooja
+                                     <?php echo $this->lang->line('book_online_pooja') ?>   
                                 </a>
                                 <!-- <a href="<?php echo base_url('offlinepoojaris') ?>" class="btn btn-outline-dark btnHover rounded-1">
                             Book Offline Pooja
@@ -67,41 +69,47 @@
                             </div>
 
                             <div class="procedure">
-                                <h4 class="text-secondary">Procedure</h4>
-                                <p>The pooja follows these steps:</p>
+                                <h4 class="text-secondary">  <?php echo $this->lang->line('procedure') ?>   </h4>
+                                <p> <?php echo $this->lang->line('procedure_steps_intro') ?>   </p>
                                 <ul>
                                     <li>
-                                        Initial prayers and sankalpam
+                                         <?php echo $this->lang->line('procedure_step1') ?>  
+                                        
+
                                     </li>
                                     <li>
-                                        Main ritual performance
+                                          <?php echo $this->lang->line('procedure_step2') ?>  
+                                        
+                               
                                     </li>
                                     <li>
-                                        Offerings to deities
+                                        <?php echo $this->lang->line('procedure_step3') ?>  
+                               
                                     </li>
                                     <li>
-                                        Final aarti and prasad distribution
+                                        <?php echo $this->lang->line('procedure_step4') ?>  
+                                        
                                     </li>
                                 </ul>
                             </div>
                             <div class="benefits mb-4">
-                                <h4 class="text-secondary">Benefits</h4>
+                                <h4 class="text-secondary">   <?php echo $this->lang->line('benefits') ?> </h4>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
                                         <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        Bring peace and harmony
+                                         <?php echo $this->lang->line('benefit1') ?>  
                                     </li>
                                     <li class="list-group-item">
                                         <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        Remove obstacles
+                                         <?php echo $this->lang->line('benefit2') ?> 
                                     </li>
                                     <li class="list-group-item">
                                         <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        Enhance spiritual growth
+                                         <?php echo $this->lang->line('benefit3') ?>  
                                     </li>
                                     <li class="list-group-item">
                                         <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        Promote overall well-being
+                                        <?php echo $this->lang->line('benefit4') ?>  
                                     </li>
                                 </ul>
                             </div>

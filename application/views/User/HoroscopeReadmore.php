@@ -127,21 +127,21 @@
                         <label for="zodiacSign"
                             class="form-label fw-bold mb-2"><?php echo $this->lang->line('Select_Other_Sign'); ?></label>
                         <select name="zodiacSign" id="zodiacSign" class="form-select shadow-none">
-                            <option value="Aries" <?php echo ($sign == "Aries") ? "selected" : ""; ?>>Ariess</option>
-                            <option value="Taurus" <?php echo ($sign == "Taurus") ? "selected" : ""; ?>>Taurus</option>
-                            <option value="Gemini" <?php echo ($sign == "Gemini") ? "selected" : ""; ?>>Gemini</option>
-                            <option value="Cancer" <?php echo ($sign == "Cancer") ? "selected" : ""; ?>>Cancer</option>
-                            <option value="Leo" <?php echo ($sign == "Leo") ? "selected" : ""; ?>>Leo</option>
-                            <option value="Virgo" <?php echo ($sign == "Virgo") ? "selected" : ""; ?>>Virgo</option>
-                            <option value="Libra" <?php echo ($sign == "Libra") ? "selected" : ""; ?>>Libra</option>
-                            <option value="Scorpio" <?php echo ($sign == "Scorpio") ? "selected" : ""; ?>>Scorpio</option>
+                            <option value="Aries" <?php echo ($sign == "Aries") ? "selected" : ""; ?>><?php echo $this->lang->line('Aries')?></option>
+                            <option value="Taurus" <?php echo ($sign == "Taurus") ? "selected" : ""; ?>><?php echo $this->lang->line('Taurus')?></option>
+                            <option value="Gemini" <?php echo ($sign == "Gemini") ? "selected" : ""; ?>><?php echo $this->lang->line('Gemini')?></option>
+                            <option value="Cancer" <?php echo ($sign == "Cancer") ? "selected" : ""; ?>><?php echo $this->lang->line('Cancer')?></option>
+                            <option value="Leo" <?php echo ($sign == "Leo") ? "selected" : ""; ?>><?php echo $this->lang->line('Leo')?></option>
+                            <option value="Virgo" <?php echo ($sign == "Virgo") ? "selected" : ""; ?>><?php echo $this->lang->line('Virgo')?></option>
+                            <option value="Libra" <?php echo ($sign == "Libra") ? "selected" : ""; ?>><?php echo $this->lang->line('Libra')?></option>
+                            <option value="Scorpio" <?php echo ($sign == "Scorpio") ? "selected" : ""; ?>><?php echo $this->lang->line('Scorpio')?></option>
                             <option value="Sagittarius" <?php echo ($sign == "Sagittarius") ? "selected" : ""; ?>>
-                                Sagittarius</option>
-                            <option value="Capricorn" <?php echo ($sign == "Capricorn") ? "selected" : ""; ?>>Capricorn
+                                <?php echo $this->lang->line('Sagittarius')?></option>
+                            <option value="Capricorn" <?php echo ($sign == "Capricorn") ? "selected" : ""; ?>><?php echo $this->lang->line('Capricorn')?>
                             </option>
-                            <option value="Aquarius" <?php echo ($sign == "Aquarius") ? "selected" : ""; ?>>Aquarius
+                            <option value="Aquarius" <?php echo ($sign == "Aquarius") ? "selected" : ""; ?>><?php echo $this->lang->line('Aquarius')?>
                             </option>
-                            <option value="Pisces" <?php echo ($sign == "Pisces") ? "selected" : ""; ?>>Pisces</option>
+                            <option value="Pisces" <?php echo ($sign == "Pisces") ? "selected" : ""; ?>><?php echo $this->lang->line('Pisces')?></option>
                         </select>
 
 
@@ -472,7 +472,7 @@
 
                 } catch (err) {
                     console.error(err);
-                    container.innerHTML = `<p class="text-danger">API request failed. Please try again later.</p>`;
+                    container.innerHTML = `<p class="text-danger">Data not available due to server problem</p>`;
                 }
             }
 

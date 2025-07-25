@@ -69,11 +69,11 @@
                                     <!-- Details Section -->
                                     <div class="d-flex flex-column gap-2 mb-3">
                                         <span class="small text-muted">(<?php echo $showmobpujadata["completed_puja_count"]; ?>+
-                                            Poojas)</span>
+                                            <?php echo $this->lang->line('poojas') ?>)</span>
 
                                         <div class="d-flex align-items-center small">
                                             <i class="bi bi-calendar2-check me-2 text-success"></i>
-                                            <span><?php echo $showmobpujadata["experience"]; ?> Years</span>
+                                            <span><?php echo $showmobpujadata["experience"]; ?> +<?php echo $this->lang->line('Year') ?> </span>
                                         </div>
 
                                         <div class="d-flex align-items-center small">

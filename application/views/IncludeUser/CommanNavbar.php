@@ -210,7 +210,7 @@
 
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Notification'); ?>">
-                                    <i class="bi bi-bell me-2"></i> Notifications
+                                    <i class="bi bi-bell me-2"></i>  <?php echo $this->lang->line('notifications') ?: "Notifications"; ?> 
                                     <span id="notificationCount" class="badge bg-danger rounded-pill float-end me-2"
                                 style="display:none;">0</span>
                                 </a>
@@ -256,25 +256,33 @@
 
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Orders'); ?>">
-                                    <i class="bi bi-bag me-2"></i> My Orders
+                                    <i class="bi bi-bag me-2"></i><?php echo $this->lang->line('my_orders') ?: "my orders"; ?>  
                                 </a>
                             </li>
+
+                             <li>
+                                <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Cart'); ?>">
+                                   <i class="bi bi-cart me-2"></i><?php echo $this->lang->line('your_cart') ?: "your cart"; ?> 
+                                </a>
+                            </li>
+
+
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Following'); ?>">
-                                    <i class="bi bi-heart me-2"></i> Following
+                                    <i class="bi bi-heart me-2"></i><?php echo $this->lang->line('following') ?: "Following"; ?> 
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('CustomerSupport'); ?>">
                                     <i class="bi bi-gear me-2"></i>
-                                    <?php echo $this->lang->line('Customer_Support') ? $this->lang->line('Customer_Support') : 'Customer_Support'; ?>
+                                    <?php echo $this->lang->line('Customer_Support') ? $this->lang->line('Customer_Support') : 'Customer Support'; ?>
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item py-2 ps-4"
                                     href="https://api.whatsapp.com/send?text=Check%20out%20this%20awesome%20website!%20https%3A%2F%2Fexample.com"
                                     target="_blank">
-                                    <i class="bi bi-share me-2"></i> Refer to Friends
+                                    <i class="bi bi-share me-2"></i> <?php echo $this->lang->line('refer_to_friends') ?: "Refer to friends"; ?> 
                                 </a>
                             </li>
                             <li>
@@ -282,7 +290,7 @@
                             </li>
                             <li>
                                 <a class="dropdown-item py-2 ps-4 text-danger" href="<?php echo base_url('Logout'); ?>">
-                                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                    <i class="bi bi-box-arrow-right me-2"></i><?php echo $this->lang->line('logout') ?: "Logout"; ?>  
                                 </a>
                             </li>
                         </ul>

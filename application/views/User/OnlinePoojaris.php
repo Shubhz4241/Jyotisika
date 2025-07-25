@@ -61,7 +61,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group w-100 text-center mx-auto">
                         <input id="searchInput" type="search" class="form-control shadow-none"
-                            placeholder="Search astrologer by name, expertise or language" onkeyup="filterCards()">
+                            placeholder=    "<?php echo $this->lang->line('search_astrologer') ?>" onkeyup="filterCards()">
 
                     </div>
                 </div>
@@ -93,14 +93,14 @@
                 <div class="col-md-3 text-center">
                     <a href="<?php echo base_url('bookpooja'); ?>"
                        class="btn btn-outline-primary rounded-pill px-4">
-                        View More
+                       <?php echo $this->lang->line('ViewMore') ?>
                     </a>
                 </div>
             </div>
         </div>
     <?php endforeach; ?>
 <?php else: ?>
-    <p class="text-muted">No services found.</p>
+    <p class="text-muted"><?php echo $this->lang->line('no_services_found') ?></p>
 <?php endif; ?>
 
 
@@ -149,7 +149,7 @@
                                                 <i class="bi bi-star-fill small" style="color: #ffd700;"></i>
                                                 <span class="small text-muted mt-1"><?php echo $pujaridata["average_rating"] ?>
                                                     (<?php echo $pujaridata["completed_puja_count"] ?>
-                                                    + Poojas)</span>
+                                                    +<?php echo $this->lang->line('poojas') ?> )</span>
                                             </div>
                                         </div>
                                     </div>
@@ -165,7 +165,7 @@
                                                 <div class="d-flex align-items-center small">
                                                     <i class="bi bi-calendar2-check me-1 text-success"></i>
                                                     <span class="card-experience"><?php echo $pujaridata["experience"] ?>
-                                                        +Years</span>
+                                                        + <?php echo $this->lang->line('Year') ?></span>
                                                 </div>
                                             </div>
 

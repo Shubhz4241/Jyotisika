@@ -57,6 +57,48 @@ $lang['Birth_Chart'] = "जन्म पत्रिका";
 $lang['Numerology_Calculator'] = "अंकशास्त्र कॅल्क्युलेटर";
 $lang['Baby_Name'] = "बाळाचे नाव";
 
+$lang['Blog_Heading'] = "ज्योतिषाचे ब्लॉग्स";
+$lang['Blog_Subtext'] = "तारे समजून घ्या, आपले भविष्य उलगडा करा.";
+$lang['No_Blogs_Message'] = "सध्या कोणतेही ब्लॉग्स उपलब्ध नाहीत";
+
+//TOP shop
+
+$lang['Top_Shop_Heading'] = "सर्वोत्तम दुकान";
+$lang['Top_Shop_Subtext'] = "तुमच्या प्रवासासाठी आवश्यक दैवी वस्तू.";
+
+
+//Free Kundli
+
+$lang['Free_Kundli_Generation'] = "मोफत कुंडली तयार करा";
+$lang['Astrology'] = "ज्योतिष";
+$lang['Planetary_Positions'] = "ग्रहांची स्थिती";
+$lang['Positions'] = "स्थिती";
+$lang['Vimshottari_Dasha'] = "विंशोत्तरी दशा";
+$lang['Ascendant'] = "लग्न";
+$lang['Report'] = "अहवाल";
+$lang['Gemstone_Recommendation'] = "रत्न शिफारस";
+$lang['Composite_Friendship'] = "सांघिक मैत्री";
+$lang['Shadbala'] = "षड्बल";
+$lang['Yogini_Dasha'] = "योगिनी दशा";
+$lang['Horoscope_Charts'] = "जन्मकुंडली चार्ट्स";
+$lang['Manglik_Dosha'] = "मंगळ दोष";
+$lang['Kaal_Sarpa_Dosha'] = "कालसर्प दोष";
+$lang['Bhava_Kundli'] = "भाव कुंडली";
+$lang['Sadhe_Sati'] = "साडेसाती";
+
+
+
+//Astroloegr cart
+
+
+$lang['Busy'] = "व्यस्त";
+$lang['Available'] = "उपलब्ध";
+$lang['Chat'] = "चॅट करा";
+$lang['Call'] = "कॉल करा";
+$lang['No_Astrologers_Found'] = "कोणतेही ज्योतिषी सापडले नाहीत.";
+
+$lang['Year'] = "वर्ष";
+$lang['Rs'] = "₹ प्रति मिनिट";
 
 //Comman nav bar
 
@@ -114,6 +156,31 @@ $lang['Vastu_Experts'] = "वास्तु तज्ञ";
 $lang['Numerologist'] = "संख्या शास्त्रज्ञ";
 
 
+$lang['astrological_services'] = "ज्योतिष सेवा";
+$lang['finance'] = "आर्थिक बाबी";
+$lang['ask_question'] = "प्रश्न विचारा";
+$lang['career_and_job'] = "करिअर आणि नोकरी";
+
+
+
+$lang['get_free_kundali'] = "मोफत कुंडली मिळवा";
+$lang['basic_astrology'] = "मूलभूत ज्योतिष";
+$lang['planetary_position'] = "ग्रह स्थिती";
+$lang['vimshottari_dasha'] = "विंशोत्तरी दशा";
+$lang['ascendant_report'] = "लग्न अहवाल";
+$lang['manglik_dosha'] = "मंगळ दोष";
+$lang['gemstone_recommendation'] = "रत्न शिफारस";
+
+
+
+$lang['horoscope'] = "राशिभविष्य";
+$lang['todays_horoscope'] = "आजचे राशिभविष्य";
+$lang['weekly_horoscope'] = "साप्ताहिक राशिभविष्य";
+$lang['monthly_horoscope'] = "मासिक राशिभविष्य";
+
+
+$lang['online_consultations'] = "ऑनलाइन सल्ला";
+$lang['contact_us'] = "आमच्याशी संपर्क साधा";
 
 //Festivals
 
@@ -435,6 +502,8 @@ $lang['View_Details'] = "तपशील पहा";
 $lang['No_Product'] = "कोणताही उत्पादन उपलब्ध नाही";
 $lang['Photo_Gallery'] = "आमचा फोटो गॅलरी";
 
+$lang['rudraksha'] = "रुद्राक्ष";
+
 
 
 $lang['Reviews'] = "समीक्षा";
@@ -491,3 +560,64 @@ $lang['best_sellers']        = "सर्वाधिक विक्री";
 $lang['energy_stones']       = "उर्जा दगड";
 $lang['gallery']             = "गॅलरी";
 $lang['customer_reviews']    = "ग्राहक पुनरावलोकने";
+
+
+// Marathi
+$lang['Follow'] = "फॉलो करा";
+$lang['Following'] = "फॉलो करत आहे";
+$lang['specialties'] = "विशेषज्ञता";
+$lang['Experience'] = "अनुभव";
+$lang['Years'] = "वर्षे";
+$lang['Languages'] = "भाषा";
+$lang['Consultation Fee'] = "सल्लामसलत शुल्क";
+$lang['/min'] = "प्रति मिनिट";
+$lang['About'] = "विषयी";
+$lang['User_Reviews'] = "वापरकर्त्यांच्या पुनरावलोकने";
+
+
+$lang['available_balance'] = "उपलब्ध शिल्लक";
+$lang['rs_prefix'] = "रु.";
+$lang['zero_amount'] = "०००";
+
+$lang['recharge'] = "रीचार्ज";
+
+
+//Book pooja
+
+$lang['online'] = "ऑनलाईन";
+
+$lang['book_pooja_prompt'] = "चला तुमची पूजा बुक करूया, तुम्हाला कशामध्ये मदत हवी आहे?";
+
+// Marathi
+$lang['view_more_title'] = "अधिक पहा";
+$lang['description'] = "वर्णन";
+$lang['price'] = "किंमत :-";
+$lang['book_online_pooja'] = "ऑनलाइन पूजा बुक करा";
+$lang['procedure'] = "प्रक्रिया";
+$lang['procedure_steps_intro'] = "पूजेसाठी खालील टप्पे आहेत:";
+$lang['procedure_step1'] = "प्रारंभिक प्रार्थना आणि संकल्प";
+$lang['procedure_step2'] = "मुख्य विधी";
+$lang['procedure_step3'] = "देवतांना अर्पण";
+$lang['procedure_step4'] = "अंतिम आरती व प्रसाद वितरण";
+$lang['benefits'] = "फायदे";
+$lang['benefit1'] = "शांती आणि सौहार्द निर्माण करतो";
+$lang['benefit2'] = "अडथळे दूर करतो";
+$lang['benefit3'] = "आध्यात्मिक वाढ वाढवतो";
+$lang['benefit4'] = "एकूणच कल्याणात वाढ होते";
+
+
+//Online poojaries
+$lang['search_astrologer'] = "ज्योतिष नाव, विशेषज्ञता किंवा भाषेनुसार शोधा";
+$lang['no_services_found'] = "कोणतीही सेवा सापडली नाही";
+$lang['poojas'] = "पूजा";
+
+
+//NavBar
+$lang['notifications'] = "सूचना";
+$lang['my_orders'] = "माझी ऑर्डर्स";
+$lang['your_cart'] = "तुमची कार्ट";
+$lang['following'] = "अनुसरण करत आहे";
+$lang['refer_to_friends'] = "मित्रांना शिफारस करा";
+$lang['logout'] = "बाहेर पडा";
+
+$lang['your_notifications'] = "तुमच्या सूचना";

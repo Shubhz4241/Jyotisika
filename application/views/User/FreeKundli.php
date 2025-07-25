@@ -227,6 +227,14 @@
                         <option value="sadhe_sati">Sadhe Sati</option>
                         <option value="horoscope">Horoscope Charts</option>
 
+
+
+                        <!-- <option value="yogas">Yogas</option>
+                        <option value="kal_chakra">Kal Chakra Dasha</option>
+                        <option value="sudarshan_chakra">Sudarshana Chakra </option>
+                        <option value="planet_data">Planet Analysis</option>
+                        <option value="ghata_chakra">Ghata Chakra </option> -->
+
                     </select>
 
                     <center>
@@ -497,8 +505,7 @@
                     apiUrl = "<?= base_url('User_Api_Controller/shadbala'); ?>";
                     break;
 
-
-
+                
                 case "horoscope":
                 default:
                     apiUrl = "<?= base_url('User_Api_Controller/getKundli'); ?>";
@@ -540,10 +547,10 @@
 
                             output.innerHTML = html;
                         }
-                      else if (selectedFeature === 'sadhe_sati') {
-    const ss = data.data.data.sadhesati;
+                        else if (selectedFeature === 'sadhe_sati') {
+                            const ss = data.data.data.sadhesati;
 
-    const html = `
+                            const html = `
         <div class="alert alert-success">Sadhe Sati Data Loaded</div>
 
         <div class="bg-light p-4 rounded shadow-sm mt-3">
@@ -563,8 +570,8 @@
         </div>
     `;
 
-    output.innerHTML = html;
-}
+                            output.innerHTML = html;
+                        }
 
 
                         else if (selectedFeature === 'manglik') {
@@ -594,10 +601,10 @@
                             output.innerHTML = html;
                         }
 
-                       else if (selectedFeature === 'horoscope') {
-    const kundli = data.data.data;
+                        else if (selectedFeature === 'horoscope') {
+                            const kundli = data.data.data;
 
-    const html = `
+                            const html = `
         <div class="alert alert-success">Kundli Data Loaded</div>
 
         <h5 class="text-center mt-4">🔹 Horoscope (Janma Kundli) Overview</h5>
@@ -613,8 +620,8 @@
         </div>
     `;
 
-    output.innerHTML = html;
-}
+                            output.innerHTML = html;
+                        }
 
                         else if (selectedFeature === 'basicastrology') {
                             const astro = data.data.data;
@@ -840,11 +847,11 @@
                         }
 
                         else if (selectedFeature === 'gemstone_suggestions') {
-    const gemData = data.data.data;
-    const lifeStone = gemData.lucky_stone || {};
-    const dashaStone = gemData.dasha_stone || [];
+                            const gemData = data.data.data;
+                            const lifeStone = gemData.lucky_stone || {};
+                            const dashaStone = gemData.dasha_stone || [];
 
-    let html = `
+                            let html = `
         <div class="alert alert-success">Gemstone Suggestions Loaded</div>
 
         <div class="card mb-4 shadow-sm">
@@ -884,8 +891,8 @@
         </div>
     `;
 
-    if (dashaStone.length > 0) {
-        html += `
+                            if (dashaStone.length > 0) {
+                                html += `
         <div class="card shadow-sm">
             <div class="card-header bg-info text-white">
                 <h5 class="mb-0">🔮 Dasha Stone Recommendations</h5>
@@ -907,8 +914,8 @@
                         <tbody>
         `;
 
-        dashaStone.forEach((stone, index) => {
-            html += `
+                                dashaStone.forEach((stone, index) => {
+                                    html += `
                 <tr>
                     <td>${index + 1}</td>
                     <td>${stone.gemstones?.Primary || 'N/A'}</td>
@@ -919,28 +926,28 @@
                     <td>${stone.mantra || 'N/A'}</td>
                 </tr>
             `;
-        });
+                                });
 
-        html += `
+                                html += `
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
         `;
-    }
+                            }
 
-    output.innerHTML = html;
-}
+                            output.innerHTML = html;
+                        }
 
-                      else if (selectedFeature === 'composite_friendship') {
-    const friendshipData = data.data.data;
+                        else if (selectedFeature === 'composite_friendship') {
+                            const friendshipData = data.data.data;
 
-    function createFriendshipTable(title, dataObject) {
-        const planets = Object.keys(dataObject);
-        const headers = [''].concat(Object.keys(dataObject[planets[0]]));
+                            function createFriendshipTable(title, dataObject) {
+                                const planets = Object.keys(dataObject);
+                                const headers = [''].concat(Object.keys(dataObject[planets[0]]));
 
-        let table = `
+                                let table = `
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-dark text-white">
                     <h5 class="mb-0">${title}</h5>
@@ -955,39 +962,39 @@
                         <tbody>
         `;
 
-        planets.forEach(planet => {
-            table += `<tr><th>${planet}</th>`;
-            headers.slice(1).forEach(other => {
-                table += `<td>${dataObject[planet][other] || '-'}</td>`;
-            });
-            table += `</tr>`;
-        });
+                                planets.forEach(planet => {
+                                    table += `<tr><th>${planet}</th>`;
+                                    headers.slice(1).forEach(other => {
+                                        table += `<td>${dataObject[planet][other] || '-'}</td>`;
+                                    });
+                                    table += `</tr>`;
+                                });
 
-        table += `
+                                table += `
                         </tbody>
                     </table>
                 </div>
             </div>
         `;
 
-        return table;
-    }
+                                return table;
+                            }
 
-    let html = `<div class="alert alert-success">Composite Friendship Data Loaded</div>`;
+                            let html = `<div class="alert alert-success">Composite Friendship Data Loaded</div>`;
 
-     html += createFriendshipTable("⚖️ Five-Fold Friendship", friendshipData.five_fold_friendship);
-    html += createFriendshipTable("🌐 Natural Friendship", friendshipData.natural_friendship);
-    html += createFriendshipTable("🔁 Temporary Friendship", friendshipData.temporary_friendship);
-   
+                            html += createFriendshipTable("⚖️ Five-Fold Friendship", friendshipData.five_fold_friendship);
+                            html += createFriendshipTable("🌐 Natural Friendship", friendshipData.natural_friendship);
+                            html += createFriendshipTable("🔁 Temporary Friendship", friendshipData.temporary_friendship);
 
-    output.innerHTML = html;
-}
+
+                            output.innerHTML = html;
+                        }
 
                         else if (selectedFeature === 'shadbala') {
-    const shadbala = data.data.data;
+                            const shadbala = data.data.data;
 
-    const planets = Object.keys(shadbala.shadbala_in_rupa);
-    let html = `
+                            const planets = Object.keys(shadbala.shadbala_in_rupa);
+                            let html = `
         <div class="alert alert-success">Shadbala (षड्बल) Data Loaded</div>
         <div class="card shadow-sm mb-4">
             <div class="card-header bg-dark text-white">
@@ -1008,17 +1015,17 @@
                     <tbody>
     `;
 
-    planets.forEach(planet => {
-        const rupa = shadbala.shadbala_in_rupa[planet] || 0;
-        const total = shadbala.total_shadbala[planet] || 0;
-        const min = shadbala.min_require[planet] || 0;
-        const ratio = shadbala.ratio[planet] || 0;
-        const rank = shadbala.rank[planet] || '-';
+                            planets.forEach(planet => {
+                                const rupa = shadbala.shadbala_in_rupa[planet] || 0;
+                                const total = shadbala.total_shadbala[planet] || 0;
+                                const min = shadbala.min_require[planet] || 0;
+                                const ratio = shadbala.ratio[planet] || 0;
+                                const rank = shadbala.rank[planet] || '-';
 
-        const isStrong = rupa >= min;
-        const rowClass = isStrong ? 'table-success' : 'table-danger';
+                                const isStrong = rupa >= min;
+                                const rowClass = isStrong ? 'table-success' : 'table-danger';
 
-        html += `
+                                html += `
             <tr class="${rowClass}">
                 <td>${planet}</td>
                 <td>${rupa.toFixed(2)}</td>
@@ -1028,9 +1035,9 @@
                 <td>${rank}</td>
             </tr>
         `;
-    });
+                            });
 
-    html += `
+                            html += `
                     </tbody>
                 </table>
                 <p class="text-muted small mt-2">🟢 Green = Meets Minimum Requirement, 🔴 Red = Below Standard</p>
@@ -1038,29 +1045,29 @@
         </div>
     `;
 
-    output.innerHTML = html;
-}
+                            output.innerHTML = html;
+                        }
 
-                      else if (selectedFeature === 'yogini_dasha') {
-    const dashas = data.data.data.maha_dasha;
-    let html = `
+                        else if (selectedFeature === 'yogini_dasha') {
+                            const dashas = data.data.data.maha_dasha;
+                            let html = `
         <div class="alert alert-success">Yogini Dasha Data Loaded</div>
         <div class="accordion" id="yoginiDashaAccordion">
     `;
 
-    dashas.forEach((dashaObj, index) => {
-        const dasha = dashaObj.dasha;
-        const startDate = dashaObj.start_date;
-        const endDate = dashaObj.end_date;
-        const antar = dashaObj.antar_dasha;
+                            dashas.forEach((dashaObj, index) => {
+                                const dasha = dashaObj.dasha;
+                                const startDate = dashaObj.start_date;
+                                const endDate = dashaObj.end_date;
+                                const antar = dashaObj.antar_dasha;
 
-        let antarHTML = '<ul>';
-        for (const [antarName, antarDate] of Object.entries(antar)) {
-            antarHTML += `<li><strong>${antarName}:</strong> ${antarDate}</li>`;
-        }
-        antarHTML += '</ul>';
+                                let antarHTML = '<ul>';
+                                for (const [antarName, antarDate] of Object.entries(antar)) {
+                                    antarHTML += `<li><strong>${antarName}:</strong> ${antarDate}</li>`;
+                                }
+                                antarHTML += '</ul>';
 
-        html += `
+                                html += `
             <div class="accordion-item">
                 <h2 class="accordion-header" id="heading${index}">
                     <button class="accordion-button ${index !== 0 ? 'collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}" aria-expanded="${index === 0}" aria-controls="collapse${index}">
@@ -1077,17 +1084,18 @@
                 </div>
             </div>
         `;
-    });
+                            });
 
-    html += '</div>';
-    document.getElementById('kundliResult').innerHTML = html;
-}
+                            html += '</div>';
+                            document.getElementById('kundliResult').innerHTML = html;
+                        }
 
 
-                     else if (selectedFeature === 'bhava_kundli') {
-    const kundli = data.data.data;
+                        
+                        else if (selectedFeature === 'bhava_kundli') {
+                            const kundli = data.data.data;
 
-    const html = `
+                            const html = `
         <div class="alert alert-success">Bhava Kundli Data Loaded</div>
 
         <h5 class="text-center mt-4">🔹 Bhava Kundli Information</h5>
@@ -1102,10 +1110,11 @@
         </div>
     `;
 
-    document.getElementById('kundliResult').innerHTML = html;
-}
+                            document.getElementById('kundliResult').innerHTML = html;
+                        }
 
 
+                      
 
                         else {
                             output.innerHTML = `
@@ -1126,7 +1135,7 @@
                 .catch(error => {
                     document.getElementById("loader").style.display = "none";
                     document.getElementById('kundliResult').innerHTML =
-                        `<div class="alert alert-danger">Error: ${error}</div>`;
+                        `<div class="alert alert-danger">Data not available due to server problem</div>`;
                 });
         });
     </script>

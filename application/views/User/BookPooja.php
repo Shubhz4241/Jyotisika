@@ -35,7 +35,7 @@
         <div class="row">
             <div class="input-group w-md-50 text-center mx-auto">
                 <input id="searchInput" type="search" class="form-control shadow-none"
-                    placeholder="Let’s book your pooja, what do you need help with?" onkeyup="filterCards()">
+                    placeholder= "<?php echo $this->lang->line('book_pooja_prompt')  ?>" onkeyup="filterCards()">
                 <button class="btn border" type="button" style="background-color: var(--yellow); color: black;">
                     <i class="bi bi-search"></i>
                 </button>
@@ -85,9 +85,9 @@
 
                             <a href="<?php echo base_url('PoojaInfo/' . $card["id"]) ?>">
                                 <div class="position-relative">
-                                    <img src="<?php echo base_url("uploads/services/".$card["image"]) ?>"
-                                        class="card-img-top" alt="<?php echo $card['name'];  ?>"
-                                        style="height: 200px; object-fit: cover;"  onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';" >
+                                    <img src="<?php echo base_url("uploads/services/" . $card["image"]) ?>" class="card-img-top"
+                                        alt="<?php echo $card['name']; ?>" style="height: 200px; object-fit: cover;"
+                                        onerror="this.onerror=null; this.src='<?php echo base_url('assets/images/BookPooja/MahaRudrabhishekpooja.png'); ?>';">
                                     <div class="position-absolute top-0 end-0 m-2">
                                         <span class="badge bg-danger"><?php echo $card['name']; ?></span>
                                     </div>
@@ -98,13 +98,13 @@
 
                             <div class="card-body text-center">
                                 <h5 class="card-title fw-bold"><?php echo $card['name']; ?></h5>
-                              <p class="card-text text-muted">
-    <?php
-        $words = explode(' ', strip_tags($card['description']));
-        $short_desc = implode(' ', array_slice($words, 0, 8)) . (count($words) > 15 ? '...' : '');
-        echo $short_desc;
-    ?>
-</p>
+                                <p class="card-text text-muted">
+                                    <?php
+                                    $words = explode(' ', strip_tags($card['description']));
+                                    $short_desc = implode(' ', array_slice($words, 0, 8)) . (count($words) > 15 ? '...' : '');
+                                    echo $short_desc;
+                                    ?>
+                                </p>
 
                             </div>
                             <div class="card-footer bg-transparent border-0">
@@ -114,7 +114,7 @@
                                 </a> -->
                                     <a href="<?php echo base_url('OnlinePoojaris/' . $card['id']) ?>"
                                         class="btn btn-outline-dark btnHover flex-grow-1">
-                                        Online
+                                       <?php echo $this->lang->line('online') ?>
                                     </a>
                                 </div>
                             </div>

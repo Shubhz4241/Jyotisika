@@ -85,7 +85,7 @@
         <div class="container my-4">
             <h2 class="text-center mb-3"
                 style="color:var(--red) ; font-family: 'Kaisei Decol', serif; font-size: 1.8rem;">
-                <i class="bi bi-bell-fill me-2"></i>Your Notifications
+                <i class="bi bi-bell-fill me-2"></i><?php echo $this->lang->line('your_notifications') ?>
             </h2>
         </div>
 

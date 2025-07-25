@@ -452,6 +452,7 @@
                     }
                 });
 
+
                 fetch("<?php echo base_url('User_Api_Controller/VerifyOtp'); ?>", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -482,6 +483,13 @@
 
                                 document.getElementById("userDetailsStep").style.display = "block";
                             });
+                        } else if (data.status === "userresticted") {
+                            Swal.fire({
+                                icon: "warning",
+                                title: "Access Denied",
+                                text: "Your account has been banned. Please contact support for assistance.",
+                            });
+
                         } else {
                             Swal.fire({
                                 icon: "warning",

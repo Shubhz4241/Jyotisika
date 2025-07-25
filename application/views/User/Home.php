@@ -28,44 +28,46 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-<!-- Bootstrap Bundle (includes Popper) -->
+    <!-- Bootstrap Bundle (includes Popper) -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-RWcAUkBBaTzZ7OmFcOwKp0QATKcPfPK4D38x7qnL8Mpt5AVnwl0FkpGyoC7tVZ1T"
         crossorigin="anonymous"></script>
 
 
     <style>
-        
-    .ticker-wrapper {
-      overflow: hidden;
-      background-color: #fff;
-     
-      padding: 10px 0;
-    }
+        .ticker-wrapper {
+            overflow: hidden;
+            background-color: #fff;
 
-    .ticker {
-      display: flex;
-      width: calc(200px * 24); /* 12 images * 2 sets = 24 */
-      animation: scroll 30s linear infinite;
-    }
+            padding: 10px 0;
+        }
 
-    .ticker img {
-      width: 200px;
-      height: auto;
-      margin-right: 20px;
-      object-fit: contain;
-      border-radius: 10px;
-    }
+        .ticker {
+            display: flex;
+            width: calc(200px * 24);
+            /* 12 images * 2 sets = 24 */
+            animation: scroll 30s linear infinite;
+        }
 
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
-    }
+        .ticker img {
+            width: 200px;
+            height: auto;
+            margin-right: 20px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
         /* slider code  */
         .owl-nav .owl-prev,
         .owl-nav .owl-next {
@@ -430,39 +432,42 @@
             </div>
         </div>
     </section>
-<section> <div class="ticker-wrapper">
-   
-    <div class="ticker">
-      <!-- Repeat images twice for seamless scroll -->
-  <img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1">
-<img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2">
-<img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3">
-<img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4">
-<img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5">
-<img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6">
-<img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7">
-<img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8">
-<img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9">
-<img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10">
-<img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11">
-<img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12">
-<img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1">
-<img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2">
-<img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3">
-<img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4">
-<img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5">
-<img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6">
-<img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7">
-<img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8">
-<img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9">
-<img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10">
-<img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11">
-<img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12">
 
-    </div>
-   </div>
- 
-</section>
+   
+    <section>
+        <div class="ticker-wrapper">
+
+            <div class="ticker">
+                <!-- Repeat images twice for seamless scroll -->
+                <img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1">
+                <img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2">
+                <img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3">
+                <img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4">
+                <img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5">
+                <img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6">
+                <img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7">
+                <img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8">
+                <img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9">
+                <img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10">
+                <img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11">
+                <img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12">
+                <img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1">
+                <img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2">
+                <img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3">
+                <img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4">
+                <img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5">
+                <img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6">
+                <img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7">
+                <img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8">
+                <img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9">
+                <img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10">
+                <img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11">
+                <img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12">
+
+            </div>
+        </div>
+
+    </section>
 
     <!-- Astrologer on call or chat -->
 
@@ -485,7 +490,7 @@
                                         <!-- Profile Section -->
                                         <div class="d-flex align-items-center mb-2">
                                             <a href="<?php echo base_url('ViewAstrologer/' . $astrologer['id']); ?>">
-                                                <img src="<?php echo !empty($astrologer['profile_pic']) ? base_url($astrologer['profile_pic']) : base_url('assets/images/astrologerimg.png') ?>"
+                                                <img src="<?php echo !empty($astrologer['profile_image']) ? base_url($astrologer['profile_image']) : base_url('assets/images/astrologerimg.png') ?>"
                                                     alt="image" class="rounded-circle"
                                                     style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);"
                                                     onerror="this.onerror=null  this.src='<?php echo base_url('assets/images/astrologerimg.png'); ?>';">
@@ -520,12 +525,12 @@
                                                 <img src="<?php echo base_url('assets/images/experience.png'); ?>"
                                                     alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
                                                 <small><?php echo isset($astrologer['experience']) && !empty($astrologer['experience']) ? $astrologer['experience'] : '0'; ?>+
-                                                    Year</small>
+                                                    <?php echo $this->lang->line('Year') ?> </small>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
                                                     style="width: 15px; height: 15px; margin-right: 5px;">
-                                                <small>Rs.<?php echo isset($astrologer['price_per_minute']) && !empty($astrologer['price_per_minute']) ? $astrologer['price_per_minute'] : 'N/A'; ?>/min</small>
+                                                <small> <?php echo $this->lang->line('Rs') ?><?php echo isset($astrologer['price_per_minute']) && !empty($astrologer['price_per_minute']) ? $astrologer['price_per_minute'] : 'N/A'; ?>/min</small>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
@@ -538,7 +543,7 @@
                                             <div class="d-flex align-items-center">
 
                                                 <?php if ($astrologer['chatstatus'] == "active"): ?>
-                                                    <small class="card-language text-danger">Busy , </small>
+                                                    <small class="card-language text-danger"> <?php echo $this->lang->line('Busy') ?> , </small>
 
 
                                                     <?php
@@ -565,7 +570,7 @@
                                                     ?>
 
                                                 <?php else: ?>
-                                                    <small class="card-language text-success">Available</small>
+                                                    <small class="card-language text-success">  <?php echo $this->lang->line('Available') ?> </small>
                                                 <?php endif ?>
                                             </div>
 
@@ -581,18 +586,18 @@
                                                     <?php echo $astrologer['price_per_minute']; ?>,  
                                                     '<?php echo base_url('chat/' . $astrologer['id']); ?>',
                                                     '<?php echo addslashes($astrologer['name']); ?>' 
-                                                )">Chat</button>
+                                                )"><?php echo $this->lang->line('Chat') ?></button>
                                             <?php else: ?>
                                                 <button class="btn btn-sm w-50 rounded-3 border-1 chatlink"
-                                                    style="background-color: var(--yellow);">Chat</button>
+                                                    style="background-color: var(--yellow);"><?php echo $this->lang->line('Chat') ?></button>
                                             <?php endif ?>
 
-                                            <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
+                                            <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3"><?php echo $this->lang->line('Call') ?></button>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
-                                
+
                             </div>
 
 
@@ -600,7 +605,7 @@
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="col-12 text-center">
-                            <p class="fw-bold text-danger">No astrologers found.</p>
+                            <p class="fw-bold text-danger"><?php echo $this->lang->line('No_Astrologers_FoundNo') ?> </p>
                         </div>
                     <?php endif; ?>
 
@@ -609,10 +614,10 @@
                             style="background-color: var(--yellow);"> <?php echo $this->lang->line('ViewMore') ?></a>
                     </div>
                 </div>
-                
+
 
             </div>
-            </div>
+        </div>
     </section>
 
     <script>
@@ -645,52 +650,65 @@
     </script>
 
 
+
+
     <section class="containernew py-4">
         <div class="container">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Free Kundli Generation</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"> <?php echo $this->lang->line('Free_Kundli_Generation') ?></h2>
             <div class="grid-wrapper">
                 <a href="<?php echo base_url('FreeKundli_Controller/BasicAstrology'); ?>" class="text-decoration-none">
-                <div class="kundli-box"><img src="<?php echo base_url("assets/images/esoteric.png") ?>" /> Basic Astrology </div>
-    </a>
-    <a href="<?php echo base_url('FreeKundli_Controller/PlanetaryPosition'); ?>" class="text-decoration-none">
-                <div class="kundli-box"><img src="<?php echo base_url("assets/images/galaxy.png") ?>" /> Planetary Positions</div>
-    </a>
-    <a href="<?php echo base_url('FreeKundli_Controller/VimshottariDasha'); ?>" class="text-decoration-none">
-              
-    <div class="kundli-box"><img src="<?php echo base_url("assets/images/magic-book.png") ?>" />Vimshottari Dasha</div>
-    </a>
-    <a  href="<?php echo base_url('FreeKundli_Controller/AscendantReport'); ?>" class="text-decoration-none">
-                <div class="kundli-box"><img src="<?php echo base_url("assets/images/book.png") ?>" /> Ascendant Report</div>
-    </a>
-    <a href="<?php echo base_url('FreeKundli_Controller/GemstoneRecommendation'); ?>" class="text-decoration-none">
-                <div class="kundli-box"><img src="<?php echo base_url("assets/images/diamond.png") ?>" /> Gemstone Recommendation</div>
-    </a>
-    <a href="<?php echo base_url('FreeKundli_Controller/CompositeFriendship'); ?>" class="text-decoration-none">
-                <div class="kundli-box"><img src="<?php echo base_url("assets/images/friendship.png") ?>" style="width: 50px;" /> Composite Friendship</div>
-    </a>
-    <a  href="<?php echo base_url('FreeKundli_Controller/Shadbala'); ?>" class="text-decoration-none">
-                <div class="kundli-box"><img src="<?php echo base_url("assets/images/parchment.png") ?>" />Shadbala</div>
-    </a>
-                <a  href="<?php echo base_url('FreeKundli_Controller/YoginiDasha'); ?>" class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/esoteric.png") ?>" /><?php echo $this->lang->line('Astrology') ?> </div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/PlanetaryPosition'); ?>"
+                    class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/galaxy.png") ?>" /><?php echo $this->lang->line('Planetary_Positions') ?> </div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/VimshottariDasha'); ?>"
+                    class="text-decoration-none">
 
-    <div class="kundli-box"><img src="<?php echo base_url("assets/images/sun.png") ?>" />Yogini Dasha</div>
-    </a>
-              <a href="<?php echo base_url('FreeKundli_Controller/HoroscopeCharts'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/horoscopecharts.png") ?>" />Horoscope Charts</div>
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/magic-book.png") ?>" /><?php echo $this->lang->line('Vimshottari_Dasha') ?> </div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/AscendantReport'); ?>" class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/book.png") ?>" />  <?php echo $this->lang->line('Ascendant') ?> </div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/GemstoneRecommendation'); ?>"
+                    class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/diamond.png") ?>" /><?php echo $this->lang->line('Gemstone_Recommendation') ?> </div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/CompositeFriendship'); ?>"
+                    class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/friendship.png") ?>"
+                            style="width: 50px;" /> <?php echo $this->lang->line('Composite_Friendship') ?> </div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/Shadbala'); ?>" class="text-decoration-none">
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/parchment.png") ?>" /><?php echo $this->lang->line('Shadbala') ?> 
+                    </div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/YoginiDasha'); ?>" class="text-decoration-none">
+
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/sun.png") ?>" /><?php echo $this->lang->line('Yogini_Dasha') ?> 
+                    </div>
+                </a>
+                <a href="<?php echo base_url('FreeKundli_Controller/HoroscopeCharts'); ?>" class="text-decoration-none">
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/horoscopecharts.png") ?>" /><?php echo $this->lang->line('Horoscope_Charts') ?> </div>
                 </a>
 
                 <a href="<?php echo base_url('FreeKundli_Controller/ManglikDosha'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/mangal.png") ?>" />Manglik Dosha</div>
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/mangal.png") ?>" /><?php echo $this->lang->line('Manglik_Dosha') ?> </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/KaalSarpaDosha'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/king.png") ?>" />Kaal Sarpa Dosha</div>
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/king.png") ?>" /><?php echo $this->lang->line('Kaal_Sarpa_Dosha') ?> </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/SadheSati'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/sadhesati.png") ?>" />Sadhe Sati</div>
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/sadhesati.png") ?>" /><?php echo $this->lang->line('Sadhe_Sati') ?> </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/BhavaKundli'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/houses.png") ?>" />Bhava Kundli</div>
-                </a>
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/houses.png") ?>" /><?php echo $this->lang->line('Bhava_Kundli') ?> 
+                    </div>
+
+                </a>
             </div>
         </div>
     </section>
@@ -708,11 +726,11 @@
                 <?php if (!empty($service_data)): ?>
                     <?php foreach ($service_data as $service): ?>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <a href="<?php echo base_url('User/astrolgerservices/') . $service["id"]; ?>" class="text-decoration-none">
+                            <a href="<?php echo base_url('User/astrolgerservices/') . $service["id"]; ?>"
+                                class="text-decoration-none">
                                 <div class="card text-center shadow rounded border-0 p-3 h-100 card-hover">
                                     <img src="<?php echo base_url('uploads/services/' . $service['image']); ?>"
-                                        alt="<?php echo htmlspecialchars($service['name']); ?>"
-                                        class="mx-auto mb-3"
+                                        alt="<?php echo htmlspecialchars($service['name']); ?>" class="mx-auto mb-3"
                                         style="width: 60px; height: 60px; object-fit: cover;"
                                         onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
 
@@ -747,14 +765,15 @@
             </div>
         </div>
     </section>
- <section class="py-5">
+    <section class="py-5">
         <div class="container">
 
             <div class="row align-items-center mb-4">
                 <div class="col text-center">
-                    <h3 class="fw-bold">Blogs of Astrology</h3>
-                    <p class="text-muted mb-0">Explore the stars, decode your destiny.</p>
+                    <h3 class="fw-bold"><?= $this->lang->line('Blog_Heading') ?></h3>
+                    <p class="text-muted mb-0"><?= $this->lang->line('Blog_Subtext') ?></p>
                 </div>
+
 
             </div>
 
@@ -767,21 +786,22 @@
                                 <a href="<?= base_url('User/ViewBlogInfo/' . $product['blog_id']); ?>"
                                     class="text-decoration-none">
                                     <div class="card border-0 shadow-sm rounded-3 h-100" style="height: 320px;">
-                                        <img src="<?= base_url("uploads/blogs/".$product['blog_image']); ?>" class="card-img-top rounded-top-3"
-                                            alt="Blog Image" style="height: 170px; object-fit: cover;">
+                                        <img src="<?= base_url("uploads/blogs/" . $product['blog_image']); ?>"
+                                            class="card-img-top rounded-top-3" alt="Blog Image"
+                                            style="height: 170px; object-fit: cover;">
                                         <div class="card-body d-flex flex-column justify-content-between">
                                             <h5 class="card-title text-dark mb-2"
                                                 style="font-size: 1rem; height: 48px; overflow: hidden; text-overflow: ellipsis; line-height: 1.3;">
                                                 <?= $product["blog_title"]; ?>
                                             </h5>
-                                            <p class="text-muted small mb-0"><?= $this->lang->line('Today') ?? 'Today'; ?></p>
+                                            <p class="text-muted small mb-0"><?php echo $product['date'] ?></p>
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <p class="text-center text-muted">No blogs available at the moment.</p>
+                        <p class="text-center text-muted"> <?= $this->lang->line('No_Blogs_Message') ?></p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -791,7 +811,7 @@
                 <div class="col text-center">
                     <a href="<?= base_url('User/Blog'); ?>" class="btn  fw-bold px-4 py-2 rounded-3"
                         style="background-color: var(--yellow);">
-                        View More
+                        <?php echo $this->lang->line('ViewMore') ?>
                     </a>
                 </div>
             </div>
@@ -803,14 +823,14 @@
             <div class="row">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div class="col text-center">
-                        <h3 class="fw-bold">Top Shop</h3>
-                        <p class="text-muted mb-0">Divine essentials crafted for your journey.</p>
+                        <h3 class="fw-bold"> <?php echo $this->lang->line('Top_Shop_Heading') ?></h3>
+                        <p class="text-muted mb-0"> <?php echo $this->lang->line('Top_Shop_Subtext') ?></p>
                     </div>
 
                     <div class="col-auto d-none">
                         <button class="btn rounded-1" style="background-color: var(--yellow);">
                             <a class="text-decoration-none text-dark" href="<?php echo base_url('jyotisikamall') ?>">
-                                View All
+                                <?php echo $this->lang->line('ViewMore') ?>
                             </a>
                         </button>
                     </div>
@@ -853,7 +873,7 @@
                 <div class="col text-center">
                     <a href="<?= base_url('jyotisikamall'); ?>" class="btn  fw-bold px-4 py-2 rounded-3"
                         style="background-color: var(--yellow);">
-                        View More
+                        <?php echo $this->lang->line('ViewMore') ?>
                     </a>
                 </div>
             </div>
@@ -900,7 +920,7 @@
             // window.location.href = "<?php echo base_url("chat") ?>"; // Change this to your actual chat page URL
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.owl1').owlCarousel({
                 loop: true,
                 margin: 10,
@@ -974,26 +994,26 @@
             positionNavButtons();
 
             // Reposition on window resize
-            $(window).resize(function() {
+            $(window).resize(function () {
                 positionNavButtons();
             });
 
             // Prevent hover color change
-            $('.owl-nav button').hover(function() {
+            $('.owl-nav button').hover(function () {
                 $(this).css('background', 'transparent');
             });
 
 
         });
 
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const chatlinks = document.querySelectorAll(".chatlink");
 
             let data = Array.from(chatlinks);
             console.log(chatlinks);
             console.log(data);
-            Array.from(chatlinks).forEach(function(chatlink) {
-                chatlink.addEventListener("click", function(e) {
+            Array.from(chatlinks).forEach(function (chatlink) {
+                chatlink.addEventListener("click", function (e) {
                     e.preventDefault(); // Now correctly inside the click event
 
                     <?php if (!$this->session->userdata('user_id')): ?>
@@ -1019,7 +1039,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-   
+
 
 </body>
 

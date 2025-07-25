@@ -331,7 +331,7 @@
                     const nakPada = data?.data?.nakshatras?.nakshatra_pada;
 
                     if (!nakList || nakList.length === 0) {
-                        document.getElementById("nakshatra").innerText = "No data found";
+                        document.getElementById("nakshatra").innerText = "Loading..";
                         return;
                     }
 
@@ -346,7 +346,7 @@
                 })
                 .catch(error => {
                     console.error("Error fetching nakshatra:", error);
-                    document.getElementById("nakshatra").innerText = "Error loading nakshatra";
+                    document.getElementById("nakshatra").innerText = "Loading..";
                 });
         }
 
@@ -422,14 +422,14 @@
                         // Display Paksha from the first Karana (usually all have the same)
                         document.getElementById("todayPaksha").innerText = karnas[0].paksha;
                     } else {
-                        document.getElementById("todayKarana").innerText = "Not available";
-                        document.getElementById("todayPaksha").innerText = "Not available";
+                        document.getElementById("todayKarana").innerText = "Loading..";
+                        document.getElementById("todayPaksha").innerText = "Loading..";
                     }
                 })
                 .catch(error => {
                     console.error("Error fetching Karana data:", error);
-                    document.getElementById("todayKarana").innerText = "Error loading";
-                    document.getElementById("todayPaksha").innerText = "Error loading";
+                    document.getElementById("todayKarana").innerText = "Loading..";
+                    document.getElementById("todayPaksha").innerText = "Loading..";
                 });
         };
 
@@ -485,7 +485,7 @@
                 .then(data => {
                     const yogaArray = data?.data?.yogas;
                     if (!yogaArray || yogaArray.length === 0) {
-                        document.getElementById("todayYoga").innerText = "Not available";
+                        document.getElementById("todayYoga").innerText = "Loading..";
                         return;
                     }
 
@@ -659,11 +659,11 @@
                 })
                 .catch(err => {
                     console.error("Error fetching sun and moon timings:", err);
-                    document.getElementById("sunrise").innerText = "Error";
-                    document.getElementById("sunset").innerText = "Error";
-                    document.getElementById("moonrise").innerText = "Error";
-                    document.getElementById("moonset").innerText = "Error";
-                    document.getElementById("weekday").innerText = "Error";
+                    document.getElementById("sunrise").innerText = "Loading..";
+                    document.getElementById("sunset").innerText = "Loading..";
+                    document.getElementById("moonrise").innerText = "Loading..";
+                    document.getElementById("moonset").innerText = "Loading..";
+                    document.getElementById("weekday").innerText = "Loading..";
                 });
         };
 

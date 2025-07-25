@@ -224,8 +224,8 @@
         <div class="row flex-col justify-content-center align-items-start">
             <div class="col-12 col-md-6">
                 <div class="text-center">
-                    <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png') ?>" alt="Bhava Kundli Chart" class="img-fluid"
-                        style="width: 450px; height: 450px; margin-top: 5px;">
+                    <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png') ?>" alt="Bhava Kundli Chart"
+                        class="img-fluid" style="width: 450px; height: 450px; margin-top: 5px;">
                     <h4 class="mt-5">Generate Your Bhava Kundli</h4>
                     <form id="kundliForm" class="p-3 bg-white shadow rounded">
                         <label class="m-2">Enter Name</label>
@@ -273,13 +273,13 @@
                             </div>
                             <div class="col-12 col-md-4">
                                 <label>Birth Minutes</label>
-                                <select name="minute" id="boy_minute" class="form-control shadow-none my-2 p-2 rounded-1"
-                                    required></select>
+                                <select name="minute" id="boy_minute"
+                                    class="form-control shadow-none my-2 p-2 rounded-1" required></select>
                             </div>
                             <div class="col-12 col-md-4">
                                 <label>Birth Seconds</label>
-                                <select name="second" id="boy_second" class="form-control shadow-none my-2 p-2 rounded-1"
-                                    required></select>
+                                <select name="second" id="boy_second"
+                                    class="form-control shadow-none my-2 p-2 rounded-1" required></select>
                             </div>
                         </div>
                         <label>Birth Place</label>
@@ -301,7 +301,30 @@
                             <option value="ml">Malayalam</option>
                             <option value="kn">Kannada</option>
                         </select>
-                        <select id="astro_feature" class="form-control shadow-none my-2 p-2 rounded-1" required style="visibility: hidden;">
+
+
+                        <div class="form-group">
+                            <label for="chart_id">Select Bhava Kundli Chart</label>
+                            <select id="chart_id" class="form-control shadow-none my-2 p-2 rounded-1" required>
+                                <option value="" disabled selected>Select Chart Type</option>
+                                <option value="1">Bhava Kundli 1</option>
+                                <option value="2">Bhava Kundli 2</option>
+                                <option value="3">Bhava Kundli 3</option>
+                                <option value="4">Bhava Kundli 4</option>
+                                <option value="5">Bhava Kundli 5</option>
+                                <option value="6">Bhava Kundli 6</option>
+                                <option value="7">Bhava Kundli 7</option>
+                                <option value="8">Bhava Kundli 8</option>
+                                <option value="9">Bhava Kundli 9</option>
+                                <option value="10">Bhava Kundli 10</option>
+                                <option value="11">Bhava Kundli 11</option>
+                                <option value="12">Bhava Kundli 12</option>
+                            </select>
+                        </div>
+
+
+                        <select id="astro_feature" class="form-control shadow-none my-2 p-2 rounded-1" required
+                            style="visibility: hidden;">
                             <option value="bhava_kundli" selected>Bhava Kundli</option>
                         </select>
                         <center>
@@ -320,7 +343,10 @@
             <div class="col-12 col-md-6">
                 <div class="mt-2" style="text-align: justify; padding: 0 20px;">
                     <p style="font-weight: 300;">
-                        Bhava Kundli, also known as the House Chart in Vedic astrology, is a divisional chart that focuses on the houses of the horoscope rather than the zodiac signs. It provides detailed insights into various aspects of life, such as wealth, relationships, career, and health, based on the positioning of planets in different houses.
+                        Bhava Kundli, also known as the House Chart in Vedic astrology, is a divisional chart that
+                        focuses on the houses of the horoscope rather than the zodiac signs. It provides detailed
+                        insights into various aspects of life, such as wealth, relationships, career, and health, based
+                        on the positioning of planets in different houses.
                     </p>
                     <h4 class="mt-4 d-flex align-items-center justify-content-center gap-2">
                         <span class="fw-semibold">Key Aspects of Bhava Kundli</span>
@@ -328,29 +354,37 @@
                     <div class="mt-4 px-2">
                         <h5 class="fw-bold mb-3">What is Bhava Kundli?</h5>
                         <p class="text-justify mb-4">
-                            Bhava Kundli is a chart that divides the horoscope into 12 houses, each representing a specific area of life. Unlike the Rasi chart, it considers the house cusps and planetary placements to provide a more nuanced analysis of life events.
+                            Bhava Kundli is a chart that divides the horoscope into 12 houses, each representing a
+                            specific area of life. Unlike the Rasi chart, it considers the house cusps and planetary
+                            placements to provide a more nuanced analysis of life events.
                         </p>
                         <h6 class="fw-semibold mb-2">Houses in Bhava Kundli:</h6>
                         <p class="text-justify mb-4">
-                            Each of the 12 houses corresponds to different life aspects, such as self (1st house), wealth (2nd house), relationships (7th house), and career (10th house). The strength and placement of planets in these houses influence outcomes.
+                            Each of the 12 houses corresponds to different life aspects, such as self (1st house),
+                            wealth (2nd house), relationships (7th house), and career (10th house). The strength and
+                            placement of planets in these houses influence outcomes.
                         </p>
                         <h6 class="fw-semibold mb-2">Significance:</h6>
                         <p class="text-justify mb-4">
-                            Bhava Kundli provides a comprehensive view of an individual’s life by analyzing the strength of houses and their lords, helping to predict outcomes and challenges in specific areas.
+                            Bhava Kundli provides a comprehensive view of an individual’s life by analyzing the strength
+                            of houses and their lords, helping to predict outcomes and challenges in specific areas.
                         </p>
                         <h6 class="fw-semibold mb-2">Planetary Influence:</h6>
                         <p class="text-justify mb-4">
-                            The planets in each house and their aspects determine the strength and challenges in the corresponding life areas, offering insights into potential opportunities and obstacles.
+                            The planets in each house and their aspects determine the strength and challenges in the
+                            corresponding life areas, offering insights into potential opportunities and obstacles.
                         </p>
                         <h6 class="fw-semibold mb-2">Remedies:</h6>
                         <p class="text-justify mb-4">
-                            Weak houses or afflicted planets can be addressed through remedies like mantras, gemstones, or rituals to strengthen positive influences and mitigate challenges.
+                            Weak houses or afflicted planets can be addressed through remedies like mantras, gemstones,
+                            or rituals to strengthen positive influences and mitigate challenges.
                         </p>
                     </div>
                     <div class="mt-4 px-2">
                         <h5 class="fw-bold mb-3">Importance of Bhava Kundli:</h5>
                         <p class="text-justify mb-4">
-                            Bhava Kundli is crucial for understanding the dynamics of different life aspects, enabling individuals to make informed decisions and undertake remedies to enhance positive outcomes.
+                            Bhava Kundli is crucial for understanding the dynamics of different life aspects, enabling
+                            individuals to make informed decisions and undertake remedies to enhance positive outcomes.
                         </p>
                     </div>
                 </div>
@@ -358,11 +392,14 @@
             <div class="col-12">
                 <h6 class="fw-semibold mb-2">Transits and Bhava Kundli:</h6>
                 <p class="text-justify mb-4">
-                    Planetary transits through the houses of Bhava Kundli can significantly impact life events. Analyzing these transits helps in timing decisions and understanding periods of opportunity or challenge.
+                    Planetary transits through the houses of Bhava Kundli can significantly impact life events.
+                    Analyzing these transits helps in timing decisions and understanding periods of opportunity or
+                    challenge.
                 </p>
                 <h6 class="fw-semibold mb-2">Technology and Bhava Analysis:</h6>
                 <p class="text-justify mb-4">
-                    Modern astrological software accurately calculates Bhava Kundli, providing precise house divisions and planetary placements for personalized astrological guidance.
+                    Modern astrological software accurately calculates Bhava Kundli, providing precise house divisions
+                    and planetary placements for personalized astrological guidance.
                 </p>
             </div>
         </div>
@@ -378,61 +415,80 @@
                     <div class="accordion" id="bhavaKundliImpactAccordion">
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingSelf">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSelf" aria-expanded="false" aria-controls="collapseSelf">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSelf" aria-expanded="false" aria-controls="collapseSelf">
                                     <i class="bi bi-person me-2"></i> Self & Personality
                                 </button>
                             </h2>
-                            <div id="collapseSelf" class="accordion-collapse collapse" aria-labelledby="headingSelf" data-bs-parent="#bhavaKundliImpactAccordion">
+                            <div id="collapseSelf" class="accordion-collapse collapse" aria-labelledby="headingSelf"
+                                data-bs-parent="#bhavaKundliImpactAccordion">
                                 <div class="accordion-body">
-                                    The 1st house in Bhava Kundli represents the self, personality, and physical appearance, influencing confidence and overall life approach.
+                                    The 1st house in Bhava Kundli represents the self, personality, and physical
+                                    appearance, influencing confidence and overall life approach.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingWealth">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWealth" aria-expanded="false" aria-controls="collapseWealth">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseWealth" aria-expanded="false"
+                                    aria-controls="collapseWealth">
                                     <i class="bi bi-wallet me-2"></i> Wealth & Finances
                                 </button>
                             </h2>
-                            <div id="collapseWealth" class="accordion-collapse collapse" aria-labelledby="headingWealth" data-bs-parent="#bhavaKundliImpactAccordion">
+                            <div id="collapseWealth" class="accordion-collapse collapse" aria-labelledby="headingWealth"
+                                data-bs-parent="#bhavaKundliImpactAccordion">
                                 <div class="accordion-body">
-                                    The 2nd and 11th houses govern wealth, income, and financial stability, with planetary placements indicating prosperity or challenges.
+                                    The 2nd and 11th houses govern wealth, income, and financial stability, with
+                                    planetary placements indicating prosperity or challenges.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingRelationships">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRelationships" aria-expanded="false" aria-controls="collapseRelationships">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseRelationships" aria-expanded="false"
+                                    aria-controls="collapseRelationships">
                                     <i class="bi bi-heart me-2"></i> Relationships & Marriage
                                 </button>
                             </h2>
-                            <div id="collapseRelationships" class="accordion-collapse collapse" aria-labelledby="headingRelationships" data-bs-parent="#bhavaKundliImpactAccordion">
+                            <div id="collapseRelationships" class="accordion-collapse collapse"
+                                aria-labelledby="headingRelationships" data-bs-parent="#bhavaKundliImpactAccordion">
                                 <div class="accordion-body">
-                                    The 7th house in Bhava Kundli influences partnerships and marriage, with planetary aspects affecting harmony and compatibility.
+                                    The 7th house in Bhava Kundli influences partnerships and marriage, with planetary
+                                    aspects affecting harmony and compatibility.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingCareer">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCareer" aria-expanded="false" aria-controls="collapseCareer">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseCareer" aria-expanded="false"
+                                    aria-controls="collapseCareer">
                                     <i class="bi bi-briefcase me-2"></i> Career & Profession
                                 </button>
                             </h2>
-                            <div id="collapseCareer" class="accordion-collapse collapse" aria-labelledby="headingCareer" data-bs-parent="#bhavaKundliImpactAccordion">
+                            <div id="collapseCareer" class="accordion-collapse collapse" aria-labelledby="headingCareer"
+                                data-bs-parent="#bhavaKundliImpactAccordion">
                                 <div class="accordion-body">
-                                    The 10th house governs career and public life, with strong planetary placements indicating success and recognition.
+                                    The 10th house governs career and public life, with strong planetary placements
+                                    indicating success and recognition.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingHealth">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHealth" aria-expanded="false" aria-controls="collapseHealth">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseHealth" aria-expanded="false"
+                                    aria-controls="collapseHealth">
                                     <i class="bi bi-heart-pulse me-2"></i> Health & Well-Being
                                 </button>
                             </h2>
-                            <div id="collapseHealth" class="accordion-collapse collapse" aria-labelledby="headingHealth" data-bs-parent="#bhavaKundliImpactAccordion">
+                            <div id="collapseHealth" class="accordion-collapse collapse" aria-labelledby="headingHealth"
+                                data-bs-parent="#bhavaKundliImpactAccordion">
                                 <div class="accordion-body">
-                                    The 6th house relates to health and daily routines, with afflicted planets indicating potential health challenges that require attention.
+                                    The 6th house relates to health and daily routines, with afflicted planets
+                                    indicating potential health challenges that require attention.
                                 </div>
                             </div>
                         </div>
@@ -441,418 +497,236 @@
                         <i class="bi bi-book me-2"></i> ✨ Why Analyze Bhava Kundli?
                     </h5>
                     <p class="text-justify">
-                        Analyzing Bhava Kundli provides a detailed understanding of various life aspects, enabling targeted remedies and informed decision-making to achieve balance and success.
+                        Analyzing Bhava Kundli provides a detailed understanding of various life aspects, enabling
+                        targeted remedies and informed decision-making to achieve balance and success.
                     </p>
                 </div>
             </div>
             <div class="col-12 col-md-5 text-center">
-                <img src="<?php echo base_url('assets/images/FreeKundli/bhava_kundli2.png'); ?>" alt="Bhava Kundli Illustration" class="img-fluid rounded" style="max-width: 300px; height: auto; background-color: transparent;">
+                <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png'); ?>"
+                    alt="Bhava Kundli Illustration" class="img-fluid rounded"
+                    style="max-width: 300px; height: auto; background-color: transparent;">
             </div>
         </div>
     </div>
 
     <section>
         <div class="container my-4">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrologers for Bhava Kundli</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrologers For Bhava Kundli</h2>
             <div class="owl-carousel owl-theme" id="astrologerCarousel">
                 <!-- Astrologer Card 1 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Priya Sharma" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Priya Sharma</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
+
+
+                <?php if ($astrologer_data): ?>
+
+                    <?php foreach ($astrologer_data as $astrologer): ?>
+                        <div class="card-item">
+                            <div class="card shadow-sm rounded-3 h-100"
+                                style="border: 1px solid var(--red); background-color: #fff;">
+                                <div class="card-body p-3">
+                                    <!-- Profile Section -->
+                                    <div class="d-flex align-items-center mb-2">
+
+                                        <img src="<?php echo base_url("assets/images/astrologerimg.png") ?>"
+                                            alt="Astrologer Priya Sharma" class="rounded-circle"
+                                            style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+
+                                        <div class="ms-2">
+
+                                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                <?php echo $astrologer["name"] ?>
+                                            </h6>
+
+                                            <div class="d-flex align-items-center gap-1">
+                                                <?php for ($i = 0; $i < $astrologer["average_rating"]; $i++): ?>
+                                                    <img src="<?php echo base_url("assets/images/rating.png") ?>">
+                                                <?php endfor ?>
+
+
+                                            </div>
+                                        </div>
                                     </div>
+                                    <!-- Details Section -->
+                                    <div class="d-flex flex-column gap-1 mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/star.png") ?>" alt="star"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small class="card-expertise"><?php echo $astrologer["specialties"] ?></small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/experience.png") ?>" alt="experience"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small><?php echo $astrologer["experience"] ?>+ Years</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/money.png") ?>" alt="price"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small> <?php echo $astrologer["price_per_minute"] ?> +Price Per Minutes</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/language.png") ?>" alt="language"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small> <?php echo $astrologer["languages"] ?></small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+
+                                            <?php if ($astrologer['chatstatus'] == "active"): ?>
+                                                <small class="card-language text-danger">Busy , </small>
+
+
+                                                <?php
+                                                if (!empty($astrologer['chat_expire_on'])) {
+                                                    date_default_timezone_set('Asia/Kolkata'); // Ensure you're using IST
+                                                    $now = new DateTime(); // current timestamp
+                                                    $expire = new DateTime($astrologer['chat_expire_on']);
+
+                                                    // Calculate only if expire time is in the future
+                                                    if ($expire > $now) {
+                                                        $interval = $now->diff($expire);
+                                                        $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+                                                        $seconds = $interval->s;
+
+                                                        echo '<div class="d-flex align-items-center">
+                                              <small class="card-language text-danger">Wait for Time: ' . $waitTimeMinutes . ' min ' . $seconds . ' sec</small>
+                                                </div>';
+                                                    } else {
+                                                        echo '<div class="d-flex align-items-center">
+                                                <small class="card-language text-danger">session not ended</small>
+                                            </div>';
+                                                    }
+                                                }
+                                                ?>
+
+                                            <?php else: ?>
+                                                <small class="card-language text-success">Available</small>
+                                            <?php endif ?>
+                                        </div>
+                                    </div>
+                                    <!-- Action Buttons -->
+                                    <div class="d-flex gap-2 mb-2">
+
+                                        <?php if ($this->session->userdata('user_id')): ?>
+
+
+
+                                            <button class="btn btn-sm w-50 rounded-3 border-1"
+                                                style="background-color: var(--yellow);" onclick="checkBalance(
+                                                     '<?php echo $astrologer['chatstatus']; ?>',
+                                                    <?php echo $userinfo_data['amount']; ?>, 
+                                                    <?php echo $astrologer['price_per_minute']; ?>,  
+                                                    '<?php echo base_url('chat/' . $astrologer['astrologer_id']); ?>',
+                                                    '<?php echo addslashes($astrologer['name']); ?>' ,
+                                                    '<?php echo $astrologer['chatvalue'] ?>' 
+                                                )"> Chat</button>
+                                        <?php else: ?>
+                                            <button id="chatlink" onclick="checklogin()"
+                                                class="chatlink btn btn-sm w-50 rounded-3 border-1 btnlog"
+                                                style="background-color: var(--yellow);">Chat</button>
+                                        <?php endif; ?>
+
+
+                                        <?php if ($this->session->userdata('user_id')): ?>
+                                            <button
+                                                class="btn btnHover btn-sm btn-outline-success w-50 rounded-3 call-btn">Call</button>
+                                        <?php else: ?>
+                                            <button
+                                                class="btn btnHover btn-sm btn-outline-dark  w-50 rounded-3 call-btn">Call</button>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <script>
+
+
+                                        function checklogin() {
+                                            Swal.fire({
+                                                title: "Login Required",
+                                                text: "Please login to access this service",
+                                                icon: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonText: "Login",
+                                                cancelButtonText: "Cancel",
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    window.location.href = "<?php echo base_url('Login'); ?>";
+                                                }
+                                            });
+
+
+                                        }
+                                        function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name, statusastro) {
+                                            if (amount < astrologer_charge * 5) {
+                                                Swal.fire({
+                                                    icon: "warning",
+                                                    title: "Insufficient Balance",
+                                                    text: `Minimum balance of 5 minutes (₹ ${astrologer_charge * 5}) is required to start chat with  ${name}.`,
+                                                    confirmButtonText: "Recharge Now",
+                                                    confirmButtonColor: "#ffcc00"
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        window.location.href = "<?php echo base_url('wallet'); ?>";
+                                                    }
+                                                });
+                                            } else {
+                                                if (chatstatus == "active") {
+
+                                                    if (statusastro == "sessionnotend") {
+                                                        window.location.href = chatUrl;
+                                                    }
+                                                    else {
+
+                                                        Swal.fire({
+                                                            icon: "warning",
+                                                            title: "Astrologer is busy",
+                                                        });
+                                                    }
+                                                }
+                                                else {
+                                                    window.location.href = chatUrl;
+                                                }
+                                            }
+                                        }
+
+                                    </script>
                                 </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Vedic Astrology, Bhava Analysis</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>10+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.50/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Hindi</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
                             </div>
                         </div>
-                    </div>
-                </div>
+
+                    <?php endforeach ?>
+
+                <?php endif ?>
                 <!-- Astrologer Card 2 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Rajesh Kumar" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Rajesh Kumar</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Numerology, Bhava Analysis</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>15+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.60/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Hindi, Marathi</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 3 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Anjali Rao" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Anjali Rao</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Vastu, Bhava Kundli</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>8+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.45/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Tamil</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 4 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Vikram Singh" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Vikram Singh</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Kundli Matching, Bhava Kundli</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>12+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.55/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Hindi, Bengali</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 5 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Neha Patel" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Neha Patel</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Gemstone Consultation, Bhava Kundli</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>7+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.40/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Gujarati</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 6 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Sanjay Gupta" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Sanjay Gupta</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Astrology, Bhava Analysis</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>9+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.48/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Hindi, Punjabi</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 7 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Lakshmi Nair" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Lakshmi Nair</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Tarot, Bhava Kundli</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>6+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.42/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Malayalam</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 8 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Rohan Desai" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Rohan Desai</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Relationship Astrology, Bhava Kundli</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>11+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.52/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Kannada</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
+
             </div>
         </div>
     </section>
 
+
+    <!-- <script>
+        let chatlinks = document.querySelectorAll('.chatlink'); // selects all elements with class 'chatlink'
+
+        chatlinks.forEach(function (chatlink) {
+            chatlink.addEventListener('click', showalert);
+        });
+
+        function showalert() {
+            alert("pls login");
+        }
+    </script> -->
+
+
+
     <!-- jQuery and Owl Carousel JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Initialize Owl Carousel -->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#astrologerCarousel").owlCarousel({
                 loop: true,
                 margin: 15,
@@ -876,8 +750,10 @@
     <!-- Footer -->
     <?php $this->load->view('IncludeUser/CommanFooter'); ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
 
     <!-- Form Handling and API Scripts -->
     <script>
@@ -885,7 +761,7 @@
         const suggestionBox = document.getElementById("suggestions");
         let debounceTimer = null;
 
-        input.addEventListener("input", function() {
+        input.addEventListener("input", function () {
             const query = input.value.trim();
             if (debounceTimer) clearTimeout(debounceTimer);
             if (query.length < 2) {
@@ -921,7 +797,7 @@
             }, 300);
         });
 
-        document.addEventListener("click", function(e) {
+        document.addEventListener("click", function (e) {
             if (!suggestionBox.contains(e.target) && e.target !== input) {
                 suggestionBox.innerHTML = "";
             }
@@ -957,7 +833,7 @@
             populateSelect("boy_second", 0, 59, true);
         });
 
-        document.getElementById("kundliForm").addEventListener("submit", function(e) {
+        document.getElementById("kundliForm").addEventListener("submit", function (e) {
             e.preventDefault();
             const requiredFields = [
                 'name', 'male', 'female', 'boy_day', 'boy_month', 'boy_year',
@@ -1004,6 +880,7 @@
                 boy_lat: document.getElementById('boy_lat').value || "28.7041",
                 boy_lon: document.getElementById('boy_lon').value || "77.1025",
                 lan: document.getElementById('language').value || "en",
+                chartid: document.getElementById('chart_id').value || "1"
             };
 
             let apiUrl = "";
@@ -1011,20 +888,20 @@
 
             switch (selectedFeature) {
                 case "bhava_kundli":
-                    apiUrl = "<?php echo base_url('User_Api_Controller/bhava_kundli'); ?>";
+                    apiUrl = "<?php echo base_url('User_Api_Controller/bhava_kundli_data'); ?>";
                     break;
                 default:
-                    apiUrl = "<?php echo base_url('User_Api_Controller/bhava_kundli'); ?>";
+                    apiUrl = "<?php echo base_url('User_Api_Controller/bhava_kundli_data'); ?>";
                     break;
             }
 
             fetch(apiUrl, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(formData)
-                })
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
                 .then(res => res.json())
                 .then(data => {
                     const output = document.getElementById('kundliResult') || document.createElement('div');
@@ -1032,47 +909,31 @@
                         output.id = 'kundliResult';
                         document.getElementById('kundliForm').appendChild(output);
                     }
-                    
+
                     if (data.success) {
                         document.getElementById("loader").style.display = "none";
                         if (selectedFeature === 'bhava_kundli') {
-                            const bhavaData = data.data.data;
-                            let html = `
-                                <div class="alert alert-success">Bhava Kundli Analysis Loaded</div>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover align-middle text-center">
-                                        <thead class="table-primary">
-                                            <tr>
-                                                <th>House</th>
-                                                <th>Sign</th>
-                                                <th>Planets</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                            `;
-                            bhavaData.houses.forEach(house => {
-                                html += `
-                                    <tr>
-                                        <td><strong>${house.house}</strong></td>
-                                        <td>${house.sign || 'N/A'}</td>
-                                        <td>${house.planets.join(', ') || 'None'}</td>
-                                        <td>${house.description || 'No specific influences noted.'}</td>
-                                    </tr>
-                                `;
-                            });
-                            html += `
-                                        </tbody>
-                                    </table>
-                                </div>
-                            `;
-                            output.innerHTML = html;
-                        } else {
-                            output.innerHTML = `
-                                <div class="alert alert-success">${selectedFeature.replace(/_/g, ' ')} Data Loaded</div>
-                                <pre class="bg-light p-2 rounded">${JSON.stringify(data.data, null, 2)}</pre>
-                            `;
+                            const kundli = data.data.data;
+
+                            const html = `
+        <div class="alert alert-success">Bhava Kundli Data Loaded</div>
+
+        <h5 class="text-center mt-4">🔹 Bhava Kundli Information</h5>
+        <p class="text-muted text-center mb-3 px-3">
+            The Bhava Kundli (House Chart) provides an in-depth view of planetary placements in each house
+            based on the individual's exact birth time and location. It helps understand areas such as career,
+            relationships, health, and wealth through house-wise analysis.
+        </p>
+
+        <div class="text-center my-3">
+            <img src="${kundli.base64_image}" alt="Bhava Kundli Chart" class="img-fluid rounded shadow" style="max-width:100%; height:auto;" />
+        </div>
+    `;
+
+                            document.getElementById('kundliResult').innerHTML = html;
                         }
+
+
                     } else {
                         output.innerHTML = `<div class="alert alert-danger">No data returned from API.</div>`;
                     }

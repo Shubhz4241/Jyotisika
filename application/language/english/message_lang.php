@@ -61,7 +61,16 @@ $lang['Baby_Name'] = "Baby Name";
 
 
 
-//
+//Blogs section Home
+
+$lang['Blog_Heading'] = "Blogs of Astrology";
+$lang['Blog_Subtext'] = "Explore the stars, decode your destiny.";
+
+$lang['No_Blogs_Message'] = "No blogs available at the moment";
+//Top Shop
+
+$lang['Top_Shop_Heading'] = "Top Shop";
+$lang['Top_Shop_Subtext'] = "Divine essentials crafted for your journey.";
 
 
 //Comman Nav Bar
@@ -80,6 +89,42 @@ $lang['kp'] = "KP";
 $lang['festival'] = "Festival";
 $lang['MobPooja'] = "Mob Pooja";
 
+
+//Home page free kundli 
+
+
+// ENGLISH
+$lang['Free_Kundli_Generation'] = "Free Kundli Generation";
+$lang['Astrology'] = "Astrology";
+$lang['Planetary_Positions'] = "Planetary Positions";
+$lang['Positions'] = "Positions";
+$lang['Vimshottari_Dasha'] = "Vimshottari Dasha";
+$lang['Ascendant'] = "Ascendant";
+$lang['Report'] = "Report";
+$lang['Gemstone_Recommendation'] = "Gemstone Recommendation";
+$lang['Composite_Friendship'] = "Composite Friendship";
+$lang['Shadbala'] = "Shadbala";
+$lang['Yogini_Dasha'] = "Yogini Dasha";
+$lang['Horoscope_Charts'] = "Horoscope Charts";
+$lang['Manglik_Dosha'] = "Manglik Dosha";
+$lang['Kaal_Sarpa_Dosha'] = "Kaal Sarpa Dosha";
+$lang['Bhava_Kundli'] = "Bhava Kundli";
+$lang['Sadhe_Sati'] = "Sadhe Sati";
+
+
+
+
+//Astrologer cart 
+
+$lang['Busy'] = "Busy";
+$lang['Available'] = "Available";
+$lang['Chat'] = "Chat";
+$lang['Call'] = "Call";
+$lang['No_Astrologers_Found'] = "No astrologers found.";
+
+
+$lang['Year'] = "Year";
+$lang['Rs'] = "Rs Per Minute";
 
 
 //Footer
@@ -126,6 +171,38 @@ $lang['Financial_Astrologers'] = "Financial Astrologers";
 $lang['KP_Astrologers'] = "KP Astrologers";
 $lang['Vastu_Experts'] = "Vastu Experts";
 $lang['Numerologist'] = "Numerologist";
+
+
+$lang['astrological_services'] = "Astrological Services";
+$lang['finance'] = "Finance";
+$lang['ask_question'] = "Ask a question";
+$lang['career_and_job'] = "Career and Job";
+
+
+
+$lang['get_free_kundali'] = "Get Free Kundali";
+$lang['basic_astrology'] = "Basic Astrology";
+$lang['planetary_position'] = "Planetary Position";
+$lang['vimshottari_dasha'] = "Vimshottari Dasha";
+$lang['ascendant_report'] = "Ascendant Report";
+$lang['manglik_dosha'] = "Manglik Dosha";
+$lang['gemstone_recommendation'] = "Gemstone Recommendation";
+
+
+
+
+$lang['horoscope'] = "Horoscope";
+$lang['todays_horoscope'] = "Today's Horoscope";
+$lang['weekly_horoscope'] = "Weekly Horoscope";
+$lang['monthly_horoscope'] = "Monthly Horoscope";
+
+$lang['online_consultations'] = "Online Consultations";
+$lang['contact_us'] = "Contact Us";
+
+
+//Footer link
+
+
 
 
 //Festivals 
@@ -468,6 +545,9 @@ $lang['Photo_Gallery'] = "Our Photo Gallery";
 $lang['Reviews'] = "Reviews";
 
 
+$lang['rudraksha'] = "Rudraksha";
+
+
 
 //Cart Details 
 
@@ -513,3 +593,80 @@ $lang['best_sellers']        = "Best Sellers";
 $lang['energy_stones']       = "Energy Stones";
 $lang['gallery']             = "Gallery";
 $lang['customer_reviews']    = "Customer Reviews";
+
+
+//View Astrolger 
+
+// English (Default)
+$lang['Follow'] = "Follow";
+$lang['Following'] = "Following";
+$lang['specialties'] = "Specialties";
+$lang['Experience'] = "Experience";
+$lang['Years'] = "Years";
+$lang['Languages'] = "Languages";
+$lang['Consultation Fee'] = "Consultation Fee";
+$lang['/min'] = "/min";
+$lang['About'] = "About";
+$lang['User_Reviews'] = "User Reviews";
+
+
+$lang['available_balance'] = "Available Balance";
+$lang['rs_prefix'] = "Rs.";
+$lang['zero_amount'] = "000";
+
+$lang['recharge'] = "Recharge";
+
+
+
+
+//Book pooja
+
+$lang['online'] = "Online";
+
+
+$lang['book_pooja_prompt'] = "Let’s book your pooja, what do you need help with?";
+
+
+
+//Pooja info
+
+// English
+$lang['view_more_title'] = "View More";
+$lang['description'] = "Description";
+$lang['price'] = "Price:-";
+$lang['book_online_pooja'] = "Book Online Pooja";
+$lang['procedure'] = "Procedure";
+$lang['procedure_steps_intro'] = "The pooja follows these steps:";
+$lang['procedure_step1'] = "Initial prayers and sankalpam";
+$lang['procedure_step2'] = "Main ritual performance";
+$lang['procedure_step3'] = "Offerings to deities";
+$lang['procedure_step4'] = "Final aarti and prasad distribution";
+$lang['benefits'] = "Benefits";
+$lang['benefit1'] = "Bring peace and harmony";
+$lang['benefit2'] = "Remove obstacles";
+$lang['benefit3'] = "Enhance spiritual growth";
+$lang['benefit4'] = "Promote overall well-being";
+
+
+//Online Poojaries
+
+$lang['search_astrologer'] = "Search astrologer by name, expertise or language";
+$lang['no_services_found'] = "No services found";
+
+$lang['poojas'] = "Poojas";
+
+
+
+//NavBar Section 
+
+$lang['notifications'] = "Notifications";
+$lang['my_orders'] = "My Orders";
+$lang['your_cart'] = "Your Cart";
+$lang['following'] = "Following";
+$lang['refer_to_friends'] = "Refer to Friends";
+$lang['logout'] = "Logout";
+
+
+//Notification 
+$lang['your_notifications'] = "Your Notifications";
+

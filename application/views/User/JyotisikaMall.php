@@ -261,7 +261,7 @@
                 </button> -->
         </div>
 
-        <?php print_r($getcategory_data)?>
+        <!-- <?php print_r($getcategory_data)?> -->
         <div class="container">
 
             <!-- Collections Section -->
@@ -303,7 +303,7 @@
 
 
             <!-- Best Sellers Carousel -->
-            <section class="">
+            <!-- <section class="">
                 <div class="container">
                     <?php if ((empty(!$productdata))): ?>
                         <h2 class="text-center mb-4"><?php echo $this->lang->line('best_sellers'); ?></h2>
@@ -413,9 +413,9 @@
                                                 </div>
                                                 <div class="product-price">
                                                     <span class="current-price">₹
-                                                        <?php echo $product["discount_price"]; ?><sup>00</sup></span>
+                                                        <?php echo $product["discount_price"]; ?></span>
                                                     <span class="original-price">₹
-                                                        <?php echo $product["product_price"]; ?><sup>00</sup></span>
+                                                        <?php echo $product["product_price"]; ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -428,11 +428,132 @@
                     </div>
                 </div>
             </section>
-
+ -->
 
             <!-- <?php print_r($energy_stone) ?> -->
 
             <!-- Energy Stones-->
+
+             <?php if (empty(!$rudraksh_data_)): ?>
+                <section class="py-3">
+                    <div class="container">
+                        <h2 class="text-center mb-4"><?php echo $this->lang->line('rudraksha'); ?></h2>
+                        <div class="owl-carousel owl-theme">
+                            <?php
+                            $energyStones = [
+                                [
+                                    'slug' => 'rudraksha-bracelet',
+                                    'discount' => 'Up to 40% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/stone1.png'),
+                                    'title' => 'Gold Plated Modern Rudraksha Bracelet',
+                                    'rating' => 4.5,
+                                    'reviews' => 2156,
+                                    'current_price' => 599,
+                                    'original_price' => 999
+                                ],
+                                [
+                                    'slug' => 'yantra-pendant-1',
+                                    'discount' => 'Up to 30% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/stone2.png'),
+                                    'title' => 'Spiritual Yantra Pendant',
+                                    'rating' => 4,
+                                    'reviews' => 1520,
+                                    'current_price' => 699,
+                                    'original_price' => 999
+                                ],
+                                // ... Add more with different slugs
+                                [
+                                    'slug' => 'stone-3',
+                                    'discount' => 'Up to 30% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/stone3.png'),
+                                    'title' => 'Spiritual Yantra Pendant',
+                                    'rating' => 4,
+                                    'reviews' => 1520,
+                                    'current_price' => 699,
+                                    'original_price' => 999
+                                ],
+                                [
+                                    'slug' => 'stone-4',
+                                    'discount' => 'Up to 30% off',
+                                    'img' => base_url('assets/images/JyotisikaMall/stone4.png'),
+                                    'title' => 'Spiritual Yantra Pendant',
+                                    'rating' => 4,
+                                    'reviews' => 1520,
+                                    'current_price' => 699,
+                                    'original_price' => 999
+                                ],
+                                // Repeat for rest with unique slugs
+                            ]; ?>
+
+                            <!-- <?php print_r($energy_stone) ?> -->
+
+
+                            <?php if (empty(!$rudraksh_data_)): ?>
+
+                                <?php foreach ($rudraksh_data_ as $rudraksh): ?>
+                                    <div class="item">
+                                        <a href="<?php echo base_url('ProductDetails/' . $rudraksh["product_id"]); ?>"
+                                            style="text-decoration: none; color: inherit;">
+                                            <div class="best-seller-card">
+                                                <div class="discount-badge">
+                                                    <i class="bi bi-heart-fill me-1"></i>
+                                                    <?php
+                                                    $original = (float) $rudraksh['product_price'];
+                                                    $discount = (float) $rudraksh['discount_price'];
+                                                    if ($original > 0 && $discount < $original) {
+                                                        $percent = round((($original - $discount) / $original) * 100);
+                                                        echo $percent . "% off";
+                                                    } else {
+                                                        echo "No discount";
+                                                    }
+                                                    ?>
+                                                </div>
+
+
+
+                                                <img src="<?php echo base_url('uploads/products/' . $rudraksh["product_image"]); ?>"
+                                                    class="best-seller-img" alt="Product"
+                                                    onerror="this.onerror=null;this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
+                                                <div class="product-content">
+                                                    <div class="product-title"><?php echo $rudraksh['product_name']; ?></div>
+                                                    <div class="product-rating">
+                                                        <span>
+                                                            <?php
+                                                            $rating = isset($rudraksh["average_rating"]) && is_numeric($rudraksh["average_rating"]) ? floatval($rudraksh["average_rating"]) : 0;
+                                                            $fullStars = floor($rating);
+                                                            $halfStar = ($rating - $fullStars) >= 0.5 ? 1 : 0;
+                                                            for ($i = 0; $i < $fullStars; $i++) {
+                                                                echo '<i class="bi bi-star-fill"></i>';
+                                                            }
+                                                            if ($halfStar) {
+                                                                echo '<i class="bi bi-star-half"></i>';
+                                                            }
+                                                            for ($i = $fullStars + $halfStar; $i < 5; $i++) {
+                                                                echo '<i class="bi bi-star"></i>';
+                                                            }
+                                                            ?>
+                                                        </span>
+                                                        <!-- <span>(<?php echo 2; ?>)</span> -->
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <span class="current-price">₹
+                                                            <?php echo $rudraksh['discount_price']; ?></span>
+                                                        <span class="original-price">₹
+                                                            <?php echo $rudraksh['product_price']; ?></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>There is no product with energy stones category</p>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                </section>
+            <?php endif ?>
+
 
 
 
@@ -540,9 +661,9 @@
                                                     </div>
                                                     <div class="product-price">
                                                         <span class="current-price">₹
-                                                            <?php echo $stone['discount_price']; ?><sup>00</sup></span>
+                                                            <?php echo $stone['discount_price']; ?></span>
                                                         <span class="original-price">₹
-                                                            <?php echo $stone['product_price']; ?><sup>00</sup></span>
+                                                            <?php echo $stone['product_price']; ?></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -556,6 +677,9 @@
                     </div>
                 </section>
             <?php endif ?>
+
+
+
 
 
 

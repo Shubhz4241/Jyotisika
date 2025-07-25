@@ -612,6 +612,34 @@ class User extends CI_Controller
 
 		// print_r($data["getcategory_data"]);
 
+			$api_url_rudraksh = base_url("User_Api_Controller/show_rudraksh");
+		$ch_rudraksh_data = curl_init();
+		curl_setopt($ch_rudraksh_data, CURLOPT_URL, $api_url_rudraksh);
+		curl_setopt($ch_rudraksh_data, CURLOPT_RETURNTRANSFER, true);
+		$rudraksh_data_data = curl_exec($ch_rudraksh_data);
+		$curl_error_rudraksh_data = curl_error($ch_rudraksh_data);
+		curl_close($ch_rudraksh_data);
+
+		if ($rudraksh_data_data === false) {
+			show_error("cURL Error: " . $curl_error_rudraksh_data, 500);
+			return;
+		}
+
+		$rudraksh_data_ = json_decode($rudraksh_data_data, associative: true);
+
+
+
+		$data["rudraksh_data_"] = "";
+		if ($rudraksh_data_["status"] == "success") {
+			$data["rudraksh_data_"] = $rudraksh_data_["data"];
+		}
+  
+
+		
+
+
+
+
 
 
 		$api_url_energy_stone = base_url("User_Api_Controller/show_energy_stones");
@@ -1586,6 +1614,9 @@ class User extends CI_Controller
 	public function PoojaInfo($puja_id)
 	{
 
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
 		$api_url = base_url("User_Api_Controller/show_puja_info");
 
 
@@ -1900,6 +1931,9 @@ class User extends CI_Controller
 	public function Orders()
 	{
 
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
 
 		$user_id = $this->session->userdata('user_id');
 
@@ -2089,6 +2123,8 @@ class User extends CI_Controller
 
 	public function Notification()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
 
 		$user_id = $this->session->userdata('user_id');
 
@@ -2145,6 +2181,10 @@ class User extends CI_Controller
 
 	public function CustomerSupport()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+
 		$this->load->view('User/CustomerSupport');
 	}
 

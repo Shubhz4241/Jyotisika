@@ -158,13 +158,13 @@
                                             <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
                                                 style="width: 15px; height: 15px; margin-right: 5px;">
                                             <small><?php echo isset($astrologer['experience']) && !empty($astrologer['experience']) ? $astrologer['experience'] : "0"; ?>
-                                                + Years</small>
+                                                +  <?php echo $this->lang->line('Year') ?></small>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
                                                 style="width: 15px; height: 15px; margin-right: 5px;">
                                             <small><?php echo isset($astrologer['price_per_minute']) && !empty($astrologer['price_per_minute']) ? $astrologer['price_per_minute'] : "0"; ?>
-                                               Rs per minute</small>
+                                               <?php echo $this->lang->line('Rs') ?></small>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
@@ -176,7 +176,7 @@
                                         <div class="d-flex align-items-center">
 
                                             <?php if ($astrologer['chatstatus'] == "active"): ?>
-                                                <small class="card-language text-danger">Busy , </small>
+                                                <small class="card-language text-danger"><?php echo $this->lang->line('Busy') ?>  , </small>
 
 
                                                 <?php
@@ -203,7 +203,7 @@
                                                 ?>
 
                                             <?php else: ?>
-                                                <small class="card-language text-success">Available</small>
+                                                <small class="card-language text-success"> <?php echo $this->lang->line('Available') ?></small>
                                             <?php endif ?>
                                         </div>
                                     </div>
@@ -223,19 +223,19 @@
                                                     '<?php echo base_url('chat/' . $astrologer['id']); ?>',
                                                     '<?php echo addslashes($astrologer['name']); ?>' ,
                                                     '<?php echo $astrologer['chatvalue'] ?>' 
-                                                )"> Chat</button>
+                                                )"> <?php echo $this->lang->line('Chat') ?> </button>
                                         <?php else: ?>
                                             <button id="chatlink" class="btn btn-sm w-50 rounded-3 border-1 btnlog"
-                                                style="background-color: var(--yellow);">Chat</button>
+                                                style="background-color: var(--yellow);"> <?php echo $this->lang->line('Chat') ?> </button>
                                         <?php endif; ?>
 
 
                                         <?php if ($this->session->userdata('user_id')): ?>
                                             <button
-                                                class="btn btnHover btn-sm btn-outline-success w-50 rounded-3 call-btn">Call</button>
+                                                class="btn btnHover btn-sm btn-outline-success w-50 rounded-3 call-btn"><?php echo $this->lang->line('Call') ?> </button>
                                         <?php else: ?>
                                             <button
-                                                class="btn btnHover btn-sm btn-outline-dark  w-50 rounded-3 call-btn">Call</button>
+                                                class="btn btnHover btn-sm btn-outline-dark  w-50 rounded-3 call-btn"><?php echo $this->lang->line('Call') ?> </button>
                                         <?php endif; ?>
                                     </div>
 

@@ -67,15 +67,19 @@
 
 
 
+      
+
+
         <section>
             <div class="container">
 
                 <!-- recharge and seach section  -->
                 <div class="row my-4">
                     <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
-                        <h4 id="balance" class="fw-bold">Available Balance : Rs.000</h4>
+                        <h4 id="balance" class="fw-bold"><?php  echo $this->lang->line('available_balance')  ?>  <?php  echo $this->lang->line('rs_prefix')  ?><?php  echo $this->lang->line('zero_amount')  ?></h4>
                         <button onclick="func()" class="btn rounded-4 btn-outline-success">
-                            Recharge
+                            <?php  echo $this->lang->line('recharge')  ?> 
+                           
                         </button>
                     </div>
                 </div>
@@ -148,7 +152,7 @@
 
                                             <?php if (!($this->session->userdata("user_id"))): ?>
                                                 <button class="btn btn-light btn-sm rounded-4 px-3 showlogin">
-                                                    <i class="bi bi-person-plus-fill me-1"></i>Follow
+                                                    <i class="bi bi-person-plus-fill me-1"></i><?php echo $this->lang->line('Follow') ?> 
                                                 </button>
 
                                             <?php else: ?>
@@ -156,11 +160,11 @@
                                                 <?php if ($is_following == "followed"): ?>
 
                                                     <button disabled="true" class="btn btn-light btn-sm rounded-4 px-3">
-                                                        <i class="bi bi-person me-1"></i>Following
+                                                        <i class="bi bi-person me-1"></i><?php echo $this->lang->line('Following') ?>
                                                     </button>
                                                 <?php else: ?>
                                                     <button id="followastrologer" class="btn btn-light btn-sm rounded-4 px-3">
-                                                        <i class="bi bi-person-plus-fill me-1"></i>Follow
+                                                        <i class="bi bi-person-plus-fill me-1"></i><?php echo $this->lang->line('Follow') ?> 
                                                     </button>
 
 
@@ -185,7 +189,7 @@
                                                             <i class="bi bi-stars text-danger"></i>
                                                         </div>
                                                         <div>
-                                                            <h6 class="mb-0 fw-bold">specialties</h6>
+                                                            <h6 class="mb-0 fw-bold"><?php echo $this->lang->line('specialties') ?></h6>
                                                             <span
                                                                 class="card-expertise"><?php echo isset($astrologerdata[0]["specialties"]) && !empty($astrologerdata[0]["specialties"]) ? $astrologerdata[0]["specialties"] : "N/A" ?></span>
                                                         </div>
@@ -196,7 +200,7 @@
                                                             <i class="bi bi-clock-history text-danger"></i>
                                                         </div>
                                                         <div>
-                                                            <h6 class="mb-0 fw-bold">Experience</h6>
+                                                            <h6 class="mb-0 fw-bold"><?php echo $this->lang->line('Experience') ?></h6>
                                                             <span><?php echo isset($astrologerdata[0]["experience"]) && !empty($astrologerdata[0]["experience"]) ? $astrologerdata[0]["experience"] : "N/A" ?>+
                                                                 Years</span>
                                                         </div>
@@ -207,7 +211,7 @@
                                                             <i class="bi bi-translate text-danger"></i>
                                                         </div>
                                                         <div>
-                                                            <h6 class="mb-0 fw-bold">Languages</h6>
+                                                            <h6 class="mb-0 fw-bold"><?php echo $this->lang->line('Languages') ?></h6>
                                                             <span
                                                                 class="card-language"><?php echo isset($astrologerdata[0]["languages"]) && !empty($astrologerdata[0]["languages"]) ? $astrologerdata[0]["languages"] : "N/A" ?>
                                                             </span>
@@ -224,7 +228,7 @@
                                             <div
                                                 class="col-md-4 d-flex flex-column justify-content-between mt-3 mt-md-0">
                                                 <div class="text-center mb-3">
-                                                    <h5 class="fw-bold text-danger mb-1">Consultation Fee</h5>
+                                                    <h5 class="fw-bold text-danger mb-1"><?php echo $this->lang->line('Consultation Fee') ?></h5>
 
                                                     <h4 class="fw-bold">
                                                         ₹<?php echo isset($astrologerdata[0]["price_per_minute"]) && !empty($astrologerdata[0]["price_per_minute"]) ? $astrologerdata[0]["price_per_minute"] : "N/A" ?>/min
@@ -273,23 +277,22 @@
                                                     '<?php echo addslashes($astrologerdata[0]['name']); ?>' ,
                                                     '<?php echo $astrologersession ?>'
                                                     )">
-                                                            <i class="bi bi-chat-dots-fill me-1"></i> Chat
-                                                        </button>
+                                                            <i class="bi bi-chat-dots-fill me-1"></i><?php echo $this->lang->line('Chat') ?>                                                         </button>
                                                     <?php else: ?>
                                                         <button class="btn showlogin rounded-3 text-dark"
                                                             style="background-color: var(--yellow);">
-                                                            <i class="bi bi-chat-dots-fill me-1"></i> Chat
+                                                            <i class="bi bi-chat-dots-fill me-1"></i> <?php echo $this->lang->line('Chat') ?>
                                                         </button>
                                                     <?php endif ?>
 
 
                                                     <?php if ($this->session->userdata("user_id")): ?>
                                                         <button class="btn btnHover btn-outline-dark f rounded-3">
-                                                            <i class="bi bi-telephone-fill me-1"></i> Call
+                                                            <i class="bi bi-telephone-fill me-1"></i> <?php echo $this->lang->line('Call') ?>
                                                         </button>
                                                     <?php else: ?>
                                                         <button class="btn showlogin btnHover btn-outline-dark f rounded-3">
-                                                            <i class="bi bi-telephone-fill me-1"></i> Call
+                                                            <i class="bi bi-telephone-fill me-1"></i> <?php echo $this->lang->line('Call') ?>
                                                         </button>
                                                     <?php endif ?>
 
@@ -305,7 +308,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <h6 class="fs-5 fw-bold">About</h6>
+                        <h6 class="fs-5 fw-bold"><?php echo $this->lang->line('About') ?></h6>
                         <p style="text-align:justify;">
                             <?php echo isset($astrologerdata[0]["specialties"]) && !empty($astrologerdata[0]["specialties"]) ? $astrologerdata[0]["specialties"] : "N/A" ?>
                         </p>
@@ -399,7 +402,7 @@
 
         <section>
             <div class="container mb-5">
-                <h5 class=" mb-4 fw-bold">User Reviews</h5>
+                <h5 class=" mb-4 fw-bold"><?php echo $this->lang->line('User_Reviews') ?></h5>
                 <div class="owl-carousel owl1 owl-theme">
 
                     <?php if (!empty($feedback)): ?>

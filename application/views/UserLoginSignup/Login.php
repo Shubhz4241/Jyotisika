@@ -245,10 +245,10 @@
                             text: "Something went wrong!",
                         });
                     }).finally(() => {
-                    // Enable the button again after response or failure
-                    getOtpBtn.disabled = false;
-                    getOtpBtn.innerText = "Get OTP";
-                });
+                        // Enable the button again after response or failure
+                        getOtpBtn.disabled = false;
+                        getOtpBtn.innerText = "Get OTP";
+                    });
             }
 
             getOtpBtn.addEventListener("click", sendOtp);
@@ -304,7 +304,15 @@
                         }).then(() => {
                             window.location.href = "<?php echo base_url('User/home'); ?>";
                         });
-                    } else {
+                    } else if (data.status === "userresticted") {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Access Denied",
+                            text: "Your account has been banned. Please contact support for assistance.",
+                        });
+
+                    }
+                    else {
                         Swal.fire({
                             icon: "error",
                             title: "Verification Failed",

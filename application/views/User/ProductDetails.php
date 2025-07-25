@@ -172,6 +172,8 @@
 
 <body>
 
+
+
     <!-- Navbar -->
     <?php $this->load->view('IncludeUser/CommanNavbar'); ?>
     <?php $this->load->view('IncludeUser/CommanSubnav'); ?>
@@ -215,6 +217,7 @@
                     </span>
                 </div>
 
+              
                 <!-- Cart Buttons -->
                 <div class="button-group mb-2">
                     <?php if ($this->session->userdata("user_id")): ?>
@@ -231,6 +234,11 @@
                 </div>
 
                 <!-- Product Description -->
+
+                 <p class="text-dark me-3">
+                   <b> Purposes :-
+                    <?php echo $product_data[0]["purpose"] ?></b>
+                </p>
                 <p class="text-muted mb-3">
                     <?php echo $product_data[0]["product_description"] ?>
                 </p>

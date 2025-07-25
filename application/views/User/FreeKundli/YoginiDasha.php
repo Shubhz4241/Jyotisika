@@ -32,8 +32,12 @@
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
     <style>
         /* Gender Selection CSS */
         .form-check-input+.gender-label {
@@ -109,7 +113,9 @@
 
         /* Responsive Adjustments */
         @media (max-width: 767.98px) {
-            .col-md-7, .col-md-5 {
+
+            .col-md-7,
+            .col-md-5 {
                 margin-bottom: 1.5rem;
             }
 
@@ -151,7 +157,8 @@
             justify-content: space-between;
         }
 
-        .card-expertise, .card-language {
+        .card-expertise,
+        .card-language {
             font-size: 0.85rem;
             line-height: 1.4;
         }
@@ -225,8 +232,8 @@
         <div class="row flex-col justify-content-center align-items-start">
             <div class="col-12 col-md-6">
                 <div class="text-center">
-                    <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png')?>" alt="Yogini Dasha Chart" class="img-fluid"
-                        style="width: 450px; height: 450px; margin-top: 5px;">
+                    <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png') ?>" alt="Yogini Dasha Chart"
+                        class="img-fluid" style="width: 450px; height: 450px; margin-top: 5px;">
                     <h4 class="mt-5">Yogini Dasha by Birth Date</h4>
                     <form id="kundliForm" class="p-3 bg-white shadow rounded">
                         <label for="name" class="m-2">Enter Name</label>
@@ -272,13 +279,13 @@
                             </div>
                             <div class="col-12 col-md-4">
                                 <label for="boy_minute">Birth Minutes</label>
-                                <select name="minute" id="boy_minute" class="form-control shadow-none my-2 p-2 rounded-1"
-                                    required></select>
+                                <select name="minute" id="boy_minute"
+                                    class="form-control shadow-none my-2 p-2 rounded-1" required></select>
                             </div>
                             <div class="col-12 col-md-4">
                                 <label for="boy_second">Birth Seconds</label>
-                                <select name="second" id="boy_second" class="form-control shadow-none my-2 p-2 rounded-1"
-                                    required></select>
+                                <select name="second" id="boy_second"
+                                    class="form-control shadow-none my-2 p-2 rounded-1" required></select>
                             </div>
                         </div>
                         <label for="boy_birthPlace">Birth Place</label>
@@ -301,7 +308,8 @@
                             <option value="kn">Kannada</option>
                         </select>
                         <label for="astro_feature" style="visibility: hidden;">Select Feature</label>
-                        <select id="astro_feature" class="form-control shadow-none my-2 p-2 rounded-1" required style="visibility: hidden;">
+                        <select id="astro_feature" class="form-control shadow-none my-2 p-2 rounded-1" required
+                            style="visibility: hidden;">
                             <option value="yogini_dasha" selected>Yogini Dasha</option>
                         </select>
                         <center>
@@ -321,7 +329,9 @@
             <div class="col-12 col-md-6">
                 <div class="mt-2" style="text-align: justify; padding: 0 20px;">
                     <p style="font-weight: 300;">
-                        Yogini Dasha is a Vedic astrology system that calculates planetary periods to predict life events based on your birth chart. It uses eight Yoginis, each associated with a specific duration and planetary influence, to guide you through life’s cycles and challenges.
+                        Yogini Dasha is a Vedic astrology system that calculates planetary periods to predict life
+                        events based on your birth chart. It uses eight Yoginis, each associated with a specific
+                        duration and planetary influence, to guide you through life’s cycles and challenges.
                     </p>
                     <h4 class="mt-4 d-flex align-items-center justify-content-center gap-2">
                         <span class="fw-semibold">Key Aspects of Yogini Dasha</span>
@@ -329,33 +339,41 @@
                     <div class="mt-4 px-2">
                         <h5 class="fw-bold mb-3">Yogini Types:</h5>
                         <p class="text-justify mb-4">
-                            The eight Yoginis—Mangala, Pingala, Dhanya, Bhramari, Bhadrika, Ulka, Siddha, and Sankata—each govern specific periods ranging from 1 to 8 years, influencing different life aspects.
+                            The eight Yoginis—Mangala, Pingala, Dhanya, Bhramari, Bhadrika, Ulka, Siddha, and
+                            Sankata—each govern specific periods ranging from 1 to 8 years, influencing different life
+                            aspects.
                         </p>
                         <h6 class="fw-semibold mb-2">Planetary Association:</h6>
                         <p class="text-justify mb-4">
-                            Each Yogini is linked to a planet or node, such as Moon (Mangala), Sun (Pingala), or Rahu (Sankata), affecting the nature of events during its period.
+                            Each Yogini is linked to a planet or node, such as Moon (Mangala), Sun (Pingala), or Rahu
+                            (Sankata), affecting the nature of events during its period.
                         </p>
                         <h6 class="fw-semibold mb-2">Dasha Sequence:</h6>
                         <p class="text-justify mb-4">
-                            The sequence of Yogini Dashas is fixed, starting from the Moon’s Nakshatra at birth, and progresses cyclically, impacting various life areas like career and relationships.
+                            The sequence of Yogini Dashas is fixed, starting from the Moon’s Nakshatra at birth, and
+                            progresses cyclically, impacting various life areas like career and relationships.
                         </p>
                         <h6 class="fw-semibold mb-2">Sub-Periods (Antardasha):</h6>
                         <p class="text-justify mb-4">
-                            Each Yogini Dasha is divided into sub-periods, providing detailed insights into shorter timeframes within the major Dasha period.
+                            Each Yogini Dasha is divided into sub-periods, providing detailed insights into shorter
+                            timeframes within the major Dasha period.
                         </p>
                         <h6 class="fw-semibold mb-2">Timing of Events:</h6>
                         <p class="text-justify mb-4">
-                            Yogini Dasha predicts the timing of significant life events, helping you prepare for opportunities or challenges based on planetary influences.
+                            Yogini Dasha predicts the timing of significant life events, helping you prepare for
+                            opportunities or challenges based on planetary influences.
                         </p>
                         <h6 class="fw-semibold mb-2">Remedial Measures:</h6>
                         <p class="text-justify mb-4">
-                            During challenging Yogini periods, remedies like mantras, charity, or rituals can mitigate negative effects and enhance positive outcomes.
+                            During challenging Yogini periods, remedies like mantras, charity, or rituals can mitigate
+                            negative effects and enhance positive outcomes.
                         </p>
                     </div>
                     <div class="mt-4 px-2">
                         <h5 class="fw-bold mb-3">Significance of Yogini Dasha:</h5>
                         <p class="text-justify mb-4">
-                            Understanding Yogini Dasha helps you navigate life’s phases, make informed decisions, and align with cosmic cycles for personal growth and success.
+                            Understanding Yogini Dasha helps you navigate life’s phases, make informed decisions, and
+                            align with cosmic cycles for personal growth and success.
                         </p>
                     </div>
                 </div>
@@ -363,11 +381,13 @@
             <div class="col-12">
                 <h6 class="fw-semibold mb-2">Transits and Yogini Dasha:</h6>
                 <p class="text-justify mb-4">
-                    Current planetary transits interact with Yogini Dasha periods, amplifying or moderating their effects. Timing remedies with transits enhances their efficacy.
+                    Current planetary transits interact with Yogini Dasha periods, amplifying or moderating their
+                    effects. Timing remedies with transits enhances their efficacy.
                 </p>
                 <h6 class="fw-semibold mb-2">Technology and Dasha Analysis:</h6>
                 <p class="text-justify mb-4">
-                    Advanced astrological tools calculate Yogini Dasha periods with precision, offering personalized insights based on your birth chart.
+                    Advanced astrological tools calculate Yogini Dasha periods with precision, offering personalized
+                    insights based on your birth chart.
                 </p>
             </div>
         </div>
@@ -383,73 +403,97 @@
                     <div class="accordion" id="yoginiImpactAccordion">
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingPersonality">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePersonality" aria-expanded="false" aria-controls="collapsePersonality">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapsePersonality" aria-expanded="false"
+                                    aria-controls="collapsePersonality">
                                     <i class="bi bi-person me-2"></i> Personality & Behavior
                                 </button>
                             </h2>
-                            <div id="collapsePersonality" class="accordion-collapse collapse" aria-labelledby="headingPersonality" data-bs-parent="#yoginiImpactAccordion">
+                            <div id="collapsePersonality" class="accordion-collapse collapse"
+                                aria-labelledby="headingPersonality" data-bs-parent="#yoginiImpactAccordion">
                                 <div class="accordion-body">
-                                    Yogini Dashas like Dhanya (Jupiter) and Siddha (Venus) enhance confidence, creativity, and emotional balance, shaping your personality during their periods.
+                                    Yogini Dashas like Dhanya (Jupiter) and Siddha (Venus) enhance confidence,
+                                    creativity, and emotional balance, shaping your personality during their periods.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingCareer">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCareer" aria-expanded="false" aria-controls="collapseCareer">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseCareer" aria-expanded="false"
+                                    aria-controls="collapseCareer">
                                     <i class="bi bi-briefcase me-2"></i> Career & Success
                                 </button>
                             </h2>
-                            <div id="collapseCareer" class="accordion-collapse collapse" aria-labelledby="headingCareer" data-bs-parent="#yoginiImpactAccordion">
+                            <div id="collapseCareer" class="accordion-collapse collapse" aria-labelledby="headingCareer"
+                                data-bs-parent="#yoginiImpactAccordion">
                                 <div class="accordion-body">
-                                    Pingala (Sun) and Bhadrika (Mercury) periods promote leadership and intellectual success, aligning career growth with planetary cycles.
+                                    Pingala (Sun) and Bhadrika (Mercury) periods promote leadership and intellectual
+                                    success, aligning career growth with planetary cycles.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingRelationships">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRelationships" aria-expanded="false" aria-controls="collapseRelationships">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseRelationships" aria-expanded="false"
+                                    aria-controls="collapseRelationships">
                                     <i class="bi bi-heart me-2"></i> Relationships & Compatibility
                                 </button>
                             </h2>
-                            <div id="collapseRelationships" class="accordion-collapse collapse" aria-labelledby="headingRelationships" data-bs-parent="#yoginiImpactAccordion">
+                            <div id="collapseRelationships" class="accordion-collapse collapse"
+                                aria-labelledby="headingRelationships" data-bs-parent="#yoginiImpactAccordion">
                                 <div class="accordion-body">
-                                    Siddha (Venus) and Mangala (Moon) periods foster harmony and emotional bonding, improving relationship dynamics.
+                                    Siddha (Venus) and Mangala (Moon) periods foster harmony and emotional bonding,
+                                    improving relationship dynamics.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingHealth">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHealth" aria-expanded="false" aria-controls="collapseHealth">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseHealth" aria-expanded="false"
+                                    aria-controls="collapseHealth">
                                     <i class="bi bi-heart-pulse me-2"></i> Health & Vitality
                                 </button>
                             </h2>
-                            <div id="collapseHealth" class="accordion-collapse collapse" aria-labelledby="headingHealth" data-bs-parent="#yoginiImpactAccordion">
+                            <div id="collapseHealth" class="accordion-collapse collapse" aria-labelledby="headingHealth"
+                                data-bs-parent="#yoginiImpactAccordion">
                                 <div class="accordion-body">
-                                    Mangala (Moon) and Ulka (Saturn) periods influence physical and mental health, guiding remedies to boost vitality.
+                                    Mangala (Moon) and Ulka (Saturn) periods influence physical and mental health,
+                                    guiding remedies to boost vitality.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingSpirituality">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpirituality" aria-expanded="false" aria-controls="collapseSpirituality">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSpirituality" aria-expanded="false"
+                                    aria-controls="collapseSpirituality">
                                     <i class="bi bi-moon-stars me-2"></i> Spirituality & Karma
                                 </button>
                             </h2>
-                            <div id="collapseSpirituality" class="accordion-collapse collapse" aria-labelledby="headingSpirituality" data-bs-parent="#yoginiImpactAccordion">
+                            <div id="collapseSpirituality" class="accordion-collapse collapse"
+                                aria-labelledby="headingSpirituality" data-bs-parent="#yoginiImpactAccordion">
                                 <div class="accordion-body">
-                                    Sankata (Rahu) and Bhramari (Mars) periods encourage spiritual practices and karmic balance, guiding you toward your life’s purpose.
+                                    Sankata (Rahu) and Bhramari (Mars) periods encourage spiritual practices and karmic
+                                    balance, guiding you toward your life’s purpose.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingTiming">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTiming" aria-expanded="false" aria-controls="collapseTiming">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTiming" aria-expanded="false"
+                                    aria-controls="collapseTiming">
                                     <i class="bi bi-clock me-2"></i> Life Events & Transits
                                 </button>
                             </h2>
-                            <div id="collapseTiming" class="accordion-collapse collapse" aria-labelledby="headingTiming" data-bs-parent="#yoginiImpactAccordion">
+                            <div id="collapseTiming" class="accordion-collapse collapse" aria-labelledby="headingTiming"
+                                data-bs-parent="#yoginiImpactAccordion">
                                 <div class="accordion-body">
-                                    Yogini Dasha periods align with transits to predict and optimize the timing of major life events, such as career shifts or personal milestones.
+                                    Yogini Dasha periods align with transits to predict and optimize the timing of major
+                                    life events, such as career shifts or personal milestones.
                                 </div>
                             </div>
                         </div>
@@ -458,418 +502,240 @@
                         <i class="bi bi-book me-2"></i> ✨ Why Explore Yogini Dasha?
                     </h5>
                     <p class="text-justify">
-                        Analyzing Yogini Dasha empowers you to understand life’s timing, make strategic decisions, and align with cosmic rhythms for clarity and success.
+                        Analyzing Yogini Dasha empowers you to understand life’s timing, make strategic decisions, and
+                        align with cosmic rhythms for clarity and success.
                     </p>
                 </div>
             </div>
             <div class="col-12 col-md-5 text-center">
-                <img src="<?php echo base_url('assets/images/FreeKundli/kundli2.png'); ?>" alt="Yogini Dasha Illustration" class="img-fluid rounded" style="max-width: 300px; height: auto; background-color: transparent;">
+                <img src="<?php echo base_url('assets/images/FreeKundli/kundli2.png'); ?>"
+                    alt="Yogini Dasha Illustration" class="img-fluid rounded"
+                    style="max-width: 300px; height: auto; background-color: transparent;">
             </div>
         </div>
     </div>
 
+
     <section>
         <div class="container my-4">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrologers for Yogini Dasha Analysis</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrologers For Yogini Dasha Analysis</h2>
             <div class="owl-carousel owl-theme" id="astrologerCarousel">
                 <!-- Astrologer Card 1 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png')?>" alt="Astrologer Priya Sharma" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Priya Sharma</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
+
+
+                <?php if ($astrologer_data): ?>
+
+                    <?php foreach ($astrologer_data as $astrologer): ?>
+                        <div class="card-item">
+                            <div class="card shadow-sm rounded-3 h-100"
+                                style="border: 1px solid var(--red); background-color: #fff;">
+                                <div class="card-body p-3">
+                                    <!-- Profile Section -->
+                                    <div class="d-flex align-items-center mb-2">
+
+                                        <img src="<?php echo base_url("assets/images/astrologerimg.png") ?>"
+                                            alt="Astrologer Priya Sharma" class="rounded-circle"
+                                            style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+
+                                        <div class="ms-2">
+
+                                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                <?php echo $astrologer["name"] ?>
+                                            </h6>
+
+                                            <div class="d-flex align-items-center gap-1">
+                                                <?php for ($i = 0; $i < $astrologer["average_rating"]; $i++): ?>
+                                                    <img src="<?php echo base_url("assets/images/rating.png") ?>">
+                                                <?php endfor ?>
+
+
+                                            </div>
+                                        </div>
                                     </div>
+                                    <!-- Details Section -->
+                                    <div class="d-flex flex-column gap-1 mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/star.png") ?>" alt="star"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small class="card-expertise"><?php echo $astrologer["specialties"] ?></small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/experience.png") ?>" alt="experience"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small><?php echo $astrologer["experience"] ?>+ Years</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/money.png") ?>" alt="price"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small> <?php echo $astrologer["price_per_minute"] ?> +Price Per Minutes</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/language.png") ?>" alt="language"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small> <?php echo $astrologer["languages"] ?></small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+
+                                            <?php if ($astrologer['chatstatus'] == "active"): ?>
+                                                <small class="card-language text-danger">Busy , </small>
+
+
+                                                <?php
+                                                if (!empty($astrologer['chat_expire_on'])) {
+                                                    date_default_timezone_set('Asia/Kolkata'); // Ensure you're using IST
+                                                    $now = new DateTime(); // current timestamp
+                                                    $expire = new DateTime($astrologer['chat_expire_on']);
+
+                                                    // Calculate only if expire time is in the future
+                                                    if ($expire > $now) {
+                                                        $interval = $now->diff($expire);
+                                                        $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+                                                        $seconds = $interval->s;
+
+                                                        echo '<div class="d-flex align-items-center">
+                                              <small class="card-language text-danger">Wait for Time: ' . $waitTimeMinutes . ' min ' . $seconds . ' sec</small>
+                                                </div>';
+                                                    } else {
+                                                        echo '<div class="d-flex align-items-center">
+                                                <small class="card-language text-danger">session not ended</small>
+                                            </div>';
+                                                    }
+                                                }
+                                                ?>
+
+                                            <?php else: ?>
+                                                <small class="card-language text-success">Available</small>
+                                            <?php endif ?>
+                                        </div>
+                                    </div>
+                                    <!-- Action Buttons -->
+                                    <div class="d-flex gap-2 mb-2">
+
+                                        <?php if ($this->session->userdata('user_id')): ?>
+
+
+
+                                            <button class="btn btn-sm w-50 rounded-3 border-1"
+                                                style="background-color: var(--yellow);" onclick="checkBalance(
+                                                     '<?php echo $astrologer['chatstatus']; ?>',
+                                                    <?php echo $userinfo_data['amount']; ?>, 
+                                                    <?php echo $astrologer['price_per_minute']; ?>,  
+                                                    '<?php echo base_url('chat/' . $astrologer['astrologer_id']); ?>',
+                                                    '<?php echo addslashes($astrologer['name']); ?>' ,
+                                                    '<?php echo $astrologer['chatvalue'] ?>' 
+                                                )"> Chat</button>
+                                        <?php else: ?>
+                                            <button id="chatlink" onclick="checklogin()"  class="chatlink btn btn-sm w-50 rounded-3 border-1 btnlog"
+                                                style="background-color: var(--yellow);">Chat</button>
+                                        <?php endif; ?>
+
+
+                                        <?php if ($this->session->userdata('user_id')): ?>
+                                            <button
+                                                class="btn btnHover btn-sm btn-outline-success w-50 rounded-3 call-btn">Call</button>
+                                        <?php else: ?>
+                                            <button
+                                                class="btn btnHover btn-sm btn-outline-dark  w-50 rounded-3 call-btn">Call</button>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <script>
+
+
+                                        function checklogin() {
+                                            Swal.fire({
+                                                title: "Login Required",
+                                                text: "Please login to access this service",
+                                                icon: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonText: "Login",
+                                                cancelButtonText: "Cancel",
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    window.location.href = "<?php echo base_url('Login'); ?>";
+                                                }
+                                            });
+
+
+                                        }
+
+
+                                        function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name, statusastro) {
+                                            if (amount < astrologer_charge * 5) {
+                                                Swal.fire({
+                                                    icon: "warning",
+                                                    title: "Insufficient Balance",
+                                                    text: `Minimum balance of 5 minutes (₹ ${astrologer_charge * 5}) is required to start chat with  ${name}.`,
+                                                    confirmButtonText: "Recharge Now",
+                                                    confirmButtonColor: "#ffcc00"
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        window.location.href = "<?php echo base_url('wallet'); ?>";
+                                                    }
+                                                });
+                                            } else {
+                                                if (chatstatus == "active") {
+
+                                                    if (statusastro == "sessionnotend") {
+                                                        window.location.href = chatUrl;
+                                                    }
+                                                    else {
+
+                                                        Swal.fire({
+                                                            icon: "warning",
+                                                            title: "Astrologer is busy",
+                                                        });
+                                                    }
+                                                }
+                                                else {
+                                                    window.location.href = chatUrl;
+                                                }
+                                            }
+                                        }
+
+                                    </script>
                                 </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png')?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Vedic Astrology, Yogini Dasha</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png')?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>10+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png')?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.50/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png')?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Hindi</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
                             </div>
                         </div>
-                    </div>
-                </div>
+
+                    <?php endforeach ?>
+
+                <?php endif ?>
                 <!-- Astrologer Card 2 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png')?>" alt="Astrologer Rajesh Kumar" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Rajesh Kumar</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png')?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Numerology, Yogini Dasha</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png')?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>15+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png')?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.60/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png')?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Hindi, Marathi</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 3 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png')?>" alt="Astrologer Anjali Rao" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Anjali Rao</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png')?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Vastu, Yogini Dasha</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png')?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>8+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png')?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.45/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png')?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Tamil</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 4 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png')?>" alt="Astrologer Vikram Singh" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Vikram Singh</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png')?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Kundli Matching, Yogini Dasha</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png')?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>12+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png')?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.55/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png')?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Hindi, Bengali</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 5 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png')?>" alt="Astrologer Neha Patel" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Neha Patel</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png')?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Yogini Dasha, Vedic Astrology</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png')?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>7+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png')?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.40/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png')?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Gujarati</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 6 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png')?>" alt="Astrologer Sanjay Gupta" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Sanjay Gupta</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png')?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Astrology, Yogini Dasha</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png')?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>9+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png')?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.48/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png')?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Hindi, Punjabi</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 7 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png')?>" alt="Astrologer Lakshmi Nair" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Lakshmi Nair</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png')?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Tarot, Yogini Dasha</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png')?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>6+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png')?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.42/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png')?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Malayalam</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 8 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png')?>" alt="Astrologer Rohan Desai" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Rohan Desai</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png')?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png')?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Relationship Astrology, Yogini Dasha</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png')?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>11+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png')?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.52/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png')?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Kannada</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
+
             </div>
         </div>
     </section>
 
+
+    <!-- <script>
+        let chatlinks = document.querySelectorAll('.chatlink'); // selects all elements with class 'chatlink'
+
+        chatlinks.forEach(function (chatlink) {
+            chatlink.addEventListener('click', showalert);
+        });
+
+        function showalert() {
+            alert("pls login");
+        }
+    </script> -->
+
+
+
+
+
     <!-- jQuery and Owl Carousel JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Initialize Owl Carousel -->
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $("#astrologerCarousel").owlCarousel({
                 loop: true,
                 margin: 15,
@@ -1038,10 +904,10 @@
                     const output = document.getElementById('kundliResult');
 
                     if (data.success) {
-                     if (selectedFeature === 'yogini_dasha') {
-    const dashaData = data.data.data?.maha_dasha || [];
+                        if (selectedFeature === 'yogini_dasha') {
+                            const dashaData = data.data.data?.maha_dasha || [];
 
-    let html = `
+                            let html = `
         <div class="card border-primary mb-3">
             <div class="card-header bg-primary text-white">
                 <i class="bi bi-calendar2-week"></i> Yogini Dasha Periods
@@ -1059,8 +925,8 @@
                     <tbody>
     `;
 
-    dashaData.forEach((dasha, index) => {
-        html += `
+                            dashaData.forEach((dasha, index) => {
+                                html += `
             <tr>
                 <td>${index + 1}</td>
                 <td>${dasha.dasha || 'N/A'}</td>
@@ -1068,18 +934,18 @@
                 <td>${dasha.end_date || 'N/A'}</td>
             </tr>
         `;
-    });
+                            });
 
-    html += `
+                            html += `
                     </tbody>
                 </table>
             </div>
         </div>
     `;
 
-    output.innerHTML = html;
-}
- else {
+                            output.innerHTML = html;
+                        }
+                        else {
                             output.innerHTML = `
                                 <div class="alert alert-success">${selectedFeature.replace(/_/g, ' ')} Data Loaded</div>
                                 <pre class="bg-light p-2 rounded">${JSON.stringify(data.data, null, 2)}</pre>
@@ -1101,8 +967,8 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: error.message.includes('404') ? 
-                            'The Yogini Dasha API is not available. Please check the server configuration or contact support.' : 
+                        text: error.message.includes('404') ?
+                            'The Yogini Dasha API is not available. Please check the server configuration or contact support.' :
                             'An error occurred while fetching Yogini Dasha data. Please try again later.',
                         confirmButtonColor: '#28a745',
                     });
@@ -1110,4 +976,5 @@
         });
     </script>
 </body>
+
 </html>

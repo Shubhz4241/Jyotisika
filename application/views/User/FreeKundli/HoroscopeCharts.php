@@ -31,7 +31,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- SweetAlert2 for Alerts -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" integrity="sha384-J76bhP0EL9IB2R4OgJagzM97Txy8h4w4gPkh+RA+ny4J2z4eYp16S6gq3ly0W3k1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"
+        integrity="sha384-J76bhP0EL9IB2R4OgJagzM97Txy8h4w4gPkh+RA+ny4J2z4eYp16S6gq3ly0W3k1"
+        crossorigin="anonymous"></script>
 
     <style>
         :root {
@@ -229,8 +231,8 @@
         <div class="row flex-col justify-content-center align-items-start">
             <div class="col-12 col-md-6">
                 <div class="text-center">
-                    <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png') ?>" alt="Horoscope Chart" class="img-fluid"
-                        style="width: 450px; height: 450px; margin-top: 5px;">
+                    <img src="<?php echo base_url('assets/images/FreeKundli/kundli.png') ?>" alt="Horoscope Chart"
+                        class="img-fluid" style="width: 450px; height: 450px; margin-top: 5px;">
                     <h4 class="mt-5">Generate Your Horoscope Chart</h4>
                     <form id="kundliForm" class="p-3 bg-white shadow rounded">
                         <label class="m-2">Enter Name</label>
@@ -276,13 +278,13 @@
                             </div>
                             <div class="col-12 col-md-4">
                                 <label>Birth Minutes</label>
-                                <select name="minute" id="boy_minute" class="form-control shadow-none my-2 p-2 rounded-1"
-                                    required></select>
+                                <select name="minute" id="boy_minute"
+                                    class="form-control shadow-none my-2 p-2 rounded-1" required></select>
                             </div>
                             <div class="col-12 col-md-4">
                                 <label>Birth Seconds</label>
-                                <select name="second" id="boy_second" class="form-control shadow-none my-2 p-2 rounded-1"
-                                    required></select>
+                                <select name="second" id="boy_second"
+                                    class="form-control shadow-none my-2 p-2 rounded-1" required></select>
                             </div>
                         </div>
                         <label>Birth Place</label>
@@ -304,7 +306,38 @@
                             <option value="ml">Malayalam</option>
                             <option value="kn">Kannada</option>
                         </select>
-                        <select id="astro_feature" class="form-control shadow-none my-2 p-2 rounded-1" required style="visibility: hidden;">
+                           <!-- #region -->
+
+                            <label>Chart Type</label>
+
+                        <select id="chartType" class="form-control shadow-none my-2 p-2 rounded-1" required>
+                            <option value="" disabled selected>Select Chart Type</option>
+                            <option value="chalit">Chalit Chart</option>
+                            <option value="SUN">Sun Chart</option>
+                            <option value="MOON">Moon Chart</option>
+                            <option value="D1">Birth Chart </option>
+                            <option value="D2">Hora Chart </option>
+                            <option value="D3">Dreshkan Chart </option>
+                            <option value="D4">Chathurthamasha Chart </option>
+                            <option value="D7">Saptamansha Chart</option>
+                            <option value="D9">Navamsha Chart</option>
+                            <option value="D10">Dashamansha Chart</option>
+                            <option value="D12">Dwadashamsha Chart </option>
+                            <option value="D16">Shodashamsha Chart </option>
+                            <option value="D20">Vishamansha Chart</option>
+                            <option value="D24">Chaturvimshamsha Chart </option>
+                            <option value="D27">Bhamsha Chart </option>
+                            <option value="D30">Trishamansha Chart </option>
+                            <option value="D40">Khavedamsha Chart </option>
+                            <option value="D45">Akshvedansha Chart </option>
+                            <option value="D60">Shashtymsha Chart</option>
+                            <option value="cuspal">Cuspal Chart</option>
+                        </select>
+
+
+
+                        <select id="astro_feature" class="form-control shadow-none my-2 p-2 rounded-1" required
+                            style="visibility: hidden;">
                             <option value="horoscope_charts" selected>Horoscope Charts</option>
                         </select>
                         <center>
@@ -324,7 +357,9 @@
             <div class="col-12 col-md-6">
                 <div class="mt-2" style="text-align: justify; padding: 0 20px;">
                     <p style="font-weight: 300;">
-                        A Horoscope Chart, also known as a natal or birth chart, is a celestial snapshot of the sky at the time of your birth. It maps the positions of planets, zodiac signs, and houses, offering insights into your personality, life path, and destiny.
+                        A Horoscope Chart, also known as a natal or birth chart, is a celestial snapshot of the sky at
+                        the time of your birth. It maps the positions of planets, zodiac signs, and houses, offering
+                        insights into your personality, life path, and destiny.
                     </p>
                     <h4 class="mt-4 d-flex align-items-center justify-content-center gap-2">
                         <span class="fw-semibold">Key Components of a Horoscope Chart</span>
@@ -332,33 +367,43 @@
                     <div class="mt-4 px-2">
                         <h5 class="fw-bold mb-3">Planets:</h5>
                         <p class="text-justify mb-4">
-                            In Vedic astrology, the nine key planets—Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, and Ketu—each influence specific aspects of life, such as identity, emotions, drive, intellect, abundance, love, discipline, and karma.
+                            In Vedic astrology, the nine key planets—Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn,
+                            Rahu, and Ketu—each influence specific aspects of life, such as identity, emotions, drive,
+                            intellect, abundance, love, discipline, and karma.
                         </p>
                         <h6 class="fw-semibold mb-2">Zodiac Signs:</h6>
                         <p class="text-justify mb-4">
-                            The 12 zodiac signs in the chart shape how planetary energies manifest. For instance, a Sun in Leo radiates confidence, while a Sun in Cancer emphasizes emotional depth and nurturing.
+                            The 12 zodiac signs in the chart shape how planetary energies manifest. For instance, a Sun
+                            in Leo radiates confidence, while a Sun in Cancer emphasizes emotional depth and nurturing.
                         </p>
                         <h6 class="fw-semibold mb-2">Houses:</h6>
                         <p class="text-justify mb-4">
-                            The 12 houses represent different life areas, such as career, relationships, and spirituality. The placement of planets in these houses highlights where their energies are most active in your life.
+                            The 12 houses represent different life areas, such as career, relationships, and
+                            spirituality. The placement of planets in these houses highlights where their energies are
+                            most active in your life.
                         </p>
                         <h6 class="fw-semibold mb-2">Ascendant (Lagna):</h6>
                         <p class="text-justify mb-4">
-                            The Ascendant, or rising sign, is the zodiac sign on the eastern horizon at your birth. It shapes your personality, appearance, and approach to life.
+                            The Ascendant, or rising sign, is the zodiac sign on the eastern horizon at your birth. It
+                            shapes your personality, appearance, and approach to life.
                         </p>
                         <h6 class="fw-semibold mb-2">Aspects and Conjunctions:</h6>
                         <p class="text-justify mb-4">
-                            Planets form aspects (angular relationships) and conjunctions (close proximity), influencing how their energies interact and impact various life areas in the chart.
+                            Planets form aspects (angular relationships) and conjunctions (close proximity), influencing
+                            how their energies interact and impact various life areas in the chart.
                         </p>
                         <h6 class="fw-semibold mb-2">Dasha System:</h6>
                         <p class="text-justify mb-4">
-                            The Vedic Dasha system tracks planetary periods, indicating when specific planets will influence your life, guiding timing for major events and decisions.
+                            The Vedic Dasha system tracks planetary periods, indicating when specific planets will
+                            influence your life, guiding timing for major events and decisions.
                         </p>
                     </div>
                     <div class="mt-4 px-2">
                         <h5 class="fw-bold mb-3">Significance of Horoscope Charts:</h5>
                         <p class="text-justify mb-4">
-                            A Horoscope Chart provides a comprehensive guide to understanding your strengths, challenges, and potential. It aids in making informed decisions about career, relationships, health, and spiritual growth.
+                            A Horoscope Chart provides a comprehensive guide to understanding your strengths,
+                            challenges, and potential. It aids in making informed decisions about career, relationships,
+                            health, and spiritual growth.
                         </p>
                     </div>
                 </div>
@@ -366,11 +411,13 @@
             <div class="col-12">
                 <h6 class="fw-semibold mb-2">Transits and Horoscope Charts:</h6>
                 <p class="text-justify mb-4">
-                    Current planetary transits interact with your natal chart, influencing life events and opportunities. Analyzing transits alongside your chart offers predictive insights for planning.
+                    Current planetary transits interact with your natal chart, influencing life events and
+                    opportunities. Analyzing transits alongside your chart offers predictive insights for planning.
                 </p>
                 <h6 class="fw-semibold mb-2">Technology and Chart Analysis:</h6>
                 <p class="text-justify mb-4">
-                    Advanced software calculates horoscope charts with precision, enabling accurate interpretations and personalized astrological guidance.
+                    Advanced software calculates horoscope charts with precision, enabling accurate interpretations and
+                    personalized astrological guidance.
                 </p>
             </div>
         </div>
@@ -386,73 +433,97 @@
                     <div class="accordion" id="horoscopeImpactAccordion">
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingPersonality">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePersonality" aria-expanded="false" aria-controls="collapsePersonality">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapsePersonality" aria-expanded="false"
+                                    aria-controls="collapsePersonality">
                                     <i class="bi bi-person me-2"></i> Personality & Identity
                                 </button>
                             </h2>
-                            <div id="collapsePersonality" class="accordion-collapse collapse" aria-labelledby="headingPersonality" data-bs-parent="#horoscopeImpactAccordion">
+                            <div id="collapsePersonality" class="accordion-collapse collapse"
+                                aria-labelledby="headingPersonality" data-bs-parent="#horoscopeImpactAccordion">
                                 <div class="accordion-body">
-                                    The Ascendant, Sun, and Moon in your chart define your core personality, emotional nature, and how you present yourself to the world.
+                                    The Ascendant, Sun, and Moon in your chart define your core personality, emotional
+                                    nature, and how you present yourself to the world.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingCareer">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCareer" aria-expanded="false" aria-controls="collapseCareer">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseCareer" aria-expanded="false"
+                                    aria-controls="collapseCareer">
                                     <i class="bi bi-briefcase me-2"></i> Career & Ambitions
                                 </button>
                             </h2>
-                            <div id="collapseCareer" class="accordion-collapse collapse" aria-labelledby="headingCareer" data-bs-parent="#horoscopeImpactAccordion">
+                            <div id="collapseCareer" class="accordion-collapse collapse" aria-labelledby="headingCareer"
+                                data-bs-parent="#horoscopeImpactAccordion">
                                 <div class="accordion-body">
-                                    Planets in the 10th house and placements of Jupiter and Saturn reveal career strengths, professional paths, and optimal times for success.
+                                    Planets in the 10th house and placements of Jupiter and Saturn reveal career
+                                    strengths, professional paths, and optimal times for success.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingRelationships">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRelationships" aria-expanded="false" aria-controls="collapseRelationships">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseRelationships" aria-expanded="false"
+                                    aria-controls="collapseRelationships">
                                     <i class="bi bi-heart me-2"></i> Love & Relationships
                                 </button>
                             </h2>
-                            <div id="collapseRelationships" class="accordion-collapse collapse" aria-labelledby="headingRelationships" data-bs-parent="#horoscopeImpactAccordion">
+                            <div id="collapseRelationships" class="accordion-collapse collapse"
+                                aria-labelledby="headingRelationships" data-bs-parent="#horoscopeImpactAccordion">
                                 <div class="accordion-body">
-                                    Venus, Mars, and the 7th house govern love, attraction, and partnership dynamics, guiding compatibility and relationship harmony.
+                                    Venus, Mars, and the 7th house govern love, attraction, and partnership dynamics,
+                                    guiding compatibility and relationship harmony.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingHealth">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHealth" aria-expanded="false" aria-controls="collapseHealth">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseHealth" aria-expanded="false"
+                                    aria-controls="collapseHealth">
                                     <i class="bi bi-heart-pulse me-2"></i> Health & Well-Being
                                 </button>
                             </h2>
-                            <div id="collapseHealth" class="accordion-collapse collapse" aria-labelledby="headingHealth" data-bs-parent="#horoscopeImpactAccordion">
+                            <div id="collapseHealth" class="accordion-collapse collapse" aria-labelledby="headingHealth"
+                                data-bs-parent="#horoscopeImpactAccordion">
                                 <div class="accordion-body">
-                                    The 6th house, Sun, and Moon placements highlight health strengths and vulnerabilities, aiding in wellness planning.
+                                    The 6th house, Sun, and Moon placements highlight health strengths and
+                                    vulnerabilities, aiding in wellness planning.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingSpirituality">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpirituality" aria-expanded="false" aria-controls="collapseSpirituality">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSpirituality" aria-expanded="false"
+                                    aria-controls="collapseSpirituality">
                                     <i class="bi bi-moon-stars me-2"></i> Spirituality & Purpose
                                 </button>
                             </h2>
-                            <div id="collapseSpirituality" class="accordion-collapse collapse" aria-labelledby="headingSpirituality" data-bs-parent="#horoscopeImpactAccordion">
+                            <div id="collapseSpirituality" class="accordion-collapse collapse"
+                                aria-labelledby="headingSpirituality" data-bs-parent="#horoscopeImpactAccordion">
                                 <div class="accordion-body">
-                                    The 9th and 12th houses, along with Rahu and Ketu, reveal spiritual inclinations, karmic lessons, and your life’s higher purpose.
+                                    The 9th and 12th houses, along with Rahu and Ketu, reveal spiritual inclinations,
+                                    karmic lessons, and your life’s higher purpose.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item border-0">
                             <h2 class="accordion-header" id="headingTiming">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTiming" aria-expanded="false" aria-controls="collapseTiming">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTiming" aria-expanded="false"
+                                    aria-controls="collapseTiming">
                                     <i class="bi bi-clock me-2"></i> Life Events & Timing
                                 </button>
                             </h2>
-                            <div id="collapseTiming" class="accordion-collapse collapse" aria-labelledby="headingTiming" data-bs-parent="#horoscopeImpactAccordion">
+                            <div id="collapseTiming" class="accordion-collapse collapse" aria-labelledby="headingTiming"
+                                data-bs-parent="#horoscopeImpactAccordion">
                                 <div class="accordion-body">
-                                    The Dasha system and planetary transits interacting with your chart indicate key life events, opportunities, and challenges.
+                                    The Dasha system and planetary transits interacting with your chart indicate key
+                                    life events, opportunities, and challenges.
                                 </div>
                             </div>
                         </div>
@@ -461,424 +532,243 @@
                         <i class="bi bi-book me-2"></i> ✨ Why Explore Horoscope Charts?
                     </h5>
                     <p class="text-justify">
-                        A Horoscope Chart offers a personalized roadmap to your life, empowering you to align with cosmic energies, make informed decisions, and navigate challenges with clarity and purpose.
+                        A Horoscope Chart offers a personalized roadmap to your life, empowering you to align with
+                        cosmic energies, make informed decisions, and navigate challenges with clarity and purpose.
                     </p>
                 </div>
             </div>
             <div class="col-12 col-md-5 text-center">
-                <img src="<?php echo base_url('assets/images/FreeKundli/kundli2.png'); ?>" alt="Horoscope Chart Illustration" class="img-fluid rounded" style="max-width: 300px; height: auto; background-color: transparent;">
+                <img src="<?php echo base_url('assets/images/FreeKundli/kundli2.png'); ?>"
+                    alt="Horoscope Chart Illustration" class="img-fluid rounded"
+                    style="max-width: 300px; height: auto; background-color: transparent;">
             </div>
         </div>
     </div>
 
     <section>
         <div class="container my-4">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrologers for Horoscope Charts</h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">Astrologers For Horoscope Charts</h2>
             <div class="owl-carousel owl-theme" id="astrologerCarousel">
                 <!-- Astrologer Card 1 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Priya Sharma" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Priya Sharma</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
+
+
+                <?php if ($astrologer_data): ?>
+
+                    <?php foreach ($astrologer_data as $astrologer): ?>
+                        <div class="card-item">
+                            <div class="card shadow-sm rounded-3 h-100"
+                                style="border: 1px solid var(--red); background-color: #fff;">
+                                <div class="card-body p-3">
+                                    <!-- Profile Section -->
+                                    <div class="d-flex align-items-center mb-2">
+
+                                        <img src="<?php echo base_url("assets/images/astrologerimg.png") ?>"
+                                            alt="Astrologer Priya Sharma" class="rounded-circle"
+                                            style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
+
+                                        <div class="ms-2">
+
+                                            <h6 class="card-title fw-bold mb-0" style="color: var(--red);">
+                                                <?php echo $astrologer["name"] ?>
+                                            </h6>
+
+                                            <div class="d-flex align-items-center gap-1">
+                                                <?php for ($i = 0; $i < $astrologer["average_rating"]; $i++): ?>
+                                                    <img src="<?php echo base_url("assets/images/rating.png") ?>">
+                                                <?php endfor ?>
+
+
+                                            </div>
+                                        </div>
                                     </div>
+                                    <!-- Details Section -->
+                                    <div class="d-flex flex-column gap-1 mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/star.png") ?>" alt="star"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small class="card-expertise"><?php echo $astrologer["specialties"] ?></small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/experience.png") ?>" alt="experience"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small><?php echo $astrologer["experience"] ?>+ Years</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/money.png") ?>" alt="price"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small> <?php echo $astrologer["price_per_minute"] ?> +Price Per Minutes</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo base_url("assets/images/language.png") ?>" alt="language"
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <small> <?php echo $astrologer["languages"] ?></small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+
+                                            <?php if ($astrologer['chatstatus'] == "active"): ?>
+                                                <small class="card-language text-danger">Busy , </small>
+
+
+                                                <?php
+                                                if (!empty($astrologer['chat_expire_on'])) {
+                                                    date_default_timezone_set('Asia/Kolkata'); // Ensure you're using IST
+                                                    $now = new DateTime(); // current timestamp
+                                                    $expire = new DateTime($astrologer['chat_expire_on']);
+
+                                                    // Calculate only if expire time is in the future
+                                                    if ($expire > $now) {
+                                                        $interval = $now->diff($expire);
+                                                        $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+                                                        $seconds = $interval->s;
+
+                                                        echo '<div class="d-flex align-items-center">
+                                              <small class="card-language text-danger">Wait for Time: ' . $waitTimeMinutes . ' min ' . $seconds . ' sec</small>
+                                                </div>';
+                                                    } else {
+                                                        echo '<div class="d-flex align-items-center">
+                                                <small class="card-language text-danger">session not ended</small>
+                                            </div>';
+                                                    }
+                                                }
+                                                ?>
+
+                                            <?php else: ?>
+                                                <small class="card-language text-success">Available</small>
+                                            <?php endif ?>
+                                        </div>
+                                    </div>
+                                    <!-- Action Buttons -->
+                                    <div class="d-flex gap-2 mb-2">
+
+                                        <?php if ($this->session->userdata('user_id')): ?>
+
+
+
+                                            <button class="btn btn-sm w-50 rounded-3 border-1"
+                                                style="background-color: var(--yellow);" onclick="checkBalance(
+                                                     '<?php echo $astrologer['chatstatus']; ?>',
+                                                    <?php echo $userinfo_data['amount']; ?>, 
+                                                    <?php echo $astrologer['price_per_minute']; ?>,  
+                                                    '<?php echo base_url('chat/' . $astrologer['astrologer_id']); ?>',
+                                                    '<?php echo addslashes($astrologer['name']); ?>' ,
+                                                    '<?php echo $astrologer['chatvalue'] ?>' 
+                                                )"> Chat</button>
+                                        <?php else: ?>
+                                            <button id="chatlink" onclick="checklogin()"
+                                                class="chatlink btn btn-sm w-50 rounded-3 border-1 btnlog"
+                                                style="background-color: var(--yellow);">Chat</button>
+                                        <?php endif; ?>
+
+
+                                        <?php if ($this->session->userdata('user_id')): ?>
+                                            <button
+                                                class="btn btnHover btn-sm btn-outline-success w-50 rounded-3 call-btn">Call</button>
+                                        <?php else: ?>
+                                            <button
+                                                class="btn btnHover btn-sm btn-outline-dark  w-50 rounded-3 call-btn">Call</button>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <script>
+
+                                        function checklogin() {
+                                            Swal.fire({
+                                                title: "Login Required",
+                                                text: "Please login to access this service",
+                                                icon: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonText: "Login",
+                                                cancelButtonText: "Cancel",
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    window.location.href = "<?php echo base_url('Login'); ?>";
+                                                }
+                                            });
+
+
+                                        }
+                                        function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name, statusastro) {
+                                            if (amount < astrologer_charge * 5) {
+                                                Swal.fire({
+                                                    icon: "warning",
+                                                    title: "Insufficient Balance",
+                                                    text: `Minimum balance of 5 minutes (₹ ${astrologer_charge * 5}) is required to start chat with  ${name}.`,
+                                                    confirmButtonText: "Recharge Now",
+                                                    confirmButtonColor: "#ffcc00"
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        window.location.href = "<?php echo base_url('wallet'); ?>";
+                                                    }
+                                                });
+                                            } else {
+                                                if (chatstatus == "active") {
+
+                                                    if (statusastro == "sessionnotend") {
+                                                        window.location.href = chatUrl;
+                                                    }
+                                                    else {
+
+                                                        Swal.fire({
+                                                            icon: "warning",
+                                                            title: "Astrologer is busy",
+                                                        });
+                                                    }
+                                                }
+                                                else {
+                                                    window.location.href = chatUrl;
+                                                }
+                                            }
+                                        }
+
+                                    </script>
                                 </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Vedic Astrology, Horoscope Analysis</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>10+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.50/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Hindi</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
                             </div>
                         </div>
-                    </div>
-                </div>
+
+                    <?php endforeach ?>
+
+                <?php endif ?>
                 <!-- Astrologer Card 2 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Rajesh Kumar" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Rajesh Kumar</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Natal Chart Reading, Numerology</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>15+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.60/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Hindi, Marathi</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 3 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Anjali Rao" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Anjali Rao</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Vastu, Horoscope Analysis</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>8+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.45/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Tamil</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 4 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Vikram Singh" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Vikram Singh</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Kundli Matching, Vedic Astrology</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>12+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.55/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Hindi, Bengali</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 5 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Neha Patel" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Neha Patel</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Gemstone Consultation, Horoscope Analysis</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>7+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.40/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Gujarati</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 6 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Sanjay Gupta" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Sanjay Gupta</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Astrology, Horoscope Interpretation</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>9+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.48/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Hindi, Punjabi</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 7 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Lakshmi Nair" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Lakshmi Nair</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Tarot, Horoscope Reading</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>6+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.42/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Malayalam</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Astrologer Card 8 -->
-                <div class="card-item">
-                    <div class="card shadow-sm rounded-3 h-100" style="border: 1px solid var(--red); background-color: #fff;">
-                        <div class="card-body p-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <a href="#">
-                                    <img src="<?php echo base_url('assets/images/astrologerimg.png') ?>" alt="Astrologer Rohan Desai" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
-                                </a>
-                                <div class="ms-2">
-                                    <a href="#" class="text-decoration-none">
-                                        <h6 class="card-title fw-bold mb-0" style="color: var(--red);">Rohan Desai</h6>
-                                    </a>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                        <img src="<?php echo base_url('assets/images/rating.png') ?>" style="width: 15px; height: 15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column gap-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/star.png') ?>" alt="star" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small class="card-expertise">Relationship Astrology, Horoscope Analysis</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/experience.png') ?>" alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>11+ Years</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/money.png') ?>" alt="price" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>Rs.52/min</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo base_url('assets/images/language.png') ?>" alt="language" style="width: 15px; height: 15px; margin-right: 5px;">
-                                    <small>English, Kannada</small>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <small class="card-language text-success">Available</small>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 mb-2">
-                                <button class="btn btn-sm w-50 rounded-3 border-1" style="background-color: var(--yellow);">Chat</button>
-                                <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3">Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
+
             </div>
         </div>
     </section>
 
+
+    <!-- <script>
+        let chatlinks = document.querySelectorAll('.chatlink'); // selects all elements with class 'chatlink'
+
+        chatlinks.forEach(function (chatlink) {
+            chatlink.addEventListener('click', showalert);
+        });
+
+        function showalert() {
+            alert("pls login");
+        }
+    </script> -->
+
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- Popper.js and Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
 
     <!-- Owl Carousel JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Initialize Owl Carousel -->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#astrologerCarousel").owlCarousel({
                 loop: true,
                 margin: 15,
@@ -906,7 +796,7 @@
         const suggestionBox = document.getElementById("suggestions");
         let debounceTimer = null;
 
-        input.addEventListener("input", function() {
+        input.addEventListener("input", function () {
             const query = input.value.trim();
             if (debounceTimer) clearTimeout(debounceTimer);
             if (query.length < 2) {
@@ -955,7 +845,7 @@
             }, 300);
         });
 
-        document.addEventListener("click", function(e) {
+        document.addEventListener("click", function (e) {
             if (!suggestionBox.contains(e.target) && e.target !== input) {
                 suggestionBox.innerHTML = "";
             }
@@ -1002,46 +892,46 @@
         });
 
         // Form Submission
-        document.getElementById("kundliForm").addEventListener("submit", function(e) {
+        document.getElementById("kundliForm").addEventListener("submit", function (e) {
             e.preventDefault();
             console.log('Form submitted');
 
             const requiredFields = [{
-                    id: 'name',
-                    label: 'Name'
-                },
-                {
-                    id: 'boy_day',
-                    label: 'Birth Day'
-                },
-                {
-                    id: 'boy_month',
-                    label: 'Birth Month'
-                },
-                {
-                    id: 'boy_year',
-                    label: 'Birth Year'
-                },
-                {
-                    id: 'boy_hour',
-                    label: 'Birth Hour'
-                },
-                {
-                    id: 'boy_minute',
-                    label: 'Birth Minutes'
-                },
-                {
-                    id: 'boy_second',
-                    label: 'Birth Seconds'
-                },
-                {
-                    id: 'boy_birthPlace',
-                    label: 'Birth Place'
-                },
-                {
-                    id: 'language',
-                    label: 'Language'
-                }
+                id: 'name',
+                label: 'Name'
+            },
+            {
+                id: 'boy_day',
+                label: 'Birth Day'
+            },
+            {
+                id: 'boy_month',
+                label: 'Birth Month'
+            },
+            {
+                id: 'boy_year',
+                label: 'Birth Year'
+            },
+            {
+                id: 'boy_hour',
+                label: 'Birth Hour'
+            },
+            {
+                id: 'boy_minute',
+                label: 'Birth Minutes'
+            },
+            {
+                id: 'boy_second',
+                label: 'Birth Seconds'
+            },
+            {
+                id: 'boy_birthPlace',
+                label: 'Birth Place'
+            },
+            {
+                id: 'language',
+                label: 'Language'
+            }
             ];
 
             const genderChecked = document.querySelector('input[name="gender"]:checked');
@@ -1082,7 +972,8 @@
                 boy_birthPlace: document.getElementById('boy_birthPlace').value,
                 boy_lat: document.getElementById('boy_lat').value || "28.7041",
                 boy_lon: document.getElementById('boy_lon').value || "77.1025",
-                lan: document.getElementById('language').value || "en"
+                lan: document.getElementById('language').value || "en",
+                chartid: document.getElementById('chartType').value || "D1"
             };
 
             console.log('Form Data:', formData);
@@ -1091,12 +982,12 @@
             document.getElementById("loader").style.display = "block";
 
             fetch(apiUrl, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(formData)
-                })
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
                 .then(res => {
                     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
                     return res.json();
@@ -1111,71 +1002,22 @@
                     }
 
                     if (data.success && data.data && data.data.data) {
-                        const chartData = data.data.data;
-                        chartData.planets = chartData.planets || []; // Fallback for undefined planets
-                        let html = `
-                            <div class="alert alert-success">Horoscope Chart Loaded</div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover align-middle text-center">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th>Component</th>
-                                            <th>Details</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>Ascendant</strong></td>
-                                            <td>${chartData.ascendant || 'N/A'}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Sun Sign</strong></td>
-                                            <td>${chartData.sun_sign || 'N/A'}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Moon Sign</strong></td>
-                                            <td>${chartData.moon_sign || 'N/A'}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Planetary Positions</strong></td>
-                                            <td>
-                                                <table class="table table-sm table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Planet</th>
-                                                            <th>Sign</th>
-                                                            <th>House</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                        `;
-                        if (chartData.planets.length > 0) {
-                            chartData.planets.forEach(planet => {
-                                html += `
-                                    <tr>
-                                        <td>${planet.name || 'N/A'}</td>
-                                        <td>${planet.sign || 'N/A'}</td>
-                                        <td>${planet.house || 'N/A'}</td>
-                                    </tr>
-                                `;
-                            });
-                        } else {
-                            html += `<tr><td colspan="3">No planetary data available</td></tr>`;
-                        }
-                        html += `
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Current Dasha</strong></td>
-                                            <td>${chartData.current_dasha || 'N/A'}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        `;
+                        const kundli = data.data.data;
+
+                        const html = `
+        <div class="alert alert-success">Kundli Data Loaded</div>
+
+        
+        <div class="text-center my-3">
+            <img src="${kundli.base64_image}" alt="Kundli Chart" class="img-fluid rounded shadow" style="max-width:100%; height:auto;" />
+        </div>
+
+
+    `;
+
                         output.innerHTML = html;
+
+
                     } else {
                         output.innerHTML = `<div class="alert alert-danger">No data returned from API: ${data.message || 'Unknown error'}</div>`;
                         Swal.fire({

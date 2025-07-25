@@ -59,6 +59,7 @@ class User_Api_Model extends CI_Model
         $user = $this->db->get_where("otp_data", array(
             "mobile_number" => $mobileNumber,
             "otp" => $otp
+
         ))->row();
 
         if (!$user) {
@@ -71,6 +72,22 @@ class User_Api_Model extends CI_Model
 
         return true; // OTP is valid
     }
+
+
+   public function checkrestrict($id) {
+    $this->db->where("user_id", $id);
+    $query = $this->db->get("jyotisika_users");
+
+    // Check if any result was found
+    if ($query->num_rows() > 0) {
+        $row = $query->row_array();
+        if ($row['isRestricted'] == 1) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 
     public function getUserByMobile($mobile_number)
@@ -87,8 +104,9 @@ class User_Api_Model extends CI_Model
 
         $timestamp = date('Y-m-d H:i:s');
 
+        if($data){
 
-        $form_data_user_notification = [
+            $form_data_user_notification = [
             "sender_id" => $data["user_id"],
             "sender_role" => "user",
             "receiver_id" => $data["user_id"],
@@ -96,13 +114,16 @@ class User_Api_Model extends CI_Model
             "title" => "Welcome Back!",
             "message" => "Hello " . $data["user_name"] . ", welcome back to Jyotisika! We're happy to see you again.",
             "type" => "info",
+            "redirect_url"=>'home',
             "created_at" => $timestamp,
             "updated_at" => $timestamp
-        ];
+         ];
 
 
         $this->db->insert("jyotisika_notifications", $form_data_user_notification);
 
+        }
+        
 
         return $data;
 
@@ -1936,7 +1957,7 @@ class User_Api_Model extends CI_Model
         foreach ($astrologers as &$astro) {
             $chatSession = $this->db->select('start_time, expire_on')
                 ->from('chat_sessions')
-                ->where('astrologer_id', $astro->id)
+                ->where('astrologer_id', $astro->astrologer_id)
                 ->where('status', 'active')
                 ->order_by('id', 'DESC')
                 ->limit(1)
@@ -2403,6 +2424,23 @@ class User_Api_Model extends CI_Model
 
 
 
+     public function show_rudraksh_model()
+    {
+
+
+        $this->db->select('jotishika_mall.*, AVG(product_feedback.productrating) as average_rating');
+        $this->db->from('jotishika_mall');
+        $this->db->join('product_feedback', 'product_feedback.product_id = jotishika_mall.product_id', 'left');
+        $this->db->where('jotishika_mall.category', "Rudraksha");
+        $this->db->group_by('jotishika_mall.product_id');
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+
+
+
+
     public function show_product_feedback_data_model()
     {
         $this->db->select("product_feedback.* , jyotisika_users.*, jotishika_mall.*");
@@ -2432,10 +2470,13 @@ class User_Api_Model extends CI_Model
 
         $astrologers = $query->result();
 
+        // print_r($astrologers);
+
+        // exit();
         foreach ($astrologers as &$astro) {
             $chatSession = $this->db->select('start_time, expire_on')
                 ->from('chat_sessions')
-                ->where('astrologer_id', $astro->id)
+                ->where('astrologer_id', $astro->astrologer_id)
                 ->where('status', 'active')
                 ->order_by('id', 'DESC')
                 ->limit(1)

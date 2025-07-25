@@ -355,7 +355,7 @@
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="text-center">
-                            <h1 class="display-6 fw-bold mb-2"><?php echo $this->lang->line('energy_stones');?></h1>
+                            <h1 class="display-6 fw-bold mb-2"><?php echo $product_data[0]["category"] ?? 'Not Available'; ?></h1>
                             <p class="text-muted mb-0">(<?php echo $product__count_data ?> products)</p>
                             <p class="small text-muted"><?php echo $this->lang->line('semi');?></p>
                         </div>
@@ -579,7 +579,7 @@
                                 ]
                             ]; ?>
 
-                            <!-- <?php print_r($product_data) ?> -->
+                            
                             <?php if (empty(!$product_data)): ?>
 
                                 <?php foreach ($product_data as $stone): ?>
@@ -641,9 +641,9 @@
                                                     </div>
                                                     <div class="product-price">
                                                         <span class="current-price">₹
-                                                            <?php echo $stone['discount_price']; ?><sup>00</sup></span>
+                                                            <?php echo $stone['discount_price']; ?></span>
                                                         <span class="original-price">₹
-                                                            <?php echo $stone['product_price']; ?><sup>00</sup></span>
+                                                            <?php echo $stone['product_price']; ?></span>
                                                     </div>
                                                 </div>
                                             </div>

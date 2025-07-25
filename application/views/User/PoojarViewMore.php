@@ -87,7 +87,7 @@
                                                     echo 0;
                                                 }
 
-                                                ?>+ Poojas)</span>
+                                                ?>+ <?php echo $this->lang->line('poojas'); ?> )</span>
 
                                         </div>
                                     </div>

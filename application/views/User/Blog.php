@@ -79,7 +79,7 @@
                                         alt="Product Image" style="height: 200px; object-fit: cover;"  onerror="this.onerror=null;this.src='<?php echo base_url('uploads/festivals/diva.jpg'); ?>';">
                                     <div class="card-body">
                                         <h5 class="card-title "><?php echo $product["blog_title"] ?></h5>
-                                        <p class="text-muted">Today</p>
+                                        <p class="text-muted"><?php echo $product["date"] ?></p>
 
                                     </div>
                                 </div>
