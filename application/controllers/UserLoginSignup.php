@@ -12,28 +12,36 @@ class UserLoginSignup extends CI_Controller
 
 		$this->load->library('session');
 		$this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-    $this->output->set_header("Cache-Control: post-check=0, pre-check=0", false);
-    $this->output->set_header("Pragma: no-cache");
+		$this->output->set_header("Cache-Control: post-check=0, pre-check=0", false);
+		$this->output->set_header("Pragma: no-cache");
 
 
 	}
 
-	
+
 
 
 	public function Signup()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
 		$this->load->view('UserLoginSignup/Signup');
 	}
 
 	public function Login()
 	{
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
 		$this->load->view('UserLoginSignup/Login');
 	}
 
 
 	public function register_user()
 	{
+
+
 		$api_url = "http://localhost/jyotisika_api/User/User_Auth/Register_User";
 		$formdata = $this->input->post();
 
@@ -190,6 +198,10 @@ class UserLoginSignup extends CI_Controller
 
 	public function login_user()
 	{
+
+
+
+
 		$api_url = "http://localhost/jyotisika_api/User/User_Auth/Login_user";
 		$formdata = $this->input->post();
 
@@ -273,16 +285,16 @@ class UserLoginSignup extends CI_Controller
 	// {
 	// 	$this->session->sess_destroy();
 	// 	$this->load->view('UserLoginSignup/Login');
-		
+
 	// }
 
 	public function Logout()
-{
-    $this->session->unset_userdata('user_mobilenumber');
-    $this->session->unset_userdata('user_otp');
-    $this->session->sess_destroy();
-    redirect('UserLoginSignup/Login'); // Ensure redirection instead of just loading a view
-}
+	{
+		$this->session->unset_userdata('user_mobilenumber');
+		$this->session->unset_userdata('user_otp');
+		$this->session->sess_destroy();
+		redirect('UserLoginSignup/Login'); // Ensure redirection instead of just loading a view
+	}
 
 
 

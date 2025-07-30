@@ -57,13 +57,15 @@
         }
     </style>
 
-<style>
-    .unread-notification {
-        border-left: 5px solid #ff6f00; /* Deep orange */
-        background-color: #fff3e0 !important; /* Light peach/orange background */
-        transition: background-color 0.3s ease;
-    }
-</style>
+    <style>
+        .unread-notification {
+            border-left: 5px solid #ff6f00;
+            /* Deep orange */
+            background-color: #fff3e0 !important;
+            /* Light peach/orange background */
+            transition: background-color 0.3s ease;
+        }
+    </style>
 
 
 
@@ -99,6 +101,9 @@
                         <?php if (!empty($show_notification_data_response)): ?>
 
                             <?php foreach ($show_notification_data_response as $shownotification): ?>
+
+                              <a href="<?php echo base_url(!empty($shownotification['redirect_url']) ? $shownotification['redirect_url'] : 'Notification'); ?>" class="text-decoration-none">
+
                                 <div class="card mb-3 border-0 shadow hover-shadow 
         <?php echo ($shownotification['is_read'] == 0) ? 'bg-light unread-notification' : ''; ?>"
                                     style="border-radius: 12px; transition: all 0.2s ease;">
@@ -135,6 +140,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             <?php endforeach ?>
 
                         <?php else: ?>

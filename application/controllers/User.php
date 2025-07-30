@@ -343,7 +343,1334 @@ class User extends CI_Controller
 	{
 		$language = $this->session->userdata('site_language') ?? 'english';
 		$this->lang->load('message', $language);
+
+
+
 		$this->load->view('User/FreeKundli');
+	}
+
+	public function showkundlidatas()
+	{
+
+		if (!$this->input->post('boy_name') || !$this->input->post('boy_day') || !$this->input->post('boy_month')) {
+			redirect('User/FreeKundli');
+		}
+
+		$access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+		$api_key = "b49e81e874acc04f1141569767b24b79";
+
+
+		$formdata = [
+			'api_key' => $api_key,
+			'full_name' => $this->input->post('boy_name'),
+			'day' => (int) $this->input->post('boy_day'),
+			'month' => (int) $this->input->post('boy_month'),
+			'year' => (int) $this->input->post('boy_year'),
+			'hour' => (int) $this->input->post('boy_hour'),
+			'min' => (int) $this->input->post('boy_minute'),
+			'sec' => (int) $this->input->post('boy_second'),
+			'gender' => $this->input->post('boy_gender'),
+			'place' => $this->input->post('boy_birthPlace'),
+			'lat' => $this->input->post('boy_lat'),
+			'lon' => $this->input->post('boy_lon'),
+			'tzone' => 5.5,
+			'lan' => $this->input->post('lan') ?? 'ma', // fallback if not provided
+			'chart_type' => 'south',
+			// 'show_planet_degree' => 1,
+			'show_planet_retro' => 1,
+			'dasha_type' => 'maha-dasha',
+			'accesss_token' => $access_token
+		];
+
+		$data["formdata"] = $formdata;
+
+
+		//Dasha
+
+
+
+
+		// print_r($data["yogini_dasha_data"]);
+
+
+
+
+
+		//Free Report 
+
+
+		//Assedance Report
+
+
+		$url_ascendant = 'https://astroapi-3.divineapi.com/indian-api/v2/ascendant-report';
+
+		$ch_ascendant = curl_init($url_ascendant);
+		curl_setopt($ch_ascendant, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_ascendant, CURLOPT_POST, true);
+		curl_setopt($ch_ascendant, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_ascendant, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_ascendant = curl_exec($ch_ascendant);
+		$error = curl_error($ch_ascendant);
+		curl_close($ch_ascendant);
+		$response_ascendant_data = json_decode($response_ascendant, associative: true);
+
+
+		$data["ascendant_data"] = $response_ascendant_data;
+
+
+		// print_r($data["ascendant_data"]);
+
+
+		//Planetary Positions
+
+
+		$url_planetary = 'https://astroapi-3.divineapi.com/indian-api/v2/planetary-positions';
+
+		$ch_planetary = curl_init($url_planetary);
+		curl_setopt($ch_planetary, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_planetary, CURLOPT_POST, true);
+		curl_setopt($ch_planetary, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_planetary, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_planetary = curl_exec($ch_planetary);
+		$error = curl_error($ch_planetary);
+		curl_close($ch_planetary);
+		$response_planetary_data = json_decode($response_planetary, associative: true);
+
+
+		$data["planetary_data"] = $response_planetary_data;
+
+
+
+
+		$url_vimshottari = 'https://astroapi-3.divineapi.com/indian-api/v1/vimshottari-dasha';
+
+		$ch_vimshottari = curl_init($url_vimshottari);
+		curl_setopt($ch_vimshottari, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_vimshottari, CURLOPT_POST, true);
+		curl_setopt($ch_vimshottari, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_vimshottari, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_vimshottari = curl_exec($ch_vimshottari);
+		$error = curl_error($ch_vimshottari);
+		curl_close($ch_vimshottari);
+		$respons_vimshottari_data = json_decode($response_vimshottari, associative: true);
+
+
+		$data["vimshottari_data"] = $respons_vimshottari_data;
+
+
+
+
+
+		$url_shadbala = 'https://astroapi-3.divineapi.com/indian-api/v1/shadbala';
+
+		$ch_shadbala = curl_init($url_shadbala);
+		curl_setopt($ch_shadbala, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_shadbala, CURLOPT_POST, true);
+		curl_setopt($ch_shadbala, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_shadbala, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_shadbala = curl_exec($ch_shadbala);
+		$error = curl_error($ch_shadbala);
+		curl_close($ch_shadbala);
+		$respons_shadbala_data = json_decode($response_shadbala, associative: true);
+		$data["shadbala_data"] = $respons_shadbala_data;
+
+
+		// print_r($data["shadbala_data"]);
+
+
+
+
+		$url_manglik = 'https://astroapi-3.divineapi.com/indian-api/v2/manglik-dosha';
+
+		$ch_manglik = curl_init($url_manglik);
+		curl_setopt($ch_manglik, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_manglik, CURLOPT_POST, true);
+		curl_setopt($ch_manglik, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_manglik, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_manglik = curl_exec($ch_manglik);
+		$error = curl_error($ch_manglik);
+		curl_close($ch_manglik);
+		$respons_manglik_data = json_decode($response_manglik, associative: true);
+		$data["manglik_data"] = $respons_manglik_data;
+
+
+		// print_r($data["manglik_data"]);
+
+
+
+
+		$url_kal_sarpa = 'https://astroapi-3.divineapi.com/indian-api/v1/kaal-sarpa-yoga';
+
+		$ch_kal_sarpa = curl_init($url_kal_sarpa);
+		curl_setopt($ch_kal_sarpa, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_kal_sarpa, CURLOPT_POST, true);
+		curl_setopt($ch_kal_sarpa, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_kal_sarpa, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_kal_sarpa = curl_exec($ch_kal_sarpa);
+		$error = curl_error($ch_kal_sarpa);
+		curl_close($ch_kal_sarpa);
+		$respons_kal_sarpa_data = json_decode($response_kal_sarpa, associative: true);
+		$data["kal_sarpa_data"] = $respons_kal_sarpa_data;
+
+
+		// print_r($data["kal_sarpa_data"]);
+
+
+		$url_sadhe_sati = 'https://astroapi-3.divineapi.com/indian-api/v2/sadhe-sati';
+
+		$ch_url_sadhe_sati = curl_init($url_sadhe_sati);
+		curl_setopt($ch_url_sadhe_sati, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_url_sadhe_sati, CURLOPT_POST, true);
+		curl_setopt($ch_url_sadhe_sati, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_url_sadhe_sati, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_sadhe_sati = curl_exec($ch_url_sadhe_sati);
+		$error = curl_error($ch_url_sadhe_sati);
+		curl_close($ch_url_sadhe_sati);
+		$response_sadhe_sati_data = json_decode($response_sadhe_sati, associative: true);
+		$data["sadhe_sati_data"] = $response_sadhe_sati_data;
+
+
+
+
+
+		$url_gemstone = 'https://astroapi-3.divineapi.com/indian-api/v2/gemstone-suggestion';
+
+		$ch_url_gemstone = curl_init($url_gemstone);
+		curl_setopt($ch_url_gemstone, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_url_gemstone, CURLOPT_POST, true);
+		curl_setopt($ch_url_gemstone, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_url_gemstone, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_gemstone = curl_exec($ch_url_gemstone);
+		$error = curl_error($ch_url_gemstone);
+		curl_close($ch_url_gemstone);
+		$response_gemstone_data = json_decode($response_gemstone, associative: true);
+		$data["gemstone_data"] = $response_gemstone_data;
+
+
+
+
+
+		$url_compositefriendship = 'https://astroapi-3.divineapi.com/indian-api/v1/composite-friendship';
+
+		$ch_url_compositefriendship = curl_init($url_compositefriendship);
+		curl_setopt($ch_url_compositefriendship, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_url_compositefriendship, CURLOPT_POST, true);
+		curl_setopt($ch_url_compositefriendship, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_url_compositefriendship, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_compositefriendship = curl_exec($ch_url_compositefriendship);
+		$error = curl_error($ch_url_compositefriendship);
+		curl_close($ch_url_compositefriendship);
+		$response_compositefriendship_data = json_decode($response_compositefriendship, associative: true);
+		$data["compositefriendship_data"] = $response_compositefriendship_data;
+
+
+
+
+
+
+		$url_yogini_dasha = 'https://astroapi-3.divineapi.com/indian-api/v2/yogini-dasha';
+
+		$ch_url_yogini_dasha = curl_init($url_yogini_dasha);
+		curl_setopt($ch_url_yogini_dasha, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_url_yogini_dasha, CURLOPT_POST, true);
+		curl_setopt($ch_url_yogini_dasha, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_url_yogini_dasha, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_yogini_dasha = curl_exec($ch_url_yogini_dasha);
+		$error = curl_error($ch_url_yogini_dasha);
+		curl_close($ch_url_yogini_dasha);
+		$response_yogini_dasha_data = json_decode($response_yogini_dasha, associative: true);
+		$data["yogini_dasha_data"] = $response_yogini_dasha_data;
+
+
+
+
+
+
+		$this->load->view('User/Show_dataof_kundli', $data);
+
+	}
+
+	public function showkundlidatas1()
+	{
+
+		if (!$this->input->post('boy_name') || !$this->input->post('boy_day') || !$this->input->post('boy_month')) {
+			redirect('User/FreeKundli');
+		}
+
+		$access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+		$api_key = "b49e81e874acc04f1141569767b24b79";
+
+
+		$formdata = [
+			'api_key' => $api_key,
+			'full_name' => $this->input->post('boy_name'),
+			'day' => (int) $this->input->post('boy_day'),
+			'month' => (int) $this->input->post('boy_month'),
+			'year' => (int) $this->input->post('boy_year'),
+			'hour' => (int) $this->input->post('boy_hour'),
+			'min' => (int) $this->input->post('boy_minute'),
+			'sec' => (int) $this->input->post('boy_second'),
+			'gender' => $this->input->post('boy_gender'),
+			'place' => $this->input->post('boy_birthPlace'),
+			'lat' => $this->input->post('boy_lat'),
+			'lon' => $this->input->post('boy_lon'),
+			'tzone' => 5.5,
+			'lan' => $this->input->post('lan') ?? 'ma', // fallback if not provided
+			'chart_type' => 'south',
+			// 'show_planet_degree' => 1,
+			'show_planet_retro' => 1,
+			'dasha_type' => 'maha-dasha'
+		];
+
+		$data["formdata"] = $formdata;
+
+
+		$datanorth = [
+			'api_key' => $api_key,
+			'full_name' => $this->input->post('boy_name'),
+			'day' => (int) $this->input->post('boy_day'),
+			'month' => (int) $this->input->post('boy_month'),
+			'year' => (int) $this->input->post('boy_year'),
+			'hour' => (int) $this->input->post('boy_hour'),
+			'min' => (int) $this->input->post('boy_minute'),
+			'sec' => (int) $this->input->post('boy_second'),
+			'gender' => $this->input->post('boy_gender'),
+			'place' => $this->input->post('boy_birthPlace'),
+			'lat' => $this->input->post('boy_lat'),
+			'lon' => $this->input->post('boy_lon'),
+			'tzone' => 5.5,
+			'lan' => $this->input->post('lan') ?? 'ma',
+			'chart_type' => 'north',
+			// 'show_planet_degree' => 1,
+			'show_planet_retro' => 1
+		];
+
+
+
+		//Basic Astrology details first tab
+
+		$url_basic_astrologydetails = 'https://astroapi-3.divineapi.com/indian-api/v2/basic-astro-details';
+		$ch_basic_astrology = curl_init($url_basic_astrologydetails);
+		curl_setopt($ch_basic_astrology, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_basic_astrology, CURLOPT_POST, true);
+		curl_setopt($ch_basic_astrology, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_basic_astrology, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_basic_astrology_detail = curl_exec($ch_basic_astrology);
+		$error = curl_error($ch_basic_astrology);
+		curl_close($ch_basic_astrology);
+
+
+		$responsedata_basic_astrology_detail = json_decode($response_basic_astrology_detail, associative: true);
+
+		$data["basicastrology"] = $responsedata_basic_astrology_detail;
+
+
+
+
+
+
+
+
+		//North
+
+
+		$url_birth_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D1';
+
+		$ch_birth_north = curl_init($url_birth_horoscope_north);
+		curl_setopt($ch_birth_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_birth_north, CURLOPT_POST, true);
+		curl_setopt($ch_birth_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_birth_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_birth_north = curl_exec($ch_birth_north);
+		$error = curl_error($ch_birth_north);
+		curl_close($ch_birth_north);
+
+
+
+
+		$responsehoroscopebirthdata_north = json_decode($responsehoro_scope_birth_north, associative: true);
+
+
+		$data["birthchart_north"] = $responsehoroscopebirthdata_north;
+
+
+
+		// print_r($data["birthchartnorth"]);
+		// print_r($data["birthchart"]["data"]["base64_image"]);
+
+
+
+
+		$url_navamsha_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D9';
+
+		$ch_navamasha_north = curl_init($url_navamsha_north);
+		curl_setopt($ch_navamasha_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_navamasha_north, CURLOPT_POST, true);
+		curl_setopt($ch_navamasha_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_navamasha_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+		$responsenavamshachatnorth = curl_exec($ch_navamasha_north);
+		$error = curl_error($ch_navamasha_north);
+		curl_close($ch_navamasha_north);
+		$response_navamshachat_data_north = json_decode($responsenavamshachatnorth, associative: true);
+		$data["Navamsha_north"] = $response_navamshachat_data_north;
+
+
+
+
+		//Horoscope Data Birth Chat And Navamasa Chat Second Tab  South Data
+
+		$url_horoscope_birth_chart_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D1';
+		$ch_south_birth_chart = curl_init($url_horoscope_birth_chart_south);
+		curl_setopt($ch_south_birth_chart, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_south_birth_chart, CURLOPT_POST, true);
+		curl_setopt($ch_south_birth_chart, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_south_birth_chart, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_south_birth_chart = curl_exec($ch_south_birth_chart);
+		$error = curl_error($ch_south_birth_chart);
+		curl_close($ch_south_birth_chart);
+		$response_south_birth_chart_data = json_decode($response_south_birth_chart, associative: true);
+		$data["birthchart_south"] = $response_south_birth_chart_data;
+
+
+
+		//South Namavasa Chart South
+		$horoscope_namavasha_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D9';
+
+		$ch_namavsha_south = curl_init($horoscope_namavasha_south);
+		curl_setopt($ch_namavsha_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_namavsha_south, CURLOPT_POST, true);
+		curl_setopt($ch_namavsha_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_namavsha_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_namvasa_chat_south = curl_exec($ch_namavsha_south);
+		$error = curl_error($ch_namavsha_south);
+		curl_close($ch_namavsha_south);
+
+		$responsenavamshachatdata_south = json_decode($response_namvasa_chat_south, associative: true);
+
+
+		$data["Navamsha_south"] = $responsenavamshachatdata_south;
+
+
+
+
+
+
+
+
+
+
+		//North  Side data show
+
+
+		$url_chalit_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/chalit';
+
+		$ch_chalit_north = curl_init($url_chalit_horoscope_north);
+		curl_setopt($ch_chalit_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_chalit_north, CURLOPT_POST, true);
+		curl_setopt($ch_chalit_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_chalit_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_chalit_north = curl_exec($ch_chalit_north);
+		$error = curl_error($ch_chalit_north);
+		curl_close($ch_chalit_north);
+		$responsehoro_scope_chalit_north_data = json_decode($responsehoro_scope_chalit_north, associative: true);
+
+
+		$data["chalit_north"] = $responsehoro_scope_chalit_north_data;
+
+
+		// print_r($data["chalit_north"] );
+
+
+		// print_r($data["birthchartnorth"]);
+		// print_r($data["birthchart"]["data"]["base64_image"]);
+
+
+		$url_sun_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/SUN';
+
+		$ch_sun_north = curl_init($url_sun_horoscope_north);
+		curl_setopt($ch_sun_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_sun_north, CURLOPT_POST, true);
+		curl_setopt($ch_sun_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_sun_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_sun_north = curl_exec($ch_sun_north);
+		$error = curl_error($ch_sun_north);
+		curl_close($ch_sun_north);
+		$responsehoro_scope_sun_north_data = json_decode($responsehoro_scope_sun_north, associative: true);
+
+
+		$data["sun_north"] = $responsehoro_scope_sun_north_data;
+
+
+
+
+
+
+		$url_moon_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/MOON';
+
+		$ch_moon_north = curl_init($url_moon_horoscope_north);
+		curl_setopt($ch_moon_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_moon_north, CURLOPT_POST, true);
+		curl_setopt($ch_moon_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_moon_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_moon_north = curl_exec($ch_moon_north);
+		$error = curl_error($ch_moon_north);
+		curl_close($ch_moon_north);
+		$responsehoro_scope_moon_north_data = json_decode($responsehoro_scope_moon_north, associative: true);
+
+
+		$data["moon_north"] = $responsehoro_scope_moon_north_data;
+
+
+
+
+
+
+		$url_hora_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D2';
+
+		$ch_hora_north = curl_init($url_hora_horoscope_north);
+		curl_setopt($ch_hora_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_hora_north, CURLOPT_POST, true);
+		curl_setopt($ch_hora_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_hora_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_hora_north = curl_exec($ch_hora_north);
+		$error = curl_error($ch_hora_north);
+		curl_close($ch_hora_north);
+		$responsehoro_scope_hora_north_data = json_decode($responsehoro_scope_hora_north, associative: true);
+
+
+		$data["hora_north"] = $responsehoro_scope_hora_north_data;
+
+
+
+
+
+
+
+		$url_Dreshkan_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D3';
+
+		$ch_dreshkan_north = curl_init($url_Dreshkan_horoscope_north);
+		curl_setopt($ch_dreshkan_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_dreshkan_north, CURLOPT_POST, true);
+		curl_setopt($ch_dreshkan_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_dreshkan_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_dreshkan_north = curl_exec($ch_dreshkan_north);
+		$error = curl_error($ch_dreshkan_north);
+		curl_close($ch_dreshkan_north);
+		$responsehoro_scope_dreshkan_north_data = json_decode($responsehoro_scope_dreshkan_north, associative: true);
+
+
+		$data["dreshkan_north"] = $responsehoro_scope_dreshkan_north_data;
+
+
+
+
+
+
+
+
+
+
+		$url_Chathurthamasha_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D4';
+		$ch_Chathurthamasha_north = curl_init($url_Chathurthamasha_horoscope_north);
+		curl_setopt($ch_Chathurthamasha_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_Chathurthamasha_north, CURLOPT_POST, true);
+		curl_setopt($ch_Chathurthamasha_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_Chathurthamasha_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_Chathurthamasha_north = curl_exec($ch_Chathurthamasha_north);
+		$error = curl_error($ch_Chathurthamasha_north);
+		curl_close($ch_Chathurthamasha_north);
+		$responsehoro_scope_Chathurthamasha_north_data = json_decode($responsehoro_scope_Chathurthamasha_north, associative: true);
+
+
+		$data["Chathurthamasha_north"] = $responsehoro_scope_Chathurthamasha_north_data;
+
+
+
+
+
+
+		$url_Saptamansha_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D7';
+
+		$ch_Saptamansha_north = curl_init($url_Saptamansha_horoscope_north);
+		curl_setopt($ch_Saptamansha_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_Saptamansha_north, CURLOPT_POST, true);
+		curl_setopt($ch_Saptamansha_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_Saptamansha_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_Saptamansha_north = curl_exec($ch_Saptamansha_north);
+		$error = curl_error($ch_Saptamansha_north);
+		curl_close($ch_Saptamansha_north);
+		$responsehoro_scope_Saptamansha_north_data = json_decode($responsehoro_scope_Saptamansha_north, associative: true);
+
+
+		$data["Saptamansha_north"] = $responsehoro_scope_Saptamansha_north_data;
+
+
+
+
+
+
+		$url_cuspal_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/cuspal';
+
+		$ch_cuspal_north = curl_init($url_cuspal_horoscope_north);
+		curl_setopt($ch_cuspal_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_cuspal_north, CURLOPT_POST, true);
+		curl_setopt($ch_cuspal_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_cuspal_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_cuspal_north = curl_exec($ch_cuspal_north);
+		$error = curl_error($ch_cuspal_north);
+		curl_close($ch_cuspal_north);
+		$responsehoro_scope_cuspal_north_data = json_decode($responsehoro_scope_cuspal_north, associative: true);
+
+
+		$data["cuspal_north"] = $responsehoro_scope_cuspal_north_data;
+
+
+
+
+
+		$url_Bhamsha_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D27';
+
+		$ch_Bhamsha_north = curl_init($url_Bhamsha_horoscope_north);
+		curl_setopt($ch_Bhamsha_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_Bhamsha_north, CURLOPT_POST, true);
+		curl_setopt($ch_Bhamsha_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_Bhamsha_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_bhamsha_north = curl_exec($ch_Bhamsha_north);
+		$error = curl_error($ch_Bhamsha_north);
+		curl_close($ch_Bhamsha_north);
+		$responsehoro_scope_bhamsha_north_data = json_decode($responsehoro_scope_bhamsha_north, associative: true);
+
+
+		$data["bhamsha_north"] = $responsehoro_scope_bhamsha_north_data;
+
+
+
+
+		$url_Shodashamsha_horoscope_north = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D16';
+
+		$ch_Shodashamsha_north = curl_init($url_Shodashamsha_horoscope_north);
+		curl_setopt($ch_Shodashamsha_north, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_Shodashamsha_north, CURLOPT_POST, true);
+		curl_setopt($ch_Shodashamsha_north, CURLOPT_POSTFIELDS, json_encode($datanorth));
+		curl_setopt($ch_Shodashamsha_north, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_Shodashamsha_north = curl_exec($ch_Shodashamsha_north);
+		$error = curl_error($ch_Shodashamsha_north);
+		curl_close($ch_Shodashamsha_north);
+		$responsehoro_scope_shodashamsha_north_data = json_decode($responsehoro_scope_Shodashamsha_north, associative: true);
+
+
+		$data["shodashamsha_north"] = $responsehoro_scope_shodashamsha_north_data;
+
+
+
+
+
+
+
+
+		//South  Side data show
+
+
+		$url_chalit_horoscope_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/chalit';
+
+		$ch_chalit_south = curl_init($url_chalit_horoscope_south);
+		curl_setopt($ch_chalit_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_chalit_south, CURLOPT_POST, true);
+		curl_setopt($ch_chalit_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_chalit_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_chalit_south = curl_exec($ch_chalit_south);
+		$error = curl_error($ch_chalit_south);
+		curl_close($ch_chalit_south);
+		$responsehoro_scope_chalit_south_data = json_decode($responsehoro_scope_chalit_south, associative: true);
+
+
+		$data["chalit_south"] = $responsehoro_scope_chalit_south_data;
+
+
+		// print_r($data["chalit_north"] );
+
+
+		// print_r($data["birthchartnorth"]);
+		// print_r($data["birthchart"]["data"]["base64_image"]);
+
+
+		$url_sun_horoscope_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/SUN';
+
+		$ch_sun_south = curl_init($url_sun_horoscope_south);
+		curl_setopt($ch_sun_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_sun_south, CURLOPT_POST, true);
+		curl_setopt($ch_sun_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_sun_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_sun_south = curl_exec($ch_sun_south);
+		$error = curl_error($ch_sun_south);
+		curl_close($ch_sun_south);
+		$responsehoro_scope_sun_south_data = json_decode($responsehoro_scope_sun_south, associative: true);
+
+
+		$data["sun_south"] = $responsehoro_scope_sun_south_data;
+
+
+
+
+
+		$url_moon_horoscope_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/MOON';
+
+		$ch_moon_south = curl_init($url_moon_horoscope_south);
+		curl_setopt($ch_moon_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_moon_south, CURLOPT_POST, true);
+		curl_setopt($ch_moon_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_moon_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_moon_south = curl_exec($ch_moon_south);
+		$error = curl_error($ch_moon_south);
+		curl_close($ch_moon_south);
+		$responsehoro_scope_moon_south_data = json_decode($responsehoro_scope_moon_south, associative: true);
+
+
+		$data["moon_south"] = $responsehoro_scope_moon_south_data;
+
+
+
+
+
+
+		$url_hora_horoscope_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D2';
+
+		$ch_hora_south = curl_init($url_hora_horoscope_south);
+		curl_setopt($ch_hora_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_hora_south, CURLOPT_POST, true);
+		curl_setopt($ch_hora_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_hora_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_hora_south = curl_exec($ch_hora_south);
+		$error = curl_error($ch_hora_south);
+		curl_close($ch_hora_south);
+		$responsehoro_scope_hora_south_data = json_decode($responsehoro_scope_hora_south, associative: true);
+
+
+		$data["hora_south"] = $responsehoro_scope_hora_south_data;
+
+
+
+
+
+		$url_Dreshkan_horoscope_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D3';
+
+		$ch_dreshkan_south = curl_init($url_Dreshkan_horoscope_south);
+		curl_setopt($ch_dreshkan_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_dreshkan_south, CURLOPT_POST, true);
+		curl_setopt($ch_dreshkan_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_dreshkan_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_dreshkan_south = curl_exec($ch_dreshkan_south);
+		$error = curl_error($ch_dreshkan_south);
+		curl_close($ch_dreshkan_south);
+		$responsehoro_scope_dreshkan_south_data = json_decode($responsehoro_scope_dreshkan_south, associative: true);
+
+
+		$data["dreshkan_south"] = $responsehoro_scope_dreshkan_south_data;
+
+
+
+
+
+
+
+
+
+
+		$url_Chathurthamasha_horoscope_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D4';
+		$ch_Chathurthamasha_south = curl_init($url_Chathurthamasha_horoscope_south);
+		curl_setopt($ch_Chathurthamasha_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_Chathurthamasha_south, CURLOPT_POST, true);
+		curl_setopt($ch_Chathurthamasha_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_Chathurthamasha_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_Chathurthamasha_south = curl_exec($ch_Chathurthamasha_south);
+		$error = curl_error($ch_Chathurthamasha_south);
+		curl_close($ch_Chathurthamasha_south);
+		$responsehoro_scope_Chathurthamasha_south_data = json_decode($responsehoro_scope_Chathurthamasha_south, associative: true);
+
+
+		$data["Chathurthamasha_south"] = $responsehoro_scope_Chathurthamasha_south_data;
+
+
+
+
+
+
+		$url_Saptamansha_horoscope_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D7';
+
+		$ch_Saptamansha_south = curl_init($url_Saptamansha_horoscope_south);
+		curl_setopt($ch_Saptamansha_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_Saptamansha_south, CURLOPT_POST, true);
+		curl_setopt($ch_Saptamansha_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_Saptamansha_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_Saptamansha_south = curl_exec($ch_Saptamansha_south);
+		$error = curl_error($ch_Saptamansha_south);
+		curl_close($ch_Saptamansha_south);
+		$responsehoro_scope_Saptamansha_south_data = json_decode($responsehoro_scope_Saptamansha_south, associative: true);
+
+
+		$data["Saptamansha_south"] = $responsehoro_scope_Saptamansha_south_data;
+
+
+
+
+
+
+		$url_cuspal_horoscope_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/cuspal';
+
+		$ch_cuspal_south = curl_init($url_cuspal_horoscope_south);
+		curl_setopt($ch_cuspal_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_cuspal_south, CURLOPT_POST, true);
+		curl_setopt($ch_cuspal_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_cuspal_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_cuspal_south = curl_exec($ch_cuspal_south);
+		$error = curl_error($ch_cuspal_south);
+		curl_close($ch_cuspal_south);
+		$responsehoro_scope_cuspal_south_data = json_decode($responsehoro_scope_cuspal_south, associative: true);
+
+
+		$data["cuspal_south"] = $responsehoro_scope_cuspal_south_data;
+
+
+
+
+
+		$url_Bhamsha_horoscope_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D27';
+
+		$ch_Bhamsha_south = curl_init($url_Bhamsha_horoscope_south);
+		curl_setopt($ch_Bhamsha_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_Bhamsha_south, CURLOPT_POST, true);
+		curl_setopt($ch_Bhamsha_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_Bhamsha_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_bhamsha_south = curl_exec($ch_Bhamsha_south);
+		$error = curl_error($ch_Bhamsha_south);
+		curl_close($ch_Bhamsha_south);
+		$responsehoro_scope_bhamsha_south_data = json_decode($responsehoro_scope_bhamsha_south, associative: true);
+
+
+		$data["bhamsha_south"] = $responsehoro_scope_bhamsha_south_data;
+
+
+
+
+		$url_Shodashamsha_horoscope_south = 'https://astroapi-3.divineapi.com/indian-api/v1/horoscope-chart/D16';
+
+		$ch_Shodashamsha_south = curl_init($url_Shodashamsha_horoscope_south);
+		curl_setopt($ch_Shodashamsha_south, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_Shodashamsha_south, CURLOPT_POST, true);
+		curl_setopt($ch_Shodashamsha_south, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_Shodashamsha_south, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$responsehoro_scope_Shodashamsha_south = curl_exec($ch_Shodashamsha_south);
+		$error = curl_error($ch_Shodashamsha_south);
+		curl_close($ch_Shodashamsha_south);
+		$responsehoro_scope_shodashamsha_south_data = json_decode($responsehoro_scope_Shodashamsha_south, associative: true);
+
+
+		$data["shodashamsha_south"] = $responsehoro_scope_shodashamsha_south_data;
+
+
+
+
+
+		//Free Report 
+
+
+		//Assedance Report
+
+
+		$url_ascendant = 'https://astroapi-3.divineapi.com/indian-api/v2/ascendant-report';
+
+		$ch_ascendant = curl_init($url_ascendant);
+		curl_setopt($ch_ascendant, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_ascendant, CURLOPT_POST, true);
+		curl_setopt($ch_ascendant, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_ascendant, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_ascendant = curl_exec($ch_ascendant);
+		$error = curl_error($ch_ascendant);
+		curl_close($ch_ascendant);
+		$response_ascendant_data = json_decode($response_ascendant, associative: true);
+
+
+		$data["ascendant_data"] = $response_ascendant_data;
+
+
+		// print_r($data["ascendant_data"]);
+
+
+		//Planetary Positions
+
+
+		$url_planetary = 'https://astroapi-3.divineapi.com/indian-api/v2/planetary-positions';
+
+		$ch_planetary = curl_init($url_planetary);
+		curl_setopt($ch_planetary, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_planetary, CURLOPT_POST, true);
+		curl_setopt($ch_planetary, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_planetary, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_planetary = curl_exec($ch_planetary);
+		$error = curl_error($ch_planetary);
+		curl_close($ch_planetary);
+		$response_planetary_data = json_decode($response_planetary, associative: true);
+
+
+		$data["planetary_data"] = $response_planetary_data;
+
+
+
+
+		$url_vimshottari = 'https://astroapi-3.divineapi.com/indian-api/v1/vimshottari-dasha';
+
+		$ch_vimshottari = curl_init($url_vimshottari);
+		curl_setopt($ch_vimshottari, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_vimshottari, CURLOPT_POST, true);
+		curl_setopt($ch_vimshottari, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_vimshottari, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_vimshottari = curl_exec($ch_vimshottari);
+		$error = curl_error($ch_vimshottari);
+		curl_close($ch_vimshottari);
+		$respons_vimshottari_data = json_decode($response_vimshottari, associative: true);
+
+
+		$data["vimshottari_data"] = $respons_vimshottari_data;
+
+
+
+
+
+		$url_shadbala = 'https://astroapi-3.divineapi.com/indian-api/v1/shadbala';
+
+		$ch_shadbala = curl_init($url_shadbala);
+		curl_setopt($ch_shadbala, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_shadbala, CURLOPT_POST, true);
+		curl_setopt($ch_shadbala, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_shadbala, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_shadbala = curl_exec($ch_shadbala);
+		$error = curl_error($ch_shadbala);
+		curl_close($ch_shadbala);
+		$respons_shadbala_data = json_decode($response_shadbala, associative: true);
+		$data["shadbala_data"] = $respons_shadbala_data;
+
+
+
+
+		$url_manglik = 'https://astroapi-3.divineapi.com/indian-api/v2/manglik-dosha';
+
+		$ch_manglik = curl_init($url_manglik);
+		curl_setopt($ch_manglik, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_manglik, CURLOPT_POST, true);
+		curl_setopt($ch_manglik, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_manglik, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_manglik = curl_exec($ch_manglik);
+		$error = curl_error($ch_manglik);
+		curl_close($ch_manglik);
+		$respons_manglik_data = json_decode($response_manglik, associative: true);
+		$data["manglik_data"] = $respons_manglik_data;
+
+
+		// print_r($data["manglik_data"]);
+
+
+
+
+		$url_kal_sarpa = 'https://astroapi-3.divineapi.com/indian-api/v1/kaal-sarpa-yoga';
+
+		$ch_kal_sarpa = curl_init($url_kal_sarpa);
+		curl_setopt($ch_kal_sarpa, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_kal_sarpa, CURLOPT_POST, true);
+		curl_setopt($ch_kal_sarpa, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_kal_sarpa, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_kal_sarpa = curl_exec($ch_kal_sarpa);
+		$error = curl_error($ch_kal_sarpa);
+		curl_close($ch_kal_sarpa);
+		$respons_kal_sarpa_data = json_decode($response_kal_sarpa, associative: true);
+		$data["kal_sarpa_data"] = $respons_kal_sarpa_data;
+
+
+		// print_r($data["kal_sarpa_data"]);
+
+
+		$url_sadhe_sati = 'https://astroapi-3.divineapi.com/indian-api/v2/sadhe-sati';
+
+		$ch_url_sadhe_sati = curl_init($url_sadhe_sati);
+		curl_setopt($ch_url_sadhe_sati, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_url_sadhe_sati, CURLOPT_POST, true);
+		curl_setopt($ch_url_sadhe_sati, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_url_sadhe_sati, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_sadhe_sati = curl_exec($ch_url_sadhe_sati);
+		$error = curl_error($ch_url_sadhe_sati);
+		curl_close($ch_url_sadhe_sati);
+		$response_sadhe_sati_data = json_decode($response_sadhe_sati, associative: true);
+		$data["sadhe_sati_data"] = $response_sadhe_sati_data;
+
+
+
+
+
+		$url_gemstone = 'https://astroapi-3.divineapi.com/indian-api/v2/gemstone-suggestion';
+
+		$ch_url_gemstone = curl_init($url_gemstone);
+		curl_setopt($ch_url_gemstone, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_url_gemstone, CURLOPT_POST, true);
+		curl_setopt($ch_url_gemstone, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_url_gemstone, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_gemstone = curl_exec($ch_url_gemstone);
+		$error = curl_error($ch_url_gemstone);
+		curl_close($ch_url_gemstone);
+		$response_gemstone_data = json_decode($response_gemstone, associative: true);
+		$data["gemstone_data"] = $response_gemstone_data;
+
+
+
+
+
+		$url_compositefriendship = 'https://astroapi-3.divineapi.com/indian-api/v1/composite-friendship';
+
+		$ch_url_compositefriendship = curl_init($url_compositefriendship);
+		curl_setopt($ch_url_compositefriendship, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_url_compositefriendship, CURLOPT_POST, true);
+		curl_setopt($ch_url_compositefriendship, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_url_compositefriendship, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_compositefriendship = curl_exec($ch_url_compositefriendship);
+		$error = curl_error($ch_url_compositefriendship);
+		curl_close($ch_url_compositefriendship);
+		$response_compositefriendship_data = json_decode($response_compositefriendship, associative: true);
+		$data["compositefriendship_data"] = $response_compositefriendship_data;
+
+
+
+
+
+
+		//Dasha
+
+
+		$url_yogini_dasha = 'https://astroapi-3.divineapi.com/indian-api/v2/yogini-dasha';
+
+		$ch_url_yogini_dasha = curl_init($url_yogini_dasha);
+		curl_setopt($ch_url_yogini_dasha, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_url_yogini_dasha, CURLOPT_POST, true);
+		curl_setopt($ch_url_yogini_dasha, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_url_yogini_dasha, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_yogini_dasha = curl_exec($ch_url_yogini_dasha);
+		$error = curl_error($ch_url_yogini_dasha);
+		curl_close($ch_url_yogini_dasha);
+		$response_yogini_dasha_data = json_decode($response_yogini_dasha, associative: true);
+		$data["yogini_dasha_data"] = $response_yogini_dasha_data;
+
+
+		// print_r($data["yogini_dasha_data"]);
+
+
+
+
+
+		//KP
+
+
+		$url_kp = 'https://astroapi-3.divineapi.com/indian-api/v2/kp/cuspal';
+
+		$ch_url_kp = curl_init($url_kp);
+		curl_setopt($ch_url_kp, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_url_kp, CURLOPT_POST, true);
+		curl_setopt($ch_url_kp, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_url_kp, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_kp = curl_exec($ch_url_kp);
+		$error = curl_error($ch_url_kp);
+		curl_close($ch_url_kp);
+		$response_kp_data = json_decode($response_kp, associative: true);
+		$data["kp_data"] = $response_kp_data;
+
+
+
+
+
+
+		$this->load->view('User/Show_dataof_kundli', $data);
+	}
+
+
+
+
+	public function showkundlidata()
+	{
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
+
+
+		if (!$this->input->post('boy_name') || !$this->input->post('boy_day') || !$this->input->post('boy_month') || !$this->input->post('boy_minute') || !$this->input->post('boy_second') || !$this->input->post('boy_birthPlace') || !$this->input->post('boy_lat') || !$this->input->post('boy_lon')) {
+			redirect('User/FreeKundli');
+		}
+
+		$access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RpdmluZWFwaS5jb20vc2lnbnVwIiwiaWF0IjoxNzUwMzExNjA1LCJuYmYiOjE3NTAzMTE2MDUsImp0aSI6InNhM0h4bEVpejBtWDAxdXIiLCJzdWIiOiIzODQ2IiwicHJ2IjoiZTZlNjRiYjBiNjEyNmQ3M2M2Yjk3YWZjM2I0NjRkOTg1ZjQ2YzlkNyJ9.n2_tICXPqQBv8JkIPqQP_J4UzZc_PIsnXX4_W0lRC5g";
+		$api_key = "b49e81e874acc04f1141569767b24b79";
+
+
+		$formdata = [
+			'api_key' => $api_key,
+			'full_name' => $this->input->post('boy_name'),
+			'day' => (int) $this->input->post('boy_day'),
+			'month' => (int) $this->input->post('boy_month'),
+			'year' => (int) $this->input->post('boy_year'),
+			'hour' => (int) $this->input->post('boy_hour'),
+			'min' => (int) $this->input->post('boy_minute'),
+			'sec' => (int) $this->input->post('boy_second'),
+			'gender' => $this->input->post('boy_gender'),
+			'place' => $this->input->post('boy_birthPlace'),
+			'lat' => $this->input->post('boy_lat'),
+			'lon' => $this->input->post('boy_lon'),
+			'tzone' => 5.5,
+			'lan' => $this->input->post('lan') ?? 'en', // fallback if not provided
+			'chart_type' => 'south',
+			// 'show_planet_degree' => 1,
+			'show_planet_retro' => 1,
+			'dasha_type' => 'maha-dasha'
+		];
+
+		$data["formdata"] = $formdata;
+
+
+
+
+		$url_basic_astrologydetails = 'https://astroapi-3.divineapi.com/indian-api/v2/basic-astro-details';
+		$ch_basic_astrology = curl_init($url_basic_astrologydetails);
+		curl_setopt($ch_basic_astrology, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_basic_astrology, CURLOPT_POST, true);
+		curl_setopt($ch_basic_astrology, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_basic_astrology, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_basic_astrology_detail = curl_exec($ch_basic_astrology);
+		$error = curl_error($ch_basic_astrology);
+		curl_close($ch_basic_astrology);
+
+
+		$responsedata_basic_astrology_detail = json_decode($response_basic_astrology_detail, associative: true);
+
+		$data["basicastrology"] = $responsedata_basic_astrology_detail;
+
+
+         if ($data["basicastrology"]["success"] != 1 || empty($data["basicastrology"])) {
+
+			$this->session->set_flashdata('serverwarning', 'Server is busy');
+			redirect('User/FreeKundli');
+			return;
+		}
+
+
+		$url_gemstone = 'https://astroapi-3.divineapi.com/indian-api/v2/gemstone-suggestion';
+
+		$ch_url_gemstone = curl_init($url_gemstone);
+		curl_setopt($ch_url_gemstone, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch_url_gemstone, CURLOPT_POST, true);
+		curl_setopt($ch_url_gemstone, CURLOPT_POSTFIELDS, json_encode($formdata));
+		curl_setopt($ch_url_gemstone, CURLOPT_HTTPHEADER, [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		]);
+
+		$response_gemstone = curl_exec($ch_url_gemstone);
+		$error = curl_error($ch_url_gemstone);
+		curl_close($ch_url_gemstone);
+		$response_gemstone_data = json_decode($response_gemstone, associative: true);
+		$data["gemstone_data"] = $response_gemstone_data;
+
+
+
+		if ($data["gemstone_data"]["success"] != 1 || empty($data["gemstone_data"])) {
+
+			$this->session->set_flashdata('serverwarning', 'Server is busy');
+			redirect('User/FreeKundli');
+			return;
+		}
+
+
+		$this->load->view('User/Data_Of_kundli_View', $data);
 	}
 
 
@@ -612,7 +1939,7 @@ class User extends CI_Controller
 
 		// print_r($data["getcategory_data"]);
 
-			$api_url_rudraksh = base_url("User_Api_Controller/show_rudraksh");
+		$api_url_rudraksh = base_url("User_Api_Controller/show_rudraksh");
 		$ch_rudraksh_data = curl_init();
 		curl_setopt($ch_rudraksh_data, CURLOPT_URL, $api_url_rudraksh);
 		curl_setopt($ch_rudraksh_data, CURLOPT_RETURNTRANSFER, true);
@@ -633,9 +1960,9 @@ class User extends CI_Controller
 		if ($rudraksh_data_["status"] == "success") {
 			$data["rudraksh_data_"] = $rudraksh_data_["data"];
 		}
-  
 
-		
+
+
 
 
 
@@ -1328,6 +2655,7 @@ class User extends CI_Controller
 
 
 
+
 		$this->load->view('User/Astrologers', $data);
 	}
 
@@ -1491,6 +2819,8 @@ class User extends CI_Controller
 
 			$data["userinfo_data"] = $getdata["userinfo"];
 		}
+
+
 
 
 
@@ -2271,6 +3601,10 @@ class User extends CI_Controller
 
 	public function Chat($astrologer_id)
 	{
+
+		$language = $this->session->userdata('site_language') ?? 'english';
+		$this->lang->load('message', $language);
+
 
 		if (!$astrologer_id) {
 			show_error("User ID is required", 400);

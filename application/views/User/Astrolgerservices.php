@@ -112,31 +112,31 @@
                 <?php if (!empty($service_data)): ?>
                     <?php foreach ($service_data as $service): ?>
                         <div class="col-12 mb-4">
-    <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center p-4 shadow rounded bg-light">
-        <!-- Image Section -->
-        <img src="<?php echo base_url('uploads/services/' . $service['image']); ?>"
-             alt="<?php echo $service['name']; ?>"
-             class="me-md-4 mb-3 mb-md-0 rounded-circle"
-             style="width: 100px; height: 100px; object-fit: cover;"
-             onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
+                            <div
+                                class="d-flex flex-column flex-md-row align-items-start align-items-md-center p-4 shadow rounded bg-light">
+                                <!-- Image Section -->
+                                <img src="<?php echo base_url('uploads/services/' . $service['image']); ?>"
+                                    alt="<?php echo $service['name']; ?>" class="me-md-4 mb-3 mb-md-0 rounded-circle"
+                                    style="width: 100px; height: 100px; object-fit: cover;"
+                                    onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/askQuestion.png'); ?>';">
 
-        <!-- Text Section -->
-        <div class="flex-grow-1 mb-3 mb-md-0">
-            <h5 class="fw-bold mb-2"><?php echo $service['name']; ?></h5>
-            <p class="text-muted mb-2">
-                <?php echo $service['description']; ?>
-            </p>
-        </div>
+                                <!-- Text Section -->
+                                <div class="flex-grow-1 mb-3 mb-md-0">
+                                    <h5 class="fw-bold mb-2"><?php echo $service['name']; ?></h5>
+                                    <p class="text-muted mb-2">
+                                        <?php echo $service['description']; ?>
+                                    </p>
+                                </div>
 
-        <!-- Button Section (Fixed Width & No Shrink) -->
-        <div class="d-flex align-items-center flex-shrink-0">
-            <a href="<?php echo base_url('AstrologyServices'); ?>"
-               class="btn btn-outline-primary rounded-pill px-4">
-                View More
-            </a>
-        </div>
-    </div>
-</div>
+                                <!-- Button Section (Fixed Width & No Shrink) -->
+                                <div class="d-flex align-items-center flex-shrink-0">
+                                    <a href="<?php echo base_url('AstrologyServices'); ?>"
+                                        class="btn btn-outline-primary rounded-pill px-4">
+                                        View More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -149,7 +149,7 @@
 
 
 
-            <!-- <?php print_r($astrologerdata)?> -->
+            <!-- <?php print_r($astrologerdata) ?> -->
 
             <div class="row my-4" id="cardContainer">
 
@@ -407,7 +407,7 @@
                                 }
                             });
                         <?php else: ?>
-                            handleCallClick();
+                            handleCallClickcalll();
                         <?php endif; ?>
                     });
                 });
@@ -429,6 +429,30 @@
 
             }
         </script>
+
+        <script>
+            function handleCallClickcalll() {
+                Swal.fire({
+                    title: "Call Service Available on Mobile App",
+                    text: "To talk to an astrologer, please use our mobile app. The calling service is available exclusively on our app.",
+                    icon: "info",
+                    showCancelButton: true,
+                    confirmButtonText: "Go to Play Store",
+                    cancelButtonText: "Cancel"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "https://play.google.com/store/apps/details?id=com.rovio.baba&pcampaignid=merch_published_cluster_promotion_battlestar_top_picks"; // Replace with your actual Play Store URL
+                    }
+                });
+
+
+
+            }
+        </script>
+
+
+
+
     </main>
 
     <footer>

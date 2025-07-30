@@ -73,6 +73,10 @@ $lang['Available'] = "उपलब्ध";
 $lang['Chat'] = "चैट करें";
 $lang['Call'] = "कॉल करें";
 $lang['No_Astrologers_Found'] = "कोई ज्योतिषी नहीं मिला।";
+$lang['currently_offline'] = "वर्तमान में ऑफ़लाइन";
+
+
+$lang['Offline'] = "ऑफलाइन";
 
 
 $lang['Year'] = "वर्ष";
@@ -150,6 +154,22 @@ $lang['KP_Astrologers'] = "केपी ज्योतिषी";
 $lang['Vastu_Experts'] = "वास्तु विशेषज्ञ";
 $lang['Numerologist'] = "अंक ज्योतिषी";
 
+
+
+$lang['bhava_kundali'] = "Bhava Kundali";
+$lang['birth_chart'] = "Birth Chart";
+$lang['register_as_astrologer'] = "Register As Astrologer";
+$lang['counselling'] = "Counselling";
+$lang['yearbook'] = "YearBook";
+
+$lang['bhava_kundali'] = "भाव कुंडली";
+$lang['birth_chart'] = "जन्म कुंडली";
+$lang['register_as_astrologer'] = "ज्योतिषी के रूप में पंजीकरण करें";
+$lang['counselling'] = "परामर्श";
+$lang['yearbook'] = "वर्षपुस्तिका";
+
+
+$lang['register_as_pujari'] = "पुजारी के रूप में पंजीकरण करें";
 
 //Footer section
 
@@ -618,3 +638,126 @@ $lang['logout'] = "लॉग आउट";
 
 
 $lang['your_notifications'] = "आपकी सूचनाएँ";
+
+
+
+//Login Form
+
+$lang['get_personalized_info'] = "व्यक्तिगत जानकारी प्राप्त करें";
+$lang['save_kundli_on_cloud'] = "कुंडली क्लाउड पर सहेजें";
+$lang['write_notes_comments'] = "टिप्पणियाँ और नोट्स लिखें";
+$lang['access_anywhere'] = "कहीं से भी एक्सेस करें: मोबाइल और वेब";
+$lang['login_to_continue'] = "जारी रखने के लिए लॉगिन करें";
+$lang['get_otp'] = "ओटीपी प्राप्त करें";
+$lang['time_remaining'] = "शेष समय:";
+$lang['seconds'] = "सेकंड";
+$lang['resend_otp'] = "ओटीपी फिर से भेजें";
+$lang['verify_otp'] = "ओटीपी सत्यापित करें";
+$lang['dont_have_account'] = "क्या आपका खाता नहीं है?";
+$lang['sign_up'] = "साइन अप करें";
+
+
+//Sign up
+
+$lang['full_name'] = "पूरा नाम";
+$lang['gender'] = "लिंग";
+$lang['select_gender'] = "लिंग चुनें";
+$lang['male'] = "पुरुष";
+$lang['female'] = "महिला";
+$lang['dob'] = "जन्म तिथि";
+$lang['complete_registration'] = "पंजीकरण पूरा करें";
+$lang['login'] = "लॉग इन करें";
+
+$lang['signup_to_continue'] = "जारी रखने के लिए साइन अप करें";
+$lang['why_signup'] = "साइन अप क्यों करें?";
+
+
+$lang['why_login'] = "लॉग इन क्यों करें?";
+
+
+
+$lang['basic']         = "बुनियादी";
+$lang['kundli']        = "कुंडली";
+$lang['kp']            = "केपी";
+$lang['charts']        = "चार्ट्स";
+$lang['dasha']         = "दशा";
+$lang['free_report']   = "निःशुल्क रिपोर्ट";
+$lang['remedies']      = "उपाय";
+
+
+//Free Kundli 
+
+// Hindi
+$lang['basic_details'] = "बुनियादी विवरण";
+$lang['full_name'] = "पूरा नाम";
+$lang['gender'] = "लिंग";
+$lang['year'] = "वर्ष";
+$lang['month'] = "महीना";
+$lang['day'] = "दिन";
+$lang['time'] = "समय";
+$lang['place'] = "स्थान";
+$lang['latitude'] = "अक्षांश";
+$lang['longitude'] = "देशांतर";
+$lang['timezone'] = "समय क्षेत्र";
+$lang['sunrise'] = "सूर्योदय";
+$lang['sunset'] = "सूर्यास्त";
+$lang['panchang_details'] = "पंचांग विवरण";
+$lang['tithi'] = "तिथि";
+$lang['karan'] = "करण";
+$lang['yoga'] = "योग";
+$lang['nakshatra'] = "नक्षत्र";
+$lang['avakhada_details'] = "अवखड़ा विवरण";
+$lang['varna'] = "वर्ण";
+$lang['vashya'] = "वश्य";
+$lang['yoni'] = "योनि";
+$lang['gan'] = "गण";
+$lang['nadi'] = "नाड़ी";
+$lang['vaar'] = "वार";
+$lang['tatva'] = "तत्व";
+$lang['rashi_akshar'] = "राशि अक्षर";
+$lang['sun_sign'] = "सूर्य राशि";
+$lang['moon_sign'] = "चंद्र राशि";
+$lang['chandramasa'] = "चंद्र मास";
+$lang['yunja'] = "युंजा";
+$lang['ayanamsha'] = "अयनांश";
+$lang['paya'] = "पाय";
+
+
+
+$lang['free_kundli_para1'] = "हमारी <strong>नि:शुल्क कुंडली</strong> सेवा के साथ वैदिक ज्योतिष की प्राचीन ज्ञान को जानिए। कुंडली (जन्म पत्रिका) एक शक्तिशाली ज्योतिषीय उपकरण है, जो आपके जन्म की तिथि, समय और स्थान के आधार पर बनाई जाती है। यह आपके जन्म के समय ग्रहों की स्थिति को दर्शाती है और आपके व्यक्तित्व, भाग्य और जीवन मार्ग की गहराई से जानकारी देती है।";
+
+$lang['free_kundli_para2'] = "आपकी कुंडली सिर्फ एक चार्ट नहीं, बल्कि एक ब्रह्मांडीय खाका है। यह आपके गुण, चुनौतियाँ, करियर के अवसर, विवाह संगति, आर्थिक स्थिति और स्वास्थ्य के पहलुओं को समझने में मदद करती है। ज्योतिषी इसका उपयोग जीवन की बड़ी घटनाओं जैसे नौकरी परिवर्तन, रिश्ते, शिक्षा आदि की भविष्यवाणी के लिए करते हैं।";
+
+$lang['free_kundli_para3'] = "हमारी नि:शुल्क कुंडली सेवा से आपको <strong>लग्न (Ascendant)</strong>, <strong>चंद्र राशि</strong>, <strong>सूर्य राशि</strong>, <strong>ग्रहों की स्थिति</strong>, <strong>दोष</strong> (जैसे मांगलिक या काल सर्प) और आपके <strong>दशा काल</strong> की विस्तृत जानकारी तुरंत प्राप्त होती है। यह पूरी तरह स्वचालित और त्वरित है।";
+
+
+$lang['kundli_intro_para1'] = "क्या आप जानना चाहते हैं कि आपके लिए सितारों ने क्या योजना बनाई है? हमारी <strong>नि:शुल्क कुंडली</strong> सेवा से आप कुछ ही क्लिक में अपने जीवन का खाका जान सकते हैं। कुंडली यह दर्शाती है कि जन्म के समय ग्रहों की स्थिति आपके व्यक्तित्व, रिश्तों, करियर और भविष्य को कैसे प्रभावित करती है।";
+
+$lang['kundli_intro_para2'] = "हमारा उन्नत ज्योतिष इंजन तुरंत आपकी विस्तृत कुंडली बनाता है — जिसमें <strong>राशि</strong>, <strong>नक्षत्र</strong>, <strong>दशा काल</strong>, और संभावित <strong>दोष</strong> जैसे मंगलीक या काल सर्प शामिल होते हैं। यही चार्ट ज्योतिषी विवाह मेल, करियर मार्गदर्शन और आध्यात्मिक विश्लेषण के लिए उपयोग करते हैं।";
+
+$lang['kundli_intro_para3'] = "चाहे आप उत्तर खोज रहे हों, भविष्य की योजना बना रहे हों या खुद को गहराई से समझना चाहते हों — यह एक आदर्श शुरुआत है। किसी पूर्व ज्योतिष ज्ञान की आवश्यकता नहीं है।";
+
+$lang['kundli_intro_cta'] = "आज ही अपनी यात्रा शुरू करें — आपकी कुंडली एक क्लिक की दूरी पर है!";
+
+
+$lang['kundli_title'] = "कुंडली / जन्म पत्रिका";
+$lang['birth_hour'] = "जन्म का समय";
+$lang['get_kundli'] = "कुंडली प्राप्त करें";
+
+
+
+//Free kundli 
+$lang['kundli_chart'] = "कुंडली चार्ट";
+$lang['north_indian'] = "उत्तर भारतीय";
+$lang['south_indian'] = "दक्षिण भारतीय";
+$lang['birth_chart_north'] = "जन्म कुंडली (उत्तर भारतीय)";
+$lang['navamsa_chart_north'] = "नवांश कुंडली (उत्तर भारतीय)";
+$lang['birth_chart_south'] = "जन्म कुंडली (दक्षिण भारतीय)";
+$lang['navamsa_chart_south'] = "नवांश कुंडली (दक्षिण भारतीय)";
+$lang['kundli_description'] = "कुंडली (जन्म कुंडली) आपके जन्म के समय आकाश का एक खगोलीय स्नैपशॉट है। यह ग्रहों की स्थिति के आधार पर आपके व्यक्तित्व, करियर, विवाह, स्वास्थ्य और अन्य पहलुओं की विस्तृत जानकारी प्रदान करता है।";
+$lang['planetary_details'] = "ग्रह विवरण";
+$lang['planet'] = "ग्रह";
+$lang['symbol'] = "प्रतीक";
+$lang['sign_no'] = "राशि क्रमांक";
+$lang['degree'] = "डिग्री";
+$lang['retrograde'] = "वक्री";

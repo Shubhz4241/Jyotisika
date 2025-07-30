@@ -3,35 +3,6 @@
                 color: black;
                 text-decoration: none;
         }
-           @keyframes rotate360 {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.rotating-logo {
-    animation: rotate360 7s linear infinite;
-}
-.rotating-logo {
-  animation: spin 4s linear infinite;
-}
-
-@keyframes spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 </style>
 
 <!-- footer -->
@@ -40,33 +11,27 @@
                 <div class="row d-flex flex-row justify-content-center align-items-start gap-3 p-3"
                         style="background-color: rgba(254, 156, 19, 0.96); ">
                         <!-- Column 1: Social Media -->
-                        <div class="col-12 col-md-2">
-                                 <a class="navbar-brand" href="#" style="position: relative; display: inline-block; width: 150px; height: 150px;">
-    <!-- Rotating background -->
-    <div class="rotating-logo" style="
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 120px;
-        height: 120px;
-        background-image: url('<?php echo base_url('assets/images/new_logo.png'); ?>');
-        background-size: cover;
-        background-position: center;
-        border-radius: 50%;
-        animation: rotate 6s linear infinite;
-        z-index: 1;">
-    </div>
+                        <div class="col-12 col-md-2 text-center">
+                                <img src="<?php echo base_url('assets/images/new_logo.png'); ?>" alt="Logo"
+                                        style="width: 100px;">
+                                <div class="social-media mt-2">
+                                        <a href="https://www.facebook.com/profile.php?id=61578103586317"><img
+                                                        src="<?php echo base_url('assets/images/facebook.png'); ?>"
+                                                        alt="Facebook" style="width: 30px;"></a>
+                                        <!-- <a href="#"><img src="<?php echo base_url('assets/images/whatsapp.png'); ?>"
+                                                        alt="WhatsApp" style="width: 30px;"></a> -->
+                                        <!-- <a href="#"><img src="<?php echo base_url('assets/images/youtube.png'); ?>"
+                                                        alt="YouTube" style="width: 30px;"></a> -->
+                                        <a href="https://www.instagram.com/jyotisikaa?igsh=Z2hmOWtlM3RhMXVu"><img
+                                                        src="<?php echo base_url('assets/images/instagram.png'); ?>"
+                                                        alt="Instagram" style="width: 30px;"></a>
 
-    <!-- Static cropped circular image -->
-    <img src="<?php echo base_url('assets/images/cropped_circle_image.png'); ?>" 
-         alt="logo overlay" 
-         style="width: 80px; height: 80px; border-radius: 50%; position: relative;left:21px;top:21px; z-index: 2;">
-</a>
-                       </div>
+                                </div>
+                        </div>
                         <!-- Column 2: Astrological Services -->
                         <div class="col-12 col-sm-4 col-md-2 mt-2 mt-md-0">
                                 <h5 class="fw-bold">
-                                        <!--<?php echo $this->lang->line('Categories') ?: "Categories"; ?>-->
+                                        <?php echo $this->lang->line('Categories') ?: "Categories"; ?>
                                 </h5>
                                 <?php echo $this->lang->line('Astrological_Description') ?: "Explore our range of astrological services tailored to your needs."; ?>
                         </div>
@@ -103,105 +68,7 @@
                                         </li> -->
                                 </ul>
                         </div>
-                         <div class="col-12 col-sm-4 col-md-2">
-                                <h5 class="fw-bold">
-                                        <?php echo $this->lang->line('horoscope') ? $this->lang->line('horoscope') : 'Horoscope'; ?>
-                                </h5>
-                                <ul class="list-unstyled">
-
-                                        <li><a href="<?php echo base_url("horoscopereadmore/Aries") ?>"
-                                                        class="footer-links"><?php echo $this->lang->line('todays_horoscope') ? $this->lang->line('todays_horoscope') : 'Today s Horoscope'; ?></a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("horoscopereadmore/Aries") ?>" class="footer-links"><?php echo $this->lang->line('weekly_horoscope') ? $this->lang->line('weekly_horoscope') : 'Weekly Horoscope'; ?></a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("horoscopereadmore/Aries") ?>" class="footer-links"><?php echo $this->lang->line('monthly_horoscope') ? $this->lang->line('monthly_horoscope') : 'Monthly Horoscope'; ?></a>
-                                        </li>
-                                        
-
-                                </ul>
-                        </div>
-                    <div class="col-12 col-sm-4 col-md-2">
-    <h5 class="fw-bold"> <?php echo $this->lang->line('contact_us') ? $this->lang->line('contact_us') : 'Contact us'; ?>  </h5>
-    <ul class="list-unstyled">
-        <li>
-            <a href="mailto:contact@jyotisika.in" class="footer-links">
-                contact@jyotisika.in
-            </a>
-        </li>
-        <li class="d-flex align-items-center justify-content-start mt-2 gap-2">
-            <a href="https://www.facebook.com/profile.php?id=61578103586317" target="_blank">
-                <img src="<?php echo base_url('assets/images/facebook.png'); ?>" alt="Facebook" style="width: 30px;">
-            </a>
-            <!-- <a href="#">
-                <img src="<?php echo base_url('assets/images/whatsapp.png'); ?>" alt="WhatsApp" style="width: 30px;">
-            </a>
-            <a href="#">
-                <img src="<?php echo base_url('assets/images/youtube.png'); ?>" alt="YouTube" style="width: 30px;">
-            </a> -->
-            
-            <a href="https://www.instagram.com/jyotisikaa?igsh=Z2hmOWtlM3RhMXVu" target="_blank">
-                <img src="<?php echo base_url('assets/images/instagram.png'); ?>" alt="Instagram" style="width: 30px;">
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-
-                        <div class="col-12 col-sm-4 col-md-2">
-                                <h5 class="fw-bold">
-                                        <?php echo $this->lang->line('astrological_services') ? $this->lang->line('astrological_services') : 'Astrological Services'; ?>
-                                </h5>
-                                <ul class="list-unstyled">
-
-                                        <li><a href="<?php echo base_url("astrologers") ?>"
-                                                        class="footer-links"><?php echo $this->lang->line('finance') ? $this->lang->line('finance') : 'Finance'; ?></a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("astrologers") ?>" class="footer-links"><?php echo $this->lang->line('ask_question') ? $this->lang->line('ask_question') : 'Ask Question'; ?></a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("astrologers") ?>" class="footer-links"><?php echo $this->lang->line('career_and_job') ? $this->lang->line('career_and_job') : 'Career And Job'; ?></a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("astrologers") ?>"
-                                                        class="footer-links"><?php echo $this->lang->line('counselling') ? $this->lang->line('counselling') : 'Counselling'; ?></a>
-                                        </li>
-
-                                        <li><a href="<?php echo base_url("astrologers") ?>"
-                                                        class="footer-links"><?php echo $this->lang->line('yearbook') ? $this->lang->line('yearbook') : 'Yearbook'; ?></a>
-                                        </li>
-
-                                </ul>
-                        </div>
-
-                         <div class="col-12 col-sm-4 col-md-2">
-                                <h5 class="fw-bold">
-                                      <?php echo $this->lang->line('get_free_kundali') ? $this->lang->line('get_free_kundali') : 'Get Free Kundli'; ?>
-                                </h5>
-                                <ul class="list-unstyled">
-
-                                        <li><a href="<?php echo base_url("FreeKundli_Controller/BasicAstrology") ?>"
-                                                        class="footer-links"><?php echo $this->lang->line('basic_astrology') ? $this->lang->line('basic_astrology') : 'Basic Astrology'; ?></a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("FreeKundli_Controller/HoroscopeCharts") ?>" class="footer-links"><?php echo $this->lang->line('birth_chart') ? $this->lang->line('birth_chart') : 'Birth Chat'; ?></a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("FreeKundli_Controller/PlanetaryPosition") ?>" class="footer-links">  <?php echo $this->lang->line('planetary_position') ? $this->lang->line('planetary_position') : 'Planetary Position'; ?>
-                                                       </a>
-                                        </li>
-                                        <li><a href="<?php echo base_url("FreeKundli_Controller/BhavaKundli") ?>"
-                                                        class="footer-links"><?php echo $this->lang->line('bhava_kundali') ? $this->lang->line('bhava_kundali') : 'Bhava Kundali'; ?></a>
-                                        </li>
-
-                                        <li><a href="<?php echo base_url("FreeKundli_Controller/ManglikDosha") ?>"
-                                                        class="footer-links">  <?php echo $this->lang->line('manglik_dosha') ? $this->lang->line('manglik_dosha') : 'Manglik Dosha'; ?></a>
-                                        </li>
-
-                                        <li><a href="<?php echo base_url("FreeKundli_Controller/VimshottariDasha") ?>"
-                                                        class="footer-links"> <?php echo $this->lang->line('vimshottari_dasha') ? $this->lang->line('vimshottari_dasha') : 'Vimshottari dasha'; ?></a>
-                                        </li>
-                                        
-
-                                </ul>
-                        </div>
-   <!-- Column 4: General Links -->
+                        <!-- Column 4: General Links -->
                         <div class="col-12 col-sm-4 col-md-2">
                                 <h5 class="fw-bold"><?php echo $this->lang->line('General_Links') ?: "General Links"; ?>
                                 </h5>
@@ -228,12 +95,8 @@
                                                         class="footer-links"><?php echo $this->lang->line('Horoscope') ?: "Horoscope"; ?></a>
                                         </li>
 
-                                        <li><a href="<?php echo base_url("AstrologerMobileNumberAndOTPForm") ?>"
-                                                        class="footer-links"> <?php echo $this->lang->line('register_as_astrologer') ? $this->lang->line('register_as_astrologer') : 'Register As Astrologer'; ?></a>
-                                        </li>
-
-                                        <li><a href="<?php echo base_url("MobileNumberAndOTPForm") ?>"
-                                                        class="footer-links"> <?php echo $this->lang->line('register_as_pujari') ? $this->lang->line('register_as_pujari') : 'Register As Pujari'; ?></a>
+                                        <li><a href="<?php echo base_url("UserSelection") ?>"
+                                                        class="footer-links">Register As Astrologer</a>
                                         </li>
 
 
@@ -253,28 +116,17 @@
                     <li><a href="#" class="footer-links"><?php echo $this->lang->line('KP') ?: "KP"; ?></a></li> -->
                                 </ul>
                         </div>
-                    
 
-
-
-
-
-
-                        <!-- Column 5: Online Consultations -->
-                       
-
-                        
-
-                       
-                          <div class="col-12 col-sm-4 col-md-2">
+                        <div class="col-12 col-sm-4 col-md-2">
                                 <h5 class="fw-bold">
                                         <?php echo $this->lang->line('our_services'); ?>
 
                                 </h5>
                                 <ul class="list-unstyled">
 
-                                        <li><a href="<?php echo base_url("bookpooja") ?>" class="footer-links"><?php
-                                                                                                                echo $this->lang->line('freekundali') ? $this->lang->line('freekundali') : 'Free Kundali'; ?></a>
+                                        <li><a href="<?php echo base_url("freekundli") ?>"
+                                                        class="footer-links"><?php
+                                                        echo $this->lang->line('freekundali') ? $this->lang->line('freekundali') : 'Free Kundali'; ?></a>
                                         </li>
                                         <li><a href="<?php echo base_url("kundlimatching") ?>"
                                                         class="footer-links"><?php echo $this->lang->line('kundlimatching') ? $this->lang->line('kundlimatching') : 'Kundli Matching'; ?></a>
@@ -300,27 +152,149 @@
                                                         class="footer-links"><?php echo $this->lang->line('festival') ? $this->lang->line('festival') : 'Festival'; ?></a>
                                         </li>
                                         <li><a href="<?php echo base_url("bookpooja") ?>" class="footer-links"> <?php
-                                                                                                                echo $this->lang->line('bookpuja') ? $this->lang->line('bookpuja') : 'Book Puja';
-                                                                                                                ?>
+                                           echo $this->lang->line('bookpuja') ? $this->lang->line('bookpuja') : 'Book Puja';
+                                           ?>
                                                 </a>
                                         </li>
 
 
-                                        <li><a href="<?php echo base_url("MobPooja") ?>" class="footer-links"> <?php echo $this->lang->line('MobPooja') ? $this->lang->line('MobPooja') : 'Mob Pooja'; ?>
+                                        <li><a href="<?php echo base_url("MobPooja") ?>" class="footer-links">
+                                                        <?php echo $this->lang->line('MobPooja') ? $this->lang->line('MobPooja') : 'Mob Pooja'; ?>
                                                 </a>
                                         </li>
 
                                 </ul>
                         </div>
 
-                         <div class="col-12 col-sm-4 col-md-2">
-                                <h5 class="fw-bold"> <?php echo $this->lang->line('online_consultations') ? $this->lang->line('online_consultations') : 'Online Consultations '; ?>      </h5>
+
+
+
+                        <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+                                        <?php echo $this->lang->line('astrological_services') ? $this->lang->line('astrological_services') : 'Astrological Services'; ?>
+                                </h5>
+                                <ul class="list-unstyled">
+
+                                        <li><a href="<?php echo base_url("astrologers") ?>" class="footer-links">
+                                                        <?php echo $this->lang->line('finance') ? $this->lang->line('finance') : 'Finance'; ?></a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("astrologers") ?>" class="footer-links">
+                                                        <?php echo $this->lang->line('ask_question') ? $this->lang->line('ask_question') : 'Ask Question'; ?></a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("astrologers") ?>" class="footer-links">
+                                                        <?php echo $this->lang->line('career_and_job') ? $this->lang->line('career_and_job') : 'Career And Job'; ?></a>
+                                        </li>
+
+
+                                </ul>
+                        </div>
+
+                        <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+                                       <?php echo $this->lang->line('get_free_kundali') ? $this->lang->line('get_free_kundali') : 'Basic Astrology'; ?>
+                                     
+                                </h5>
+                                <ul class="list-unstyled">
+                                        <li>
+                                                <a href="<?php echo base_url('FreeKundli_Controller/BasicAstrology'); ?>"
+                                                        class="footer-links">
+                                                        <?php echo $this->lang->line('basic_astrology') ? $this->lang->line('basic_astrology') : 'Basic Astrology'; ?>
+                                                        
+                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href="<?php echo base_url('FreeKundli_Controller/PlanetaryPosition'); ?>"
+                                                        class="footer-links">
+                                                         <?php echo $this->lang->line('planetary_position') ? $this->lang->line('planetary_position') : 'Career And Job'; ?>
+                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href="<?php echo base_url('FreeKundli_Controller/VimshottariDasha'); ?>"
+                                                        class="footer-links">
+                                                         <?php echo $this->lang->line('vimshottari_dasha') ? $this->lang->line('vimshottari_dasha') : 'Career And Job'; ?>
+                                                        
+                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href="<?php echo base_url('FreeKundli_Controller/AscendantReport'); ?>"
+                                                        class="footer-links">
+                                                         <?php echo $this->lang->line('ascendant_report') ? $this->lang->line('ascendant_report') : 'Career And Job'; ?>
+                                                        
+                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href="<?php echo base_url('FreeKundli_Controller/ManglikDosha'); ?>"
+                                                        class="footer-links">
+                                                         <?php echo $this->lang->line('manglik_dosha') ? $this->lang->line('manglik_dosha') : 'Career And Job'; ?>
+                                                      
+                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href="<?php echo base_url('FreeKundli_Controller/GemstoneRecommendation'); ?>"
+                                                        class="footer-links">
+                                                         <?php echo $this->lang->line('gemstone_recommendation') ? $this->lang->line('gemstone_recommendation') : 'Career And Job'; ?>
+                                                     
+                                                </a>
+                                        </li>
+                                </ul>
+                        </div>
+
+                        <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+
+                                <?php echo $this->lang->line('horoscope') ? $this->lang->line('horoscope') : 'Horoscope'; ?>
+                                        
+                                </h5>
+                                <ul class="list-unstyled">
+
+                                        <li><a href="<?php echo base_url("horoscopereadmore/Aries") ?>"
+                                                        class="footer-links"><?php echo $this->lang->line('todays_horoscope') ? $this->lang->line('todays_horoscope') : 'Today s Horoscope'; ?></a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("horoscopereadmore/Aries") ?>"
+                                                        class="footer-links"><?php echo $this->lang->line('weekly_horoscope') ? $this->lang->line('weekly_horoscope') : 'Weekly Horoscope'; ?></a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("horoscopereadmore/Aries") ?>"
+                                                        class="footer-links"><?php echo $this->lang->line('monthly_horoscope') ? $this->lang->line('monthly_horoscope') : 'Monthly Horoscope'; ?></a>
+                                        </li>
+
+
+                                </ul>
+                        </div>
+
+
+
+
+
+
+                        <!-- Column 5: Online Consultations -->
+                        <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+                                <?php echo $this->lang->line('online_consultations') ? $this->lang->line('online_consultations') : 'Online Consultations '; ?>        
+                               </h5>
                                 <ul class="list-unstyled" id="footer-services-list">
                                         <!-- JavaScript will populate this -->
                                 </ul>
                         </div>
+
+
+
+                        <div class="col-12 col-sm-4 col-md-2">
+                                <h5 class="fw-bold">
+                                        <?php echo $this->lang->line('contact_us') ? $this->lang->line('contact_us') : 'Contact us'; ?>        
+                                </h5>
+                                <ul class="list-unstyled">
+
+                                        <li>
+                                                <a href="mailto:contact@jyotisika.in"
+                                                        class="footer-links">contact@jyotisika.in</a>
+                                        </li>
+
+
+
+                                </ul>
+                        </div>
                         <script>
-                                document.addEventListener("DOMContentLoaded", function() {
+                                document.addEventListener("DOMContentLoaded", function () {
                                         fetch("<?php echo base_url('User_Api_Controller/showservices_limited'); ?>")
                                                 .then(response => response.json())
                                                 .then(data => {
@@ -332,7 +306,7 @@
                                                                 data.data.forEach(service => {
                                                                         html += `
                                                                         <li>
-                                                                          <a href="<?php echo base_url('/astrologers') ?>" class="footer-links">
+                                                                          <a href="<?php echo base_url('/User/astrolgerservices/') ?>${service.id}" class="footer-links">
                                                                             ${service.name}
                                                                           </a>
                                                                         </li>

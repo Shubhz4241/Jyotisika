@@ -120,8 +120,8 @@
                                             class="text-decoration-none">
 
 
-                                            <img src=" <?php echo !empty($astrologer['profile_image']) ? base_url($astrologer['profile_image']) : base_url('assets/images/astrologerimg.png') ?>"
-                                                alt="image" class="rounded-circle"
+                                            <img src="<?php echo !empty($astrologerdata[0]['profile_image']) ? base_url($astrologerdata[0]['profile_image']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
+                                                class="rounded-circle"
                                                 style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                         </a>
                                         <div class="ms-2">
@@ -158,13 +158,13 @@
                                             <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"
                                                 style="width: 15px; height: 15px; margin-right: 5px;">
                                             <small><?php echo isset($astrologer['experience']) && !empty($astrologer['experience']) ? $astrologer['experience'] : "0"; ?>
-                                                +  <?php echo $this->lang->line('Year') ?></small>
+                                                + <?php echo $this->lang->line('Year') ?></small>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
                                                 style="width: 15px; height: 15px; margin-right: 5px;">
                                             <small><?php echo isset($astrologer['price_per_minute']) && !empty($astrologer['price_per_minute']) ? $astrologer['price_per_minute'] : "0"; ?>
-                                               <?php echo $this->lang->line('Rs') ?></small>
+                                                <?php echo $this->lang->line('Rs') ?></small>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
@@ -175,35 +175,51 @@
 
                                         <div class="d-flex align-items-center">
 
-                                            <?php if ($astrologer['chatstatus'] == "active"): ?>
-                                                <small class="card-language text-danger"><?php echo $this->lang->line('Busy') ?>  , </small>
+                                            <?php if ($astrologer['is_online'] == 0): ?>
+                                                <small class="card-language text-danger">
+                                                    <i class="bi bi-x-circle-fill"></i> <?php echo $this->lang->line('Offline') ?>
+                                                </small>
 
 
-                                                <?php
-                                                if (!empty($astrologer['chat_expire_on'])) {
-                                                    date_default_timezone_set('Asia/Kolkata'); // Ensure you're using IST
-                                                    $now = new DateTime(); // current timestamp
-                                                    $expire = new DateTime($astrologer['chat_expire_on']);
-
-                                                    // Calculate only if expire time is in the future
-                                                    if ($expire > $now) {
-                                                        $interval = $now->diff($expire);
-                                                        $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
-                                                        $seconds = $interval->s;
-
-                                                        echo '<div class="d-flex align-items-center">
-                                              <small class="card-language text-danger">Wait for Time: ' . $waitTimeMinutes . ' min ' . $seconds . ' sec</small>
-                                                </div>';
-                                                    } else {
-                                                        echo '<div class="d-flex align-items-center">
-                                                <small class="card-language text-danger">session not ended</small>
-                                            </div>';
-                                                    }
-                                                }
-                                                ?>
 
                                             <?php else: ?>
-                                                <small class="card-language text-success"> <?php echo $this->lang->line('Available') ?></small>
+
+                                                <?php if ($astrologer['chatstatus'] == "active"): ?>
+                                                    <small class="card-language text-danger"> <i class="bi bi-clock-history me-1">
+                                                        </i><?php echo $this->lang->line('Busy') ?> ,
+                                                    </small>
+
+
+                                                    <?php
+                                                    if (!empty($astrologer['chat_expire_on'])) {
+                                                        date_default_timezone_set('Asia/Kolkata'); // Ensure you're using IST
+                                                        $now = new DateTime(); // current timestamp
+                                                        $expire = new DateTime($astrologer['chat_expire_on']);
+
+                                                        // Calculate only if expire time is in the future
+                                                        if ($expire > $now) {
+                                                            $interval = $now->diff($expire);
+                                                            $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+                                                            $seconds = $interval->s;
+
+                                                            echo '<div class="d-flex align-items-center">
+                                              <small class="card-language text-danger">Wait for Time: ' . $waitTimeMinutes . ' min ' . $seconds . ' sec</small>
+                                                </div>';
+                                                        } else {
+                                                            echo '<div class="d-flex align-items-center">
+                                                <small class="card-language text-danger">session not ended</small>
+                                            </div>';
+                                                        }
+                                                    }
+                                                    ?>
+
+                                                <?php else: ?>
+                                                    <small class="card-language text-success">
+                                                        <i class="bi bi-check-circle-fill me-1"></i>
+                                                        <?php echo $this->lang->line('Available') ?>
+                                                    </small>
+
+                                                <?php endif ?>
                                             <?php endif ?>
                                         </div>
                                     </div>
@@ -222,25 +238,30 @@
                                                     <?php echo $astrologer['price_per_minute']; ?>,  
                                                     '<?php echo base_url('chat/' . $astrologer['id']); ?>',
                                                     '<?php echo addslashes($astrologer['name']); ?>' ,
-                                                    '<?php echo $astrologer['chatvalue'] ?>' 
+                                                    '<?php echo $astrologer['chatvalue'] ?>' ,
+                                                      '<?php echo $astrologer['is_online'] ?>' ,
+
                                                 )"> <?php echo $this->lang->line('Chat') ?> </button>
                                         <?php else: ?>
                                             <button id="chatlink" class="btn btn-sm w-50 rounded-3 border-1 btnlog"
-                                                style="background-color: var(--yellow);"> <?php echo $this->lang->line('Chat') ?> </button>
+                                                style="background-color: var(--yellow);"> <?php echo $this->lang->line('Chat') ?>
+                                            </button>
                                         <?php endif; ?>
 
 
                                         <?php if ($this->session->userdata('user_id')): ?>
                                             <button
-                                                class="btn btnHover btn-sm btn-outline-success w-50 rounded-3 call-btn"><?php echo $this->lang->line('Call') ?> </button>
+                                                class="btn btnHover btn-sm btn-outline-success w-50 rounded-3 call-btn"><?php echo $this->lang->line('Call') ?>
+                                            </button>
                                         <?php else: ?>
                                             <button
-                                                class="btn btnHover btn-sm btn-outline-dark  w-50 rounded-3 call-btn"><?php echo $this->lang->line('Call') ?> </button>
+                                                class="btn btnHover btn-sm btn-outline-dark  w-50 rounded-3 call-btn"><?php echo $this->lang->line('Call') ?>
+                                            </button>
                                         <?php endif; ?>
                                     </div>
 
                                     <script>
-                                        function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name, statusastro) {
+                                        function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name, statusastro, isonline) {
                                             if (amount < astrologer_charge * 5) {
                                                 Swal.fire({
                                                     icon: "warning",
@@ -254,22 +275,33 @@
                                                     }
                                                 });
                                             } else {
-                                                if (chatstatus == "active") {
+                                                if (isonline == 0) {
+                                                    Swal.fire({
+                                                        icon: "warning",
+                                                        title: "Astrologer is Not Online",
+                                                    });
 
-                                                    if (statusastro == "sessionnotend") {
-                                                        window.location.href = chatUrl;
-                                                    }
-                                                    else {
-
-                                                        Swal.fire({
-                                                            icon: "warning",
-                                                            title: "Astrologer is busy",
-                                                        });
-                                                    }
                                                 }
                                                 else {
-                                                    window.location.href = chatUrl;
+                                                    if (chatstatus == "active") {
+
+                                                        if (statusastro == "sessionnotend") {
+                                                            window.location.href = chatUrl;
+                                                        }
+                                                        else {
+
+                                                            Swal.fire({
+                                                                icon: "warning",
+                                                                title: "Astrologer is busy",
+                                                            });
+                                                        }
+                                                    }
+                                                    else {
+                                                        window.location.href = chatUrl;
+                                                    }
+
                                                 }
+
                                             }
                                         }
 
@@ -373,12 +405,18 @@
 
             function handleCallClick() {
                 Swal.fire({
-                    title: "Initiating Call",
-                    text: "Connecting you to the service...",
-                    icon: "success",
-                    timer: 2000,
-                    showConfirmButton: false
+                      title: "Call Service Available on Mobile App",
+                    text: "To talk to an astrologer, please use our mobile app. The calling service is available exclusively on our app.",
+                    icon: "info",
+                    showCancelButton: true,
+                    confirmButtonText: "Go to Play Store",
+                    cancelButtonText: "Cancel"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "https://play.google.com/store/apps/details?id=com.rovio.baba&pcampaignid=merch_published_cluster_promotion_battlestar_top_picks"; // Replace with your actual Play Store URL
+                    }
                 });
+
 
 
             }

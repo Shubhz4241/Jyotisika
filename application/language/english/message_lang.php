@@ -122,9 +122,12 @@ $lang['Chat'] = "Chat";
 $lang['Call'] = "Call";
 $lang['No_Astrologers_Found'] = "No astrologers found.";
 
+$lang['Offline'] = "Offline";
 
 $lang['Year'] = "Year";
 $lang['Rs'] = "Rs Per Minute";
+$lang['currently_offline'] = "Currently Offline";
+
 
 
 //Footer
@@ -171,6 +174,7 @@ $lang['Financial_Astrologers'] = "Financial Astrologers";
 $lang['KP_Astrologers'] = "KP Astrologers";
 $lang['Vastu_Experts'] = "Vastu Experts";
 $lang['Numerologist'] = "Numerologist";
+$lang['register_as_pujari'] = "Register As Pujari";
 
 
 $lang['astrological_services'] = "Astrological Services";
@@ -198,6 +202,14 @@ $lang['monthly_horoscope'] = "Monthly Horoscope";
 
 $lang['online_consultations'] = "Online Consultations";
 $lang['contact_us'] = "Contact Us";
+
+
+$lang['bhava_kundali'] = "Bhava Kundali";
+$lang['birth_chart'] = "Birth Chart";
+$lang['register_as_astrologer'] = "Register As Astrologer";
+$lang['counselling'] = "Counselling";
+$lang['yearbook'] = "YearBook";
+
 
 
 //Footer link
@@ -670,3 +682,129 @@ $lang['logout'] = "Logout";
 //Notification 
 $lang['your_notifications'] = "Your Notifications";
 
+
+
+//Login form
+
+$lang['get_personalized_info'] = "Get personalized information";
+$lang['save_kundli_on_cloud'] = "Save charts (Kundli) on cloud";
+$lang['write_notes_comments'] = "Write notes & comments";
+$lang['access_anywhere'] = "Access anywhere: mobile & web";
+$lang['login_to_continue'] = "Login to Continue";
+$lang['get_otp'] = "Get OTP";
+$lang['time_remaining'] = "Time remaining:";
+$lang['seconds'] = "seconds";
+$lang['resend_otp'] = "Resend OTP";
+$lang['verify_otp'] = "Verify OTP";
+$lang['dont_have_account'] = "Don't have an Account?";
+$lang['sign_up'] = "Sign Up";
+
+
+//Sign up
+
+$lang['full_name'] = "Full Name";
+$lang['gender'] = "Gender";
+$lang['select_gender'] = "Select Gender";
+$lang['male'] = "Male";
+$lang['female'] = "Female";
+$lang['dob'] = "Date of Birth";
+$lang['complete_registration'] = "Complete Registration";
+$lang['login'] = "Log in";
+
+$lang['signup_to_continue'] = "Sign Up to Continue";
+$lang['why_signup'] = "Why Sign Up?";
+
+
+$lang['why_login'] = "Why Log In?";
+
+
+$lang['basic']         = "Basic";
+$lang['kundli']        = "Kundli";
+$lang['kp']            = "KP";
+$lang['charts']        = "Charts";
+$lang['dasha']         = "Dasha";
+$lang['free_report']   = "Free Report";
+$lang['remedies']      = "Remedies";
+
+
+//Free Kundli
+
+// English
+$lang['basic_details'] = "Basic Details";
+$lang['full_name'] = "Full Name";
+$lang['gender'] = "Gender";
+$lang['year'] = "Year";
+$lang['month'] = "Month";
+$lang['day'] = "Day";
+$lang['time'] = "Time";
+$lang['place'] = "Place";
+$lang['latitude'] = "Latitude";
+$lang['longitude'] = "Longitude";
+$lang['timezone'] = "Timezone";
+$lang['sunrise'] = "Sunrise";
+$lang['sunset'] = "Sunset";
+$lang['panchang_details'] = "Panchang Details";
+$lang['tithi'] = "Tithi";
+$lang['karan'] = "Karan";
+$lang['yoga'] = "Yoga";
+$lang['nakshatra'] = "Nakshatra";
+$lang['avakhada_details'] = "Avakhada Details";
+$lang['varna'] = "Varna";
+$lang['vashya'] = "Vashya";
+$lang['yoni'] = "Yoni";
+$lang['gan'] = "Gan";
+$lang['nadi'] = "Nadi";
+$lang['vaar'] = "Vaar";
+$lang['tatva'] = "Tatva";
+$lang['rashi_akshar'] = "Rashi Akshar";
+$lang['sun_sign'] = "Sun Sign";
+$lang['moon_sign'] = "Moon Sign";
+$lang['chandramasa'] = "Chandramasa";
+$lang['yunja'] = "Yunja";
+$lang['ayanamsha'] = "Ayanamsha";
+$lang['paya'] = "Paya";
+
+
+//Free kundli
+
+$lang['free_kundli_para1'] = "Unlock the ancient wisdom of Vedic astrology with our <strong>Free Kundli</strong> service. A Kundli (Janam Patrika or birth chart) is a powerful astrological tool created using your exact birth date, time, and place. It maps the position of celestial bodies at the moment you were born, revealing deep insights about your personality, destiny, and life path.";
+
+$lang['free_kundli_para2'] = "Your Kundli is not just a chart — it's a cosmic blueprint. It helps you understand your strengths, challenges, career opportunities, marriage compatibility, financial prospects, and even health patterns. Astrologers use Kundli as a foundation to predict major life events like job changes, relationships, education, and more.";
+
+$lang['free_kundli_para3'] = "With our Free Kundli, you get a detailed analysis of your <strong>Lagna (Ascendant)</strong>, <strong>Moon Sign</strong>, <strong>Sun Sign</strong>, <strong>planetary positions</strong>, <strong>Doshas</strong> (like Manglik or Kaal Sarp), and even your <strong>Dasha periods</strong>. It's completely automated and available instantly.";
+
+
+
+$lang['kundli_intro_para1'] = "Curious about what the stars have planned for you? With our <strong>Free Kundli</strong> tool, you can explore your life’s blueprint in just a few clicks. A Kundli, or birth chart, reveals how planetary positions at the time of your birth influence your personality, relationships, career, and future events.";
+
+$lang['kundli_intro_para2'] = "Our advanced astrology engine generates your detailed Kundli instantly — showing your <strong>Rashi (Zodiac Sign)</strong>, <strong>Nakshatra (Star)</strong>, <strong>Dasha periods</strong>, and possible <strong>Doshas</strong> like Manglik or Kaal Sarp. It’s the same chart astrologers use for matchmaking, career guidance, and spiritual insight.";
+
+$lang['kundli_intro_para3'] = "Whether you’re seeking answers, planning your future, or simply exploring who you are at a deeper level — this is the perfect starting point. No prior astrology knowledge needed.";
+
+$lang['kundli_intro_cta'] = "Start your journey today — your stars are just a click away!";
+
+
+
+$lang['kundli_title'] = "Kundli / Birth Chart";
+$lang['birth_hour'] = "Birth Hour";
+$lang['get_kundli'] = "Get Kundli";
+
+
+
+//Data Of Kundli
+
+
+$lang['kundli_chart'] = "Kundli Chart";
+$lang['north_indian'] = "North Indian";
+$lang['south_indian'] = "South Indian";
+$lang['birth_chart_north'] = "Birth Chart (North Indian)";
+$lang['navamsa_chart_north'] = "Navamsa Chart (North Indian)";
+$lang['birth_chart_south'] = "Birth Chart (South Indian)";
+$lang['navamsa_chart_south'] = "Navamsa Chart (South Indian)";
+$lang['kundli_description'] = "The Kundli (Janam Kundli) is a celestial snapshot of the sky at the moment of your birth. It provides detailed insights into your personality, career, marriage, health, and more based on planetary positions.";
+$lang['planetary_details'] = "Planetary Details";
+$lang['planet'] = "Planet";
+$lang['symbol'] = "Symbol";
+$lang['sign_no'] = "Sign No";
+$lang['degree'] = "Degree";
+$lang['retrograde'] = "Retrograde";

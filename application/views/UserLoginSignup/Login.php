@@ -52,23 +52,23 @@
             <div class="col-md-6 p-4 order-2 order-md-1 d-flex flex-column justify-content-center align-items-center"
                 style="background: linear-gradient(135deg, #FDFBDF, #FFE085);">
                 <div style="max-width: 450px;">
-                    <h3 class="fw-bold mb-4" style="color: #333; font-size: 1.5rem;">Why Sign Up?</h3>
+                    <h3 class="fw-bold mb-4" style="color: #333; font-size: 1.5rem;"> <?php echo $this->lang->line('why_login') ? $this->lang->line('why_login') : 'Why Log In?'; ?></h3>
                     <div class="benefits-list" style="font-size: 1rem; line-height: 2;">
                         <p class="d-flex align-items-start mb-1">
                             <span class="me-3" style="font-size: 1.5rem; color: #F7C548;">✔</span>
-                            Get personalized information
+                            <?php echo $this->lang->line('get_personalized_info') ? $this->lang->line('get_personalized_info') : 'Get personalized information'; ?>
                         </p>
                         <p class="d-flex align-items-start mb-1">
                             <span class="me-3" style="font-size: 1.5rem; color: #F7C548;">✔</span>
-                            Save charts (Kundli) on cloud
+                            <?php echo $this->lang->line('save_kundli_on_cloud') ? $this->lang->line('save_kundli_on_cloud') : 'Save charts (Kundli) on cloud'; ?> 
                         </p>
                         <p class="d-flex align-items-start mb-1">
                             <span class="me-3" style="font-size: 1.5rem; color: #F7C548;">✔</span>
-                            Write notes & comments
+                             <?php echo $this->lang->line('write_notes_comments') ? $this->lang->line('write_notes_comments') : 'Write notes & comments'; ?> 
                         </p>
                         <p class="d-flex align-items-start">
                             <span class="me-3" style="font-size: 1.5rem; color: #F7C548;">✔</span>
-                            Access anywhere: mobile & web
+                              <?php echo $this->lang->line('access_anywhere') ? $this->lang->line('access_anywhere') : 'Access anywhere: mobile & web'; ?>  
                         </p>
                     </div>
                     <img src="<?php echo base_url('assets/images/ShreeGanesh.jpg'); ?>" alt="Benefits"
@@ -79,7 +79,7 @@
             <!-- Right Section: Login Form -->
             <div class="col-md-6 d-flex flex-column justify-content-center align-items-center p-5 order-1 order-md-2"
                 style="background: #FFF;">
-                <h5 class="fw-bold mb-4" style="color: #444; font-size: 1.6rem;">Login to Continue</h5>
+                <h5 class="fw-bold mb-4" style="color: #444; font-size: 1.6rem;"> <?php echo $this->lang->line('login_to_continue') ? $this->lang->line('login_to_continue') : 'Login to Continue'; ?></h5>
 
                 <!-- <form id="loginForm" method="POST" action="<?php echo base_url("UserLoginSignup/login_user"); ?>"
                     style="width: 100%; max-width: 420px;"> -->
@@ -100,7 +100,7 @@
                         </div>
                         <button type="button" id="getOtpBtn" class="btn w-100 fw-bold"
                             style="background: #F2DC51; border-radius: 10px; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
-                            Get OTP
+                           <?php echo $this->lang->line('get_otp') ? $this->lang->line('get_otp') : 'Get OTP'; ?>  
                         </button>
                     </div>
 
@@ -113,10 +113,10 @@
                                 style="padding: 0.5rem; border: 1px solid #ddd; font-size:1.1rem">
                             <div id="otpError" class="text-danger small"></div>
                             <div id="timerDisplay" class="mt-2">
-                                Time remaining: <span id="timer">60</span> seconds
+                                <?php echo $this->lang->line('time_remaining') ? $this->lang->line('time_remaining') : 'Time remaining:'; ?>   <span id="timer">60</span> <?php echo $this->lang->line('seconds') ? $this->lang->line('seconds') : 'Seconds:'; ?>  
                             </div>
                             <button type="button" id="resendOtpBtn" class="btn btn-link" style="display: none;">
-                                Resend OTP
+                             <?php echo $this->lang->line('resend_otp') ? $this->lang->line('resend_otp') : ' Resend OTP'; ?>   
                             </button>
                         </div>
                         <!-- <button type="submit" id="verifyOtpBtn" class="btn w-100 fw-bold"
@@ -126,13 +126,13 @@
 
                         <button type="submit" id="verifyOtpBtn" class="btn w-100 fw-bold"
                             style="background: #F2DC51; border-radius: 10px; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
-                            Verify OTP
+                          <?php echo $this->lang->line('verify_otp') ? $this->lang->line('verify_otp') : 'Verify OTP'; ?>     
                         </button>
                     </div>
                 </form>
 
-                <p class="mt-4 text-center">Don't have a Account? <a href="<?php echo base_url('Signup'); ?>"
-                        class="text-decoration-none text-dark" style=" font-weight: 900;">Sign Up</a></p>
+                <p class="mt-4 text-center"> <?php echo $this->lang->line('dont_have_account') ? $this->lang->line('dont_have_account') : ' Dont have a Account?'; ?>   <a href="<?php echo base_url('Signup'); ?>"
+                        class="text-decoration-none text-dark" style=" font-weight: 900;">   <?php echo $this->lang->line('sign_up') ? $this->lang->line('sign_up') : 'Sign Up'; ?></a></p>
             </div>
         </div>
     </div>

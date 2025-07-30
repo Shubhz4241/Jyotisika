@@ -67,7 +67,7 @@
 
 
 
-      
+
 
 
         <section>
@@ -76,10 +76,12 @@
                 <!-- recharge and seach section  -->
                 <div class="row my-4">
                     <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
-                        <h4 id="balance" class="fw-bold"><?php  echo $this->lang->line('available_balance')  ?>  <?php  echo $this->lang->line('rs_prefix')  ?><?php  echo $this->lang->line('zero_amount')  ?></h4>
+                        <h4 id="balance" class="fw-bold"><?php echo $this->lang->line('available_balance') ?>
+                            <?php echo $this->lang->line('rs_prefix') ?><?php echo $this->lang->line('zero_amount') ?>
+                        </h4>
                         <button onclick="func()" class="btn rounded-4 btn-outline-success">
-                            <?php  echo $this->lang->line('recharge')  ?> 
-                           
+                            <?php echo $this->lang->line('recharge') ?>
+
                         </button>
                     </div>
                 </div>
@@ -119,9 +121,9 @@
                             });
                     }
 
-                   function func() {
-    window.location.href = "<?php echo base_url("/wallet") ?>";
-}
+                    function func() {
+                        window.location.href = "<?php echo base_url("/wallet") ?>";
+                    }
 
                 </script>
 
@@ -152,7 +154,8 @@
 
                                             <?php if (!($this->session->userdata("user_id"))): ?>
                                                 <button class="btn btn-light btn-sm rounded-4 px-3 showlogin">
-                                                    <i class="bi bi-person-plus-fill me-1"></i><?php echo $this->lang->line('Follow') ?> 
+                                                    <i
+                                                        class="bi bi-person-plus-fill me-1"></i><?php echo $this->lang->line('Follow') ?>
                                                 </button>
 
                                             <?php else: ?>
@@ -160,11 +163,13 @@
                                                 <?php if ($is_following == "followed"): ?>
 
                                                     <button disabled="true" class="btn btn-light btn-sm rounded-4 px-3">
-                                                        <i class="bi bi-person me-1"></i><?php echo $this->lang->line('Following') ?>
+                                                        <i
+                                                            class="bi bi-person me-1"></i><?php echo $this->lang->line('Following') ?>
                                                     </button>
                                                 <?php else: ?>
                                                     <button id="followastrologer" class="btn btn-light btn-sm rounded-4 px-3">
-                                                        <i class="bi bi-person-plus-fill me-1"></i><?php echo $this->lang->line('Follow') ?> 
+                                                        <i
+                                                            class="bi bi-person-plus-fill me-1"></i><?php echo $this->lang->line('Follow') ?>
                                                     </button>
 
 
@@ -189,7 +194,9 @@
                                                             <i class="bi bi-stars text-danger"></i>
                                                         </div>
                                                         <div>
-                                                            <h6 class="mb-0 fw-bold"><?php echo $this->lang->line('specialties') ?></h6>
+                                                            <h6 class="mb-0 fw-bold">
+                                                                <?php echo $this->lang->line('specialties') ?>
+                                                            </h6>
                                                             <span
                                                                 class="card-expertise"><?php echo isset($astrologerdata[0]["specialties"]) && !empty($astrologerdata[0]["specialties"]) ? $astrologerdata[0]["specialties"] : "N/A" ?></span>
                                                         </div>
@@ -200,7 +207,9 @@
                                                             <i class="bi bi-clock-history text-danger"></i>
                                                         </div>
                                                         <div>
-                                                            <h6 class="mb-0 fw-bold"><?php echo $this->lang->line('Experience') ?></h6>
+                                                            <h6 class="mb-0 fw-bold">
+                                                                <?php echo $this->lang->line('Experience') ?>
+                                                            </h6>
                                                             <span><?php echo isset($astrologerdata[0]["experience"]) && !empty($astrologerdata[0]["experience"]) ? $astrologerdata[0]["experience"] : "N/A" ?>+
                                                                 Years</span>
                                                         </div>
@@ -211,7 +220,9 @@
                                                             <i class="bi bi-translate text-danger"></i>
                                                         </div>
                                                         <div>
-                                                            <h6 class="mb-0 fw-bold"><?php echo $this->lang->line('Languages') ?></h6>
+                                                            <h6 class="mb-0 fw-bold">
+                                                                <?php echo $this->lang->line('Languages') ?>
+                                                            </h6>
                                                             <span
                                                                 class="card-language"><?php echo isset($astrologerdata[0]["languages"]) && !empty($astrologerdata[0]["languages"]) ? $astrologerdata[0]["languages"] : "N/A" ?>
                                                             </span>
@@ -228,39 +239,47 @@
                                             <div
                                                 class="col-md-4 d-flex flex-column justify-content-between mt-3 mt-md-0">
                                                 <div class="text-center mb-3">
-                                                    <h5 class="fw-bold text-danger mb-1"><?php echo $this->lang->line('Consultation Fee') ?></h5>
+                                                    <h5 class="fw-bold text-danger mb-1">
+                                                        <?php echo $this->lang->line('Consultation Fee') ?>
+                                                    </h5>
 
                                                     <h4 class="fw-bold">
                                                         ₹<?php echo isset($astrologerdata[0]["price_per_minute"]) && !empty($astrologerdata[0]["price_per_minute"]) ? $astrologerdata[0]["price_per_minute"] : "N/A" ?>/min
                                                     </h4>
 
 
+                                                    <?php if ($astrologerdata[0]['is_online'] == 0): ?>
 
-                                                    <?php if ($astrologerdata['chatstatus'] !== 'inactive'): ?>
-                                                        <div class="text-center mb-3">
+                                                      <p class="fw-bold text-danger"><i class="bi bi-x-circle-fill me-2"></i><?php echo $this->lang->line('currently_offline') ?></p>
 
 
-                                                            <?php
-                                                            date_default_timezone_set('Asia/Kolkata'); // Set your desired timezone
+                                                    <?php else: ?>
+                                                        <?php if ($astrologerdata['chatstatus'] !== 'inactive'): ?>
+                                                            <div class="text-center mb-3">
+
+
+                                                                <?php
+                                                                date_default_timezone_set('Asia/Kolkata'); // Set your desired timezone
                                                         
-                                                            if (!empty($astrologerdata['chat_expire_on'])) {
-                                                                $now = new DateTime(); // Current time
-                                                                $expire = new DateTime($astrologerdata['chat_expire_on']);
+                                                                if (!empty($astrologerdata['chat_expire_on'])) {
+                                                                    $now = new DateTime(); // Current time
+                                                                    $expire = new DateTime($astrologerdata['chat_expire_on']);
 
-                                                                if ($expire > $now) {
-                                                                    $interval = $now->diff($expire);
-                                                                    $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
-                                                                    $seconds = $interval->s;
+                                                                    if ($expire > $now) {
+                                                                        $interval = $now->diff($expire);
+                                                                        $waitTimeMinutes = ($interval->days * 24 * 60) + ($interval->h * 60) + $interval->i;
+                                                                        $seconds = $interval->s;
 
-                                                                    echo '<p class="fw-bold text-danger">' . "wait for " . $waitTimeMinutes . ' min ' . $seconds . ' sec</p>';
+                                                                        echo '<p class="fw-bold text-danger">' . "wait for " . $waitTimeMinutes . ' min ' . $seconds . ' sec</p>';
+                                                                    } else {
+                                                                        echo '<p class="fw-bold text-danger">Not Available ,  wait some time</p>';
+                                                                    }
                                                                 } else {
-                                                                    echo '<p class="fw-bold text-danger">Not Available ,  wait some time</p>';
+                                                                    echo '<p class="fw-bold text-success">Available</p>';
                                                                 }
-                                                            } else {
-                                                                echo '<p class="fw-bold text-success">Available</p>';
-                                                            }
-                                                            ?>
-                                                        </div>
+                                                                ?>
+                                                            </div>
+                                                        <?php endif; ?>
                                                     <?php endif; ?>
                                                 </div>
 
@@ -275,24 +294,33 @@
                                                     <?php echo $astrologerdata[0]['price_per_minute']; ?>,  
                                                     '<?php echo base_url('chat/' . $astrologerdata[0]['id']); ?>',
                                                     '<?php echo addslashes($astrologerdata[0]['name']); ?>' ,
-                                                    '<?php echo $astrologersession ?>'
+                                                    '<?php echo $astrologersession ?>',
+                                                     '<?php echo $astrologerdata[0]['is_online'] ?>'
+
+                                                    
                                                     )">
-                                                            <i class="bi bi-chat-dots-fill me-1"></i><?php echo $this->lang->line('Chat') ?>                                                         </button>
+                                                            <i
+                                                                class="bi bi-chat-dots-fill me-1"></i><?php echo $this->lang->line('Chat') ?>
+                                                        </button>
                                                     <?php else: ?>
                                                         <button class="btn showlogin rounded-3 text-dark"
                                                             style="background-color: var(--yellow);">
-                                                            <i class="bi bi-chat-dots-fill me-1"></i> <?php echo $this->lang->line('Chat') ?>
+                                                            <i class="bi bi-chat-dots-fill me-1"></i>
+                                                            <?php echo $this->lang->line('Chat') ?>
                                                         </button>
                                                     <?php endif ?>
 
 
                                                     <?php if ($this->session->userdata("user_id")): ?>
-                                                        <button class="btn btnHover btn-outline-dark f rounded-3">
-                                                            <i class="bi bi-telephone-fill me-1"></i> <?php echo $this->lang->line('Call') ?>
+                                                        <button onclick="handleCallClick()" class="btn btnHover btn-outline-dark f rounded-3">
+                                                            <i class="bi bi-telephone-fill me-1"></i>
+                                                            <?php echo $this->lang->line('Call') ?>
                                                         </button>
                                                     <?php else: ?>
-                                                        <button class="btn showlogin btnHover btn-outline-dark f rounded-3">
-                                                            <i class="bi bi-telephone-fill me-1"></i> <?php echo $this->lang->line('Call') ?>
+                                                        <button onclick="handleCallClick()" class="btn showlogin btnHover btn-outline-dark f rounded-3">
+                                                            <i class="bi bi-telephone-fill me-1"></i>
+                                                            
+                                                            <?php echo $this->lang->line('Call') ?>
                                                         </button>
                                                     <?php endif ?>
 
@@ -360,10 +388,29 @@
                 <?php endif; ?>
             </div>
         </section> -->
+        <script>
+             function handleCallClick() {
+                Swal.fire({
+                     title: "Call Service Available on Mobile App",
+                    text: "To talk to an astrologer, please use our mobile app. The calling service is available exclusively on our app.",
+                    icon: "info",
+                    showCancelButton: true,
+                    confirmButtonText: "Go to Play Store",
+                    cancelButtonText: "Cancel"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "https://play.google.com/store/apps/details?id=com.rovio.baba&pcampaignid=merch_published_cluster_promotion_battlestar_top_picks"; // Replace with your actual Play Store URL
+                    }
+                });
+
+
+
+            }
+        </script>
 
 
         <script>
-            function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name, astrologersession) {
+            function checkBalance(chatstatus, amount, astrologer_charge, chatUrl, name, astrologersession, isonline) {
                 if (amount < astrologer_charge * 5) {
                     Swal.fire({
                         icon: "warning",
@@ -377,22 +424,33 @@
                         }
                     });
                 } else {
-                    if (chatstatus == "active") {
+                    if (isonline == 0) {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Astrologer is Not Online",
+                        });
 
-                        if (astrologersession == "sessionnotend") {
-                            window.location.href = chatUrl;
-                        }
-                        else {
-                            Swal.fire({
-                                icon: "warning",
-                                title: "Astrologer is busy",
-                            });
-
-                        }
-                      
                     }
                     else {
-                        window.location.href = chatUrl;
+
+
+                        if (chatstatus == "active") {
+
+                            if (astrologersession == "sessionnotend") {
+                                window.location.href = chatUrl;
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: "warning",
+                                    title: "Astrologer is busy",
+                                });
+
+                            }
+
+                        }
+                        else {
+                            window.location.href = chatUrl;
+                        }
                     }
                 }
             }

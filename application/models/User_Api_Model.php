@@ -167,6 +167,7 @@ class User_Api_Model extends CI_Model
                         "title" => "Welcome Aboard!",
                         "message" => "Dear " . $userdata["user_name"] . ", we're delighted to welcome you! Thank you for joining Jyotisika. We’re here to guide you on your spiritual journey.",
                         "type" => "info",
+                         "redirect_url"=>'home',
                         "created_at" => $timestamp,
                         "updated_at" => $timestamp
                     ];
@@ -339,7 +340,7 @@ class User_Api_Model extends CI_Model
             "receiver_role" => "user",
             "title" => "Wallet Updated",
             "message" => "Your wallet has been updated successfully. You’re now ready to chat with your preferred astrologer.",
-
+             "redirect_url"=>'home',
             "type" => "success",
             "created_at" => $timestamp,
             "updated_at" => $timestamp
@@ -378,7 +379,10 @@ class User_Api_Model extends CI_Model
         $this->db->join('astrologer_feedback', 'astrologer_feedback.astrologer_id = astrologer_registration.id', 'Left');
         $this->db->group_by('astrologer_registration.id');
         $this->db->where("status", "approved");
-        $this->db->where("is_online", "1");
+        $this->db->order_by("is_online", "DESC");
+
+        // $this->db->where("is_online", "1");
+
 
         $query = $this->db->get();
         $astrologers = $query->result();
@@ -546,6 +550,7 @@ class User_Api_Model extends CI_Model
                 "title" => "New Follower",
                 "message" => $user_data["user_name"] . " has started following you. Stay connected and share your guidance.",
                 "type" => "info",
+                "redirect_url"=>'Following',
                 "created_at" => $timestamp,
                 "updated_at" => $timestamp
 

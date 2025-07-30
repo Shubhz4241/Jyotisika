@@ -1,28 +1,10 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary px-md-2 sticky-top"
     style="background-color:rgba(254, 156, 19, 0.96) !important;">
     <div class="container-fluid">
-       <a class="navbar-brand" href="#" style="position: relative; display: inline-block; width: 60px; height: 60px;">
-    <!-- Rotating background -->
-    <div class="rotating-logo" style="
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 60px;
-        height: 60px;
-        background-image: url('<?php echo base_url('assets/images/new_logo.png'); ?>');
-        background-size: cover;
-        background-position: center;
-        border-radius: 50%;
-        animation: rotate 6s linear infinite;
-        z-index: 1;">
-    </div>
-
-    <!-- Static cropped circular image -->
-    <img src="<?php echo base_url('assets/images/cropped_circle_image.png'); ?>" 
-         alt="logo overlay" 
-         style="width: 40px; height: 40px; border-radius: 50%; position: relative;left:11px;top:5px; z-index: 2;">
-</a>
-
+        <a class="navbar-brand" href="#">
+            <img src="<?php echo base_url('assets/images/new_logo.png'); ?>" alt="logo image"
+                style="width: 60px; height: 60px; mix-blend-mode: multiply;">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,7 +14,7 @@
         $user_image = $this->session->userdata('user_image');
         $profile_image_path = !empty($user_image)
             ? base_url($user_image)
-            : base_url('assets/images/profileimage.png');
+            : base_url('assets/images/profileImage.png');
         ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="row">
@@ -115,13 +97,11 @@
             <div class="d-flex align-items-center gap-2">
 
                 <!-- Wallet Button -->
-              <a href="<?php echo base_url('wallet'); ?>"
-   class="btn border-1 btn-sm rounded-1 d-flex align-items-center gap-2 mb-2 mb-xl-0"
-   style="white-space: nowrap;">
-   <i class="bi bi-wallet2"></i>
-   <span id="wallet-amount">₹ 0</span>
-</a>
-
+                <a href="<?php echo base_url('wallet'); ?>"
+                    class="btn border-1 btn-sm rounded-1 d-flex flex-row justify-content-cemter align-items-center gap-2 mb-2 mb-xl-0">
+                    <i class="bi bi-wallet2"></i>
+                    <span id="wallet-amount">₹ 0</span>
+                </a>
 
                 <script>
                     document.addEventListener("DOMContentLoaded", function() {
@@ -157,10 +137,10 @@
                 </script>
 
                 <!-- Language Switcher -->
-                <div class="position-relative" style="min-width: 100px; background-color: rgba(232, 191, 57, 0.8);">
+                <div class="position-relative" style="min-width: 100px;">
                     <i class="bi bi-translate position-absolute ps-2"
                         style="top: 50%; left: 0px; transform: translateY(-50%);"></i>
-                    <select id="languageSwitcher" class="p-1 px-4" style="padding-left: 2.2rem !important;background-color: rgba(219, 135, 18, 0.96); border: none;">
+                    <select id="languageSwitcher" class="p-1 px-4 rounded-2" style="padding-left: 2.2rem !important;">
                         <option value="english" <?php echo ($this->session->userdata('site_language') == 'english') ? 'selected' : ''; ?>>Eng</option>
                         <option value="marathi" <?php echo ($this->session->userdata('site_language') == 'marathi') ? 'selected' : ''; ?>>मराठी</option>
                         <option value="hindi" <?php echo ($this->session->userdata('site_language') == 'hindi') ? 'selected' : ''; ?>>हिन्दी</option>
@@ -228,7 +208,7 @@
                                 </a>
                             </li> -->
 
-                           <li>
+                            <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Notification'); ?>">
                                     <i class="bi bi-bell me-2"></i>  <?php echo $this->lang->line('notifications') ?: "Notifications"; ?> 
                                     <span id="notificationCount" class="badge bg-danger rounded-pill float-end me-2"
@@ -274,30 +254,28 @@
 
 
 
-                           <li>
+                            <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Orders'); ?>">
                                     <i class="bi bi-bag me-2"></i><?php echo $this->lang->line('my_orders') ?: "my orders"; ?>  
                                 </a>
                             </li>
 
-
-                              <li>
+                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Cart'); ?>">
                                    <i class="bi bi-cart me-2"></i><?php echo $this->lang->line('your_cart') ?: "your cart"; ?> 
                                 </a>
                             </li>
 
 
-                             <li>
+                            <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Following'); ?>">
                                     <i class="bi bi-heart me-2"></i><?php echo $this->lang->line('following') ?: "Following"; ?> 
                                 </a>
                             </li>
-                           
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('CustomerSupport'); ?>">
                                     <i class="bi bi-gear me-2"></i>
-                                    <?php echo $this->lang->line('Customer_Support') ? $this->lang->line('Customer_Support') : 'Customer_Support'; ?>
+                                    <?php echo $this->lang->line('Customer_Support') ? $this->lang->line('Customer_Support') : 'Customer Support'; ?>
                                 </a>
                             </li>
                             <li>
@@ -310,13 +288,11 @@
                             <li>
                                 <hr class="dropdown-divider mx-3">
                             </li>
-                            
-                             <li>
+                            <li>
                                 <a class="dropdown-item py-2 ps-4 text-danger" href="<?php echo base_url('Logout'); ?>">
                                     <i class="bi bi-box-arrow-right me-2"></i><?php echo $this->lang->line('logout') ?: "Logout"; ?>  
                                 </a>
                             </li>
-                           
                         </ul>
                     <?php else: ?>
                         <ul class="dropdown-menu dropdown-menu-end"
@@ -378,36 +354,6 @@
         border-radius: 2px;
         border: 3px solid #f1f1f1;
     }
-    @keyframes rotate360 {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.rotating-logo {
-    animation: rotate360 7s linear infinite;
-}
-.rotating-logo {
-  animation: spin 4s linear infinite;
-}
-
-@keyframes spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-
 </style>
 
 

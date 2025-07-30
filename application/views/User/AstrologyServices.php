@@ -61,7 +61,8 @@
 
                 foreach ($service_data as $service): ?>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a href="<?php echo base_url('User/astrolgerservices/') . $service["id"] ?>" class="text-decoration-none">
+                        <a href="<?php echo base_url('User/astrolgerservices/') . $service["id"] ?>"
+                            class="text-decoration-none">
                             <div class="card service-card text-center shadow-sm rounded border-0 p-3 h-100 card-hover">
                                 <div class="service-card-image-container">
                                     <img src="<?php echo base_url('uploads/services/' . $service['image']); ?>"
@@ -101,6 +102,8 @@
         }
     </script>
 
+
+    
     <!-- footer -->
     <?php $this->load->view('IncludeUser/CommanFooter'); ?>
 

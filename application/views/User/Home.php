@@ -433,7 +433,7 @@
         </div>
     </section>
 
-   
+
     <section>
         <div class="ticker-wrapper">
 
@@ -530,7 +530,8 @@
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
                                                     style="width: 15px; height: 15px; margin-right: 5px;">
-                                                <small> <?php echo $this->lang->line('Rs') ?><?php echo isset($astrologer['price_per_minute']) && !empty($astrologer['price_per_minute']) ? $astrologer['price_per_minute'] : 'N/A'; ?>/min</small>
+                                                <small>
+                                                    <?php echo $this->lang->line('Rs') ?>        <?php echo isset($astrologer['price_per_minute']) && !empty($astrologer['price_per_minute']) ? $astrologer['price_per_minute'] : 'N/A'; ?>/min</small>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
@@ -543,7 +544,8 @@
                                             <div class="d-flex align-items-center">
 
                                                 <?php if ($astrologer['chatstatus'] == "active"): ?>
-                                                    <small class="card-language text-danger"> <?php echo $this->lang->line('Busy') ?> , </small>
+                                                    <small class="card-language text-danger">
+                                                        <?php echo $this->lang->line('Busy') ?> , </small>
 
 
                                                     <?php
@@ -570,7 +572,8 @@
                                                     ?>
 
                                                 <?php else: ?>
-                                                    <small class="card-language text-success">  <?php echo $this->lang->line('Available') ?> </small>
+                                                    <small class="card-language text-success">
+                                                        <?php echo $this->lang->line('Available') ?> </small>
                                                 <?php endif ?>
                                             </div>
 
@@ -592,7 +595,9 @@
                                                     style="background-color: var(--yellow);"><?php echo $this->lang->line('Chat') ?></button>
                                             <?php endif ?>
 
-                                            <button class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3"><?php echo $this->lang->line('Call') ?></button>
+                                            <button
+                                            onclick="handleCallClick()"
+                                                class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3"><?php echo $this->lang->line('Call') ?></button>
                                         </div>
 
                                     </div>
@@ -650,31 +655,61 @@
     </script>
 
 
+    <script>
+        function handleCallClick() {
+            Swal.fire({
+                title: "Call Service Available on Mobile App",
+                text: "To talk to an astrologer, please use our mobile app. The calling service is available exclusively on our app.",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonText: "Go to Play Store",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "https://play.google.com/store/apps/details?id=com.rovio.baba&pcampaignid=merch_published_cluster_promotion_battlestar_top_picks"; // Replace with your actual Play Store URL
+                }
+            });
+
+
+
+        }
+    </script>
+
+
 
 
     <section class="containernew py-4">
         <div class="container">
-            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);"> <?php echo $this->lang->line('Free_Kundli_Generation') ?></h2>
+            <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
+                <?php echo $this->lang->line('Free_Kundli_Generation') ?></h2>
             <div class="grid-wrapper">
                 <a href="<?php echo base_url('FreeKundli_Controller/BasicAstrology'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/esoteric.png") ?>" /><?php echo $this->lang->line('Astrology') ?> </div>
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/esoteric.png") ?>" /><?php echo $this->lang->line('Astrology') ?>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/PlanetaryPosition'); ?>"
                     class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/galaxy.png") ?>" /><?php echo $this->lang->line('Planetary_Positions') ?> </div>
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/galaxy.png") ?>" /><?php echo $this->lang->line('Planetary_Positions') ?>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/VimshottariDasha'); ?>"
                     class="text-decoration-none">
 
                     <div class="kundli-box"><img
-                            src="<?php echo base_url("assets/images/magic-book.png") ?>" /><?php echo $this->lang->line('Vimshottari_Dasha') ?> </div>
+                            src="<?php echo base_url("assets/images/magic-book.png") ?>" /><?php echo $this->lang->line('Vimshottari_Dasha') ?>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/AscendantReport'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/book.png") ?>" />  <?php echo $this->lang->line('Ascendant') ?> </div>
+                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/book.png") ?>" />
+                        <?php echo $this->lang->line('Ascendant') ?> </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/GemstoneRecommendation'); ?>"
                     class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/diamond.png") ?>" /><?php echo $this->lang->line('Gemstone_Recommendation') ?> </div>
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/diamond.png") ?>" /><?php echo $this->lang->line('Gemstone_Recommendation') ?>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/CompositeFriendship'); ?>"
                     class="text-decoration-none">
@@ -682,30 +717,40 @@
                             style="width: 50px;" /> <?php echo $this->lang->line('Composite_Friendship') ?> </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/Shadbala'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/parchment.png") ?>" /><?php echo $this->lang->line('Shadbala') ?> 
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/parchment.png") ?>" /><?php echo $this->lang->line('Shadbala') ?>
                     </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/YoginiDasha'); ?>" class="text-decoration-none">
 
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/sun.png") ?>" /><?php echo $this->lang->line('Yogini_Dasha') ?> 
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/sun.png") ?>" /><?php echo $this->lang->line('Yogini_Dasha') ?>
                     </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/HoroscopeCharts'); ?>" class="text-decoration-none">
                     <div class="kundli-box"><img
-                            src="<?php echo base_url("assets/images/horoscopecharts.png") ?>" /><?php echo $this->lang->line('Horoscope_Charts') ?> </div>
+                            src="<?php echo base_url("assets/images/horoscopecharts.png") ?>" /><?php echo $this->lang->line('Horoscope_Charts') ?>
+                    </div>
                 </a>
 
                 <a href="<?php echo base_url('FreeKundli_Controller/ManglikDosha'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/mangal.png") ?>" /><?php echo $this->lang->line('Manglik_Dosha') ?> </div>
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/mangal.png") ?>" /><?php echo $this->lang->line('Manglik_Dosha') ?>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/KaalSarpaDosha'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/king.png") ?>" /><?php echo $this->lang->line('Kaal_Sarpa_Dosha') ?> </div>
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/king.png") ?>" /><?php echo $this->lang->line('Kaal_Sarpa_Dosha') ?>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/SadheSati'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/sadhesati.png") ?>" /><?php echo $this->lang->line('Sadhe_Sati') ?> </div>
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/sadhesati.png") ?>" /><?php echo $this->lang->line('Sadhe_Sati') ?>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/BhavaKundli'); ?>" class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/houses.png") ?>" /><?php echo $this->lang->line('Bhava_Kundli') ?> 
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/houses.png") ?>" /><?php echo $this->lang->line('Bhava_Kundli') ?>
                     </div>
 
                 </a>
