@@ -12,7 +12,7 @@ $lang['KundliBirthChart'] = "Kundli/BirthChart";
 
 
 
-$lang['Aries'] = "Aris";
+$lang['Aries'] = "Aries";
 $lang['Taurus'] = "Taurus";
 $lang['Gemini'] = "Gemini";
 $lang['Cancer'] = "Cancer";
@@ -23,6 +23,7 @@ $lang['Sagittarius'] = "Sagittarius";
 $lang['Capricorn'] = "Capricorn";
 $lang['Aquarius'] = "Aquarius";
 $lang['Pisces'] = "Pisces";
+$lang['Libra'] = "Libra";
 
 
 

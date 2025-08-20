@@ -46,20 +46,7 @@
         <div class="container">
 
 
-            <div class="row my-4">
-                <!-- <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
-                    <h4 class="fw-bold">Available Balance : Rs.000</h4>
-                    <button class="btn btn-outline-success">
-                        <a class="text-decoration-none text-dark" href="<?php echo base_url('Recharge') ?>">Recharger</a>
-                    </button>
-                </div> -->
-                <div class="col-12 d-flex justify-content-center ">
-                    <div class="input-group w-50">
-                        <input id="searchInput" type="search" class="form-control shadow-none"
-                            placeholder="Search astrologer by name, expertise or language" onkeyup="filterCards()">
-                    </div>
-                </div>
-            </div>
+           
 
 
             <!-- <?php print_r($userinfo_data) ?> -->
@@ -113,7 +100,7 @@
                     <?php foreach ($service_data as $service): ?>
                         <div class="col-12 mb-4">
                             <div
-                                class="d-flex flex-column flex-md-row align-items-start align-items-md-center p-4 shadow rounded bg-light">
+                                class="d-flex flex-column flex-md-column align-items-start align-items-md-center p-4 shadow rounded bg-light">
                                 <!-- Image Section -->
                                 <img src="<?php echo base_url('uploads/services/' . $service['image']); ?>"
                                     alt="<?php echo $service['name']; ?>" class="me-md-4 mb-3 mb-md-0 rounded-circle"
@@ -144,6 +131,22 @@
                         <p class="fw-bold text-danger">No services available at the moment.</p>
                     </div>
                 <?php endif; ?>
+            </div>
+
+
+             <div class="row my-4">
+                <!-- <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
+                    <h4 class="fw-bold">Available Balance : Rs.000</h4>
+                    <button class="btn btn-outline-success">
+                        <a class="text-decoration-none text-dark" href="<?php echo base_url('Recharge') ?>">Recharger</a>
+                    </button>
+                </div> -->
+                <div class="col-12 d-flex justify-content-center ">
+                    <div class="input-group w-50">
+                        <input id="searchInput" type="search" class="form-control shadow-none"
+                            placeholder="Search astrologer by name, expertise or language" onkeyup="filterCards()">
+                    </div>
+                </div>
             </div>
 
 

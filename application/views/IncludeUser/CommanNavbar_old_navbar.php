@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary  sticky-top"
+<nav class="navbar navbar-expand-lg bg-body-tertiary px-md-2 sticky-top"
     style="background-color:rgba(254, 156, 19, 0.96) !important;">
-    <div class="container-fluid px-0 mx-3">
+    <div class="container-fluid">
        <a class="navbar-brand" href="#" style="position: relative; display: inline-block; width: 60px; height: 60px;">
     <!-- Rotating background -->
     <div class="rotating-logo" style="
@@ -34,8 +34,8 @@
             ? base_url($user_image)
             : base_url('assets/images/profileImage.png');
         ?>
-        <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
-            <div class="row w-100">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="row">
                 <div class="col-12">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold" style="font-size: medium;">
                         <li class="nav-item">
@@ -119,7 +119,7 @@
    class="btn border-1 btn-sm rounded-1 d-flex align-items-center gap-2 mb-2 mb-xl-0"
    style="white-space: nowrap;">
    <i class="bi bi-wallet2"></i>
-   <span id="wallet-amount" style="width:30px;">₹ 0</span>
+   <span id="wallet-amount">₹ 0</span>
 </a>
 
 
@@ -228,9 +228,9 @@
                                 </a>
                             </li> -->
 
-                            <li>
+                           <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Notification'); ?>">
-                                    <i class="bi bi-bell me-2"></i> <?php echo $this->lang->line('notifications') ?: "Notifications"; ?> 
+                                    <i class="bi bi-bell me-2"></i>  <?php echo $this->lang->line('notifications') ?: "Notifications"; ?> 
                                     <span id="notificationCount" class="badge bg-danger rounded-pill float-end me-2"
                                 style="display:none;">0</span>
                                 </a>
@@ -274,22 +274,26 @@
 
 
 
-                            <li>
+                           <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Orders'); ?>">
-                                    <i class="bi bi-bag me-2"></i> <?php echo $this->lang->line('my_orders') ?: "my orders"; ?>  
+                                    <i class="bi bi-bag me-2"></i><?php echo $this->lang->line('my_orders') ?: "my orders"; ?>  
                                 </a>
                             </li>
-                             <li>
+
+
+                              <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Cart'); ?>">
                                    <i class="bi bi-cart me-2"></i><?php echo $this->lang->line('your_cart') ?: "your cart"; ?> 
                                 </a>
                             </li>
-                            
-                            <li>
+
+
+                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('Following'); ?>">
-                                    <i class="bi bi-heart me-2"></i> <?php echo $this->lang->line('following') ?: "Following"; ?> 
+                                    <i class="bi bi-heart me-2"></i><?php echo $this->lang->line('following') ?: "Following"; ?> 
                                 </a>
                             </li>
+                           
                             <li>
                                 <a class="dropdown-item py-2 ps-4" href="<?php echo base_url('CustomerSupport'); ?>">
                                     <i class="bi bi-gear me-2"></i>
@@ -300,17 +304,19 @@
                                 <a class="dropdown-item py-2 ps-4"
                                     href="https://api.whatsapp.com/send?text=Check%20out%20this%20awesome%20website!%20https%3A%2F%2Fexample.com"
                                     target="_blank">
-                                    <i class="bi bi-share me-2"></i>  <?php echo $this->lang->line('refer_to_friends') ?: "Refer to friends"; ?> 
-                                    </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider mx-1">
-                            </li>
-                            <li>
-                                <a class="dropdown-item py-2 ps-4 text-danger" href="<?php echo base_url('Logout'); ?>">
-                                    <i class="bi bi-box-arrow-right me-1"></i> Logout
+                                    <i class="bi bi-share me-2"></i> <?php echo $this->lang->line('refer_to_friends') ?: "Refer to friends"; ?> 
                                 </a>
                             </li>
+                            <li>
+                                <hr class="dropdown-divider mx-3">
+                            </li>
+                            
+                             <li>
+                                <a class="dropdown-item py-2 ps-4 text-danger" href="<?php echo base_url('Logout'); ?>">
+                                    <i class="bi bi-box-arrow-right me-2"></i><?php echo $this->lang->line('logout') ?: "Logout"; ?>  
+                                </a>
+                            </li>
+                           
                         </ul>
                     <?php else: ?>
                         <ul class="dropdown-menu dropdown-menu-end"

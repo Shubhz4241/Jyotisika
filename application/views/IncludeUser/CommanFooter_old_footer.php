@@ -273,7 +273,7 @@
                                 </h5>
                                 <ul class="list-unstyled">
 
-                                        <li><a href="<?php echo base_url("freekundli") ?>" class="footer-links"><?php
+                                        <li><a href="<?php echo base_url("bookpooja") ?>" class="footer-links"><?php
                                                                                                                 echo $this->lang->line('freekundali') ? $this->lang->line('freekundali') : 'Free Kundali'; ?></a>
                                         </li>
                                         <li><a href="<?php echo base_url("kundlimatching") ?>"
@@ -332,7 +332,7 @@
                                                                 data.data.forEach(service => {
                                                                         html += `
                                                                         <li>
-                                                                          <a href="<?php echo base_url('/User/astrolgerservices/') ?>${service.id}" class="footer-links">
+                                                                          <a href="<?php echo base_url('/astrologers') ?>" class="footer-links">
                                                                             ${service.name}
                                                                           </a>
                                                                         </li>

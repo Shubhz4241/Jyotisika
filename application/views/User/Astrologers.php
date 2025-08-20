@@ -120,7 +120,7 @@
                                             class="text-decoration-none">
 
 
-                                            <img src="<?php echo !empty($astrologerdata[0]['profile_image']) ? base_url($astrologerdata[0]['profile_image']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
+                                            <img src="<?php echo !empty($astrologer['profile_image']) ? base_url($astrologer['profile_image']) :base_url('assets/images/astrologerimg.png')?>" alt="image"
                                                 class="rounded-circle"
                                                 style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--red);">
                                         </a>
@@ -151,8 +151,12 @@
                                         <div class="d-flex align-items-center">
                                             <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
                                                 style="width: 15px; height: 15px; margin-right: 5px;">
-                                            <small
-                                                class="card-expertise"><?php echo isset($astrologer['specialties']) && !empty($astrologer['specialties']) ? $astrologer['specialties'] : "N/A"; ?></small>
+                                             <small class="card-expertise">
+                                                    <?php
+                                                    $text = strip_tags($astrologer['specialties']);
+                                                   echo mb_strimwidth($text, 0, 30, '...');
+                                                    ?>
+                                                </small>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <img src="<?php echo base_url('assets/images/experience.png'); ?>" alt="experience"

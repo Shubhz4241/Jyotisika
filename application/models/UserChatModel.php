@@ -156,6 +156,18 @@ class UserChatModel extends CI_Model
 
 
 
+     public function getSessionById($session_id)
+    {
+        return $this->db->get_where('chat_sessions', ['firebase_chat_id' => $session_id])->row_array();
+    }
+
+      public function addMessage($session_id, $messageData)
+    {
+        $messageData['session_id'] = $session_id;
+        $this->db->insert('chat_messages', $messageData);
+    }
+
+
 
 
 }

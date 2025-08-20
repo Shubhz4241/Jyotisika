@@ -30,79 +30,42 @@
 
     <!-- Bootstrap Bundle (includes Popper) -->
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-RWcAUkBBaTzZ7OmFcOwKp0QATKcPfPK4D38x7qnL8Mpt5AVnwl0FkpGyoC7tVZ1T"
-        crossorigin="anonymous"></script> -->
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
-
-    <!-- jQuery (must be before Bootstrap JS) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Bootstrap CSS (in <head>) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .ticker-wrapper {
             overflow: hidden;
             background-color: #fff;
+
             padding: 10px 0;
-            width: 100%;
         }
 
         .ticker {
             display: flex;
-            animation: scroll 20s linear infinite;
+            width: calc(200px * 24);
+            /* 12 images * 2 sets = 24 */
+            animation: scroll 30s linear infinite;
         }
 
         .ticker img {
-            width: 50vw;
-            /* Responsive width: 80% of viewport */
-            max-width: 250px;
-            /* Limit size on big screens */
+            width: 200px;
             height: auto;
-            /* Maintain aspect ratio */
             margin-right: 20px;
+            object-fit: contain;
             border-radius: 10px;
-            flex-shrink: 0;
-        }
-
-        @media (max-width: 768px) {
-            .ticker img {
-                width: 50vw;
-                margin-right: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .ticker img {
-                width: 50vw;
-                margin-right: 5px;
-            }
-
         }
 
         @keyframes scroll {
             0% {
-                transform: translateX(0%);
+                transform: translateX(0);
             }
 
             100% {
-                transform: translateX(-100%);
+                transform: translateX(-50%);
             }
-
         }
 
         /* slider code  */
@@ -325,6 +288,10 @@
                     </a>
 
                 </div>
+
+
+
+
                 <div class="col-auto">
                     <a href="<?php echo base_url('horoscopereadmore/Taurus'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
@@ -335,6 +302,7 @@
                         </p>
                     </a>
                 </div>
+
                 <div class="col-auto">
                     <a href="<?php echo base_url('horoscopereadmore/Gemini'); ?>"
                         class="astro-card d-flex flex-column align-items-center text-decoration-none">
@@ -433,22 +401,12 @@
                         </p>
                     </a>
                 </div>
-
-
-                <div class="col-auto">
-                    <a href="<?php echo base_url('horoscopereadmore/Libra'); ?>"
-                        class="astro-card d-flex flex-column align-items-center text-decoration-none">
-                        <img src="<?php echo base_url('assets/images/libra.png'); ?>" alt="Pisces"
-                            class="rounded-circle p-2 shadow-sm">
-                        <p class="mt-2 mb-0 text-dark fw-bold">
-                            <?php echo !empty($this->lang->line('Libra')) ? $this->lang->line('Libra') : 'Libra'; ?>
-                        </p>
-                    </a>
-                </div>
             </div>
         </div>
-    </section>
 
+
+
+    </section>
 
 
     <!--CAROUSEL CODE  -->
@@ -474,113 +432,42 @@
             </div>
         </div>
     </section>
+
+
     <section>
         <div class="ticker-wrapper">
 
             <div class="ticker">
-                <img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll1.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll2.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll3.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll4.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll5.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll6.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll7.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll8.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll9.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll10.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll11.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll12.png') ?>">
+                <!-- Repeat images twice for seamless scroll -->
+                <img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1">
+                <img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2">
+                <img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3">
+                <img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4">
+                <img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5">
+                <img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6">
+                <img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7">
+                <img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8">
+                <img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9">
+                <img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10">
+                <img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11">
+                <img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12">
+                <img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1">
+                <img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2">
+                <img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3">
+                <img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4">
+                <img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5">
+                <img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6">
+                <img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7">
+                <img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8">
+                <img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9">
+                <img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10">
+                <img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11">
+                <img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12">
 
-                <!-- Repeat for seamless scroll -->
-                <img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll1.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll2.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll3.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll4.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll5.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll6.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll7.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll8.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll9.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll10.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll11.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll12.png') ?>">
-
-                <img src="<?php echo base_url('assets/images/scroll1.png') ?>" alt="1" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll1.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll2.png') ?>" alt="2" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll2.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll3.png') ?>" alt="3" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll3.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll4.png') ?>" alt="4" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll4.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll5.png') ?>" alt="5" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll5.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll6.png') ?>" alt="6" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll6.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll7.png') ?>" alt="7" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll7.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll8.png') ?>" alt="8" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll8.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll9.png') ?>" alt="9" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll9.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll10.png') ?>" alt="10" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll10.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll11.png') ?>" alt="11" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll11.png') ?>">
-                <img src="<?php echo base_url('assets/images/scroll12.png') ?>" alt="12" class="open-image-modal"
-                    data-img="<?php echo base_url('assets/images/scroll12.png') ?>">
             </div>
-
         </div>
 
     </section>
-    <!-- Image Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content bg-dark">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0 text-center">
-                    <img id="modalImage" src="" class="img-fluid" style="max-height: 80vh; object-fit: contain;" />
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function () {
-            $('.open-image-modal').on('click', function () {
-                const imgSrc = $(this).data('img');
-                $('#modalImage').attr('src', imgSrc);
-                $('#imageModal').modal('show');
-            });
-        });
-    </script>
 
     <!-- Astrologer on call or chat -->
 
@@ -618,14 +505,12 @@
                                                     </h6>
                                                 </a>
 
-                                              <div class="d-flex align-items-center gap-1">
+                                                <div class="d-flex align-items-center gap-1">
                                                     <?php for ($j = 0; $j < $astrologer['average_rating']; $j++): ?>
                                                         <img src="<?php echo base_url('assets/images/rating.png'); ?>" alt="star"
                                                             style="width: 15px; height: 15px;">
                                                     <?php endfor; ?>
                                                 </div>
-
-
                                             </div>
                                         </div>
 
@@ -634,25 +519,24 @@
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/star.png'); ?>" alt="star"
                                                     style="width: 15px; height: 15px; margin-right: 5px;">
-                                                <small class="card-expertise">
-                                                    <?php
-                                                    $text = strip_tags($astrologer['specialties']);
-                                                   echo mb_strimwidth($text, 0, 30, '...');
-                                                    ?>
-                                                </small>
+                                                <small class="card-expertise"><?php echo $astrologer['specialties']; ?></small>
 
+
+                                                
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/experience.png'); ?>"
                                                     alt="experience" style="width: 15px; height: 15px; margin-right: 5px;">
                                                 <small><?php echo isset($astrologer['experience']) && !empty($astrologer['experience']) ? $astrologer['experience'] : '0'; ?>+
-                                                    <?php echo $this->lang->line('Year') ?></small>
+                                                    <?php echo $this->lang->line('Year') ?> </small>
+
+                                                    
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/money.png'); ?>" alt="price"
                                                     style="width: 15px; height: 15px; margin-right: 5px;">
                                                 <small>
-                                                    RS.<?php echo isset($astrologer['price_per_minute']) && !empty($astrologer['price_per_minute']) ? $astrologer['price_per_minute'] : 'N/A'; ?>/min</small>
+                                                    <?php echo $this->lang->line('Rs') ?>        <?php echo isset($astrologer['price_per_minute']) && !empty($astrologer['price_per_minute']) ? $astrologer['price_per_minute'] : 'N/A'; ?>/min</small>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <img src="<?php echo base_url('assets/images/language.png'); ?>" alt="language"
@@ -665,8 +549,8 @@
                                             <div class="d-flex align-items-center">
 
                                                 <?php if ($astrologer['chatstatus'] == "active"): ?>
-                                                    <small class="card-language text-danger"><?php echo $this->lang->line('Busy') ?>
-                                                        , </small>
+                                                    <small class="card-language text-danger">
+                                                        <?php echo $this->lang->line('Busy') ?> , </small>
 
 
                                                     <?php
@@ -693,9 +577,8 @@
                                                     ?>
 
                                                 <?php else: ?>
-                                                    <small
-                                                        class="card-language text-success"><?php echo $this->lang->line('Available') ?>
-                                                    </small>
+                                                    <small class="card-language text-success">
+                                                        <?php echo $this->lang->line('Available') ?> </small>
                                                 <?php endif ?>
                                             </div>
 
@@ -711,13 +594,14 @@
                                                     <?php echo $astrologer['price_per_minute']; ?>,  
                                                     '<?php echo base_url('chat/' . $astrologer['id']); ?>',
                                                     '<?php echo addslashes($astrologer['name']); ?>' 
-                                                )">Chat</button>
+                                                )"><?php echo $this->lang->line('Chat') ?></button>
                                             <?php else: ?>
                                                 <button class="btn btn-sm w-50 rounded-3 border-1 chatlink"
                                                     style="background-color: var(--yellow);"><?php echo $this->lang->line('Chat') ?></button>
                                             <?php endif ?>
 
                                             <button
+                                            onclick="handleCallClick()"
                                                 class="btn btnHover btn-sm btn-outline-dark w-50 rounded-3"><?php echo $this->lang->line('Call') ?></button>
                                         </div>
 
@@ -731,7 +615,7 @@
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="col-12 text-center">
-                            <p class="fw-bold text-danger">No astrologers found.</p>
+                            <p class="fw-bold text-danger"><?php echo $this->lang->line('No_Astrologers_FoundNo') ?> </p>
                         </div>
                     <?php endif; ?>
 
@@ -776,11 +660,33 @@
     </script>
 
 
+    <script>
+        function handleCallClick() {
+            Swal.fire({
+                title: "Call Service Available on Mobile App",
+                text: "To talk to an astrologer, please use our mobile app. The calling service is available exclusively on our app.",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonText: "Go to Play Store",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "https://play.google.com/store/apps/details?id=com.rovio.baba&pcampaignid=merch_published_cluster_promotion_battlestar_top_picks"; // Replace with your actual Play Store URL
+                }
+            });
+
+
+
+        }
+    </script>
+
+
+
+
     <section class="containernew py-4">
         <div class="container">
             <h2 class="text-center mb-4 fw-bold" style="color: var(--red);">
-                <?php echo $this->lang->line('Free_Kundli_Generation') ?>
-            </h2>
+                <?php echo $this->lang->line('Free_Kundli_Generation') ?></h2>
             <div class="grid-wrapper">
                 <a href="<?php echo base_url('FreeKundli_Controller/BasicAstrology'); ?>" class="text-decoration-none">
                     <div class="kundli-box"><img
@@ -789,8 +695,9 @@
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/PlanetaryPosition'); ?>"
                     class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/galaxy.png") ?>" />
-                        <?php echo $this->lang->line('Planetary_Positions') ?></div>
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/galaxy.png") ?>" /><?php echo $this->lang->line('Planetary_Positions') ?>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/VimshottariDasha'); ?>"
                     class="text-decoration-none">
@@ -805,8 +712,9 @@
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/GemstoneRecommendation'); ?>"
                     class="text-decoration-none">
-                    <div class="kundli-box"><img src="<?php echo base_url("assets/images/diamond.png") ?>" />
-                        <?php echo $this->lang->line('Gemstone_Recommendation') ?></div>
+                    <div class="kundli-box"><img
+                            src="<?php echo base_url("assets/images/diamond.png") ?>" /><?php echo $this->lang->line('Gemstone_Recommendation') ?>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/CompositeFriendship'); ?>"
                     class="text-decoration-none">
@@ -818,8 +726,6 @@
                             src="<?php echo base_url("assets/images/parchment.png") ?>" /><?php echo $this->lang->line('Shadbala') ?>
                     </div>
                 </a>
-
-
                 <a href="<?php echo base_url('FreeKundli_Controller/YoginiDasha'); ?>" class="text-decoration-none">
 
                     <div class="kundli-box"><img
@@ -835,12 +741,12 @@
                 <a href="<?php echo base_url('FreeKundli_Controller/ManglikDosha'); ?>" class="text-decoration-none">
                     <div class="kundli-box"><img
                             src="<?php echo base_url("assets/images/mangal.png") ?>" /><?php echo $this->lang->line('Manglik_Dosha') ?>
-                        Dosha</div>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/KaalSarpaDosha'); ?>" class="text-decoration-none">
                     <div class="kundli-box"><img
                             src="<?php echo base_url("assets/images/king.png") ?>" /><?php echo $this->lang->line('Kaal_Sarpa_Dosha') ?>
-                        Dosha</div>
+                    </div>
                 </a>
                 <a href="<?php echo base_url('FreeKundli_Controller/SadheSati'); ?>" class="text-decoration-none">
                     <div class="kundli-box"><img
@@ -851,6 +757,7 @@
                     <div class="kundli-box"><img
                             src="<?php echo base_url("assets/images/houses.png") ?>" /><?php echo $this->lang->line('Bhava_Kundli') ?>
                     </div>
+
                 </a>
             </div>
         </div>
@@ -908,7 +815,7 @@
             </div>
         </div>
     </section>
-    5 <section class="py-5">
+    <section class="py-5">
         <div class="container">
 
             <div class="row align-items-center mb-4">
@@ -916,6 +823,7 @@
                     <h3 class="fw-bold"><?= $this->lang->line('Blog_Heading') ?></h3>
                     <p class="text-muted mb-0"><?= $this->lang->line('Blog_Subtext') ?></p>
                 </div>
+
 
             </div>
 
@@ -930,20 +838,20 @@
                                     <div class="card border-0 shadow-sm rounded-3 h-100" style="height: 320px;">
                                         <img src="<?= base_url("uploads/blogs/" . $product['blog_image']); ?>"
                                             class="card-img-top rounded-top-3" alt="Blog Image"
-                                            style="height: 170px; object-fit: cover;">
+                                            style="height: 170px; object-fit: cover;">
                                         <div class="card-body d-flex flex-column justify-content-between">
                                             <h5 class="card-title text-dark mb-2"
                                                 style="font-size: 1rem; height: 48px; overflow: hidden; text-overflow: ellipsis; line-height: 1.3;">
                                                 <?= $product["blog_title"]; ?>
                                             </h5>
-                                            <p class="text-muted small mb-0"><?= $this->lang->line('Today') ?? 'Today'; ?></p>
+                                            <p class="text-muted small mb-0"><?php echo $product['date'] ?></p>
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <p class="text-center text-muted"><?= $this->lang->line('No_Blogs_Message') ?></p>
+                        <p class="text-center text-muted"> <?= $this->lang->line('No_Blogs_Message') ?></p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -965,7 +873,7 @@
             <div class="row">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div class="col text-center">
-                        <h3 class="fw-bold"><?php echo $this->lang->line('Top_Shop_Heading') ?></h3>
+                        <h3 class="fw-bold"> <?php echo $this->lang->line('Top_Shop_Heading') ?></h3>
                         <p class="text-muted mb-0"> <?php echo $this->lang->line('Top_Shop_Subtext') ?></p>
                     </div>
 

@@ -157,7 +157,120 @@ class Api_ChatUser_Controller extends CI_Controller
     }
 
 
+
+     public function Send_message()
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        if (empty($data['session_id']) || empty($data['sender_id']) || empty($data['message'])) {
+            echo json_encode(['error' => 'Invalid data']);
+            return;
+        }
+
+        // print_r($data['session_id']);
+        // exit();      
+        $session = $this->UserChatModel->getSessionById($data['session_id']);
+        if (!$session) {
+            echo json_encode(['error' => 'Session not found']);
+            return;
+        }
+
+        $firebase_chat_id = $session['firebase_chat_id'];
+
+        $messageData = [
+            'sender_id' => $data['sender_id'],
+            'message' => $data['message'],
+            'timestamp' => date('Y-m-d H:i:s')
+        ];
+
+        // Store message in Firebase
+        firebaseRequest("chats/{$firebase_chat_id}/messages/msg_" . time(), $messageData);
+
+        // Store message in the database
+        // $this->UserChatModel->addMessage($data['session_id'], $messageData);
+
+        echo json_encode(['status' => 'Message sent']);
+    }
+
    
+   
+
+
+     public function get_messages()
+    {
+        header('Content-Type: application/json');
+
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        $userId = $input['user_id'] ?? null;
+        $astrologerId = $input['astrologer_id'] ?? null;
+
+        if (!$userId || !$astrologerId) {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Missing user_id or astrologer_id'
+            ]);
+            return;
+        }
+
+        // Firebase DB URL
+        
+        $firebaseBase = 'https://manasvichatapp-41f59-default-rtdb.firebaseio.com/chats.json'; // Important: append /chats.json
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $firebaseBase);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $firebaseResponse = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Failed to fetch data from Firebase.',
+                'error' => $error
+            ]);
+            return;
+        }
+
+        $chats = json_decode($firebaseResponse, true);
+        $matchedMessages = [];
+
+     
+
+        if (is_array($chats)) {
+            foreach ($chats as $chatId => $chatData) {
+                if (
+                    isset($chatData['session_info']['user_id']) &&
+                    isset($chatData['session_info']['astrologer_id']) &&
+                    $chatData['session_info']['user_id'] == $userId &&
+                    $chatData['session_info']['astrologer_id'] == $astrologerId
+                ) {
+                    // Found matching chat
+                    if (!empty($chatData['messages']) && is_array($chatData['messages'])) {
+                        foreach ($chatData['messages'] as $msgId => $msg) {
+                            $matchedMessages[] = [
+                                'chat_id' => $chatId,
+                                'message_id' => $msgId,
+                                'message' => $msg['message'] ?? '',
+                                'sender_id' => $msg['sender_id'] ?? null,
+                                'timestamp' => $msg['timestamp'] ?? ''
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+
+        echo json_encode([
+            'status' => true,
+            'messages' => $matchedMessages
+        ]);
+    }
+
+
+
 
   
 
